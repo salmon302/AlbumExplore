@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "albumexplore"
+version = "0.1.0"
+description = "An interactive visualization system for exploring music albums through their tag relationships"
+requires-python = ">=3.8"
+dependencies = [
+	"pandas>=2.0.0",
+	"networkx>=3.0.0",
+	"fastapi>=0.100.0",
+	"sqlalchemy>=2.0.0",
+	"pytest>=7.0.0",
+	"python-dateutil>=2.8.2",
+	"uvicorn>=0.23.0",
+	"pydantic>=2.0.0",
+	"PyQt6>=6.4.0",
+	"pycountry>=22.3.5",
+	"pytest-qt>=4.2.0",
+]

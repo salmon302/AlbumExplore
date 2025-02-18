@@ -1,0 +1,20 @@
+numpy>=1.21.0
+scipy>=1.7.0
+scikit-learn>=0.24.0
+pandas>=2.0.0
+networkx>=3.0.0
+fastapi>=0.100.0
+sqlalchemy>=2.0.0
+pytest>=7.0.0
+python-dateutil>=2.8.2
+uvicorn>=0.23.0
+PyQt6>=6.4.0
+pycountry>=22.3.5
+rich>=10.0.0
+# Performance testing dependencies
+psutil>=5.9.0
+memory_profiler>=0.60.0
+pytest-benchmark>=4.0.0
+pytest-cov>=4.0.0
+line_profiler>=4.0.0
+gprof2dot>=2022.7.29

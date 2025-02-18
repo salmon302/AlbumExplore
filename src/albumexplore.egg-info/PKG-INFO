@@ -1,0 +1,16 @@
+Metadata-Version: 2.2
+Name: albumexplore
+Version: 0.1.0
+Summary: An interactive visualization system for exploring music albums through their tag relationships
+Requires-Python: >=3.8
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: networkx>=3.0.0
+Requires-Dist: fastapi>=0.100.0
+Requires-Dist: sqlalchemy>=2.0.0
+Requires-Dist: pytest>=7.0.0
+Requires-Dist: python-dateutil>=2.8.2
+Requires-Dist: uvicorn>=0.23.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: PyQt6>=6.4.0
+Requires-Dist: pycountry>=22.3.5
+Dynamic: requires-python

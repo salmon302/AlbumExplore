@@ -1,0 +1,78 @@
+2025-02-18 00:11:56,320 - gui - DEBUG - MainWindow initialized
+2025-02-18 00:11:56,357 - gui - DEBUG - DataInterface initialized
+2025-02-18 00:11:56,357 - gui - DEBUG - ViewManager initialized
+2025-02-18 00:11:56,423 - gui - DEBUG - Updating data from data interface
+2025-02-18 00:11:56,424 - gui - DEBUG - Getting albums: page=0, filters=None
+2025-02-18 00:11:56,567 - gui - DEBUG - Initializing view: ViewType.TABLE
+2025-02-18 00:11:56,567 - gui - DEBUG - TableView initialized
+2025-02-18 00:11:56,595 - gui - DEBUG - Updating data in TableView: 100 nodes, 0 edges
+2025-02-18 00:11:56,607 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:11:56,608 - gui - DEBUG - Updating data in TableView: 100 nodes, 0 edges
+2025-02-18 00:11:56,731 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 713)
+2025-02-18 00:11:56,732 - gui - DEBUG - Updating data in TableView: 100 nodes, 0 edges
+2025-02-18 00:11:56,744 - gui - DEBUG - Paint event started in TableView
+2025-02-18 00:11:56,745 - gui - DEBUG - Paint event finished in TableView
+2025-02-18 00:11:56,920 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:11:56,928 - gui - DEBUG - Updating data in TableView: 100 nodes, 0 edges
+2025-02-18 00:11:56,932 - gui - DEBUG - Paint event started in TableView
+2025-02-18 00:11:56,934 - gui - DEBUG - Paint event finished in TableView
+2025-02-18 00:11:57,267 - gui - DEBUG - Paint event started in TableView
+2025-02-18 00:11:57,268 - gui - DEBUG - Paint event finished in TableView
+2025-02-18 00:11:57,308 - gui - DEBUG - Paint event started in TableView
+2025-02-18 00:11:57,308 - gui - DEBUG - Paint event finished in TableView
+2025-02-18 00:25:02,886 - gui - DEBUG - Handling view change: network
+2025-02-18 00:25:02,892 - gui - DEBUG - Switching to view: ViewType.NETWORK
+2025-02-18 00:25:02,892 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:25:02,895 - gui - DEBUG - NetworkView initialized
+2025-02-18 00:25:02,975 - gui - DEBUG - Paint event started in TableView
+2025-02-18 00:25:02,976 - gui - DEBUG - Paint event finished in TableView
+2025-02-18 00:25:02,992 - gui - DEBUG - Paint event started in TableView
+2025-02-18 00:25:02,992 - gui - DEBUG - Paint event finished in TableView
+2025-02-18 00:25:04,248 - gui - DEBUG - Updating data in NetworkView: 100 nodes, 0 edges
+2025-02-18 00:25:04,249 - gui - DEBUG - Applying transition in NetworkView: {'transition': {'type': 'instant', 'duration': 300, 'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)'}, 'preserved_positions': {}, 'shared_selections': [], 'source_type': 'network', 'target_type': 'network'}
+2025-02-18 00:25:04,251 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:25:04,253 - gui - DEBUG - NetworkView initialized
+2025-02-18 00:25:05,762 - gui - DEBUG - Updating data in NetworkView: 100 nodes, 0 edges
+2025-02-18 00:25:05,762 - gui - DEBUG - Applying transition in NetworkView: {'transition': {'type': 'instant', 'duration': 300, 'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)'}, 'preserved_positions': {}, 'shared_selections': [], 'source_type': 'network', 'target_type': 'network'}
+2025-02-18 00:25:05,763 - gui - DEBUG - Handling selection change: set()
+2025-02-18 00:33:19,437 - gui - DEBUG - MainWindow initialized
+2025-02-18 00:33:19,479 - gui - DEBUG - DataInterface initialized
+2025-02-18 00:33:19,481 - gui - DEBUG - ViewManager initialized
+2025-02-18 00:33:19,579 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:33:19,697 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 713)
+2025-02-18 00:33:19,791 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:33:23,524 - gui - DEBUG - Handling view change: network
+2025-02-18 00:33:23,527 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:33:23,527 - gui - DEBUG - NetworkView initialized
+2025-02-18 00:33:24,977 - gui - DEBUG - Updating data in NetworkView: 0 nodes, 0 edges
+2025-02-18 00:33:24,977 - gui - DEBUG - Applying transition in NetworkView: {'transition': {'type': 'instant', 'duration': 300, 'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)'}, 'preserved_positions': {}, 'shared_selections': [], 'source_type': 'network', 'target_type': 'network'}
+2025-02-18 00:33:24,978 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:33:24,978 - gui - DEBUG - NetworkView initialized
+2025-02-18 00:33:26,538 - gui - DEBUG - Updating data in NetworkView: 0 nodes, 0 edges
+2025-02-18 00:33:26,540 - gui - DEBUG - Applying transition in NetworkView: {'transition': {'type': 'instant', 'duration': 300, 'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)'}, 'preserved_positions': {}, 'shared_selections': [], 'source_type': 'network', 'target_type': 'network'}
+2025-02-18 00:33:26,540 - gui - DEBUG - Handling selection change: set()
+2025-02-18 00:36:09,573 - gui - DEBUG - MainWindow initialized
+2025-02-18 00:36:09,758 - gui - DEBUG - DataInterface initialized
+2025-02-18 00:36:09,759 - gui - DEBUG - ViewManager initialized
+2025-02-18 00:36:10,272 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:36:10,547 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:36:10,720 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:36:14,807 - gui - DEBUG - Handling view change: network
+2025-02-18 00:36:14,810 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:36:14,811 - gui - DEBUG - NetworkView initialized
+2025-02-18 00:36:15,886 - gui - DEBUG - Updating data in NetworkView: 0 nodes, 0 edges
+2025-02-18 00:36:15,886 - gui - DEBUG - Applying transition in NetworkView: {'transition': {'type': 'instant', 'duration': 300, 'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)'}, 'preserved_positions': {}, 'shared_selections': [], 'source_type': 'network', 'target_type': 'network'}
+2025-02-18 00:36:15,887 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:36:15,887 - gui - DEBUG - NetworkView initialized
+2025-02-18 00:36:17,386 - gui - DEBUG - Updating data in NetworkView: 0 nodes, 0 edges
+2025-02-18 00:36:17,391 - gui - DEBUG - Applying transition in NetworkView: {'transition': {'type': 'instant', 'duration': 300, 'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)'}, 'preserved_positions': {}, 'shared_selections': [], 'source_type': 'network', 'target_type': 'network'}
+2025-02-18 00:36:17,391 - gui - DEBUG - Handling selection change: set()
+2025-02-18 00:40:18,489 - gui - DEBUG - MainWindow initialized
+2025-02-18 00:40:18,661 - gui - DEBUG - DataInterface initialized
+2025-02-18 00:40:18,667 - gui - DEBUG - ViewManager initialized
+2025-02-18 00:40:19,975 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:40:20,582 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 713)
+2025-02-18 00:40:21,330 - gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800)
+2025-02-18 00:40:28,320 - gui - DEBUG - Handling view change: network
+2025-02-18 00:40:28,360 - gui - DEBUG - Initializing view: ViewType.NETWORK
+2025-02-18 00:40:28,375 - gui - DEBUG - NetworkView initialized

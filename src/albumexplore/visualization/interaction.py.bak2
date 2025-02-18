@@ -1,0 +1,95 @@
+from typing import Dict, Any, Optional, Tuple, Set
+from .state import StateManager, ViewType
+
+class InteractionHandler:
+	"""Handles user interactions with visualizations."""
+	
+	def __init__(self, state_manager: StateManager):
+		self.state_manager = state_manager
+		self.drag_start: Optional[Dict[str, float]] = None
+		self.selected_nodes: Set[str] = set()
+	
+	def handle_zoom(self, delta: float, center: Optional[Dict[str, float]] = None) -> Dict[str, Any]:
+		"""Handle zoom interaction."""
+		current_zoom = self.state_manager.current_view.zoom_level
+		
+		# For zoom out (negative delta), we want to reduce by the percentage
+		# e.g., -0.5 means multiply by 0.5, -0.75 means multiply by 0.25
+		if delta < 0:
+			factor = 1.0 + delta  # delta is negative, so this gives us the reduction factor
+			new_zoom = current_zoom * factor
+		else:
+			new_zoom = current_zoom * (1.0 + delta)
+		
+		# Clamp zoom level
+		new_zoom = max(0.1, min(5.0, new_zoom))
+		
+		# If zoom center is provided, adjust position to maintain center point
+		if center and current_zoom != new_zoom:
+			current_pos = self.state_manager.current_view.position
+			scale_change = new_zoom / current_zoom
+			
+			# Adjust position to keep zoom center fixed
+			current_pos["x"] = center["x"] - (center["x"] - current_pos["x"]) * scale_change
+			current_pos["y"] = center["y"] - (center["y"] - current_pos["y"]) * scale_change
+			
+			self.state_manager.update_position(current_pos["x"], current_pos["y"])
+		
+		self.state_manager.update_zoom(new_zoom)
+		return {
+			"zoom_level": new_zoom,
+			"position": self.state_manager.current_view.position
+		}
+	
+	def start_drag(self, position: Dict[str, float]) -> None:
+		"""Start drag interaction."""
+		self.drag_start = position.copy()
+	
+	def update_drag(self, position: Dict[str, float]) -> Dict[str, Any]:
+		"""Update drag interaction."""
+		if not self.drag_start:
+			return {"position": self.state_manager.current_view.position}
+		
+		# Calculate drag delta
+		delta_x = position["x"] - self.drag_start["x"]
+		delta_y = position["y"] - self.drag_start["y"]
+		
+		# Update position
+		current_pos = self.state_manager.current_view.position
+		new_x = current_pos["x"] + delta_x
+		new_y = current_pos["y"] + delta_y
+		
+		self.state_manager.update_position(new_x, new_y)
+		self.drag_start = position.copy()
+		
+		return {"position": {"x": new_x, "y": new_y}}
+	
+	def end_drag(self) -> None:
+		"""End drag interaction."""
+		self.drag_start = None
+	
+	def handle_click(self, position: Dict[str, float], multi_select: bool = False) -> Dict[str, Any]:
+		"""Handle click interaction."""
+		clicked_node = self._find_node_at_position(position)
+		
+		if clicked_node:
+			if multi_select:
+				if clicked_node in self.selected_nodes:
+					self.selected_nodes.remove(clicked_node)
+				else:
+					self.selected_nodes.add(clicked_node)
+			else:
+				self.selected_nodes = {clicked_node}
+			
+			self.state_manager.select_nodes(self.selected_nodes)
+		elif not multi_select:
+			self.selected_nodes.clear()
+			self.state_manager.select_nodes(set())
+		
+		return {
+			"selected_nodes": list(self.selected_nodes)
+		}
+	
+	def _find_node_at_position(self, position: Dict[str, float]) -> Optional[str]:
+		"""Find node at given position."""
+		return None
