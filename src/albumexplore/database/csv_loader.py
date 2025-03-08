@@ -60,6 +60,19 @@ def load_csv_data(csv_dir: Path) -> bool:
             # Keep track of existing tags
             tag_map = {}  # name -> Tag object
             
+            # Check if the genre category exists once before processing
+            genre_category = db.query(models.TagCategory).filter_by(id='genre').first()
+            if not genre_category:
+                logger.debug("Creating 'genre' category as it doesn't exist")
+                genre_category = models.TagCategory(
+                    id='genre',
+                    name='Genre',
+                    description='Musical genres and subgenres'
+                )
+                db.add(genre_category)
+                # Commit the genre category immediately to avoid integrity errors later
+                db.flush()
+            
             # Process in chunks to avoid memory issues
             chunk_size = 500
             for chunk_start in range(0, len(df), chunk_size):
@@ -83,12 +96,20 @@ def load_csv_data(csv_dir: Path) -> bool:
                         album.release_year = album.release_date.year
                     
                     # Handle genre tags
-                    if pd.notna(row.get('tags')) and isinstance(row['tags'], list):
+                    # Add debug logging
+                    logger.debug(f"Processing tags for album: {album.artist} - {album.title}")
+                    
+                    # Check if 'tags' exists and is usable
+                    if 'tags' in row and isinstance(row['tags'], list) and len(row['tags']) > 0:
+                        logger.debug(f"Using pre-processed tags: {row['tags']}")
                         tags = row['tags']
-                    elif pd.notna(row.get('Genre / Subgenres')):
+                    elif 'Genre / Subgenres' in row and not pd.isna(row['Genre / Subgenres']).all():
                         # Fallback to genre string if tags not processed
-                        tags = [g.strip() for g in str(row['Genre / Subgenres']).split(',')]
+                        genre_str = str(row['Genre / Subgenres'])
+                        logger.debug(f"Parsing tags from genre string: {genre_str}")
+                        tags = [g.strip() for g in genre_str.split(',')]
                     else:
+                        logger.debug("No tags found, using 'untagged'")
                         tags = ['untagged']
                     
                     # Create or get existing tags
@@ -101,11 +122,15 @@ def load_csv_data(csv_dir: Path) -> bool:
                             tag = db.query(models.Tag).filter_by(name=tag_name).first()
                             if not tag:
                                 tag_count += 1
+                                # Debug the issue
+                                logger.debug(f"Creating tag with name: {tag_name}")
+                                
                                 tag = models.Tag(
                                     id=f"t{tag_count}",
                                     name=tag_name,
-                                    category='genre'
+                                    category_id='genre'  # Set the foreign key, not the relationship
                                 )
+                                logger.debug(f"Created tag: {tag}")
                                 db.add(tag)
                             tag_map[tag_name] = tag
                         album.tags.append(tag_map[tag_name])

@@ -88,24 +88,6 @@ class MainWindow(QMainWindow):
         # Add visualization container to main layout
         self.main_layout.addWidget(self.visualization_container, stretch=1)
         
-        # Create view selection controls container
-        controls_container = QWidget()
-        controls_layout = QHBoxLayout(controls_container)
-        controls_layout.setContentsMargins(10, 5, 10, 5)
-        
-        # Add view type selector
-        view_label = QLabel("View Type:")
-        self.view_selector = QComboBox()
-        self.view_selector.addItems([vt.value for vt in ViewType])
-        self.view_selector.currentTextChanged.connect(self._handle_view_change)
-        
-        controls_layout.addWidget(view_label)
-        controls_layout.addWidget(self.view_selector)
-        controls_layout.addStretch()
-        
-        # Add controls above visualization container
-        self.main_layout.insertWidget(0, controls_container)
-        
         # Force immediate layout update
         self.visualization_container.updateGeometry()
         
@@ -210,8 +192,8 @@ class MainWindow(QMainWindow):
             gui_logger.error(f"Data error: {str(error)}", exc_info=True)
             self.status_bar.showMessage(f"Data error: {str(error)}")
         
-        # Register error handlers
-        self.error_manager.register_handler(ErrorCategory.VIEW, handle_view_error)
+        # Register error handlers using existing categories
+        self.error_manager.register_handler(ErrorCategory.RENDERING, handle_view_error)
         self.error_manager.register_handler(ErrorCategory.DATA, handle_data_error)
     
     def _setup_responsive_design(self):
@@ -219,6 +201,10 @@ class MainWindow(QMainWindow):
         def handle_resize(event: QResizeEvent):
             new_size = event.size()
             gui_logger.debug(f"Window resized to {new_size.width()}x{new_size.height()}")
+            
+            # Update responsive manager with new screen dimensions
+            if hasattr(self, 'responsive_manager'):
+                self.responsive_manager.update_screen_size(new_size.width(), new_size.height())
             
             # Update visualization container
             if self.visualization_container:
@@ -231,10 +217,7 @@ class MainWindow(QMainWindow):
             # Accept the resize event
             event.accept()
         
-        # Register responsive handlers
-        self.responsive_manager.register_handler('resize', handle_resize)
-        
-        # Connect resize event
+        # Set the resize event handler directly
         self.resizeEvent = handle_resize
     
     def _create_view_controls(self):

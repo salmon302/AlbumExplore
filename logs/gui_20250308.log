@@ -575,3 +575,1112 @@ Traceback (most recent call last):
     instance_state(child),
     ^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-03-08 16:30:50,255 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:30:50,255 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:30:50,296 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:30:50,510 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:30:50,510 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:30:50,647 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:30:50,647 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:30:50,648 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:31:04,822 - albumexplore.gui - ERROR - Error initializing database: 'str' object has no attribute '_sa_instance_state' - {app.py:45}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 104, in load_csv_data
+    tag = models.Tag(
+          ^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2178, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 537, in __set__
+    self.impl.set(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1467, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1506, in fire_replace_event
+    value = fn(
+            ^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 2161, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-03-08 16:31:04,833 - albumexplore.gui - ERROR - Fatal error in main: 'str' object has no attribute '_sa_instance_state' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 106, in main
+    session = initialize_database()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 104, in load_csv_data
+    tag = models.Tag(
+          ^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2178, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 537, in __set__
+    self.impl.set(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1467, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1506, in fire_replace_event
+    value = fn(
+            ^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 2161, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-03-08 16:33:59,261 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:33:59,261 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:33:59,298 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:33:59,564 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:33:59,564 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:33:59,750 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:33:59,751 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:33:59,751 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:34:34,322 - albumexplore.gui - ERROR - Error initializing database: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all() - {app.py:45}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 86, in load_csv_data
+    if pd.notna(row.get('tags')) and isinstance(row['tags'], list):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-03-08 16:34:34,324 - albumexplore.gui - ERROR - Fatal error in main: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all() - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 106, in main
+    session = initialize_database()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 86, in load_csv_data
+    if pd.notna(row.get('tags')) and isinstance(row['tags'], list):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-03-08 16:44:44,636 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:44:44,639 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:44:44,734 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:44:45,243 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:44:45,244 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:44:45,359 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:44:45,359 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:44:45,360 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:45:03,427 - albumexplore.gui - ERROR - Error initializing database: (sqlite3.IntegrityError) UNIQUE constraint failed: tag_categories.id
+[SQL: INSERT INTO tag_categories (id, name, description) VALUES (?, ?, ?)]
+[parameters: [('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')  ... displaying 10 of 129 total bound parameter sets ...  ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')]]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) - {app.py:45}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1933, in _exec_single_context
+    self.dialect.do_executemany(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 939, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: tag_categories.id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 139, in load_csv_data
+    db.commit()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1048, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1933, in _exec_single_context
+    self.dialect.do_executemany(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 939, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: tag_categories.id
+[SQL: INSERT INTO tag_categories (id, name, description) VALUES (?, ?, ?)]
+[parameters: [('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')  ... displaying 10 of 129 total bound parameter sets ...  ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')]]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-03-08 16:45:03,447 - albumexplore.gui - ERROR - Fatal error in main: (sqlite3.IntegrityError) UNIQUE constraint failed: tag_categories.id
+[SQL: INSERT INTO tag_categories (id, name, description) VALUES (?, ?, ?)]
+[parameters: [('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')  ... displaying 10 of 129 total bound parameter sets ...  ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')]]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1933, in _exec_single_context
+    self.dialect.do_executemany(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 939, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: tag_categories.id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 106, in main
+    session = initialize_database()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 139, in load_csv_data
+    db.commit()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1048, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1933, in _exec_single_context
+    self.dialect.do_executemany(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 939, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: tag_categories.id
+[SQL: INSERT INTO tag_categories (id, name, description) VALUES (?, ?, ?)]
+[parameters: [('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')  ... displaying 10 of 129 total bound parameter sets ...  ('genre', 'Genre', 'Musical genres and subgenres'), ('genre', 'Genre', 'Musical genres and subgenres')]]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-03-08 16:47:07,410 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:47:07,411 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:47:07,479 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:47:07,825 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:47:07,826 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:47:08,054 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:47:08,055 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:47:08,056 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:48:46,632 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:37}
+2025-03-08 16:48:46,636 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:48:46,644 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:48:46,687 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:48:46,688 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:48:46,692 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:48:46,692 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:48:48,267 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 16:48:48,817 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 16:48:48,886 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:259}
+2025-03-08 16:48:48,917 - albumexplore.gui - ERROR - Fatal error in main: type object 'ErrorCategory' has no attribute 'VIEW' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 65, in __init__
+    self._setup_error_handling()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 214, in _setup_error_handling
+    self.error_manager.register_handler(ErrorCategory.VIEW, handle_view_error)
+                                        ^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'ErrorCategory' has no attribute 'VIEW'
+2025-03-08 16:49:10,454 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:49:10,455 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:49:10,552 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:49:10,917 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:49:10,918 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:49:11,144 - albumexplore.gui - DEBUG - Current album count: 11752 - {app.py:28}
+2025-03-08 16:49:11,144 - albumexplore.gui - INFO - Database already contains 11752 albums - {app.py:41}
+2025-03-08 16:49:11,144 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:49:11,147 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:49:11,184 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:49:11,186 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:49:11,187 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:49:11,188 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:49:13,526 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 16:49:13,861 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 16:49:13,935 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:259}
+2025-03-08 16:49:13,954 - albumexplore.gui - ERROR - Fatal error in main: type object 'ErrorCategory' has no attribute 'VIEW' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 65, in __init__
+    self._setup_error_handling()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 214, in _setup_error_handling
+    self.error_manager.register_handler(ErrorCategory.VIEW, handle_view_error)
+                                        ^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'ErrorCategory' has no attribute 'VIEW'
+2025-03-08 16:50:18,430 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:50:18,431 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:50:18,481 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:50:19,326 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:50:19,326 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:50:19,990 - albumexplore.gui - DEBUG - Current album count: 11752 - {app.py:28}
+2025-03-08 16:50:19,990 - albumexplore.gui - INFO - Database already contains 11752 albums - {app.py:41}
+2025-03-08 16:50:19,991 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:50:20,006 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:50:20,033 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:50:20,033 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:50:20,034 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:50:20,034 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:50:22,296 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 16:50:22,655 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 16:50:22,730 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:259}
+2025-03-08 16:50:22,750 - albumexplore.gui - ERROR - Fatal error in main: 'ResponsiveManager' object has no attribute 'register_handler' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 66, in __init__
+    self._setup_responsive_design()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 235, in _setup_responsive_design
+    self.responsive_manager.register_handler('resize', handle_resize)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ResponsiveManager' object has no attribute 'register_handler'
+2025-03-08 16:52:35,149 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:52:35,150 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:52:35,174 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:52:35,293 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:52:35,293 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:52:35,377 - albumexplore.gui - DEBUG - Current album count: 11752 - {app.py:28}
+2025-03-08 16:52:35,377 - albumexplore.gui - INFO - Database already contains 11752 albums - {app.py:41}
+2025-03-08 16:52:35,377 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:52:35,378 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:52:35,386 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:52:35,386 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:52:35,387 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:52:35,387 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:52:36,921 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 16:52:37,146 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 16:52:37,186 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:260}
+2025-03-08 16:52:37,211 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:221}
+2025-03-08 16:52:37,220 - albumexplore.gui - DEBUG - Starting application initialization - {main_window.py:117}
+2025-03-08 16:52:37,221 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:173}
+2025-03-08 16:52:37,221 - albumexplore.gui - DEBUG - MainWindow:  - {main_window.py:168}
+2025-03-08 16:52:37,221 - albumexplore.gui - DEBUG -   QLayout: _layout - {main_window.py:168}
+2025-03-08 16:52:37,221 - albumexplore.gui - DEBUG -   GraphicsDebugMonitor:  - {main_window.py:168}
+2025-03-08 16:52:37,221 - albumexplore.gui - DEBUG -   QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,222 - albumexplore.gui - DEBUG -     QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,222 - albumexplore.gui - DEBUG -     QFrame: visualizationContainer - {main_window.py:168}
+2025-03-08 16:52:37,223 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,223 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,223 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,223 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 16:52:37,223 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 16:52:37,224 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 16:52:37,224 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 16:52:37,233 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,234 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 16:52:37,235 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:37,235 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:37,236 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:37,236 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,236 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,237 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,238 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 16:52:37,238 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 16:52:37,238 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 16:52:37,238 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 16:52:37,238 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,238 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:37,239 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -   QStatusBar:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -     QSizeGrip:  - {main_window.py:168}
+2025-03-08 16:52:37,240 - albumexplore.gui - DEBUG -     QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,241 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,241 - albumexplore.gui - DEBUG -         QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:37,241 - albumexplore.gui - DEBUG - Loading initial data - {main_window.py:123}
+2025-03-08 16:52:37,241 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:52:37,241 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:52:37,982 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 16:52:38,095 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 16:52:38,124 - albumexplore.gui - INFO - Loaded 11752 nodes - {main_window.py:125}
+2025-03-08 16:52:38,125 - albumexplore.gui - DEBUG - Switching to initial view - {main_window.py:128}
+2025-03-08 16:52:38,125 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 16:52:38,125 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 16:52:38,130 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:45}
+2025-03-08 16:52:38,130 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:120}
+2025-03-08 16:52:38,136 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:176}
+2025-03-08 16:52:38,137 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 16:52:38,137 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 16:52:38,140 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {view_manager.py:87}
+2025-03-08 16:52:38,140 - albumexplore.gui - DEBUG - Updating table data with 11752 nodes - {views.py:180}
+2025-03-08 16:52:38,142 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {views.py:187}
+2025-03-08 16:52:38,484 - albumexplore.gui - DEBUG - Table updated with 11752 rows - {views.py:215}
+2025-03-08 16:52:38,485 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:68}
+2025-03-08 16:52:38,485 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:258}
+2025-03-08 16:52:38,485 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:87}
+2025-03-08 16:52:38,485 - albumexplore.gui - DEBUG - Table view shown - {views.py:250}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TABLE - {view_manager.py:108}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:173}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG - MainWindow:  - {main_window.py:168}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG -   QLayout: _layout - {main_window.py:168}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG -   GraphicsDebugMonitor:  - {main_window.py:168}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG -   QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,486 - albumexplore.gui - DEBUG -     QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -     QFrame: visualizationContainer - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -       TableViewWidget: TableViewWidget - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -         GraphicsDebugMonitor:  - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -         QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -         QTableWidget: albumTable - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -           QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -           QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:38,487 - albumexplore.gui - DEBUG -           QHeaderView:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -           QHeaderView:  - {main_window.py:168}
+2025-03-08 16:52:38,488 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -           QAbstractButton:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -           QAbstractTableModel:  - {main_window.py:168}
+2025-03-08 16:52:38,489 - albumexplore.gui - DEBUG -           QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -           QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -             QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -             QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -           QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -             QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -             QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,490 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 16:52:38,491 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,492 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 16:52:38,493 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 16:52:38,494 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 16:52:38,494 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 16:52:38,494 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,494 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 16:52:38,494 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 16:52:38,494 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 16:52:38,495 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -   QStatusBar:  - {main_window.py:168}
+2025-03-08 16:52:38,496 - albumexplore.gui - DEBUG -     QSizeGrip:  - {main_window.py:168}
+2025-03-08 16:52:38,497 - albumexplore.gui - DEBUG -     QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,497 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,497 - albumexplore.gui - DEBUG -         QHBoxLayout:  - {main_window.py:168}
+2025-03-08 16:52:38,497 - albumexplore.gui - DEBUG - Application initialization complete - {main_window.py:148}
+2025-03-08 16:52:38,500 - albumexplore.gui - DEBUG - Window resized to 1200x713 - {main_window.py:221}
+2025-03-08 16:52:38,501 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:68}
+2025-03-08 16:52:38,501 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:258}
+2025-03-08 16:52:38,553 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:221}
+2025-03-08 16:52:38,554 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:68}
+2025-03-08 16:52:38,554 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:258}
+2025-03-08 16:52:43,784 - albumexplore.gui - ERROR - Error during shutdown: 'ViewManager' object has no attribute 'cleanup' - {main_window.py:277}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 271, in closeEvent
+    self.view_manager.cleanup()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ViewManager' object has no attribute 'cleanup'
+2025-03-08 16:52:43,786 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:262}
+2025-03-08 16:52:43,786 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:107}
+2025-03-08 16:52:43,787 - albumexplore.gui - INFO - Application exited with code 0 - {app.py:138}
+2025-03-08 17:04:49,354 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 17:04:49,354 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 17:04:49,381 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 17:04:49,533 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 17:04:49,533 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 17:04:49,675 - albumexplore.gui - DEBUG - Current album count: 11752 - {app.py:28}
+2025-03-08 17:04:49,675 - albumexplore.gui - INFO - Database already contains 11752 albums - {app.py:41}
+2025-03-08 17:04:49,675 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 17:04:49,676 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 17:04:49,686 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 17:04:49,686 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 17:04:49,687 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 17:04:49,687 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 17:04:50,416 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 17:04:50,549 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 17:04:50,598 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:260}
+2025-03-08 17:04:50,619 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:221}
+2025-03-08 17:04:50,628 - albumexplore.gui - DEBUG - Starting application initialization - {main_window.py:117}
+2025-03-08 17:04:50,629 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:173}
+2025-03-08 17:04:50,629 - albumexplore.gui - DEBUG - MainWindow:  - {main_window.py:168}
+2025-03-08 17:04:50,629 - albumexplore.gui - DEBUG -   QLayout: _layout - {main_window.py:168}
+2025-03-08 17:04:50,629 - albumexplore.gui - DEBUG -   GraphicsDebugMonitor:  - {main_window.py:168}
+2025-03-08 17:04:50,629 - albumexplore.gui - DEBUG -   QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,631 - albumexplore.gui - DEBUG -     QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,631 - albumexplore.gui - DEBUG -     QFrame: visualizationContainer - {main_window.py:168}
+2025-03-08 17:04:50,631 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,632 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,632 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,632 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 17:04:50,633 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 17:04:50,634 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 17:04:50,635 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 17:04:50,650 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,650 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 17:04:50,652 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:50,652 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:50,653 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:50,653 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:50,654 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,655 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,655 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,655 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,655 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 17:04:50,655 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 17:04:50,655 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 17:04:50,656 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 17:04:50,656 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,656 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 17:04:50,656 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:50,656 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:50,657 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:50,658 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:50,658 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,658 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:50,658 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:50,658 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:50,658 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:50,659 - albumexplore.gui - DEBUG -   QStatusBar:  - {main_window.py:168}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG -     QSizeGrip:  - {main_window.py:168}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG -     QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG -         QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG - Loading initial data - {main_window.py:123}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 17:04:50,660 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 17:04:51,460 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 17:04:51,601 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 17:04:51,670 - albumexplore.gui - INFO - Loaded 11752 nodes - {main_window.py:125}
+2025-03-08 17:04:51,670 - albumexplore.gui - DEBUG - Switching to initial view - {main_window.py:128}
+2025-03-08 17:04:51,671 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:04:51,671 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:04:51,672 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:45}
+2025-03-08 17:04:51,673 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:120}
+2025-03-08 17:04:51,678 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:176}
+2025-03-08 17:04:51,679 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:04:51,680 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:04:51,686 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {view_manager.py:87}
+2025-03-08 17:04:51,686 - albumexplore.gui - DEBUG - Updating table data with 11752 nodes - {views.py:180}
+2025-03-08 17:04:51,694 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {views.py:187}
+2025-03-08 17:04:52,065 - albumexplore.gui - DEBUG - Table updated with 11752 rows - {views.py:215}
+2025-03-08 17:04:52,066 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:68}
+2025-03-08 17:04:52,066 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:258}
+2025-03-08 17:04:52,067 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:87}
+2025-03-08 17:04:52,067 - albumexplore.gui - DEBUG - Table view shown - {views.py:250}
+2025-03-08 17:04:52,067 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TABLE - {view_manager.py:108}
+2025-03-08 17:04:52,067 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:173}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG - MainWindow:  - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -   QLayout: _layout - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -   GraphicsDebugMonitor:  - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -   QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -     QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -     QFrame: visualizationContainer - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -       TableViewWidget: TableViewWidget - {main_window.py:168}
+2025-03-08 17:04:52,068 - albumexplore.gui - DEBUG -         GraphicsDebugMonitor:  - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -         QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -         QTableWidget: albumTable - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -           QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -           QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -           QHeaderView:  - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,069 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -           QHeaderView:  - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,070 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -           QAbstractButton:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -           QAbstractTableModel:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -           QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -           QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -             QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,071 - albumexplore.gui - DEBUG -             QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -           QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -             QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -             QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 17:04:52,072 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,073 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:52,074 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:168}
+2025-03-08 17:04:52,075 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:168}
+2025-03-08 17:04:52,076 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:52,077 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG -   QStatusBar:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG -     QSizeGrip:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG -     QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG -         QHBoxLayout:  - {main_window.py:168}
+2025-03-08 17:04:52,078 - albumexplore.gui - DEBUG - Application initialization complete - {main_window.py:148}
+2025-03-08 17:04:52,080 - albumexplore.gui - DEBUG - Window resized to 1200x713 - {main_window.py:221}
+2025-03-08 17:04:52,080 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:68}
+2025-03-08 17:04:52,080 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:258}
+2025-03-08 17:04:52,181 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:221}
+2025-03-08 17:04:52,188 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:68}
+2025-03-08 17:04:52,188 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:258}
+2025-03-08 17:05:41,196 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 17:05:41,196 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 17:05:41,227 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:05:41,228 - albumexplore.gui - ERROR - Error switching view: TagNormalizer.normalize() got an unexpected keyword argument 'aggressive' - {view_manager.py:121}
+2025-03-08 17:05:44,176 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_GRAPH - {view_manager.py:64}
+2025-03-08 17:05:44,176 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_GRAPH - {__init__.py:29}
+2025-03-08 17:05:44,189 - albumexplore.gui - DEBUG - View ViewType.TAG_GRAPH created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:05:44,218 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TAG_GRAPH - {view_manager.py:108}
+2025-03-08 17:05:44,718 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 17:05:45,640 - albumexplore.gui - DEBUG - Switching to view type: ViewType.CHORD - {view_manager.py:64}
+2025-03-08 17:05:45,641 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.CHORD - {__init__.py:29}
+2025-03-08 17:05:45,644 - albumexplore.gui - DEBUG - View ViewType.CHORD created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:05:45,647 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.CHORD - {view_manager.py:108}
+2025-03-08 17:05:46,148 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 17:05:46,282 - albumexplore.gui - DEBUG - Switching to view type: ViewType.NETWORK - {view_manager.py:64}
+2025-03-08 17:05:46,282 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.NETWORK - {__init__.py:29}
+2025-03-08 17:05:46,283 - albumexplore.gui - ERROR - Error switching view: type object 'ViewType' has no attribute 'ENHANCED_NETWORK' - {view_manager.py:121}
+2025-03-08 17:05:48,098 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 17:05:48,098 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 17:05:48,115 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:05:48,124 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TAG_EXPLORER - {view_manager.py:108}
+2025-03-08 17:05:48,626 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 17:05:54,989 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:05:54,989 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:05:54,990 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:45}
+2025-03-08 17:05:54,990 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:120}
+2025-03-08 17:05:54,992 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:176}
+2025-03-08 17:05:54,992 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:05:54,992 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:05:54,992 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {view_manager.py:87}
+2025-03-08 17:05:54,992 - albumexplore.gui - DEBUG - Updating table data with 0 nodes - {views.py:180}
+2025-03-08 17:05:54,992 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {views.py:187}
+2025-03-08 17:05:54,993 - albumexplore.gui - DEBUG - Table updated with 0 rows - {views.py:215}
+2025-03-08 17:05:54,993 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:68}
+2025-03-08 17:05:54,993 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:258}
+2025-03-08 17:05:54,994 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:87}
+2025-03-08 17:05:54,994 - albumexplore.gui - DEBUG - Table view shown - {views.py:250}
+2025-03-08 17:05:54,994 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TABLE - {view_manager.py:108}
+2025-03-08 17:05:55,494 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 17:05:57,810 - albumexplore.gui - DEBUG - Switching to view type: ViewType.NETWORK - {view_manager.py:64}
+2025-03-08 17:05:57,810 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.NETWORK - {__init__.py:29}
+2025-03-08 17:05:57,811 - albumexplore.gui - ERROR - Error switching view: type object 'ViewType' has no attribute 'ENHANCED_NETWORK' - {view_manager.py:121}
+2025-03-08 17:05:59,998 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:05:59,998 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:05:59,999 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:45}
+2025-03-08 17:05:59,999 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:120}
+2025-03-08 17:06:00,000 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:176}
+2025-03-08 17:06:00,000 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 708) - {__init__.py:66}
+2025-03-08 17:06:00,001 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:06:00,001 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {view_manager.py:87}
+2025-03-08 17:06:00,001 - albumexplore.gui - DEBUG - Updating table data with 0 nodes - {views.py:180}
+2025-03-08 17:06:00,001 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {views.py:187}
+2025-03-08 17:06:00,001 - albumexplore.gui - DEBUG - Table updated with 0 rows - {views.py:215}
+2025-03-08 17:06:00,002 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:68}
+2025-03-08 17:06:00,002 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 708) - {views.py:258}
+2025-03-08 17:06:00,003 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:87}
+2025-03-08 17:06:00,004 - albumexplore.gui - DEBUG - Table view shown - {views.py:250}
+2025-03-08 17:06:00,004 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TABLE - {view_manager.py:108}
+2025-03-08 17:06:00,505 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 17:06:00,505 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:262}
+2025-03-08 17:06:00,505 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:107}
+2025-03-08 17:06:01,725 - albumexplore.gui - ERROR - Error during shutdown: 'ViewManager' object has no attribute 'cleanup' - {main_window.py:277}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 271, in closeEvent
+    self.view_manager.cleanup()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ViewManager' object has no attribute 'cleanup'
+2025-03-08 17:06:01,728 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:262}
+2025-03-08 17:06:01,729 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:107}
+2025-03-08 17:06:01,729 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:262}
+2025-03-08 17:06:01,729 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:107}
+2025-03-08 17:06:01,733 - albumexplore.gui - INFO - Application exited with code 0 - {app.py:138}
+2025-03-08 17:17:33,115 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 17:17:33,115 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 17:17:33,137 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 17:17:33,329 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 17:17:33,329 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 17:17:33,403 - albumexplore.gui - DEBUG - Current album count: 11752 - {app.py:28}
+2025-03-08 17:17:33,403 - albumexplore.gui - INFO - Database already contains 11752 albums - {app.py:41}
+2025-03-08 17:17:33,404 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 17:17:33,404 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 17:17:33,409 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:94}
+2025-03-08 17:17:33,409 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 17:17:33,409 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:136}
+2025-03-08 17:17:33,409 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 17:17:34,065 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 17:17:34,188 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 17:17:34,214 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:242}
+2025-03-08 17:17:34,227 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:203}
+2025-03-08 17:17:34,233 - albumexplore.gui - DEBUG - Starting application initialization - {main_window.py:99}
+2025-03-08 17:17:34,233 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:155}
+2025-03-08 17:17:34,233 - albumexplore.gui - DEBUG - MainWindow:  - {main_window.py:150}
+2025-03-08 17:17:34,234 - albumexplore.gui - DEBUG -   QLayout: _layout - {main_window.py:150}
+2025-03-08 17:17:34,234 - albumexplore.gui - DEBUG -   GraphicsDebugMonitor:  - {main_window.py:150}
+2025-03-08 17:17:34,234 - albumexplore.gui - DEBUG -   QWidget:  - {main_window.py:150}
+2025-03-08 17:17:34,235 - albumexplore.gui - DEBUG -     QVBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,235 - albumexplore.gui - DEBUG -     QFrame: visualizationContainer - {main_window.py:150}
+2025-03-08 17:17:34,235 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,235 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:150}
+2025-03-08 17:17:34,236 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,236 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:150}
+2025-03-08 17:17:34,236 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:150}
+2025-03-08 17:17:34,237 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:150}
+2025-03-08 17:17:34,237 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:150}
+2025-03-08 17:17:34,243 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,244 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:150}
+2025-03-08 17:17:34,245 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:150}
+2025-03-08 17:17:34,245 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:150}
+2025-03-08 17:17:34,245 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:150}
+2025-03-08 17:17:34,246 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -   QStatusBar:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -     QSizeGrip:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -     QHBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,247 - albumexplore.gui - DEBUG -         QHBoxLayout:  - {main_window.py:150}
+2025-03-08 17:17:34,248 - albumexplore.gui - DEBUG - Loading initial data - {main_window.py:105}
+2025-03-08 17:17:34,248 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:136}
+2025-03-08 17:17:34,248 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 17:17:35,010 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 17:17:35,128 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 17:17:35,160 - albumexplore.gui - INFO - Loaded 11752 nodes - {main_window.py:107}
+2025-03-08 17:17:35,160 - albumexplore.gui - DEBUG - Switching to initial view - {main_window.py:110}
+2025-03-08 17:17:35,160 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:17:35,160 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:17:35,162 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:47}
+2025-03-08 17:17:35,162 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:122}
+2025-03-08 17:17:35,167 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:200}
+2025-03-08 17:17:35,168 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:17:35,168 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:17:35,170 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {view_manager.py:87}
+2025-03-08 17:17:35,171 - albumexplore.gui - DEBUG - Updating table data with 11752 nodes - {views.py:204}
+2025-03-08 17:17:35,174 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {views.py:211}
+2025-03-08 17:17:35,527 - albumexplore.gui - DEBUG - Table updated with 11752 rows - {views.py:239}
+2025-03-08 17:17:35,529 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:70}
+2025-03-08 17:17:35,530 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:282}
+2025-03-08 17:17:35,531 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:89}
+2025-03-08 17:17:35,531 - albumexplore.gui - DEBUG - Table view shown - {views.py:274}
+2025-03-08 17:17:35,532 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:17:35,532 - albumexplore.gui - ERROR - Error during initialization: Failed to initialize view: Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {main_window.py:138}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 113, in _initialize_application
+    raise RuntimeError(f"Failed to initialize view: {result['message']}")
+RuntimeError: Failed to initialize view: Error switching view: 'ViewManager' object has no attribute 'render_current_view'
+2025-03-08 17:17:35,536 - albumexplore.gui - DEBUG - Window resized to 1200x713 - {main_window.py:203}
+2025-03-08 17:17:35,536 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:70}
+2025-03-08 17:17:35,536 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:282}
+2025-03-08 17:17:35,582 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:203}
+2025-03-08 17:17:35,583 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:70}
+2025-03-08 17:17:35,583 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:282}
+2025-03-08 17:17:40,342 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 17:17:40,342 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 17:17:40,355 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:17:40,355 - albumexplore.gui - DEBUG - Initializing tag explorer view data - {view_manager.py:90}
+2025-03-08 17:17:40,355 - albumexplore.gui - ERROR - Error switching view: TagNormalizer.normalize() got an unexpected keyword argument 'aggressive' - {view_manager.py:131}
+2025-03-08 17:17:43,430 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_GRAPH - {view_manager.py:64}
+2025-03-08 17:17:43,430 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_GRAPH - {__init__.py:29}
+2025-03-08 17:17:43,435 - albumexplore.gui - DEBUG - View ViewType.TAG_GRAPH created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:17:43,444 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:17:43,945 - albumexplore.gui - DEBUG - Cleaning up previous view: ViewType.TAG_EXPLORER - {view_manager.py:195}
+2025-03-08 17:17:44,314 - albumexplore.gui - DEBUG - Switching to view type: ViewType.NETWORK - {view_manager.py:64}
+2025-03-08 17:17:44,314 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.NETWORK - {__init__.py:29}
+2025-03-08 17:17:44,315 - albumexplore.gui - ERROR - Error switching view: type object 'ViewType' has no attribute 'ENHANCED_NETWORK' - {view_manager.py:131}
+2025-03-08 17:17:45,489 - albumexplore.gui - DEBUG - Switching to view type: ViewType.ARC - {view_manager.py:64}
+2025-03-08 17:17:45,490 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.ARC - {__init__.py:29}
+2025-03-08 17:17:45,491 - albumexplore.gui - DEBUG - View ViewType.ARC created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:17:45,492 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:17:45,993 - albumexplore.gui - DEBUG - Cleaning up previous view: ViewType.TAG_GRAPH - {view_manager.py:195}
+2025-03-08 17:17:45,999 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:17:46,000 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:17:46,000 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:47}
+2025-03-08 17:17:46,001 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:122}
+2025-03-08 17:17:46,005 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:200}
+2025-03-08 17:17:46,006 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:17:46,007 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:17:46,007 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {view_manager.py:87}
+2025-03-08 17:17:46,007 - albumexplore.gui - DEBUG - Updating table data with 0 nodes - {views.py:204}
+2025-03-08 17:17:46,008 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {views.py:211}
+2025-03-08 17:17:46,008 - albumexplore.gui - DEBUG - Table updated with 0 rows - {views.py:239}
+2025-03-08 17:17:46,008 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:70}
+2025-03-08 17:17:46,009 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:282}
+2025-03-08 17:17:46,010 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:89}
+2025-03-08 17:17:46,010 - albumexplore.gui - DEBUG - Table view shown - {views.py:274}
+2025-03-08 17:17:46,011 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:17:46,512 - albumexplore.gui - DEBUG - Cleaning up previous view: ViewType.ARC - {view_manager.py:195}
+2025-03-08 17:17:47,305 - albumexplore.gui - DEBUG - Switching to view type: ViewType.NETWORK - {view_manager.py:64}
+2025-03-08 17:17:47,305 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.NETWORK - {__init__.py:29}
+2025-03-08 17:17:47,306 - albumexplore.gui - ERROR - Error switching view: type object 'ViewType' has no attribute 'ENHANCED_NETWORK' - {view_manager.py:131}
+2025-03-08 17:17:50,286 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:17:50,286 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:17:50,286 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:47}
+2025-03-08 17:17:50,286 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:122}
+2025-03-08 17:17:50,290 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:200}
+2025-03-08 17:17:50,290 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:17:50,290 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:17:50,290 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {view_manager.py:87}
+2025-03-08 17:17:50,290 - albumexplore.gui - DEBUG - Updating table data with 0 nodes - {views.py:204}
+2025-03-08 17:17:50,291 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {views.py:211}
+2025-03-08 17:17:50,291 - albumexplore.gui - DEBUG - Table updated with 0 rows - {views.py:239}
+2025-03-08 17:17:50,291 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:70}
+2025-03-08 17:17:50,291 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:282}
+2025-03-08 17:17:50,292 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:89}
+2025-03-08 17:17:50,292 - albumexplore.gui - DEBUG - Table view shown - {views.py:274}
+2025-03-08 17:17:50,293 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:17:50,793 - albumexplore.gui - DEBUG - Cleaning up previous view: ViewType.TABLE - {view_manager.py:195}
+2025-03-08 17:17:50,794 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:286}
+2025-03-08 17:17:50,794 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:109}
+2025-03-08 17:17:53,558 - albumexplore.gui - ERROR - Error during shutdown: 'ViewManager' object has no attribute 'cleanup' - {main_window.py:259}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 253, in closeEvent
+    self.view_manager.cleanup()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ViewManager' object has no attribute 'cleanup'
+2025-03-08 17:17:53,560 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:286}
+2025-03-08 17:17:53,560 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:109}
+2025-03-08 17:17:53,560 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:286}
+2025-03-08 17:17:53,560 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:109}
+2025-03-08 17:17:53,561 - albumexplore.gui - INFO - Application exited with code 0 - {app.py:138}
+2025-03-08 17:18:37,203 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 17:18:37,204 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 17:18:37,256 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 17:18:37,511 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 17:18:37,511 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 17:18:37,679 - albumexplore.gui - DEBUG - Current album count: 11752 - {app.py:28}
+2025-03-08 17:18:37,679 - albumexplore.gui - INFO - Database already contains 11752 albums - {app.py:41}
+2025-03-08 17:18:37,680 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 17:18:37,681 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 17:18:37,686 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:94}
+2025-03-08 17:18:37,686 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 17:18:37,687 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:136}
+2025-03-08 17:18:37,687 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 17:18:38,623 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 17:18:38,816 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 17:18:38,818 - albumexplore.gui - DEBUG - View controls setup complete - {main_window.py:242}
+2025-03-08 17:18:38,832 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:203}
+2025-03-08 17:18:38,843 - albumexplore.gui - DEBUG - Starting application initialization - {main_window.py:99}
+2025-03-08 17:18:38,844 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:155}
+2025-03-08 17:18:38,844 - albumexplore.gui - DEBUG - MainWindow:  - {main_window.py:150}
+2025-03-08 17:18:38,844 - albumexplore.gui - DEBUG -   QLayout: _layout - {main_window.py:150}
+2025-03-08 17:18:38,844 - albumexplore.gui - DEBUG -   GraphicsDebugMonitor:  - {main_window.py:150}
+2025-03-08 17:18:38,844 - albumexplore.gui - DEBUG -   QWidget:  - {main_window.py:150}
+2025-03-08 17:18:38,847 - albumexplore.gui - DEBUG -     QVBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,849 - albumexplore.gui - DEBUG -     QFrame: visualizationContainer - {main_window.py:150}
+2025-03-08 17:18:38,851 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,851 - albumexplore.gui - DEBUG -     QWidget:  - {main_window.py:150}
+2025-03-08 17:18:38,851 - albumexplore.gui - DEBUG -       QHBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,852 - albumexplore.gui - DEBUG -       QLabel:  - {main_window.py:150}
+2025-03-08 17:18:38,852 - albumexplore.gui - DEBUG -       QComboBox:  - {main_window.py:150}
+2025-03-08 17:18:38,854 - albumexplore.gui - DEBUG -         QStandardItemModel:  - {main_window.py:150}
+2025-03-08 17:18:38,854 - albumexplore.gui - DEBUG -         QFrame:  - {main_window.py:150}
+2025-03-08 17:18:38,858 - albumexplore.gui - DEBUG -           QBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,859 - albumexplore.gui - DEBUG -           QListView:  - {main_window.py:150}
+2025-03-08 17:18:38,860 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_viewport - {main_window.py:150}
+2025-03-08 17:18:38,860 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_hcontainer - {main_window.py:150}
+2025-03-08 17:18:38,861 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:150}
+2025-03-08 17:18:38,861 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,861 - albumexplore.gui - DEBUG -             QWidget: qt_scrollarea_vcontainer - {main_window.py:150}
+2025-03-08 17:18:38,862 - albumexplore.gui - DEBUG -               QScrollBar:  - {main_window.py:150}
+2025-03-08 17:18:38,862 - albumexplore.gui - DEBUG -               QBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,862 - albumexplore.gui - DEBUG -             QStyledItemDelegate:  - {main_window.py:150}
+2025-03-08 17:18:38,862 - albumexplore.gui - DEBUG -             QItemSelectionModel:  - {main_window.py:150}
+2025-03-08 17:18:38,862 - albumexplore.gui - DEBUG -             QAbstractItemDelegate:  - {main_window.py:150}
+2025-03-08 17:18:38,862 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:150}
+2025-03-08 17:18:38,863 - albumexplore.gui - DEBUG -           QWidget:  - {main_window.py:150}
+2025-03-08 17:18:38,863 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:150}
+2025-03-08 17:18:38,863 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:150}
+2025-03-08 17:18:38,863 - albumexplore.gui - DEBUG -     QPropertyAnimation:  - {main_window.py:150}
+2025-03-08 17:18:38,863 - albumexplore.gui - DEBUG -   QStatusBar:  - {main_window.py:150}
+2025-03-08 17:18:38,864 - albumexplore.gui - DEBUG -     QSizeGrip:  - {main_window.py:150}
+2025-03-08 17:18:38,864 - albumexplore.gui - DEBUG -     QHBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,864 - albumexplore.gui - DEBUG -       QVBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,864 - albumexplore.gui - DEBUG -         QHBoxLayout:  - {main_window.py:150}
+2025-03-08 17:18:38,864 - albumexplore.gui - DEBUG - Loading initial data - {main_window.py:105}
+2025-03-08 17:18:38,864 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:136}
+2025-03-08 17:18:38,865 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 17:18:40,200 - albumexplore.gui - DEBUG - Retrieved 11752 albums from database - {data_interface.py:120}
+2025-03-08 17:18:40,575 - albumexplore.gui - DEBUG - Created 11752 visual nodes - {data_interface.py:153}
+2025-03-08 17:18:40,580 - albumexplore.gui - INFO - Loaded 11752 nodes - {main_window.py:107}
+2025-03-08 17:18:40,580 - albumexplore.gui - DEBUG - Switching to initial view - {main_window.py:110}
+2025-03-08 17:18:40,580 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:18:40,580 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:18:40,581 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:47}
+2025-03-08 17:18:40,582 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:122}
+2025-03-08 17:18:40,589 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:200}
+2025-03-08 17:18:40,592 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:18:40,593 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:18:40,600 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {view_manager.py:87}
+2025-03-08 17:18:40,601 - albumexplore.gui - DEBUG - Updating table data with 11752 nodes - {views.py:204}
+2025-03-08 17:18:40,611 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {views.py:211}
+2025-03-08 17:18:40,930 - albumexplore.gui - DEBUG - Table updated with 11752 rows - {views.py:239}
+2025-03-08 17:18:40,931 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:70}
+2025-03-08 17:18:40,931 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:282}
+2025-03-08 17:18:40,932 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:89}
+2025-03-08 17:18:40,932 - albumexplore.gui - DEBUG - Table view shown - {views.py:274}
+2025-03-08 17:18:40,932 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:18:40,932 - albumexplore.gui - ERROR - Error during initialization: Failed to initialize view: Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {main_window.py:138}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 113, in _initialize_application
+    raise RuntimeError(f"Failed to initialize view: {result['message']}")
+RuntimeError: Failed to initialize view: Error switching view: 'ViewManager' object has no attribute 'render_current_view'
+2025-03-08 17:18:40,934 - albumexplore.gui - DEBUG - Window resized to 1200x713 - {main_window.py:203}
+2025-03-08 17:18:40,935 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:70}
+2025-03-08 17:18:40,935 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 713) - {views.py:282}
+2025-03-08 17:18:41,029 - albumexplore.gui - DEBUG - Window resized to 1200x800 - {main_window.py:203}
+2025-03-08 17:18:41,030 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:70}
+2025-03-08 17:18:41,030 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 800) - {views.py:282}
+2025-03-08 17:19:02,537 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 17:19:02,539 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 17:19:02,556 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:19:02,556 - albumexplore.gui - DEBUG - Initializing tag explorer view data - {view_manager.py:90}
+2025-03-08 17:19:02,612 - albumexplore.gui - ERROR - Error switching view: TagNormalizer.normalize() got an unexpected keyword argument 'aggressive' - {view_manager.py:131}
+2025-03-08 17:19:07,105 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:19:07,106 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:19:07,106 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:47}
+2025-03-08 17:19:07,107 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:122}
+2025-03-08 17:19:07,110 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:200}
+2025-03-08 17:19:07,111 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:19:07,111 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:19:07,115 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {view_manager.py:87}
+2025-03-08 17:19:07,115 - albumexplore.gui - DEBUG - Updating table data with 11752 nodes - {views.py:204}
+2025-03-08 17:19:07,122 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {views.py:211}
+2025-03-08 17:19:07,505 - albumexplore.gui - DEBUG - Table updated with 11752 rows - {views.py:239}
+2025-03-08 17:19:07,505 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:70}
+2025-03-08 17:19:07,505 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:282}
+2025-03-08 17:19:07,506 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:89}
+2025-03-08 17:19:07,506 - albumexplore.gui - DEBUG - Table view shown - {views.py:274}
+2025-03-08 17:19:07,507 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:19:08,007 - albumexplore.gui - DEBUG - Cleaning up previous view: ViewType.TAG_EXPLORER - {view_manager.py:195}
+2025-03-08 17:19:08,998 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 17:19:08,998 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 17:19:09,010 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:19:09,010 - albumexplore.gui - DEBUG - Initializing tag explorer view data - {view_manager.py:90}
+2025-03-08 17:19:09,011 - albumexplore.gui - ERROR - Error switching view: TagNormalizer.normalize() got an unexpected keyword argument 'aggressive' - {view_manager.py:131}
+2025-03-08 17:19:10,212 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 17:19:10,213 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 17:19:10,214 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:47}
+2025-03-08 17:19:10,214 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:122}
+2025-03-08 17:19:10,220 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:200}
+2025-03-08 17:19:10,220 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:19:10,220 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 17:19:10,226 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {view_manager.py:87}
+2025-03-08 17:19:10,226 - albumexplore.gui - DEBUG - Updating table data with 11752 nodes - {views.py:204}
+2025-03-08 17:19:10,237 - albumexplore.gui - DEBUG - Found 11752 valid row nodes - {views.py:211}
+2025-03-08 17:19:10,619 - albumexplore.gui - DEBUG - Table updated with 11752 rows - {views.py:239}
+2025-03-08 17:19:10,619 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:70}
+2025-03-08 17:19:10,619 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 743) - {views.py:282}
+2025-03-08 17:19:10,620 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:89}
+2025-03-08 17:19:10,620 - albumexplore.gui - DEBUG - Table view shown - {views.py:274}
+2025-03-08 17:19:10,621 - albumexplore.gui - ERROR - Error switching view: 'ViewManager' object has no attribute 'render_current_view' - {view_manager.py:131}
+2025-03-08 17:19:11,121 - albumexplore.gui - DEBUG - Cleaning up previous view: ViewType.TAG_EXPLORER - {view_manager.py:195}
+2025-03-08 17:19:11,969 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 17:19:11,969 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 17:19:11,981 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 743) - {__init__.py:66}
+2025-03-08 17:19:11,981 - albumexplore.gui - DEBUG - Initializing tag explorer view data - {view_manager.py:90}
+2025-03-08 17:19:11,983 - albumexplore.gui - ERROR - Error switching view: TagNormalizer.normalize() got an unexpected keyword argument 'aggressive' - {view_manager.py:131}
+2025-03-08 17:19:13,746 - albumexplore.gui - ERROR - Error during shutdown: 'ViewManager' object has no attribute 'cleanup' - {main_window.py:259}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 253, in closeEvent
+    self.view_manager.cleanup()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ViewManager' object has no attribute 'cleanup'
+2025-03-08 17:19:13,748 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:286}
+2025-03-08 17:19:13,748 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:109}
+2025-03-08 17:19:13,748 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:286}
+2025-03-08 17:19:13,748 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:109}
+2025-03-08 17:19:13,749 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:286}
+2025-03-08 17:19:13,749 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:109}
+2025-03-08 17:19:13,750 - albumexplore.gui - INFO - Application exited with code 0 - {app.py:138}

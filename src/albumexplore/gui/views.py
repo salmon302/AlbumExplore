@@ -8,6 +8,8 @@ from PyQt6.QtGui import QPen, QBrush, QColor, QPainter, QPainterPath, QPalette
 from albumexplore.visualization.state import ViewType
 from albumexplore.visualization.models import VisualNode, VisualEdge
 from albumexplore.gui.gui_logging import gui_logger
+from albumexplore.visualization.views.tag_explorer_view import TagExplorerView
+from albumexplore.visualization.views.tag_graph_view import TagGraphView
 
 class BaseViewWidget(QWidget):
     """Base class for all visualization view widgets."""
@@ -135,6 +137,28 @@ class TableViewWidget(BaseViewWidget):
         self.table.setHorizontalHeaderLabels(["Artist", "Album", "Year", "Tags"])
         self.table.setShowGrid(True)
         self.table.setAlternatingRowColors(True)
+        
+        # Set fixed colors for alternating rows that won't disappear on selection
+        self.table.setStyleSheet("""
+            QTableWidget {
+                alternate-background-color: #f0f0f0;
+                background-color: white;
+            }
+            QTableWidget::item {
+                color: black;
+                border-bottom: 1px solid #eeeeee;
+            }
+            QTableWidget::item:selected {
+                background-color: #c2dbf5;
+                color: black;
+            }
+            QHeaderView::section {
+                background-color: #f5f5f5;
+                color: black;
+                border: 1px solid #dcdcdc;
+                padding: 4px;
+            }
+        """)
         
         # Configure header
         header = self.table.horizontalHeader()
@@ -664,7 +688,9 @@ def create_view(view_type: ViewType, parent=None) -> BaseViewWidget:
 		ViewType.TABLE: TableViewWidget,
 		ViewType.NETWORK: NetworkViewWidget,
 		ViewType.CHORD: ChordViewWidget,
-		ViewType.ARC: ArcViewWidget
+		ViewType.ARC: ArcViewWidget,
+		ViewType.TAG_EXPLORER: lambda p: TagExplorerView(p),
+		ViewType.TAG_GRAPH: lambda p: TagGraphView(p)
 	}
 	widget_class = view_map.get(view_type)
 	if not widget_class:

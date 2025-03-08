@@ -86,6 +86,9 @@ class ViewManager:
                     valid_nodes = [n for n in self.nodes if n.data.get("type") == "row"]
                     gui_logger.debug(f"Found {len(valid_nodes)} valid row nodes")
                     self.current_view.update_data(valid_nodes, [])
+                elif view_type == ViewType.TAG_EXPLORER:
+                    gui_logger.debug("Initializing tag explorer view data")
+                    self.current_view.update_data(self.nodes, self.edges)
                 else:
                     self.current_view.update_data(self.nodes, self.edges)
                 
@@ -93,29 +96,36 @@ class ViewManager:
                 if self.parent_widget:
                     self.current_view.resize(self.parent_widget.size())
                     
-                # Ensure the view is visible
+                # Ensure the view is visible and properly displayed
                 self.current_view.show()
                 self.current_view.raise_()
                 
+                # Special handling for table view to ensure it's properly displayed
+                if hasattr(self.current_view, 'table'):
+                    self.current_view.table.resize(self.current_view.size())
+                    self.current_view.table.show()
+                    self.current_view.table.raise_()
+                    self.current_view.table.viewport().update()
+                
             finally:
                 self.current_view.setUpdatesEnabled(True)
-                if hasattr(self.current_view, 'table'):
-                    self.current_view.table.viewport().update()
+                self.current_view.update()
             
             # Schedule cleanup of previous view
             self._schedule_previous_view_cleanup()
             
-            gui_logger.debug(f"Successfully switched to view type: {view_type}")
-            return {
-                "success": True,
-                "message": f"Switched to {view_type} view",
-                "transition": self.view_integration.prepare_transition(
-                    self.nodes,
-                    self.edges,
+            # Signal transition if needed
+            if transition_type != TransitionType.NONE and self.previous_view:
+                transition_config = self.view_integration.create_transition_config(
+                    self.previous_view_type,
+                    view_type,
                     self.state_manager.current_view,
-                    view_type
+                    self.nodes
                 )
-            }
+                self.current_view.apply_transition(transition_config)
+            
+            # Perform view-specific rendering and return result
+            return self.render_current_view()
             
         except Exception as e:
             gui_logger.error(f"Error switching view: {str(e)}")
@@ -181,9 +191,17 @@ class ViewManager:
 
     def _cleanup_previous_view(self) -> None:
         """Clean up the previous view properly."""
-        if self.previous_view:
-            gui_logger.debug("Cleaning up previous view")
+        if self.previous_view and self.previous_view != self.current_view:
+            gui_logger.debug(f"Cleaning up previous view: {self.previous_view_type}")
+            
+            # Hide the previous view to ensure it doesn't interfere with current view
             self.previous_view.hide()
+            
+            # Remove from parent if it has a parent
+            if self.previous_view.parent():
+                self.previous_view.setParent(None)
+                
+            # Delete the view to free resources
             self.previous_view.deleteLater()
             self.previous_view = None
 

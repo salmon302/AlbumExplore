@@ -79,3 +79,501 @@
 2025-03-08 16:23:01,318 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
 2025-03-08 16:26:51,211 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
 2025-03-08 16:27:53,101 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:30:50,255 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:33:59,261 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:44:44,643 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:47:07,412 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:48:46,646 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:48:48,921 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:49:10,455 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:49:11,148 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:49:13,955 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:50:18,431 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:50:20,012 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:50:22,893 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:52:35,150 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:52:35,378 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:52:38,125 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:52:38,504 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 379.43ms (2.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 16:52:38,509 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 16:52:38,555 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 50.01ms (20.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 16:52:38,559 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 16:52:38,592 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 37.41ms (26.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 16:52:38,592 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 16:52:38,751 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 159.24ms (6.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 16:52:38,751 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 16:52:39,343 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 592.18ms (1.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 16:52:39,344 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 16:52:40,854 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 1510.39ms (0.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 16:52:40,854 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 16:52:43,787 - albumexplore.gui.graphics - INFO - Cleaning up application resources - {app.py:81}
+2025-03-08 16:52:43,965 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:52:43,966 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:04:49,354 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 17:04:49,676 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:04:51,671 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:04:52,081 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 409.72ms (2.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:04:52,087 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:04:52,197 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 115.65ms (8.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:04:52,211 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:04:52,310 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 113.15ms (8.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:04:52,310 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:04:55,344 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 3034.08ms (0.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:04:55,344 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:05:02,125 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 6780.86ms (0.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:05:02,125 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:05:37,330 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35205.67ms (0.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:05:37,331 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:05:38,876 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 1545.35ms (0.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:05:38,877 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:05:41,197 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 17:05:41,197 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:05:41,224 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:62}
+2025-03-08 17:05:41,224 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:05:41,227 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:62}
+2025-03-08 17:05:41,228 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:05:41,233 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:41,250 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:41,717 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:41,901 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:42,096 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:42,193 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:42,319 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:42,358 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:44,177 - albumexplore.gui.graphics - INFO - Initializing TagGraphView - {base_view.py:23}
+2025-03-08 17:05:44,178 - albumexplore.gui.graphics - DEBUG - TagGraphView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:05:44,189 - albumexplore.gui.graphics - INFO - Updating data in TagGraphView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:05:44,189 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagGraphView scheduled update - {gui_logging.py:62}
+2025-03-08 17:05:44,215 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagGraphView resized to PyQt6.QtCore.QSize(1200, 708) - {gui_logging.py:62}
+2025-03-08 17:05:44,215 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagGraphView scheduled update - {gui_logging.py:62}
+2025-03-08 17:05:44,217 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagGraphView shown - {gui_logging.py:62}
+2025-03-08 17:05:44,221 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:44,230 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:44,347 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:44,357 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:44,418 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:44,719 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:62}
+2025-03-08 17:05:44,720 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:45,642 - albumexplore.gui.graphics - INFO - Initializing ChordView - {base_view.py:23}
+2025-03-08 17:05:45,643 - albumexplore.gui.graphics - DEBUG - ChordView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:05:45,645 - albumexplore.gui.graphics - INFO - Updating data in ChordView: 0 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:05:45,646 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: ChordView scheduled update - {gui_logging.py:62}
+2025-03-08 17:05:45,647 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: ChordView resized to PyQt6.QtCore.QSize(1200, 708) - {gui_logging.py:62}
+2025-03-08 17:05:45,647 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: ChordView shown - {gui_logging.py:62}
+2025-03-08 17:05:45,648 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: ChordView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:46,148 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagGraphView hidden - {gui_logging.py:62}
+2025-03-08 17:05:46,151 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: ChordView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:46,282 - albumexplore.gui.graphics - INFO - Initializing EnhancedNetworkView - {base_view.py:23}
+2025-03-08 17:05:46,283 - albumexplore.gui.graphics - DEBUG - EnhancedNetworkView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:05:48,098 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 17:05:48,099 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:05:48,108 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:62}
+2025-03-08 17:05:48,108 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:05:48,113 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:62}
+2025-03-08 17:05:48,116 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 0 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:05:48,127 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:48,141 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:48,599 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:48,627 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: ChordView hidden - {gui_logging.py:62}
+2025-03-08 17:05:48,629 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:48,678 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:48,687 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:05:54,990 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:05:55,495 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:62}
+2025-03-08 17:05:57,810 - albumexplore.gui.graphics - INFO - Initializing EnhancedNetworkView - {base_view.py:23}
+2025-03-08 17:05:57,811 - albumexplore.gui.graphics - DEBUG - EnhancedNetworkView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:05:59,998 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:06:00,506 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:06:01,732 - albumexplore.gui.graphics - INFO - Cleaning up application resources - {app.py:81}
+2025-03-08 17:06:01,823 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:06:02,048 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:06:02,050 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:17:33,115 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 17:17:33,405 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:17:35,160 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:17:35,537 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 376.62ms (2.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:35,541 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:35,584 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 46.49ms (21.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:35,589 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:35,653 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 69.16ms (14.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:35,654 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:40,343 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 17:17:40,344 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:17:40,352 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:62}
+2025-03-08 17:17:40,353 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:17:40,354 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:62}
+2025-03-08 17:17:40,355 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:17:40,357 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:40,375 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:41,533 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:42,059 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:42,226 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:42,368 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:42,613 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:43,430 - albumexplore.gui.graphics - INFO - Initializing TagGraphView - {base_view.py:23}
+2025-03-08 17:17:43,431 - albumexplore.gui.graphics - DEBUG - TagGraphView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:17:43,435 - albumexplore.gui.graphics - INFO - Updating data in TagGraphView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:17:43,436 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagGraphView scheduled update - {gui_logging.py:62}
+2025-03-08 17:17:43,444 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagGraphView resized to PyQt6.QtCore.QSize(1200, 743) - {gui_logging.py:62}
+2025-03-08 17:17:43,444 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagGraphView shown - {gui_logging.py:62}
+2025-03-08 17:17:43,447 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:43,458 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:43,708 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:43,767 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:43,912 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:43,945 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:62}
+2025-03-08 17:17:43,958 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:44,314 - albumexplore.gui.graphics - INFO - Initializing EnhancedNetworkView - {base_view.py:23}
+2025-03-08 17:17:44,315 - albumexplore.gui.graphics - DEBUG - EnhancedNetworkView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:17:44,359 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:44,699 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:44,709 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagGraphView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:45,490 - albumexplore.gui.graphics - INFO - Initializing ArcView - {base_view.py:23}
+2025-03-08 17:17:45,490 - albumexplore.gui.graphics - DEBUG - ArcView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:17:45,491 - albumexplore.gui.graphics - INFO - Updating data in ArcView: 0 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:17:45,491 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: ArcView scheduled update - {gui_logging.py:62}
+2025-03-08 17:17:45,492 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: ArcView resized to PyQt6.QtCore.QSize(1200, 743) - {gui_logging.py:62}
+2025-03-08 17:17:45,492 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: ArcView shown - {gui_logging.py:62}
+2025-03-08 17:17:45,494 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: ArcView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:45,993 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagGraphView hidden - {gui_logging.py:62}
+2025-03-08 17:17:45,996 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: ArcView paint event started - {gui_logging.py:62}
+2025-03-08 17:17:46,000 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:17:46,015 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:46,021 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:46,235 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 215.05ms (4.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:46,236 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:46,512 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: ArcView hidden - {gui_logging.py:62}
+2025-03-08 17:17:46,513 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 277.71ms (3.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:46,514 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:46,682 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 169.03ms (5.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:46,684 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:47,305 - albumexplore.gui.graphics - INFO - Initializing EnhancedNetworkView - {base_view.py:23}
+2025-03-08 17:17:47,306 - albumexplore.gui.graphics - DEBUG - EnhancedNetworkView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:17:50,286 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:17:50,295 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:50,303 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:50,794 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:17:50,796 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 494.24ms (2.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:17:50,798 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:17:53,561 - albumexplore.gui.graphics - INFO - Cleaning up application resources - {app.py:81}
+2025-03-08 17:17:53,595 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:17:53,727 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:17:53,727 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:18:37,204 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 17:18:37,681 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:18:40,580 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:18:40,935 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 354.97ms (2.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:40,939 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:41,031 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 95.72ms (10.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:41,041 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:41,074 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 43.29ms (23.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:41,076 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:41,984 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 909.39ms (1.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:41,984 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,616 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 632.67ms (1.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:42,617 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,644 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,679 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35.93ms (27.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:42,681 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,744 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 64.82ms (15.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:42,745 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,776 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,815 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 41.02ms (24.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:42,817 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:42,867 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 51.63ms (19.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:42,869 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:43,228 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 361.37ms (2.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:43,229 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:43,255 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:43,296 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 42.04ms (23.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:43,297 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:43,335 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.42ms (25.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:43,336 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:43,376 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 40.64ms (24.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:43,378 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:43,984 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 608.42ms (1.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:43,985 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:44,014 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:44,024 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:45,310 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 1286.36ms (0.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:45,312 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:45,625 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 315.50ms (3.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:45,626 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:45,762 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 136.45ms (7.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:45,762 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:45,994 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 232.45ms (4.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:45,994 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:46,043 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 48.42ms (20.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:46,043 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:46,989 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 946.39ms (1.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:46,990 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,101 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 112.01ms (8.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:47,101 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,558 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 457.48ms (2.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:47,560 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,581 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,608 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,658 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 51.04ms (19.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:47,659 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,696 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.55ms (25.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:47,698 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,726 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:47,765 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 40.43ms (24.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:47,767 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:48,062 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 297.22ms (3.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:48,062 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:50,860 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 2797.85ms (0.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:50,861 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:50,886 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:50,918 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:50,955 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.63ms (25.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:50,957 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:50,995 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 40.38ms (24.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:50,997 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,042 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 46.56ms (21.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,044 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,481 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 439.55ms (2.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,482 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,505 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,539 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35.90ms (27.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,541 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,574 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 34.90ms (28.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,577 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,623 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 48.33ms (20.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,624 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,657 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 34.05ms (29.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,661 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:51,691 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 34.16ms (29.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:51,702 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,248 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 557.17ms (1.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:52,249 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,274 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,311 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 37.55ms (26.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:52,313 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,342 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,379 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,420 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 46.74ms (21.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:52,422 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,457 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 37.04ms (27.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:52,460 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,967 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 509.64ms (2.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:52,968 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:52,991 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:53,027 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 37.54ms (26.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:53,029 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:53,694 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 666.58ms (1.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:53,694 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:53,956 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 262.59ms (3.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:53,957 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:53,995 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.42ms (26.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:53,995 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,229 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 234.77ms (4.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,230 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,265 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35.73ms (28.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,267 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,315 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 50.33ms (19.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,316 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,351 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35.00ms (28.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,355 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,390 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.11ms (25.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,391 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,428 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.59ms (25.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,431 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,474 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 45.49ms (22.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,476 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,544 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 70.00ms (14.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,546 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,584 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.90ms (25.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,587 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,621 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 37.04ms (27.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,624 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,662 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 41.23ms (24.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,664 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,701 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.02ms (25.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,703 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,739 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.31ms (26.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,741 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,778 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.77ms (25.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,780 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,823 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 44.88ms (22.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,825 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,861 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 37.91ms (26.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,862 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,898 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35.91ms (27.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,900 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:54,933 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 36.20ms (27.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:54,934 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,209 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 276.35ms (3.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,210 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,233 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,462 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 230.58ms (4.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,464 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,491 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,529 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.06ms (25.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,531 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,568 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.55ms (25.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,570 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,608 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.53ms (25.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,610 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,655 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 47.86ms (20.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,660 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,723 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 67.85ms (14.7 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,724 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,756 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,800 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 46.36ms (21.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,802 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,875 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 75.06ms (13.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,877 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,909 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,931 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:55,969 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.62ms (25.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:55,973 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,229 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 259.64ms (3.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,230 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,262 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 33.42ms (29.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,265 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,307 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 44.97ms (22.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,308 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,341 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 34.33ms (29.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,345 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,392 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 51.06ms (19.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,394 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,419 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,449 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,494 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 47.74ms (20.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,496 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,539 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 44.31ms (22.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,541 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,580 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 41.29ms (24.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,583 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,628 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 48.17ms (20.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,629 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,651 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,689 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.28ms (25.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,692 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,740 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 50.40ms (19.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,742 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,774 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:56,976 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 203.97ms (4.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:56,977 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,000 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,033 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,077 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 45.62ms (21.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,079 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,136 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 58.54ms (17.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,138 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,336 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 200.50ms (5.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,337 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,539 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 203.20ms (4.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,540 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,564 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,603 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 40.89ms (24.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,606 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,629 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,659 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,724 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 66.08ms (15.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,725 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,756 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,792 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 36.57ms (27.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:57,794 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:57,827 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,046 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 221.04ms (4.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,047 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,239 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 192.83ms (5.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,242 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,277 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.01ms (26.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,278 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,307 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,345 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.81ms (25.8 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,346 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,379 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,415 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 38.22ms (26.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,417 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,458 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 42.74ms (23.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,460 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,499 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 40.64ms (24.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,501 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,533 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 34.29ms (29.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,534 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,566 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,597 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,644 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 47.54ms (21.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,646 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,949 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 305.38ms (3.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:58,950 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:58,973 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,007 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 34.92ms (28.6 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,009 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,046 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.31ms (25.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,048 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,082 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 36.61ms (27.3 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,083 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,137 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 54.92ms (18.2 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,139 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,176 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 39.17ms (25.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,178 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,220 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 43.47ms (23.0 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,222 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,251 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:18:59,285 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 35.20ms (28.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:18:59,287 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:00,225 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 940.78ms (1.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:00,225 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:00,227 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:01,311 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 1083.67ms (0.9 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:01,312 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:02,540 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 17:19:02,541 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:19:02,550 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:62}
+2025-03-08 17:19:02,550 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:19:02,555 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:62}
+2025-03-08 17:19:02,556 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:19:02,611 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:19:02,613 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:02,641 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:03,297 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:03,442 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:03,646 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:03,890 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:04,057 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:04,228 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:04,532 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:07,106 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:19:07,509 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 402.45ms (2.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:07,510 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:07,540 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:08,008 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:62}
+2025-03-08 17:19:08,016 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 476.78ms (2.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:08,018 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:08,999 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 17:19:08,999 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:19:09,006 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:62}
+2025-03-08 17:19:09,007 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:19:09,009 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:62}
+2025-03-08 17:19:09,010 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:19:09,016 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:09,037 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:10,213 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 17:19:10,622 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 409.19ms (2.4 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:10,623 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:10,656 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 33.94ms (29.5 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:10,658 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:11,121 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:62}
+2025-03-08 17:19:11,130 - albumexplore.gui.graphics - DEBUG - paint: TableViewWidget took 473.51ms (2.1 FPS) - BG state: {'translucent': False, 'no_system_bg': False, 'opaque_paint': True, 'auto_fill': True} - {graphics_debug.py:61}
+2025-03-08 17:19:11,131 - albumexplore.gui.graphics - DEBUG - Buffer state for TableViewWidget: valid - {graphics_debug.py:82}
+2025-03-08 17:19:11,970 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 17:19:11,970 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 17:19:11,977 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:62}
+2025-03-08 17:19:11,977 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:62}
+2025-03-08 17:19:11,980 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:62}
+2025-03-08 17:19:11,981 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 11752 nodes, 0 edges - {base_view.py:92}
+2025-03-08 17:19:11,989 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:12,004 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:12,423 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:12,442 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:62}
+2025-03-08 17:19:13,749 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:62}
+2025-03-08 17:19:13,749 - albumexplore.gui.graphics - INFO - Cleaning up application resources - {app.py:81}
+2025-03-08 17:19:14,381 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:19:14,502 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:19:14,884 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 17:19:14,886 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
