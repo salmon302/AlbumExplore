@@ -15,6 +15,9 @@ setup(
 		'uvicorn>=0.23.0',
 		'pycountry>=22.3.5',
 		'pydantic>=2.0.0',
+		'PyQt6>=6.4.0',
+		'PyQt6-OpenGL>=6.4.0',
+		'PyOpenGL>=3.1.6',
 	],
 	extras_require={
 		'test': [

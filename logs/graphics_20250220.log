@@ -1,0 +1,191 @@
+2025-02-20 19:03:11,306 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:03:11,512 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:03:11,629 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:03:11,638 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:05:01,767 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:05:01,987 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:05:02,122 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:05:02,141 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:88}
+2025-02-20 19:05:02,143 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:05:02,151 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:05:02,157 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:05:02,160 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:05:02,180 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:05:02,222 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:05:14,128 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:05:14,134 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:05:19,507 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:05:21,287 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:05:21,473 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:05:21,616 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:05:21,625 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:88}
+2025-02-20 19:05:21,626 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:05:21,630 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:05:21,633 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:05:21,636 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:05:21,656 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:05:21,694 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:15,379 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:15,391 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:16,658 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:16,673 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:16,825 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:16,830 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:17,335 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:06:19,165 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:06:19,372 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:06:19,529 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:06:19,548 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:88}
+2025-02-20 19:06:19,549 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:06:19,555 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:06:19,558 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:06:19,565 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:06:19,588 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:19,623 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:34,236 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:34,249 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:35,193 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:35,235 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:06:35,683 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:07:01,870 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:07:02,096 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:07:02,220 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:07:02,231 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:88}
+2025-02-20 19:07:02,232 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:07:02,243 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:07:02,245 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:07:02,249 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:07:02,274 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:02,305 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:05,257 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:05,267 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:06,217 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:06,258 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:06,666 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:07:21,028 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:07:21,230 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:07:21,347 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:07:21,356 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:88}
+2025-02-20 19:07:21,356 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:07:21,360 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:07:21,361 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:07:21,363 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:07:21,394 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:21,414 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:21,440 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:27,478 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:27,485 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:27,493 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:27,495 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:27,502 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:28,109 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:28,116 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:29,698 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:29,704 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,213 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,219 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,819 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,829 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,840 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,856 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,873 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,908 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,923 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,940 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,956 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:31,976 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,044 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,133 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,141 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,156 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,173 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,190 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,206 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,229 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,248 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:07:32,367 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:14:30,437 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:14:30,650 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:14:30,789 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:14:30,801 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:94}
+2025-02-20 19:14:30,801 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:14:30,803 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:14:30,808 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:14:30,810 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:14:30,838 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:14:30,897 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:14:30,935 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:14:30,977 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:14:31,004 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:11,260 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:11,279 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:13,665 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:13,709 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:13,725 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:13,759 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:15:15,266 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:16:02,873 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:16:03,121 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:16:03,261 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:16:03,272 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:94}
+2025-02-20 19:16:03,273 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:16:03,276 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:16:03,287 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:16:03,288 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:16:03,304 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:03,357 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:03,397 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:03,440 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:03,451 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:03,489 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:05,462 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:16:07,479 - gui.graphics - [INFO] - Initializing EnhancedNetworkView - {base_view.py:23}
+2025-02-20 19:16:07,482 - gui.graphics - [INFO] - Initializing EnhancedNetworkView - {enhanced_network_view.py:53}
+2025-02-20 19:16:07,490 - gui.graphics - [INFO] - Updating data in EnhancedNetworkView: 100 nodes, 0 edges - {base_view.py:94}
+2025-02-20 19:16:07,493 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:16:07,494 - gui.graphics - [DEBUG] - Graphics Event - Visibility: EnhancedNetworkView shown - {gui_logging.py:60}
+2025-02-20 19:16:07,503 - gui.graphics - [DEBUG] - Starting buffer paint - {enhanced_network_view.py:257}
+2025-02-20 19:16:09,893 - gui.graphics - [DEBUG] - Graphics Event - Visibility: EnhancedNetworkView hidden - {gui_logging.py:60}
+2025-02-20 19:22:13,507 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:22:13,708 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:22:13,837 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:22:13,847 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:94}
+2025-02-20 19:22:13,847 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:22:13,849 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:22:13,854 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:22:13,856 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:22:13,874 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:13,948 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:13,972 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:14,014 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:14,030 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:14,070 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:17,290 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:18,112 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:18,130 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:18,288 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:18,305 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:22:18,971 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}
+2025-02-20 19:47:49,570 - gui.graphics - [INFO] - Configuring high DPI support - {app.py:37}
+2025-02-20 19:47:49,986 - gui.graphics - [INFO] - Creating main window - {app.py:76}
+2025-02-20 19:47:50,157 - gui.graphics - [INFO] - Initializing TableView - {base_view.py:23}
+2025-02-20 19:47:50,174 - gui.graphics - [INFO] - Updating data in TableView: 100 nodes, 0 edges - {base_view.py:94}
+2025-02-20 19:47:50,175 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:47:50,180 - gui.graphics - [INFO] - Displaying main window - {app.py:84}
+2025-02-20 19:47:50,195 - gui.graphics - [DEBUG] - Graphics Event - Update: TableView scheduled update - {gui_logging.py:60}
+2025-02-20 19:47:50,201 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView shown - {gui_logging.py:60}
+2025-02-20 19:47:50,207 - gui.graphics - [DEBUG] - Graphics Event - MainWindow: Window displayed - {gui_logging.py:60}
+2025-02-20 19:47:50,231 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:47:50,296 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:47:50,328 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:47:50,373 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:47:50,391 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:54:02,864 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 19:54:02,876 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:29,242 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:29,265 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:31,715 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:31,750 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:32,074 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:32,097 - gui.graphics - [DEBUG] - Graphics Event - Paint: TableView paint event started - {gui_logging.py:60}
+2025-02-20 20:36:33,295 - gui.graphics - [DEBUG] - Graphics Event - Visibility: TableView hidden - {gui_logging.py:60}

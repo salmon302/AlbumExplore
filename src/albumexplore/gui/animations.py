@@ -1,130 +1,123 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QPointF, QObject, pyqtProperty
-from PyQt6.QtWidgets import QGraphicsItem
+"""Animation utilities for GUI transitions."""
 
-class NodeAnimation(QObject):
-	"""Handles node animation for transitions."""
-	def __init__(self, item: QGraphicsItem):
-		super().__init__()
-		self._item = item
-		self._pos = QPointF(0, 0)
-		if hasattr(self._item, 'data') and isinstance(self._item.data, dict):
-			self._pos = QPointF(self._item.data.get('x', 0), self._item.data.get('y', 0))
-		self._opacity = 1.0
-	
-	def _get_pos(self) -> QPointF:
-		return self._pos
-	
-	def _set_pos(self, pos: QPointF):
-		self._pos = pos
-		if hasattr(self._item, 'data'):
-			if not isinstance(self._item.data, dict):
-				self._item.data = {}
-			self._item.data['x'] = pos.x()
-			self._item.data['y'] = pos.y()
-			if hasattr(self._item, 'pos'):
-				if callable(self._item.pos):
-					self._item.pos = lambda: {'x': pos.x(), 'y': pos.y()}
-				else:
-					self._item.pos = {'x': pos.x(), 'y': pos.y()}
-	
-	def _get_opacity(self) -> float:
-		return self._opacity
-	
-	def _set_opacity(self, opacity: float):
-		self._opacity = opacity
-	
-	pos = pyqtProperty(QPointF, _get_pos, _set_pos)
-	opacity = pyqtProperty(float, _get_opacity, _set_opacity)
+from typing import Dict, List, Any, Callable
+from dataclasses import dataclass
+from PyQt6.QtCore import QTimer, QObject, pyqtSignal
+import time
 
-class ViewTransitionAnimator:
-	"""Manages view transition animations with improved smoothing."""
-	def __init__(self):
-		self.animations = []
-		self._animation_cache = {}
-		self._default_easing = "OutCubic"
-	
-	def morph_nodes(self, items: dict, target_positions: dict, duration: int, easing: str = None) -> None:
-		"""Animate nodes with improved smoothing."""
-		self.clear()
-		easing = easing or self._default_easing
-		
-		# Group animations for better performance
-		animations_group = []
-		
-		for node_id, item in items.items():
-			if node_id in target_positions:
-				target_pos = target_positions[node_id]
-				anim = NodeAnimation(item)
-				
-				# Position animation with improved smoothing
-				pos_anim = QPropertyAnimation(anim, b"pos")
-				pos_anim.setDuration(duration)
-				
-				# Get current position with fallback
-				current_pos = QPointF(
-					item.data.get('x', 0) if isinstance(item.data, dict) else 0,
-					item.data.get('y', 0) if isinstance(item.data, dict) else 0
-				)
-				
-				# Smooth start position using cache
-				if node_id in self._animation_cache:
-					cached_pos = self._animation_cache[node_id]
-					current_pos = QPointF(
-						cached_pos['x'] + (current_pos.x() - cached_pos['x']) * 0.7,
-						cached_pos['y'] + (current_pos.y() - cached_pos['y']) * 0.7
-					)
-				
-				pos_anim.setStartValue(current_pos)
-				pos_anim.setEndValue(QPointF(target_pos['x'], target_pos['y']))
-				
-				# Use custom easing curve for smoother animation
-				if easing == 'cubic-bezier(0.4, 0.0, 0.2, 1)':
-					curve = QEasingCurve(QEasingCurve.Type.OutCubic)
-					curve.setPeriod(0.5)
-					curve.setAmplitude(1.0)
-					pos_anim.setEasingCurve(curve)
-				else:
-					pos_anim.setEasingCurve(getattr(QEasingCurve, easing))
-				
-				animations_group.append(pos_anim)
-				
-				# Cache target position for next animation
-				self._animation_cache[node_id] = target_pos
-		
-		# Start all animations together
-		self.animations.extend(animations_group)
-		for anim in animations_group:
-			anim.start()
-	
-	def fade_nodes(self, items: dict, fade_out: bool, duration: int, easing: str = None) -> None:
-		"""Animate nodes with smooth fading."""
-		self.clear()
-		
-		animations_group = []
-		for item in items.values():
-			anim = NodeAnimation(item)
-			opacity_anim = QPropertyAnimation(anim, b"opacity")
-			opacity_anim.setDuration(duration)
-			
-			# Smooth opacity transition
-			opacity_anim.setStartValue(0.0 if not fade_out else 1.0)
-			opacity_anim.setEndValue(1.0 if not fade_out else 0.0)
-			
-			# Use custom easing for smoother fade
-			curve = QEasingCurve(QEasingCurve.Type.InOutCubic)
-			curve.setPeriod(0.5)
-			opacity_anim.setEasingCurve(curve)
-			
-			animations_group.append(opacity_anim)
-		
-		# Start all animations together
-		self.animations.extend(animations_group)
-		for anim in animations_group:
-			anim.start()
-	
-	def clear(self) -> None:
-		"""Stop animations but preserve cache."""
-		for anim in self.animations:
-			anim.stop()
-		self.animations.clear()
-		# Don't clear cache to maintain position history
+
+@dataclass
+class NodeAnimation:
+    """Animation data for a node."""
+    node_id: str
+    start_pos: Dict[str, float]
+    end_pos: Dict[str, float]
+    start_opacity: float = 1.0
+    end_opacity: float = 1.0
+    start_size: float = 1.0
+    end_size: float = 1.0
+
+
+class ViewTransitionAnimator(QObject):
+    """Handles smooth transitions between views."""
+    
+    # Signal emitted when animation progresses (0 to 1)
+    progress = pyqtSignal(float)
+    
+    # Signal emitted when animation completes
+    finished = pyqtSignal()
+    
+    def __init__(self):
+        super().__init__()
+        self.timer = QTimer()
+        self.timer.timeout.connect(self._update)
+        self.animations: List[NodeAnimation] = []
+        self._animation_cache: Dict[str, Dict[str, float]] = {}
+        self.current_progress = 0.0
+        self.duration = 300  # ms
+        self.start_time = 0
+        self.active = False
+        self.update_callback = None
+    
+    def animate(self, animations: List[NodeAnimation], duration_ms: int = 300) -> None:
+        """Start animations with given duration."""
+        self.animations = animations
+        self.duration = duration_ms
+        self.current_progress = 0.0
+        self.start_time = time.time() * 1000  # ms
+        self.active = True
+        self.timer.start(16)  # ~60 FPS
+        
+        # Update cache with end positions
+        for anim in animations:
+            self._animation_cache[anim.node_id] = anim.end_pos.copy()
+    
+    def _update(self) -> None:
+        """Update animation state."""
+        if not self.active:
+            return
+        
+        current_time = time.time() * 1000
+        elapsed = current_time - self.start_time
+        progress = min(1.0, elapsed / self.duration)
+        
+        # Apply easing function
+        eased_progress = self._ease_out_cubic(progress)
+        self.current_progress = progress
+        
+        # Emit progress signal
+        self.progress.emit(progress)
+        
+        # Call update callback if provided
+        if self.update_callback:
+            current_values = self._calculate_current_values(eased_progress)
+            self.update_callback(current_values)
+        
+        # Check for completion
+        if progress >= 1.0:
+            self.active = False
+            self.timer.stop()
+            self.finished.emit()
+    
+    def _calculate_current_values(self, progress: float) -> Dict[str, Dict[str, Any]]:
+        """Calculate current interpolated values for all animations."""
+        result = {}
+        
+        for anim in self.animations:
+            # Interpolate position
+            x = anim.start_pos.get('x', 0) + (anim.end_pos.get('x', 0) - anim.start_pos.get('x', 0)) * progress
+            y = anim.start_pos.get('y', 0) + (anim.end_pos.get('y', 0) - anim.start_pos.get('y', 0)) * progress
+            
+            # Interpolate opacity
+            opacity = anim.start_opacity + (anim.end_opacity - anim.start_opacity) * progress
+            
+            # Interpolate size
+            size = anim.start_size + (anim.end_size - anim.start_size) * progress
+            
+            result[anim.node_id] = {
+                'x': x,
+                'y': y,
+                'opacity': opacity,
+                'size': size
+            }
+        
+        return result
+    
+    def cancel(self) -> None:
+        """Cancel ongoing animation."""
+        if self.active:
+            self.active = False
+            self.timer.stop()
+    
+    def clear(self) -> None:
+        """Clear all animations but preserve cache."""
+        self.cancel()
+        self.animations.clear()
+    
+    def set_update_callback(self, callback: Callable[[Dict[str, Dict[str, Any]]], None]) -> None:
+        """Set callback to update nodes during animation."""
+        self.update_callback = callback
+    
+    def _ease_out_cubic(self, t: float) -> float:
+        """Cubic ease-out function."""
+        return 1 - (1 - t) ** 3

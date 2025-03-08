@@ -1,100 +1,122 @@
-from dataclasses import dataclass
-from typing import Dict, List, Optional
-import time
-from collections import deque
-import json
-from pathlib import Path
-import logging
-from PyQt6.QtWidgets import QApplication
+"""Debug utilities for visualization performance monitoring."""
 
-@dataclass
-class PerformanceSnapshot:
-	timestamp: float
-	frame_time: float
-	render_time: float
-	layout_time: float
-	node_count: int
-	edge_count: int
-	memory_usage: float
-	viewport_scale: float
-	fps: float
+import time
+from typing import Dict, Any, List, Optional
+from collections import deque
+import statistics
+from albumexplore.gui.gui_logging import performance_logger, log_performance_metric
 
 class PerformanceDebugger:
-	def __init__(self, log_path: Optional[str] = None):
-		self.snapshots = deque(maxlen=300)  # 5 seconds at 60 FPS
-		self.start_times: Dict[str, float] = {}
-		self.log_path = log_path or str(Path.home() / "albumexplore_perf.log")
-		self._setup_logging()
-		
-	def _setup_logging(self):
-		self.logger = logging.getLogger("PerformanceDebugger")
-		self.logger.setLevel(logging.DEBUG)
-		handler = logging.FileHandler(self.log_path)
-		handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
-		self.logger.addHandler(handler)
-		
-	def start_measure(self, name: str):
-		self.start_times[name] = time.perf_counter()
-		
-	def end_measure(self, name: str) -> float:
-		if name in self.start_times:
-			duration = (time.perf_counter() - self.start_times[name]) * 1000
-			del self.start_times[name]
-			return duration
-		return 0.0
-		
-	def take_snapshot(self, metrics: Dict[str, float]):
-		snapshot = PerformanceSnapshot(
-			timestamp=time.time(),
-			frame_time=metrics.get('frame_time', 0),
-			render_time=metrics.get('render_time', 0),
-			layout_time=metrics.get('layout_time', 0),
-			node_count=int(metrics.get('node_count', 0)),
-			edge_count=int(metrics.get('edge_count', 0)),
-			memory_usage=metrics.get('memory_usage', 0),
-			viewport_scale=metrics.get('viewport_scale', 1.0),
-			fps=1000.0 / metrics.get('frame_time', 16.7) if metrics.get('frame_time', 0) > 0 else 60.0
-		)
-		self.snapshots.append(snapshot)
-		self._log_snapshot(snapshot)
-		
-	def _log_snapshot(self, snapshot: PerformanceSnapshot):
-		self.logger.debug(json.dumps({
-			'timestamp': snapshot.timestamp,
-			'fps': snapshot.fps,
-			'frame_time': snapshot.frame_time,
-			'render_time': snapshot.render_time,
-			'layout_time': snapshot.layout_time,
-			'node_count': snapshot.node_count,
-			'edge_count': snapshot.edge_count,
-			'memory_usage': snapshot.memory_usage,
-			'viewport_scale': snapshot.viewport_scale
-		}))
-		
-	def get_performance_report(self) -> str:
-		if not self.snapshots:
-			return "No performance data available"
-			
-		recent = list(self.snapshots)[-60:]  # Last second at 60 FPS
-		avg_fps = sum(s.fps for s in recent) / len(recent)
-		avg_frame_time = sum(s.frame_time for s in recent) / len(recent)
-		
-		return f"""Performance Report
-===================
-Average FPS: {avg_fps:.1f}
-Frame Time: {avg_frame_time:.1f}ms
-Node Count: {recent[-1].node_count}
-Edge Count: {recent[-1].edge_count}
-Memory Usage: {recent[-1].memory_usage/1024/1024:.1f}MB
-Viewport Scale: {recent[-1].viewport_scale:.2f}x
-"""
-
-	def copy_report_to_clipboard(self) -> None:
-		"""Copy current performance report to clipboard."""
-		try:
-			report = self.get_performance_report()
-			if report:
-				clipboard = QApplication.clipboard()
-				clipboard.setText(report)
-		except Exception as e:
-			print(f"Error copying performance report: {str(e)}")
+    """Performance monitoring and debugging for visualizations."""
+    
+    def __init__(self):
+        self.metrics: Dict[str, float] = {}
+        self.start_times: Dict[str, float] = {}
+        self.history: Dict[str, deque] = {}
+        self.max_history_size = 60  # Keep last 60 measurements
+        self.snapshot_history: List[Dict[str, Any]] = []
+        self.max_snapshots = 20
+        self.last_snapshot_time = 0
+        self.snapshot_interval = 1.0  # seconds
+    
+    def start_measure(self, name: str) -> None:
+        """Start measuring a metric."""
+        self.start_times[name] = time.time()
+    
+    def end_measure(self, name: str) -> float:
+        """End measuring a metric and return time in ms."""
+        if name not in self.start_times:
+            return 0.0
+            
+        elapsed = (time.time() - self.start_times[name]) * 1000
+        self.metrics[name] = elapsed
+        
+        # Add to history
+        if name not in self.history:
+            self.history[name] = deque(maxlen=self.max_history_size)
+        self.history[name].append(elapsed)
+        
+        # Log to performance monitoring
+        log_performance_metric("Visualization", name, f"{elapsed:.2f}ms")
+        
+        return elapsed
+    
+    def get_metric(self, name: str) -> Optional[float]:
+        """Get the last measurement for a metric."""
+        return self.metrics.get(name)
+    
+    def get_average(self, name: str, window: int = None) -> Optional[float]:
+        """Get average of a metric over history window."""
+        if name not in self.history or len(self.history[name]) == 0:
+            return None
+            
+        values = list(self.history[name])
+        if window is not None and window < len(values):
+            values = values[-window:]
+            
+        return sum(values) / len(values)
+    
+    def get_percentile(self, name: str, percentile: float = 95.0) -> Optional[float]:
+        """Get a percentile of a metric over history."""
+        if name not in self.history or len(self.history[name]) == 0:
+            return None
+            
+        values = sorted(self.history[name])
+        idx = int(len(values) * percentile / 100)
+        return values[idx]
+    
+    def get_performance_report(self) -> str:
+        """Get a formatted report of all performance metrics."""
+        lines = ["Performance Report:"]
+        
+        for name in sorted(self.metrics.keys()):
+            current = self.metrics[name]
+            avg = self.get_average(name)
+            p95 = self.get_percentile(name, 95)
+            
+            if avg is not None and p95 is not None:
+                lines.append(f"{name}: {current:.2f}ms (avg: {avg:.2f}ms, p95: {p95:.2f}ms)")
+            else:
+                lines.append(f"{name}: {current:.2f}ms")
+        
+        # Add snapshot data
+        if self.snapshot_history:
+            lines.append("\nLast Snapshot:")
+            for key, value in self.snapshot_history[-1].items():
+                if isinstance(value, float):
+                    lines.append(f"  {key}: {value:.2f}")
+                else:
+                    lines.append(f"  {key}: {value}")
+        
+        return "\n".join(lines)
+    
+    def copy_report_to_clipboard(self) -> None:
+        """Copy performance report to clipboard."""
+        try:
+            # Optional, only if QApplication is available
+            from PyQt6.QtWidgets import QApplication
+            QApplication.clipboard().setText(self.get_performance_report())
+        except:
+            pass  # Silently fail if clipboard access fails
+    
+    def take_snapshot(self, metrics: Dict[str, Any]) -> None:
+        """Take a snapshot of metrics and add to history."""
+        now = time.time()
+        
+        # Rate-limit snapshots
+        if now - self.last_snapshot_time < self.snapshot_interval:
+            return
+            
+        self.last_snapshot_time = now
+        
+        # Add timestamp
+        snapshot = {
+            'timestamp': now,
+            **metrics
+        }
+        
+        self.snapshot_history.append(snapshot)
+        
+        # Trim history if needed
+        if len(self.snapshot_history) > self.max_snapshots:
+            self.snapshot_history = self.snapshot_history[-self.max_snapshots:]

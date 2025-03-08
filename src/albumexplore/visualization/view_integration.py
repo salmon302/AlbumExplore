@@ -27,6 +27,8 @@ class ViewIntegrationManager:
 		self.view_sync_handlers: Dict[ViewType, List[Callable]] = {}
 		self._transition_cache = {}  # Cache for transition data
 		self._last_positions = {}    # Cache for last known positions
+		self._view_transition_in_progress = False  # Track transition state
+		self._active_view_type = None  # Track active view
 		self._init_default_transitions()
 	
 	def _init_default_transitions(self) -> None:
@@ -43,6 +45,9 @@ class ViewIntegrationManager:
 		self.transition_configs[(ViewType.CHORD, ViewType.ARC)] = ViewTransition(
 			ViewType.CHORD, ViewType.ARC, TransitionType.MORPH, 400
 		)
+		
+		# Set initial view type
+		self._active_view_type = ViewType.TABLE
 	
 	def register_sync_handler(self, view_type: ViewType, handler: Callable) -> None:
 		"""Register a handler for view synchronization events."""
@@ -61,59 +66,63 @@ class ViewIntegrationManager:
 	def prepare_transition(self, nodes: List[VisualNode], edges: List[VisualEdge],
 						 source_state: ViewState, target_type: ViewType) -> Dict[str, Any]:
 		"""Prepare transition with improved smoothness."""
-		transition = self.get_transition_config(source_state.view_type, target_type)
-		cache_key = (source_state.view_type, target_type)
+		self._view_transition_in_progress = True
+		try:
+			transition = self.get_transition_config(source_state.view_type, target_type)
+			cache_key = (source_state.view_type, target_type)
 		
-		# Initialize positions with last known positions
-		node_positions = self._last_positions.copy()
-		
-		# Update positions based on transition type
-		if transition.transition_type == TransitionType.MORPH:
-			for node in nodes:
-				if not isinstance(node.data, dict):
-					node.data = {}
-				if not hasattr(node, 'pos'):
-					node.pos = {}
-				
-				# Use existing position or smoothly interpolate from last known position
-				if node.id in self._last_positions:
-					last_pos = self._last_positions[node.id]
-					current_x = node.data.get('x', last_pos['x'])
-					current_y = node.data.get('y', last_pos['y'])
-					# Smooth interpolation
-					x = last_pos['x'] + (current_x - last_pos['x']) * 0.7
-					y = last_pos['y'] + (current_y - last_pos['y']) * 0.7
-				else:
-					x = node.data.get('x', 0)
-					y = node.data.get('y', 0)
-				
-				# Update all position references
-				node.data['x'] = x
-				node.data['y'] = y
-				node.data['pos'] = {'x': x, 'y': y}
-				node.pos['x'] = x
-				node.pos['y'] = y
-				node_positions[node.id] = {'x': x, 'y': y}
-		
-		# Store positions for next transition
-		self._last_positions = node_positions
-		
-		# Prepare transition data with easing
-		transition_data = {
-			'transition': {
-				'type': transition.transition_type.value,
-				'duration': transition.duration_ms,
-				'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)',  # Smooth easing
-			},
-			'preserved_positions': node_positions,
-			'shared_selections': list(self.shared_selections),
-			'source_type': source_state.view_type.value,
-			'target_type': target_type.value
-		}
-		
-		# Cache transition data
-		self._transition_cache[cache_key] = transition_data
-		return transition_data
+			# Initialize positions with last known positions
+			node_positions = self._last_positions.copy()
+			
+			# Update positions based on transition type
+			if transition.transition_type == TransitionType.MORPH:
+				for node in nodes:
+					if not isinstance(node.data, dict):
+						node.data = {}
+					if not hasattr(node, 'pos'):
+						node.pos = {}
+					
+					# Use existing position or smoothly interpolate from last known position
+					if node.id in self._last_positions:
+						last_pos = self._last_positions[node.id]
+						current_x = node.data.get('x', last_pos['x'])
+						current_y = node.data.get('y', last_pos['y'])
+						# Smooth interpolation
+						x = last_pos['x'] + (current_x - last_pos['x']) * 0.7
+						y = last_pos['y'] + (current_y - last_pos['y']) * 0.7
+					else:
+						x = node.data.get('x', 0)
+						y = node.data.get('y', 0)
+					
+					# Update all position references
+					node.data['x'] = x
+					node.data['y'] = y
+					node.data['pos'] = {'x': x, 'y': y}
+					node.pos['x'] = x
+					node.pos['y'] = y
+					node_positions[node.id] = {'x': x, 'y': y}
+			
+			# Store positions for next transition
+			self._last_positions = node_positions
+			
+			# Prepare transition data with easing
+			transition_data = {
+				'transition': {
+					'type': transition.transition_type.value,
+					'duration': transition.duration_ms,
+					'easing': 'cubic-bezier(0.4, 0.0, 0.2, 1)',  # Smooth easing
+				},
+				'preserved_positions': node_positions,
+				'shared_selections': list(self.shared_selections),
+				'source_type': source_state.view_type.value,
+				'target_type': target_type.value
+			}
+			
+			# Cache transition data
+			self._transition_cache[cache_key] = transition_data
+			return transition_data
+		finally:
+			self._view_transition_in_progress = False
 
 	
 	def sync_selection(self, selected_ids: Set[str], source_type: ViewType) -> None:

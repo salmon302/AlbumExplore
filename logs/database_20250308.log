@@ -1,0 +1,526 @@
+2025-03-08 14:42:18,362 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:45}
+2025-03-08 14:42:18,749 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:50}
+2025-03-08 14:45:00,240 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:45}
+2025-03-08 14:45:00,244 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 14:45:00,244 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 14:45:00,245 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,245 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,261 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,264 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,265 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,273 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,276 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,276 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,291 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,292 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,292 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,304 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,306 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,307 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,316 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,320 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,321 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,342 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,344 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,345 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,357 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,363 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,364 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,381 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,386 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,391 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,429 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,435 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,438 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,492 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,495 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,496 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,514 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,516 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,516 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,539 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,547 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,548 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,576 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,579 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,579 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,624 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,633 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,633 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,665 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,670 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,670 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,709 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,715 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:45:00,716 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:45:00,743 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:45:00,748 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 14:45:00,751 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:50}
+2025-03-08 14:59:58,348 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:34}
+2025-03-08 14:59:58,374 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 14:59:58,456 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 14:59:58,599 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 14:59:58,600 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 14:59:58,601 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,602 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,615 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,622 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,622 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,633 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,638 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,639 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,654 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,657 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,657 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,672 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,674 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,674 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,686 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,691 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,691 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,706 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,712 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,713 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,725 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,730 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,731 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,755 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,757 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,758 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,776 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,780 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,781 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,805 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,808 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,809 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,826 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,829 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,832 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,866 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,871 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,872 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,897 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,905 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,905 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,935 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,940 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,940 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:58,975 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:58,983 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 14:59:58,983 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 14:59:59,004 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:59,006 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 14:59:59,007 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 14:59:59,022 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 14:59:59,026 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 14:59:59,033 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:51}
+2025-03-08 16:14:38,020 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:34}
+2025-03-08 16:14:38,049 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:14:38,116 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:14:38,222 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 16:14:38,223 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 16:14:38,224 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,225 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,238 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,242 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,243 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,251 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,253 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,254 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,279 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,282 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,283 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,297 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,311 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,312 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,320 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,323 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,324 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,339 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,342 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,342 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,350 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,355 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,356 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,375 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,377 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,377 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,388 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,390 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,390 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,405 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,408 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,408 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,419 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,421 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,422 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,438 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,441 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,441 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,466 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,473 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,473 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,504 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,507 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,507 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,528 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,530 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,531 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,544 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,548 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:14:38,548 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:14:38,565 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:14:38,568 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 16:14:38,570 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:51}
+2025-03-08 16:19:18,859 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:34}
+2025-03-08 16:19:18,908 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:19:19,233 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:19:19,242 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 16:19:19,243 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 16:19:19,243 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,244 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,254 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,257 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,257 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,271 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,275 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,275 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,296 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,299 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,300 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,319 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,333 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,339 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,379 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,395 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,395 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,447 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,461 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,461 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,489 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,492 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,492 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,525 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,527 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,527 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,542 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,545 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,545 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,566 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,569 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,570 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,625 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,638 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,638 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,785 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,814 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,824 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:19,934 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:19,954 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:19,961 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:20,028 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:20,033 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:20,035 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:20,090 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:20,100 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:19:20,100 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:19:20,120 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:20,128 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:19:20,129 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:19:20,148 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:19:20,151 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 16:19:20,153 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:51}
+2025-03-08 16:20:41,450 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:34}
+2025-03-08 16:20:41,507 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:20:41,722 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:20:41,727 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 16:20:41,728 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 16:20:41,729 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,729 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,738 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,740 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,740 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,752 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,754 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,755 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,780 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,784 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,784 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,799 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,802 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,809 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,822 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,824 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,825 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,849 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,854 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,854 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,869 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,871 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,871 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,893 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,896 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,896 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,906 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,910 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,911 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,935 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,937 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,938 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,954 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,957 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:41,958 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:41,988 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:41,997 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:42,000 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:42,019 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:42,024 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:42,025 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:42,055 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:42,061 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:42,061 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:42,097 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:42,100 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:20:42,100 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:20:42,123 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:42,127 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:20:42,127 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:20:42,144 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:20:42,151 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 16:20:42,152 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:51}
+2025-03-08 16:22:22,466 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:35}
+2025-03-08 16:22:22,485 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:22:22,593 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:22:22,596 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 16:22:22,596 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 16:22:22,596 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,596 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,603 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,605 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,605 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,612 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,614 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,614 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,621 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,623 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,623 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,636 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,641 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,641 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,648 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,650 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,650 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,669 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,672 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,673 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,689 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,696 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,699 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,715 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,717 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,718 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,731 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,733 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,734 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,759 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,763 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,764 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,781 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,785 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,786 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,810 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,813 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,813 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,835 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,839 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,841 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,871 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,876 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,878 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,912 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,915 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,915 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,934 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,938 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:22:22,938 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:22:22,959 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:22:22,966 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 16:22:22,969 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:51}
+2025-03-08 16:23:00,402 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:35}
+2025-03-08 16:23:00,452 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:23:00,588 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:23:00,593 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:29}
+2025-03-08 16:23:00,595 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:90}
+2025-03-08 16:23:00,596 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,596 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,617 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,621 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,622 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,643 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,647 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,647 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,668 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,671 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,671 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,693 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,701 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,701 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,718 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,726 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,727 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,751 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,757 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,757 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,780 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,788 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,789 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,814 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,818 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,818 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,841 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,845 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,846 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,882 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,892 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,894 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,919 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,931 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,931 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:00,965 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:00,970 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:00,971 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:01,012 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:01,017 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:01,018 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:01,066 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:01,073 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:01,074 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:01,107 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:01,119 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:95}
+2025-03-08 16:23:01,122 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:47}
+2025-03-08 16:23:01,160 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:01,164 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:95}
+2025-03-08 16:23:01,164 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:47}
+2025-03-08 16:23:01,199 - albumexplore.database - ERROR - Error parsing /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv: 'DataCleaner' object has no attribute 'clean_data' - {csv_parser.py:85}
+2025-03-08 16:23:01,203 - albumexplore.database - WARNING - No valid data found in any CSV files - {csv_parser.py:101}
+2025-03-08 16:23:01,213 - albumexplore.database - WARNING - No data parsed from CSV files - {csv_loader.py:51}
+2025-03-08 16:26:51,614 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:35}
+2025-03-08 16:26:51,655 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:26:51,827 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:26:51,829 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:28}
+2025-03-08 16:26:51,830 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:85}
+2025-03-08 16:26:51,830 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,830 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,849 - albumexplore.database - DEBUG - Successfully parsed 315 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,850 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,850 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,864 - albumexplore.database - DEBUG - Successfully parsed 291 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,866 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,867 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,886 - albumexplore.database - DEBUG - Successfully parsed 423 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,888 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,889 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,911 - albumexplore.database - DEBUG - Successfully parsed 363 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,914 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,914 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,921 - albumexplore.database - DEBUG - Successfully parsed 36 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,924 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,924 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,945 - albumexplore.database - DEBUG - Successfully parsed 562 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,946 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,946 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:26:51,962 - albumexplore.database - DEBUG - Successfully parsed 225 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:26:51,963 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:26:51,964 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:26:53,852 - albumexplore.database - DEBUG - Successfully parsed 759 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:26:53,854 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:26:53,856 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:26:54,618 - albumexplore.database - DEBUG - Successfully parsed 377 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:26:54,619 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:26:54,821 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:26:57,061 - albumexplore.database - DEBUG - Successfully parsed 1215 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:26:57,063 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:26:57,063 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:26:58,850 - albumexplore.database - DEBUG - Successfully parsed 903 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:26:58,853 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:26:58,853 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:01,733 - albumexplore.database - DEBUG - Successfully parsed 1415 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:01,734 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:01,734 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:03,682 - albumexplore.database - DEBUG - Successfully parsed 1066 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:03,684 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:03,684 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:08,890 - albumexplore.database - DEBUG - Successfully parsed 2320 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:08,891 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:08,891 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:12,835 - albumexplore.database - DEBUG - Successfully parsed 2077 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:12,836 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:12,836 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:14,653 - albumexplore.database - DEBUG - Successfully parsed 837 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:14,654 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:14,655 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:16,378 - albumexplore.database - DEBUG - Successfully parsed 820 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:16,511 - albumexplore.database - INFO - Successfully parsed 11752 total rows from 17 files - {csv_parser.py:115}
+2025-03-08 16:27:16,515 - albumexplore.database - INFO - Parsed 11752 rows from CSV files - {csv_loader.py:54}
+2025-03-08 16:27:16,527 - albumexplore.database - DEBUG - Processing chunk 0-500 - {csv_loader.py:67}
+2025-03-08 16:27:16,540 - albumexplore.database - ERROR - Error loading CSV data: 'str' object has no attribute '_sa_instance_state' - {csv_loader.py:132}
+2025-03-08 16:27:53,385 - albumexplore.database - INFO - Initializing database at sqlite:////home/seth-n/PycharmProjects/AlbumExplore/albumexplore.db - {__init__.py:35}
+2025-03-08 16:27:53,410 - albumexplore.database - INFO - Database tables created successfully - {__init__.py:52}
+2025-03-08 16:27:53,560 - albumexplore.database - INFO - Loading CSV data... - {csv_loader.py:46}
+2025-03-08 16:27:53,563 - albumexplore.database - INFO - Parsing data from: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:28}
+2025-03-08 16:27:53,564 - albumexplore.database - INFO - Looking for CSV files in: /home/seth-n/PycharmProjects/AlbumExplore/csv - {csv_parser.py:85}
+2025-03-08 16:27:53,564 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,564 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,576 - albumexplore.database - DEBUG - Successfully parsed 315 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,577 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,577 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,586 - albumexplore.database - DEBUG - Successfully parsed 291 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,587 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,588 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,604 - albumexplore.database - DEBUG - Successfully parsed 423 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,606 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,606 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,622 - albumexplore.database - DEBUG - Successfully parsed 363 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,624 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,624 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,632 - albumexplore.database - DEBUG - Successfully parsed 36 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,633 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,634 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,651 - albumexplore.database - DEBUG - Successfully parsed 562 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,655 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,657 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:53,673 - albumexplore.database - DEBUG - Successfully parsed 225 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:53,674 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:53,674 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:54,501 - albumexplore.database - DEBUG - Successfully parsed 759 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:54,502 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:54,502 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:54,987 - albumexplore.database - DEBUG - Successfully parsed 377 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:54,988 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:54,988 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:55,796 - albumexplore.database - DEBUG - Successfully parsed 1215 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:55,796 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:55,796 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:56,411 - albumexplore.database - DEBUG - Successfully parsed 903 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:56,412 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:56,412 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:57,336 - albumexplore.database - DEBUG - Successfully parsed 1415 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:57,337 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:57,337 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:27:58,042 - albumexplore.database - DEBUG - Successfully parsed 1066 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:27:58,043 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:27:58,043 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:27:59,674 - albumexplore.database - DEBUG - Successfully parsed 2320 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:27:59,675 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:27:59,675 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:28:01,029 - albumexplore.database - DEBUG - Successfully parsed 2077 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:28:01,030 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:101}
+2025-03-08 16:28:01,030 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:42}
+2025-03-08 16:28:01,580 - albumexplore.database - DEBUG - Successfully parsed 837 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv - {csv_parser.py:76}
+2025-03-08 16:28:01,580 - albumexplore.database - DEBUG - Processing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:101}
+2025-03-08 16:28:01,580 - albumexplore.database - DEBUG - Parsing file: /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:42}
+2025-03-08 16:28:02,145 - albumexplore.database - DEBUG - Successfully parsed 820 rows from /home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv - {csv_parser.py:76}
+2025-03-08 16:28:02,219 - albumexplore.database - INFO - Successfully parsed 11752 total rows from 17 files - {csv_parser.py:115}
+2025-03-08 16:28:02,221 - albumexplore.database - INFO - Parsed 11752 rows from CSV files - {csv_loader.py:54}
+2025-03-08 16:28:02,227 - albumexplore.database - DEBUG - Processing chunk 0-500 - {csv_loader.py:67}
+2025-03-08 16:28:02,231 - albumexplore.database - ERROR - Error loading CSV data: 'str' object has no attribute '_sa_instance_state' - {csv_loader.py:132}

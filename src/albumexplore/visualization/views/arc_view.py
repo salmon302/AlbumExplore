@@ -6,6 +6,7 @@ import math
 from .base_view import BaseView
 from ..state import ViewType, ViewState
 from ..arc_renderer import ArcRenderer
+from albumexplore.gui.gui_logging import graphics_logger
 
 class ArcView(BaseView):
 	"""Arc diagram visualization."""
@@ -16,16 +17,16 @@ class ArcView(BaseView):
 		self.renderer = ArcRenderer()
 		self.setMinimumSize(400, 400)
 		
-		# Improve buffer management
-		self.setProperty("paintOnScreen", False)
-		self.setAttribute(Qt.WidgetAttribute.WA_PaintOnScreen, False)
-		self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, True)
-		self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent, True)
-		
+		 # Improved buffer management
 		self._paint_buffer = None
 		self._buffer_dirty = True
 		self._buffer_lock = False
 		self._cleanup_scheduled = False
+		
+		# Set up timer for deferred cleanup
+		self._cleanup_timer = QTimer()
+		self._cleanup_timer.setSingleShot(True)
+		self._cleanup_timer.timeout.connect(self._cleanup_resources)
 	
 	def update(self) -> None:
 		"""Override update to mark buffer as dirty."""
@@ -34,6 +35,8 @@ class ArcView(BaseView):
 
 	def paintEvent(self, event):
 		if not hasattr(self, 'renderer') or not self.nodes or self._buffer_lock:
+			# Call parent paintEvent to ensure background is properly painted
+			super().paintEvent(event)
 			return
 
 		try:
@@ -47,11 +50,20 @@ class ArcView(BaseView):
 				self._paint_buffer.fill(Qt.GlobalColor.transparent)
 				self._paint_to_buffer()
 				self._buffer_dirty = False
-
-			# Paint from buffer to widget
+			
+			# Paint buffer to widget with proper background handling
 			painter = QPainter(self)
+			
+			# Call parent's background painting to ensure proper clearing
+			painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 			painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Source)
-			painter.drawPixmap(0, 0, self._paint_buffer)
+			painter.fillRect(self.rect(), self._background_color)
+			painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
+			
+			# Now draw from buffer
+			if self._paint_buffer:
+				painter.drawPixmap(0, 0, self._paint_buffer)
+			
 			painter.end()
 			
 		finally:
@@ -65,7 +77,7 @@ class ArcView(BaseView):
 		painter = QPainter(self._paint_buffer)
 		painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 		
-		# Clear the buffer
+		# Clear the buffer with transparent (not using QPixmap.fill again)
 		painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
 		painter.fillRect(self._paint_buffer.rect(), Qt.GlobalColor.transparent)
 		painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
@@ -82,6 +94,7 @@ class ArcView(BaseView):
 			for arc in render_data.get('arcs', []):
 				path = QPainterPath()
 				points = arc.get('path', [])
+				
 				if len(points) >= 3:  # Need at least start, control, and end points
 					start, control, end = points[:3]  # Take first three points
 					
@@ -124,24 +137,30 @@ class ArcView(BaseView):
 					painter.drawText(label_rect, Qt.AlignmentFlag.AlignCenter, text)
 		finally:
 			painter.end()
-	
+
 	def resizeEvent(self, event) -> None:
 		"""Handle resize with proper buffer cleanup."""
 		super().resizeEvent(event)
+		self._buffer_dirty = True
+		
+		# Clean up old buffer to free memory
 		if self._paint_buffer:
 			self._paint_buffer = None
-		self._buffer_dirty = True
-		self.update()
 
 	def hideEvent(self, event) -> None:
 		"""Clean up resources when hidden."""
 		super().hideEvent(event)
+		self._schedule_cleanup()
+
+	def _schedule_cleanup(self) -> None:
+		"""Schedule resource cleanup to avoid immediate buffer destruction during transitions."""
 		if not self._cleanup_scheduled:
 			self._cleanup_scheduled = True
-			QTimer.singleShot(100, self._cleanup_resources)
+			self._cleanup_timer.start(200)  # Wait 200ms before cleanup
 
 	def _cleanup_resources(self) -> None:
 		"""Clean up buffers and resources."""
+		graphics_logger.debug("Cleaning up ArcView resources")
 		if self._paint_buffer:
 			self._paint_buffer = None
 		self._buffer_dirty = True

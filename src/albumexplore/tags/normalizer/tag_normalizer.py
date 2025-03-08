@@ -1,198 +1,119 @@
-from typing import List, Dict, Set
+"""Tag normalization system."""
 import re
-from difflib import SequenceMatcher
+import json
+import os
+from typing import Dict, Optional
 
 class TagNormalizer:
-	"""Handles tag normalization, cleaning, and standardization."""
-	
-	COMMON_MISSPELLINGS = {
-		# Progressive variations
-		'prog': 'progressive',
-		'prog-': 'progressive',
-		'prog metal': 'progressive metal',
-		'prog-metal': 'progressive metal',
-		'progmetal': 'progressive metal',
-		
-		# Metal subgenre variations
-		'black-metal': 'black metal',
-		'blackmetal': 'black metal',
-		'death-metal': 'death metal',
-		'deathmetal': 'death metal',
-		'tech death': 'technical death metal',
-		'tech-death': 'technical death metal',
-		'techdeath': 'technical death metal',
-		'doom-metal': 'doom metal',
-		'doommetal': 'doom metal',
-		'power-metal': 'power metal',
-		'powermetal': 'power metal',
-		'thrash-metal': 'thrash metal',
-		'thrashmetal': 'thrash metal',
-		'tharsh metal': 'thrash metal',
-		
-		# Core genre variations
-		'metal-core': 'metalcore',
-		'metalcoore': 'metalcore',
-		'death-core': 'deathcore',
-		'deathcoore': 'deathcore',
-		'post-core': 'postcore',
-		'postcoore': 'postcore',
-		'math-core': 'mathcore',
-		'mathcoore': 'mathcore',
-		
-		# Post genre variations
-		'post metal': 'post-metal',
-		'postmetal': 'post-metal',
-		'post rock': 'post-rock',
-		'postrock': 'post-rock',
-		'post punk': 'post-punk',
-		'postpunk': 'post-punk',
-		'post hardcore': 'post-hardcore',
-		'posthardcore': 'post-hardcore',
-		
-		# Common misspellings
-		'pyschedelic': 'psychedelic',
-		'psycedelic': 'psychedelic',
-		'pschedelic': 'psychedelic',
-		'ambiental': 'ambient',
-		'experimental metal': 'experimental',
-		'avant garde': 'avant-garde',
-		'avantgarde': 'avant-garde',
-		'symph': 'symphonic',
-		'symphonyc': 'symphonic'
-	}
-
-	def __init__(self):
-		self.known_tags: Set[str] = set()
-		self.tag_aliases: Dict[str, str] = {}
-		self._initialize_known_tags()
-
-	def _initialize_known_tags(self):
-		"""Initialize set of known valid tags."""
-		base_genres = {
-			# Metal genres
-			'metal', 'heavy metal', 'power metal', 'doom metal', 'black metal',
-			'death metal', 'thrash metal', 'folk metal', 'gothic metal',
-			'symphonic metal', 'progressive metal', 'post-metal', 'sludge metal',
-			'stoner metal', 'drone metal', 'industrial metal', 'avant-garde metal',
-			'technical death metal', 'melodic death metal', 'viking metal',
-			
-			# Core genres
-			'metalcore', 'deathcore', 'grindcore', 'mathcore', 'hardcore',
-			'post-hardcore', 'crust', 'powerviolence',
-			
-			# Rock genres
-			'rock', 'hard rock', 'progressive rock', 'psychedelic rock',
-			'post-rock', 'indie rock', 'alternative rock', 'art rock',
-			'experimental rock', 'garage rock', 'space rock', 'stoner rock',
-			
-			# Electronic genres
-			'electronic', 'ambient', 'industrial', 'synthwave', 'darkwave',
-			'ebm', 'idm', 'techno', 'house', 'trance',
-			
-			# Other genres
-			'jazz', 'blues', 'folk', 'classical', 'avant-garde',
-			'experimental', 'fusion', 'world music', 'pop', 'punk'
-		}
-		
-		modifiers = {
-			'atmospheric', 'technical', 'melodic', 'experimental',
-			'avant-garde', 'progressive', 'symphonic', 'post',
-			'blackened', 'dark', 'epic', 'raw', 'brutal',
-			'ambient', 'industrial', 'psychedelic', 'traditional'
-		}
-		
-		self.known_tags.update(base_genres)
-		self.known_tags.update(modifiers)
-
-	def normalize(self, tag: str) -> str:
-		"""Normalize a single tag following standardized rules."""
-		# Initial case normalization and cleaning
-		tag = tag.lower().strip()
-		
-		# Handle special compound terms first
-		compound_terms = {
-			'post metal': 'post-metal',
-			'post-metal': 'post-metal',
-			'postmetal': 'post-metal',
-			'progmetal': 'progressive metal',
-			'techno metal': 'technical metal'
-		}
-		
-		# Regional spelling variations
-		regional_variants = {
-			'metal-core': 'metalcore',
-			'death-core': 'deathcore',
-			'black-core': 'blackcore',
-			'grind-core': 'grindcore',
-			'math-core': 'mathcore'
-		}
-		
-		# Check if the tag matches any compound terms
-		for term, replacement in compound_terms.items():
-			if tag == term:
-				return replacement
-				
-		# Check regional variants
-		for variant, standard in regional_variants.items():
-			if tag == variant:
-				return standard
-		
-		# Normalize hyphens and spaces around them
-		tag = re.sub(r'\s*-\s*', '-', tag)  # Standardize spaces around hyphens
-		
-		# Remove special characters but preserve hyphens and apostrophes
-		tag = re.sub(r'[^\w\s\'-]', ' ', tag)
-		# Normalize multiple spaces to single space
-		tag = re.sub(r'\s+', ' ', tag)
-		# Remove leading/trailing spaces
-		tag = tag.strip()
-		
-		# Handle hyphenated compounds specially
-		if '-' in tag:
-			parts = tag.split('-')
-			# Normalize each part individually
-			parts = [part.strip() for part in parts]
-			# Rejoin with standardized hyphen
-			tag = '-'.join(filter(None, parts))
-		
-		# Check common misspellings
-		if tag in self.COMMON_MISSPELLINGS:
-			return self.COMMON_MISSPELLINGS[tag]
-		
-		# Check aliases
-		if tag in self.tag_aliases:
-			return self.tag_aliases[tag]
-		
-		# If it's a known tag, return as is
-		if tag in self.known_tags:
-			return tag
-		
-		# Try to find closest match
-		closest_match = self._find_closest_match(tag)
-		if closest_match:
-			self.tag_aliases[tag] = closest_match
-			return closest_match
-		
-		return tag
-
-
-	def _find_closest_match(self, tag: str, threshold: float = 0.85) -> str:
-		"""Find the closest matching known tag."""
-		best_ratio = 0
-		best_match = None
-		
-		for known_tag in self.known_tags:
-			ratio = SequenceMatcher(None, tag, known_tag).ratio()
-			if ratio > threshold and ratio > best_ratio:
-				best_ratio = ratio
-				best_match = known_tag
-		
-		return best_match if best_match else tag
-
-	def add_alias(self, alias: str, primary: str):
-		"""Add a new tag alias mapping."""
-		self.tag_aliases[alias.lower().strip()] = primary.lower().strip()
-
-	def normalize_list(self, tags: List[str]) -> List[str]:
-		"""Normalize a list of tags."""
-		return [self.normalize(tag) for tag in tags]
+    """Handles tag normalization and variant consolidation."""
+    
+    def __init__(self):
+        """Initialize the normalizer with rules."""
+        self._load_config()
+        self._variant_cache = {}
+        
+    def _load_config(self):
+        """Load normalization rules from config."""
+        config_dir = os.path.join(os.path.dirname(__file__), '../../config')
+        os.makedirs(config_dir, exist_ok=True)
+        config_path = os.path.join(config_dir, 'tag_rules.json')
+        
+        # Default rules if config doesn't exist
+        self._substitutions = {
+            r'^prog\s+': 'progressive ',
+            r'^alt\s+': 'alternative ',
+            r'^exp\s+': 'experimental ',
+            r'metal\s*core': 'metalcore',
+            r'post[- ](\w+)': 'post-\\1'
+        }
+        
+        self._prefix_standardization = {
+            'progressive': 'prog-',
+            'alternative': 'alt-',
+            'experimental': 'exp-',
+            'atmospheric': 'atmo-'
+        }
+        
+        self._category_mapping = {
+            'metal': ['death metal', 'black metal', 'doom metal', 'thrash metal',
+                     'progressive metal', 'power metal', 'gothic metal'],
+            'rock': ['progressive rock', 'psychedelic rock', 'hard rock',
+                    'alternative rock', 'post-rock'],
+            'core': ['metalcore', 'deathcore', 'post-hardcore', 'hardcore'],
+            'fusion': ['jazz fusion', 'prog fusion', 'world fusion'],
+            'experimental': ['avant-garde', 'experimental metal', 'experimental rock']
+        }
+        
+        try:
+            if os.path.exists(config_path):
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    self._substitutions.update(config.get('substitutions', {}))
+                    self._prefix_standardization.update(config.get('prefix_standardization', {}))
+                    for category, tags in config.get('category_mapping', {}).items():
+                        if category in self._category_mapping:
+                            self._category_mapping[category].extend(tags)
+                        else:
+                            self._category_mapping[category] = tags
+        except Exception as e:
+            print(f"Error loading tag rules: {e}")
+    
+    def normalize(self, tag: str) -> str:
+        """Convert a tag to its normalized form."""
+        if not tag:
+            return tag
+            
+        # Convert to lowercase and strip whitespace
+        tag = tag.lower().strip()
+        
+        # Check cache first
+        if tag in self._variant_cache:
+            return self._variant_cache[tag]
+            
+        # Apply substitutions
+        normalized = tag
+        for pattern, replacement in self._substitutions.items():
+            if re.search(pattern, normalized):
+                normalized = re.sub(pattern, replacement, normalized)
+        
+        # Standardize prefixes
+        for full, short in self._prefix_standardization.items():
+            if normalized.startswith(full):
+                normalized = normalized.replace(full, short, 1)
+        
+        # Cache the result
+        self._variant_cache[tag] = normalized
+        return normalized
+    
+    def get_category(self, tag: str) -> str:
+        """Get the category for a tag based on the config mappings."""
+        normalized = self.normalize(tag)
+        
+        for category, tags in self._category_mapping.items():
+            if normalized in tags:
+                return category
+                
+        # Try to infer category from tag name
+        if any(word in normalized for word in ['metal', 'metalcore', 'core']):
+            return 'metal'
+        if any(word in normalized for word in ['rock', 'prog-', 'psychedelic']):
+            return 'rock'
+        if 'jazz' in normalized or 'fusion' in normalized:
+            return 'fusion'
+        if any(word in normalized for word in ['experimental', 'avant', 'noise']):
+            return 'experimental'
+            
+        return 'other'
+        
+    def add_variant(self, variant: str, canonical: str):
+        """Register a new variant mapping."""
+        self._variant_cache[variant.lower().strip()] = canonical.lower().strip()
+    
+    def clear_cache(self):
+        """Clear the variant cache."""
+        self._variant_cache.clear()
+        
+    def reload_config(self):
+        """Reload the configuration file."""
+        self._load_config()
+        self.clear_cache()

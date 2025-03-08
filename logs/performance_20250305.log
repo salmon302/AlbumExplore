@@ -1,0 +1,101 @@
+2025-03-05 20:26:19,153 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 20:26:53,503 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 20:28:05,541 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 20:28:05,805 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.26s - {gui_logging.py:63}
+2025-03-05 20:28:29,139 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 20:28:29,724 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.59s - {gui_logging.py:63}
+2025-03-05 20:30:20,803 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 20:30:21,122 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.32s - {gui_logging.py:63}
+2025-03-05 21:29:08,995 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 21:29:09,369 - gui.performance - [DEBUG] - Performance - TableView - data_update_time: 0.26ms - {gui_logging.py:63}
+2025-03-05 21:29:09,370 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.38s - {gui_logging.py:63}
+2025-03-05 21:29:09,404 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 5.84ms - {gui_logging.py:63}
+2025-03-05 21:29:09,480 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.37ms - {gui_logging.py:63}
+2025-03-05 21:29:09,604 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 5.17ms - {gui_logging.py:63}
+2025-03-05 21:29:09,714 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 3.44ms - {gui_logging.py:63}
+2025-03-05 21:29:09,745 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 3.59ms - {gui_logging.py:63}
+2025-03-05 21:29:12,000 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.35ms - {gui_logging.py:63}
+2025-03-05 21:29:12,003 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.27ms - {gui_logging.py:63}
+2025-03-05 21:29:43,650 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 21:29:43,971 - gui.performance - [DEBUG] - Performance - TableView - data_update_time: 0.33ms - {gui_logging.py:63}
+2025-03-05 21:29:43,972 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.32s - {gui_logging.py:63}
+2025-03-05 21:29:44,024 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 8.69ms - {gui_logging.py:63}
+2025-03-05 21:29:44,103 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 2.01ms - {gui_logging.py:63}
+2025-03-05 21:29:44,142 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 7.73ms - {gui_logging.py:63}
+2025-03-05 21:29:44,262 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 3.30ms - {gui_logging.py:63}
+2025-03-05 21:29:44,315 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.44ms - {gui_logging.py:63}
+2025-03-05 21:29:45,258 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.30ms - {gui_logging.py:63}
+2025-03-05 21:29:45,300 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.71ms - {gui_logging.py:63}
+2025-03-05 21:29:45,334 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.53ms - {gui_logging.py:63}
+2025-03-05 21:29:45,371 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.81ms - {gui_logging.py:63}
+2025-03-05 21:29:45,409 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.62ms - {gui_logging.py:63}
+2025-03-05 21:29:45,843 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.30ms - {gui_logging.py:63}
+2025-03-05 21:29:45,871 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.48ms - {gui_logging.py:63}
+2025-03-05 21:29:45,905 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.50ms - {gui_logging.py:63}
+2025-03-05 21:29:45,937 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.68ms - {gui_logging.py:63}
+2025-03-05 21:29:45,980 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.49ms - {gui_logging.py:63}
+2025-03-05 21:29:46,015 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.43ms - {gui_logging.py:63}
+2025-03-05 21:29:46,348 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.29ms - {gui_logging.py:63}
+2025-03-05 21:29:46,411 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.64ms - {gui_logging.py:63}
+2025-03-05 21:29:46,443 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.58ms - {gui_logging.py:63}
+2025-03-05 21:29:46,472 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.37ms - {gui_logging.py:63}
+2025-03-05 21:29:46,499 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.62ms - {gui_logging.py:63}
+2025-03-05 21:29:46,536 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.34ms - {gui_logging.py:63}
+2025-03-05 21:29:46,563 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.55ms - {gui_logging.py:63}
+2025-03-05 21:29:46,599 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.91ms - {gui_logging.py:63}
+2025-03-05 21:29:46,924 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.33ms - {gui_logging.py:63}
+2025-03-05 21:29:46,972 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.39ms - {gui_logging.py:63}
+2025-03-05 21:29:46,993 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.82ms - {gui_logging.py:63}
+2025-03-05 21:29:47,025 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.29ms - {gui_logging.py:63}
+2025-03-05 21:29:47,056 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.72ms - {gui_logging.py:63}
+2025-03-05 21:29:47,088 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 2.05ms - {gui_logging.py:63}
+2025-03-05 21:29:47,446 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.35ms - {gui_logging.py:63}
+2025-03-05 21:29:47,477 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.38ms - {gui_logging.py:63}
+2025-03-05 21:29:47,513 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.71ms - {gui_logging.py:63}
+2025-03-05 21:29:47,544 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.26ms - {gui_logging.py:63}
+2025-03-05 21:29:47,580 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.40ms - {gui_logging.py:63}
+2025-03-05 21:29:47,625 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.37ms - {gui_logging.py:63}
+2025-03-05 21:29:47,940 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.33ms - {gui_logging.py:63}
+2025-03-05 21:29:47,982 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.57ms - {gui_logging.py:63}
+2025-03-05 21:29:48,005 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.62ms - {gui_logging.py:63}
+2025-03-05 21:29:48,033 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.38ms - {gui_logging.py:63}
+2025-03-05 21:29:48,582 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.41ms - {gui_logging.py:63}
+2025-03-05 21:29:48,603 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.39ms - {gui_logging.py:63}
+2025-03-05 21:29:48,640 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.61ms - {gui_logging.py:63}
+2025-03-05 21:29:48,668 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.79ms - {gui_logging.py:63}
+2025-03-05 21:29:48,693 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.40ms - {gui_logging.py:63}
+2025-03-05 21:29:48,731 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.43ms - {gui_logging.py:63}
+2025-03-05 21:29:48,773 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.34ms - {gui_logging.py:63}
+2025-03-05 21:29:49,146 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.47ms - {gui_logging.py:63}
+2025-03-05 21:29:49,171 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.43ms - {gui_logging.py:63}
+2025-03-05 21:29:49,206 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.43ms - {gui_logging.py:63}
+2025-03-05 21:29:49,236 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.32ms - {gui_logging.py:63}
+2025-03-05 21:29:49,264 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.85ms - {gui_logging.py:63}
+2025-03-05 21:29:49,293 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 2.64ms - {gui_logging.py:63}
+2025-03-05 21:29:49,356 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.28ms - {gui_logging.py:63}
+2025-03-05 22:28:57,928 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 22:28:58,890 - gui.performance - [DEBUG] - Performance - TableView - data_update_time: 0.67ms - {gui_logging.py:63}
+2025-03-05 22:28:58,892 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.96s - {gui_logging.py:63}
+2025-03-05 22:28:58,953 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 8.09ms - {gui_logging.py:63}
+2025-03-05 22:28:59,045 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 2.65ms - {gui_logging.py:63}
+2025-03-05 22:28:59,081 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 4.85ms - {gui_logging.py:63}
+2025-03-05 22:28:59,142 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.72ms - {gui_logging.py:63}
+2025-03-05 22:28:59,162 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.48ms - {gui_logging.py:63}
+2025-03-05 22:29:16,109 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.37ms - {gui_logging.py:63}
+2025-03-05 22:29:16,125 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.92ms - {gui_logging.py:63}
+2025-03-05 22:29:16,226 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 2.20ms - {gui_logging.py:63}
+2025-03-05 22:35:14,046 - gui.performance - [INFO] - Starting performance monitoring - {app.py:21}
+2025-03-05 22:35:14,832 - gui.performance - [DEBUG] - Performance - TableView - data_update_time: 0.75ms - {gui_logging.py:63}
+2025-03-05 22:35:14,835 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 0.79s - {gui_logging.py:63}
+2025-03-05 22:35:14,921 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 6.63ms - {gui_logging.py:63}
+2025-03-05 22:35:15,029 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 9.99ms - {gui_logging.py:63}
+2025-03-05 22:35:15,077 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.67ms - {gui_logging.py:63}
+2025-03-05 22:35:15,103 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.39ms - {gui_logging.py:63}
+2025-03-05 22:38:48,898 - gui.performance - [INFO] - Starting performance monitoring - {app.py:27}
+2025-03-05 22:38:50,203 - gui.performance - [DEBUG] - Performance - TableView - data_update_time: 3.78ms - {gui_logging.py:63}
+2025-03-05 22:38:50,205 - gui.performance - [DEBUG] - Performance - Application - initialization_time: 1.31s - {gui_logging.py:63}
+2025-03-05 22:38:50,282 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 7.45ms - {gui_logging.py:63}
+2025-03-05 22:38:50,362 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.49ms - {gui_logging.py:63}
+2025-03-05 22:38:50,427 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 25.98ms - {gui_logging.py:63}
+2025-03-05 22:38:50,477 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 0.41ms - {gui_logging.py:63}
+2025-03-05 22:38:50,507 - gui.performance - [DEBUG] - Performance - TableView - paint_time: 1.06ms - {gui_logging.py:63}

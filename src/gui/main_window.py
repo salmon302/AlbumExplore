@@ -9,6 +9,12 @@ from albumexplore.data.parsers.csv_parser import CSVParser
 from albumexplore.data.validators.data_validator import DataValidator
 from albumexplore.tags.normalizer.tag_normalizer import TagNormalizer
 from albumexplore.tags.relationships.tag_relationships import TagRelationships
+from albumexplore.visualization.views import create_view
+from albumexplore.visualization.models import VisualNode, VisualEdge
+from albumexplore.visualization.view_manager import ViewManager
+from albumexplore.visualization.data_interface import DataInterface
+from albumexplore.visualization.state import ViewType
+from albumexplore.database import get_db_session
 
 logging.basicConfig(level=logging.INFO)
 
@@ -19,11 +25,16 @@ class MainWindow(QMainWindow):
 		self.setWindowTitle("Album Explorer")
 		self.setMinimumSize(1200, 800)
 		
+		# Initialize database session and data interface
+		self.db_session = get_db_session()
+		self.data_interface = DataInterface(self.db_session)
+		self.view_manager = ViewManager(self.data_interface)
+
 		# Initialize data
 		self.df = None
 		self.all_tags = set()
 		self.normalizer = TagNormalizer()
-		self.relationships = TagRelationships()
+		self.relationships = TagRelationships() 
 		
 		# Create central widget and layout
 		central_widget = QWidget()
@@ -40,11 +51,14 @@ class MainWindow(QMainWindow):
 		self.tags_tab = self._create_tags_tab()
 		self.relationships_tab = self._create_relationships_tab()
 		self.consolidation_tab = self._create_consolidation_tab()
+		self.network_tab = self._create_network_tab()
 		
 		tabs.addTab(self.albums_tab, "Albums")
 		tabs.addTab(self.tags_tab, "Tags")
 		tabs.addTab(self.relationships_tab, "Relationships")
 		tabs.addTab(self.consolidation_tab, "Consolidation")
+		tabs.addTab(self.network_tab, "Network")
+
 		
 		# Create status bar
 		self.status_bar = QStatusBar()
@@ -150,6 +164,41 @@ class MainWindow(QMainWindow):
 			self.tag_select.addItems(sorted_tags)
 			self.consolidation_tag_select.addItems(sorted_tags)
 			
+			# Create network data
+			nodes = []
+			edges = []
+			tag_ids = {tag: f"tag_{i}" for i, tag in enumerate(self.all_tags)}
+			
+			for tag in self.all_tags:
+				nodes.append(VisualNode(
+					id=tag_ids[tag],
+					label=tag,
+					size=10,
+					color="#4a90e2",
+					shape="circle",
+					data={"type": "tag"}
+				))
+			
+			# Create edges based on tag co-occurrence
+			for tags in self.df['tags']:
+				if isinstance(tags, list) and len(tags) > 1:
+					for i in range(len(tags)):
+						for j in range(i + 1, len(tags)):
+							edges.append(VisualEdge(
+								source=tag_ids[tags[i]],
+								target=tag_ids[tags[j]],
+								weight=1,
+								color="#999999",
+								thickness=1
+							))
+			
+			# Update network view with proper data update
+			if hasattr(self, 'network_view'):
+				self.network_view.update_data(nodes, edges)
+				self.network_view.adjust_viewport_to_content()
+				self.network_view.start_layout()
+
+
 			# Update tables
 			logging.info("Updating tables...")
 			self.update_albums_table()
@@ -292,6 +341,17 @@ class MainWindow(QMainWindow):
 		for i, tag in enumerate(sorted(self.all_tags)):
 			self.consolidation_table.setItem(i, 0, QTableWidgetItem(tag))
 			self.consolidation_table.setItem(i, 1, QTableWidgetItem(""))
+
+	def _create_network_tab(self):
+		widget = QWidget()
+		layout = QVBoxLayout(widget)
+		
+		# Create network view using create_view
+		self.network_view = create_view(ViewType.NETWORK)
+		layout.addWidget(self.network_view)
+		
+		return widget
+
 
 	def update_relationships(self, tag):
 		if not tag:

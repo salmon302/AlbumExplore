@@ -1,0 +1,577 @@
+2025-03-08 14:30:37,086 - gui - INFO - Initializing application logging
+2025-03-08 14:30:37,106 - gui - INFO - Initializing database
+2025-03-08 14:30:37,182 - gui - DEBUG - Current album count: 0
+2025-03-08 14:30:37,182 - gui - INFO - Database is empty, loading CSV data
+2025-03-08 14:30:37,183 - gui - DEBUG - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv
+2025-03-08 14:30:37,183 - gui - DEBUG - CSV directory contents: [PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv')]
+2025-03-08 14:30:46,015 - gui - ERROR - Error initializing database: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 91, in initialize_database
+    load_csv_data(session, csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 64, in load_csv_data
+    if pd.notna(row.get('tags')) and isinstance(row['tags'], list):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-03-08 14:42:17,992 - albumexplore.gui - INFO - Initializing application logging - {app.py:32}
+2025-03-08 14:42:18,056 - albumexplore.gui - INFO - Initializing database - {app.py:76}
+2025-03-08 14:42:18,361 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:83}
+2025-03-08 14:42:18,361 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:86}
+2025-03-08 14:42:18,362 - albumexplore.gui - DEBUG - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:89}
+2025-03-08 14:42:18,362 - albumexplore.gui - DEBUG - CSV directory contents: [PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv')] - {app.py:90}
+2025-03-08 14:42:18,751 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:93}
+2025-03-08 14:42:18,751 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:119}
+2025-03-08 14:42:19,043 - albumexplore.gui - INFO - Creating main window - {app.py:128}
+2025-03-08 14:42:19,046 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:20}
+2025-03-08 14:42:19,061 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:111}
+2025-03-08 14:42:19,062 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 14:42:19,066 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 14:42:19,066 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 14:42:19,080 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 14:42:19,080 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 14:42:19,132 - albumexplore.gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800) - {main_window.py:301}
+2025-03-08 14:42:19,151 - albumexplore.gui - DEBUG - Starting application initialization - {main_window.py:116}
+2025-03-08 14:42:19,153 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:172}
+2025-03-08 14:42:19,156 - albumexplore.gui - DEBUG - MainWindow: PyQt6.QtCore.QSize(1200, 800), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,156 - albumexplore.gui - DEBUG -   QWidget: PyQt6.QtCore.QSize(1200, 778), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,161 - albumexplore.gui - DEBUG -     QFrame: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,162 - albumexplore.gui - DEBUG -     QWidget: PyQt6.QtCore.QSize(1200, 35), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,162 - albumexplore.gui - DEBUG -       QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,162 - albumexplore.gui - DEBUG -       QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,164 - albumexplore.gui - DEBUG -         QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,178 - albumexplore.gui - DEBUG -           QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,181 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,181 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,189 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,190 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,190 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,191 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,192 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,195 - albumexplore.gui - DEBUG -     QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,196 - albumexplore.gui - DEBUG -     QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,199 - albumexplore.gui - DEBUG -       QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,200 - albumexplore.gui - DEBUG -         QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,202 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,203 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,203 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,203 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,204 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,204 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,204 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,204 - albumexplore.gui - DEBUG -   QStatusBar: PyQt6.QtCore.QSize(1200, 22), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,204 - albumexplore.gui - DEBUG -     QSizeGrip: PyQt6.QtCore.QSize(17, 17), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,205 - albumexplore.gui - DEBUG - Loading initial data - {main_window.py:122}
+2025-03-08 14:42:19,205 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 14:42:19,205 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 14:42:19,208 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 14:42:19,210 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 14:42:19,210 - albumexplore.gui - INFO - Loaded 0 nodes - {main_window.py:124}
+2025-03-08 14:42:19,210 - albumexplore.gui - DEBUG - Switching to initial view - {main_window.py:127}
+2025-03-08 14:42:19,210 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 14:42:19,210 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 14:42:19,214 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:45}
+2025-03-08 14:42:19,214 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:120}
+2025-03-08 14:42:19,223 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:176}
+2025-03-08 14:42:19,225 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 718) - {__init__.py:66}
+2025-03-08 14:42:19,225 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 14:42:19,225 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {view_manager.py:87}
+2025-03-08 14:42:19,225 - albumexplore.gui - DEBUG - Updating table data with 0 nodes - {views.py:180}
+2025-03-08 14:42:19,226 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {views.py:187}
+2025-03-08 14:42:19,226 - albumexplore.gui - DEBUG - Table updated with 0 rows - {views.py:215}
+2025-03-08 14:42:19,227 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 718) - {views.py:68}
+2025-03-08 14:42:19,227 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 718) - {views.py:258}
+2025-03-08 14:42:19,229 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:87}
+2025-03-08 14:42:19,230 - albumexplore.gui - DEBUG - Table view shown - {views.py:250}
+2025-03-08 14:42:19,230 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TABLE - {view_manager.py:108}
+2025-03-08 14:42:19,231 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:172}
+2025-03-08 14:42:19,231 - albumexplore.gui - DEBUG - MainWindow: PyQt6.QtCore.QSize(1200, 800), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,231 - albumexplore.gui - DEBUG -   QWidget: PyQt6.QtCore.QSize(1200, 778), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,232 - albumexplore.gui - DEBUG -     QFrame: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,232 - albumexplore.gui - DEBUG -       TableViewWidget: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,233 - albumexplore.gui - DEBUG -         QTableWidget: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,235 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(1200, 697), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,235 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,235 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -           QHeaderView: PyQt6.QtCore.QSize(0, 697), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(0, 697), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,236 - albumexplore.gui - DEBUG -           QHeaderView: PyQt6.QtCore.QSize(1200, 21), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,237 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(1200, 21), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,237 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,237 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,237 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,238 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,238 - albumexplore.gui - DEBUG -           QAbstractButton: PyQt6.QtCore.QSize(0, 21), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,238 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(1200, 14), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,238 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 14), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,238 - albumexplore.gui - DEBUG -     QWidget: PyQt6.QtCore.QSize(1200, 35), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,238 - albumexplore.gui - DEBUG -       QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,239 - albumexplore.gui - DEBUG -       QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,239 - albumexplore.gui - DEBUG -         QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,239 - albumexplore.gui - DEBUG -           QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,239 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,239 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,241 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,241 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,241 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,241 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,241 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,242 - albumexplore.gui - DEBUG -     QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,242 - albumexplore.gui - DEBUG -     QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,242 - albumexplore.gui - DEBUG -       QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,242 - albumexplore.gui - DEBUG -         QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,242 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,242 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -   QStatusBar: PyQt6.QtCore.QSize(1200, 22), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,243 - albumexplore.gui - DEBUG -     QSizeGrip: PyQt6.QtCore.QSize(17, 17), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:42:19,244 - albumexplore.gui - DEBUG - Application initialization complete - {main_window.py:147}
+2025-03-08 14:42:19,348 - albumexplore.gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 713) - {main_window.py:301}
+2025-03-08 14:42:19,542 - albumexplore.gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800) - {main_window.py:301}
+2025-03-08 14:42:22,431 - albumexplore.gui - DEBUG - Handling view change: tag_explorer - {main_window.py:227}
+2025-03-08 14:42:22,433 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 14:42:22,434 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 14:42:22,457 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 718) - {__init__.py:66}
+2025-03-08 14:42:22,459 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TAG_EXPLORER - {view_manager.py:108}
+2025-03-08 14:42:22,960 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 14:42:22,960 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:262}
+2025-03-08 14:42:22,960 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:107}
+2025-03-08 14:44:59,993 - albumexplore.gui - INFO - Initializing application logging - {app.py:32}
+2025-03-08 14:45:00,047 - albumexplore.gui - INFO - Initializing database - {app.py:76}
+2025-03-08 14:45:00,238 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:83}
+2025-03-08 14:45:00,239 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:86}
+2025-03-08 14:45:00,239 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:90}
+2025-03-08 14:45:00,240 - albumexplore.gui - DEBUG - CSV files found: [PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv')] - {app.py:91}
+2025-03-08 14:45:00,753 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:94}
+2025-03-08 14:45:00,754 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:120}
+2025-03-08 14:45:01,122 - albumexplore.gui - INFO - Creating main window - {app.py:129}
+2025-03-08 14:45:01,126 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:20}
+2025-03-08 14:45:01,148 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:111}
+2025-03-08 14:45:01,149 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 14:45:01,150 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 14:45:01,150 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 14:45:01,166 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 14:45:01,166 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 14:45:01,203 - albumexplore.gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800) - {main_window.py:301}
+2025-03-08 14:45:01,218 - albumexplore.gui - DEBUG - Starting application initialization - {main_window.py:116}
+2025-03-08 14:45:01,218 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:172}
+2025-03-08 14:45:01,218 - albumexplore.gui - DEBUG - MainWindow: PyQt6.QtCore.QSize(1200, 800), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,219 - albumexplore.gui - DEBUG -   QWidget: PyQt6.QtCore.QSize(1200, 778), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,222 - albumexplore.gui - DEBUG -     QFrame: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,224 - albumexplore.gui - DEBUG -     QWidget: PyQt6.QtCore.QSize(1200, 35), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,225 - albumexplore.gui - DEBUG -       QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,226 - albumexplore.gui - DEBUG -       QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,228 - albumexplore.gui - DEBUG -         QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,234 - albumexplore.gui - DEBUG -           QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,237 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,237 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,238 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,238 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,239 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,242 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,243 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,244 - albumexplore.gui - DEBUG -     QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,245 - albumexplore.gui - DEBUG -     QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,245 - albumexplore.gui - DEBUG -       QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,246 - albumexplore.gui - DEBUG -         QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,247 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,248 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,251 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,251 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,252 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,253 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,253 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,253 - albumexplore.gui - DEBUG -   QStatusBar: PyQt6.QtCore.QSize(1200, 22), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,253 - albumexplore.gui - DEBUG -     QSizeGrip: PyQt6.QtCore.QSize(17, 17), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,254 - albumexplore.gui - DEBUG - Loading initial data - {main_window.py:122}
+2025-03-08 14:45:01,254 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 14:45:01,255 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 14:45:01,258 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 14:45:01,258 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 14:45:01,259 - albumexplore.gui - INFO - Loaded 0 nodes - {main_window.py:124}
+2025-03-08 14:45:01,259 - albumexplore.gui - DEBUG - Switching to initial view - {main_window.py:127}
+2025-03-08 14:45:01,259 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TABLE - {view_manager.py:64}
+2025-03-08 14:45:01,259 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TABLE - {__init__.py:29}
+2025-03-08 14:45:01,261 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:45}
+2025-03-08 14:45:01,261 - albumexplore.gui - DEBUG - Initializing TableViewWidget - {views.py:120}
+2025-03-08 14:45:01,269 - albumexplore.gui - DEBUG - TableViewWidget initialized with size PyQt6.QtCore.QSize(100, 100) - {views.py:176}
+2025-03-08 14:45:01,272 - albumexplore.gui - DEBUG - View ViewType.TABLE created with size PyQt6.QtCore.QSize(1200, 718) - {__init__.py:66}
+2025-03-08 14:45:01,273 - albumexplore.gui - DEBUG - Initializing table view data - {view_manager.py:85}
+2025-03-08 14:45:01,274 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {view_manager.py:87}
+2025-03-08 14:45:01,275 - albumexplore.gui - DEBUG - Updating table data with 0 nodes - {views.py:180}
+2025-03-08 14:45:01,277 - albumexplore.gui - DEBUG - Found 0 valid row nodes - {views.py:187}
+2025-03-08 14:45:01,279 - albumexplore.gui - DEBUG - Table updated with 0 rows - {views.py:215}
+2025-03-08 14:45:01,280 - albumexplore.gui - DEBUG - TableViewWidget resized to PyQt6.QtCore.QSize(1200, 718) - {views.py:68}
+2025-03-08 14:45:01,280 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QSize(1200, 718) - {views.py:258}
+2025-03-08 14:45:01,282 - albumexplore.gui - DEBUG - TableViewWidget shown - {views.py:87}
+2025-03-08 14:45:01,284 - albumexplore.gui - DEBUG - Table view shown - {views.py:250}
+2025-03-08 14:45:01,286 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TABLE - {view_manager.py:108}
+2025-03-08 14:45:01,286 - albumexplore.gui - DEBUG - Widget hierarchy: - {main_window.py:172}
+2025-03-08 14:45:01,286 - albumexplore.gui - DEBUG - MainWindow: PyQt6.QtCore.QSize(1200, 800), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,287 - albumexplore.gui - DEBUG -   QWidget: PyQt6.QtCore.QSize(1200, 778), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,287 - albumexplore.gui - DEBUG -     QFrame: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,287 - albumexplore.gui - DEBUG -       TableViewWidget: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,287 - albumexplore.gui - DEBUG -         QTableWidget: PyQt6.QtCore.QSize(1200, 718), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,291 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(1200, 697), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,292 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,292 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,293 - albumexplore.gui - DEBUG -           QHeaderView: PyQt6.QtCore.QSize(0, 697), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,295 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(0, 697), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,297 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,297 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,297 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,298 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,298 - albumexplore.gui - DEBUG -           QHeaderView: PyQt6.QtCore.QSize(1200, 21), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,300 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(1200, 21), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,300 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,301 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,301 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,302 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,303 - albumexplore.gui - DEBUG -           QAbstractButton: PyQt6.QtCore.QSize(0, 21), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,303 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(1200, 14), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,304 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 14), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,304 - albumexplore.gui - DEBUG -     QWidget: PyQt6.QtCore.QSize(1200, 35), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,304 - albumexplore.gui - DEBUG -       QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,309 - albumexplore.gui - DEBUG -       QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,311 - albumexplore.gui - DEBUG -         QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,312 - albumexplore.gui - DEBUG -           QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,313 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,313 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,314 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,314 - albumexplore.gui - DEBUG -             QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,315 - albumexplore.gui - DEBUG -               QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,316 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,317 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,317 - albumexplore.gui - DEBUG -     QLabel: PyQt6.QtCore.QSize(60, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,317 - albumexplore.gui - DEBUG -     QComboBox: PyQt6.QtCore.QSize(101, 25), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,317 - albumexplore.gui - DEBUG -       QFrame: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,318 - albumexplore.gui - DEBUG -         QListView: PyQt6.QtCore.QSize(640, 480), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,318 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(638, 478), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,318 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,319 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,319 - albumexplore.gui - DEBUG -           QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,319 - albumexplore.gui - DEBUG -             QScrollBar: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,319 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,322 - albumexplore.gui - DEBUG -         QWidget: PyQt6.QtCore.QSize(100, 30), visible=False, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,326 - albumexplore.gui - DEBUG -   QStatusBar: PyQt6.QtCore.QSize(1200, 22), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,329 - albumexplore.gui - DEBUG -     QSizeGrip: PyQt6.QtCore.QSize(17, 17), visible=True, shown=False - {main_window.py:167}
+2025-03-08 14:45:01,332 - albumexplore.gui - DEBUG - Application initialization complete - {main_window.py:147}
+2025-03-08 14:45:01,437 - albumexplore.gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 713) - {main_window.py:301}
+2025-03-08 14:45:01,619 - albumexplore.gui - DEBUG - Resize event: PyQt6.QtCore.QSize(1200, 800) - {main_window.py:301}
+2025-03-08 14:45:03,254 - albumexplore.gui - DEBUG - Key press event: 16777248 - {main_window.py:335}
+2025-03-08 14:46:47,990 - albumexplore.gui - DEBUG - Handling view change: tag_explorer - {main_window.py:227}
+2025-03-08 14:46:47,992 - albumexplore.gui - DEBUG - Switching to view type: ViewType.TAG_EXPLORER - {view_manager.py:64}
+2025-03-08 14:46:47,993 - albumexplore.gui - DEBUG - Creating visualization view: ViewType.TAG_EXPLORER - {__init__.py:29}
+2025-03-08 14:46:48,010 - albumexplore.gui - DEBUG - View ViewType.TAG_EXPLORER created with size PyQt6.QtCore.QSize(1200, 718) - {__init__.py:66}
+2025-03-08 14:46:48,012 - albumexplore.gui - DEBUG - Successfully switched to view type: ViewType.TAG_EXPLORER - {view_manager.py:108}
+2025-03-08 14:46:48,513 - albumexplore.gui - DEBUG - Cleaning up previous view - {view_manager.py:185}
+2025-03-08 14:46:48,513 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:262}
+2025-03-08 14:46:48,513 - albumexplore.gui - DEBUG - TableViewWidget hidden - {views.py:107}
+2025-03-08 14:46:49,642 - albumexplore.gui - ERROR - Uncaught exception - {app.py:42}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/visualization/views/tag_explorer_view.py", line 471, in _export_tag_data
+    print(f"Consolidation ratio: {len(self.tag_counts)/len(self.raw_tag_counts):.2f}")
+                                  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: division by zero
+2025-03-08 14:59:58,289 - albumexplore.gui - INFO - Initializing application logging - {app.py:31}
+2025-03-08 14:59:58,348 - albumexplore.gui - INFO - Initializing database - {app.py:75}
+2025-03-08 14:59:58,454 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:82}
+2025-03-08 14:59:58,454 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:85}
+2025-03-08 14:59:58,455 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:89}
+2025-03-08 14:59:58,456 - albumexplore.gui - DEBUG - CSV files found: [PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2018.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2017.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2021 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2025 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2022 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Reissues & Special Releases.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-rock.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2024 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2020 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2023 Prog-metal.csv'), PosixPath('/home/seth-n/PycharmProjects/AlbumExplore/csv/_r_ProgMetal _ Yearly Albums - 2019 Prog-metal.csv')] - {app.py:90}
+2025-03-08 14:59:59,034 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:92}
+2025-03-08 14:59:59,035 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:118}
+2025-03-08 14:59:59,275 - albumexplore.gui - INFO - Creating main window - {app.py:127}
+2025-03-08 14:59:59,276 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 14:59:59,291 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 14:59:59,292 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 14:59:59,295 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 14:59:59,295 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 14:59:59,321 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 14:59:59,322 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 14:59:59,322 - albumexplore.gui - ERROR - Uncaught exception - {app.py:41}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 168, in <module>
+    run_gui()
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 165, in run_gui
+    sys.exit(main())
+             ^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 128, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 58, in __init__
+    self._create_view_controls()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute '_create_view_controls'
+2025-03-08 16:14:37,624 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:14:37,625 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:14:37,687 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:14:38,019 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:14:38,020 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:14:38,114 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:14:38,115 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:14:38,116 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:14:38,571 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:37}
+2025-03-08 16:14:38,572 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:14:38,573 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:14:38,601 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:14:38,601 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:14:38,603 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:14:38,604 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:14:38,622 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 16:14:38,622 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 16:14:38,623 - albumexplore.gui - ERROR - Fatal error in main: 'MainWindow' object has no attribute '_create_view_controls' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 58, in __init__
+    self._create_view_controls()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute '_create_view_controls'
+2025-03-08 16:19:18,525 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:19:18,526 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:19:18,589 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:19:18,852 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:19:18,858 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:19:19,231 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:19:19,232 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:19:19,232 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:19:20,154 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:37}
+2025-03-08 16:19:20,155 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:19:20,157 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:19:20,221 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:19:20,221 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:19:20,222 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:19:20,222 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:19:20,245 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 16:19:20,245 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 16:19:20,246 - albumexplore.gui - ERROR - Fatal error in main: 'MainWindow' object has no attribute '_create_view_controls' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 58, in __init__
+    self._create_view_controls()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute '_create_view_controls'
+2025-03-08 16:20:40,925 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:20:40,926 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:20:40,984 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:20:41,449 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:20:41,450 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:20:41,720 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:20:41,720 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:20:41,722 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:20:42,153 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:37}
+2025-03-08 16:20:42,153 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:20:42,154 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:20:42,176 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:20:42,176 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:20:42,179 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:20:42,179 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:20:42,198 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 16:20:42,199 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 16:20:42,199 - albumexplore.gui - ERROR - Fatal error in main: 'MainWindow' object has no attribute '_create_view_controls' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 58, in __init__
+    self._create_view_controls()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute '_create_view_controls'
+2025-03-08 16:22:22,229 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:22:22,229 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:22:22,255 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:22:22,466 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:22:22,466 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:22:22,592 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:22:22,592 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:22:22,593 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:22:22,969 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:37}
+2025-03-08 16:22:22,970 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:22:22,972 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:22:22,984 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:22:22,984 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:22:22,985 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:22:22,985 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:22:23,004 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 16:22:23,004 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 16:22:23,005 - albumexplore.gui - ERROR - Fatal error in main: 'MainWindow' object has no attribute '_create_view_controls' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 58, in __init__
+    self._create_view_controls()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute '_create_view_controls'
+2025-03-08 16:22:59,978 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:22:59,978 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:23:00,024 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:23:00,402 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:23:00,402 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:23:00,582 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:23:00,586 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:23:00,588 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:23:01,214 - albumexplore.gui - INFO - CSV data loaded successfully - {app.py:37}
+2025-03-08 16:23:01,214 - albumexplore.gui - INFO - Creating main window - {app.py:109}
+2025-03-08 16:23:01,216 - albumexplore.gui - DEBUG - MainWindow initialized - {main_window.py:21}
+2025-03-08 16:23:01,268 - albumexplore.gui - DEBUG - Visualization container setup complete - {main_window.py:112}
+2025-03-08 16:23:01,268 - albumexplore.gui - DEBUG - DataInterface initialized - {data_interface.py:14}
+2025-03-08 16:23:01,269 - albumexplore.gui - DEBUG - Updating visualization data - {view_manager.py:126}
+2025-03-08 16:23:01,269 - albumexplore.gui - DEBUG - Getting visible data... - {data_interface.py:113}
+2025-03-08 16:23:01,290 - albumexplore.gui - DEBUG - Retrieved 0 albums from database - {data_interface.py:120}
+2025-03-08 16:23:01,290 - albumexplore.gui - DEBUG - Created 0 visual nodes - {data_interface.py:153}
+2025-03-08 16:23:01,291 - albumexplore.gui - ERROR - Fatal error in main: 'MainWindow' object has no attribute '_create_view_controls' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 110, in main
+    window = MainWindow(session)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/main_window.py", line 58, in __init__
+    self._create_view_controls()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute '_create_view_controls'
+2025-03-08 16:26:51,211 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:26:51,211 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:26:51,280 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:26:51,614 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:26:51,614 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:26:51,824 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:26:51,825 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:26:51,826 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:27:16,543 - albumexplore.gui - ERROR - Error initializing database: 'str' object has no attribute '_sa_instance_state' - {app.py:45}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 104, in load_csv_data
+    tag = models.Tag(
+          ^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2178, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 537, in __set__
+    self.impl.set(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1467, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1506, in fire_replace_event
+    value = fn(
+            ^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 2161, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-03-08 16:27:16,681 - albumexplore.gui - ERROR - Fatal error in main: 'str' object has no attribute '_sa_instance_state' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 106, in main
+    session = initialize_database()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 104, in load_csv_data
+    tag = models.Tag(
+          ^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2178, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 537, in __set__
+    self.impl.set(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1467, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1506, in fire_replace_event
+    value = fn(
+            ^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 2161, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-03-08 16:27:53,101 - albumexplore.gui - INFO - Logging system initialized - {gui_logging.py:57}
+2025-03-08 16:27:53,101 - albumexplore.gui - INFO - Starting application - {app.py:89}
+2025-03-08 16:27:53,129 - albumexplore.gui - INFO - Creating QApplication instance - {app.py:96}
+2025-03-08 16:27:53,384 - albumexplore.gui - INFO - Initializing database connection - {app.py:105}
+2025-03-08 16:27:53,385 - albumexplore.gui - INFO - Initializing database - {app.py:21}
+2025-03-08 16:27:53,559 - albumexplore.gui - DEBUG - Current album count: 0 - {app.py:28}
+2025-03-08 16:27:53,559 - albumexplore.gui - INFO - Database is empty, loading CSV data - {app.py:31}
+2025-03-08 16:27:53,559 - albumexplore.gui - INFO - Found CSV directory: /home/seth-n/PycharmProjects/AlbumExplore/csv - {app.py:35}
+2025-03-08 16:28:02,231 - albumexplore.gui - ERROR - Error initializing database: 'str' object has no attribute '_sa_instance_state' - {app.py:45}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 104, in load_csv_data
+    tag = models.Tag(
+          ^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2178, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 537, in __set__
+    self.impl.set(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1467, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1506, in fire_replace_event
+    value = fn(
+            ^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 2161, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+2025-03-08 16:28:02,235 - albumexplore.gui - ERROR - Fatal error in main: 'str' object has no attribute '_sa_instance_state' - {app.py:142}
+Traceback (most recent call last):
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 106, in main
+    session = initialize_database()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/gui/app.py", line 36, in initialize_database
+    load_csv_data(csv_dir)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/src/albumexplore/database/csv_loader.py", line 104, in load_csv_data
+    tag = models.Tag(
+          ^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2178, in _declarative_constructor
+    setattr(self, k, kwargs[k])
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 537, in __set__
+    self.impl.set(
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1467, in set
+    value = self.fire_replace_event(state, dict_, value, old, initiator)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1506, in fire_replace_event
+    value = fn(
+            ^^^
+  File "/home/seth-n/PycharmProjects/AlbumExplore/.venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 2161, in emit_backref_from_scalar_set_event
+    instance_state(child),
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute '_sa_instance_state'

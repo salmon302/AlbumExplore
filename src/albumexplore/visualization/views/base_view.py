@@ -1,8 +1,11 @@
-from PyQt6.QtWidgets import QWidget, QApplication
+from PyQt6.QtWidgets import QWidget, QApplication, QSizePolicy
 from PyQt6.QtCore import pyqtSignal, Qt, QTimer
-from PyQt6.QtGui import QKeyEvent
+from PyQt6.QtGui import QKeyEvent, QPainter, QPalette, QColor
 from typing import List, Dict, Any, Set
-from albumexplore.gui.gui_logging import gui_logger
+from albumexplore.gui.gui_logging import (
+	gui_logger, graphics_logger, performance_logger,
+	log_graphics_event, log_performance_metric, log_interaction
+)
 import json
 import time
 from ..models import VisualNode, VisualEdge
@@ -16,20 +19,21 @@ class BaseView(QWidget):
 
 	def __init__(self, parent=None):
 		super().__init__(parent)
-		gui_logger.debug(f"{self.__class__.__name__} initialized")
+		self.view_name = self.__class__.__name__
+		graphics_logger.info(f"Initializing {self.view_name}")
 		
-		# Enable Qt optimizations
-		self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent)
-		self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground)
-		self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, False)
+		# Set proper widget attributes for clean rendering
 		self.setAutoFillBackground(True)
 		
-		# Add base-level buffer management
-		self.setProperty("paintOnScreen", False)
-		self.setAttribute(Qt.WidgetAttribute.WA_PaintOnScreen, False)
+		 # Ensure consistent background color
+		palette = self.palette()
+		palette.setColor(QPalette.ColorRole.Window, QColor(255, 255, 255))
+		palette.setColor(QPalette.ColorRole.Base, QColor(255, 255, 255))
+		self.setPalette(palette)
 		
-		# Enable key events
-		self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+		# Set size policy to expand in both directions
+		self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+		self.setMinimumSize(100, 100)
 		
 		# Initialize state
 		self.nodes: List[VisualNode] = []
@@ -39,50 +43,61 @@ class BaseView(QWidget):
 		self.view_state = None
 		self.performance_debugger = PerformanceDebugger()
 		
-		# Add update control with improved timing
-		self._update_scheduled = False
+		 # Setup efficient update scheduling
 		self._update_timer = QTimer(self)
 		self._update_timer.setSingleShot(True)
 		self._update_timer.timeout.connect(self._handle_update)
 		self._last_update_time = 0
-		self._min_update_interval = 33  # ~30 FPS max
+		self._min_update_interval = 16  # ~60 FPS
+		
+		# Monitor buffer state
+		graphics_logger.debug(f"{self.view_name} view initialized with size {self.size()}")
 
 	def update(self) -> None:
 		"""Schedule update with rate limiting."""
 		current_time = time.time() * 1000
-		if not self._update_scheduled and current_time - self._last_update_time >= self._min_update_interval:
-			self._update_scheduled = True
+		if current_time - self._last_update_time >= self._min_update_interval:
 			self._last_update_time = current_time
-			self._update_timer.start(self._min_update_interval)
+			log_graphics_event("Update", f"{self.view_name} scheduled update")
+			super().update()
 
 	def _handle_update(self) -> None:
-		"""Handle scheduled update with cleanup."""
-		self._update_scheduled = False
-		if hasattr(self, '_paint_buffer'):
-			self._buffer_dirty = True
+		"""Handle scheduled update."""
+		log_graphics_event("Update", f"{self.view_name} handling update")
+		start_time = time.time()
 		super().update()
+		update_time = (time.time() - start_time) * 1000
+		log_performance_metric(self.view_name, "update_time", f"{update_time:.2f}ms")
 
 	def hideEvent(self, event) -> None:
 		"""Handle cleanup when view is hidden."""
+		log_graphics_event("Visibility", f"{self.view_name} hidden")
 		super().hideEvent(event)
 		self.transition_animator.cancel_animations()
-		if hasattr(self, '_cleanup_resources'):
-			self._cleanup_resources()
 
 	def showEvent(self, event) -> None:
 		"""Handle setup when view is shown."""
+		log_graphics_event("Visibility", f"{self.view_name} shown")
 		super().showEvent(event)
-		if hasattr(self, '_buffer_dirty'):
-			self._buffer_dirty = True
+		
+		# Ensure proper size when shown
+		if self.parent():
+			self.resize(self.parent().size())
+		
 		self.update()
 
 	def update_data(self, nodes: List[VisualNode], edges: List[VisualEdge]) -> None:
 		"""Update visualization data with stability."""
-		gui_logger.debug(f"Updating data in {self.__class__.__name__}: {len(nodes)} nodes, {len(edges)} edges")
+		start_time = time.time()
+		graphics_logger.info(f"Updating data in {self.view_name}: {len(nodes)} nodes, {len(edges)} edges")
+		
 		self.setUpdatesEnabled(False)
 		self.nodes = nodes
 		self.edges = edges
 		self.setUpdatesEnabled(True)
+		
+		update_time = (time.time() - start_time) * 1000
+		log_performance_metric(self.view_name, "data_update_time", f"{update_time:.2f}ms")
 		self.update()
 
 	def apply_transition(self, transition_config: Dict[str, Any]) -> None:
@@ -200,13 +215,46 @@ class BaseView(QWidget):
 		self.performance_debugger.take_snapshot(metrics)
 
 	def paintEvent(self, event) -> None:
-		"""Handle paint events with logging."""
-		gui_logger.debug(f"Paint event started in {self.__class__.__name__}")
-		super().paintEvent(event)
-		gui_logger.debug(f"Paint event finished in {self.__class__.__name__}")
+		"""Handle paint events with proper background."""
+		start_time = time.time()
+		log_graphics_event("Paint", f"{self.view_name} paint event started")
+		
+		painter = QPainter(self)
+		try:
+			# Fill background with solid white and enable antialiasing
+			painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+			painter.fillRect(self.rect(), QColor(255, 255, 255))
+			
+			# Let subclasses paint their content
+			self._paint_content(painter)
+			
+		finally:
+			painter.end()
+			paint_time = (time.time() - start_time) * 1000
+			log_performance_metric(self.view_name, "paint_time", f"{paint_time:.2f}ms")
+
+	def _paint_content(self, painter: QPainter) -> None:
+		"""Paint view-specific content. To be overridden by subclasses."""
+		pass
+
+	def resizeEvent(self, event) -> None:
+		"""Handle resize events."""
+		super().resizeEvent(event)
+		log_graphics_event("Resize", f"{self.view_name} resized to {event.size()}")
+		
+		if self.parent():
+			# Ensure view fills parent while maintaining aspect ratio if needed
+			self.setGeometry(0, 0, self.parent().width(), self.parent().height())
+		
+		# Update viewport in view state if available
+		if self.view_state:
+			self.view_state.update_viewport(self.width(), self.height())
+		
+		self.update()
 
 	def update_selection(self, selected_ids: Set[str]) -> None:
 		"""Update selected nodes."""
+		log_interaction(self.view_name, f"Selection changed: {len(selected_ids)} items")
 		self.selected_ids = selected_ids
 		self.selectionChanged.emit(selected_ids)
 		self.update()

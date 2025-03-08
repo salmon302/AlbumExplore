@@ -7,6 +7,8 @@ class ViewType(Enum):
 	NETWORK = "network"
 	ARC = "arc"
 	CHORD = "chord"
+	TAG_EXPLORER = "tag_explorer"
+	TAG_GRAPH = "tag_graph"
 
 @dataclass
 class ViewState:

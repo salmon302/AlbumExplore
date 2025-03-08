@@ -1,0 +1,81 @@
+2025-03-08 14:30:37,086 - gui.graphics - INFO - Configuring high DPI support
+2025-03-08 14:42:17,994 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:50}
+2025-03-08 14:42:19,047 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 14:42:19,211 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 14:42:22,434 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 14:42:22,436 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 14:42:22,453 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:58}
+2025-03-08 14:42:22,453 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:58}
+2025-03-08 14:42:22,456 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:58}
+2025-03-08 14:42:22,457 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 0 nodes, 0 edges - {base_view.py:92}
+2025-03-08 14:42:22,462 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1198, 716) - {gui_logging.py:58}
+2025-03-08 14:42:22,465 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1200, 718) - {gui_logging.py:58}
+2025-03-08 14:42:22,467 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:42:22,504 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:42:22,521 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1198, 716) - {gui_logging.py:58}
+2025-03-08 14:42:22,523 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1200, 718) - {gui_logging.py:58}
+2025-03-08 14:42:22,524 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:58}
+2025-03-08 14:42:22,530 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:42:22,550 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:42:22,960 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 14:42:22,961 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1198, 716) - {gui_logging.py:58}
+2025-03-08 14:42:22,962 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1200, 718) - {gui_logging.py:58}
+2025-03-08 14:42:22,963 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:58}
+2025-03-08 14:42:22,965 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:42:22,977 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:42:26,221 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:58}
+2025-03-08 14:42:26,222 - albumexplore.gui.graphics - INFO - Cleaning up application resources - {app.py:72}
+2025-03-08 14:42:26,389 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 14:44:59,994 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:50}
+2025-03-08 14:45:01,127 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 14:45:01,260 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 14:46:47,994 - albumexplore.gui.graphics - INFO - Initializing TagExplorerView - {base_view.py:23}
+2025-03-08 14:46:47,995 - albumexplore.gui.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100) - {base_view.py:54}
+2025-03-08 14:46:48,003 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100) - {gui_logging.py:58}
+2025-03-08 14:46:48,004 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:58}
+2025-03-08 14:46:48,010 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView shown - {gui_logging.py:58}
+2025-03-08 14:46:48,011 - albumexplore.gui.graphics - INFO - Updating data in TagExplorerView: 0 nodes, 0 edges - {base_view.py:92}
+2025-03-08 14:46:48,014 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1198, 716) - {gui_logging.py:58}
+2025-03-08 14:46:48,015 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1200, 718) - {gui_logging.py:58}
+2025-03-08 14:46:48,017 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:48,053 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:48,070 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1198, 716) - {gui_logging.py:58}
+2025-03-08 14:46:48,074 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1200, 718) - {gui_logging.py:58}
+2025-03-08 14:46:48,077 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:58}
+2025-03-08 14:46:48,083 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:48,107 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:48,513 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 14:46:48,515 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1198, 716) - {gui_logging.py:58}
+2025-03-08 14:46:48,521 - albumexplore.gui.graphics - DEBUG - Graphics Event - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1200, 718) - {gui_logging.py:58}
+2025-03-08 14:46:48,521 - albumexplore.gui.graphics - DEBUG - Graphics Event - Update: TagExplorerView scheduled update - {gui_logging.py:58}
+2025-03-08 14:46:48,523 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:48,540 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:48,953 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:49,004 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:49,234 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:49,477 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:49,641 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:49,815 - albumexplore.gui.graphics - DEBUG - Graphics Event - Paint: TagExplorerView paint event started - {gui_logging.py:58}
+2025-03-08 14:46:51,694 - albumexplore.gui.graphics - DEBUG - Graphics Event - Visibility: TagExplorerView hidden - {gui_logging.py:58}
+2025-03-08 14:46:51,695 - albumexplore.gui.graphics - INFO - Cleaning up application resources - {app.py:72}
+2025-03-08 14:46:51,984 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 14:59:58,290 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:49}
+2025-03-08 14:59:59,277 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 14:59:59,488 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:14:37,625 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:14:38,574 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:14:38,661 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:19:18,526 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:19:20,157 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:19:20,279 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:20:40,928 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:20:42,155 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:20:42,265 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:22:22,229 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:22:22,973 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:22:23,029 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:22:59,978 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:23:01,216 - albumexplore.gui.graphics - INFO - Graphics monitoring started - {graphics_debug.py:26}
+2025-03-08 16:23:01,318 - albumexplore.gui.graphics - INFO - Graphics monitoring stopped - {graphics_debug.py:31}
+2025-03-08 16:26:51,211 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}
+2025-03-08 16:27:53,101 - albumexplore.gui.graphics - INFO - Configuring high DPI support - {app.py:61}

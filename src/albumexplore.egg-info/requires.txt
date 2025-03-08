@@ -8,3 +8,4 @@ uvicorn>=0.23.0
 pydantic>=2.0.0
 PyQt6>=6.4.0
 pycountry>=22.3.5
+pytest-qt>=4.2.0

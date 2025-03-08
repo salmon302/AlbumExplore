@@ -38,16 +38,34 @@ class Album(Base):
 	raw_tags = Column(String)  # Stored as JSON string
 	platforms = Column(String)  # Stored as JSON string
 
+	def __repr__(self):
+		return f"<Album {self.artist} - {self.title}>"
+
+class TagCategory(Base):
+	__tablename__ = "tag_categories"
+	
+	id = Column(String, primary_key=True)
+	name = Column(String, nullable=False)
+	description = Column(String)
+	
+	# Relationship to tags
+	tags = relationship("Tag", back_populates="category")
+	
+	def __repr__(self):
+		return f"<TagCategory {self.name}>"
+
 class Tag(Base):
 	__tablename__ = "tags"
 
 	id = Column(String, primary_key=True)
 	name = Column(String, nullable=False, unique=True)
-	category = Column(String)
-	aliases = Column(String)  # Stored as JSON string
+	normalized_name = Column(String, nullable=True, index=True)
+	category_id = Column(String, ForeignKey('tag_categories.id'))
 	frequency = Column(Integer, default=0)
+	is_canonical = Column(Integer, default=1)
 	
-	# Add parent-child relationships
+	# Relationships
+	category = relationship("TagCategory", back_populates="tags")
 	parent_tags = relationship(
 		"Tag",
 		secondary=tag_hierarchy,
@@ -56,6 +74,23 @@ class Tag(Base):
 		backref="child_tags"
 	)
 	albums = relationship("Album", secondary=album_tags, back_populates="tags")
+	variants = relationship("TagVariant", back_populates="canonical_tag")
+
+	def __repr__(self):
+		return f"<Tag {self.name}>"
+
+class TagVariant(Base):
+	__tablename__ = "tag_variants"
+	
+	id = Column(Integer, primary_key=True)
+	variant = Column(String, nullable=False, index=True)
+	canonical_tag_id = Column(String, ForeignKey('tags.id'), nullable=False)
+	
+	# Relationship to canonical tag
+	canonical_tag = relationship("Tag", back_populates="variants")
+	
+	def __repr__(self):
+		return f"<TagVariant {self.variant} -> {self.canonical_tag.name}>"
 
 class TagRelation(Base):
 	__tablename__ = "tag_relationships"
@@ -65,6 +100,9 @@ class TagRelation(Base):
 	tag2_id = Column(String, ForeignKey('tags.id'))
 	relationship_type = Column(String, nullable=False)
 	strength = Column(Float)
+
+	def __repr__(self):
+		return f"<TagRelation {self.tag1_id} -> {self.tag2_id}>"
 
 class UpdateHistory(Base):
 	__tablename__ = "update_history"

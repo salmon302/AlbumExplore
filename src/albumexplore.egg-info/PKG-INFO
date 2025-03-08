@@ -13,4 +13,5 @@ Requires-Dist: uvicorn>=0.23.0
 Requires-Dist: pydantic>=2.0.0
 Requires-Dist: PyQt6>=6.4.0
 Requires-Dist: pycountry>=22.3.5
+Requires-Dist: pytest-qt>=4.2.0
 Dynamic: requires-python

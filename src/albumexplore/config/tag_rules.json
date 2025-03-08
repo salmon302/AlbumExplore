@@ -1,0 +1,66 @@
+{
+    "substitutions": {
+        "prog-?(?:metal|rock)": "progressive {0}",
+        "post-?(?:metal|rock|hardcore|punk)": "post-{0}",
+        "math-?rock": "math rock",
+        "art-?rock": "art rock",
+        "avant-?garde": "avant-garde",
+        "psychedelic?": "psychedelic",
+        "experimental(?:\\s+metal|\\s+rock)?": "experimental {0}",
+        "atmospheric(?:\\s+black\\s+metal|\\s+metal)": "atmospheric {0}",
+        "tech(?:nical)?[-\\s]death": "technical death",
+        "black[-\\s]metal": "black metal",
+        "death[-\\s]metal": "death metal",
+        "doom[-\\s]metal": "doom metal",
+        "folk[-\\s]metal": "folk metal",
+        "hard[-\\s]rock": "hard rock",
+        "indie[-\\s]rock": "indie rock",
+        "jazz[-\\s]fusion": "jazz fusion",
+        "neo[-\\s]prog": "neo-prog",
+        "power[-\\s]metal": "power metal",
+        "speed[-\\s]metal": "speed metal",
+        "stoner[-\\s]rock": "stoner rock",
+        "symphonic[-\\s]metal": "symphonic metal"
+    },
+    "prefix_standardization": {
+        "progressive": "prog-",
+        "technical": "tech-",
+        "experimental": "exp-",
+        "atmospheric": "atmo-",
+        "alternative": "alt-",
+        "electronic": "electro-"
+    },
+    "category_mapping": {
+        "metal": [
+            "black metal",
+            "death metal",
+            "doom metal",
+            "folk metal",
+            "power metal",
+            "prog-metal",
+            "speed metal",
+            "symphonic metal"
+        ],
+        "rock": [
+            "art rock",
+            "hard rock",
+            "indie rock",
+            "math rock",
+            "prog-rock",
+            "psychedelic rock",
+            "stoner rock"
+        ],
+        "fusion": [
+            "jazz fusion",
+            "world fusion",
+            "prog fusion"
+        ],
+        "experimental": [
+            "avant-garde",
+            "experimental",
+            "noise",
+            "experimental metal",
+            "experimental rock"
+        ]
+    }
+}

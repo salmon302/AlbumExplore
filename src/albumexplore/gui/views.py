@@ -1,115 +1,267 @@
 import math
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem, 
-						   QGraphicsView, QGraphicsScene, QGraphicsItem, QHeaderView,
-						   QSizePolicy, QGraphicsLineItem)
+                           QGraphicsView, QGraphicsScene, QGraphicsItem, QHeaderView,
+                           QSizePolicy, QGraphicsLineItem)
 from PyQt6.QtCore import pyqtSignal, Qt, QRectF, QPointF
-from PyQt6.QtGui import QPen, QBrush, QColor, QPainter, QPainterPath
+from .graphics_debug import init_graphics_debugging, GraphicsDebugMonitor
+from PyQt6.QtGui import QPen, QBrush, QColor, QPainter, QPainterPath, QPalette
 from albumexplore.visualization.state import ViewType
 from albumexplore.visualization.models import VisualNode, VisualEdge
+from albumexplore.gui.gui_logging import gui_logger
 
 class BaseViewWidget(QWidget):
-	"""Base class for all visualization view widgets."""
-	selectionChanged = pyqtSignal(set)  # Emits set of selected node IDs
-	
-	def __init__(self, parent=None):
-		super().__init__(parent)
-		self.layout = QVBoxLayout(self)
-		self.selected_ids = set()
-	
-	def update_data(self, nodes: list[VisualNode], edges: list[VisualEdge]) -> None:
-		"""Update view with new data."""
-		raise NotImplementedError
-	
-	def apply_transition(self, transition_data: dict) -> None:
-		"""Apply transition effect."""
-		raise NotImplementedError
+    """Base class for all visualization view widgets."""
+    selectionChanged = pyqtSignal(set)  # Emits set of selected node IDs
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setObjectName(self.__class__.__name__)
+        self.graphics_debug = init_graphics_debugging(self)
+        
+        # Initialize selection tracking
+        self.selected_ids = set()
+        
+        # Enhanced buffer management - ensure consistent background handling
+        self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent, True)
+        self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, False)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, False)
+        self.setAutoFillBackground(True)
+        
+        # Create layout after setting attributes
+        self.layout = QVBoxLayout(self)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.setSpacing(0)
+        
+        # Set size policy and minimum size
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.setMinimumSize(100, 100)
+        
+        # Set explicit white background
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.Window, Qt.GlobalColor.white)
+        palette.setColor(QPalette.ColorRole.Base, Qt.GlobalColor.white)
+        self.setPalette(palette)
+        
+        gui_logger.debug(f"{self.__class__.__name__} initialized with size {self.size()}")
+    
+    def resizeEvent(self, event):
+        """Handle resize events with proper update management."""
+        self.setUpdatesEnabled(False)
+        try:
+            super().resizeEvent(event)
+            
+            # For views with internal widgets, ensure they resize properly
+            if hasattr(self, 'view'):
+                self.view.resize(event.size())
+            elif hasattr(self, 'table'):
+                self.table.resize(event.size())
+            
+            # Check visibility after resize
+            if hasattr(self, 'view'):
+                visible = len(self.view.scene().items())
+                total = getattr(self, '_total_items', visible)
+                self.graphics_debug.log_view_update(self, visible, total)
+            
+        finally:
+            self.setUpdatesEnabled(True)
+            self.update()  # Force immediate repaint
+            gui_logger.debug(f"{self.__class__.__name__} resized to {event.size()}")
+    
+    def showEvent(self, event):
+        """Handle show events with proper initialization."""
+        super().showEvent(event)
+        
+        # Ensure proper sizing of child widgets
+        if hasattr(self, 'view'):
+            self.view.resize(self.size())
+            self.view.show()
+            visible = len(self.view.scene().items())
+            total = getattr(self, '_total_items', visible)
+            self.graphics_debug.log_view_update(self, visible, total)
+        elif hasattr(self, 'table'):
+            self.table.resize(self.size())
+            self.table.show()
+            self.table.raise_()
+        
+        self.update()
+        gui_logger.debug(f"{self.__class__.__name__} shown")
+    
+    def paintEvent(self, event):
+        """Ensure proper background painting and buffer management."""
+        self.graphics_debug.log_paint_event(self, "paint")
+        painter = QPainter(self)
+        
+        # Fill background with solid white
+        painter.fillRect(self.rect(), Qt.GlobalColor.white)
+        
+        # Paint child widgets
+        super().paintEvent(event)
+        
+        # Verify buffer state
+        viewport = self.rect()
+        cleared = viewport.isValid()
+        self.graphics_debug.log_buffer_state(self, cleared)
+    
+    def hideEvent(self, event):
+        """Handle cleanup when widget is hidden."""
+        gui_logger.debug(f"{self.__class__.__name__} hidden")
+        super().hideEvent(event)
+        
+        # Ensure child widgets are hidden
+        if hasattr(self, 'view'):
+            self.view.hide()
+        elif hasattr(self, 'table'):
+            self.table.hide()
 
 class TableViewWidget(BaseViewWidget):
-	"""Table view implementation."""
-	def __init__(self, parent=None):
-		super().__init__(parent)
-		
-		# Create table widget
-		self.table = QTableWidget(self)
-		self.layout.addWidget(self.table)
-		
-		# Setup table properties
-		self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-		self.table.setSelectionMode(QTableWidget.SelectionMode.MultiSelection)
-		self.table.setColumnCount(4)
-		self.table.setHorizontalHeaderLabels(["Artist", "Album", "Year", "Tags"])
-		self.table.horizontalHeader().setStretchLastSection(True)
-		self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
-		self.table.setShowGrid(True)
-		self.table.setAlternatingRowColors(True)
-		
-		# Ensure table expands to fill space
-		self.table.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-		
-		# Connect selection signal
-		self.table.itemSelectionChanged.connect(self._handle_selection)
-	
-	def update_data(self, nodes: list[VisualNode], edges: list[VisualEdge]) -> None:
-		"""Update table with new data."""
-		print(f"Updating table with {len(nodes)} nodes")  # Debug log
-		self.table.setRowCount(0)  # Clear existing rows
-		self.table.setRowCount(len(nodes))
-		
-		for row, node in enumerate(nodes):
-			if node.data.get("type") == "row":
-				print(f"Setting row {row}: {node.data}")  # Debug log
-				# Artist
-				artist_item = QTableWidgetItem(str(node.data.get("artist", "")))
-				self.table.setItem(row, 0, artist_item)
-				
-				# Album
-				album_item = QTableWidgetItem(str(node.data.get("title", "")))
-				self.table.setItem(row, 1, album_item)
-				
-				# Year
-				year_item = QTableWidgetItem(str(node.data.get("year", "")))
-				self.table.setItem(row, 2, year_item)
-				
-				# Tags
-				tags = node.data.get("tags", [])
-				tags_item = QTableWidgetItem(", ".join(str(tag) for tag in tags))
-				self.table.setItem(row, 3, tags_item)
-				
-				# Store node ID for selection tracking
-				for col in range(4):
-					item = self.table.item(row, col)
-					if item:
-						item.setData(Qt.ItemDataRole.UserRole, node.id)
-		
-		self.table.resizeColumnsToContents()
-		print("Table update complete")  # Debug log
+    """Table view implementation."""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        gui_logger.debug("Initializing TableViewWidget")
+        
+        # Create table widget with proper initialization
+        self.table = QTableWidget(self)
+        self.table.setObjectName("albumTable")
+        
+        # Set explicit size policies
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.table.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        
+        # Setup table properties
+        self.table.setFrameStyle(QTableWidget.Shape.NoFrame)
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setSelectionMode(QTableWidget.SelectionMode.MultiSelection)
+        self.table.setColumnCount(4)
+        self.table.setHorizontalHeaderLabels(["Artist", "Album", "Year", "Tags"])
+        self.table.setShowGrid(True)
+        self.table.setAlternatingRowColors(True)
+        
+        # Configure header
+        header = self.table.horizontalHeader()
+        header.setVisible(True)
+        header.setSectionsClickable(True)
+        header.setHighlightSections(True)
+        
+        # Set initial column widths
+        self.table.setColumnWidth(0, 250)  # Artist
+        self.table.setColumnWidth(1, 300)  # Album
+        self.table.setColumnWidth(2, 80)   # Year
+        self.table.setColumnWidth(3, 400)  # Tags
+        
+        # Now set interactive resize mode and stretch last section
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
+        header.setStretchLastSection(True)
+        
+        # Hide vertical header (row numbers)
+        self.table.verticalHeader().setVisible(False)
+        
+        # Add table to layout and ensure it fills the widget
+        self.layout.addWidget(self.table)
+        
+        # Connect selection signal
+        self.table.itemSelectionChanged.connect(self._handle_selection)
+        
+        # Initialize sorting state
+        self.sort_column = None
+        self.sort_direction = "asc"
+        
+        # Force immediate geometry update
+        self.updateGeometry()
+        self.table.updateGeometry()
+        
+        # Ensure table is visible after initialization
+        self.table.show()
+        self.table.raise_()
+        
+        gui_logger.debug(f"TableViewWidget initialized with size {self.size()}")
 
-	
-	def apply_transition(self, transition_data: dict) -> None:
-		"""Apply transition effect."""
-		# For table view, we just update the selection state
-		if 'shared_selections' in transition_data:
-			self.selected_ids = set(transition_data['shared_selections'])
-			self._update_selection()
-	
-	def _handle_selection(self):
-		"""Handle table selection changes."""
-		selected_ids = set()
-		for item in self.table.selectedItems():
-			node_id = item.data(Qt.ItemDataRole.UserRole)
-			if node_id:
-				selected_ids.add(node_id)
-		
-		self.selected_ids = selected_ids
-		self.selectionChanged.emit(selected_ids)
-	
-	def _update_selection(self):
-		"""Update table selection state."""
-		self.table.clearSelection()
-		for row in range(self.table.rowCount()):
-			item = self.table.item(row, 0)
-			if item and item.data(Qt.ItemDataRole.UserRole) in self.selected_ids:
-				self.table.selectRow(row)
+    def update_data(self, nodes: list[VisualNode], edges: list[VisualEdge]) -> None:
+        """Update table with new data."""
+        gui_logger.debug(f"Updating table data with {len(nodes)} nodes")
+        self.table.setUpdatesEnabled(False)
+        try:
+            self.table.clearContents()
+            
+            # Filter for row-type nodes
+            valid_nodes = [n for n in nodes if n.data.get("type") == "row"]
+            gui_logger.debug(f"Found {len(valid_nodes)} valid row nodes")
+            
+            # Set row count
+            self.table.setRowCount(len(valid_nodes))
+            
+            for row, node in enumerate(valid_nodes):
+                items = [
+                    (str(node.data.get("artist", "")), 0),
+                    (str(node.data.get("title", "")), 1),
+                    (str(node.data.get("year", "")), 2),
+                    (", ".join(str(tag) for tag in node.data.get("tags", [])), 3)
+                ]
+                
+                for text, col in items:
+                    item = QTableWidgetItem(text)
+                    item.setData(Qt.ItemDataRole.UserRole, node.id)
+                    self.table.setItem(row, col, item)
+            
+            # Update selection state
+            self._update_selection()
+            
+            # Apply current sorting if any
+            if self.sort_column is not None:
+                self.table.sortItems(
+                    self.sort_column,
+                    Qt.SortOrder.AscendingOrder if self.sort_direction == "asc" else Qt.SortOrder.DescendingOrder
+                )
+            
+            gui_logger.debug(f"Table updated with {self.table.rowCount()} rows")
+            
+        finally:
+            self.table.setUpdatesEnabled(True)
+            self.table.viewport().update()
+            self.table.updateGeometry()
+
+    def _handle_selection(self):
+        """Handle table selection changes."""
+        selected_ids = set()
+        for item in self.table.selectedItems():
+            node_id = item.data(Qt.ItemDataRole.UserRole)
+            if node_id:
+                selected_ids.add(node_id)
+        
+        if selected_ids != self.selected_ids:
+            self.selected_ids = selected_ids
+            self.selectionChanged.emit(selected_ids)
+
+    def _update_selection(self):
+        """Update table selection state."""
+        self.table.clearSelection()
+        for row in range(self.table.rowCount()):
+            item = self.table.item(row, 0)
+            if item and item.data(Qt.ItemDataRole.UserRole) in self.selected_ids:
+                self.table.selectRow(row)
+
+    def showEvent(self, event):
+        """Handle show events."""
+        super().showEvent(event)
+        # Ensure table resizes properly when shown
+        self.table.resize(self.size())
+        self.table.show()
+        self.table.raise_()
+        self.update()
+        gui_logger.debug("Table view shown")
+
+    def resizeEvent(self, event):
+        """Handle resize events."""
+        super().resizeEvent(event)
+        # Ensure table fills the widget when resized
+        self.table.resize(event.size())
+        self.update()
+        gui_logger.debug(f"Table resized to {event.size()}")
+
+    def hideEvent(self, event):
+        """Handle cleanup when widget is hidden."""
+        gui_logger.debug(f"{self.__class__.__name__} hidden")
+        super().hideEvent(event)
+        self.table.hide()
 
 class NetworkViewWidget(BaseViewWidget):
 	"""Network graph view implementation."""
@@ -140,6 +292,9 @@ class NetworkViewWidget(BaseViewWidget):
 		self.scene.clear()
 		self.node_items.clear()
 		
+		# Store total items count for visibility tracking
+		self._total_items = len(nodes) + len(edges)
+		
 		# Draw edges first (so they appear under nodes)
 		for edge in edges:
 			self._create_edge(edge)
@@ -147,6 +302,9 @@ class NetworkViewWidget(BaseViewWidget):
 		# Draw nodes
 		for node in nodes:
 			self._create_node(node)
+		
+		# Check for overlapping elements
+		self.graphics_debug.log_overlap_check(self, self.scene.items())
 		
 		# Update selection state
 		self._update_selection()
