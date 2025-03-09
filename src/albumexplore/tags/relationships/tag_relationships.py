@@ -1,144 +1,186 @@
-"""Tag relationship management system."""
+"""Tag relationships management."""
+from typing import Dict, List, Set, Optional, Tuple
 import networkx as nx
-from typing import Dict, List, Tuple, Optional, Set
+from ..normalizer import TagNormalizer
+from ..analysis import TagAnalyzer, TagSimilarity
 
 class TagRelationships:
-    """Manages relationships between tags."""
-
-    def __init__(self):
-        """Initialize the relationship manager."""
-        self.graph = nx.Graph()
-        self.hierarchies: Dict[str, str] = {}  # child -> parent
-        self._initialize_relationships()
+    """Manages relationships between tags including hierarchies and variants."""
     
-    def _initialize_relationships(self):
-        """Initialize basic tag relationships and hierarchies."""
-        # Base genre hierarchies
-        base_hierarchies = {
-            'melodic death metal': 'death metal',
-            'technical death metal': 'death metal',
-            'atmospheric black metal': 'black metal',
-            'progressive metal': 'metal',
-            'death metal': 'metal',
-            'black metal': 'metal',
-            'doom metal': 'metal',
-            'folk metal': 'metal',
-            'power metal': 'metal',
-            'gothic metal': 'metal',
-            'symphonic metal': 'metal',
-            'thrash metal': 'metal',
-            'progressive rock': 'rock',
-            'psychedelic rock': 'rock',
-            'post-rock': 'rock',
-            'art rock': 'rock',
-            'folk rock': 'rock',
-            'space rock': 'rock'
-        }
+    def __init__(self, normalizer: TagNormalizer, analyzer: TagAnalyzer, similarity: TagSimilarity):
+        """Initialize with required components."""
+        self.normalizer = normalizer
+        self.analyzer = analyzer
+        self.similarity = similarity
+        self.relationship_graph = nx.DiGraph()
+        self._build_relationship_graph()
         
-        # Add hierarchies
-        for child, parent in base_hierarchies.items():
-            self.add_hierarchy(child, parent)
+    def _build_relationship_graph(self):
+        """Build the initial relationship graph from tag data."""
+        # Add nodes for all tags
+        for tag in self.analyzer.tag_counts:
+            self.relationship_graph.add_node(tag, 
+                                          count=self.analyzer.get_tag_frequency(tag),
+                                          category=self.normalizer.get_category(tag))
         
-        # Add common relationships with weights
-        relationships = [
-            ('atmospheric', 'black metal', 0.8),
-            ('technical', 'death metal', 0.8),
-            ('progressive', 'metal', 0.7),
-            ('symphonic', 'metal', 0.7),
-            ('experimental', 'metal', 0.6),
-            ('avant-garde', 'experimental', 0.8),
-            ('post-metal', 'metal', 0.7),
-            ('post-rock', 'rock', 0.7),
-            ('psychedelic', 'progressive', 0.6),
-            ('jazz fusion', 'jazz', 0.8),
-            ('prog fusion', 'progressive', 0.7)
-        ]
+        # Add hierarchical relationships based on tag patterns
+        patterns = self.analyzer.get_common_patterns()
+        for prefix, bases in patterns.items():
+            for base in bases:
+                full_tag = f"{prefix} {base}"
+                if full_tag in self.analyzer.tag_counts and base in self.analyzer.tag_counts:
+                    self.relationship_graph.add_edge(full_tag, base, type='specialization')
+                    
+        # Add variant relationships from similarity analysis
+        clusters = self.similarity.find_similar_tag_clusters(min_similarity=0.8)
+        for cluster in clusters:
+            # Find the most frequent tag in cluster as canonical form
+            canonical = max(cluster, key=lambda t: self.analyzer.get_tag_frequency(t))
+            for variant in cluster:
+                if variant != canonical:
+                    self.relationship_graph.add_edge(variant, canonical, type='variant')
+                    
+    def get_tag_variants(self, tag: str) -> List[str]:
+        """Get all variants of a tag."""
+        variants = []
         
-        for tag1, tag2, weight in relationships:
-            self.add_relationship(tag1, tag2, weight)
-
-    def add_hierarchy(self, child: str, parent: str):
-        """Add a hierarchical relationship between tags."""
-        self.hierarchies[child] = parent
-        self.graph.add_edge(child, parent, type='hierarchy', weight=1.0)
-
-    def add_relationship(self, tag1: str, tag2: str, weight: float = 0.5):
-        """Add a weighted relationship between tags."""
-        self.graph.add_edge(tag1, tag2, type='related', weight=weight)
-
-    def get_related_tags(self, tag: str, min_weight: float = 0.0) -> List[Tuple[str, float]]:
-        """Get related tags with their relationship strengths."""
-        if tag not in self.graph:
-            return []
+        # Check outgoing variant edges
+        if tag in self.relationship_graph:
+            for _, target in self.relationship_graph.out_edges(tag):
+                if self.relationship_graph[tag][target]['type'] == 'variant':
+                    variants.append(target)
+                    
+        # Check incoming variant edges
+        for source, _ in self.relationship_graph.in_edges(tag):
+            if self.relationship_graph[source][tag]['type'] == 'variant':
+                variants.append(source)
+                
+        return variants
         
+    def get_broader_tags(self, tag: str) -> List[str]:
+        """Get broader (parent) tags."""
+        broader = []
+        
+        if tag in self.relationship_graph:
+            for _, target in self.relationship_graph.out_edges(tag):
+                if self.relationship_graph[tag][target]['type'] == 'specialization':
+                    broader.append(target)
+                    
+        return broader
+        
+    def get_narrower_tags(self, tag: str) -> List[str]:
+        """Get narrower (child) tags."""
+        narrower = []
+        
+        for source, _ in self.relationship_graph.in_edges(tag):
+            if self.relationship_graph[source][tag]['type'] == 'specialization':
+                narrower.append(source)
+                
+        return narrower
+        
+    def get_related_tags(self, tag: str, min_similarity: float = 0.6) -> List[Tuple[str, float]]:
+        """Get related tags based on co-occurrence and similarity."""
         related = []
-        for neighbor in self.graph.neighbors(tag):
-            weight = self.graph[tag][neighbor]['weight']
-            if weight >= min_weight:
-                related.append((neighbor, weight))
         
+        # Get variants
+        variants = self.get_tag_variants(tag)
+        for variant in variants:
+            related.append((variant, 1.0))
+            
+        # Get hierarchically related tags
+        broader = self.get_broader_tags(tag)
+        narrower = self.get_narrower_tags(tag)
+        
+        for btag in broader:
+            related.append((btag, 0.9))
+        for ntag in narrower:
+            related.append((ntag, 0.9))
+            
+        # Get similar tags
+        similar = self.similarity.find_similar_tags(tag, threshold=min_similarity)
+        for sim_tag, score in similar:
+            if sim_tag not in variants and sim_tag not in broader and sim_tag not in narrower:
+                related.append((sim_tag, score))
+                
         return sorted(related, key=lambda x: x[1], reverse=True)
-
-    def get_parent_tags(self, tag: str) -> List[str]:
-        """Get all parent tags in hierarchy."""
-        parents = []
-        current = tag
-        while current in self.hierarchies:
-            parent = self.hierarchies[current]
-            parents.append(parent)
-            current = parent
-        return parents
-
-    def get_child_tags(self, tag: str) -> List[str]:
-        """Get immediate child tags in hierarchy."""
-        return [child for child, parent in self.hierarchies.items() if parent == tag]
-
-    def calculate_similarity(self, tag1: str, tag2: str) -> float:
-        """Calculate similarity between two tags."""
-        if tag1 == tag2:
-            return 1.0
+        
+    def suggest_canonical_form(self, tag: str) -> Optional[str]:
+        """Suggest canonical form for a tag."""
+        # First check normalized form
+        normalized = self.normalizer.normalize(tag)
+        if normalized != tag:
+            return normalized
             
-        if not (self.graph.has_node(tag1) and self.graph.has_node(tag2)):
-            return 0.0
+        # Check for variants
+        for _, target in self.relationship_graph.out_edges(tag):
+            if self.relationship_graph[tag][target]['type'] == 'variant':
+                # Return the most frequent variant
+                variants = self.get_tag_variants(tag)
+                if variants:
+                    return max(variants, key=lambda t: self.analyzer.get_tag_frequency(t))
+                    
+        return None
+        
+    def get_tag_hierarchy(self, root_tag: Optional[str] = None) -> Dict:
+        """Get hierarchical representation of tags."""
+        hierarchy = {}
+        
+        if root_tag:
+            # Build hierarchy from specific root
+            hierarchy = self._build_hierarchy_from_node(root_tag)
+        else:
+            # Find all root nodes (no incoming specialization edges)
+            roots = [node for node in self.relationship_graph.nodes()
+                    if not any(self.relationship_graph[src][node]['type'] == 'specialization'
+                             for src, _ in self.relationship_graph.in_edges(node))]
             
-        try:
-            # Use shortest path length as a similarity metric
-            path_length = nx.shortest_path_length(self.graph, tag1, tag2)
-            return 1.0 / (1.0 + path_length)  # Convert distance to similarity
-        except nx.NetworkXNoPath:
-            return 0.0
-
-    def get_all_tags(self) -> Set[str]:
-        """Get all tags in the relationship graph."""
-        return set(self.graph.nodes())
-
-    def get_tag_category(self, tag: str) -> str:
-        """Get the high-level category of a tag."""
-        parents = self.get_parent_tags(tag)
-        if parents:
-            return parents[-1]  # Return the highest level parent
-        return tag  # Return the tag itself if no parents
-
+            # Build hierarchy from each root
+            for root in roots:
+                hierarchy[root] = self._build_hierarchy_from_node(root)
+                
+        return hierarchy
+        
+    def _build_hierarchy_from_node(self, node: str) -> Dict:
+        """Recursively build hierarchy from a node."""
+        hierarchy = {'variants': self.get_tag_variants(node)}
+        
+        # Add narrower tags recursively
+        narrower = self.get_narrower_tags(node)
+        if narrower:
+            hierarchy['narrower'] = {}
+            for tag in narrower:
+                hierarchy['narrower'][tag] = self._build_hierarchy_from_node(tag)
+                
+        return hierarchy
+        
     def merge_tags(self, source: str, target: str):
         """Merge source tag into target tag."""
         if source == target:
             return
             
-        # Transfer relationships
-        for neighbor in list(self.graph.neighbors(source)):
-            if neighbor != target:
-                weight = self.graph[source][neighbor]['weight']
-                rel_type = self.graph[source][neighbor]['type']
-                self.graph.add_edge(target, neighbor, weight=weight, type=rel_type)
+        # Update analyzer counts
+        source_count = self.analyzer.tag_counts[source]
+        self.analyzer.tag_counts[target] = self.analyzer.tag_counts.get(target, 0) + source_count
+        del self.analyzer.tag_counts[source]
         
-        # Update hierarchies
-        if source in self.hierarchies:
-            self.hierarchies[target] = self.hierarchies[source]
-        for child, parent in list(self.hierarchies.items()):
-            if parent == source:
-                self.hierarchies[child] = target
+        # Update relationship graph
+        if source in self.relationship_graph:
+            # Redirect edges to target
+            for _, dest in list(self.relationship_graph.out_edges(source)):
+                edge_data = self.relationship_graph[source][dest]
+                if dest != target:  # Avoid self-loops
+                    self.relationship_graph.add_edge(target, dest, **edge_data)
+                    
+            for src, _ in list(self.relationship_graph.in_edges(source)):
+                edge_data = self.relationship_graph[src][source]
+                if src != target:  # Avoid self-loops
+                    self.relationship_graph.add_edge(src, target, **edge_data)
+                    
+            # Remove source node
+            self.relationship_graph.remove_node(source)
+            
+        # Update normalizer
+        self.normalizer.add_variant(source, target)
         
-        # Remove source tag
-        self.graph.remove_node(source)
-        if source in self.hierarchies:
-            del self.hierarchies[source]
+        # Clear caches
+        self.similarity.clear_cache()

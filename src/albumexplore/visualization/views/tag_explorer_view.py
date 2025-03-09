@@ -1,9 +1,10 @@
 from PyQt6.QtWidgets import (QTableWidget, QTableWidgetItem, QHeaderView, 
                            QVBoxLayout, QHBoxLayout, QSizePolicy, QScrollBar,
                            QWidget, QPushButton, QLabel, QMenu, QSplitter,
-                           QComboBox, QRadioButton, QButtonGroup, QToolButton)
-from PyQt6.QtCore import Qt, QTimer, pyqtSignal
-from PyQt6.QtGui import QColor, QPalette, QIcon, QAction
+                           QComboBox, QRadioButton, QButtonGroup, QToolButton, 
+                           QStackedWidget)
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QTime
+from PyQt6.QtGui import QColor, QPalette, QIcon, QAction, QPainter
 from typing import Dict, Any, Set, List, Optional
 from collections import Counter, defaultdict
 import json
@@ -11,8 +12,41 @@ import json
 from .base_view import BaseView
 from ..state import ViewType, ViewState
 from ...tags.normalizer import TagNormalizer
+from ...tags.analysis.single_instance_handler import SingleInstanceHandler
+from ...tags.analysis.tag_analyzer import TagAnalyzer
+from ...tags.analysis.tag_similarity import TagSimilarity
+from .tag_cloud_widget import TagCloudWidget
 
+# Ensure we're properly importing tag cloud widget
+try:
+    from .tag_cloud_widget import TagCloudWidget
+    from .tag_cloud_widget import CloudTag
+except ImportError as e:
+    from albumexplore.gui.gui_logging import gui_logger
+    gui_logger.error(f"Failed to import TagCloudWidget: {str(e)}")
+    
+    # Create a minimal fallback implementation to prevent crashes
+    class CloudTag:
+        def __init__(self, text, weight, x=0, y=0):
+            self.text = text
+            self.weight = weight
+            self.x = x
+            self.y = y
+    
+    class TagCloudWidget(QWidget):
+        tagClicked = pyqtSignal(str)
+        
+        def __init__(self, parent=None):
+            super().__init__(parent)
+            self.tags = {}
+            
+        def update_tags(self, tag_counts):
+            pass
+            
+        def update_filter_states(self, tag_filters):
+            pass
 
+# Simple table widget item that provides proper sorting
 class SortableTableWidgetItem(QTableWidgetItem):
     """Custom table widget item for proper sorting."""
     
@@ -27,6 +61,23 @@ class SortableTableWidgetItem(QTableWidgetItem):
         return super().__lt__(other)
 
 
+class DoubleBufferedViewport(QWidget):
+    """Custom viewport for double buffering."""
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent)
+        self.setAttribute(Qt.WidgetAttribute.WA_PaintOnScreen, True)
+        self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, True)
+        self.setAutoFillBackground(False)
+    
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        painter.setRenderHint(QPainter.RenderHint.TextAntialiasing)
+        super().paintEvent(event)
+
+
 class TagExplorerView(BaseView):
     """Tag-based album exploration view."""
     
@@ -35,9 +86,15 @@ class TagExplorerView(BaseView):
     FILTER_EXCLUDE = 2
     FILTER_NEUTRAL = 0
     
+    # Enum-like constants for view modes
+    MODE_TABLE = 0
+    MODE_CLOUD = 1
+    
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.view_state = ViewState(ViewType.TABLE)
+        self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent)  # Avoid unnecessary background redraws
+        self.setUpdatesEnabled(False)  # Disable updates during initialization
+        self.view_state = ViewState(ViewType.TAG_EXPLORER)  # Fixed: Use TAG_EXPLORER instead of TABLE
         self.tag_normalizer = TagNormalizer()
         
         # For storing data
@@ -47,6 +104,13 @@ class TagExplorerView(BaseView):
         self.tag_filters = {}              # Current filter state for each tag
         self.filtered_albums = []          # Albums matching current filters
         self.normalized_mapping = {}       # Mapping from original to normalized tags
+        self.single_instance_tags = set()  # Tags that appear only once
+        self.tag_mode = self.MODE_TABLE    # Current tag visualization mode
+        
+        # Advanced tag analysis components (initialized in process_tag_data)
+        self.tag_analyzer = None
+        self.tag_similarity = None
+        self.single_instance_handler = None
         
         # Setup UI components
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
@@ -73,6 +137,12 @@ class TagExplorerView(BaseView):
         self.tag_count_label = QLabel("Tags: 0")
         filter_header_layout.addWidget(self.tag_count_label)
         
+        # Add view mode selector
+        self.view_mode_combo = QComboBox()
+        self.view_mode_combo.addItems(["Table View", "Cloud View"])
+        self.view_mode_combo.currentIndexChanged.connect(self._change_tag_view_mode)
+        filter_header_layout.addWidget(self.view_mode_combo)
+        
         filter_header_layout.addStretch()
         
         # Add export button
@@ -81,11 +151,20 @@ class TagExplorerView(BaseView):
         self.export_button.clicked.connect(self._export_tag_data)
         filter_header_layout.addWidget(self.export_button)
         
+        # Add single-instance tag management button
+        self.manage_singles_button = QPushButton("Manage Singles")
+        self.manage_singles_button.setToolTip("Manage single-instance tags")
+        self.manage_singles_button.clicked.connect(self._show_single_instance_dialog)
+        filter_header_layout.addWidget(self.manage_singles_button)
+        
         self.clear_filters_button = QPushButton("Clear Filters")
         self.clear_filters_button.clicked.connect(self.clear_tag_filters)
         filter_header_layout.addWidget(self.clear_filters_button)
         
         tag_panel_layout.addWidget(self.filter_header)
+        
+        # Create tag views stack
+        self.tag_views_stack = QStackedWidget()
         
         # Create tag table
         self.tags_table = QTableWidget()
@@ -108,8 +187,17 @@ class TagExplorerView(BaseView):
         self.tags_table.setSortingEnabled(True)
         self.tags_sort_column = 1  # Default sort by count
         self.tags_sort_order = Qt.SortOrder.DescendingOrder
+        self.tags_table.cellDoubleClicked.connect(self._cycle_tag_filter_state)
         
-        tag_panel_layout.addWidget(self.tags_table)
+        # Create tag cloud view
+        self.tag_cloud = TagCloudWidget()
+        self.tag_cloud.tagClicked.connect(self._handle_tag_cloud_click)
+        
+        # Add both views to stack
+        self.tag_views_stack.addWidget(self.tags_table)
+        self.tag_views_stack.addWidget(self.tag_cloud)
+        
+        tag_panel_layout.addWidget(self.tag_views_stack)
         
         # Create album panel widget
         self.album_panel = QWidget()
@@ -182,9 +270,19 @@ class TagExplorerView(BaseView):
         self._selection_timer.timeout.connect(self._process_selection)
         self._pending_selection = set()
         
+        # Add paint optimization flags
+        self._needs_full_update = False
+        self._last_paint_time = 0
+        self._paint_throttle = 16  # ~60fps
+        
+        # Configure tables for optimized painting
+        self.tags_table.setViewport(DoubleBufferedViewport())
+        self.album_table.setViewport(DoubleBufferedViewport())
+        
         # Set unified styling
         self._apply_unified_styling()
         
+        self.setUpdatesEnabled(True)  # Re-enable updates
         self.show()
         
     def _apply_unified_styling(self):
@@ -268,7 +366,7 @@ class TagExplorerView(BaseView):
                 for tag in node.data['tags']:
                     self.raw_tag_counts[tag] += 1
                     # Apply normalization to consolidate tags
-                    normalized_tag = self.tag_normalizer.normalize(tag, aggressive=True)
+                    normalized_tag = self.tag_normalizer.normalize(tag)
                     self.normalized_mapping[tag] = normalized_tag
                     self.tag_counts[normalized_tag] += 1
         
@@ -279,6 +377,38 @@ class TagExplorerView(BaseView):
                 normalized_tags = [self.normalized_mapping.get(tag, tag) for tag in node.data['tags']]
                 # Remove duplicates that might appear after normalization
                 node.data['normalized_tags'] = list(dict.fromkeys(normalized_tags))
+        
+        # Identify single-instance tags
+        self.single_instance_tags = {tag for tag, count in self.raw_tag_counts.items() if count == 1}
+        
+        # Initialize tag analysis components if we have enough data
+        if len(nodes) > 0:
+            # Create a pandas DataFrame from the nodes for the tag analyzer
+            import pandas as pd
+            data = []
+            for node in nodes:
+                if 'tags' in node.data:
+                    data.append({
+                        'id': node.id,
+                        'artist': node.data.get('artist', ''),
+                        'title': node.data.get('title', ''),
+                        'year': node.data.get('year', 0),
+                        'tags': node.data.get('tags', [])
+                    })
+            
+            if data:
+                df = pd.DataFrame(data)
+                self.tag_analyzer = TagAnalyzer(df)
+                self.tag_similarity = TagSimilarity(self.tag_analyzer)
+                self.single_instance_handler = SingleInstanceHandler(
+                    self.tag_analyzer,
+                    self.tag_normalizer,
+                    self.tag_similarity
+                )
+                
+                # Initialize relationships and identify single-instance tags
+                self.tag_analyzer.calculate_relationships()
+                self.single_instance_handler.identify_single_instance_tags()
         
         # Refresh the tag table with consolidated counts
         self.refresh_tag_table()
@@ -339,6 +469,10 @@ class TagExplorerView(BaseView):
             
         # Update tag count display
         self.tag_count_label.setText(f"Tags: {len(self.tag_counts)}")
+        
+        # Update tag cloud
+        self.tag_cloud.update_tags(self.tag_counts)
+        self.tag_cloud.update_filter_states(self.tag_filters)
     
     def refresh_album_table(self):
         """Refresh the album table with filtered data."""
@@ -407,6 +541,9 @@ class TagExplorerView(BaseView):
     
     def apply_tag_filters(self):
         """Apply tag filters to the album list."""
+        # Start timer to measure performance
+        start_time = QTime.currentTime()
+        
         # If no filters are active, show all albums
         active_filters = {tag: state for tag, state in self.tag_filters.items() 
                          if state != self.FILTER_NEUTRAL}
@@ -418,37 +555,38 @@ class TagExplorerView(BaseView):
             self.refresh_tag_table()
             return
         
-        # Filter albums based on tag criteria
-        self.filtered_albums = []
-        for node in self.nodes:
-            # Use normalized tags for filtering
-            album_normalized_tags = set(node.data.get('normalized_tags', []))
-            
-            # Check if album should be included
-            include = True
-            
-            # Must include all INCLUDE tags
-            for tag, state in active_filters.items():
-                if state == self.FILTER_INCLUDE and tag not in album_normalized_tags:
-                    include = False
-                    break
-            
-            # Must exclude all EXCLUDE tags
-            if include:
-                for tag, state in active_filters.items():
-                    if state == self.FILTER_EXCLUDE and tag in album_normalized_tags:
-                        include = False
-                        break
-            
-            if include:
-                self.filtered_albums.append(node)
+        # Separate include and exclude filters for more efficient processing
+        include_tags = {tag for tag, state in active_filters.items() if state == self.FILTER_INCLUDE}
+        exclude_tags = {tag for tag, state in active_filters.items() if state == self.FILTER_EXCLUDE}
         
-        # Calculate matching counts for each normalized tag
+        # Pre-filter albums using set operations for better performance
+        candidate_albums = []
+        
+        # First apply include filters (must have all included tags)
+        if include_tags:
+            for node in self.nodes:
+                # Use faster set operations for filtering
+                if include_tags.issubset(set(node.data.get('normalized_tags', []))):
+                    candidate_albums.append(node)
+        else:
+            candidate_albums = self.nodes.copy()
+        
+        # Then apply exclude filters (must not have any excluded tags)
+        if exclude_tags:
+            self.filtered_albums = []
+            for node in candidate_albums:
+                node_tags = set(node.data.get('normalized_tags', []))
+                if not exclude_tags.intersection(node_tags):  # No intersection with exclude tags
+                    self.filtered_albums.append(node)
+        else:
+            self.filtered_albums = candidate_albums
+        
+        # Calculate matching counts using Counter for better performance
         self.matching_counts = Counter()
+        tag_collection = []
         for album in self.filtered_albums:
-            album_tags = album.data.get('normalized_tags', [])
-            for tag in album_tags:
-                self.matching_counts[tag] += 1
+            tag_collection.extend(album.data.get('normalized_tags', []))
+        self.matching_counts.update(tag_collection)
         
         # Update both tables
         self.refresh_album_table()
@@ -458,9 +596,16 @@ class TagExplorerView(BaseView):
         if self.selected_ids:
             new_selection = {node_id for node_id in self.selected_ids 
                            if any(node.id == node_id for node in self.filtered_albums)}
+            
             if new_selection != self.selected_ids:
                 self.update_selection(new_selection)
-
+        
+        # Log performance metrics
+        elapsed_ms = start_time.msecsTo(QTime.currentTime())
+        if elapsed_ms > 100:  # Only log if filtering took significant time
+            from albumexplore.gui.gui_logging import performance_logger
+            performance_logger.debug(f"Tag filtering took {elapsed_ms}ms for {len(self.nodes)} albums with {len(active_filters)} filters")
+    
     def _export_tag_data(self):
         """Export tag data to console for analysis."""
         print("\n===== TAG EXPLORER DATA ANALYSIS =====")
@@ -494,17 +639,42 @@ class TagExplorerView(BaseView):
             print(f"{tag}: {count} occurrences, {len(variants)} variants")
         
         # Tags that were never consolidated (single-instance tags)
-        single_instance_tags = [tag for tag, count in self.raw_tag_counts.items() 
+        single_instance_tags = [tag for tag, count in self.raw_tag_counts.items()
                                if count == 1 and tag == self.normalized_mapping.get(tag, tag)]
         print(f"\n--- SINGLE-INSTANCE TAGS ({len(single_instance_tags)}) ---")
         print(f"Sample of 20: {', '.join(single_instance_tags[:20])}")
+        
+        # If we have the single instance handler, show suggestions
+        if self.single_instance_handler:
+            suggestions = self.single_instance_handler.get_consolidation_suggestions()
+            if suggestions:
+                print("\n--- SUGGESTED NORMALIZATIONS FOR SINGLE-INSTANCE TAGS ---")
+                for tag, tag_suggestions in list(suggestions.items())[:20]:  # Show top 20
+                    if tag_suggestions:
+                        best_suggestion = tag_suggestions[0]  # First suggestion is highest confidence
+                        print(f"{tag} -> {best_suggestion[0]} (confidence: {best_suggestion[1]:.2f}, reason: {best_suggestion[2]})")
+                
+                # Show stats on suggestions
+                high_confidence = sum(1 for tag_suggestions in suggestions.values()
+                                     if tag_suggestions and tag_suggestions[0][1] >= 0.8)
+                medium_confidence = sum(1 for tag_suggestions in suggestions.values()
+                                       if tag_suggestions and 0.5 <= tag_suggestions[0][1] < 0.8)
+                low_confidence = sum(1 for tag_suggestions in suggestions.values()
+                                    if tag_suggestions and tag_suggestions[0][1] < 0.5)
+                
+                print(f"\nSuggestion confidence levels:")
+                print(f"  High confidence (>=0.8): {high_confidence}")
+                print(f"  Medium confidence (0.5-0.8): {medium_confidence}")
+                print(f"  Low confidence (<0.5): {low_confidence}")
+                print(f"  No suggestions: {len(single_instance_tags) - len(suggestions)}")
         
         # Export full data for deeper analysis
         print("\n--- EXPORTING FULL DATA ---")
         analysis_data = {
             "raw_tag_counts": dict(self.raw_tag_counts),
             "normalized_tag_counts": dict(self.tag_counts),
-            "normalization_mapping": self.normalized_mapping
+            "normalization_mapping": self.normalized_mapping,
+            "single_instance_tags": single_instance_tags
         }
         
         print("Data analysis complete. Check console output for results.")
@@ -541,6 +711,41 @@ class TagExplorerView(BaseView):
         """Process pending selection changes."""
         if self._pending_selection != self.selected_ids:
             self.update_selection(self._pending_selection)
+            
+    def _show_single_instance_dialog(self):
+        """Show dialog for managing single-instance tags."""
+        if not self.single_instance_handler:
+            from PyQt6.QtWidgets import QMessageBox
+            QMessageBox.warning(
+                self,
+                "Not Available",
+                "Single-instance tag management is not available. Please load data first."
+            )
+            return
+            
+        dialog = SingleInstanceDialog(
+            self,
+            self.single_instance_handler,
+            self.tag_normalizer
+        )
+        
+        # Connect the changes_applied signal
+        dialog.changes_applied.connect(self._handle_tag_changes)
+        
+        # Show the dialog
+        dialog.exec()
+        
+    def _handle_tag_changes(self, changes):
+        """Handle changes from the single-instance dialog."""
+        if not changes:
+            return
+            
+        # Reprocess tag data to apply changes
+        self.process_tag_data(self.nodes)
+        
+        # Refresh the view
+        self.refresh_tag_table()
+        self.refresh_album_table()
     
     def _show_tag_context_menu(self, position):
         """Show context menu for tag table."""
@@ -608,3 +813,37 @@ class TagExplorerView(BaseView):
         """Handle resize events."""
         super().resizeEvent(event)
         self.splitter.resize(self.size())
+    
+    def paintEvent(self, event):
+        """Handle paint events with throttling."""
+        current_time = QTime.currentTime().msecsSinceStartOfDay()
+        if current_time - self._last_paint_time < self._paint_throttle and not self._needs_full_update:
+            event.accept()
+            return
+            
+        super().paintEvent(event)
+        self._last_paint_time = current_time
+        self._needs_full_update = False
+    
+    def _change_tag_view_mode(self, index):
+        """Change the tag view mode."""
+        self.tag_mode = index
+        self.tag_views_stack.setCurrentIndex(index)
+    
+    def _handle_tag_cloud_click(self, tag):
+        """Handle tag click in the tag cloud."""
+        current_state = self.tag_filters.get(tag, self.FILTER_NEUTRAL)
+        
+        # Cycle through states: NEUTRAL -> INCLUDE -> EXCLUDE -> NEUTRAL
+        if current_state == self.FILTER_NEUTRAL:
+            self.tag_filters[tag] = self.FILTER_INCLUDE
+        elif current_state == self.FILTER_INCLUDE:
+            self.tag_filters[tag] = self.FILTER_EXCLUDE
+        else:
+            self.tag_filters[tag] = self.FILTER_NEUTRAL
+            
+        # Update tag cloud filter states
+        self.tag_cloud.update_filter_states(self.tag_filters)
+        
+        # Apply filters
+        self.apply_tag_filters()

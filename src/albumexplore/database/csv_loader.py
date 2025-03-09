@@ -1,158 +1,123 @@
-"""CSV data loading module for database initialization."""
-import logging
-import pandas as pd
+"""CSV data loader for album database."""
+import csv
+import os
 from pathlib import Path
+from typing import Dict, Set, List
 from datetime import datetime
+import re
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from ..data.parsers.csv_parser import CSVParser
-from . import models, get_session
+from albumexplore.database import get_session
+from albumexplore.database.models import Album, Tag, TagCategory
+from albumexplore.gui.gui_logging import db_logger
 
-logger = logging.getLogger("albumexplore.database")
+def extract_year(filename: str) -> int:
+    """Extract year from filename."""
+    match = re.search(r'20\d{2}', filename)
+    return int(match.group()) if match else None
 
-def parse_date(date_str: str) -> datetime:
-    """Convert date string to datetime object."""
+def normalize_tag(tag: str) -> str:
+    """Normalize tag string."""
+    return tag.strip().lower()
+
+def load_csv_data(csv_dir: Path) -> None:
+    """Load data from CSV files into database."""
+    db_logger.info(f"Loading CSV data from {csv_dir}")
+    
+    session = get_session()
     try:
-        if pd.isna(date_str):
-            return None
-        # Handle different date formats
-        if isinstance(date_str, str):
-            # Try full date format first
+        # Process each CSV file
+        for csv_file in csv_dir.glob('*.csv'):
             try:
-                return datetime.strptime(date_str.strip(), '%Y-%m-%d')
-            except ValueError:
-                pass
-            # Try just month and year
-            try:
-                dt = datetime.strptime(date_str.strip(), '%B %Y')
-                return dt.replace(day=1)
-            except ValueError:
-                pass
-            # Try just year
-            try:
-                return datetime.strptime(date_str.strip(), '%Y')
-            except ValueError:
-                pass
-        # If nothing else works, try pandas parsing
-        return pd.to_datetime(date_str).to_pydatetime()
-    except (ValueError, TypeError) as e:
-        logger.warning(f"Could not parse date '{date_str}': {str(e)}")
-        return None
+                year = extract_year(csv_file.name)
+                if year:
+                    db_logger.info(f"Processing {csv_file.name} for year {year}")
+                    _process_csv_file(csv_file, year, session)
+            except Exception as e:
+                db_logger.error(f"Error processing {csv_file}: {str(e)}", exc_info=True)
+        
+        session.commit()
+        db_logger.info("CSV data loaded successfully")
+        
+    except Exception as e:
+        session.rollback()
+        db_logger.error(f"Error loading CSV data: {str(e)}", exc_info=True)
+        raise
+    finally:
+        session.close()
 
-def load_csv_data(csv_dir: Path) -> bool:
-    """Load CSV data into the database."""
-    with get_session() as db:
-        try:
-            logger.info("Loading CSV data...")
-            parser = CSVParser(csv_dir)
-            df = parser.parse()
-            
-            if df.empty:
-                logger.warning("No data parsed from CSV files")
-                return False
-            
-            logger.info(f"Parsed {len(df)} rows from CSV files")
-            
-            # Get current counts for ID generation
-            album_count = db.query(models.Album).count()
-            tag_count = db.query(models.Tag).count()
-            
-            # Keep track of existing tags
-            tag_map = {}  # name -> Tag object
-            
-            # Check if the genre category exists once before processing
-            genre_category = db.query(models.TagCategory).filter_by(id='genre').first()
-            if not genre_category:
-                logger.debug("Creating 'genre' category as it doesn't exist")
-                genre_category = models.TagCategory(
-                    id='genre',
-                    name='Genre',
-                    description='Musical genres and subgenres'
+def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
+    """Process a single CSV file."""
+    with open(csv_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        
+        for row in reader:
+            try:
+                # Extract album data
+                artist = row.get('Artist', '').strip()
+                title = row.get('Album', '').strip()
+                
+                if not artist or not title:
+                    continue
+                
+                # Check if album already exists
+                existing = session.query(Album).filter(
+                    Album.artist == artist,
+                    Album.title == title
+                ).first()
+                
+                if existing:
+                    db_logger.debug(f"Album already exists: {artist} - {title}")
+                    continue
+                
+                # Create new album
+                album = Album(
+                    artist=artist,
+                    title=title,
+                    release_year=year,
+                    genre=row.get('Genre', '').strip(),
+                    country=row.get('Country', '').strip()
                 )
-                db.add(genre_category)
-                # Commit the genre category immediately to avoid integrity errors later
-                db.flush()
-            
-            # Process in chunks to avoid memory issues
-            chunk_size = 500
-            for chunk_start in range(0, len(df), chunk_size):
-                chunk_df = df.iloc[chunk_start:chunk_start + chunk_size]
-                logger.debug(f"Processing chunk {chunk_start}-{chunk_start + len(chunk_df)}")
                 
-                for i, row in chunk_df.iterrows():
-                    # Create album with unique ID
-                    album = models.Album(
-                        id=f"a{album_count + i}",
-                        artist=str(row['Artist']).strip(),
-                        title=str(row['Album']).strip(),
-                        release_date=parse_date(row['Release Date']),
-                        length=str(row['Length']).strip() if pd.notna(row['Length']) else None,
-                        vocal_style=str(row['Vocal Style']).strip() if pd.notna(row['Vocal Style']) else None,
-                        country=str(row['Country / State']).strip() if pd.notna(row['Country / State']) else None
-                    )
-                    
-                    # Extract release year from date if possible
-                    if album.release_date:
-                        album.release_year = album.release_date.year
-                    
-                    # Handle genre tags
-                    # Add debug logging
-                    logger.debug(f"Processing tags for album: {album.artist} - {album.title}")
-                    
-                    # Check if 'tags' exists and is usable
-                    if 'tags' in row and isinstance(row['tags'], list) and len(row['tags']) > 0:
-                        logger.debug(f"Using pre-processed tags: {row['tags']}")
-                        tags = row['tags']
-                    elif 'Genre / Subgenres' in row and not pd.isna(row['Genre / Subgenres']).all():
-                        # Fallback to genre string if tags not processed
-                        genre_str = str(row['Genre / Subgenres'])
-                        logger.debug(f"Parsing tags from genre string: {genre_str}")
-                        tags = [g.strip() for g in genre_str.split(',')]
-                    else:
-                        logger.debug("No tags found, using 'untagged'")
-                        tags = ['untagged']
-                    
-                    # Create or get existing tags
+                # Process tags
+                tags_str = row.get('Tags', '').strip()
+                if tags_str:
+                    tags = [t.strip() for t in tags_str.split(',') if t.strip()]
                     for tag_name in tags:
-                        tag_name = tag_name.strip().lower()
-                        if not tag_name:
-                            continue
-                            
-                        if tag_name not in tag_map:
-                            tag = db.query(models.Tag).filter_by(name=tag_name).first()
-                            if not tag:
-                                tag_count += 1
-                                # Debug the issue
-                                logger.debug(f"Creating tag with name: {tag_name}")
-                                
-                                tag = models.Tag(
-                                    id=f"t{tag_count}",
-                                    name=tag_name,
-                                    category_id='genre'  # Set the foreign key, not the relationship
-                                )
-                                logger.debug(f"Created tag: {tag}")
-                                db.add(tag)
-                            tag_map[tag_name] = tag
-                        album.tags.append(tag_map[tag_name])
-                    
-                    db.add(album)
+                        # Get or create tag
+                        tag = session.query(Tag).filter(
+                            Tag.name == tag_name
+                        ).first()
+                        
+                        if not tag:
+                            tag = Tag(
+                                name=tag_name,
+                                normalized_name=normalize_tag(tag_name)
+                            )
+                            session.add(tag)
+                        
+                        album.tags.append(tag)
                 
-                try:
-                    db.commit()
-                    logger.info(f"Committed chunk of {len(chunk_df)} albums")
-                except IntegrityError as e:
-                    db.rollback()
-                    logger.error(f"Integrity error in chunk: {str(e)}")
-                    raise
-                except Exception as e:
-                    db.rollback()
-                    logger.error(f"Error committing chunk: {str(e)}")
-                    raise
-            
-            logger.info(f"Successfully loaded {len(df)} albums")
-            return True
-            
-        except Exception as e:
-            db.rollback()
-            logger.error(f"Error loading CSV data: {str(e)}")
-            raise
+                session.add(album)
+                db_logger.debug(f"Added album: {artist} - {title}")
+                
+            except Exception as e:
+                db_logger.error(f"Error processing row: {row}", exc_info=True)
+                raise
+
+def get_tag_statistics() -> Dict:
+    """Get statistics about tags in the database."""
+    session = get_session()
+    try:
+        total_tags = session.query(Tag).count()
+        total_albums = session.query(Album).count()
+        
+        # Get top tags
+        top_tags = session.query(Tag).order_by(Tag.frequency.desc()).limit(10).all()
+        
+        return {
+            'total_tags': total_tags,
+            'total_albums': total_albums,
+            'top_tags': [(tag.name, tag.frequency) for tag in top_tags]
+        }
+    finally:
+        session.close()

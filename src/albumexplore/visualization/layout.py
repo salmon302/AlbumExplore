@@ -1,4 +1,4 @@
-from typing import List, Dict, Any, Tuple, Set
+from typing import List, Dict, Any, Tuple, Set, Protocol, Optional
 import math
 import random
 import time
@@ -6,6 +6,7 @@ from collections import defaultdict
 from .models import VisualNode, VisualEdge, Point
 from .physics.force_params import ForceParams
 from .physics_system import PhysicsSystem
+from albumexplore.gui.gui_logging import graphics_logger
 
 
 class MultiLevelLayout:
@@ -123,248 +124,270 @@ def create_bundled_edge(edges: List[VisualEdge]) -> VisualEdge:
 	)
 
 class ForceDirectedLayout:
-	def __init__(self, params: ForceParams = None):
-		self.params = params or ForceParams()
-		self.physics = PhysicsSystem(self.params)
-		self.positions: Dict[str, Point] = {}
-		self.velocities: Dict[str, Point] = {}
-		self._nodes = None
-		self._node_lookup = {}
-		self.layout_iterations = 0
+    """Force-directed layout implementation."""
+    
+    def __init__(self, params: Optional[ForceParams] = None):
+        self.params = params or ForceParams()
+        self._velocities: Dict[str, Point] = {}
+        self._forces: Dict[str, Point] = {}
+        self.iteration = 0
+        self.total_kinetic_energy = float('inf')
+    
+    def initialize(self, nodes: List[VisualNode], width: float, height: float):
+        """Initialize layout with random positions."""
+        margin = min(width, height) * 0.1
+        
+        for node in nodes:
+            if not node.pos or ('x' not in node.pos or 'y' not in node.pos):
+                # Random position within bounds
+                node.pos = {
+                    'x': margin + random.random() * (width - 2 * margin),
+                    'y': margin + random.random() * (height - 2 * margin)
+                }
+            
+            # Initialize velocity
+            self._velocities[node.id] = Point(0.0, 0.0)
+            self._forces[node.id] = Point(0.0, 0.0)
+    
+    def _calculate_forces(self, nodes: List[VisualNode], edges: List[VisualEdge]):
+        """Calculate forces for current iteration."""
+        # Reset forces
+        for node_id in self._forces:
+            self._forces[node_id] = Point(0.0, 0.0)
+        
+        # Calculate repulsion forces between all pairs of nodes
+        for i, node1 in enumerate(nodes):
+            pos1 = Point(node1.pos['x'], node1.pos['y'])
+            
+            # Node-node repulsion
+            for node2 in nodes[i+1:]:
+                pos2 = Point(node2.pos['x'], node2.pos['y'])
+                dx = pos1.x - pos2.x
+                dy = pos1.y - pos2.y
+                distance = math.sqrt(dx * dx + dy * dy)
+                
+                if distance < 0.01:  # Prevent division by zero
+                    distance = 0.01
+                    dx = random.uniform(-0.1, 0.1)
+                    dy = random.uniform(-0.1, 0.1)
+                
+                # Repulsion force
+                force = self.params.repulsion / (distance * distance)
+                fx = force * dx / distance
+                fy = force * dy / distance
+                
+                # Apply forces to both nodes
+                self._forces[node1.id].x += fx
+                self._forces[node1.id].y += fy
+                self._forces[node2.id].x -= fx
+                self._forces[node2.id].y -= fy
+        
+        # Calculate spring forces for edges
+        for edge in edges:
+            # Get connected nodes
+            source = next(n for n in nodes if n.id == edge.source)
+            target = next(n for n in nodes if n.id == edge.target)
+            
+            # Calculate spring force
+            dx = source.pos['x'] - target.pos['x']
+            dy = source.pos['y'] - target.pos['y']
+            distance = math.sqrt(dx * dx + dy * dy)
+            
+            if distance < 0.01:
+                continue
+            
+            # Force is proportional to difference from ideal length
+            force = self.params.spring_coefficient * (distance - self.params.spring_length)
+            fx = force * dx / distance
+            fy = force * dy / distance
+            
+            # Weight force by edge weight
+            fx *= edge.weight
+            fy *= edge.weight
+            
+            # Apply forces
+            self._forces[source.id].x -= fx
+            self._forces[source.id].y -= fy
+            self._forces[target.id].x += fx
+            self._forces[target.id].y += fy
+    
+    def _update_positions(self, nodes: List[VisualNode], width: float, height: float):
+        """Update node positions based on forces."""
+        self.total_kinetic_energy = 0.0
+        current_temperature = self.params.temperature * (self.params.cooling_rate ** self.iteration)
+        
+        for node in nodes:
+            # Get current force
+            force = self._forces[node.id]
+            velocity = self._velocities[node.id]
+            
+            # Update velocity (with damping)
+            velocity.x = (velocity.x + force.x * self.params.time_step) * self.params.damping
+            velocity.y = (velocity.y + force.y * self.params.time_step) * self.params.damping
+            
+            # Apply temperature scaling
+            velocity.x *= current_temperature
+            velocity.y *= current_temperature
+            
+            # Update position
+            node.pos['x'] += velocity.x * self.params.time_step
+            node.pos['y'] += velocity.y * self.params.time_step
+            
+            # Constrain to bounds
+            margin = 10.0
+            node.pos['x'] = max(margin, min(width - margin, node.pos['x']))
+            node.pos['y'] = max(margin, min(height - margin, node.pos['y']))
+            
+            # Update kinetic energy
+            speed_squared = velocity.x * velocity.x + velocity.y * velocity.y
+            self.total_kinetic_energy += speed_squared
+    
+    def step(self, nodes: List[VisualNode], edges: List[VisualEdge], 
+             width: float, height: float) -> bool:
+        """Perform one iteration of layout."""
+        if not nodes:
+            return False
+            
+        # Calculate forces
+        self._calculate_forces(nodes, edges)
+        
+        # Update positions
+        self._update_positions(nodes, width, height)
+        
+        # Update iteration count
+        self.iteration += 1
+        
+        # Check if we've converged
+        return (self.total_kinetic_energy > self.params.min_movement and 
+                self.iteration < self.params.max_iterations)
+    
+    def adjust_parameters(self, node_count: int, edge_count: int):
+        """Adjust layout parameters based on graph size."""
+        # Scale forces based on graph density
+        density = edge_count / (node_count * (node_count - 1)) if node_count > 1 else 0
+        
+        # Adjust repulsion based on number of nodes
+        self.params.repulsion = 200.0 + 100.0 * math.log(node_count + 1)
+        
+        # Adjust spring length based on density
+        self.params.spring_length = 50.0 + 200.0 * (1.0 - density)
+        
+        # Adjust other parameters for stability
+        if node_count > 100:
+            self.params.damping = 0.9
+            self.params.time_step = 0.2
+        elif node_count > 50:
+            self.params.damping = 0.85
+            self.params.time_step = 0.3
+    
+    def reset(self):
+        """Reset layout state."""
+        self._velocities.clear()
+        self._forces.clear()
+        self.iteration = 0
+        self.total_kinetic_energy = float('inf')
 
-		
-	def initialize_positions(self, nodes: List[VisualNode], width: float, height: float) -> None:
-		"""Initialize node positions in a spiral layout for better distribution"""
-		radius = min(width, height) * 0.3  # Reduced initial radius
-		center_x = width / 2
-		center_y = height / 2
-		
-		# Clear existing positions and velocities
-		self.positions.clear()
-		self.velocities.clear()
-		
-		# Place nodes in a spiral pattern
-		angle = 0
-		radius_step = radius / (len(nodes) + 1)
-		current_radius = radius_step
-		
-		for node in nodes:
-			self.positions[node.id] = Point(
-				x=center_x + current_radius * math.cos(angle),
-				y=center_y + current_radius * math.sin(angle)
-			)
-			self.velocities[node.id] = Point(x=0.0, y=0.0)
-			
-			# Adjust angle and radius for next node
-			angle += math.pi * (3.0 - math.sqrt(5.0))  # Golden angle
-			current_radius += radius_step / (2 * math.pi)
-		
-	def layout(self, nodes: List[VisualNode], edges: List[VisualEdge], width: float, height: float) -> Dict[str, Point]:
-		"""Layout with improved stability."""
-		self._nodes = nodes
-		self._node_lookup = {node.id: node for node in nodes}
-		
-		# Handle single node case first
-		if len(nodes) <= 1:
-			if len(nodes) == 1:
-				pos = Point(x=width/2, y=height/2)
-				self.positions[nodes[0].id] = pos
-				nodes[0].data = nodes[0].data or {}
-				nodes[0].pos = nodes[0].pos or {}
-				nodes[0].data['x'] = pos.x
-				nodes[0].data['y'] = pos.y
-				nodes[0].pos['x'] = pos.x
-				nodes[0].pos['y'] = pos.y
-			return self.positions
+"""Layout engine for visualization system."""
+from typing import List, Dict, Protocol
+from .models import VisualNode, VisualEdge, Point
+from .physics.force_params import ForceParams
 
-		# Initialize positions only if not already set
-		positions_exist = all(
-			hasattr(node, 'data') and isinstance(node.data, dict) and
-			'x' in node.data and 'y' in node.data
-			for node in nodes
-		)
-		
-		if not positions_exist:
-			self.initialize_positions(nodes, width, height)
-		else:
-			# Use existing positions
-			for node in nodes:
-				self.positions[node.id] = Point(
-					x=node.data['x'],
-					y=node.data['y']
-				)
-				self.velocities[node.id] = Point(x=0.0, y=0.0)
-		
-		# Bundle edges with stability
-		bundled_edges = self._bundle_edges(edges)
-		
-		# Reduced iterations for better stability
-		max_iter = min(3, max(1, len(nodes) // 100))
-		
-		# Apply forces with damping
-		for i in range(max_iter):
-			if self.apply_forces(nodes, bundled_edges):
-				break
-			# Increase damping with each iteration
-			self.params.damping *= 1.1
-		
-		# Reset damping
-		self.params.damping = 0.8
-		
-		# Scale positions smoothly
-		self._scale_positions(width, height)
-		
-		# Update node positions atomically
-		for node_id, pos in self.positions.items():
-			node = self._node_lookup.get(node_id)
-			if node:
-				if not isinstance(node.data, dict):
-					node.data = {}
-				if not hasattr(node, 'pos'):
-					node.pos = {}
-				# Update all position representations atomically
-				node.data['x'] = pos.x
-				node.data['y'] = pos.y
-				node.pos['x'] = pos.x
-				node.pos['y'] = pos.y
-		
-		return self.positions
+class LayoutEngine(Protocol):
+    """Interface for graph layout algorithms."""
+    
+    def compute_layout(self, nodes: List[VisualNode], edges: List[VisualEdge], 
+                      width: float, height: float) -> Dict[str, Point]:
+        """Compute layout positions for nodes."""
+        ...
+    
+    def update_layout(self, nodes: List[VisualNode], edges: List[VisualEdge],
+                     fixed_nodes: Dict[str, Point]) -> bool:
+        """Update existing layout."""
+        ...
 
+class ForceLayout:
+    """Force-directed layout implementation."""
+    
+    def __init__(self, params: ForceParams = None):
+        from .physics_system import PhysicsSystem
+        self.physics = PhysicsSystem(params)
+    
+    def compute_layout(self, nodes: List[VisualNode], edges: List[VisualEdge],
+                      width: float, height: float) -> Dict[str, Point]:
+        """Compute initial force-directed layout."""
+        # Reset physics state
+        self.physics.reset()
+        
+        # Initialize node positions
+        self.physics.initialize(nodes, width, height)
+        
+        # Run physics simulation until stable
+        while self.physics.step(nodes, edges, width, height):
+            pass
+        
+        # Return final positions
+        return self.physics.state.positions
+    
+    def update_layout(self, nodes: List[VisualNode], edges: List[VisualEdge],
+                     fixed_nodes: Dict[str, Point]) -> bool:
+        """Update existing layout with fixed nodes."""
+        # Fix specified nodes
+        for node_id, pos in fixed_nodes.items():
+            self.physics.fix_node(node_id)
+            if node_id in self.physics.state.positions:
+                self.physics.state.positions[node_id] = pos
+        
+        # Run single physics step
+        return self.physics.step(nodes, edges, 
+                               max(n.pos['x'] for n in nodes if n.visible),
+                               max(n.pos['y'] for n in nodes if n.visible))
 
-	def _update_grid(self, positions: Dict[str, Tuple[float, float]]) -> None:
-		"""Update spatial partitioning grid"""
-		self.grid_cells.clear()
-		for node_id, pos in positions.items():
-			cell_x = int(pos[0] / self.cell_size)
-			cell_y = int(pos[1] / self.cell_size)
-			cell = (cell_x, cell_y)
-			if cell not in self.grid_cells:
-				self.grid_cells[cell] = []
-			self.grid_cells[cell].append(node_id)
+class RadialLayout:
+    """Radial layout implementation."""
+    
+    def compute_layout(self, nodes: List[VisualNode], edges: List[VisualEdge],
+                      width: float, height: float) -> Dict[str, Point]:
+        """Compute radial layout."""
+        import math
+        
+        positions = {}
+        center_x = width / 2
+        center_y = height / 2
+        radius = min(width, height) * 0.4
+        
+        # Sort nodes by some property (e.g., degree or weight)
+        sorted_nodes = sorted(nodes, key=lambda n: len([e for e in edges 
+            if e.source == n.id or e.target == n.id]), reverse=True)
+        
+        # Position nodes in a circle
+        for i, node in enumerate(sorted_nodes):
+            angle = (2 * math.pi * i) / len(nodes)
+            x = center_x + radius * math.cos(angle)
+            y = center_y + radius * math.sin(angle)
+            positions[node.id] = Point(x, y)
+            
+            # Update node position
+            node.pos['x'] = x
+            node.pos['y'] = y
+        
+        return positions
+    
+    def update_layout(self, nodes: List[VisualNode], edges: List[VisualEdge],
+                     fixed_nodes: Dict[str, Point]) -> bool:
+        """Update radial layout (no dynamic updates)."""
+        return False
 
-	def _get_nearby_nodes(self, pos: Tuple[float, float]) -> Set[str]:
-		"""Get nodes from nearby grid cells"""
-		cell_x = int(pos[0] / self.cell_size)
-		cell_y = int(pos[1] / self.cell_size)
-		nearby = set()
-		for dx in (-1, 0, 1):
-			for dy in (-1, 0, 1):
-				cell = (cell_x + dx, cell_y + dy)
-				if cell in self.grid_cells:
-					nearby.update(self.grid_cells[cell])
-		return nearby
-
-	def apply_forces(self, nodes: List[VisualNode], edges: List[VisualEdge]) -> bool:
-		"""Apply forces using the Barnes-Hut optimization"""
-		if not self.positions:
-			return True
-
-		new_positions = self.physics.calculate_forces(nodes, edges, self.positions, self.velocities)
-		
-		# Calculate total movement
-		total_movement = 0.0
-		for node_id, new_pos in new_positions.items():
-			old_pos = self.positions[node_id]
-			dx = new_pos.x - old_pos.x
-			dy = new_pos.y - old_pos.y
-			total_movement += math.sqrt(dx * dx + dy * dy)
-			self.positions[node_id] = new_pos
-
-		avg_movement = total_movement / len(nodes)
-		self.layout_iterations += 1
-		
-		return avg_movement < self.params.convergence_threshold
-
-
-
-	def _bundle_edges(self, edges: List[VisualEdge]) -> List[VisualEdge]:
-		"""Bundle edges that share similar paths with optimized grouping"""
-		bundles = {}
-		bundled = []
-		
-		# Group edges by endpoint distance for more efficient bundling
-		for edge in edges:
-			src_pos = self.positions[edge.source]
-			tgt_pos = self.positions[edge.target]
-			dist = math.sqrt((tgt_pos.x - src_pos.x)**2 + (tgt_pos.y - src_pos.y)**2)
-			angle = math.atan2(tgt_pos.y - src_pos.y, tgt_pos.x - src_pos.x)
-			
-			# Use coarser grouping
-			key = (round(angle, 1), round(dist, -1))  # Round angle to 0.1, distance to nearest 10
-			if key not in bundles:
-				bundles[key] = []
-			bundles[key].append(edge)
-		
-		# Create bundled edges with early exit for small groups
-		for edges_group in bundles.values():
-			if len(edges_group) <= 2:  # Don't bundle small groups
-				bundled.extend(edges_group)
-			else:
-				bundled.append(create_bundled_edge(edges_group))
-		
-		return bundled
-
-
-
-	def _project_positions(self, source_nodes: List[VisualNode], target_nodes: List[VisualNode]) -> None:
-		"""Project positions from source nodes to target nodes."""
-		# Create mapping from source to target nodes
-		node_map = {}
-		for node in target_nodes:
-			if '_' in node.id:  # Handle super-nodes
-				source_id = node.id.split('_')[1]  # Get original node ID
-				node_map[source_id] = node.id
-			else:
-				node_map[node.id] = node.id
-		
-		# Project positions
-		for source_node in source_nodes:
-			if source_node.id in self.positions:
-				source_pos = self.positions[source_node.id]
-				target_id = node_map.get(source_node.id)
-				if target_id:
-					self.positions[target_id] = Point(x=source_pos.x, y=source_pos.y)
-					self.velocities[target_id] = Point(x=0.0, y=0.0)
-
-	def _scale_positions(self, width: float, height: float) -> None:
-		"""Scale node positions to fit within the specified dimensions."""
-		if not self.positions:
-			return
-			
-		# Find current bounds in one pass
-		positions = list(self.positions.values())
-		min_x = min(pos.x for pos in positions)
-		max_x = max(pos.x for pos in positions)
-		min_y = min(pos.y for pos in positions)
-		max_y = max(pos.y for pos in positions)
-		
-		# Calculate scaling factors
-		width_scale = (width * 0.9) / (max_x - min_x) if max_x != min_x else 1
-		height_scale = (height * 0.9) / (max_y - min_y) if max_y != min_y else 1
-		scale = min(width_scale, height_scale)
-		
-		# Calculate center offset
-		center_x = width / 2
-		center_y = height / 2
-		
-		# Scale and center positions
-		for node_id, pos in self.positions.items():
-			scaled_x = (pos.x - min_x) * scale
-			scaled_y = (pos.y - min_y) * scale
-			pos.x = scaled_x + (width - (max_x - min_x) * scale) / 2
-			pos.y = scaled_y + (height - (max_y - min_y) * scale) / 2
-			
-			# Update node data and pos attributes
-			for node in self._nodes:  # Store nodes as instance variable
-				if node.id == node_id:
-					if not isinstance(node.data, dict):
-						node.data = {}
-					if not hasattr(node, 'pos'):
-						node.pos = {}
-					node.data['x'] = pos.x
-					node.data['y'] = pos.y
-					node.pos['x'] = pos.x
-					node.pos['y'] = pos.y
-					break
+def create_layout_engine(layout_type: str = "force", params: ForceParams = None) -> LayoutEngine:
+    """Create layout engine based on type."""
+    engines = {
+        "force": lambda: ForceLayout(params),
+        "radial": RadialLayout
+    }
+    
+    engine_class = engines.get(layout_type)
+    if not engine_class:
+        raise ValueError(f"Unsupported layout type: {layout_type}")
+        
+    return engine_class()
 
 

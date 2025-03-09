@@ -1,174 +1,135 @@
-"""Animation system for smooth transitions between visualization states."""
-
-from typing import Dict, Any, Optional, List, Callable
-from PyQt6.QtCore import QTimer, QObject, pyqtSignal
+"""Transition animator for smooth view transitions."""
+from typing import Dict, Any, List, Optional, Callable
+from PyQt6.QtCore import QObject, QTimer, pyqtSignal
 import time
-import math
-from .models import VisualNode, VisualEdge
-from .state import ViewType
-from albumexplore.gui.animations import ViewTransitionAnimator, NodeAnimation
+from dataclasses import dataclass
+from .models import VisualNode
+from albumexplore.gui.gui_logging import graphics_logger
+
+@dataclass
+class TransitionState:
+    """State information for a transition."""
+    start_positions: Dict[str, Dict[str, float]]
+    end_positions: Dict[str, Dict[str, float]]
+    start_opacity: Dict[str, float]
+    end_opacity: Dict[str, float]
+    start_scale: Dict[str, float]
+    end_scale: Dict[str, float]
+    duration_ms: int = 300
+    easing: str = "cubic-bezier(0.4, 0.0, 0.2, 1)"
 
 class TransitionAnimator(QObject):
-    """Handles smooth transitions between visualization states."""
+    """Handles smooth transitions between views."""
     
-    # Signal emitted when animation progresses (progress from 0.0 to 1.0)
-    progress = pyqtSignal(float)
-    
-    # Signal emitted when animation completes
-    finished = pyqtSignal()
+    # Signals
+    transition_frame = pyqtSignal(dict)  # Emits current transition state
+    transition_complete = pyqtSignal()   # Emits when transition completes
     
     def __init__(self):
         super().__init__()
-        self.timer = QTimer()
-        self.timer.timeout.connect(self._update_animation)
-        
-        self.start_time = 0
-        self.duration = 300  # ms
-        self.easing_function = self._ease_out_cubic
-        self.active = False
-        self.update_callback = None
-        self.completion_callback = None
-        
-        # Animation state
-        self.start_values = {}
-        self.end_values = {}
-        self.current_values = {}
+        self.current_transition: Optional[TransitionState] = None
+        self.start_time: float = 0
+        self.is_active: bool = False
+        self.update_timer = QTimer()
+        self.update_timer.timeout.connect(self._update_transition)
+        self.update_timer.setInterval(16)  # ~60 FPS
     
-    def animate_transition(self, nodes: Dict[str, Any], 
-                          target_positions: Dict[str, Dict[str, float]], 
-                          transition_type: str, 
-                          duration_ms: int = 300) -> None:
-        """Start animating nodes to target positions."""
-        if self.active:
-            self.cancel_animations()
-            
+    def start_transition(self, transition_state: TransitionState) -> None:
+        """Start a new transition."""
+        graphics_logger.debug("Starting transition animation")
+        self.current_transition = transition_state
         self.start_time = time.time()
-        self.duration = duration_ms / 1000  # Convert to seconds
-        self.active = True
-        
-        # Save initial positions
-        self.start_values = {}
-        for node_id, node in nodes.items():
-            if node_id in target_positions:
-                # Get current position
-                self.start_values[node_id] = {
-                    'x': node.pos.get('x', 0),
-                    'y': node.pos.get('y', 0)
-                }
-        
-        # Save target positions
-        self.end_values = target_positions
-        
-        # Start the timer
-        self.timer.start(16)  # ~60 FPS
-    
-    def _update_animation(self) -> None:
-        """Update animation on timer tick."""
-        if not self.active:
-            return
-            
-        current_time = time.time()
-        elapsed = current_time - self.start_time
-        progress = min(1.0, elapsed / self.duration)
-        
-        # Apply easing
-        eased_progress = self.easing_function(progress)
-        
-        # Update current values
-        self.current_values = {}
-        for node_id, start in self.start_values.items():
-            if node_id not in self.end_values:
-                continue
-                
-            end = self.end_values[node_id]
-            
-            # Interpolate position
-            self.current_values[node_id] = {
-                'x': start['x'] + (end['x'] - start['x']) * eased_progress,
-                'y': start['y'] + (end['y'] - start['y']) * eased_progress
-            }
-        
-        # Notify progress
-        self.progress.emit(progress)
-        
-        # Call update callback if provided
-        if self.update_callback:
-            self.update_callback(self.current_values)
-        
-        # Check if animation is complete
-        if progress >= 1.0:
-            self.active = False
-            self.timer.stop()
-            self.finished.emit()
-            
-            if self.completion_callback:
-                self.completion_callback()
+        self.is_active = True
+        self.update_timer.start()
     
     def cancel_animations(self) -> None:
-        """Cancel all running animations."""
-        if self.active:
-            self.active = False
-            self.timer.stop()
+        """Cancel any ongoing animations."""
+        if self.is_active:
+            graphics_logger.debug("Cancelling transition animation")
+            self.update_timer.stop()
+            self.is_active = False
+            self.current_transition = None
     
-    def get_current_values(self) -> Dict[str, Dict[str, float]]:
-        """Get current interpolated values."""
-        return self.current_values
-    
-    def set_update_callback(self, callback: Callable[[Dict[str, Dict[str, float]]], None]) -> None:
-        """Set callback function to update nodes during animation."""
-        self.update_callback = callback
-    
-    def set_completion_callback(self, callback: Callable[[], None]) -> None:
-        """Set callback function called when animation completes."""
-        self.completion_callback = callback
-    
-    def set_easing_function(self, easing_name: str) -> None:
-        """Set the easing function by name."""
-        easing_functions = {
-            'linear': self._ease_linear,
-            'ease_in': self._ease_in_quad,
-            'ease_out': self._ease_out_cubic,
-            'ease_in_out': self._ease_in_out_quad,
-            'bounce': self._ease_out_bounce,
-            'elastic': self._ease_out_elastic
-        }
+    def _update_transition(self) -> None:
+        """Update transition state."""
+        if not self.is_active or not self.current_transition:
+            self.update_timer.stop()
+            return
         
-        self.easing_function = easing_functions.get(easing_name, self._ease_out_cubic)
-    
-    # Easing functions
-    def _ease_linear(self, t: float) -> float:
-        return t
-    
-    def _ease_in_quad(self, t: float) -> float:
-        return t * t
-    
-    def _ease_out_cubic(self, t: float) -> float:
-        return 1 - (1 - t) ** 3
-    
-    def _ease_in_out_quad(self, t: float) -> float:
-        if t < 0.5:
-            return 2 * t * t
-        return 1 - (-2 * t + 2) ** 2 / 2
-    
-    def _ease_out_bounce(self, t: float) -> float:
-        n1 = 7.5625
-        d1 = 2.75
+        current_time = time.time()
+        elapsed = (current_time - self.start_time) * 1000  # Convert to ms
+        progress = min(1.0, elapsed / self.current_transition.duration_ms)
         
-        if t < 1 / d1:
-            return n1 * t * t
-        elif t < 2 / d1:
-            t -= 1.5 / d1
-            return n1 * t * t + 0.75
-        elif t < 2.5 / d1:
-            t -= 2.25 / d1
-            return n1 * t * t + 0.9375
-        else:
-            t -= 2.625 / d1
-            return n1 * t * t + 0.984375
-    
-    def _ease_out_elastic(self, t: float) -> float:
-        if t == 0 or t == 1:
-            return t
+        # Apply easing
+        eased_progress = self._ease_cubic(progress)
+        
+        # Calculate current state
+        current_state = {}
+        for node_id in self.current_transition.start_positions:
+            start_pos = self.current_transition.start_positions[node_id]
+            end_pos = self.current_transition.end_positions[node_id]
             
-        c4 = (2 * math.pi) / 3
-        return 2 ** (-10 * t) * math.sin((t * 10 - 0.75) * c4) + 1
+            current_state[node_id] = {
+                "x": start_pos["x"] + (end_pos["x"] - start_pos["x"]) * eased_progress,
+                "y": start_pos["y"] + (end_pos["y"] - start_pos["y"]) * eased_progress,
+                "opacity": (self.current_transition.start_opacity.get(node_id, 1.0) +
+                          (self.current_transition.end_opacity.get(node_id, 1.0) -
+                           self.current_transition.start_opacity.get(node_id, 1.0)) * eased_progress),
+                "scale": (self.current_transition.start_scale.get(node_id, 1.0) +
+                         (self.current_transition.end_scale.get(node_id, 1.0) -
+                          self.current_transition.start_scale.get(node_id, 1.0)) * eased_progress)
+            }
+        
+        # Emit current state
+        self.transition_frame.emit(current_state)
+        
+        # Check for completion
+        if progress >= 1.0:
+            self.update_timer.stop()
+            self.is_active = False
+            self.current_transition = None
+            self.transition_complete.emit()
+    
+    def _ease_cubic(self, t: float) -> float:
+        """Cubic easing function."""
+        return t * t * (3 - 2 * t)
+    
+    def update_transition(self, view: Any, transition_data: Dict[str, Any], progress: float) -> None:
+        """Update view with current transition state."""
+        if not hasattr(view, 'node_items'):
+            return
+        
+        # Get transition parameters
+        positions = transition_data.get('preserved_positions', {})
+        opacity = transition_data.get('opacity', {})
+        scale = transition_data.get('scale', {})
+        
+        # Apply current state to nodes
+        for node_id, pos in positions.items():
+            if node_id in view.node_items:
+                item = view.node_items[node_id]
+                current_x = item.pos().x()
+                current_y = item.pos().y()
+                target_x = float(pos.get('x', current_x))
+                target_y = float(pos.get('y', current_y))
+                
+                # Interpolate position
+                x = current_x + (target_x - current_x) * progress
+                y = current_y + (target_y - current_y) * progress
+                
+                # Apply new position
+                item.setPos(x, y)
+                
+                # Update opacity if specified
+                if node_id in opacity:
+                    start_opacity = item.opacity()
+                    target_opacity = float(opacity[node_id])
+                    current_opacity = start_opacity + (target_opacity - start_opacity) * progress
+                    item.setOpacity(current_opacity)
+                
+                # Update scale if specified
+                if node_id in scale:
+                    start_scale = item.scale()
+                    target_scale = float(scale[node_id])
+                    current_scale = start_scale + (target_scale - start_scale) * progress
+                    item.setScale(current_scale)

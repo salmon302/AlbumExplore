@@ -1,0 +1,43 @@
+2025-03-09 04:08:27,899 - albumexplore.gui.performance - DEBUG - Performance - Application - initialization_time: 7.39s - {app.py:152}
+2025-03-09 04:08:51,139 - albumexplore.gui.performance - DEBUG - Performing memory check - {app.py:79}
+2025-03-09 04:10:06,892 - albumexplore.gui.performance - DEBUG - Performance - Application - initialization_time: 5.95s - {app.py:152}
+2025-03-09 04:10:09,958 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - data_update_time: 0.65ms - {gui_logging.py:66}
+2025-03-09 04:10:10,532 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.75ms - {gui_logging.py:66}
+2025-03-09 04:10:10,696 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 1.67ms - {gui_logging.py:66}
+2025-03-09 04:10:10,713 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.44ms - {gui_logging.py:66}
+2025-03-09 04:10:10,744 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.56ms - {gui_logging.py:66}
+2025-03-09 04:10:12,532 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.42ms - {gui_logging.py:66}
+2025-03-09 04:10:13,780 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.52ms - {gui_logging.py:66}
+2025-03-09 04:10:15,733 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.38ms - {gui_logging.py:66}
+2025-03-09 04:10:16,438 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.44ms - {gui_logging.py:66}
+2025-03-09 04:10:17,576 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.88ms - {gui_logging.py:66}
+2025-03-09 04:10:17,706 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 4.56ms - {gui_logging.py:66}
+2025-03-09 04:10:18,384 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.93ms - {gui_logging.py:66}
+2025-03-09 04:10:20,249 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.55ms - {gui_logging.py:66}
+2025-03-09 04:10:20,390 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 3.49ms - {gui_logging.py:66}
+2025-03-09 04:10:20,473 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.44ms - {gui_logging.py:66}
+2025-03-09 04:10:20,677 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.40ms - {gui_logging.py:66}
+2025-03-09 04:10:22,385 - albumexplore.gui.performance - DEBUG - Performance - ChordView - data_update_time: 0.42ms - {gui_logging.py:66}
+2025-03-09 04:10:24,188 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - data_update_time: 0.92ms - {gui_logging.py:66}
+2025-03-09 04:10:24,549 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.51ms - {gui_logging.py:66}
+2025-03-09 04:10:27,001 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.31ms - {gui_logging.py:66}
+2025-03-09 04:10:31,132 - albumexplore.gui.performance - DEBUG - Performing memory check - {app.py:79}
+2025-03-09 04:10:32,274 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - data_update_time: 0.37ms - {gui_logging.py:66}
+2025-03-09 04:10:32,706 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.98ms - {gui_logging.py:66}
+2025-03-09 04:10:33,754 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.48ms - {gui_logging.py:66}
+2025-03-09 04:18:42,307 - albumexplore.gui.performance - DEBUG - Performance - Application - initialization_time: 5.44s - {app.py:152}
+2025-03-09 04:18:48,813 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - data_update_time: 0.17ms - {gui_logging.py:66}
+2025-03-09 04:18:49,072 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.88ms - {gui_logging.py:66}
+2025-03-09 04:18:51,610 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.25ms - {gui_logging.py:66}
+2025-03-09 04:18:51,698 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.52ms - {gui_logging.py:66}
+2025-03-09 04:18:51,910 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.25ms - {gui_logging.py:66}
+2025-03-09 04:18:51,978 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.25ms - {gui_logging.py:66}
+2025-03-09 04:18:52,008 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.56ms - {gui_logging.py:66}
+2025-03-09 04:18:52,444 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.23ms - {gui_logging.py:66}
+2025-03-09 04:18:53,330 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.30ms - {gui_logging.py:66}
+2025-03-09 04:18:53,705 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.26ms - {gui_logging.py:66}
+2025-03-09 04:18:53,863 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.70ms - {gui_logging.py:66}
+2025-03-09 04:18:53,999 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.23ms - {gui_logging.py:66}
+2025-03-09 04:18:54,162 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.70ms - {gui_logging.py:66}
+2025-03-09 04:18:54,190 - albumexplore.gui.performance - DEBUG - Performance - TagExplorerView - paint_time: 0.23ms - {gui_logging.py:66}
+2025-03-09 04:33:24,799 - performance - INFO - Performance logging initialized

@@ -1,4 +1,6 @@
 albumexplore
 data
-database
+examples
+gui
+renderers
 tags

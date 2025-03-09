@@ -53,6 +53,20 @@ class BaseView(QWidget):
 		# Monitor buffer state
 		graphics_logger.debug(f"{self.view_name} view initialized with size {self.size()}")
 
+		# State tracking
+		self._is_updating = False
+		self._update_pending = False
+		self._cleanup_scheduled = False
+
+		# Performance tracking
+		self._frame_times = []
+		self._max_frame_samples = 60
+
+		# Cleanup timer
+		self._cleanup_timer = QTimer()
+		self._cleanup_timer.setSingleShot(True)
+		self._cleanup_timer.timeout.connect(self._cleanup_resources)
+
 	def update(self) -> None:
 		"""Schedule update with rate limiting."""
 		current_time = time.time() * 1000
@@ -60,19 +74,40 @@ class BaseView(QWidget):
 			self._last_update_time = current_time
 			log_graphics_event("Update", f"{self.view_name} scheduled update")
 			super().update()
+		else:
+			# Schedule deferred update
+			if not self._update_timer.isActive():
+				remaining_time = self._min_update_interval - (current_time - self._last_update_time)
+				self._update_timer.start(int(remaining_time))
 
 	def _handle_update(self) -> None:
 		"""Handle scheduled update."""
+		if self._is_updating:
+			return
+
 		log_graphics_event("Update", f"{self.view_name} handling update")
 		start_time = time.time()
-		super().update()
+
+		self._is_updating = True
+		try:
+			self.setUpdatesEnabled(False)
+			super().update()
+		finally:
+			self.setUpdatesEnabled(True)
+			self._is_updating = False
+
 		update_time = (time.time() - start_time) * 1000
+		self._frame_times.append(update_time)
+		if len(self._frame_times) > self._max_frame_samples:
+			self._frame_times.pop(0)
+
 		log_performance_metric(self.view_name, "update_time", f"{update_time:.2f}ms")
 
 	def hideEvent(self, event) -> None:
 		"""Handle cleanup when view is hidden."""
 		log_graphics_event("Visibility", f"{self.view_name} hidden")
 		super().hideEvent(event)
+		self._schedule_cleanup()
 		self.transition_animator.cancel_animations()
 
 	def showEvent(self, event) -> None:
@@ -88,17 +123,28 @@ class BaseView(QWidget):
 
 	def update_data(self, nodes: List[VisualNode], edges: List[VisualEdge]) -> None:
 		"""Update visualization data with stability."""
-		start_time = time.time()
-		graphics_logger.info(f"Updating data in {self.view_name}: {len(nodes)} nodes, {len(edges)} edges")
-		
-		self.setUpdatesEnabled(False)
-		self.nodes = nodes
-		self.edges = edges
-		self.setUpdatesEnabled(True)
-		
-		update_time = (time.time() - start_time) * 1000
-		log_performance_metric(self.view_name, "data_update_time", f"{update_time:.2f}ms")
-		self.update()
+		if self._is_updating:
+			self._update_pending = True
+			return
+
+		self._is_updating = True
+		try:
+			start_time = time.time()
+			graphics_logger.info(f"Updating data in {self.view_name}: {len(nodes)} nodes, {len(edges)} edges")
+			
+			self.setUpdatesEnabled(False)
+			self.nodes = nodes
+			self.edges = edges
+			self.setUpdatesEnabled(True)
+			
+			update_time = (time.time() - start_time) * 1000
+			log_performance_metric(self.view_name, "data_update_time", f"{update_time:.2f}ms")
+			self.update()
+		finally:
+			self._is_updating = False
+			if self._update_pending:
+				self._update_pending = False
+				self.update()
 
 	def apply_transition(self, transition_config: Dict[str, Any]) -> None:
 		"""Apply transition with improved stability."""
@@ -258,3 +304,21 @@ class BaseView(QWidget):
 		self.selected_ids = selected_ids
 		self.selectionChanged.emit(selected_ids)
 		self.update()
+
+	def _schedule_cleanup(self) -> None:
+		"""Schedule resource cleanup to avoid immediate buffer destruction during transitions."""
+		if not self._cleanup_scheduled:
+			self._cleanup_scheduled = True
+			self._cleanup_timer.start(200)  # Wait 200ms before cleanup
+
+	def _cleanup_resources(self) -> None:
+		"""Clean up buffers and resources."""
+		graphics_logger.debug(f"Cleaning up {self.view_name} resources")
+		self._cleanup_scheduled = False
+		
+		# Reset state
+		self._is_updating = False
+		self._update_pending = False
+		self._frame_times.clear()
+		
+		# Derived classes should override to clean up their specific resources

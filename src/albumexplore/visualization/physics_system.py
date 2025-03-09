@@ -1,11 +1,11 @@
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Set
 import math
+import random
 from dataclasses import dataclass
 from .models import VisualNode, VisualEdge, Point
 from .physics.force_params import ForceParams
 
 @dataclass
-
 class Quadrant:
 	x: float
 	y: float
@@ -312,3 +312,220 @@ class PhysicsSystem:
 			new_positions[node_id] = smoothed_pos
 		
 		return new_positions
+
+@dataclass
+class PhysicsState:
+	"""Current state of physics simulation."""
+	positions: Dict[str, Point]
+	velocities: Dict[str, Point]
+	forces: Dict[str, Point]
+	total_kinetic_energy: float = float('inf')
+	iterations: int = 0
+
+class PhysicsSystem:
+	"""Physics system for force-directed layout."""
+	
+	def __init__(self, params: ForceParams = None):
+		self.params = params or ForceParams()
+		self.state = PhysicsState(
+			positions={},
+			velocities={},
+			forces={},
+		)
+		self._fixed_nodes: Set[str] = set()
+		
+	def initialize(self, nodes: List[VisualNode], width: float, height: float):
+		"""Initialize physics state."""
+		center_x = width / 2
+		center_y = height / 2
+		radius = min(width, height) * 0.4
+		
+		for i, node in enumerate(nodes):
+			# Place nodes in a circle initially
+			angle = (2 * math.pi * i) / len(nodes)
+			x = center_x + radius * math.cos(angle)
+			y = center_y + radius * math.sin(angle)
+			
+			# Store position
+			self.state.positions[node.id] = Point(x, y)
+			self.state.velocities[node.id] = Point(0.0, 0.0)
+			self.state.forces[node.id] = Point(0.0, 0.0)
+			
+			# Update node position
+			node.pos['x'] = x
+			node.pos['y'] = y
+			
+		self.state.total_kinetic_energy = float('inf')
+		self.state.iterations = 0
+	
+	def fix_node(self, node_id: str):
+		"""Fix a node in place."""
+		self._fixed_nodes.add(node_id)
+	
+	def unfix_node(self, node_id: str):
+		"""Allow a node to move again."""
+		self._fixed_nodes.discard(node_id)
+	
+	def _apply_repulsion(self, p1: Point, p2: Point) -> Tuple[float, float]:
+		"""Calculate repulsion force between two points."""
+		dx = p1.x - p2.x
+		dy = p1.y - p2.y
+		distance_sq = dx * dx + dy * dy
+		
+		if distance_sq < 0.01:
+			dx = 0.1 * (0.5 - random.random())
+			dy = 0.1 * (0.5 - random.random())
+			distance_sq = dx * dx + dy * dy
+		
+		distance = math.sqrt(distance_sq)
+		force = self.params.repulsion / distance_sq
+		return force * dx / distance, force * dy / distance
+	
+	def _apply_spring_force(self, p1: Point, p2: Point, weight: float = 1.0) -> Tuple[float, float]:
+		"""Calculate spring force between two points."""
+		dx = p1.x - p2.x
+		dy = p1.y - p2.y
+		distance = math.sqrt(dx * dx + dy * dy)
+		
+		if distance < 0.01:
+			return 0.0, 0.0
+		
+		force = self.params.spring_coefficient * (distance - self.params.spring_length)
+		fx = force * dx / distance * weight
+		fy = force * dy / distance * weight
+		return fx, fy
+	
+	def _apply_center_gravity(self, p: Point, center: Point) -> Tuple[float, float]:
+		"""Apply gravitational force toward center."""
+		dx = center.x - p.x
+		dy = center.y - p.y
+		distance = math.sqrt(dx * dx + dy * dy)
+		
+		if distance < 0.01:
+			return 0.0, 0.0
+		
+		force = self.params.gravitational_constant * distance
+		return force * dx / distance, force * dy / distance
+	
+	def _apply_boundary_force(self, p: Point, width: float, height: float) -> Tuple[float, float]:
+		"""Apply force to keep nodes within bounds."""
+		margin = 20.0
+		fx = fy = 0.0
+		
+		# Left boundary
+		if p.x < margin:
+			fx += self.params.boundary_force
+		# Right boundary
+		elif p.x > width - margin:
+			fx -= self.params.boundary_force
+		# Top boundary
+		if p.y < margin:
+			fy += self.params.boundary_force
+		# Bottom boundary
+		elif p.y > height - margin:
+			fy -= self.params.boundary_force
+			
+		return fx, fy
+	
+	def step(self, nodes: List[VisualNode], edges: List[VisualEdge], width: float, height: float) -> bool:
+		"""Perform one physics step."""
+		if not nodes:
+			return False
+			
+		# Clear forces
+		for node_id in self.state.forces:
+			self.state.forces[node_id] = Point(0.0, 0.0)
+		
+		# Center point for gravity
+		center = Point(width / 2, height / 2)
+		
+		# Calculate repulsion between all nodes
+		for i, node1 in enumerate(nodes):
+			if node1.id in self._fixed_nodes:
+				continue
+				
+			pos1 = self.state.positions[node1.id]
+			
+			# Node-node repulsion
+			for node2 in nodes[i+1:]:
+				pos2 = self.state.positions[node2.id]
+				fx, fy = self._apply_repulsion(pos1, pos2)
+				
+				if node2.id not in self._fixed_nodes:
+					self.state.forces[node2.id].x -= fx
+					self.state.forces[node2.id].y -= fy
+					
+				self.state.forces[node1.id].x += fx
+				self.state.forces[node1.id].y += fy
+			
+			# Center gravity
+			gx, gy = self._apply_center_gravity(pos1, center)
+			self.state.forces[node1.id].x += gx
+			self.state.forces[node1.id].y += gy
+			
+			# Boundary forces
+			bx, by = self._apply_boundary_force(pos1, width, height)
+			self.state.forces[node1.id].x += bx
+			self.state.forces[node1.id].y += by
+		
+		# Calculate spring forces for edges
+		for edge in edges:
+			if edge.source in self._fixed_nodes and edge.target in self._fixed_nodes:
+				continue
+				
+			source_pos = self.state.positions[edge.source]
+			target_pos = self.state.positions[edge.target]
+			fx, fy = self._apply_spring_force(source_pos, target_pos, edge.weight)
+			
+			if edge.source not in self._fixed_nodes:
+				self.state.forces[edge.source].x -= fx
+				self.state.forces[edge.source].y -= fy
+				
+			if edge.target not in self._fixed_nodes:
+				self.state.forces[edge.target].x += fx
+				self.state.forces[edge.target].y += fy
+		
+		# Update velocities and positions
+		self.state.total_kinetic_energy = 0.0
+		temperature = self.params.temperature * (self.params.cooling_rate ** self.state.iterations)
+		
+		for node in nodes:
+			if node.id in self._fixed_nodes:
+				continue
+				
+			# Get current values
+			force = self.state.forces[node.id]
+			velocity = self.state.velocities[node.id]
+			position = self.state.positions[node.id]
+			
+			# Update velocity with damping
+			velocity.x = (velocity.x + force.x * self.params.time_step) * self.params.damping * temperature
+			velocity.y = (velocity.y + force.y * self.params.time_step) * self.params.damping * temperature
+			
+			# Update position
+			position.x += velocity.x * self.params.time_step
+			position.y += velocity.y * self.params.time_step
+			
+			# Update node position
+			node.pos['x'] = position.x
+			node.pos['y'] = position.y
+			
+			# Update kinetic energy
+			speed_squared = velocity.x * velocity.x + velocity.y * velocity.y
+			self.state.total_kinetic_energy += speed_squared
+		
+		# Increment iteration count
+		self.state.iterations += 1
+		
+		# Check convergence
+		return (self.state.total_kinetic_energy > self.params.min_movement and 
+				self.state.iterations < self.params.max_iterations)
+	
+	def reset(self):
+		"""Reset physics state."""
+		self.state = PhysicsState(
+			positions={},
+			velocities={},
+			forces={},
+		)
+		self._fixed_nodes.clear()

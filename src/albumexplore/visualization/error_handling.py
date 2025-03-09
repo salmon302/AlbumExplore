@@ -1,8 +1,10 @@
 from enum import Enum
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Callable
 from dataclasses import dataclass
 import traceback
 import logging
+from PyQt6.QtWidgets import QMessageBox, QWidget
+from albumexplore.gui.gui_logging import gui_logger
 
 class ErrorSeverity(Enum):
 	INFO = "info"
@@ -35,12 +37,13 @@ class ErrorInfo:
 	recovery_hint: Optional[str] = None
 
 class ErrorManager:
-	"""Manages error handling and recovery across the visualization system."""
+	"""Manages error handling and user notifications."""
 	
 	def __init__(self):
 		self.logger = logging.getLogger(__name__)
 		self.error_handlers: Dict[ErrorCategory, List[callable]] = {}
 		self.active_errors: List[ErrorInfo] = []
+		self.last_error = None
 		self._setup_logging()
 	
 	def _setup_logging(self) -> None:
@@ -59,7 +62,7 @@ class ErrorManager:
 			self.error_handlers[category] = []
 		self.error_handlers[category].append(handler)
 	
-	def handle_error(self, error: Exception, context: Optional[ErrorContext] = None) -> ErrorInfo:
+	def handle_error(self, error: Exception, context: Optional[ErrorContext] = None, parent: Optional[QWidget] = None) -> ErrorInfo:
 		"""Handle an error and return error information."""
 		if context is None:
 			context = ErrorContext(
@@ -70,9 +73,11 @@ class ErrorManager:
 		
 		error_info = self._create_error_info(error, context)
 		self.active_errors.append(error_info)
+		self.last_error = error
 		
 		# Log the error
 		self._log_error(error_info)
+		gui_logger.error(f"Error occurred: {str(error)}", exc_info=True)
 		
 		# Call registered handlers
 		if error_info.category in self.error_handlers:
@@ -81,6 +86,11 @@ class ErrorManager:
 					handler(error_info)
 				except Exception as e:
 					self.logger.error(f"Error handler failed: {e}")
+					gui_logger.error(f"Error in error handler: {str(e)}", exc_info=True)
+		
+		# Show error dialog if no handlers handled it
+		if not self.error_handlers:
+			self._show_error_dialog(error, parent)
 		
 		return error_info
 	
@@ -164,3 +174,13 @@ class ErrorManager:
 	def clear_errors(self) -> None:
 		"""Clear all active errors."""
 		self.active_errors.clear()
+	
+	def _show_error_dialog(self, error: Exception, parent: Optional[QWidget] = None) -> None:
+		"""Show error dialog to user."""
+		dialog = QMessageBox(parent)
+		dialog.setIcon(QMessageBox.Icon.Critical)
+		dialog.setWindowTitle("Error")
+		dialog.setText(str(error))
+		dialog.setDetailedText(traceback.format_exc())
+		dialog.setStandardButtons(QMessageBox.StandardButton.Ok)
+		dialog.exec()

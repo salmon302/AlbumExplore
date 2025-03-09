@@ -2,62 +2,29 @@
 import re
 import json
 import os
-from typing import Dict, Optional
+import logging
+from typing import Dict, Optional, List, Set, Tuple
+from collections import defaultdict
+from albumexplore.tags.config.tag_rules_config import TagRulesConfig
+
+logger = logging.getLogger(__name__)
 
 class TagNormalizer:
     """Handles tag normalization and variant consolidation."""
     
-    def __init__(self):
-        """Initialize the normalizer with rules."""
-        self._load_config()
+    def __init__(self, test_mode: bool = False):
+        """Initialize the normalizer with rules.
+        
+        Args:
+            test_mode: If True, use test configuration instead of production rules
+        """
+        self._rules_config = TagRulesConfig(test_mode=test_mode)
         self._variant_cache = {}
+        self._single_instance_tags = set()
+        self._merge_history = []
+        self._similarity_threshold = 0.7
+        self._min_frequency_for_normalization = 2
         
-    def _load_config(self):
-        """Load normalization rules from config."""
-        config_dir = os.path.join(os.path.dirname(__file__), '../../config')
-        os.makedirs(config_dir, exist_ok=True)
-        config_path = os.path.join(config_dir, 'tag_rules.json')
-        
-        # Default rules if config doesn't exist
-        self._substitutions = {
-            r'^prog\s+': 'progressive ',
-            r'^alt\s+': 'alternative ',
-            r'^exp\s+': 'experimental ',
-            r'metal\s*core': 'metalcore',
-            r'post[- ](\w+)': 'post-\\1'
-        }
-        
-        self._prefix_standardization = {
-            'progressive': 'prog-',
-            'alternative': 'alt-',
-            'experimental': 'exp-',
-            'atmospheric': 'atmo-'
-        }
-        
-        self._category_mapping = {
-            'metal': ['death metal', 'black metal', 'doom metal', 'thrash metal',
-                     'progressive metal', 'power metal', 'gothic metal'],
-            'rock': ['progressive rock', 'psychedelic rock', 'hard rock',
-                    'alternative rock', 'post-rock'],
-            'core': ['metalcore', 'deathcore', 'post-hardcore', 'hardcore'],
-            'fusion': ['jazz fusion', 'prog fusion', 'world fusion'],
-            'experimental': ['avant-garde', 'experimental metal', 'experimental rock']
-        }
-        
-        try:
-            if os.path.exists(config_path):
-                with open(config_path, 'r') as f:
-                    config = json.load(f)
-                    self._substitutions.update(config.get('substitutions', {}))
-                    self._prefix_standardization.update(config.get('prefix_standardization', {}))
-                    for category, tags in config.get('category_mapping', {}).items():
-                        if category in self._category_mapping:
-                            self._category_mapping[category].extend(tags)
-                        else:
-                            self._category_mapping[category] = tags
-        except Exception as e:
-            print(f"Error loading tag rules: {e}")
-    
     def normalize(self, tag: str) -> str:
         """Convert a tag to its normalized form."""
         if not tag:
@@ -70,44 +37,100 @@ class TagNormalizer:
         if tag in self._variant_cache:
             return self._variant_cache[tag]
             
-        # Apply substitutions
-        normalized = tag
-        for pattern, replacement in self._substitutions.items():
-            if re.search(pattern, normalized):
-                normalized = re.sub(pattern, replacement, normalized)
+        # Get normalized form from config
+        normalized = self._rules_config.get_normalized_form(tag)
         
-        # Standardize prefixes
-        for full, short in self._prefix_standardization.items():
-            if normalized.startswith(full):
-                normalized = normalized.replace(full, short, 1)
-        
-        # Cache the result
+        # Cache and return result
         self._variant_cache[tag] = normalized
         return normalized
-    
+        
     def get_category(self, tag: str) -> str:
         """Get the category for a tag based on the config mappings."""
         normalized = self.normalize(tag)
+        category = self._rules_config.get_category_for_tag(normalized)
+        return category if category else 'other'
         
-        for category, tags in self._category_mapping.items():
-            if normalized in tags:
-                return category
-                
-        # Try to infer category from tag name
-        if any(word in normalized for word in ['metal', 'metalcore', 'core']):
-            return 'metal'
-        if any(word in normalized for word in ['rock', 'prog-', 'psychedelic']):
-            return 'rock'
-        if 'jazz' in normalized or 'fusion' in normalized:
-            return 'fusion'
-        if any(word in normalized for word in ['experimental', 'avant', 'noise']):
-            return 'experimental'
+    def register_single_instance_tag(self, tag: str, frequency: int = 1):
+        """Register a tag as a single-instance tag for special handling."""
+        if frequency <= self._min_frequency_for_normalization:
+            self._single_instance_tags.add(tag.lower().strip())
+    
+    def get_single_instance_tags(self) -> Set[str]:
+        """Get all registered single-instance tags."""
+        return self._single_instance_tags
+    
+    def suggest_normalization_for_single_instance(self, tag: str) -> List[Tuple[str, float, str]]:
+        """Suggest possible normalizations for a single-instance tag."""
+        tag = tag.lower().strip()
+        suggestions = []
+        
+        # Check existing mappings in config
+        single_instance_mappings = self._rules_config.get_single_instance_mappings()
+        if tag in single_instance_mappings:
+            suggestions.append((single_instance_mappings[tag], 1.0, "Existing rule"))
             
-        return 'other'
+        # Get category information
+        category = self._rules_config.get_category_for_tag(tag)
+        if category:
+            category_info = self._rules_config.get_category_info(category)
+            if category_info:
+                # Check if it matches any core terms
+                for term in category_info.get('core_terms', []):
+                    if term in tag:
+                        suggestions.append((category, 0.8, "Genre extraction"))
+                        break
+                
+                # Check if it's a modified primary genre
+                for genre in category_info.get('primary_genres', []):
+                    if genre in tag:
+                        for modifier in category_info.get('modifiers', []):
+                            if modifier in tag:
+                                suggestion = f"{modifier} {genre}"
+                                suggestions.append((suggestion, 0.9, "Category pattern"))
+                                break
         
+        # Return sorted suggestions
+        return sorted(suggestions, key=lambda x: x[1], reverse=True)
+    
     def add_variant(self, variant: str, canonical: str):
         """Register a new variant mapping."""
-        self._variant_cache[variant.lower().strip()] = canonical.lower().strip()
+        variant = variant.lower().strip()
+        canonical = canonical.lower().strip()
+        self._variant_cache[variant] = canonical
+        
+        # If it was a single-instance tag, remove it
+        if variant in self._single_instance_tags:
+            self._single_instance_tags.remove(variant)
+            
+        # Add to merge history
+        self._merge_history.append({
+            'variant': variant,
+            'canonical': canonical,
+            'timestamp': self._get_timestamp()
+        })
+        
+    def add_single_instance_rule(self, tag: str, normalized_tag: str):
+        """Add a rule for normalizing a single-instance tag."""
+        tag = tag.lower().strip()
+        normalized_tag = normalized_tag.lower().strip()
+        
+        config = self._rules_config._config  # Access underlying config
+        if 'single_instance_mappings' not in config:
+            config['single_instance_mappings'] = {}
+            
+        config['single_instance_mappings'][tag] = normalized_tag
+        self._variant_cache[tag] = normalized_tag
+        
+        # Save changes to config file
+        self._rules_config.save_changes()
+        
+        # If it was in single-instance tags set, remove it
+        if tag in self._single_instance_tags:
+            self._single_instance_tags.remove(tag)
+    
+    def get_merge_history(self) -> List[Dict]:
+        """Get the history of all tag merges."""
+        return self._merge_history
     
     def clear_cache(self):
         """Clear the variant cache."""
@@ -115,5 +138,10 @@ class TagNormalizer:
         
     def reload_config(self):
         """Reload the configuration file."""
-        self._load_config()
+        self._rules_config.reload()
         self.clear_cache()
+        
+    def _get_timestamp(self) -> str:
+        """Get current timestamp for merge history."""
+        from datetime import datetime
+        return datetime.now().isoformat()

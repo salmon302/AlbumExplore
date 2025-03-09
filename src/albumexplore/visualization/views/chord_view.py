@@ -17,6 +17,9 @@ class ChordView(BaseView):
         self.renderer = ChordRenderer()
         self.setMinimumSize(400, 400)
         
+        # Add background color
+        self._background_color = Qt.GlobalColor.white
+        
         # Improved buffer management
         self._paint_buffer = None
         self._buffer_dirty = True

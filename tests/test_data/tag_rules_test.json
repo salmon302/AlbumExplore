@@ -1,0 +1,115 @@
+{
+    "categories": {
+        "metal": {
+            "core_terms": [
+                "metal",
+                "metalcore"
+            ],
+            "primary_genres": [
+                "prog-metal",
+                "technical metal"
+            ],
+            "modifiers": [
+                "progressive",
+                "technical",
+                "experimental"
+            ]
+        },
+        "rock": {
+            "core_terms": [
+                "rock",
+                "prog-rock"
+            ],
+            "primary_genres": [
+                "progressive rock",
+                "psychedelic rock"
+            ],
+            "modifiers": [
+                "progressive",
+                "psychedelic",
+                "experimental"
+            ]
+        },
+        "experimental": {
+            "core_terms": [
+                "experimental",
+                "avant-garde"
+            ],
+            "primary_genres": [
+                "avant-garde",
+                "experimental rock"
+            ],
+            "modifiers": [
+                "progressive",
+                "technical",
+                "ambient"
+            ]
+        }
+    },
+    "prefix_patterns": {
+        "prog-": [
+            "prog",
+            "progressive"
+        ],
+        "tech-": [
+            "tech",
+            "technical"
+        ],
+        "exp-": [
+            "exp",
+            "experimental"
+        ],
+        "psych-": [
+            "psych",
+            "psychedelic"
+        ]
+    },
+    "suffix_patterns": {
+        "core": [
+            "core",
+            "-core"
+        ],
+        "gaze": [
+            "gaze",
+            "-gaze"
+        ],
+        "wave": [
+            "wave",
+            "-wave"
+        ]
+    },
+    "compound_terms": {
+        "prog-metal": [
+            "prog metal",
+            "progressive metal"
+        ],
+        "tech-death": [
+            "tech death",
+            "technical death"
+        ],
+        "post-metal": [
+            "post metal",
+            "postmetal"
+        ]
+    },
+    "common_misspellings": {
+        "progressive": [
+            "progresive",
+            "progessive"
+        ],
+        "psychedelic": [
+            "psycadelic",
+            "psych"
+        ],
+        "technical": [
+            "tecnical",
+            "techincal"
+        ]
+    },
+    "single_instance_mappings": {
+        "unique variant": "experimental",
+        "single instance tag": "prog-metal",
+        "experimental doom metal": "atmospheric doom metal",
+        "cosmic metal": "atmospheric black metal"
+    }
+}

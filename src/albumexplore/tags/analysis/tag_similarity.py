@@ -1,155 +1,173 @@
-from typing import Dict, List, Tuple, Set
+"""Tag similarity analysis component."""
+import re
 import numpy as np
+from typing import List, Tuple, Dict, Set
 from difflib import SequenceMatcher
 from .tag_analyzer import TagAnalyzer
 
 class TagSimilarity:
-	def __init__(self, tag_analyzer: TagAnalyzer):
-		self.analyzer = tag_analyzer
-		self.similarity_matrix: Dict[Tuple[str, str], float] = {}
-		self.cached_similarities: Dict[str, List[Tuple[str, float]]] = {}
-		self._genre_modifiers = {
-			'metal': {'black', 'death', 'doom', 'heavy', 'power', 'thrash', 'folk', 'gothic', 'progressive'},
-			'rock': {'hard', 'progressive', 'psychedelic', 'indie', 'alternative', 'art', 'space'},
-			'core': {'metal', 'death', 'grind', 'math', 'hard'},
-			'wave': {'dark', 'new', 'synth', 'cold'}
-		}
-
-	def calculate_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate similarity between two tags."""
-		# Check if similarity is already calculated
-		pair = (tag1, tag2)
-		if pair in self.similarity_matrix:
-			return self.similarity_matrix[pair]
-		
-		# Calculate similarity if not in matrix
-		similarity = self._calculate_tag_similarity(tag1, tag2)
-		self.similarity_matrix[pair] = similarity
-		self.similarity_matrix[(tag2, tag1)] = similarity
-		
-		return similarity
-
-	def calculate_similarities(self) -> Dict[Tuple[str, str], float]:
-		"""Calculate similarities between all tags."""
-		tags = list(self.analyzer.tag_frequencies.keys())
-		
-		for i, tag1 in enumerate(tags):
-			for tag2 in tags[i+1:]:
-				similarity = self._calculate_tag_similarity(tag1, tag2)
-				self.similarity_matrix[(tag1, tag2)] = similarity
-				self.similarity_matrix[(tag2, tag1)] = similarity
-		
-		return self.similarity_matrix
-
-	def _calculate_tag_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate similarity between two tags using multiple metrics."""
-		# String similarity (20% weight)
-		string_sim = self._calculate_string_similarity(tag1, tag2) * 0.2
-		
-		# Token similarity (20% weight)
-		token_sim = self._calculate_token_similarity(tag1, tag2) * 0.2
-		
-		# Co-occurrence similarity (30% weight)
-		cooc_sim = self._calculate_cooccurrence_similarity(tag1, tag2) * 0.3
-		
-		# Network similarity (20% weight)
-		network_sim = self._calculate_network_similarity(tag1, tag2) * 0.2
-		
-		# Context similarity (10% weight)
-		context_sim = self._calculate_context_similarity(tag1, tag2) * 0.1
-		
-		return string_sim + token_sim + cooc_sim + network_sim + context_sim
-
-	def _calculate_string_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate basic string similarity."""
-		return SequenceMatcher(None, tag1, tag2).ratio()
-
-	def _calculate_token_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate similarity based on shared tokens."""
-		tokens1 = set(tag1.split())
-		tokens2 = set(tag2.split())
-		
-		if not (tokens1 and tokens2):
-			return 0.0
-		
-		intersection = tokens1 & tokens2
-		union = tokens1 | tokens2
-		
-		return len(intersection) / len(union)
-
-	def _calculate_cooccurrence_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate similarity based on normalized co-occurrences."""
-		pair = tuple(sorted([tag1, tag2]))
-		if pair in self.analyzer.tag_relationships:
-			cooc_count = self.analyzer.tag_relationships[pair]
-			# Normalize by the geometric mean of frequencies
-			freq1 = self.analyzer.tag_frequencies[tag1]
-			freq2 = self.analyzer.tag_frequencies[tag2]
-			norm_factor = np.sqrt(freq1 * freq2)
-			return cooc_count / norm_factor if norm_factor > 0 else 0.0
-		return 0.0
-
-	def _calculate_network_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate similarity based on network structure with weighted edges."""
-		if not (self.analyzer.graph.has_node(tag1) and self.analyzer.graph.has_node(tag2)):
-			return 0.0
-		
-		# Get weighted neighbors
-		neighbors1 = {n: self.analyzer.graph[tag1][n].get('weight', 1.0) 
-					 for n in self.analyzer.graph.neighbors(tag1)}
-		neighbors2 = {n: self.analyzer.graph[tag2][n].get('weight', 1.0) 
-					 for n in self.analyzer.graph.neighbors(tag2)}
-		
-		if not (neighbors1 or neighbors2):
-			return 0.0
-		
-		# Calculate weighted Jaccard similarity
-		shared_neighbors = set(neighbors1.keys()) & set(neighbors2.keys())
-		if not shared_neighbors:
-			return 0.0
-		
-		# Sum of minimum weights for shared neighbors
-		intersection_sum = sum(min(neighbors1[n], neighbors2[n]) for n in shared_neighbors)
-		# Sum of maximum weights for all neighbors
-		union_sum = sum(max(neighbors1.get(n, 0), neighbors2.get(n, 0)) 
-					   for n in set(neighbors1.keys()) | set(neighbors2.keys()))
-		
-		return intersection_sum / union_sum if union_sum > 0 else 0.0
-
-	def _calculate_context_similarity(self, tag1: str, tag2: str) -> float:
-		"""Calculate similarity based on genre context."""
-		tokens1 = set(tag1.split())
-		tokens2 = set(tag2.split())
-		
-		# Check if tags share same genre context
-		for genre, modifiers in self._genre_modifiers.items():
-			if genre in tokens1 and genre in tokens2:
-				# Check shared modifiers
-				shared_modifiers = (tokens1 & tokens2 & modifiers)
-				all_modifiers = (tokens1 | tokens2) & modifiers
-				return len(shared_modifiers) / len(all_modifiers) if all_modifiers else 0.8
-			
-		return 0.0
-
-	def find_similar_tags(self, tag: str, threshold: float = 0.3) -> List[Tuple[str, float]]:
-		"""Find tags similar to the given tag."""
-		if tag in self.cached_similarities:
-			return [pair for pair in self.cached_similarities[tag] if pair[1] >= threshold]
-			
-		if not self.similarity_matrix:
-			self.calculate_similarities()
-			
-		similar = []
-		for other_tag in self.analyzer.tag_frequencies.keys():
-			if other_tag == tag:
-				continue
-				
-			pair = (tag, other_tag)
-			if pair in self.similarity_matrix:
-				similarity = self.similarity_matrix[pair]
-				if similarity >= threshold:
-					similar.append((other_tag, similarity))
-					
-		similar.sort(key=lambda x: x[1], reverse=True)
-		self.cached_similarities[tag] = similar
-		return similar
+    """Analyzes similarity between tags based on various metrics."""
+    
+    def __init__(self, analyzer: TagAnalyzer):
+        """Initialize with a TagAnalyzer instance."""
+        self.analyzer = analyzer
+        self._similarity_cache = {}
+        
+    def find_similar_tags(self, tag: str, threshold: float = 0.6) -> List[Tuple[str, float]]:
+        """Find tags similar to the given tag using multiple similarity metrics.
+        
+        Args:
+            tag: The tag to find similar tags for
+            threshold: Minimum similarity score (0-1) for suggestions
+            
+        Returns:
+            List of (similar_tag, similarity_score) tuples
+        """
+        # Check cache first
+        if tag in self._similarity_cache:
+            return [s for s in self._similarity_cache[tag] if s[1] >= threshold]
+            
+        similar_tags = []
+        
+        # Get co-occurrence based similarity
+        co_occur_similar = self._get_cooccurrence_similarity(tag)
+        similar_tags.extend(co_occur_similar)
+        
+        # Get string similarity based matches
+        string_similar = self._get_string_similarity(tag)
+        similar_tags.extend(string_similar)
+        
+        # Get pattern-based similarity
+        pattern_similar = self._get_pattern_similarity(tag)
+        similar_tags.extend(pattern_similar)
+        
+        # Combine scores from different metrics and normalize
+        combined = self._combine_similarity_scores(similar_tags)
+        
+        # Cache results
+        self._similarity_cache[tag] = combined
+        
+        # Return results above threshold
+        return [s for s in combined if s[1] >= threshold]
+        
+    def _get_cooccurrence_similarity(self, tag: str) -> List[Tuple[str, float]]:
+        """Calculate similarity based on tag co-occurrences."""
+        similar = []
+        co_occurrences = self.analyzer.get_co_occurrences(tag)
+        
+        if not co_occurrences:
+            return []
+        
+        # Get total occurrences for normalization
+        total = sum(co_occurrences.values())
+        
+        # Calculate normalized co-occurrence scores
+        for other_tag, count in co_occurrences.items():
+            if other_tag != tag:
+                # Normalize by total co-occurrences and tag frequency
+                score = count / total * min(1.0, count / self.analyzer.get_tag_frequency(other_tag))
+                similar.append((other_tag, score))
+                
+        return sorted(similar, key=lambda x: x[1], reverse=True)
+        
+    def _get_string_similarity(self, tag: str) -> List[Tuple[str, float]]:
+        """Calculate similarity based on string similarity metrics."""
+        similar = []
+        
+        # Get all tags from analyzer
+        all_tags = list(self.analyzer.tag_counts.keys())
+        
+        for other_tag in all_tags:
+            if other_tag != tag:
+                # Use SequenceMatcher for string similarity
+                score = SequenceMatcher(None, tag, other_tag).ratio()
+                
+                # Boost score if tags share words
+                tag_words = set(tag.split())
+                other_words = set(other_tag.split())
+                shared_words = len(tag_words & other_words)
+                if shared_words:
+                    word_score = shared_words / max(len(tag_words), len(other_words))
+                    score = max(score, word_score)
+                    
+                similar.append((other_tag, score))
+                
+        return sorted(similar, key=lambda x: x[1], reverse=True)
+        
+    def _get_pattern_similarity(self, tag: str) -> List[Tuple[str, float]]:
+        """Calculate similarity based on common tag patterns."""
+        similar = []
+        
+        # Get common patterns from analyzer
+        patterns = self.analyzer.get_common_patterns()
+        
+        # Split tag into parts
+        parts = tag.split()
+        if len(parts) > 1:
+            prefix = parts[0]
+            suffix = parts[-1]
+            
+            # Check for tags with same prefix pattern
+            if prefix in patterns:
+                for base in patterns[prefix]:
+                    similar_tag = f"{prefix} {base}"
+                    if similar_tag != tag:
+                        similar.append((similar_tag, 0.7))
+                        
+            # Check for tags with same suffix pattern
+            if suffix in patterns:
+                for base in patterns[suffix]:
+                    similar_tag = f"{base} {suffix}"
+                    if similar_tag != tag:
+                        similar.append((similar_tag, 0.7))
+                        
+        return similar
+        
+    def _combine_similarity_scores(self, similarities: List[List[Tuple[str, float]]]) -> List[Tuple[str, float]]:
+        """Combine and normalize similarity scores from different metrics."""
+        # Combine scores for same tags
+        combined_scores: Dict[str, float] = {}
+        
+        for tag, score in similarities:
+            if tag in combined_scores:
+                # Use max score as we want to preserve strong matches from any metric
+                combined_scores[tag] = max(combined_scores[tag], score)
+            else:
+                combined_scores[tag] = score
+                
+        # Convert to list and sort
+        combined = [(tag, score) for tag, score in combined_scores.items()]
+        return sorted(combined, key=lambda x: x[1], reverse=True)
+        
+    def find_similar_tag_clusters(self, min_similarity: float = 0.7) -> List[Set[str]]:
+        """Find clusters of similar tags that might be variants.
+        
+        Args:
+            min_similarity: Minimum similarity score to consider tags related
+            
+        Returns:
+            List of sets containing related tags
+        """
+        clusters = []
+        processed_tags = set()
+        
+        for tag in self.analyzer.tag_counts:
+            if tag in processed_tags:
+                continue
+                
+            # Find similar tags
+            similar = self.find_similar_tags(tag, min_similarity)
+            if similar:
+                # Create new cluster with original tag and similar ones
+                cluster = {tag}
+                cluster.update(t for t, _ in similar)
+                clusters.append(cluster)
+                processed_tags.update(cluster)
+            else:
+                processed_tags.add(tag)
+                
+        return clusters
+        
+    def clear_cache(self):
+        """Clear the similarity cache."""
+        self._similarity_cache.clear()

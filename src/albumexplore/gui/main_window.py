@@ -1,260 +1,169 @@
-import logging
+"""Main application window."""
 from typing import Optional, Dict, Any
-from albumexplore.gui.gui_logging import gui_logger
-from .graphics_debug import init_graphics_debugging
-from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
-                           QLabel, QComboBox, QStatusBar, QSizePolicy, QFrame,
-                           QDockWidget)
-from PyQt6.QtCore import Qt, QSize, QTimer
-from PyQt6.QtGui import QPalette, QColor, QResizeEvent
-from albumexplore.database import get_session
-from albumexplore.visualization.views import create_view
-from albumexplore.visualization.state import ViewType, ViewState
-from albumexplore.visualization.data_interface import DataInterface
-from albumexplore.visualization.error_handling import ErrorManager, ErrorCategory, ErrorContext
-from albumexplore.visualization.responsive import ResponsiveManager
+from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+                          QComboBox, QStatusBar, QSplitter)
+from PyQt6.QtCore import Qt, QSize
 from albumexplore.visualization.view_manager import ViewManager
+from albumexplore.visualization.data_interface import DataInterface
+from albumexplore.visualization.state import ViewType
+from albumexplore.gui.graphics_debug import GraphicsDebugMonitor, init_graphics_debugging
+from albumexplore.gui.gui_logging import gui_logger
+from .views import create_view
 
 class MainWindow(QMainWindow):
-    def __init__(self, db_session):
+    """Main application window."""
+    
+    def __init__(self, session=None):
         super().__init__()
-        gui_logger.debug("MainWindow initialized")
-        
-        # Store database session
-        self._db_session = db_session
-        
-        # Initialize graphics debugging
-        self.graphics_debug = init_graphics_debugging(self)
-        
-        # Initialize managers
-        self.error_manager = ErrorManager()
-        self.responsive_manager = ResponsiveManager()
-        
-        # Basic window setup
         self.setWindowTitle("Album Explorer")
-        self.setMinimumSize(1200, 800)
+        self.resize(QSize(1200, 800))
         
-        # Create central widget as a container
-        self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
+        # Initialize components
+        self.debug_monitor = init_graphics_debugging(self)
+        self.data_interface = DataInterface(session)
+        self.view_manager = ViewManager(self.data_interface, self, self.debug_monitor)
         
-        # Main layout for central widget
-        self.main_layout = QVBoxLayout(self.central_widget)
-        self.main_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_layout.setSpacing(0)
+        # Add recursion protection flag
+        self._is_processing_selection = False
         
-        # Create and setup the visualization container first
-        self._setup_visualization_container()
+        # UI setup
+        self._setup_ui()
+        self._setup_connections()
         
-        # Initialize data interface and view manager
-        self.data_interface = DataInterface(self._db_session)
-        self.view_manager = ViewManager(
-            self.data_interface,
-            self.visualization_container,
-            graphics_debug=self.graphics_debug
-        )
-        
-        # Create view controls
-        self._create_view_controls()
-        
-        # Create status bar
-        self.status_bar = QStatusBar()
-        self.setStatusBar(self.status_bar)
-        
-        # Setup error handling and responsive design
-        self._setup_error_handling()
-        self._setup_responsive_design()
-        
-        # Initialize the application AFTER all setup is complete
-        QTimer.singleShot(0, self._initialize_application)
+        # Load initial data
+        self.load_data()
+        gui_logger.info("Main window initialized")
     
-    def _setup_visualization_container(self):
-        """Setup the visualization container and layout."""
-        # Create main visualization container
-        self.visualization_container = QFrame()
-        self.visualization_container.setObjectName("visualizationContainer")
-        self.visualization_container.setFrameStyle(QFrame.Shape.StyledPanel)
-        self.visualization_container.setSizePolicy(
-            QSizePolicy.Policy.Expanding, 
-            QSizePolicy.Policy.Expanding
-        )
-        self.visualization_container.setMinimumSize(800, 600)
+    def _setup_ui(self):
+        """Set up UI elements."""
+        # Central widget
+        central = QWidget()
+        self.setCentralWidget(central)
+        layout = QVBoxLayout(central)
         
-        # Create layout for visualization container
-        self.view_layout = QVBoxLayout(self.visualization_container)
-        self.view_layout.setContentsMargins(0, 0, 0, 0)
-        self.view_layout.setSpacing(0)
+        # Controls
+        controls = QWidget()
+        controls_layout = QHBoxLayout(controls)
+        controls_layout.setContentsMargins(8, 8, 8, 8)
         
-        # Add visualization container to main layout
-        self.main_layout.addWidget(self.visualization_container, stretch=1)
-        
-        # Force immediate layout update
-        self.visualization_container.updateGeometry()
-        
-        gui_logger.debug("Visualization container setup complete")
-    
-    def _initialize_application(self):
-        """Initialize application data and view."""
-        try:
-            gui_logger.debug("Starting application initialization")
-            
-            # Log initial widget hierarchy
-            self._log_widget_hierarchy()
-            
-            # Update data first
-            gui_logger.debug("Loading initial data")
-            self.view_manager.update_data()
-            gui_logger.info(f"Loaded {len(self.view_manager.nodes)} nodes")
-            
-            # Switch to initial view
-            gui_logger.debug("Switching to initial view")
-            result = self.view_manager.switch_view(ViewType.TABLE)
-            if not result["success"]:
-                raise RuntimeError(f"Failed to initialize view: {result['message']}")
-                
-            if self.view_manager.current_view:
-                # Force immediate geometry update for table
-                self.view_manager.current_view.setGeometry(self.visualization_container.rect())
-                if hasattr(self.view_manager.current_view, 'table'):
-                    self.view_manager.current_view.table.setGeometry(
-                        self.view_manager.current_view.rect()
-                    )
-                    self.view_manager.current_view.table.show()
-                    self.view_manager.current_view.table.raise_()
-            
-            # Log final widget hierarchy
-            self._log_widget_hierarchy()
-            
-            # Show success message
-            self.status_bar.showMessage("Application initialized successfully")
-            gui_logger.debug("Application initialization complete")
-            
-            # Ensure window is active and visible
-            self.show()
-            self.raise_()
-            self.activateWindow()
-            
-        except Exception as e:
-            gui_logger.error(f"Error during initialization: {str(e)}", exc_info=True)
-            self.status_bar.showMessage(f"Error during initialization: {str(e)}")
-            self.error_manager.handle_error(e, ErrorContext(
-                view_type="initialization",
-                operation="application_init",
-                data={}
-            ))
-    
-    def _log_widget_hierarchy(self):
-        """Log the complete widget hierarchy for debugging."""
-        def _log_widget(widget, level=0):
-            indent = "  " * level
-            gui_logger.debug(f"{indent}{widget.__class__.__name__}: {widget.objectName()}")
-            if hasattr(widget, 'children'):
-                for child in widget.children():
-                    _log_widget(child, level + 1)
-        
-        gui_logger.debug("Widget hierarchy:")
-        _log_widget(self)
-    
-    def _handle_view_change(self, view_type_str: str):
-        """Handle view type changes."""
-        try:
-            view_type = ViewType(view_type_str)
-            result = self.view_manager.switch_view(view_type)
-            
-            if not result["success"]:
-                self.error_manager.handle_error(
-                    Exception(result["message"]),
-                    ErrorContext(
-                        view_type=view_type_str,
-                        operation="view_change",
-                        data={"previous_view": str(self.view_manager.previous_view_type)}
-                    )
-                )
-                self.status_bar.showMessage(f"Error changing view: {result['message']}")
-            else:
-                self.status_bar.showMessage(f"Switched to {view_type_str} view")
-                
-        except Exception as e:
-            gui_logger.error(f"Error changing view: {str(e)}", exc_info=True)
-            self.error_manager.handle_error(e, ErrorContext(
-                view_type=view_type_str,
-                operation="view_change",
-                data={}
-            ))
-    
-    def _setup_error_handling(self):
-        """Setup error handlers for the main window."""
-        def handle_view_error(error: Exception, context: ErrorContext):
-            gui_logger.error(f"View error: {str(error)}", exc_info=True)
-            self.status_bar.showMessage(f"Error in {context.view_type} view: {str(error)}")
-        
-        def handle_data_error(error: Exception, context: ErrorContext):
-            gui_logger.error(f"Data error: {str(error)}", exc_info=True)
-            self.status_bar.showMessage(f"Data error: {str(error)}")
-        
-        # Register error handlers using existing categories
-        self.error_manager.register_handler(ErrorCategory.RENDERING, handle_view_error)
-        self.error_manager.register_handler(ErrorCategory.DATA, handle_data_error)
-    
-    def _setup_responsive_design(self):
-        """Setup responsive design handlers."""
-        def handle_resize(event: QResizeEvent):
-            new_size = event.size()
-            gui_logger.debug(f"Window resized to {new_size.width()}x{new_size.height()}")
-            
-            # Update responsive manager with new screen dimensions
-            if hasattr(self, 'responsive_manager'):
-                self.responsive_manager.update_screen_size(new_size.width(), new_size.height())
-            
-            # Update visualization container
-            if self.visualization_container:
-                self.visualization_container.setGeometry(0, 0, new_size.width(), new_size.height())
-            
-            # Update current view
-            if self.view_manager and self.view_manager.current_view:
-                self.view_manager.current_view.resize(new_size)
-            
-            # Accept the resize event
-            event.accept()
-        
-        # Set the resize event handler directly
-        self.resizeEvent = handle_resize
-    
-    def _create_view_controls(self):
-        """Create view selection and control widgets."""
-        # Create view controls container
-        controls_container = QWidget()
-        controls_layout = QHBoxLayout(controls_container)
-        controls_layout.setContentsMargins(10, 5, 10, 5)
-        
-        # Add view type selector
-        view_label = QLabel("View Type:")
+        # View selector
         self.view_selector = QComboBox()
-        self.view_selector.addItems([vt.value for vt in ViewType])
-        self.view_selector.currentTextChanged.connect(self._handle_view_change)
-        
-        controls_layout.addWidget(view_label)
+        for view_type in ViewType:
+            self.view_selector.addItem(view_type.value)
         controls_layout.addWidget(self.view_selector)
         controls_layout.addStretch()
         
-        # Add controls above visualization container
-        self.main_layout.insertWidget(0, controls_container)
-        gui_logger.debug("View controls setup complete")
+        layout.addWidget(controls)
+        
+        # Main content area
+        self.content_splitter = QSplitter(Qt.Orientation.Horizontal)
+        
+        # View container
+        self.view_container = QWidget()
+        self.view_layout = QVBoxLayout(self.view_container)
+        self.view_layout.setContentsMargins(0, 0, 0, 0)
+        self.content_splitter.addWidget(self.view_container)
+        
+        layout.addWidget(self.content_splitter)
+        
+        # Status bar
+        self.status_bar = QStatusBar()
+        self.setStatusBar(self.status_bar)
+        
+        # Initial view
+        self.current_view = None
+        self._switch_view(ViewType.TABLE)
+    
+    def _setup_connections(self):
+        """Set up signal connections."""
+        self.view_selector.currentTextChanged.connect(self._on_view_changed)
+    
+    def _on_view_changed(self, view_type_str: str):
+        """Handle view type changes."""
+        try:
+            view_type = ViewType(view_type_str)
+            self._switch_view(view_type)
+            self.status_bar.showMessage(f"Switched to {view_type_str} view")
+        except Exception as e:
+            gui_logger.error(f"Error switching views: {str(e)}", exc_info=True)
+            self.status_bar.showMessage(f"Error switching views: {str(e)}")
+    
+    def _switch_view(self, view_type: ViewType):
+        """Switch to a different view."""
+        # Clear old view
+        if self.current_view:
+            self.current_view.setParent(None)
+        
+        # Create new view
+        self.current_view = create_view(view_type, self)
+        
+        # Add to layout
+        self.view_layout.addWidget(self.current_view)
+        
+        # Connect selection handling
+        self.current_view.selection_changed.connect(self._handle_selection)
+        
+        # Update view manager
+        result = self.view_manager.switch_view(view_type)
+        self.current_view.update_data(result)
+    
+    def __init__(self, session=None):
+        super().__init__()
+        self.setWindowTitle("Album Explorer")
+        self.resize(QSize(1200, 800))
+        
+        # Initialize components
+        self.debug_monitor = init_graphics_debugging(self)
+        self.data_interface = DataInterface(session)
+        self.view_manager = ViewManager(self.data_interface, self, self.debug_monitor)
+        
+        # Add recursion protection flag
+        self._is_processing_selection = False
+        
+        # UI setup
+        self._setup_ui()
+        self._setup_connections()
+        
+        # Load initial data
+        self.load_data()
+        gui_logger.info("Main window initialized")
+
+    def _handle_selection(self, selected_ids: set):
+        """Handle selection changes."""
+        # Use instance variable for recursion protection
+        if self._is_processing_selection:
+            return
+            
+        try:
+            self._is_processing_selection = True
+            result = self.view_manager.select_nodes(selected_ids)
+            if self.current_view:
+                self.current_view.update_data(result)
+        finally:
+            self._is_processing_selection = False
+    
+    def load_data(self):
+        """Load/reload data."""
+        try:
+            result = self.view_manager.update_data()
+            if self.current_view:
+                self.current_view.update_data(result)
+            self.status_bar.showMessage("Data loaded successfully")
+        except Exception as e:
+            gui_logger.error(f"Error loading data: {str(e)}", exc_info=True)
+            self.status_bar.showMessage(f"Error loading data: {str(e)}")
+    
+    def resizeEvent(self, event):
+        """Handle resize events."""
+        super().resizeEvent(event)
+        if self.current_view:
+            result = self.view_manager.update_dimensions(
+                self.view_container.width(),
+                self.view_container.height()
+            )
+            self.current_view.update_data(result)
     
     def closeEvent(self, event):
-        """Handle application shutdown."""
-        try:
-            # Close database session
-            if self._db_session:
-                self._db_session.close()
-            
-            # Clean up view manager
-            if hasattr(self, 'view_manager'):
-                self.view_manager.cleanup()
-            
-            gui_logger.info("Application shutdown complete")
-            event.accept()
-            
-        except Exception as e:
-            gui_logger.error(f"Error during shutdown: {str(e)}", exc_info=True)
-            event.accept()  # Accept anyway to ensure application closes
+        """Handle window close."""
+        self.view_manager.cleanup()
+        super().closeEvent(event)

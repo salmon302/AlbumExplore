@@ -1,5 +1,14 @@
-from .normalizer.tag_normalizer import TagNormalizer
-from .relationships.tag_relationships import TagRelationships
-from .grouping.tag_groups import TagGroups
+"""Tag management and analysis system."""
+from .normalizer import TagNormalizer
+from .config import TagRulesConfig
+from .analysis import TagAnalyzer, TagSimilarity, SingleInstanceHandler
+from .relationships import TagRelationships
 
-__all__ = ['TagNormalizer', 'TagRelationships', 'TagGroups']
+__all__ = [
+    'TagNormalizer',
+    'TagRulesConfig',
+    'TagAnalyzer',
+    'TagSimilarity',
+    'SingleInstanceHandler',
+    'TagRelationships'
+]
