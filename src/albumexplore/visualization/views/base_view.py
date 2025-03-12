@@ -294,7 +294,14 @@ class BaseView(QWidget):
 		
 		# Update viewport in view state if available
 		if self.view_state:
-			self.view_state.update_viewport(self.width(), self.height())
+			# Check for the update_viewport attribute before calling it
+			if hasattr(self.view_state, 'update_viewport'):
+				self.view_state.update_viewport(self.width(), self.height())
+			else:
+				# Set viewport dimensions directly if method doesn't exist
+				if hasattr(self.view_state, 'viewport_width') and hasattr(self.view_state, 'viewport_height'):
+					self.view_state.viewport_width = self.width()
+					self.view_state.viewport_height = self.height()
 		
 		self.update()
 

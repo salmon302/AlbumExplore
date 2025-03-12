@@ -10,6 +10,7 @@ class ViewType(Enum):
     CHORD = "Chord"
     ARC = "Arc"
     TAG_EXPLORER = "Tag Explorer"
+    TAG_GRAPH = "Tag Graph"
 
 class TransitionType(Enum):
     """Available transition types."""

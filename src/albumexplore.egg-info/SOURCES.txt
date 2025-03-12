@@ -89,6 +89,7 @@ src/albumexplore/utils/paths.py
 src/albumexplore/visualization/__init__.py
 src/albumexplore/visualization/arc_renderer.py
 src/albumexplore/visualization/base.py
+src/albumexplore/visualization/base_renderer.py
 src/albumexplore/visualization/chord_renderer.py
 src/albumexplore/visualization/cluster_engine.py
 src/albumexplore/visualization/data_interface.py
@@ -105,6 +106,7 @@ src/albumexplore/visualization/performance_optimizer.py
 src/albumexplore/visualization/physics_system.py
 src/albumexplore/visualization/renderer.py
 src/albumexplore/visualization/responsive.py
+src/albumexplore/visualization/spatial_grid.py
 src/albumexplore/visualization/state.py
 src/albumexplore/visualization/transition_animator.py
 src/albumexplore/visualization/view_integration.py

@@ -1,6 +1,3 @@
 albumexplore
 data
-examples
-gui
-renderers
 tags

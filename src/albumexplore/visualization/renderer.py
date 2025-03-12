@@ -117,21 +117,51 @@ class TableRenderer(RendererBase):
         """Render table visualization data."""
         logger.debug("Rendering table view with %d nodes", len(nodes))
         
+        # DEBUG: Print year values from nodes to help troubleshoot
+        logger.debug("YEAR VALUES IN NODES:")
+        for i, node in enumerate(nodes[:10]):  # Show first 10 nodes only
+            if node.visible:
+                year_val = node.data.get('year')
+                logger.debug(f"Node {i}: Year = {year_val} (Type: {type(year_val)})")
+        
         # Convert nodes to table rows
         rows = []
         visible_rows = 0
         for node in nodes:
             if not node.visible:
                 continue
+            
+            # Skip invalid nodes (like placeholder 'nan' test data)
+            if (not node.data.get('artist') or 
+                str(node.data.get('artist')).lower() == 'nan' or
+                not node.data.get('title') or 
+                str(node.data.get('title')).lower() == 'nan'):
+                continue
+                
             visible_rows += 1
             
             # Create row from node data
+            # Get album title from 'title' field or fallback to 'album'
+            title = node.data.get('title', '')
+            if not title and 'album' in node.data:
+                title = node.data.get('album', '')
+                
+            # Make sure year is properly converted to string
+            year = node.data.get('year', '')
+            if year is not None:
+                year = str(year)
+            else:
+                year = ''
+            
+            # Debug the year value
+            logger.debug(f"Processing row: {title}, Year={year}, Original value: {node.data.get('year')}")
+            
             row = {
                 'id': node.id,
                 'artist': node.data.get('artist', ''),
-                'album': node.data.get('album', ''),
-                'year': node.data.get('year', ''),
-                'genre': node.data.get('genre', ''),
+                'album': title,  # Use the processed title
+                'title': title,  # Include both keys for compatibility
+                'year': year,    # Ensure year is a string
                 'country': node.data.get('country', ''),
                 'tags': node.data.get('tags', []),
                 'selected': node.id in getattr(viewport, 'selected_ids', set())
@@ -141,6 +171,7 @@ class TableRenderer(RendererBase):
         logger.debug("Rendered %d visible rows", visible_rows)
         
         return {
+            'type': 'table',
             'rows': rows,
             'selected_ids': getattr(viewport, 'selected_ids', set())
         }
@@ -160,7 +191,8 @@ def create_renderer(view_type: ViewType, config: RenderConfig = None) -> Rendere
         ViewType.TABLE: TableRenderer,
         ViewType.CHORD: ChordRenderer,
         ViewType.ARC: ArcRenderer,
-        ViewType.TAG_EXPLORER: TableRenderer  # Temporarily use TableRenderer for TAG_EXPLORER
+        ViewType.TAG_EXPLORER: TableRenderer,  # Temporarily use TableRenderer for TAG_EXPLORER
+        ViewType.TAG_GRAPH: NetworkRenderer    # Temporarily use NetworkRenderer for TAG_GRAPH
     }
     
     renderer_class = renderers.get(view_type)

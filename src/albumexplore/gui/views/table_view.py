@@ -45,14 +45,14 @@ class TableView(BaseView):
         # Connect signals
         self.table.itemSelectionChanged.connect(self._handle_selection)
     
-    def update_data(self, data: Dict[str, Any]):
+    def update_data(self, render_data: Dict[str, Any], edges=None):
         """Update table data."""
-        super().update_data(data)
+        super().update_data(render_data)
         
-        if 'rows' not in data:
+        if 'rows' not in render_data:
             return
             
-        rows = data['rows']
+        rows = render_data['rows']
         self.table.setRowCount(len(rows))
         
         for row_idx, row in enumerate(rows):
@@ -85,8 +85,8 @@ class TableView(BaseView):
         
         # Update selection
         self.table.clearSelection()
-        if 'selected_ids' in data:
-            selected_ids = set(data['selected_ids'])
+        if 'selected_ids' in render_data:
+            selected_ids = set(render_data['selected_ids'])
             for row in range(self.table.rowCount()):
                 item = self.table.item(row, 0)
                 if item and item.data(Qt.ItemDataRole.UserRole) in selected_ids:
@@ -114,7 +114,7 @@ class TableView(BaseView):
             self.selection_changed.emit(calculated_ids)
         finally:
             self._is_processing_selection = False
-    
+            
     def _handle_sort(self, column_index: int):
         """Handle column header clicks for sorting."""
         current_direction = self.table.horizontalHeader().sortIndicatorOrder()

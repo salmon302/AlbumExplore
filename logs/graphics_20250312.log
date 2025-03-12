@@ -1,0 +1,775 @@
+2025-03-12 01:20:22,337 - albumexplore.graphics - INFO - Initializing EnhancedNetworkView
+2025-03-12 01:20:22,338 - albumexplore.graphics - DEBUG - EnhancedNetworkView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 01:52:45,766 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 01:52:45,813 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 01:52:45,813 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 01:52:45,813 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 01:54:04,218 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 01:54:04,247 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 01:54:04,248 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - View update 1: 0 nodes, 0 edges
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,249 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,255 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 01:54:04,255 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:54:04,255 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,255 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,263 - albumexplore.graphics - DEBUG - Updating dimensions: 1182x294
+2025-03-12 01:54:04,264 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:54:04,264 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,264 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,274 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x294
+2025-03-12 01:54:04,274 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:54:04,274 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:04,274 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:54:06,920 - albumexplore.graphics - INFO - Initializing TagExplorerView
+2025-03-12 01:54:06,922 - albumexplore.graphics - DEBUG - TagExplorerView view initialized with size PyQt6.QtCore.QSize(100, 100)
+2025-03-12 01:54:06,929 - albumexplore.graphics - DEBUG - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(100, 100)
+2025-03-12 01:54:06,947 - albumexplore.graphics - DEBUG - Visibility: TagExplorerView shown
+2025-03-12 01:54:06,947 - albumexplore.graphics - DEBUG - Update: TagExplorerView scheduled update
+2025-03-12 01:54:06,947 - albumexplore.graphics - DEBUG - Visibility: TagExplorerView hidden
+2025-03-12 01:54:06,952 - albumexplore.graphics - DEBUG - Resize: TagExplorerView resized to PyQt6.QtCore.QSize(1350, 294)
+2025-03-12 01:54:06,954 - albumexplore.graphics - DEBUG - Visibility: TagExplorerView shown
+2025-03-12 01:54:06,955 - albumexplore.graphics - DEBUG - Paint: TagExplorerView paint event started
+2025-03-12 01:54:07,157 - albumexplore.graphics - DEBUG - Cleaning up TagExplorerView resources
+2025-03-12 01:54:08,709 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 01:54:08,709 - albumexplore.graphics - DEBUG - Visibility: TagExplorerView hidden
+2025-03-12 01:58:06,384 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 01:58:06,437 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 01:58:06,437 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 01:58:06,437 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - View update 1: 0 nodes, 0 edges
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,438 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,444 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 01:58:06,444 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:58:06,445 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,445 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,454 - albumexplore.graphics - DEBUG - Updating dimensions: 1182x294
+2025-03-12 01:58:06,455 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:58:06,455 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,455 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,464 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x294
+2025-03-12 01:58:06,464 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 01:58:06,464 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:06,464 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 01:58:16,873 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:04:16,422 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - View update 1: 0 nodes, 0 edges
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,449 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,450 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:04:16,450 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:04:16,450 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,450 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,453 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:04:16,453 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:04:16,453 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,453 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,459 - albumexplore.graphics - DEBUG - Updating dimensions: 1182x294
+2025-03-12 02:04:16,459 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:04:16,459 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,459 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,466 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x294
+2025-03-12 02:04:16,466 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:04:16,466 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:16,466 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:04:21,885 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:05:44,861 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:05:44,887 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 02:05:44,887 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 02:05:44,900 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 02:05:44,901 - albumexplore.graphics - DEBUG - View update 1: 0 nodes, 0 edges
+2025-03-12 02:05:44,901 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:05:44,901 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,901 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,901 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:05:44,902 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:05:44,902 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,902 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,905 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:05:44,905 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:05:44,906 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,906 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,912 - albumexplore.graphics - DEBUG - Updating dimensions: 1182x294
+2025-03-12 02:05:44,913 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:05:44,914 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,914 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,920 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x294
+2025-03-12 02:05:44,921 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:05:44,921 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:44,921 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:05:47,120 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:08:41,469 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:08:41,495 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 02:08:41,495 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 02:08:41,509 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 02:08:41,509 - albumexplore.graphics - DEBUG - View update 1: 0 nodes, 0 edges
+2025-03-12 02:08:41,509 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:08:41,509 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,510 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,510 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:08:41,510 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:08:41,510 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,511 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,514 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:08:41,515 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:08:41,515 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,515 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,522 - albumexplore.graphics - DEBUG - Updating dimensions: 1182x294
+2025-03-12 02:08:41,523 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:08:41,523 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,523 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,530 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x294
+2025-03-12 02:08:41,530 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:08:41,531 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:41,531 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:08:43,257 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:09:06,204 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:09:06,231 - albumexplore.graphics - DEBUG - Table view initialized
+2025-03-12 02:09:06,231 - albumexplore.graphics - DEBUG - Switching view from Table to Table
+2025-03-12 02:09:06,244 - albumexplore.graphics - DEBUG - Prepared 2 transition from Table to Table
+2025-03-12 02:09:06,244 - albumexplore.graphics - DEBUG - View update 1: 0 nodes, 0 edges
+2025-03-12 02:09:06,244 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:09:06,244 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,244 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,244 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:09:06,245 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:09:06,245 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,245 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,248 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:09:06,249 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:09:06,249 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,249 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,258 - albumexplore.graphics - DEBUG - Updating dimensions: 1182x294
+2025-03-12 02:09:06,259 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:09:06,259 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,260 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,268 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x294
+2025-03-12 02:09:06,268 - albumexplore.graphics - DEBUG - Synchronized selection from Table: 0 items
+2025-03-12 02:09:06,269 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:06,269 - albumexplore.graphics - DEBUG - Updated table view with 0 rows
+2025-03-12 02:09:07,896 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:11:35,665 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:11:35,668 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:11:35,689 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:11:35,697 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:12:50,787 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:12:50,790 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:12:50,810 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:12:50,819 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:15:47,560 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:15:47,563 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:15:47,583 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:18:54,465 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:18:54,467 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:18:54,486 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:20:26,523 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:20:26,526 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:20:26,547 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:21:10,069 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:21:10,072 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:21:10,092 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:23:42,551 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:23:42,554 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:23:42,574 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:29:47,219 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:29:47,222 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:29:47,242 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:29:47,249 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:30:01,432 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:30:01,838 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:30:01,868 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:30:01,868 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:30:01,875 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:30:01,875 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:30:02,335 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:30:02,335 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:30:02,807 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:02,814 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:02,818 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:49,914 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:50,002 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:50,042 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:50,066 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:30:50,699 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:30:50,706 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:31:10,551 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:31:10,553 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:31:10,573 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:31:10,580 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:31:24,536 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:31:24,922 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:31:24,950 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:31:24,950 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:31:24,958 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:31:24,958 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:31:25,399 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:31:25,400 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:31:25,842 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:31:25,851 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:31:25,856 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:31:27,091 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:31:37,370 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:31:37,378 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:33:16,852 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:33:16,855 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:33:16,875 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:33:16,882 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:33:31,037 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:33:31,428 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:33:31,450 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:33:31,450 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:33:31,458 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:33:31,459 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:33:31,917 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:33:31,918 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:33:32,366 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:33:32,375 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:33:32,381 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:33:32,386 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:33:35,475 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:33:35,482 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:33:45,735 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:33:45,737 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:33:45,758 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:33:45,765 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:33:59,894 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:34:00,290 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:34:00,320 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:34:00,320 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:34:00,332 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:34:00,332 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:34:00,793 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:34:00,794 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:34:01,263 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:01,272 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:01,278 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:01,283 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:06,945 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:06,961 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:07,074 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:08,411 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:34:08,418 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:34:27,113 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:34:27,115 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:34:27,135 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:34:27,143 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:34:41,225 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:34:41,610 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:34:41,632 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:34:41,632 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:34:41,640 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:34:41,641 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:34:42,102 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:34:42,103 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:34:42,551 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:42,560 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:42,565 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:42,571 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:44,002 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:44,069 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:44,346 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:44,374 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:45,385 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:34:46,722 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:34:46,729 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:37:31,526 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:37:31,528 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:37:31,548 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:37:31,555 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:37:45,381 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:37:45,752 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:37:45,780 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:37:45,780 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:37:45,786 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:37:45,787 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:37:46,217 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:37:46,217 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:37:46,631 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:46,641 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:46,647 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:46,653 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,197 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,245 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,289 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,361 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,457 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,625 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,640 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,657 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,676 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:50,702 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:53,045 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:53,064 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:53,085 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:53,101 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:53,123 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:53,141 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,149 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,237 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,293 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,333 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,365 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,397 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,445 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,941 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:54,970 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,005 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,034 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,050 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,073 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,117 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,173 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,525 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,537 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,554 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,572 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:55,593 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:56,824 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:37:58,558 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:37:58,566 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:40:14,240 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:40:14,242 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:40:14,261 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:40:14,269 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:40:28,228 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:40:28,602 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:40:28,631 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:40:28,631 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:40:28,639 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:40:28,639 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:40:29,063 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:40:29,063 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:40:29,493 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:29,502 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:29,509 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:29,516 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,116 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,144 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,164 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,188 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,215 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,232 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,259 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,476 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,496 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,509 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,525 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,544 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,568 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:33,601 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:34,615 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,600 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,607 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,613 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,619 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,625 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,632 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,640 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,646 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,652 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,659 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,664 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,670 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,676 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,682 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,689 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,695 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,701 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,707 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,713 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,721 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,726 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,732 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,738 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,744 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,750 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,756 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,762 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,769 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,775 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,781 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,787 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,793 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,798 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,804 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,810 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,816 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,822 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,828 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,834 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,840 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,846 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,852 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,858 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,864 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,871 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,876 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,882 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,888 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,894 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,900 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,906 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,911 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,917 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,923 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,928 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,933 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,939 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,944 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,949 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,955 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,960 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,966 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,971 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,977 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,982 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,987 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,993 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:35,998 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,004 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,010 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,015 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,020 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,026 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,032 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,038 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,043 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,051 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,057 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,062 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,068 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,073 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,079 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,084 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,090 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,095 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,100 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,108 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,117 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,123 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,129 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,134 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,140 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,147 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,154 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,162 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,167 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,173 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,178 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,184 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,190 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,199 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,205 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,212 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,218 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,224 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,230 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,236 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,242 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,249 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,254 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,261 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,266 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,272 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,278 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,284 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,290 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,296 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,301 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,308 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,313 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,318 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,325 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,331 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,336 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,342 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,347 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,352 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,358 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,364 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,372 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,377 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,383 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,389 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,394 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,399 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,406 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,411 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,416 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,422 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,428 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,433 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,438 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,444 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,449 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,454 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,460 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,465 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:36,470 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,056 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,083 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,096 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,107 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,124 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,137 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,157 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,828 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:37,860 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:38,012 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:38,056 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:38,083 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:38,104 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:38,136 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:39,247 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:40,391 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:40,439 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:40,807 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:41,111 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:40:41,656 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:40:41,664 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:43:56,907 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:43:56,909 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:43:56,929 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:43:56,936 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:44:10,964 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:44:11,337 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:44:11,365 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:44:11,365 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:44:11,372 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:44:11,372 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:44:11,806 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:44:11,807 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:44:12,226 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:12,235 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:12,241 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:12,247 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,503 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,509 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,516 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,521 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,529 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,536 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,542 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,549 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,557 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,564 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,569 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,577 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,584 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,591 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,597 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,604 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,610 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,617 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,622 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,630 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,636 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,644 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,650 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,662 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,669 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,674 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,680 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,686 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,693 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,699 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,704 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,710 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,716 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,722 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,729 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,734 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,740 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,745 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,751 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,759 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,765 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,770 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,776 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,781 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,789 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,796 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,802 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,807 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,813 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,819 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,826 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,831 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,837 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,849 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,855 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,861 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,866 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,874 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,879 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,885 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,890 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,895 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,901 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,906 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,911 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,916 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,923 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,929 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,934 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,940 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,946 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,951 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,957 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,963 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,970 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,977 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,982 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,989 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,994 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:17,999 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,005 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,010 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,015 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,021 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,026 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,031 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,041 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,046 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,052 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,056 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,062 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,067 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,075 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,080 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,085 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,090 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,096 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,101 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,106 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,112 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,118 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,123 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,131 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,136 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,141 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,147 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,154 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,160 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,168 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,173 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,179 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,185 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,190 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,196 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,202 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,209 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,215 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,221 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,227 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,233 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,239 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,246 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,253 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,259 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,265 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,270 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,276 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,283 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,288 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,294 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,300 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,305 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,310 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,317 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,325 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,331 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,338 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,342 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,350 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,355 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,360 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,366 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,372 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,377 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,383 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,390 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,396 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,401 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,406 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,414 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,420 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,425 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,431 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,436 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,442 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,447 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,452 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,458 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,463 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,468 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,473 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,479 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,484 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,489 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,495 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,502 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,507 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,512 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,519 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,526 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,534 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,540 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,548 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,555 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:18,563 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:44:21,039 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:44:21,047 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:47:05,123 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:47:05,126 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:47:05,145 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:47:05,153 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:47:18,996 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:47:19,375 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:47:19,403 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:47:19,403 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:47:19,409 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:47:19,410 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:47:19,841 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:47:19,841 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:47:20,273 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:47:20,282 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:47:20,288 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:47:20,295 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:47:22,957 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:47:22,965 - albumexplore.graphics - INFO - View manager cleaned up
+2025-03-12 02:49:14,532 - albumexplore.graphics - INFO - View manager initialized
+2025-03-12 02:49:14,535 - albumexplore.graphics - INFO - Initializing TableView
+2025-03-12 02:49:14,554 - albumexplore.graphics - DEBUG - TableView view initialized with size PyQt6.QtCore.QSize(640, 480)
+2025-03-12 02:49:14,561 - albumexplore.graphics - DEBUG - Updating data
+2025-03-12 02:49:28,477 - albumexplore.graphics - DEBUG - Updating dimensions: 640x480
+2025-03-12 02:49:28,854 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 760)
+2025-03-12 02:49:28,881 - albumexplore.graphics - DEBUG - Visibility: TableView shown
+2025-03-12 02:49:28,881 - albumexplore.graphics - DEBUG - Update: TableView scheduled update
+2025-03-12 02:49:28,888 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1332, 594)
+2025-03-12 02:49:28,889 - albumexplore.graphics - DEBUG - Updating dimensions: 1332x594
+2025-03-12 02:49:29,329 - albumexplore.graphics - DEBUG - Resize: TableView resized to PyQt6.QtCore.QSize(1350, 594)
+2025-03-12 02:49:29,329 - albumexplore.graphics - DEBUG - Updating dimensions: 1350x594
+2025-03-12 02:49:29,774 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:49:29,784 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:49:29,790 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:49:29,797 - albumexplore.graphics - DEBUG - Paint: TableView paint event started
+2025-03-12 02:49:31,740 - albumexplore.graphics - DEBUG - Visibility: TableView hidden
+2025-03-12 02:49:31,749 - albumexplore.graphics - INFO - View manager cleaned up

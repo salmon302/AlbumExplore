@@ -1,2 +1,3 @@
 [console_scripts]
-albumexplore = albumexplore:run
+albumexplore = albumexplore.gui.app:main
+

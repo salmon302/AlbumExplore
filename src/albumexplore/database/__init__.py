@@ -16,8 +16,8 @@ def init_db(database_url: str = None) -> None:
     global _engine, _SessionFactory
     
     if not database_url:
-        # Default to SQLite database in project root
-        db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'albumexplore.db')
+        # Default to SQLite database in project root instead of src folder
+        db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'albumexplore.db')
         database_url = f"sqlite:///{db_path}"
     
     db_logger.info(f"Initializing database with URL: {database_url}")
@@ -40,14 +40,11 @@ def init_db(database_url: str = None) -> None:
     
     db_logger.info("Database initialized successfully")
 
-def get_session():
+def get_session() -> Session:
     """Get a new database session."""
-    global _SessionFactory, _TestSessionFactory
-    if _TestSessionFactory:
-        return scoped_session(_TestSessionFactory)
-    if not _SessionFactory:
+    if _SessionFactory is None:
         init_db()
-    return scoped_session(_SessionFactory)
+    return _SessionFactory()
 
 @contextmanager
 def session_scope() -> Iterator[Session]:
@@ -56,7 +53,7 @@ def session_scope() -> Iterator[Session]:
     try:
         yield session
         session.commit()
-    except Exception:
+    except:
         session.rollback()
         raise
     finally:
@@ -66,18 +63,17 @@ def set_test_session():
     """Set up test database session."""
     global _TestSessionFactory, _engine
     
-    # Use SQLite in-memory database for testing
-    _engine = create_engine('sqlite:///:memory:')
+    # Use in-memory SQLite for tests
+    _engine = create_engine('sqlite:///:memory:',
+                          connect_args={"check_same_thread": False})
     Base.metadata.create_all(_engine)
     _TestSessionFactory = sessionmaker(bind=_engine)
-
+    
 def clear_test_session():
     """Clear test database session."""
     global _TestSessionFactory, _engine
-    
-    if _TestSessionFactory is not None:
-        if _engine:
-            Base.metadata.drop_all(_engine)
-        _TestSessionFactory = None
-        _engine = None
+    if _engine:
+        Base.metadata.drop_all(_engine)
+    _TestSessionFactory = None
+    _engine = None
 

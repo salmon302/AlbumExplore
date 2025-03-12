@@ -1,0 +1,13 @@
+{
+  "database": {
+    "url": "sqlite:///:memory:"
+  },
+  "logging": {
+    "level": "DEBUG",
+    "directory": "/home/shwal/Documents/GitHub/AlbumExplore/tests/test_config/logs"
+  },
+  "graphics": {
+    "debug": true,
+    "buffer_strategy": "double"
+  }
+}

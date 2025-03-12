@@ -35,8 +35,21 @@ class DataInterface:
     
     def get_visible_data(self) -> Tuple[List[VisualNode], List[VisualEdge]]:
         """Get currently visible nodes and edges."""
-        # Temporarily return empty data to avoid database recursion issues
-        return [], []
+        if not self.session:
+            return [], []
+            
+        # Get all albums with their tags
+        albums = get_albums_with_tags(self.session)
+        nodes = []
+        edges = []
+        
+        # Create nodes for each album
+        for album in albums:
+            node = self._create_or_get_node(album)
+            if node:
+                nodes.append(node)
+        
+        return nodes, edges
     
     def _create_or_get_node(self, album: Album) -> Optional[VisualNode]:
         """Create or get cached node."""
@@ -47,7 +60,7 @@ class DataInterface:
         tags = set()
         if self._config.include_tags:
             if album.id not in self._tag_cache:
-                self._tag_cache[album.id] = {t.name for t in get_album_tags(self.session, album.id)}
+                self._tag_cache[album.id] = {t.name for t in album.tags}
             tags = self._tag_cache[album.id]
         
         # Create node
@@ -58,11 +71,12 @@ class DataInterface:
             color="#4287f5",  # Default blue
             data={
                 'artist': album.artist,
-                'album': album.title,
-                'year': album.year,
+                'title': album.title,
+                'year': album.release_year,
                 'genre': album.genre,
                 'country': album.country,
-                'tags': list(tags)
+                'tags': list(tags),
+                'type': 'row'  # Indicate this is a table row
             }
         )
         
