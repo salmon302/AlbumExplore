@@ -89,3 +89,7 @@
 2025-03-12 02:47:05,123 - albumexplore.database - INFO - Database initialized successfully
 2025-03-12 02:49:14,524 - albumexplore.database - INFO - Initializing database with URL: sqlite:////home/shwal/Documents/GitHub/AlbumExplore/albumexplore.db
 2025-03-12 02:49:14,531 - albumexplore.database - INFO - Database initialized successfully
+2025-03-12 12:55:04,151 - albumexplore.database - INFO - Initializing database with URL: sqlite:////home/shwal/Documents/GitHub/AlbumExplore/albumexplore.db
+2025-03-12 12:55:04,172 - albumexplore.database - INFO - Database initialized successfully
+2025-03-12 13:00:26,252 - albumexplore.database - INFO - Initializing database with URL: sqlite:////home/shwal/Documents/GitHub/AlbumExplore/albumexplore.db
+2025-03-12 13:00:26,270 - albumexplore.database - INFO - Database initialized successfully

@@ -20,4 +20,6 @@ line_profiler>=4.0.0
 gprof2dot>=2022.7.29
 black>=23.0.0
 alembic>=1.11.0
-difflib-sequences>=1.0.0
+beautifulsoup4>=4.12.0
+openpyxl>=3.1.0
+requests>=2.31.0

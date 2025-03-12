@@ -23,7 +23,10 @@ src/albumexplore/data/utils.py
 src/albumexplore/data/cleaners/__init__.py
 src/albumexplore/data/cleaners/data_cleaner.py
 src/albumexplore/data/parsers/__init__.py
+src/albumexplore/data/parsers/base_parser.py
 src/albumexplore/data/parsers/csv_parser.py
+src/albumexplore/data/parsers/html_parser.py
+src/albumexplore/data/parsers/progarchives_parser.py
 src/albumexplore/data/validators/__init__.py
 src/albumexplore/data/validators/data_validator.py
 src/albumexplore/database/__init__.py

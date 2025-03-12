@@ -1,0 +1,292 @@
+
+
+html, body,td,a,li,input,textarea,select,option, span,div,p, #tabnav li a {
+font-size: 12px;
+line-height:15px;
+font-family: 'Open sans', sans-serif;
+	
+}
+
+#header-container
+{
+overflow:auto;
+line-height:normal;
+}
+
+
+
+#navTop50Artists,
+#radioad,
+#home-mp3player,
+#navGenre, 
+#navAlphaBands,
+#navTops,
+#navShop
+{display:block;}
+
+
+#header-imagemobile{display: none;}
+
+
+
+#navSearch
+{
+	margin:0 0 3px auto;
+}
+
+#toggle-navmore{display:none;height:20px;margin:0 auto;vertical-align:middle;}
+
+
+
+#container{width:100%;}
+
+#header-image img{
+	width:100%;    
+	border-top: 1px solid #A0A0A0;
+}
+
+
+#home-main{
+	width: 96%;
+	margin:0;
+	padding:10px;
+}
+
+#home-rightsidebar{
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+
+
+#tabnav{
+	display:block;
+}
+
+
+#i_SearchQ_new
+{
+	width:150px;
+}
+
+.avatarhp{
+width:30px;
+}
+
+.avatarhp-box
+{
+width:35px;
+}
+
+.review-cover-zone
+{
+   width: 150px; /* to test */
+}
+
+	.review-cover-zone-img
+	{
+	   width: 145px; /* to test */
+	}
+
+	#artist-box
+	{
+			width: 100%;
+			float:center;
+	}
+	#artist-box img
+	{
+			width: 100%;			
+	}
+	#artist-shortcuts
+	{
+		width: 100%;
+	}
+	#artist-biography
+	{
+		width: 100%;
+		
+	}
+	.artist-discography-cover
+	{
+		width: 84px;
+	}
+	#album-cover-td
+	{
+		width: 200px;
+	}
+	
+	#imgCover
+	{
+		width: 190px;
+	}
+	.genre-tableablums-cover
+	{
+		width: 110px;
+	}
+	.topalbums-cover{
+		width:61px;
+	}
+	.review-avatar{
+		width:60px;
+	}
+	 
+	.grid-container {
+	  display: grid;
+	  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+	  gap: 0px; /* Spacing between grid items */
+	  grid-template-columns: 33% auto auto ;
+	}
+	
+	.grid-container-country {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr; /* Two equal columns */
+	  gap: 0px; /* Spacing between grid items */
+	}
+
+	.grid-item {
+	  padding: 1px;
+	  border: 1px solid #eee;
+	}
+	.grid-item-header{
+		padding: 1px;
+		border: 1px solid #eee;
+		font-weight: bold;
+		background-color: #34003C;
+		color: #FF9E10;
+	}
+
+	
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	
+	
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	
+
+	
+} 
+
+/* Large devices (laptops/desktops, 1000px and up) */
+@media only screen and (min-width: 1000px) {
+	
+	html, body,td,a,li,input,textarea,select,span,div,p, #tabnav li a {
+		font-size: 13px;
+		line-height: 16px;
+	}
+	
+	#container{width:100%;}
+	
+	#header-nav 
+	{
+		width:1000px;
+	}
+	#header-image{display:inline;}
+	
+	#home-main{
+		width:680px !important;
+		float:left;
+	}
+
+	#home-rightsidebar{
+		float:right;
+		width:300px;
+	}
+	#i_SearchQ_new
+	{
+		width:300px;
+	}
+	.avatarhp
+	{
+		width:80px;
+	}
+
+	.avatarhp-box
+	{
+		width:90px;
+	}
+	.review-cover-zone
+	{
+	   width: 185px; /* to test */
+	}
+	.review-cover-zone-img
+	{
+	   width: 175px; /* to test */
+	}
+	#artist-box
+	{
+			width: 365px;
+			float:left;
+	}
+#artist-box img
+	{
+			width: 350px;
+			
+	}
+	#artist-shortcuts
+	{
+		width: 351px;
+	}
+ 
+ #artist-biography
+	{
+		float: right;
+		width: 590px;
+	
+	}
+	.artist-discography-cover
+	{
+		width: 230px;
+	}
+	#album-cover-td
+	{
+		width: 500px;
+	}
+	
+	#album-cover-td #imgCover
+	{
+		width: 490px;
+	}
+	.genre-tableablums-cover
+	{
+		width: 300px;
+	}
+	.topalbums-cover{
+		width:200px;
+	}
+	.review-avatar{
+		width:125px;
+	}
+	#video-player 
+	{
+		width:800px;
+		height:450px;
+	}
+	
+	#video-player embed
+	{
+		width:800px;
+		height:450px;
+	}
+	.grid-item {
+	  padding: 5px;
+	}
+	.grid-item-header{
+		padding: 5px;
+	}
+	
+	
+
+
+
+
+

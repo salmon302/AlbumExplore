@@ -1,0 +1,912 @@
+/*
+On updates, compress to screen.css.
+Use http://javascriptcompressor.com/
+*/
+
+#header-imagemobile{display:none;}
+#toggle-tabnav{display:none;}
+
+.divCommentReviewForm {
+    display: none;
+    background-Color: #f0f0f0;
+    padding:5px;
+    margin:10px 0px;
+    width: 420px;
+}
+
+#artist-shortcuts
+{
+	list-style: none;
+	margin: 0 0 20px 0;
+	padding:0px;
+}
+
+#artist-shortcuts li
+{
+	border: solid 1px #f0f0f0;
+    border-top:0px;
+	background-color: #fafafa;
+	padding: 3px;
+    text-align:center;
+	font-weight: bold;
+}
+
+#toggle-fullnav
+{display:none;}
+
+#toggle-navmore{display:none;}
+
+
+
+	
+body{
+margin: 0px 0px 200px 0px;
+background-Color: #34003C;color: #000;
+}
+
+/* Smooth Image Scaling in IE7 */
+img { -ms-interpolation-mode: bicubic }
+
+
+.cls_tdDisco0{background-color:#ffffff}
+.cls_tdDisco1{background-color:#f0f0f0}
+
+.cls_tdOthers0{background-color:#ffffff}
+.cls_tdOthers1{background-color:#eeeeee}
+
+a{color:#412071;}
+a:hover{color:#FF9E10;text-decoration:none}
+a:visited{color:#660066}
+
+.cls_TableHeader{
+color:#FF9E10;
+font-weight:bold;
+background-color: #34003C;
+}
+
+.cls_SideBarHeader{
+color:#FF9E10;
+font-weight:bold;
+background-color: #412071;
+}
+
+
+
+.cls_DiscoHeader{
+color:#333333;
+font-size:23px;
+font-weight:bold;
+height:30px;
+}
+
+.featured
+{
+    border:solid 1px yellow;
+    background-color:#FF9E10;
+    padding:10px;
+    margin:10px 0px;
+    color:black;
+    font-size: 20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.cls_PageName_TEXT{color:#34003C;font-size:17px;font-weight:bold}
+.cls_TableMainTextContent{color:#000;}
+.cls_DiscoText{color:#000;}
+.cls_CDTicker_TEXT{color:#000;}
+.cls_TextCopyright{color:#999999;margin:0;}
+.cls_DiscographyHeader_Text{color:#000;font-weight:bold}
+.cls_BandName_Text{color:#FF9E10;font-size:18px;font-weight:bold;}
+.cls_Country_TEXT{color:#000;}
+.cls_DivCd{display:none}
+.cls_InputSearch
+{  color:#FF9E10;
+   font-weight:bold;
+   background-color:#868686;
+   border-width:1px;
+   border-color:#000000;
+   padding-left:5px;
+   text-Transform :uppercase;
+
+}
+.cls_InputContact
+{  color:#000;
+   background-color:#ffffff;
+   border-style:solid;
+   border-width:1px;
+   border-color:#333333;
+   padding-left:4px;
+
+}
+
+.cls_CDTicker_DIV
+{
+padding: 10px 5px 5px 5px;
+width:100%;
+height:280px;
+overflow-y:auto;
+
+}
+.cls_BANDTicker_DIV
+{
+padding: 5px 5px 5px 5px;
+width:100%;
+height:250px;
+overflow-y:auto;
+
+}
+
+
+.tdSearch
+{
+background-image: url("/static-images/bg-input.jpg");
+padding-top:3px;
+text-align:left;
+}
+
+
+#i_SearchQ {
+border:1px solid #34003C;
+padding:1px 2px;
+margin:0px 1px;
+width:500px;
+font-weight: bold;
+vertical-align:bottom;
+}
+
+#i_SearchQ_new {
+border:1px solid #34003C;
+padding:1px 2px;
+margin:0px 1px;
+font-weight: bold;
+vertical-align:bottom;
+}
+
+
+#i_SearchOpt
+{
+border:1px solid #34003C;
+padding:1px 2px;
+margin:0px 1px;
+width:70px;
+font-weight: bold;
+vertical-align:bottom;
+}
+
+#i_SearchOpt_new
+{
+border:1px solid #34003C;
+padding:1px 2px;
+margin:0px 1px;
+font-weight: bold;
+vertical-align:bottom;
+}
+
+#i_SearchBtn
+{
+margin:0px 1px;
+font-weight: bold;
+padding:0px 5px;
+overflow:visible;
+vertical-align:bottom;
+}
+
+.clsInputRate {
+padding-left:2px;
+background:#FFFFFF;
+border:1px solid #34003C;
+color: #34003C;
+}
+
+
+.titleZone{ color:#34003C;font-weight:bold;margin:10px 0px 0px 0px;letter-spacing: 2px;padding:0;}
+
+
+#band-keyalbums li
+{
+	list-style: none;
+	display: inline;
+	margin: 0px;
+	padding-right : 7px;
+}
+
+.listProgRock
+{
+    margin: 25px;
+}
+
+.listProgRock li
+{
+    display: block;
+    list-style-type:square;
+    padding: 5px;
+}
+
+
+h1,h1 a
+{
+padding:0px;
+margin:8px 0px 8px 0px; 
+font-size:30px;
+text-shadow: #ccc 1px 1px 1px;
+letter-spacing:-0.06em;
+line-height: 30px;
+}
+
+h2, h2 a
+{padding:0px;margin:30px 0px 0px 0px; font-size:18px;
+text-shadow: #ccc 1px 1px 1px;
+letter-spacing:-0.06em;
+line-height: 18px;
+}
+
+h3, h3 a
+{padding:0px;margin:5px 0px 0px 0px;}
+
+h4
+{padding:0px;margin:5px 0px 0px 0px;}
+
+h1,h2,h3,h4,h1 a,h2 a,h3 a,h4 a
+{position: relative;min-width: 0;}
+
+
+.tag {text-decoration: none; color: black;}
+
+
+
+/* Local Navs Tabs.*/
+#navg-wrap a {font-weight: bold;color:#FF9E10}
+#navg-wrap a:hover {font-weight: bold;color:#FF9E10}
+
+#navi-wrap a {font-weight: bold;color:#FF9E10}
+#navi-wrap a:hover {font-weight: bold;color:#FF9E10}
+
+#navi-wrap {border-top: 1px solid #412071;border-bottom : 1px solid #412071; background-color:#412071; font-size: 0.6em;text-align:left;}
+
+
+#navSearch{font-weight: bold;color:#FF9E10}
+#navSearch ul{margin: 0px;}
+
+#navi-wrap ul {margin:10px;padding:0px;}
+
+#navAlphaBands li, #navTops li, #navShop li, #navSearch li, #navTop50Artists li
+{
+	list-style: none;
+	display: inline;
+	margin: 0px;
+	padding-right : 3px;
+}
+
+#navAlphaAlbums li
+{
+	list-style: none;
+	display: inline;
+	margin: 0px;
+	padding-right : 3px;
+}
+
+
+#navGenre li
+{
+	list-style: none;
+	display: inline;
+	margin: 0px;
+	padding-right : 5px;
+}
+
+#albums-list li{margin-bottom: 5px;}
+
+#container
+	{
+		/* width: 1000px; */
+		background: #34003C;
+	}
+	
+#tabnav-mobi{display:none;}
+
+#tabnav, #tabnav-mobi ul
+	{
+		margin: 7px 0 0 0 ;
+		padding-left: 2px;
+	}
+
+#tabnav li, #tabnav-mobi ul li
+	{
+		margin: 0;
+		padding: 0;
+  		display: inline;
+  		list-style-type: none;
+  	}
+
+#tabnav a:link, #tabnav a:visited, #tabnav-mobi ul  a:link, #tabnav-mobi ul a:visited
+	{
+		float: left;
+		background: #412071;
+		font-weight: bold;
+		padding: 2px 8px;
+		margin-right: 4px;
+		border: 1px solid #A0A0A0;
+		border-bottom: solid 0px white;
+		text-decoration: none;
+		color: white;
+		font-size:1em;
+	}
+
+
+
+#tabnav a:hover
+	{
+		background: #FF9E10;
+		color: white;
+	}
+.legendHeader
+{
+    background-color: #000000;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+
+.list-topics li,
+{
+	padding:1px;
+}
+
+.list-topicshp li,
+{
+	padding:1px;
+}
+
+
+div.google_ad: hover { border: 1px #CAC9D7 solid; }
+div.google_ad { border: 0px #f8f8f8 solid;}
+
+.bigger-boat {
+margin-top:0px;
+min-width:0px;
+max-width:z10px;
+width:expression(document.body.clientWidth < 210? "210px": "0px" );
+}
+
+div #hdrComp{display:none;} /*BiggerBoat hack*/
+
+
+
+#home-videoOutput, #videoOutput {padding:5px;}
+#home-videoOutput ul, #videoOutput ul {
+	margin: 0px auto;
+	padding: 0;
+	list-style: none;
+}
+#home-videoOutput ul li ,#videoOutput  ul li {float:left;text-align: center;background-color: #f0f0f0;border: solid 1px #c0c0c0;margin:5px;}
+#home-videoOutput  li {width:175px;height:250px;padding:5px;}
+#home-videoOutput ul li img {width:170px;}
+
+#videoOutput ul li {width:235px;height:250px;overflow:hidden;padding:5px;}
+#videoOutput ul li img{width:220px;}
+
+#videoOutput ul li img{
+	display:block;
+	text-align: center;
+	padding-left:3px;
+}
+
+#blogs
+{
+	margin: 10px 0px;
+	padding: 0;
+	list-style: none;
+}
+
+#blogs li
+{
+	border-bottom: solid 1px #c0c0c0;
+	margin-bottom:10px;
+}
+
+.avatar{
+border: 3px solid #dbd5c5;
+background: #fffefa;
+width:100px;
+text-align:center;
+display:block;
+margin:2px auto;
+}
+
+.avatarhp{
+border: 3px solid #dbd5c5;
+background: #fffefa;
+display:block;
+text-align:center;
+margin:0px auto;
+}
+
+.avatarhp-box
+{
+background: #fffefa;
+float:left;
+padding:5px;
+margin:0px 7px 1px 0px;
+text-align:center;
+}
+
+.avatar-box
+{
+background: #fffefa;
+float:left;
+width:110px;
+text-align:center;
+padding-top:8px;
+}
+
+#ZTMC-textlinks
+{	color: white;
+}
+#ZTMC-textlinks a
+{
+	color: white;
+}
+
+.caching-warning
+{
+    color: #888;
+    font-family: "courier new";
+
+}
+
+.reviewbox
+{
+   padding:10px;
+   margin:10px 0px;
+   background-color:#f0f0f0;
+}
+
+.review-cover-zone
+{
+   float: right;
+   display: inline;
+   background-color:#ffffff;
+   text-align: center;
+   padding:3px;
+   margin:0px 0px 15px 15px;
+   border:solid 1px #aaaaaa;
+}
+
+.review-text-zone
+{
+   margin-bottom: 0px;
+}
+
+.review-footer
+{
+   margin-top:20px;
+   padding-top:10px;
+   color:#888;
+   text-align: right;
+   border-top:solid 1px #ccc;
+}
+
+
+hr{
+color: #f0f0f0;
+background-color: #f0f0f0;
+height: 1px;
+border: 0px;
+padding:0px;
+margin:2px 0px;
+}
+
+.subtitle {font-weight:normal;margin:0px;padding:0px;display:inline;float:left;color:#ccc;text-Transform:italic;font-size:11px;}
+.floatAddThis{display:inline;float:right;width:140px;text-align:right;padding:4px 0px;margin:0px;}
+
+
+/* self-clearing floats */
+#videoOutput ul:after,
+#home-videoOutput ul:after,
+#blogs li:after,
+.avatar-box:after,
+.avatarhp-box:after,
+.review-text-zone:after,
+.floatAddThis:after
+{
+   content: ".";
+   display: block;
+   height: 0;
+   clear: both;
+   visibility: hidden;
+}
+
+
+
+#ebay-header {
+background-color:#FFFFCC;
+width:100%;
+border:solid 1px #FFCE63;
+border-bottom: 0px;
+margin:0;
+padding:0;
+}
+
+#ebay-header img {
+	margin:5px;
+	float:left;
+	border:solid 1px #FFCE63;
+	width:144px;
+	height:59px;
+}
+
+#ebay-rss-items {
+width:100%;
+border-left:solid 1px #FFCE63;
+border-right:solid 1px #FFCE63;
+margin:0;padding:0;
+}
+
+.ebay-noscroll {
+}
+.ebay-scroll {
+max-height:375px;
+overflow:auto;
+overflow-x:hidden;
+}
+
+#ebay-rss-items table{
+width:100%;
+margin:0px;padding:0px;
+}
+#ebay-rss-items td {
+margin:0px;
+padding:3px;
+font-family: 'Open Sans', Arial;
+background-color:#fff;
+border-bottom:solid 1px #FFFFCC;
+}
+#ebay-footer {
+   margin: 0px;
+   padding: 0px;
+   background-color:#FFFFCC;
+   width:100%;
+   border-left:solid 1px #FFCE63;
+   border-right:solid 1px #FFCE63;
+   border-bottom:solid 1px #FFCE63;
+}
+#ebay-query-info {
+   padding:5px;
+   text-align:left;
+   float:left;
+   width:49%;
+   font-family: 'Open Sans', Arial;
+}
+#ebay-search-input {
+   padding:5px 2px;
+   text-align:right;
+   float:right;
+   width:49%;
+   font-family: 'Open Sans', Arial;
+}
+#ebay-search-input input{
+   font-family: 'Open Sans', Arial;
+}
+
+#ebay-rss-items .itemimg{
+height:48px;
+max-width:60px;
+margin:0px auto;
+padding:3px;
+border:solid 3px #ddd;
+text-align:center;
+}
+
+.ebay-td-image{text-align:center;width:75px;}
+.ebay-td-title{text-align:left;}
+.ebay-td-price{width:175px;text-align:left;}
+.ebay-td-time{width:125px;text-align:center;}
+
+#ebay-rss-items li:after,
+#ebay-rss-items:after,
+#ebay-header:after,
+#ebay-footer:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+#amazon-header {
+background-image: url(/static-images/Amazon-logo.gif);
+background-repeat: no-repeat;
+background-color:#000;
+background-position: top center;
+border:solid 1px #000;
+width:100%;
+height:65px;
+margin-top:20px;
+}
+
+
+
+
+#amazonHeaderLogContainer {
+   margin: 0px;
+   background-color:#f0f0f0;
+   width:100%;
+   border-left:solid 1px #000;
+   border-right:solid 1px #000;
+}
+
+#amazonHeaderLogText
+{
+    color:#777;
+    padding:2px 3px;
+	text-align:left;
+}
+
+
+#amazon-rss-items {
+width:100%;
+border-left:solid 1px #000;
+border-right:solid 1px #000;
+margin:0px;padding:0px;
+}
+.amazon-noscroll {
+}
+.amazon-scroll {
+max-height:500px;
+overflow:auto;
+overflow-x:hidden;
+}
+.amazon-scroll-ie6fix {
+height:375px;
+overflow:auto;
+overflow-x:hidden;
+}
+
+
+#amazon-rss-items table{
+width:100%;
+margin:0px;padding:0px;
+}
+#amazon-rss-items td {
+margin:0px;
+padding:3px;
+font-family: 'Open Sans', Arial;
+background-color:#fff;
+border-bottom:solid 1px #f0f0f0;
+}
+
+#amazon-footer {
+   margin: 0px;
+   padding: 0px;
+   background-color:#f0f0f0;
+   width:100%;
+   border-left:solid 1px #000;
+   border-right:solid 1px #000;
+   border-bottom:solid 1px #000;
+   margin-bottom:20px;
+
+}
+#amazon-query-info {
+   padding:10px 5px;
+   text-align:left;
+   float:left;
+   width:49%;
+   font-family: 'Open Sans', Arial;
+}
+#amazon-search-input {
+   padding:10px 5px;
+   text-align:right;
+   float:right;
+   width:48%;
+   font-family: 'Open Sans', Arial;
+}
+#amazon-search-input input{
+   font-family: 'Open Sans', Arial;
+}
+
+
+#amazon-rss-items .itemimg{
+height:48px;
+max-width:60px;
+margin:0px auto;
+padding:3px;
+border:solid 3px #ddd;
+text-align:center;
+}
+
+.amazonTdImage{text-align:center;width:75px;}
+.amazonTdTitle{text-align:left;}
+.amazonTdPrice{width:150px;text-align:left;}
+
+.amazonTdBinding{width:150px;text-align:center;color:#777;}
+.amazonTdReleasedate{width:50px;text-align:center;color:#777;}
+.amazonTitleFormat{color:#777;}
+
+#amazon-rss-items li:after,
+#amazon-rss-items:after,
+#amazon-footer:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
+#lpcd-header {
+background-image: url('https://www.lpcdreissues.com/img/logo.png');
+background-size: 20%;
+background-repeat: no-repeat;
+background-color:#346899;
+background-position: top center;
+border:solid 1px #000;
+width:100%;
+height:75px;
+margin-top:20px;
+}
+
+
+#lpcdHeaderLogContainer {
+   margin: 0px;
+   background-color:#f0f0f0;
+   width:100%;
+   border-left:solid 1px #000;
+   border-right:solid 1px #000;
+}
+
+#lpcdHeaderLogText
+{
+    color:#777;
+    padding:2px 3px;
+	  text-align:left;
+}
+
+
+#lpcd-rss-items {
+width:100%;
+border-left:solid 1px #000;
+border-right:solid 1px #000;
+margin:0px;padding:0px;
+}
+.lpcd-noscroll {
+}
+.lpcd-scroll {
+max-height:375px;
+overflow:auto;
+overflow-x:hidden;
+}
+.lpcd-scroll-ie6fix {
+height:375px;
+overflow:auto;
+overflow-x:hidden;
+}
+
+
+#lpcd-rss-items table{
+width:100%;
+margin:0px;padding:0px;
+}
+#lpcd-rss-items td {
+margin:0px;
+padding:3px;
+font-family: 'Open Sans', Arial;
+background-color:#fff;
+border-bottom:solid 1px #f0f0f0;
+}
+
+#lpcd-footer {
+   margin: 0px;
+   padding: 0px;
+   background-color:#f0f0f0;
+   width:100%;
+   border-left:solid 1px #000;
+   border-right:solid 1px #000;
+   border-bottom:solid 1px #000;
+   margin-bottom:20px;
+   font-size:66%;
+
+}
+#lpcd-query-info {
+   padding:10px 5px;
+   text-align:left;
+   float:left;
+   width:49%;
+   font-family: 'Open Sans', Arial;
+}
+#lpcd-search-input {
+   padding:10px 5px;
+   text-align:right;
+   float:right;
+   width:48%;
+   font-family: 'Open Sans', Arial;
+}
+#lpcd-search-input input{
+   font-family: 'Open Sans', Arial;
+}
+
+
+#lpcd-rss-items .itemimg{
+height:48px;
+max-width:60px;
+margin:0px auto;
+padding:3px;
+border:solid 3px #ddd;«
+text-align:center;
+}
+
+.lpcdTdImage{text-align:center;width:75px;}
+.lpcdTdTitle{text-align:left;}
+.lpcdTdTitle:first-letter {text-transform: uppercase;}
+.lpcdTdPrice{width:200px;text-align:center;}
+
+.lpcdTdBinding{width:150px;text-align:center;color:#777;}
+.lpcdTdReleasedate{width:50px;text-align:center;color:#777;}
+.lpcdTitleFormat{color:#777;text-align:center;}
+
+#lpcd-rss-items li:after,
+#lpcd-rss-items:after,
+#lpcd-footer:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.icon-random
+{
+margin-bottom:5px;background-image: url(/static-images/wand.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+.icon-comments
+{
+margin-bottom:5px;background-image: url(/static-images/user_msg.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+.icon-post
+{
+margin-bottom:5px;background-image: url(/static-images/blog_add.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+
+.icon-date
+{
+margin-bottom:5px;background-image: url(/static-images/calendar.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+
+.icon-socialcomments
+{
+margin-bottom:5px;background-image: url(/static-images/polemize.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+.icon-permalink
+{
+margin-bottom:5px;background-image: url(/static-images/link.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+.icon-report
+{
+margin-bottom:5px;background-image: url(/static-images/flag_red.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+.icon-feed
+{
+margin-bottom:5px;background-image: url(/static-images/feed.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+.icon-email-link
+{
+margin-bottom:5px;background-image: url(/static-images/email_link.png);background-position: 0 50%;background-repeat: no-repeat;	padding: 2px 0px 2px 19px;
+}
+
+
+.ul-relatedlink li
+{
+	line-height:18px;
+}
+#MySpamTrap, #Imessage2 {display: none;}
+
+.buyitnow {margin:0px;padding:0px;vertical-align:middle;width: 54px;}
+

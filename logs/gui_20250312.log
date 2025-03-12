@@ -173,3 +173,29 @@ AttributeError: 'TagExplorerView' object has no attribute 'selection_changed'
 2025-03-12 02:49:29,328 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
 2025-03-12 02:49:29,772 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
 2025-03-12 02:49:31,741 - albumexplore.gui - DEBUG - Table view hidden
+2025-03-12 12:55:04,185 - albumexplore.gui - DEBUG - Creating view for type: ViewType.TABLE
+2025-03-12 12:55:04,236 - albumexplore.gui - DEBUG - Initializing TableView
+2025-03-12 12:55:04,266 - albumexplore.gui - DEBUG - TableView initialized
+2025-03-12 12:55:21,564 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 12:55:21,564 - albumexplore.gui - INFO - Main window initialized
+2025-03-12 12:55:22,194 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 12:55:22,195 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QRect(0, 0, 1332, 760)
+2025-03-12 12:55:22,196 - albumexplore.gui - DEBUG - Table view shown
+2025-03-12 12:55:22,205 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QRect(0, 0, 1332, 594)
+2025-03-12 12:55:22,913 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 12:55:22,915 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QRect(0, 0, 1350, 594)
+2025-03-12 12:55:23,547 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 12:56:28,682 - albumexplore.gui - DEBUG - Table view hidden
+2025-03-12 13:00:26,275 - albumexplore.gui - DEBUG - Creating view for type: ViewType.TABLE
+2025-03-12 13:00:26,321 - albumexplore.gui - DEBUG - Initializing TableView
+2025-03-12 13:00:26,329 - albumexplore.gui - DEBUG - TableView initialized
+2025-03-12 13:00:43,346 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 13:00:43,346 - albumexplore.gui - INFO - Main window initialized
+2025-03-12 13:00:43,984 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 13:00:43,985 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QRect(0, 0, 1332, 760)
+2025-03-12 13:00:43,986 - albumexplore.gui - DEBUG - Table view shown
+2025-03-12 13:00:43,993 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QRect(0, 0, 1332, 594)
+2025-03-12 13:00:44,712 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 13:00:44,714 - albumexplore.gui - DEBUG - Table resized to PyQt6.QtCore.QRect(0, 0, 1350, 594)
+2025-03-12 13:00:45,340 - albumexplore.gui - DEBUG - Updated table view with 11697 rows
+2025-03-12 13:05:41,079 - albumexplore.gui - DEBUG - Table view hidden
