@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class ProgArchivesParser(BaseParser):
     """Parser for ProgArchives HTML files."""
     
-    VALID_RECORD_TYPES = {'Studio', 'Single', 'EP', 'Fan Club', 'Promo'}
+    VALID_RECORD_TYPES = {'Studio', 'Singles/EPs/Fan Club/Promo'}
     ENCODINGS_TO_TRY = ['utf-8', 'iso-8859-1', 'windows-1252', 'latin1']
     
     def __init__(self, directory_path: Path):
@@ -142,18 +142,15 @@ class ProgArchivesParser(BaseParser):
             if year_match:
                 year = int(year_match.group())
             
-            # Extract record type
+            # Extract record type with improved matching
             lower_info = info_text.lower()
-            if 'promo' in lower_info:
-                record_type = 'Promo'
-            elif 'studio' in lower_info:
+            
+            # Match Singles/EPs/Fan Club/Promo first
+            if any(x in lower_info for x in ['single', 'ep', 'e.p.', 'promo', 'fan club', 'promotional']):
+                record_type = 'Singles/EPs/Fan Club/Promo'
+            # Then match Studio albums
+            elif any(x in lower_info for x in ['studio', 'full-length', 'lp', 'album']):
                 record_type = 'Studio'
-            elif 'fan club' in lower_info:
-                record_type = 'Fan Club'
-            elif 'ep' in lower_info or 'e.p.' in lower_info:
-                record_type = 'EP'
-            elif 'single' in lower_info:
-                record_type = 'Single'
                 
         except Exception as e:
             logger.error(f"Error parsing record info '{info_text}': {e}")

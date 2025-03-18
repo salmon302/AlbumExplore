@@ -1,7 +1,13 @@
+"""Tests for the arc renderer."""
 import pytest
 from albumexplore.visualization.models import VisualNode, VisualEdge
 from albumexplore.visualization.state import ViewState, ViewType
 from albumexplore.visualization.arc_renderer import ArcRenderer
+from albumexplore.visualization.base_renderer import RenderConfig
+
+@pytest.fixture
+def render_config():
+	return RenderConfig()
 
 @pytest.fixture
 def sample_nodes():
@@ -17,7 +23,7 @@ def sample_nodes():
 		VisualNode(
 			id="album2",
 			label="Artist2 - Album2",
-			size=1.5,
+			size=2.0,
 			color="#808080",
 			shape="circle",
 			data={"type": "album"}
@@ -25,7 +31,7 @@ def sample_nodes():
 		VisualNode(
 			id="album3",
 			label="Artist3 - Album3",
-			size=1.0,
+			size=2.0,
 			color="#808080",
 			shape="circle",
 			data={"type": "album"}
@@ -61,8 +67,8 @@ def view_state():
 	state.position = {"x": 100.0, "y": 50.0}
 	return state
 
-def test_node_positioning(sample_nodes):
-	renderer = ArcRenderer()
+def test_node_positioning(sample_nodes, render_config):
+	renderer = ArcRenderer(render_config)
 	positions = renderer._calculate_node_positions(sample_nodes, 1000.0)
 	
 	# Check that nodes are evenly spaced
@@ -74,8 +80,8 @@ def test_node_positioning(sample_nodes):
 	# Check that positions are within bounds
 	assert all(0 < pos < 1000.0 for pos in positions.values())
 
-def test_arc_calculation():
-	renderer = ArcRenderer()
+def test_arc_calculation(render_config):
+	renderer = ArcRenderer(render_config)
 	points = renderer._calculate_arc(100.0, 300.0, 100.0)
 	
 	# Check number of points
@@ -91,8 +97,8 @@ def test_arc_calculation():
 	min_y = min(point[1] for point in points)
 	assert min_y == pytest.approx(-100.0)  # Maximum height should match input
 
-def test_arc_rendering(sample_nodes, sample_edges, view_state):
-	renderer = ArcRenderer()
+def test_arc_rendering(sample_nodes, sample_edges, view_state, render_config):
+	renderer = ArcRenderer(render_config)
 	result = renderer.render(sample_nodes, sample_edges, view_state)
 	
 	assert result["type"] == "arc"
@@ -102,14 +108,6 @@ def test_arc_rendering(sample_nodes, sample_edges, view_state):
 	# Check node rendering
 	node1 = next(n for n in result["nodes"] if n["id"] == "album1")
 	assert node1["selected"] is True
-	
-	# Add debug information
-	original_size = next(n.size for n in sample_nodes if n.id == "album1")
-	print(f"Original node size: {original_size}")
-	print(f"Zoom level: {view_state.zoom_level}")
-	print(f"Expected size: {original_size * view_state.zoom_level}")
-	print(f"Actual size: {node1['size']}")
-	
 	assert node1["size"] == 2.0 * view_state.zoom_level
 	
 	# Check arc rendering
@@ -119,8 +117,8 @@ def test_arc_rendering(sample_nodes, sample_edges, view_state):
 	assert arc["weight"] == 1.0
 	assert len(arc["path"]) > 0
 
-def test_arc_connection_visibility(sample_nodes, sample_edges, view_state):
-    renderer = ArcRenderer()
+def test_arc_connection_visibility(sample_nodes, sample_edges, view_state, render_config):
+    renderer = ArcRenderer(render_config)
     result = renderer.render(sample_nodes, sample_edges, view_state)
     
     # Check arc visibility parameters
@@ -135,8 +133,8 @@ def test_arc_connection_visibility(sample_nodes, sample_edges, view_state):
     end_point = path[-1]
     assert start_point[1] == end_point[1]  # Same y-coordinate at endpoints
 
-def test_node_label_positioning(sample_nodes, view_state):
-    renderer = ArcRenderer()
+def test_node_label_positioning(sample_nodes, view_state, render_config):
+    renderer = ArcRenderer(render_config)
     result = renderer.render(sample_nodes, [], view_state)
     
     # Check node and label positioning

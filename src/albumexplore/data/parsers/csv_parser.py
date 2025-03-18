@@ -13,7 +13,7 @@ class CSVParser:
     
     def __init__(self, path: Union[str, Path]):
         """Initialize parser with file or directory path."""
-        self.path = Path(path)
+        self.file_path = Path(path)  # Use file_path consistently
         self._data = None
         self._delimiter = None  # Will be set during parsing
         self.data_cleaner = DataCleaner()
@@ -23,19 +23,36 @@ class CSVParser:
             'Bandcamp', 'Spotify', 'YouTube', 'Amazon', 'Apple Music'
         ]
 
+    @property
+    def path(self) -> Path:
+        """Backward compatibility property for path."""
+        return self.file_path
+
     def parse(self) -> pd.DataFrame:
         """Parse CSV/TSV file(s) and return a cleaned DataFrame."""
-        logger.info(f"Parsing data from: {self.path}")
+        logger.info(f"Parsing data from: {self.file_path}")
         
         try:
-            if self.path.is_dir():
-                return self.parse_multiple_csv(self.path)
+            if self.file_path.is_dir():
+                return self.parse_multiple_csv(self.file_path)
             else:
-                return self.parse_single_csv(self.path)
+                return self.parse_single_csv(self.file_path)
             
         except Exception as e:
             logger.error(f"Error parsing data: {str(e)}")
             return pd.DataFrame(columns=self.column_names)
+
+    def _parse_tags(self, tag_str: str) -> list:
+        """Parse a tag string into a list of individual tags."""
+        if pd.isna(tag_str):
+            return ['untagged']
+        
+        # Split by both commas and pipes
+        tags = []
+        for part in tag_str.split('|'):
+            tags.extend(t.strip().lower() for t in part.split(',') if t.strip())
+        
+        return tags if tags else ['untagged']
 
     def parse_single_csv(self, file_path: Path) -> pd.DataFrame:
         """Parse a single CSV/TSV file and return a cleaned DataFrame."""
@@ -63,15 +80,19 @@ class CSVParser:
             # Drop empty rows and columns
             df = df.dropna(how='all').dropna(axis=1, how='all')
             
-            # Clean and standardize the data
-            df = self.data_cleaner.clean_dataframe(df)
+            # Clean and standardize column names
+            df.columns = df.columns.str.strip()
             
             # Convert genres to tags list
             if 'Genre / Subgenres' in df.columns:
-                df['tags'] = df['Genre / Subgenres'].apply(
-                    lambda x: [g.strip().lower() for g in str(x).split(',') if g.strip()]
-                    if pd.notna(x) else ['untagged']
-                )
+                df['tags'] = df['Genre / Subgenres'].apply(self._parse_tags)
+                
+            # Standardize date column name
+            if 'Release Date' in df.columns:
+                df = df.rename(columns={'Release Date': 'release_date'})
+            
+            # Clean and standardize the data
+            df = self.data_cleaner.clean_dataframe(df)
             
             logger.debug(f"Successfully parsed {len(df)} rows from {file_path}")
             return df

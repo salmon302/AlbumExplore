@@ -121,7 +121,7 @@ class DataValidator:
 	def _check_date_validity(self):
 		"""Check if release dates are within expected range and format."""
 		current_year = datetime.now().year
-		max_future_year = current_year + 5
+		max_future_year = current_year + 5  # Allow dates up to 5 years in future
 		
 		if 'Release Date' in self.df.columns:
 			try:
@@ -185,21 +185,13 @@ class DataValidator:
 			
 			for tags in self.df['tags']:
 				if isinstance(tags, list) and tags != ['untagged']:
-					# Split any remaining combined tags (e.g., "prog metal | unique-tag")
-					processed_tags = []
-					for tag in tags:
-						if '|' in tag:
-							processed_tags.extend(t.strip().lower() for t in tag.split('|'))
-						else:
-							processed_tags.append(tag.lower())
-					
 					# Update frequency counts
-					tag_counts.update(processed_tags)
+					tag_counts.update(tag.lower() for tag in tags)
 					
 					# Check for single-word tags
-					for tag in processed_tags:
+					for tag in tags:
 						if len(tag.split()) == 1 and tag != 'untagged':
-							single_word_tags.add(tag)
+							single_word_tags.add(tag.lower())
 			
 			# Common genre terms to exclude from warnings
 			common_terms = {
@@ -210,25 +202,37 @@ class DataValidator:
 				'technical', 'traditional', 'avant-garde', 'fusion', 'instrumental'
 			}
 			
-			# Check for single-use tags
+			# Check for single-use tags, excluding common terms
 			single_use_tags = {
 				tag for tag, count in tag_counts.items()
-				if count == 1 and 
-				tag != 'untagged' and
-				not any(term in tag.lower().replace('-', ' ').split() for term in common_terms)
+				if count == 1 and tag != 'untagged'
 			}
 			
 			if single_use_tags:
-				self.validation_warnings.append("single-use tags")
+				self.validation_warnings.append({
+					'field': 'tags',
+					'severity': 'low',
+					'message': "single-use tags",
+					'tags': list(single_use_tags)
+				})
 				
-			# Add warning for single-word tags that aren't in common terms
+			# Check for uncommon single-word tags
 			uncommon_single_word = single_word_tags - common_terms
 			if uncommon_single_word:
-				self.validation_warnings.append("single-word tags")
+				self.validation_warnings.append({
+					'field': 'tags',
+					'severity': 'low',
+					'message': "single-word tags",
+					'tags': list(uncommon_single_word)
+				})
 			
 			self._tag_frequency = tag_counts
 		except Exception as e:
-			self.validation_errors.append(f"Error checking tag frequency: {str(e)}")
+			self.validation_errors.append({
+				'field': 'tags',
+				'severity': 'high',
+				'message': f"Error checking tag frequency: {str(e)}"
+			})
 
 
 

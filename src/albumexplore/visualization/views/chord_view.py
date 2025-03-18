@@ -5,7 +5,7 @@ import math
 
 from .base_view import BaseView
 from ..state import ViewType, ViewState
-from ..chord_renderer import ChordRenderer
+from ..renderer import create_renderer
 from albumexplore.gui.gui_logging import graphics_logger
 
 class ChordView(BaseView):
@@ -14,13 +14,10 @@ class ChordView(BaseView):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.view_state = ViewState(ViewType.CHORD)
-        self.renderer = ChordRenderer()
+        self.renderer = create_renderer(ViewType.CHORD)
         self.setMinimumSize(400, 400)
         
-        # Add background color
-        self._background_color = Qt.GlobalColor.white
-        
-        # Improved buffer management
+        # Buffer management
         self._paint_buffer = None
         self._buffer_dirty = True
         self._buffer_lock = False
@@ -30,7 +27,7 @@ class ChordView(BaseView):
         self._cleanup_timer = QTimer()
         self._cleanup_timer.setSingleShot(True)
         self._cleanup_timer.timeout.connect(self._cleanup_resources)
-    
+
     def update(self) -> None:
         """Override update to mark buffer as dirty."""
         self._buffer_dirty = True
@@ -60,7 +57,7 @@ class ChordView(BaseView):
             # Call parent's background painting to ensure proper clearing
             painter.setRenderHint(QPainter.RenderHint.Antialiasing)
             painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Source)
-            painter.fillRect(self.rect(), self._background_color)
+            painter.fillRect(self.rect(), Qt.GlobalColor.white)
             painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
             
             # Now draw from buffer

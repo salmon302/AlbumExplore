@@ -11,8 +11,16 @@ class Base(DeclarativeBase):
 album_tags = Table(
     'album_tags',
     Base.metadata,
-    Column('album_id', Integer, ForeignKey('albums.id')),
-    Column('tag_id', Integer, ForeignKey('tags.id'))
+    Column('album_id', String, ForeignKey('albums.id')),
+    Column('tag_id', String, ForeignKey('tags.id'))
+)
+
+tag_hierarchy = Table(
+    'tag_hierarchy',
+    Base.metadata,
+    Column('parent_id', String, ForeignKey('tags.id')),
+    Column('child_id', String, ForeignKey('tags.id')),
+    extend_existing=True
 )
 
 class Album(Base):
@@ -40,14 +48,6 @@ class Album(Base):
     def __repr__(self):
         return f"<Album {self.artist} - {self.title}>"
 
-# Association table for tag hierarchy
-tag_hierarchy = Table(
-    'tag_hierarchy',
-    Base.metadata,
-    Column('parent_id', String, ForeignKey('tags.id')),
-    Column('child_id', String, ForeignKey('tags.id'))
-)
-
 class TagCategory(Base):
     __tablename__ = "tag_categories"
     
@@ -63,7 +63,7 @@ class TagCategory(Base):
 
 class Tag(Base):
     __tablename__ = "tags"
-    id = Column(Integer, primary_key=True)
+    id = Column(String, primary_key=True)
     name = Column(String, nullable=False, unique=True)
     normalized_name = Column(String, nullable=True, index=True)
     category_id = Column(String, ForeignKey('tag_categories.id'))

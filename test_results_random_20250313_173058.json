@@ -1,0 +1,22 @@
+{
+  "test_date": "2025-03-13T17:30:58.269095",
+  "duration": "0:00:55.206691",
+  "configuration": {
+    "test_bands": 5,
+    "min_albums": 3,
+    "error_threshold": 0.2
+  },
+  "statistics": {
+    "bands_total": 0,
+    "bands_successful": 0,
+    "bands_failed": 0,
+    "band_error_rate": 1,
+    "albums_total": 0,
+    "albums_successful": 0,
+    "albums_failed": 0,
+    "album_error_rate": 1
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": []
+}

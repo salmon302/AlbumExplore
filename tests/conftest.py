@@ -4,24 +4,39 @@ import logging
 import pytest
 from pathlib import Path
 from typing import Tuple, List
-
-from albumexplore.database import Base, set_test_session, clear_test_session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, scoped_session
+from albumexplore.database import Base
 from albumexplore.visualization.models import VisualNode, VisualEdge
 from .utils import setup_test_config
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import QTimer
 
 # Configure test logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+# Global test session storage
+_test_session = None
 
-@pytest.fixture(scope="session")
+def set_test_session(session):
+    """Set the global test session."""
+    global _test_session
+    _test_session = session
+
+def clear_test_session():
+    """Clear the global test session."""
+    global _test_session
+    _test_session = None
+
+@pytest.fixture(scope="function")
 def engine():
     """Create test database engine."""
-    return create_engine('sqlite:///:memory:')
+    engine = create_engine('sqlite:///:memory:', poolclass=None)
+    yield engine
+    engine.dispose()
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def tables(engine):
     """Create all tables for testing."""
     Base.metadata.create_all(engine)
@@ -33,11 +48,12 @@ def db_session(engine, tables):
     """Create a new database session for a test."""
     connection = engine.connect()
     transaction = connection.begin()
-    session = scoped_session(sessionmaker(bind=connection))
+    session_factory = sessionmaker(bind=connection)
+    session = scoped_session(session_factory)
     
     yield session
     
-    session.close()
+    session.remove()
     transaction.rollback()
     connection.close()
 
@@ -46,7 +62,7 @@ def setup_test_environment(db_session):
     """Set up test environment before each test."""
     logger.debug("Setting up test environment")
     setup_test_config()
-    set_test_session()
+    set_test_session(db_session)
     yield
     clear_test_session()
     logger.debug("Test environment cleanup complete")
@@ -81,10 +97,25 @@ def sample_data() -> Tuple[List[VisualNode], List[VisualEdge]]:
     
     return nodes, edges
 
-@pytest.fixture
-def qt_application():
-    """Create QApplication instance for tests."""
-    from PyQt6.QtWidgets import QApplication
-    app = QApplication([])
+@pytest.fixture(scope="module")
+def qapp():
+    """Create QApplication instance for the test session."""
+    app = QApplication.instance()
+    if app is None:
+        app = QApplication([])
     yield app
-    app.quit()
+    # Don't quit the app as it may be needed by other tests
+
+@pytest.fixture
+def qtbot(qapp):
+    """Create a QtBot instance for Qt tests."""
+    from pytestqt.plugin import QtBot
+    result = QtBot(qapp)
+    yield result
+
+@pytest.fixture
+def process_events(qapp):
+    """Process Qt events for animations."""
+    def _process():
+        qapp.processEvents()
+    return _process

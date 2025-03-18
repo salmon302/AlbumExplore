@@ -10,11 +10,9 @@ Title
 Artist
 Genre
 Record Type, Year, Ratings
-
-More data we can obtain is:
-individual artist names and instrumentation, as it is common within Progarchives to list them on the album page, however this will greatly increase our HTML download/extraction demand as we will need to reach each individual album. Depending on our output, it may be worthwhile to combine both strategies 1 & 2 for a comprehensive result.
+individual artist names and instrumentation
 Reviews by progarchives members
-Descriptions of artists/bands
+Descriptions/Biography of artists/bands
 
 ProgArchives does not have a genre tag system, so we will have to use their subgenre system as a complement to our existing tag system. This will be somewhat aided by the descriptions of the subgenres, which can be found in this directory. Their subgenre must be treated as a separate "parent" tag that can also have similarity relations with our other genre tags.
 There is very likely to be significant overlap between ProgArchives album data and our Progressive Rock/Metal CSVs, this must be accounted for.

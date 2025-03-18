@@ -1,0 +1,1350 @@
+
+<!--
+include file="inc_detectmobilebrowser.asp"
+-->
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html
+		xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en"
+		xmlns:og="http://opengraphprotocol.org/schema/"
+		xmlns:fb="http://www.facebook.com/2008/fbml" />
+<head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta property="fb:pages" content="56822568842" />
+
+<meta name="fo-verify" content="e3f73851-9d09-4e2c-9482-1b9161dba463" />
+
+<!-- TITLE -->
+<title>BOB DOWNES' OPEN MUSIC discography and reviews</title>
+
+<!-- META DESCRIPTION -->
+<meta name="description" content="BOB DOWNES' OPEN MUSIC is a Jazz Rock/Fusion / Progressive Rock artist from United Kingdom. This page includes BOB DOWNES' OPEN MUSIC's : biography, official website, pictures, videos from YouTube, MP3 (free download, stream), related forum topics, news, tour dates and  events, live eBay auctions, online shopping sites, detailled reviews and ratings (top albums) and the full discography of albums: studios, live, boxset/compilations, singles/EPs/fan club/promo releases on CD, vinyl / lp or cassette and videos released on Blu-ray, DVD or VHS">
+
+<!-- META KEYWORDS -->
+<meta name="keywords" content="BOB DOWNES' OPEN MUSIC, Jazz Rock/Fusion, music, artist, band, MP3, download, biography, official site, pictures, photos, videos, youtube, forum topics, news, tour & shows dates, events, online stores, reviews, ratings, discography, top albums, studio albums, live albums, boxset, compilations, singles, EPs, fan club, promo, cd, vinyl, lp, cassette, dvd, blu-ray, vhs, progressive rock, prog rock, progrsssive rock archives, prog archives, prog archive, progarchive">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<meta name="theme-color" content="#34003C">
+<link rel="stylesheet" href="static-css/mobile.css?v=0">
+<link href="static-css/screen.css?v=0" rel="stylesheet" />
+
+<style type="text/css">@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/vietnamese/400/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/greek/400/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/latin-ext/400/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/greek-ext/400/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/hebrew/400/normal.woff2);unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/cyrillic/400/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/cyrillic-ext/400/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Open Sans;font-style:normal;font-weight:400;src:url(/cf-fonts/s/open-sans/5.0.20/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}</style>
+
+<link href="static-css/fontawesome-free-6.2.0-web/css/all.css" rel="stylesheet">
+<link href="/lib/prototip2202/css/prototip.css" rel="stylesheet" />
+
+<link href="/lib/starbox12/css/starbox.css" rel="stylesheet" />
+<link href="/lib/prototip2202/css/prototip.css" rel="stylesheet" />
+
+
+
+
+<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+<script language="JavaScript" src="static-js/global.js?v=2" type="text/javascript" async></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1/prototype.js"></script>
+<script type='text/javascript' src='/lib/prototip2202/js/prototip/prototip.js' async></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/scriptaculous/1/scriptaculous.js" async></script>
+<script src="/lib/starbox12/js/starbox.js" type="text/javascript" async></script>
+
+
+
+
+
+
+
+
+
+<!-- Facebook Open Graph Protocol -->
+
+<meta property="og:type"  content="band" />
+<meta property="og:title" content="BOB DOWNES' OPEN MUSIC" />
+<meta property="og:image" content="http://www.progarchives.com/progressive_rock_discography_band/dones pic.jpg" />
+<meta property="og:url"   content="" />
+
+<meta property="og:site_name" content="Progarchives.com" />
+<meta property="fb:admins"    content="546882990" />
+<meta property="fb:app_id"    content="131943541722	"/>
+
+
+
+
+
+
+
+
+<meta name="verify-v1" content="gekxcnV9VQ1H7apKp4Geh+BYZ8obt1RE26pabGvprpE=" />
+<meta name="google-site-verification" content="7zi8CAxLZW3Z8s4rVL0Bw-3YfQ60x_tENsOo0U7rdpM" />
+
+<meta name="robots" content="NOODP" />
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-597J6J5M2T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-597J6J5M2T');
+</script>
+
+<style type="text/css">
+/* Stars + Quick rating */
+.discographyStar
+{
+    width: 70px;
+    margin: 0 auto;
+}
+
+.discographyStarAjaxLoader
+{
+    margin-left: 0px;
+    text-align: center;
+}
+</style>
+
+<script language="Javascript">
+function generateReadOnlyStarbox(element, average) {
+    document.observe('dom:loaded', function() {
+        new Starbox(element, average, { locked: true, ghosting: true });
+    });
+}
+
+function generateQuickRatingStarbox(element, average, username) {
+	if(username == "-1") {
+		generateQuickRatingOffStarbox(element, average);
+	} else {
+		generateQuickRatingOnStarbox(element, average);
+	}
+}
+
+function generateQuickRatingOnStarbox(element, average) {
+    document.observe('dom:loaded', function() {
+        new Starbox(element, average,
+            { locked: false,
+                ghosting: true,
+                buttons: 5,
+                rerate: true,
+                color: '#850000',
+                onRate: function(element, memo) {
+
+					var strElementId = element.id.toString();
+					var ratingDivId = strElementId.substring(strElementId.indexOf('_') + 1, strElementId.lastIndexOf('_'));
+                    var albumId = strElementId.substring(strElementId.lastIndexOf('_') + 1);
+
+                    document.getElementById('readOnlyRating_' + ratingDivId + '_' + albumId).className = 'discographyStarAjaxLoader';
+                    document.getElementById('readOnlyRating_' + ratingDivId + '_' + albumId).innerHTML = '<img width=\"14\" height=\"14\" style=\"border:0; margin:0; padding:0;\" src=\'/static-images/ajax-loader.gif\' alt=\'\'/>';
+
+                    new Ajax.Request('/ajax/QuickRating.asp?icdid=' + albumId + '&irate=' + memo.rated, {
+                        method: 'get',
+                        onSuccess: function(transport) {
+                            var json = transport.responseText.evalJSON();
+
+                            document.getElementById('readOnlyRating_' + ratingDivId + '_' + albumId).className = 'discographyStar';
+                            new Starbox('readOnlyRating_' + ratingDivId + '_' + albumId, json.QuickRating.avgRatings, { locked: true });
+
+                            document.getElementById('nbRatings_' + ratingDivId).innerHTML = json.QuickRating.nbRatings;
+                            document.getElementById('avgRatings_' + ratingDivId).innerHTML = json.QuickRating.avgRatings;
+                        }
+                    });
+                }
+            }
+        );
+    });
+}
+
+function generateQuickRatingOffStarbox(element, average) {
+    document.observe('dom:loaded', function() {
+        new Starbox(element, average,
+            { locked: false,
+                ghosting: true,
+                buttons: 5,
+                rerate: true,
+                color: '#850000',
+                onRate: function(element, memo) {
+				}
+            }
+        );
+
+		new Tip(element, "Tooltips can be set to show on click.", {
+						title: "Logon required",
+						style: 'logon',
+						ajax: {
+							url: 'ajax/QuickRatingLogon.asp?redirect=http://www.progarchives.com/artist.asp?id=3995',
+							options: {
+								onComplete: function(transport) {
+									// you could do something here after the ajax call is finished
+								}
+							}
+						},
+						closeButton: true,
+						showOn: 'click',
+						hideOn: { element: 'closeButton', event: 'click'},
+						stem: 'bottomMiddle',
+						hook: { target: 'topMiddle', tip: 'bottomMiddle' },
+						offset: { x: 0, y: -2 },
+						width: 300
+					});
+    });
+}
+</script>
+
+
+
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+
+<style>
+    #banner-helpPA {
+        margin: 0 0 12px 0;
+        padding: 7px;
+        background: #FF9E10;
+        color: #fff;
+        text-align: center;
+		width:  99%;
+    }
+	#banner-helpPA form {
+        display: block;
+    }
+	#banner-helpPA form input{
+        vertical-align: middle;
+		margin-top:0px;
+    }
+</style>
+
+<div id="banner-helpPA" align="center">
+<strong>Progarchives.com</strong> has always (since 2002) relied on banners ads to cover web hosting fees and all.<br />Please consider supporting us by giving monthly PayPal donations  and help keep PA fast-loading and ad-free forever.
+
+<div style="margin:5px 0 0 0">
+<a href="https://www.paypal.com/donate/?hosted_button_id=DRNRB8RG8NUN2" />
+<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" id="paypal-button-top" />
+</a>
+</div>
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+// AdSense Tracking -> Analytics
+window.google_analytics_uacct = "UA-579843-1";
+</script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '131943541722',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+<div align="center">	
+	
+	<div id="header-nav">
+
+		<div id="container">
+			<ul id="tabnav">
+			<!--<li><a href="#" class="active" id="menu-linkswrap"><i class="fa fa-bars"></i> MENU</a></li>-->
+			<li><a href="https://www.progarchives.com" class="active"><i class="fa fa-home"></i> HOME</a></li>
+			<li><a href="https://www.progarchives.com/forum/"><i class="fa fa-comments"></i> FORUMS </a></li>
+			<li><a href="/Progressive-rock.asp"><i class="fa fa-book"></i> PROG ROCK GUIDES</a></li>
+			<li><a href="/all_collaborators.asp"><i class="fa fa-sign-in"></i> LOG IN</a></li>
+			<li><a href="/ProgRadio.asp"><i class="fa fa-music"></i> PROG RADIOS</a></li>
+			<li><a href="/Progressive_rock_discography_LINKS.asp"><i class="fa fa-external-link"></i> PROG LINKS</a></li>
+			<li><a href="https://www.progarchives.com/forum/forum_posts.asp?TID=13080" rel="nofollow"><i class="fa fa-question-circle"></i> FAQ</a></li>
+			<li><a href="/about_us.asp"><i class="fa fa-info-circle"></i> ABOUT US</a></li>
+			</ul>
+		</div>
+		
+		
+
+
+		<div id="header-image">
+			<img src="static-images/Headerv2.jpg" alt="Progarchives, the progressive rock ultimate discography" />
+		</div>
+
+		<div id="navi-wrap">	
+		
+		
+		
+		
+			<div id="navGenre" >
+				<ul>
+					<li><span style="font-weight:bold;color:white">PROG SUB-GENRES</span></li>
+					<li><a href="/subgenre.asp?style=12">Canterbury Scene</a></li>
+					<li><a href="/subgenre.asp?style=3">Crossover Prog</a></li>
+					<li><a href="/subgenre.asp?style=42">Eclectic Prog</a></li>
+					<li><a href="/subgenre.asp?style=44">Experimental/Post Metal</a></li>
+					<li><a href="/subgenre.asp?style=41">Heavy Prog</a></li>
+					<li><a href="/subgenre.asp?style=35">Indo-Prog/Raga Rock</a></li>
+					<li><a href="/subgenre.asp?style=30">Jazz Rock/Fusion</a></li>
+					<li><a href="/subgenre.asp?style=17">Krautrock</a></li>
+					<li><a href="/subgenre.asp?style=18">Neo-Prog</a></li>
+					<li><a href="/subgenre.asp?style=32">Post Rock/Math Rock</a></li>
+					<li><a href="/subgenre.asp?style=6">Prog Folk</a></li>
+					<li><a href="/subgenre.asp?style=33">Progressive Electronic</a></li>
+					<li><a href="/subgenre.asp?style=19">Progressive Metal</a></li>
+					<li><a href="/subgenre.asp?style=15">Psychedelic/Space Rock</a></li>
+					<li><a href="/subgenre.asp?style=36">RIO/Avant-Prog</a></li>
+					<li><a href="/subgenre.asp?style=28">Rock Progressivo Italiano</a></li>
+					<li><a href="/subgenre.asp?style=4">Symphonic Prog</a></li>
+					<li><a href="/subgenre.asp?style=43">Tech/Extreme Prog Metal</a></li>
+					<li><a href="/subgenre.asp?style=11">Zeuhl</a></li>
+					<li><a href="/subgenre.asp?style=29">Various Genres/Artists</a></li>
+					<li><a href="/subgenre.asp?style=38"><font color="#FFFF66">Prog Related</font></a></li>
+					<li><a href="/subgenre.asp?style=37"><font color="#FFFF66">Proto-Prog</font></a></li>
+				</ul>
+			</div>
+
+			
+
+			<div id="navAlphaBands">
+			<ul>
+				<li><span style="font-weight:bold;color:white">PROG ARTISTS</span></li>
+				<li><a href="bands-alpha.asp?letter=a">A</a></li>
+				<li><a href="bands-alpha.asp?letter=b">B</a></li>
+				<li><a href="bands-alpha.asp?letter=c">C</a></li>
+				<li><a href="bands-alpha.asp?letter=d">D</a></li>
+				<li><a href="bands-alpha.asp?letter=e">E</a></li>
+				<li><a href="bands-alpha.asp?letter=f">F</a></li>
+				<li><a href="bands-alpha.asp?letter=g">G</a></li>
+				<li><a href="bands-alpha.asp?letter=h">H</a></li>
+				<li><a href="bands-alpha.asp?letter=i">I</a></li>
+				<li><a href="bands-alpha.asp?letter=j">J</a></li>
+				<li><a href="bands-alpha.asp?letter=k">K</a></li>
+				<li><a href="bands-alpha.asp?letter=l">L</a></li>
+				<li><a href="bands-alpha.asp?letter=m">M</a></li>
+				<li><a href="bands-alpha.asp?letter=n">N</a></li>
+				<li><a href="bands-alpha.asp?letter=o">O</a></li>
+				<li><a href="bands-alpha.asp?letter=p">P</a></li>
+				<li><a href="bands-alpha.asp?letter=q">Q</a></li>
+				<li><a href="bands-alpha.asp?letter=r">R</a></li>
+				<li><a href="bands-alpha.asp?letter=s">S</a></li>
+				<li><a href="bands-alpha.asp?letter=t">T</a></li>
+				<li><a href="bands-alpha.asp?letter=u">U</a></li>
+				<li><a href="bands-alpha.asp?letter=v">V</a></li>
+				<li><a href="bands-alpha.asp?letter=w">W</a></li>
+				<li><a href="bands-alpha.asp?letter=x">X</a></li>
+				<li><a href="bands-alpha.asp?letter=y">Y</a></li>
+				<li><a href="bands-alpha.asp?letter=z">Z</a></li>
+				<li><a href="bands-alpha.asp?letter=0">#</a></li>
+				<li><a href="artist.asp?id=2633" title="Various Arists: Samplers">VA: SAMPLERS</a></li>
+				<li><a href="artist.asp?id=2634" title="Various Arists: CONCEPT ALBUMS">VA: CONCEPT ALBUMS</a></li>
+				<li><a href="artist.asp?id=2635" title="Various Arists: TRIBUTES">VA: TRIBUTES</a></li>
+				<li><a href="bands-alpha.asp?letter=*">ALL</a></li>
+			</ul>
+			</div>
+
+			<div id="navTops">
+			<ul>
+				<li><span style="font-weight:bold;color:white">MISC</span></li>
+				<li><a href="/top-prog-albums.asp?salbumtypes=1">Top Prog Albums (all-time)</a></li>
+				<li><a href="/top-prog-albums.asp?syears=2025">Top 2025 Albums</a></li>
+				<li><a href="/top-prog-albums.asp?syears=2024">Top 2024 Albums</a></li>
+				<li><a href="/top-prog-albums.asp?salbumtypes=2#list">Top DVDs</a></li>
+				<li><a href="videos.asp">Videos</a></li>
+				<li><a href="https://www.progarchives.com/forum/forum_posts.asp?FID=47&TID=66175&PN=1">Interviews</a></li>
+				<li><a href="https://www.progarchives.com/forum/forum_topics.asp?FID=22">Gigs Reviews</a></li>
+				<li><a href="https://www.progarchives.com/forum/active_topics.asp">Active Topics</a></li>
+				<li>
+					<a href="GenerateRandomReview.asp" class="icon-random" title="Go to a random review">Review</a>,
+					<a href="GenerateRandomVideo.asp" class="icon-random" title="Go to a random online video">Video</a>
+				</li>				
+			</ul>
+			</div>
+
+			<div id="navShop">
+			<ul>
+				<li><span style="font-weight:bold;color:white"><i class="fa-solid fa-record-vinyl"></i> BUY PROG MUSIC</span></li>
+				<LI><A target="_blank" href="https://www.progarchives.com/RefLinks/DougLarsonImports.asp?src=topmenu" rel="nofollow">Doug Larson's Imports</A> <span style="color:white"> (5% off on orders over $125, 10% over $300, Free shipping over $135)</span></LI>
+				
+			</ul>
+			</div>
+
+
+
+
+<div id="navSearch">
+
+<script>
+
+function doit_onkeypress(event){
+	if (event.keyCode == 13 || event.which == 13){
+		submitSearch();
+	}
+}
+
+function submitSearch()
+{
+	if (document.getElementById("i_SearchOpt_new").value == "artists")
+		document.location.href = "http://www.progarchives.com/google-search-results.asp?cx=artists&q=" + document.getElementById("i_SearchQ_new").value;
+	else if (document.getElementById("i_SearchOpt_new").value == "forums")
+		document.location.href = "http://www.progarchives.com/google-search-results.asp?cx=forums&q=" + document.getElementById("i_SearchQ_new").value;
+}
+</script>
+
+
+				<a id="toggle-fullnav" class="toggle" href="#"><i class="fa fa-bars"></i></a> 
+				
+				<ul>
+				
+				<input type="text" name="q" maxlength="500" value="" id="i_SearchQ_new" onkeypress="javascript:doit_onkeypress(event);" />
+				<select id="i_SearchOpt_new" name="cx">
+				
+				<option value="artists" >discographies</option>
+				<option value="forums" >forums</option>
+				</select> 
+				<input type="button" name="sa" id="i_SearchBtn" value="submit" onclick="javascript:submitSearch();" />
+				</li>
+				</ul>
+				
+			</div>
+			<!-- ads here -->
+
+
+
+	
+	</div>
+
+</div>
+
+
+
+<div style="width:100%;max-width:1000px;padding:0px;text-align:left;background-color:#fff;" id="main">
+
+
+
+<div style="background-color:#fff;padding:15px;"><!-- Main DIV -->
+
+<h1>BOB DOWNES' OPEN MUSIC</h1>
+<h2 style="margin:1px 0px;padding:0;color:#777;font-weight:normal;">Jazz Rock/Fusion &bull; United Kingdom</h2>
+<hr />
+<h3 class="subtitle">From Progarchives.com, the ultimate progressive rock music website</h3>
+
+<div style="clear:both;"></div>
+
+<div style="background-color:#fff;margin:25px 0px 0px 0px;"><!-- Content -->
+
+
+
+
+
+<div id="artist-box" style="text-align:center;">
+
+
+<img src="progressive_rock_discography_band/dones pic.jpg" alt="Bob Downes' Open Music picture" title="Bob Downes' Open Music picture" style="margin:0px;padding:0px;display:block;border:solid 1px #f0f0f0;">
+
+
+<div>
+<ul id="artist-shortcuts">
+
+<li><a href="#biography">Biography</a></li>
+<li><a href="#buymusic">Buy music</a> <i class="fa-solid fa-record-vinyl"></i></li>
+<li><a href="#forumdiscussions">Forum discussions</a></li>
+
+<li><a href="#videos">Videos (Youtube)</a></li>
+
+<li><a href="#discography">Discography</a></li>
+<li><a href="#reviews">Reviews</a></li>
+
+<li>
+<a href="http://www.bobdownesmusic.de/" target="_blank" title="Bob Downes' Open Music official website : http://www.bobdownesmusic.de/" rel="nofollow" style="color:red;">Official website</a> <i class="fa fa-external-link"></i>
+</li>
+
+</ul>
+</div>
+
+
+
+</div>
+
+<a name="biography" id="biography"></a>
+<div id="artist-biography" style="padding-left:10px;margin:0;border-left: solid 5px #f0f0f0;">
+
+<strong>Bob Downes' Open Music biography</strong><br />
+Bob Downes was a well-known "studio rat" or a "session man" that played on many 60's records, from MANFRED MANN to ANDWELLA'S DREAM (and later on EGG); and his fantastic flute was second to JETHRO TULL's Ian Anderson only.  By the turn of the decade, he had decided to try his own luck and 1970 was a particularly fruitful year for him:  2 full solo album and one collaboration. Released on the legendary Vertigo swirl label, Electric City was a strange album between avant-garde jazz and hard rock. The album failed to sell and by the time Bob Downes was ready to record his second album, Phillips had demoted him to their "normal" label (only GRACIOUS suffered the same treatment). Actually "Open Music" came out as his more successful release and has been a collector item for years, now. <br><br>The same year, Bob Downes also released a wild album called "Deep Down Heavy" (and its spectacular artwork) with poet Robert Cockburn reading out his text, making another unusual record. <br><br>None of the three albums sold enough for Downes to keep trying out his solo stint. Comes then a gap where I guess he returned to studio sessions for the next couple of years, most likely appearing on avant-garde jazz albums. This in turn led him to be noticed by some Modern Artistic Dance companies and in 72, he was commissioned for two "dance" project. Forming his own trio OPEN MUSIC, named after his more successful album, "Diversion" proved an interesting release where jazz-rock alternated with free form music, while the catastrophic "Episodes At 4AM" (74), which was a Welsh project, filled with obtuse free-form music.  The following year saw Downes release "Hell's Angels",  then later  "Dawn Dreams", "South American Journey" and "Inside Stonehenge", before taking a long break. <br><br>Bob Downes moved to the continent in the late 80's and is now currently based in Germany, and continues to perform as a solo artiste, playing during the execution of paintings and art exhibitions running flute workshops and releasing the odd album now and then, such as 93's "Dreams of Nature" . <br><br><br> :::: Bio written by Hugues Chantraine, Begium :::: /<br><br>
+
+
+
+<div style="text-align:left;padding:0px;margin:10px 0px 10px 0px;">
+<!-- ads here-->
+</div>
+
+</div>
+<div style="clear:both;"></div>
+
+
+<a name="buymusic" id="buymusic"></a>
+<h2>Buy BOB DOWNES' OPEN MUSIC Music &nbsp; <i class="fa-solid fa-record-vinyl"></i></h2>
+<hr style="margin-bottom:5px;">
+<!-- AMAZON Associates intenational affiliates-->
+<!-- /// include file="Progressive_rock_discography_includes/inc_AmazonRSSWidget.asp" -->
+
+<!-- Backup Amazon widget 
+< scr___ipt type="text/javascript">
+amzn_assoc_placement = "adunit0";
+amzn_assoc_search_bar = "true";
+amzn_assoc_tracking_id = "pa008-20";
+amzn_assoc_search_bar_position = "bottom";
+amzn_assoc_ad_mode = "search";
+amzn_assoc_ad_type = "smart";
+amzn_assoc_marketplace = "amazon";
+amzn_assoc_region = "US";
+amzn_assoc_title = "Search Results from Amazon";
+amzn_assoc_default_search_phrase = "BOB DOWNES' OPEN MUSIC";
+amzn_assoc_default_category = "Music";
+amzn_assoc_linkid = "9745002490590a2eae33d6c0de3369d0";
+amzn_assoc_rows = "2";
+</script>
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script> --Â­>
+
+
+<!-- EBay Snipplet //// Removed 1 oct. 2019
+-inc--lude file="Progressive_rock_discography_includes/inc_eBayRSSWidget.asp"
+-->
+
+<!-- WebStoresLinks -->
+
+<div style="background-color:#f0f0f0;padding:15px 0px 5px 10px;margin:3px 0;">
+
+<ul>
+<li><a href="https://www.progarchives.com/RefLinks/DougLarsonImports.asp?src=buyzone" rel="nofollow" target="_blank">
+
+<span style="color:#a52a2a;">
+<strong>DOUG LARSON IMPORTS</strong> &mdash; Buy prog rock music and rarities</a> (5% off over $125, 10% off over $300, 135$+ Free shipping)
+</span>
+<br /><br />
+</li>
+
+
+
+
+<LI>
+<A target="_blank" href="https://www.amazon.com/s?k=DOWNES%27+OPEN+MUSIC+BOB&i=music-intl-ship&crid=2LVPJWHBNWYE0&sprefix=DOWNES%27+OPEN+MUSIC+BOB%2Cmusic-intl-ship%2C65&tag=pa008-20" rel="nofollow">
+<span style="color:#a52a2a;">
+<strong>AMAZON</strong> &mdash; Search &laquo; <em>DOWNES' OPEN MUSIC, BOB</em> &raquo; CDs & Vinyls 
+</span>
+</A>
+<br /><br />
+</LI>
+
+<LI>
+<A target="_blank" href="https://www.ebay.com/sch/11233/i.html?_nkw=DOWNES%27+OPEN+MUSIC+BOB&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339101792&customid=&toolid=10001&mkevt=1" rel="nofollow">
+<span style="color:#a52a2a;">
+<strong>EBAY</strong> &mdash; Search &laquo; <em>DOWNES' OPEN MUSIC, BOB</em> &raquo; CDs & Vinyls 
+</span>
+</A>
+<br /><br />
+</LI>
+
+
+
+
+
+</ul>
+
+
+</div>
+
+
+
+<!-- Others online stores -->
+<!--<strong>Buy BOB DOWNES' OPEN MUSIC & Prog Rock Digital Music online:</strong>
+<ul>
+<li style="margin:3px">AmazonMP3: Search for BOB DOWNES' OPEN MUSIC DRM-Free MP3 Downloads @ <a href="http://www.progarchives.com/RefLinks/Amazonmp3.asp?src=shopzone" target="_blank">Amazon.com MP3</a>
+<li style="margin:3px"><a href="http://amzn.to/2dIIoHC" target="_blank" >Try <strong>Amazon Prime Music</strong> (30-day free trial)</a><img src="static-images/new2.gif" alt="" border="0" />
+</ul>-->
+
+
+
+<!-- ROGER DEAN AGREEMENT (bands and cds pages)
+-Ad Infinitum
+-Anderson, Bruford, Wakeman, Howe
+-Anderson, Jon
+-Asia
+-Badger
+-Bruford, Bill
+-Glass Hammer
+-Gravy Train
+-Greenslade
+-Howe, Steve
+-Squire, Chris
+-Uriah Heep
+-Wakeman, Rick
+-Yes
+
+Plus, the album page (but not the band page) for Gentle Giant's "Octopus."
+-->
+<div align="center">
+
+</div>
+
+
+
+
+<h2>BOB DOWNES' OPEN MUSIC forum topics / tours, shows & news</h2>
+<hr>
+
+
+<div style="float:left;width:49%;text-align:left;padding:5px;">
+<a name="tour" id="tour"></a>
+<a name="news" id="news"></a>
+<strong>BOB DOWNES' OPEN MUSIC latest forum topics</strong>
+
+<blockquote><em>No topics found for : "bob downes% open music"</em></blockquote>
+
+<a href="/forum/">Create a topic now</a><br>
+</div>
+
+
+
+<div style="float:right;width:48%;padding:5px;">
+<a name="forumdiscussions" id="forumdiscussions"></a>
+<strong>BOB DOWNES' OPEN MUSIC tours, shows & news</strong>
+
+<blockquote><em>No topics found for : "bob downes% open music"</em></blockquote>
+
+<a href="/forum/">Post an entries now</a><br>
+</div>
+<div style="clear:both"></div>
+
+
+<a name="videos" id="videos"></a>
+<h2>BOB DOWNES' OPEN MUSIC Videos (YouTube and more)</h2>
+<hr>
+
+
+Showing only random 3  | <a href="artistAddVideo.asp?id=3995">Search and add more videos to BOB DOWNES' OPEN MUSIC</a>
+
+
+
+<div style="clear:both;"></div>
+
+
+
+
+<a name="discography" id="discography"></a>
+<h2>BOB DOWNES' OPEN MUSIC discography</h2>
+<hr>
+Ordered by release date | Showing ratings (top albums) |  Help Progarchives.com to complete the discography and <a href="/submittitle.asp?band_id=3995" rel="nofollow"><font color="#a52a2a">add albums</font></a><img src="https://www.progarchives.com/static-images/new.gif" alt="" border="0">
+
+
+
+
+<h3 style="background-color:#f0f0f0;padding:5px 2px;margin: 10px 0px;">BOB DOWNES' OPEN MUSIC top albums (CD, LP, MC, SACD, DVD-A, Digital Media Download)</h3>
+<table width="99%" class="artist-discography-table">
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=19732"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_15142592008.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_1_19732"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_1_19732', 3.11428571428571);
+</script>
+
+<span id="avgRatings_1" style="color:#C75D4F;font-weight:bold;" title="3.11 out of 5 (PA Average Rating Value)">3.11</span> | <span id="nbRatings_1">16</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_1_19732"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_1_19732', 0, '-1');
+</script>
+<a href="album.asp?id=19732"><strong>Electric city</strong></a><br>
+<span style="color:#777">1970</span>
+</td>
+
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=19733"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_45942592008.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_2_19733"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_2_19733', 2.51724137931034);
+</script>
+
+<span id="avgRatings_2" style="color:#C75D4F;font-weight:bold;" title="2.52 out of 5 (PA Average Rating Value)">2.52</span> | <span id="nbRatings_2">11</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_2_19733"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_2_19733', 0, '-1');
+</script>
+<a href="album.asp?id=19733"><strong>Deep Down Heavy</strong></a><br>
+<span style="color:#777">1970</span>
+</td>
+
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=19734"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_28052592008.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_3_19734"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_3_19734', 3.5);
+</script>
+
+<span id="avgRatings_3" style="color:#C75D4F;font-weight:bold;" title="3.50 out of 5 (PA Average Rating Value)">3.50</span> | <span id="nbRatings_3">4</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_3_19734"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_3_19734', 0, '-1');
+</script>
+<a href="album.asp?id=19734"><strong>Open Music</strong></a><br>
+<span style="color:#777">1970</span>
+</td>
+
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=19735"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_28352592008.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_4_19735"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_4_19735', 3);
+</script>
+
+<span id="avgRatings_4" style="color:#C75D4F;font-weight:bold;" title="3.00 out of 5 (PA Average Rating Value)">3.00</span> | <span id="nbRatings_4">2</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_4_19735"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_4_19735', 0, '-1');
+</script>
+<a href="album.asp?id=19735"><strong>Diversions</strong></a><br>
+<span style="color:#777">1974</span>
+</td>
+
+
+</tr><tr>
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=19736"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_17752592008.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_5_19736"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_5_19736', 1);
+</script>
+
+<span id="avgRatings_5" style="color:#C75D4F;font-weight:bold;" title="1.00 out of 5 (PA Average Rating Value)">1.00</span> | <span id="nbRatings_5">1</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_5_19736"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_5_19736', 0, '-1');
+</script>
+<a href="album.asp?id=19736"><strong>Episodes At 4 AM</strong></a><br>
+<span style="color:#777">1974</span>
+</td>
+
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=56342"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_5210102122017_r.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_6_56342"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_6_56342', 0);
+</script>
+
+<span id="avgRatings_6" style="color:#C75D4F;font-weight:bold;" title="0.00 out of 5 (PA Average Rating Value)">0.00</span> | <span id="nbRatings_6">0</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_6_56342"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_6_56342', 0, '-1');
+</script>
+<a href="album.asp?id=56342"><strong>Hells Angels</strong></a><br>
+<span style="color:#777">1975</span>
+</td>
+
+
+<td align="center" valign="top" width="25%" class="artist-discography-td">
+<a  href="album.asp?id=56343"><img class="artist-discography-cover" src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_5511102122017_r.jpg" border=0 style="border: 1px #aaaaaa solid;display:block;margin-bottom:5px;"></a>
+
+<div title="Average PA members rating" class="discographyStar" id="readOnlyRating_7_56343"></div>
+<script language="javascript" type="text/javascript">
+generateReadOnlyStarbox('readOnlyRating_7_56343', 0);
+</script>
+
+<span id="avgRatings_7" style="color:#C75D4F;font-weight:bold;" title="0.00 out of 5 (PA Average Rating Value)">0.00</span> | <span id="nbRatings_7">0</span> ratings
+
+<div title="Your rating (updatable anytime)" class="discographyStar" id="quickRating_7_56343"></div>
+<script language="javascript" type="text/javascript">
+generateQuickRatingStarbox('quickRating_7_56343', 0, '-1');
+</script>
+<a href="album.asp?id=56343"><strong>It's A Mystery</strong></a><br>
+<span style="color:#777">2017</span>
+</td>
+
+
+</tr>
+</table>
+
+
+
+<h3 style="background-color:#f0f0f0;padding:5px 2px;margin: 5px 0px;">BOB DOWNES' OPEN MUSIC Live Albums (CD, LP, MC, SACD, DVD-A, Digital Media Download)</h3>
+<table  width="99%">
+
+
+</tr>
+</table>
+
+
+
+<h3 style="background-color:#f0f0f0;padding:5px 2px;margin: 5px 0px;">BOB DOWNES' OPEN MUSIC Videos (DVD, Blu-ray, VHS etc)</h3>
+<table  width="99%">
+
+
+</tr>
+</table>
+
+
+<h3 style="background-color:#f0f0f0;padding:5px 2px;margin: 5px 0px;">BOB DOWNES' OPEN MUSIC Boxset & Compilations (CD, LP, MC, SACD, DVD-A, Digital Media Download)</h3>
+<table  width="99%">
+
+
+</tr>
+</table>
+
+
+<h3 style="background-color:#f0f0f0;padding:5px 2px;margin: 5px 0px;">BOB DOWNES' OPEN MUSIC Official Singles, EPs, Fan Club & Promo (CD, EP/LP, MC, Digital Media Download)</h3>
+<table  width="99%">
+
+</tr>
+</table>
+
+
+
+
+<a name="reviews"></a>
+<h2>BOB DOWNES' OPEN MUSIC Reviews</h2>
+<hr>
+Showing last 10 reviews only
+
+
+<!-- Review item box -->
+<div class="reviewbox">
+
+<!-- Cover Zone -->
+<div class="review-cover-zone">
+<a href="album.asp?id=19733"><img src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_45942592008.jpg" alt=" Deep Down Heavy by DOWNES' OPEN MUSIC, BOB album cover" align="center" border=0 hspace=2 vspace=2 class="review-cover-zone-img"></a>
+<span style="color:#777;font-size:12px;">
+Studio Album, 1970<br />
+<span style="color:#C75D4F;" title="2.52 out of 5 (PA Average Rating Value)">2.52</span> | 11 ratings
+</span><br>
+<a href="album.asp?id=19733#buymusic">BUY</a>
+</div>
+
+
+<!-- Review Zone -->
+<div class="review-text-zone">
+
+<a href="album.asp?id=19733"><span style="font-weight:bold;font-size:13px">Deep Down Heavy</span></a><br>
+<a href="artist.asp?id=3995">Bob Downes' Open Music</a> <span style="color:#777;font-size:9px;">Jazz Rock/Fusion</span><br>
+
+<p>Review by
+
+<a href="Collaborators.asp?id=15596"><strong>stefro</strong></a>
+
+<br><font color="#dc143c"><strong>Prog Reviewer</strong> <em></em></font>
+</p>
+
+
+
+<div style="color:#333;">
+
+
+	<div class="avatarhp-box">
+	<a href="https://www.progarchives.com/Collaborators.asp?id=15596">
+	
+	<img src="https://www.progarchives.com/forum/uploads/15596/STEF.jpg" class="avatarhp" width=100 onerror="this.src='http://www.progarchives.com/forum/avatars/blank_avatar.jpg'" />
+	</a>
+	</div>
+
+
+
+<img src="static-images/4stars.gif" alt="4 stars" border="0">
+A rough 'n' ready excursion into the murkier realms of British psychedelia, this underrated little gem 
+seems to get a rough deal these days, mainly thanks to it's rushed, low-budget production and the 
+gritty, almost Altman-esq sound quality(just check out the reviews on this very site!). Issued in 1970 on 
+the EMI-backed Music For Pleasure imprint, 'Deep Down Heavy' was one of three albums issued during 
+1970 by jazz-flautist Bob Downes, the others being 'Open Music' and the high-brow sounding 'Bob 
+Downes New Sounds For Flute, Percussion & Synthesizers'. Of the three, this curious psych-jazz relic 
+is perhaps the strongest, with Downes showing off his impressive flute and saxophone skills over a 
+series of deeply-psychedelic, blues-tinged jams. Also involved is poet buddy Robert Cockburn, who 
+adds some very gritty vocals, and rising young guitarist Chris Spedding, who seemed to be everywhere 
+during this time, fresh from stints with both Nucleus and Pete Brown's Battered Ornaments to name but 
+a couple. 
+To put it bluntly, 'Deep Down Heavy' is a product of it's time, very much a lost relic from a bygone age. 
+But that's exactly what makes it so fascinating. From the rough opening blasts of the hard-rockin' 'Too 
+Late', to the hazy bad-trip psychedelia of the hypnotic closer 'Circus Rising', this is an album that cooks with a 
+raw, fuzzy, late night power perfectly summed up by the album's title.  It's an ambience that is 
+maintained throughout, with surreal background noises and strange instrumental interludes adding to 
+the already highly mystical feel, but this is very much Downes baby and it is he who dominates, pulling off 
+some scintiallating solo's on both flute and saxophone. The mixture of deeply-trippy cosmic jamming, 
+edgy blues riffs and druggy jazz breaks exists to serve his improvised displays, and to a lesser extent vice-versa, the lo-fi
+sound quality only heightening the whole late-sixties vibe. This is certainly for those with a penchant for obscure psych relics, and this writer is confident that if you take a chance on 'Deep 
+Down Heavy' you won't be disappointed. A real curio from the heart of the sixties, it doesn't really get 
+any more underground than this. 
+STEFAN TURNER, STOKE NEWINGTON, 2014<p><p><p><p> </strong></strong></em></em>
+</div>
+</div>
+
+
+
+<p class="review-footer">
+<a href="https://www.progarchives.com/review.asp?id=1159637#social-comments" class="icon-socialcomments"><fb:comments-count href="http://www.progarchives.com/review.asp?id=1159637"></fb:comments-count> social review comments</a> <img src="static-images/new2.gif" alt="" border="0" /></strong> | <a href="Review.asp?id=1159637"  class="icon-permalink">Review Permalink</a><br />
+<span class="icon-date">Posted Wednesday, April 9, 2014</span> | <a href="album.asp?id=19733#postAReview" class="icon-post">Review this album</a> | <a href="https://www.progarchives.com/forum/forum_posts.asp?TID=28343" target="_blank" rel="nofollow" class="icon-report">Report</a> (Review #1159637)
+</p>
+</div>
+
+
+<!-- Review item box -->
+<div class="reviewbox">
+
+<!-- Cover Zone -->
+<div class="review-cover-zone">
+<a href="album.asp?id=19733"><img src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_45942592008.jpg" alt=" Deep Down Heavy by DOWNES' OPEN MUSIC, BOB album cover" align="center" border=0 hspace=2 vspace=2 class="review-cover-zone-img"></a>
+<span style="color:#777;font-size:12px;">
+Studio Album, 1970<br />
+<span style="color:#C75D4F;" title="2.52 out of 5 (PA Average Rating Value)">2.52</span> | 11 ratings
+</span><br>
+<a href="album.asp?id=19733#buymusic">BUY</a>
+</div>
+
+
+<!-- Review Zone -->
+<div class="review-text-zone">
+
+<a href="album.asp?id=19733"><span style="font-weight:bold;font-size:13px">Deep Down Heavy</span></a><br>
+<a href="artist.asp?id=3995">Bob Downes' Open Music</a> <span style="color:#777;font-size:9px;">Jazz Rock/Fusion</span><br>
+
+<p>Review by
+
+<a href="Collaborators.asp?id=1818"><strong>Matti</strong></a>
+
+<br><font color="#dc143c"><strong>Prog Reviewer</strong> <em></em></font>
+</p>
+
+
+
+<div style="color:#333;">
+
+
+	<div class="avatarhp-box">
+	<a href="https://www.progarchives.com/Collaborators.asp?id=1818">
+	
+	<img src="https://www.progarchives.com/forum/uploads/1818/bruegel-snow.jpg" class="avatarhp" width=100 onerror="this.src='http://www.progarchives.com/forum/avatars/blank_avatar.jpg'" />
+	</a>
+	</div>
+
+
+
+<img src="static-images/1stars.gif" alt="1 stars" border="0">
+Happy New Year, folks! I have a bunch of artists to listen to and write about, but first I just
+recycle this one that originally appeared in the Finnish Colossus #45 magazine as a part of my
+article on recent Esoteric Recordings' releases. It's not often that I can sincerely rate an album
+with one star only!<p>This album is such a strange case, but hardly that kind of experimental work which anyone would
+think to be a mind-blowing listening experience. Flutist-saxophonist Bob Downes was in the sixties a
+free-minded musician jumping over any musical fences, wandering amidst jazz, avant-garde and pop. In
+the year 1970 he released THREE albums - and each on a different label. Deep Down Heavy was made
+quite spontaneously in a short time, and it sure sounds like it. The main elements are bamboo flute,
+traffic noises and a gritty blues-rock backing, plus awfully bad singing with lyrics by the
+poet-collabotaror Robert Cockburn.<p>No, this is not a unique, "challenging" work of art demanding the listener's patience to reveal its
+genius. It is, quite simply, an artistically poor thing done in a careless manner, and not any
+amount of brave personality can hide that fact. On the opposite, this album is after all so sincere,
+literally "on the street level", that it doesn't even attempt to impress as emperor's new clothes
+(except for the interesting, psychedelic cover art perhaps - which frankly gives very false
+expectations). One sympathy point deserved.</strong></strong></em></em>
+</div>
+</div>
+
+
+
+<p class="review-footer">
+<a href="https://www.progarchives.com/review.asp?id=1104755#social-comments" class="icon-socialcomments"><fb:comments-count href="http://www.progarchives.com/review.asp?id=1104755"></fb:comments-count> social review comments</a> <img src="static-images/new2.gif" alt="" border="0" /></strong> | <a href="Review.asp?id=1104755"  class="icon-permalink">Review Permalink</a><br />
+<span class="icon-date">Posted Wednesday, January 1, 2014</span> | <a href="album.asp?id=19733#postAReview" class="icon-post">Review this album</a> | <a href="https://www.progarchives.com/forum/forum_posts.asp?TID=28343" target="_blank" rel="nofollow" class="icon-report">Report</a> (Review #1104755)
+</p>
+</div>
+
+
+<!-- Review item box -->
+<div class="reviewbox">
+
+<!-- Cover Zone -->
+<div class="review-cover-zone">
+<a href="album.asp?id=19733"><img src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_45942592008.jpg" alt=" Deep Down Heavy by DOWNES' OPEN MUSIC, BOB album cover" align="center" border=0 hspace=2 vspace=2 class="review-cover-zone-img"></a>
+<span style="color:#777;font-size:12px;">
+Studio Album, 1970<br />
+<span style="color:#C75D4F;" title="2.52 out of 5 (PA Average Rating Value)">2.52</span> | 11 ratings
+</span><br>
+<a href="album.asp?id=19733#buymusic">BUY</a>
+</div>
+
+
+<!-- Review Zone -->
+<div class="review-text-zone">
+
+<a href="album.asp?id=19733"><span style="font-weight:bold;font-size:13px">Deep Down Heavy</span></a><br>
+<a href="artist.asp?id=3995">Bob Downes' Open Music</a> <span style="color:#777;font-size:9px;">Jazz Rock/Fusion</span><br>
+
+<p>Review by
+
+<a href="Collaborators.asp?id=30507"><strong>KABSA</strong></a>
+</p>
+
+
+
+<div style="color:#333;">
+
+
+	<div class="avatarhp-box">
+	<a href="https://www.progarchives.com/Collaborators.asp?id=30507">
+	
+	<img src="https://www.progarchives.com/forum/avatars/lighthouse.jpg" class="avatarhp" width=100 onerror="this.src='http://www.progarchives.com/forum/avatars/blank_avatar.jpg'" />
+	</a>
+	</div>
+
+
+
+<img src="static-images/2stars.gif" alt="2 stars" border="0">
+released 1970 on the super-cheap label MFP but sounds like an earlier recording to me.,
+and probably so because the recording quality is mediocre about 7-8 out of 10.
+i guess the intent was to have this as a proper release as the recording on a number of tracks uses environmental sounds [london transport] and the band includes such luminaries as : chris spedding / ray russell / harry millar / laurie allan / alan rushton  plus a few others.
+the best tracks are : side one trk`s 1 & 2 & 3
+                                              two           1 & 3 & 5 & 7
+nb., trk b6 is a poetry recital by `robert cockburn` and is very good
+trk`s a1 / b7 sound like `if`
+trk a3 is more `mayall` styled
+trk a2 is instrumental , and sounds reminiscent of french band `ame son`
+trk b1 is a jazz rock with `funk` rhythm
+trk b3 is a `psyche` styled blues rock
+trk b5 is instrumental `sax` led jazz rock [med tempo]<p>let down trk`s being : a4 [environmental sounds with flute meandering]
+                                    :  a5 [middle of the road blues rock]
+                                    : b4 [a bit `long john baldry` cabaret styled]
+if the quality of recording was `proffessional` the better trk`s would become very solid indeed.</strong></strong></em></em>
+</div>
+</div>
+
+
+
+<p class="review-footer">
+<a href="https://www.progarchives.com/review.asp?id=381087#social-comments" class="icon-socialcomments"><fb:comments-count href="http://www.progarchives.com/review.asp?id=381087"></fb:comments-count> social review comments</a> <img src="static-images/new2.gif" alt="" border="0" /></strong> | <a href="Review.asp?id=381087"  class="icon-permalink">Review Permalink</a><br />
+<span class="icon-date">Posted Sunday, January 16, 2011</span> | <a href="album.asp?id=19733#postAReview" class="icon-post">Review this album</a> | <a href="https://www.progarchives.com/forum/forum_posts.asp?TID=28343" target="_blank" rel="nofollow" class="icon-report">Report</a> (Review #381087)
+</p>
+</div>
+
+
+<!-- Review item box -->
+<div class="reviewbox">
+
+<!-- Cover Zone -->
+<div class="review-cover-zone">
+<a href="album.asp?id=19736"><img src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_17752592008.jpg" alt=" Episodes At 4 AM by DOWNES' OPEN MUSIC, BOB album cover" align="center" border=0 hspace=2 vspace=2 class="review-cover-zone-img"></a>
+<span style="color:#777;font-size:12px;">
+Studio Album, 1974<br />
+<span style="color:#C75D4F;" title="1.00 out of 5 (PA Average Rating Value)">1.00</span> | 1 ratings
+</span><br>
+<a href="album.asp?id=19736#buymusic">BUY</a>
+</div>
+
+
+<!-- Review Zone -->
+<div class="review-text-zone">
+
+<a href="album.asp?id=19736"><span style="font-weight:bold;font-size:13px">Episodes At 4 AM</span></a><br>
+<a href="artist.asp?id=3995">Bob Downes' Open Music</a> <span style="color:#777;font-size:9px;">Jazz Rock/Fusion</span><br>
+
+<p>Review by
+
+<a href="Collaborators.asp?id=325"><strong>Sean Trane</strong></a>
+
+<br><font color="#dc143c"><strong>Special Collaborator</strong> <em>Prog Folk</em></font>
+</p>
+
+
+<div style="color:'#dc143c';text-align: center;font-size:14px;font-weight:bold;margin-bottom:5px;">&mdash; First review of this album &mdash;</div>
+
+
+<div style="color:#333;">
+
+
+
+
+<img src="static-images/1stars.gif" alt="1 stars" border="0">
+From what I gather, this album was a commission by some Welsh dance project (although not mentioned 
+the Rambert name is possible) from public funds and there was a modern dance choreography drawn 
+from it. Apparently both the music and dance were inspired from an Italian sculpture.  As you might guess 
+the album contains some modern music that nears free form music, "musique concrete" and other forms 
+of avant-garde arts.  The instruments on this album are handled by Downes (wind instruments, percussion 
+and shall we say.. devices???), while collab Wendy Benka handles more and weirder percussions.<p>Actually the titles of the tracks pretty well describe the music in them, and you won't find much else than 
+in the title.  Don't look for real rhythm or melodies or even songs (there are a few words here and there). 
+Somehow, you're looking at one of the more difficult album of any artiste here, and in some case, this 
+might be positive, but not here. But if you thought Diversion was a difficult album to get into, wait 'til you 
+get an earful of this "mother". <p>A bunch of bonus tracks are added to the original album, and the least we can say is that they're just as 
+weird so they don't deface the album they're from. Half of them come from the period between his two 
+active era (that means from 72 to 74), the others dating throughout the rest of the years (78, 87 and 05)<p>Exactly why this album was re-issued on Cd format eludes me, but it's certainly not by popular demand: I 
+can't imagine someone knowing what this album's about and willingly requesting a reissue. It must be a 
+Welsh joke of some kind. And should you buy this album, you'd be the butt of it.  Stay awayayayay from 
+this one.<p></strong></strong></em></em>
+</div>
+</div>
+
+
+
+<p class="review-footer">
+<a href="https://www.progarchives.com/review.asp?id=183509#social-comments" class="icon-socialcomments"><fb:comments-count href="http://www.progarchives.com/review.asp?id=183509"></fb:comments-count> social review comments</a> <img src="static-images/new2.gif" alt="" border="0" /></strong> | <a href="Review.asp?id=183509"  class="icon-permalink">Review Permalink</a><br />
+<span class="icon-date">Posted Thursday, September 25, 2008</span> | <a href="album.asp?id=19736#postAReview" class="icon-post">Review this album</a> | <a href="https://www.progarchives.com/forum/forum_posts.asp?TID=28343" target="_blank" rel="nofollow" class="icon-report">Report</a> (Review #183509)
+</p>
+</div>
+
+
+<!-- Review item box -->
+<div class="reviewbox">
+
+<!-- Cover Zone -->
+<div class="review-cover-zone">
+<a href="album.asp?id=19735"><img src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_28352592008.jpg" alt=" Diversions by DOWNES' OPEN MUSIC, BOB album cover" align="center" border=0 hspace=2 vspace=2 class="review-cover-zone-img"></a>
+<span style="color:#777;font-size:12px;">
+Studio Album, 1974<br />
+<span style="color:#C75D4F;" title="3.00 out of 5 (PA Average Rating Value)">3.00</span> | 2 ratings
+</span><br>
+<a href="album.asp?id=19735#buymusic">BUY</a>
+</div>
+
+
+<!-- Review Zone -->
+<div class="review-text-zone">
+
+<a href="album.asp?id=19735"><span style="font-weight:bold;font-size:13px">Diversions</span></a><br>
+<a href="artist.asp?id=3995">Bob Downes' Open Music</a> <span style="color:#777;font-size:9px;">Jazz Rock/Fusion</span><br>
+
+<p>Review by
+
+<a href="Collaborators.asp?id=325"><strong>Sean Trane</strong></a>
+
+<br><font color="#dc143c"><strong>Special Collaborator</strong> <em>Prog Folk</em></font>
+</p>
+
+
+
+<div style="color:#333;">
+
+
+
+
+<img src="static-images/3stars.gif" alt="3 stars" border="0">
+The first of Downes' second batch of releases, Diversion is drawn from a collab with LCDT (a dance 
+company), but by this time Bob had his own group called Open Music Trio, which was more of a jazz 
+formation rather than a rock group<p>Although the music is played from the trio base, knowing two musicians are a drummer (Denis Smith) 
+and a bassist (Barry guy in most cases), this leaves most of the show to Bob Downes and his flutes and 
+somehow it works fine enough to make this type of album more than interesting. I say this because 
+these commissioned albums from dances or theatre do not always provide music interesting enough to 
+be listened to out of their context (and this is certainly not the case of the atrocious Episodes At 4AM), 
+but here there are moments where the music is fascinating, including the opening Spanish Plain where 
+Barry Guy induces the flamenco through his bass, Smith marching on along on the warpath, and Bob's 
+fascinating flute flying all over the lace, from full dramatics to free form improv; <p>Further down the line, Sea Shore is an interesting tune, and Jeff Clyne's distinctive bass style (see 
+Nucleus), but Bob's flute reign as queen of the show. Opening the flipside, in the album's centrepiece 
+called Seventh Wave, Downes tries his luck with a tenor sax and pulls a very convincing trick for the 11 
+minutes of duration. Clearly Bob is another John Coltrane fan, and is coming close to the Africa/Brass 
+sound and Barry Guy's bow on the contrabass adds to the illusion, especially when getting dissonant. 
+Maya is a up-tempoed live-recorded track that features manic flutes, Downes' semi-scat-like vocals, 
+some wild percussion/drums and a suitable end to the album.<p>However there are some real duds on this album and Naked Forest is one of those, because Bob's flute 
+alone can't pull it off, and our interest wades from boredom into oblivion as the next The Dream track 
+offers more of the same plus some VCS3-induced wind and space noises. Samurai also prefers trying 
+the flute alone although it's "helped out" by banging a piano's keyboards and wooden case and having 
+the mike inside the piano. Frank Zappa would do this stuff some 15 years later with Civilization Phase 
+3, with as little success. Requiem is again mostly a flute-only thing, although it gets the company of the 
+bass and drums, shy at first, than slightly more present after, to end up as a soft jazz by its end. <p>So the album is resting on a strange formula where of the four pieces aside, there is two almost-solo 
+flute-only tracks, sandwiched between two group tracks, the latter four being of much greater interest 
+than the other four. A rather interesting album, hardly perfect, but the better moments outnumbers the 
+weaker ones, this is a sure pleaser to flute fans. <p></strong></strong></em></em>
+</div>
+</div>
+
+
+
+<p class="review-footer">
+<a href="https://www.progarchives.com/review.asp?id=183508#social-comments" class="icon-socialcomments"><fb:comments-count href="http://www.progarchives.com/review.asp?id=183508"></fb:comments-count> social review comments</a> <img src="static-images/new2.gif" alt="" border="0" /></strong> | <a href="Review.asp?id=183508"  class="icon-permalink">Review Permalink</a><br />
+<span class="icon-date">Posted Thursday, September 25, 2008</span> | <a href="album.asp?id=19735#postAReview" class="icon-post">Review this album</a> | <a href="https://www.progarchives.com/forum/forum_posts.asp?TID=28343" target="_blank" rel="nofollow" class="icon-report">Report</a> (Review #183508)
+</p>
+</div>
+
+
+<!-- Review item box -->
+<div class="reviewbox">
+
+<!-- Cover Zone -->
+<div class="review-cover-zone">
+<a href="album.asp?id=19732"><img src="https://www.progarchives.com/progressive_rock_discography_covers/3995/cover_15142592008.jpg" alt=" Electric city by DOWNES' OPEN MUSIC, BOB album cover" align="center" border=0 hspace=2 vspace=2 class="review-cover-zone-img"></a>
+<span style="color:#777;font-size:12px;">
+Studio Album, 1970<br />
+<span style="color:#C75D4F;" title="3.11 out of 5 (PA Average Rating Value)">3.11</span> | 16 ratings
+</span><br>
+<a href="album.asp?id=19732#buymusic">BUY</a>
+</div>
+
+
+<!-- Review Zone -->
+<div class="review-text-zone">
+
+<a href="album.asp?id=19732"><span style="font-weight:bold;font-size:13px">Electric city</span></a><br>
+<a href="artist.asp?id=3995">Bob Downes' Open Music</a> <span style="color:#777;font-size:9px;">Jazz Rock/Fusion</span><br>
+
+<p>Review by
+
+<a href="Collaborators.asp?id=325"><strong>Sean Trane</strong></a>
+
+<br><font color="#dc143c"><strong>Special Collaborator</strong> <em>Prog Folk</em></font>
+</p>
+
+
+
+<div style="color:#333;">
+
+
+
+
+<img src="static-images/3stars.gif" alt="3 stars" border="0">
+3.5 stars really!!!<p>Released on the legendary Vertigo "swirl" label, Electric City was one of the wilder and more obscure 
+issues of the famous 6360 series. But if I say wild and obscure, it is nothing compared to his later works in 
+the mid-70's, as here the music is very accessible resembling some kind of brass rock, as the cast of 
+guest on Bob's first album is an impressive who's who of Phillips-related musicians, pictured assembled on 
+the inner gatefold. The outer gatefold presents a wild collage electronic devices, wild psychedelic colours 
+and Downes in full action, the whole thing permeating a white dummy head; stunning, especially once 
+you'll be that white face<p>Made of short tracks (except the closing opus), the album has splendid up-tempo rhythms, juicy horn 
+arrangements, great virtuoso musicianship and acceptable vocals. Yup, Downes' vocals are not the main 
+asset of this album yet, Bob's lyrics (all his except for the opening No Time like The Present, which is from 
+poet Robert Cockburn, foreseeing their collab of Deep Down Heavy) are always interesting, but let's face 
+it, we want his flute and sax and he doesn't disappoint. Indeed the fabulous Keep Off The Grass, Dawn 
+Until Dawn (where Downes shows his passion for sax as well), the pedestrian Walkin' On (Bob goes nuts 
+on the sax), the tense Crush Hour, the explosive Piccadilly Circles (waaaah, the pun) and its direct 
+continuity into the lengthy (7-mins+) Gonna Take A Journey, which plunges into free improvs. <p>Other titles are more R'nB, like Don't Let Tommorrow, Go Find Time, and the bossa nova West II (the 
+worst track of the album, even if saved by a high-flying sax solo) are less enthralling, but all remain high 
+energy. Although we are in full brass-rock delire with this album, it never gets cheesy or pompous or 
+bombastic as BS&T. No we're facing some of the best of the genre, right up with Brainchild, Galliard and a 
+few more.<p>Although Electric City is a fine album, one that epitomizes his first three efforts, it sounds NOTHING like 
+the later works of his. But this one is definitely worth a shot and should be the introduction to Downes' 
+world of sounds. <p></strong></strong></em></em>
+</div>
+</div>
+
+
+
+<p class="review-footer">
+<a href="https://www.progarchives.com/review.asp?id=183507#social-comments" class="icon-socialcomments"><fb:comments-count href="http://www.progarchives.com/review.asp?id=183507"></fb:comments-count> social review comments</a> <img src="static-images/new2.gif" alt="" border="0" /></strong> | <a href="Review.asp?id=183507"  class="icon-permalink">Review Permalink</a><br />
+<span class="icon-date">Posted Thursday, September 25, 2008</span> | <a href="album.asp?id=19732#postAReview" class="icon-post">Review this album</a> | <a href="https://www.progarchives.com/forum/forum_posts.asp?TID=28343" target="_blank" rel="nofollow" class="icon-report">Report</a> (Review #183507)
+</p>
+</div>
+
+
+</div>
+
+
+
+
+
+<div style="margin:15px 0px;">
+<font color="#a52a2a">Thanks to <strong>sean trane</strong> for the artist addition.
+
+</font>
+</div>
+
+
+
+</div><!-- End Main DIV -->
+
+
+</div> <!--END MAIN DIV-->
+
+
+
+
+
+
+
+
+</div>
+
+<p align=center class="cls_TextCopyright" style="margin:5px 0px;">
+Copyright Prog Archives, All rights reserved. | <a href="Legalnotice.asp"><font color="white">Legal Notice</font></a> | <a href="PrivacyPolicy.asp"><font color="white">Privacy Policy</font></a> | <a href="/about_us.asp#advertise"><font color="white">Advertise</font></a><img src="../static-images/new2.gif" alt="" border="0"> | <a href="/syndication.asp"><font color="white">RSS + syndications</font></a><img src="../static-images/new2.gif" alt="" border="0">
+</p>
+
+<p align=center class="cls_TextCopyright" style="margin:5px 0px;">
+<strong>Other sites in the MAC network:</strong> <a href="http://www.JazzMusicArchives.com"><font color="white">JazzMusicArchives.com &mdash; jazz music reviews and archives</font></a> | <a href="http://www.MetalMusicArchives.com"><font color="white">MetalMusicArchives.com &mdash; metal music reviews and archives</font></a>
+</p>
+
+
+
+
+
+<div align=center class="cls_TextCopyright" style="margin:20px 0px;">
+Donate monthly and keep PA fast-loading and ad-free forever.
+<div style="margin:5px 0 0 0">
+<a href="https://www.paypal.com/donate/?hosted_button_id=DRNRB8RG8NUN2" />
+<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" />
+</a>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div align=center class="cls_TextCopyright" style="margin:0px 0px;">
+<!-- Server processing time: 0.70 seconds -->
+</div>
+
+
+
+
+
+
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91f8302babbf4c04',t:'MTc0MTgzMzg1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+

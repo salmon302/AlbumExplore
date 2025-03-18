@@ -1,10 +1,10 @@
-"""Enhanced network visualization with LOD and clustering support."""
 from PyQt6.QtWidgets import QWidget, QVBoxLayout
 from PyQt6.QtCore import Qt, QPointF, QTimer, QRectF
 from PyQt6.QtGui import QPainter, QPen, QColor, QBrush, QPainterPath, QPixmap, QMouseEvent
 from typing import Dict, List, Set, Optional, Tuple
 import math
 import time
+
 from albumexplore.gui.gui_logging import (
     gui_logger, graphics_logger, performance_logger,
     log_graphics_event, log_performance_metric, log_interaction
@@ -12,13 +12,13 @@ from albumexplore.gui.gui_logging import (
 from albumexplore.gui.graphics_debug import init_graphics_debugging
 
 from ..models import VisualNode, VisualEdge
-from ..state import ViewState, ViewType
+from ..state import ViewType, ViewState
 from ..spatial_grid import SpatialGrid
 from .base_view import BaseView
 from ..lod_system import LODSystem, ClusterManager
 from ..cluster_engine import ClusterEngine, ClusterNode
 from ..performance_optimizer import PerformanceOptimizer, PerformanceMetrics
-
+from ..renderer import create_renderer
 
 class DrawWidget(QWidget):
     """Widget used for drawing the network visualization with optimized rendering."""
@@ -38,21 +38,16 @@ class DrawWidget(QWidget):
 
     def paintEvent(self, event):
         """Draw the current network state from parent's buffer."""
-        if not self.parent_view or not hasattr(self.parent_view, 'nodes') or not self.parent_view.nodes:
-            # Clear with white background for empty state
+        if not self.parent_view or not hasattr(self.parent_view, '_current_buffer'):
             painter = QPainter(self)
             painter.fillRect(self.rect(), Qt.GlobalColor.white)
             painter.end()
             return
 
-        self.parent_view.start_performance_measure('frame')
+        self.parent_view._frame_start = time.time()
 
         try:
-            # Paint from buffer to widget
             painter = QPainter(self)
-            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-
-            # Draw with composition mode that prevents transparency issues
             painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Source)
             painter.fillRect(self.rect(), Qt.GlobalColor.white)
             painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
@@ -70,20 +65,19 @@ class DrawWidget(QWidget):
                 'visible_node_count': len(self.parent_view.visible_nodes),
                 'visible_edge_count': len(self.parent_view.visible_edges),
                 'memory_usage': (self.parent_view._current_buffer.size().width() *
-                                 self.parent_view._current_buffer.size().height() * 4
-                                 if self.parent_view._current_buffer else 0)
+                                self.parent_view._current_buffer.size().height() * 4
+                                if self.parent_view._current_buffer else 0)
             }
             self.parent_view.performance_metrics.update(metrics)
-
 
 class EnhancedNetworkView(BaseView):
     """Enhanced network visualization with LOD and clustering support."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        # Configure view attributes
         self.view_name = "EnhancedNetworkView"
         self.view_state = ViewState(ViewType.NETWORK)
+        self.renderer = create_renderer(ViewType.NETWORK)
 
         # Layout with high-quality draw surface
         self.layout = QVBoxLayout(self)
@@ -108,7 +102,10 @@ class EnhancedNetworkView(BaseView):
         self.drag_start_y = 0
         self.is_dragging = False
 
-        # Visibility tracking
+        # Node/edge sets
+        self.nodes = []
+        self.edges = []
+        self.selected_ids = set()
         self.visible_nodes = []
         self.visible_edges = []
 
@@ -138,11 +135,6 @@ class EnhancedNetworkView(BaseView):
         self._update_timer.setSingleShot(True)
         self._update_timer.timeout.connect(self._update_buffer)
 
-        # Node/edge sets
-        self.nodes = []
-        self.edges = []
-        self.selected_ids = set()
-
     def update_data(self, nodes: List[VisualNode], edges: List[VisualEdge]) -> None:
         """Update visualization data."""
         super().update_data(nodes, edges)
@@ -157,7 +149,6 @@ class EnhancedNetworkView(BaseView):
 
     def _init_spatial_grid(self) -> None:
         """Initialize spatial grid for efficient node lookup."""
-        # Find data extents
         if not self.nodes:
             return
 
@@ -166,20 +157,38 @@ class EnhancedNetworkView(BaseView):
         max_x = max(node.data.get('x', 0) for node in self.nodes)
         max_y = max(node.data.get('y', 0) for node in self.nodes)
 
-        # Create spatial grid
         width = max(1000, max_x - min_x)
         height = max(1000, max_y - min_y)
         self.spatial_grid = SpatialGrid(width, height, self.spatial_cell_size)
 
-        # Insert nodes
         for node in self.nodes:
             self.spatial_grid.insert(node)
 
     def _update_buffer(self) -> None:
         """Update the rendering buffer."""
-        self._frame_start = time.time()
-        self._buffer_dirty = True
-        self.draw_widget.update()
+        if not self.draw_widget:
+            return
+
+        # Create new buffer if needed
+        if (not self._next_buffer or 
+            self._next_buffer.size() != self.draw_widget.size()):
+            self._next_buffer = QPixmap(self.draw_widget.size())
+
+        # Update viewport state
+        self.view_state.viewport_width = self.draw_widget.width()
+        self.view_state.viewport_height = self.draw_widget.height()
+        self.view_state.zoom_level = self.viewport_scale
+        self.view_state.position = {"x": self.viewport_x, "y": self.viewport_y}
+
+        # Render using the renderer
+        render_data = self.renderer.render(self.nodes, self.edges, self.view_state)
+
+        # Paint to buffer
+        self._paint_to_buffer(self._next_buffer)
+
+        # Swap buffers
+        self._current_buffer = self._next_buffer
+        self._buffer_dirty = False
 
     def update(self) -> None:
         """Schedule a buffer update."""
@@ -222,84 +231,44 @@ class EnhancedNetworkView(BaseView):
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
         """Handle mouse movement for dragging."""
         if self.is_dragging:
-            # Pan view
             dx = event.position().x() - self.drag_start_x
             dy = event.position().y() - self.drag_start_y
-
+            
             self.viewport_x += dx
             self.viewport_y += dy
-
+            
             self.drag_start_x = event.position().x()
             self.drag_start_y = event.position().y()
-
+            
             self._buffer_dirty = True
             self.update()
 
     def wheelEvent(self, event) -> None:
         """Handle mouse wheel for zooming."""
-        delta = event.angleDelta().y()
-        zoom_factor = 1.1 if delta > 0 else 0.9
+        factor = 1.1
+        if event.angleDelta().y() < 0:
+            factor = 1.0 / factor
 
-        # Zoom centered on mouse position
+        # Get mouse position in scene coordinates
         mouse_x = event.position().x()
         mouse_y = event.position().y()
 
-        # Convert to view coordinates before zoom
-        view_x = (mouse_x - self.draw_widget.width()/2) / self.viewport_scale - self.viewport_x/self.viewport_scale
-        view_y = (mouse_y - self.draw_widget.height()/2) / self.viewport_scale - self.viewport_y/self.viewport_scale
+        # Calculate zoom center in scene coordinates
+        center_x = (mouse_x - self.width()/2 - self.viewport_x) / self.viewport_scale
+        center_y = (mouse_y - self.height()/2 - self.viewport_y) / self.viewport_scale
 
-        # Update zoom
-        self.viewport_scale *= zoom_factor
+        # Apply zoom
+        old_scale = self.viewport_scale
+        self.viewport_scale *= factor
         self.viewport_scale = max(0.1, min(10.0, self.viewport_scale))
 
-        # Adjust to keep the point under the mouse fixed
-        new_view_x = (mouse_x - self.draw_widget.width()/2) / self.viewport_scale - self.viewport_x/self.viewport_scale
-        new_view_y = (mouse_y - self.draw_widget.height()/2) / self.viewport_scale - self.viewport_y/self.viewport_scale
-
-        self.viewport_x += (new_view_x - view_x) * self.viewport_scale
-        self.viewport_y += (new_view_y - view_y) * self.viewport_scale
+        # Adjust viewport to keep mouse position fixed
+        scale_change = self.viewport_scale - old_scale
+        self.viewport_x -= center_x * scale_change
+        self.viewport_y -= center_y * scale_change
 
         self._buffer_dirty = True
         self.update()
-
-    def _node_at_pos(self, screen_x: float, screen_y: float) -> Optional[VisualNode]:
-        """Find node at the given screen position."""
-        if not self.nodes:
-            return None
-
-        view_x = (screen_x - self.draw_widget.width()/2) / self.viewport_scale - self.viewport_x/self.viewport_scale
-        view_y = (screen_y - self.draw_widget.height()/2) / self.viewport_scale - self.viewport_y/self.viewport_scale
-
-        search_radius = 10 / self.viewport_scale 
-        if self.enable_spatial_index and self.spatial_grid:
-            search_rect = QRectF(
-                view_x - search_radius,
-                view_y - search_radius,
-                search_radius * 2,
-                search_radius * 2
-            )
-            candidates = self.spatial_grid.query(search_rect)
-        else:
-            candidates = self.nodes
-
-        closest_node = None
-        min_dist = float('inf')
-
-        for node in candidates:
-            x = node.data.get('x', 0)
-            y = node.data.get('y', 0)
-
-            dx = x - view_x
-            dy = y - view_y
-            dist = math.sqrt(dx*dx + dy*dy)
-
-            node_radius = node.size / 2 if hasattr(node, 'size') else 5
-
-            if dist < min_dist and dist <= node_radius + search_radius:
-                closest_node = node
-                min_dist = dist
-
-        return closest_node
 
     def _paint_to_buffer(self, buffer: QPixmap) -> None:
         """Paint content to buffer with optimized rendering."""
@@ -307,8 +276,16 @@ class EnhancedNetworkView(BaseView):
             graphics_logger.warning("Attempted to paint to null buffer")
             return
 
-        start_time = time.time()
+        # Update viewport state
+        self.view_state.viewport_width = self.draw_widget.width()
+        self.view_state.viewport_height = self.draw_widget.height()
+        self.view_state.zoom_level = self.viewport_scale
+        self.view_state.position = {"x": self.viewport_x, "y": self.viewport_y}
 
+        # Get rendered data
+        render_data = self.renderer.render(self.nodes, self.edges, self.view_state)
+
+        # Paint to buffer
         painter = QPainter(buffer)
         try:
             painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
@@ -316,108 +293,83 @@ class EnhancedNetworkView(BaseView):
             painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
 
             painter.fillRect(buffer.rect(), Qt.GlobalColor.white)
-
             painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
-            painter.translate(self.draw_widget.width()/2, self.draw_widget.height()/2)
-            painter.scale(self.viewport_scale, self.viewport_scale)
-            painter.translate(self.viewport_x / self.viewport_scale,
-                            self.viewport_y / self.viewport_scale)
-
-            view_rect = QRectF(
-                -self.draw_widget.width()/(2*self.viewport_scale) - self.viewport_x/self.viewport_scale,
-                -self.draw_widget.height()/(2*self.viewport_scale) - self.viewport_y/self.viewport_scale,
-                self.draw_widget.width()/self.viewport_scale,
-                self.draw_widget.height()/self.viewport_scale
+            # Apply viewport transform
+            painter.translate(
+                self.draw_widget.width()/2 + self.viewport_x,
+                self.draw_widget.height()/2 + self.viewport_y
             )
+            painter.scale(self.viewport_scale, self.viewport_scale)
 
-            if self.enable_spatial_index:
-                self.visible_nodes = self.spatial_grid.query(view_rect)
-            else:
-                self.visible_nodes = [
-                    node for node in self.nodes
-                    if view_rect.contains(QPointF(
-                        node.data.get('x', 0),
-                        node.data.get('y', 0)
-                    ))
-                ]
+            # Draw edges
+            for edge in render_data.get("edges", []):
+                painter.setPen(QPen(QColor(edge["color"]), edge["thickness"]))
+                painter.drawLine(
+                    edge["source_x"], edge["source_y"],  
+                    edge["target_x"], edge["target_y"]
+                )
 
-            if self.enable_lod:
-                lod_level = self.lod_system.get_lod_level(self.viewport_scale)
-            else:
-                lod_level = 0
-
-            edge_start = time.time()
-            path = QPainterPath()
-
-            self.visible_edges = []
-            visible_node_ids = {node.id for node in self.visible_nodes}
-
-            for edge in self.edges:
-                if (edge.source in visible_node_ids and
-                    edge.target in visible_node_ids):
-                    self.visible_edges.append(edge)
-
-                    source = next(n for n in self.nodes if n.id == edge.source)
-                    target = next(n for n in self.nodes if n.id == edge.target)
-
-                    path.moveTo(source.data.get('x', 0), source.data.get('y', 0))
-                    path.lineTo(target.data.get('x', 0), target.data.get('y', 0))
-
-            edge_time = (time.time() - edge_start) * 1000
-            log_performance_metric("Rendering", "edge_paint_time", f"{edge_time:.2f}ms")
-
-            painter.setPen(QPen(QColor('#cccccc')))
-            painter.drawPath(path)
-
-            node_start = time.time()
-            for node in self.visible_nodes:
-                x = node.data.get('x', 0)
-                y = node.data.get('y', 0)
-
-                if not view_rect.contains(QPointF(x, y)):
-                    continue
-
-                size = node.size
-
-                if lod_level > 0:
-                    painter.setPen(Qt.PenStyle.NoPen)
-                    painter.setBrush(QColor(node.color))
-                    painter.drawEllipse(QPointF(x, y), size/2, size/2)
+            # Draw nodes
+            for node in render_data.get("nodes", []):
+                if node["selected"]:
+                    painter.setBrush(QBrush(QColor('#ff6464')))
+                    painter.setPen(QPen(QColor('#ff6464')))
                 else:
-                    if node.data.get('is_cluster', False):
-                        painter.setBrush(QBrush(QColor(node.color)))
-                        painter.setPen(QPen(QColor(node.color).darker(120)))
-                    else:
-                        if node.id in self.selected_ids:
-                            painter.setBrush(QBrush(QColor('#ff6464')))
-                            painter.setPen(QPen(QColor('#ff6464')))
-                        else:
-                            painter.setBrush(QBrush(QColor(node.color)))
-                            painter.setPen(QPen(QColor(node.color).darker(120)))
+                    painter.setBrush(QBrush(QColor(node["color"])))
+                    painter.setPen(QPen(QColor(node["color"]).darker(120)))
 
-                    painter.drawEllipse(QPointF(x, y), size/2, size/2)
+                x = node["x"]
+                y = node["y"]
+                size = node["size"]
+                painter.drawEllipse(QPointF(x, y), size/2, size/2)
 
-                    if self.viewport_scale > 0.5 and node.label:
-                        painter.setPen(QPen(Qt.GlobalColor.black))
-                        text_rect = painter.boundingRect(
-                            QRectF(x + size, y - 10, 200, 20),
-                            Qt.AlignmentFlag.AlignLeft,
-                            node.label
-                        )
-                        painter.fillRect(
-                            text_rect.adjusted(-2, -2, 2, 2),
-                            QBrush(QColor(255, 255, 255, 220))
-                        )
-                        painter.drawText(text_rect, Qt.AlignmentFlag.AlignLeft, node.label)
-
-            node_time = (time.time() - node_start) * 1000
-            log_performance_metric("Rendering", "node_paint_time", f"{node_time:.2f}ms")
+                # Draw labels if zoomed in enough
+                if self.viewport_scale > 0.5 and node.get("label"):
+                    painter.setPen(QPen(Qt.GlobalColor.black))
+                    text_rect = painter.boundingRect(
+                        QRectF(x + size, y - 10, 200, 20),
+                        Qt.AlignmentFlag.AlignLeft,
+                        node["label"]
+                    )
+                    
+                    # Draw text background
+                    painter.fillRect(
+                        text_rect.adjusted(-2, -2, 2, 2),
+                        QBrush(QColor(255, 255, 255, 220))
+                    )
+                    painter.drawText(text_rect, Qt.AlignmentFlag.AlignLeft, node["label"])
 
         finally:
             painter.end()
-            total_time = (time.time() - start_time) * 1000
-            log_performance_metric("Rendering", "total_paint_time", f"{total_time:.2f}ms")
 
-            if total_time > 33:
-                self.performance_optimizer.optimize(self.performance_metrics)
+    def _node_at_pos(self, screen_x: float, screen_y: float) -> Optional[VisualNode]:
+        """Find node at the given screen position."""
+        # Transform screen coordinates to scene coordinates
+        scene_x = (screen_x - self.width()/2 - self.viewport_x) / self.viewport_scale
+        scene_y = (screen_y - self.height()/2 - self.viewport_y) / self.viewport_scale
+
+        # Use spatial index if enabled
+        if self.enable_spatial_index and self.spatial_grid:
+            scene_pos = QPointF(scene_x, scene_y)
+            nodes = self.spatial_grid.query(QRectF(
+                scene_pos.x() - 5/self.viewport_scale,
+                scene_pos.y() - 5/self.viewport_scale,
+                10/self.viewport_scale,
+                10/self.viewport_scale
+            ))
+        else:
+            nodes = self.nodes
+
+        # Find closest node within threshold
+        closest_node = None
+        min_dist = float('inf')
+        for node in nodes:
+            dx = node.data.get('x', 0) - scene_x
+            dy = node.data.get('y', 0) - scene_y
+            dist = math.sqrt(dx*dx + dy*dy)
+            if dist < node.size/2 and dist < min_dist:
+                min_dist = dist
+                closest_node = node
+
+        return closest_node

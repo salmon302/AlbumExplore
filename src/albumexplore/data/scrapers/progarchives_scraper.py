@@ -1,301 +1,344 @@
-"""Scraper for ProgArchives.com with ethical rate limiting."""
+"""ProgArchives.com scraper with ethical rate limiting."""
 import logging
-import time
-import random
-from typing import Dict, List, Optional, Generator
-import requests
-from bs4 import BeautifulSoup
+from typing import Dict, List, Iterator, Optional
 from pathlib import Path
-import json
+from bs4 import BeautifulSoup
+import random
 import re
 from datetime import datetime
+from .base_scraper import BaseScraper
 
 logger = logging.getLogger(__name__)
 
-class ProgArchivesScraper:
-    """Ethical scraper for ProgArchives.com with rate limiting."""
+class ProgArchivesScraper(BaseScraper):
+    """Scraper for ProgArchives.com that follows ethical guidelines."""
     
-    def __init__(self, cache_dir: Optional[Path] = None):
-        """Initialize scraper with optional cache directory."""
-        self.base_url = "https://www.progarchives.com"
-        self.cache_dir = cache_dir
-        if cache_dir:
-            cache_dir.mkdir(parents=True, exist_ok=True)
-            
-        # Rate limiting settings - be very considerate
-        self.min_delay = 3.0  # Minimum seconds between requests
-        self.max_delay = 5.0  # Maximum seconds between requests
-        self.last_request_time = 0
-        self.max_retries = 3
-        self.retry_delay = 5
-        
-        # Valid record types
-        self.valid_record_types = {'Studio', 'EP', 'Single', 'Fan Club', 'Promo'}
-        
-        # Session with headers that mimic a real browser
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Connection': 'keep-alive',
-        })
+    BASE_URL = "https://www.progarchives.com"
+    ALPHA_URL = f"{BASE_URL}/bands-alpha.asp"
+    
+    def __init__(
+        self,
+        cache_dir: Optional[Path] = None,
+        max_bands: Optional[int] = None,
+        random_sample: bool = False
+    ):
+        """Initialize scraper with optional limits and sampling strategy."""
+        super().__init__(
+            cache_dir=cache_dir / "progarchives" if cache_dir else Path("cache/progarchives"),
+            min_request_interval=5.0  # Ethical rate limiting
+        )
+        self.max_bands = max_bands
+        self.random_sample = random_sample
+        self._retry_count = 3  # Number of retries for failed requests
 
-    def _wait_for_rate_limit(self):
-        """Ensure ethical rate limiting between requests."""
-        current_time = time.time()
-        elapsed = current_time - self.last_request_time
-        
-        if elapsed < self.min_delay:
-            wait_time = random.uniform(
-                self.min_delay - elapsed,
-                self.max_delay - elapsed
-            )
-            time.sleep(wait_time)
-        
-        self.last_request_time = time.time()
-
-    def get_page(self, url: str, cache_key: Optional[str] = None) -> str:
-        """Get page content with rate limiting and caching."""
-        if cache_key and self.cache_dir:
-            cache_file = self.cache_dir / f"{cache_key}.html"
-            if cache_file.exists():
-                logger.debug(f"Using cached content for {url}")
-                return cache_file.read_text(encoding='utf-8')
-        
-        retries = 0
-        while retries < self.max_retries:
-            try:
-                self._wait_for_rate_limit()
-                logger.debug(f"Fetching {url}")
-                response = self.session.get(url)
-                response.raise_for_status()
-                
-                if cache_key and self.cache_dir:
-                    cache_file = self.cache_dir / f"{cache_key}.html"
-                    cache_file.write_text(response.text, encoding='utf-8')
-                    
-                return response.text
-                
-            except requests.RequestException as e:
-                retries += 1
-                logger.warning(f"Request failed (attempt {retries}/{self.max_retries}): {str(e)}")
-                if retries < self.max_retries:
-                    time.sleep(self.retry_delay * retries)
-                else:
-                    logger.error(f"Failed to fetch {url} after {self.max_retries} attempts")
-                    raise
-
-    def get_all_bands(self) -> Generator[Dict, None, None]:
-        """Get list of all bands from the prog metal listing."""
-        # Start with the prog metal bands list
-        url = f"{self.base_url}/subgenre/19/Progressive-Metal"
-        logger.info(f"Fetching bands from {url}")
-        
-        content = self.get_page(url, cache_key="prog_metal_main")
-        soup = BeautifulSoup(content, 'html.parser')
-        
-        seen_bands = set()
-        
-        # Find the grid container that holds band listings
-        grid = soup.find('div', {'class': 'grid-container'})
-        if grid:
-            # Process bands in groups of 3 (band, style, country)
-            items = grid.find_all('div', {'class': 'grid-item'})
-            
-            # Skip header row
-            headers = items[:3]
-            items = items[3:]
-            
-            # Process in groups of 3
-            for i in range(0, len(items), 3):
-                try:
-                    if i + 2 >= len(items):
-                        break
-                        
-                    band_cell = items[i]
-                    style_cell = items[i + 1]
-                    country_cell = items[i + 2]
-                    
-                    # Get band link
-                    band_link = band_cell.find('a')
-                    if not band_link:
-                        continue
-                        
-                    band_url = band_link['href']
-                    if not band_url.startswith('http'):
-                        band_url = self.base_url + '/' + band_url
-                    
-                    if band_url in seen_bands:
-                        continue
-                        
-                    band_name = band_link.text.strip()
-                    if not band_name:
-                        continue
-                        
-                    # Get genre and country
-                    genre = style_cell.text.strip()
-                    country = country_cell.text.strip()
-                    
-                    logger.info(f"Found band: {band_name}")
-                    
-                    band = {
-                        'name': band_name,
-                        'url': band_url,
-                        'genre': genre,
-                        'country': country
-                    }
-                    
-                    seen_bands.add(band_url)
-                    yield band
-                    
-                except Exception as e:
-                    logger.error(f"Error parsing band entry: {str(e)}")
-                    continue
-        else:
-            logger.warning("Could not find grid container for band listings")
-
-    def get_band_details(self, band_url: str) -> Dict:
-        """Get detailed information about a band."""
-        logger.info(f"Getting details for band at {band_url}")
-        content = self.get_page(band_url)
-        soup = BeautifulSoup(content, 'html.parser')
-        
+    def _get_bands_for_letter(self, letter: str) -> Iterator[Dict]:
+        """Get bands starting with a specific letter."""
         try:
-            details = {'description': '', 'formed_info': '', 'albums': []}
+            url = f"{self.ALPHA_URL}?letter={letter}"
+            response = self.fetch_url(url)
             
-            # Get band info from meta description
-            meta_desc = soup.find('meta', {'name': 'description'})
-            if meta_desc:
-                desc_content = meta_desc.get('content', '')
-                if desc_content:
-                    details['description'] = desc_content
-                    # Try to extract country
-                    country_match = re.search(r'from ([^\.]+)', desc_content)
-                    if country_match:
-                        details['country'] = country_match.group(1).strip()
+            if not response or not response.get('content'):
+                logger.warning(f"No content received for letter {letter}")
+                return
+                
+            yield from self._parse_band_table(response['content'])
             
-            # Find the main content area
-            main_content = soup.find('div', {'id': 'main'})
-            if main_content:
-                # Look for discography sections
-                album_cells = main_content.find_all('td', {'align': 'center'})
+        except Exception as e:
+            logger.error(f"Error getting bands for letter {letter}: {e}")
+            return
+
+    def _get_bands_from_all(self) -> Iterator[Dict]:
+        """Fallback method to get all bands from main listing."""
+        try:
+            response = self.fetch_url(self.ALPHA_URL)
+            if not response or not response.get('content'):
+                logger.warning("No content received from main listing")
+                return
                 
-                current_section = 'Studio'  # Default section
+            yield from self._parse_band_table(response['content'])
+            
+        except Exception as e:
+            logger.error(f"Error getting bands from main listing: {e}")
+            return
+
+    def get_bands_all(self) -> Iterator[Dict]:
+        """Get list of bands from alphabetical listing, optionally using sampling strategy."""
+        bands_found = 0
+        seen_urls = set()
+        try:
+            all_bands = []
+            letters = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ*')  # Include * for misc/numbers
+            
+            # Randomize letter order if using random sampling
+            if self.random_sample:
+                random.shuffle(letters)
+            
+            for letter in letters:
+                letter_bands = list(self._get_bands_for_letter(letter))
+                if letter_bands:
+                    # If random sampling, shuffle bands from each letter
+                    if self.random_sample:
+                        random.shuffle(letter_bands)
+                    all_bands.extend(letter_bands)
+                    logger.info(f"Found {len(letter_bands)} bands for letter {letter}")
+                    
+                    # Early exit if we have enough bands
+                    if self.max_bands and len(all_bands) >= self.max_bands * 2:
+                        break
+            
+            if not all_bands:
+                # Fallback to all-bands page
+                all_bands = list(self._get_bands_from_all())
+            
+            if not all_bands:
+                raise ValueError("No bands found in alphabetical listing")
+            
+            if self.random_sample:
+                if self.max_bands:
+                    # Take a diverse sample by selecting bands from different parts of the list
+                    sample_size = min(self.max_bands, len(all_bands))
+                    interval = len(all_bands) // sample_size
+                    sampled_bands = []
+                    for i in range(0, len(all_bands), interval):
+                        if len(sampled_bands) < sample_size:
+                            sampled_bands.append(all_bands[i])
+                    all_bands = sampled_bands
+                else:
+                    # If no max_bands specified, shuffle the entire list
+                    random.shuffle(all_bands)
+            
+            for band in all_bands:
+                if band['url'] not in seen_urls:
+                    seen_urls.add(band['url'])
+                    yield band
+                    bands_found += 1
+                    
+                    if self.max_bands and bands_found >= self.max_bands:
+                        return
+
+        except Exception as e:
+            logger.error(f"Error getting bands from alphabetical listing: {e}")
+            raise
+
+    def _parse_band_table(self, content: str) -> Iterator[Dict]:
+        """Parse HTML content to extract band information."""
+        soup = BeautifulSoup(content, 'html.parser')
+        
+        # Updated selectors with fallbacks, ordered by specificity
+        table_selectors = [
+            'table.table-artists',
+            'table.artists-list',
+            'table.bands-list',
+            '#artistsTable',
+            '#band-list table',
+            'table.list',
+            'table'  # Last resort
+        ]
+        
+        for selector in table_selectors:
+            tables = soup.select(selector)
+            for table in tables:
+                # Verify this looks like a band table
+                if not self._is_valid_band_table(table):
+                    continue
                 
-                # Look for section headers to determine record type
-                for element in main_content.find_all(['h3', 'td']):
-                    text = element.get_text(strip=True).lower()
+                for row in table.find_all('tr'):
+                    band_info = self._parse_band_row(row)
+                    if band_info:
+                        yield band_info
+                
+                # If we found valid bands in this table, stop looking
+                return
+
+    def _is_valid_band_table(self, table: BeautifulSoup) -> bool:
+        """Verify if a table appears to be a valid band listing."""
+        # Should have multiple rows
+        rows = table.find_all('tr')
+        if len(rows) < 2:
+            return False
+            
+        # Should have header row with expected columns
+        header = rows[0]
+        header_text = header.text.lower()
+        return any(term in header_text for term in ['artist', 'band', 'genre', 'style'])
+
+    def _parse_band_row(self, row: BeautifulSoup) -> Optional[Dict]:
+        """Parse a single row from the band table."""
+        try:
+            # Skip header rows
+            if row.find('th'):
+                return None
+                
+            cells = row.find_all('td')
+            if len(cells) < 2:  # Need at least name and genre
+                return None
+                
+            band_link = row.find('a')
+            if not band_link:
+                return None
+                
+            band_url = band_link.get('href')
+            if not band_url:
+                return None
+                
+            if not band_url.startswith('http'):
+                band_url = f"{self.BASE_URL}/{band_url.lstrip('/')}"
+                
+            # Extract genre from appropriate column
+            genre = None
+            for cell in cells[1:]:
+                text = cell.text.strip()
+                if text and not text.isdigit() and not '/' in text:
+                    genre = text
+                    break
+            
+            return {
+                'name': band_link.text.strip(),
+                'url': band_url,
+                'genre': genre
+            }
+            
+        except Exception as e:
+            logger.warning(f"Error parsing band row: {e}")
+            return None
+
+    def get_band_details(self, url: str) -> Dict:
+        """Get detailed information about a band."""
+        try:
+            response = self.fetch_url(url)
+            if not response or not response.get('content'):
+                raise ValueError(f"No content received from {url}")
+
+            soup = BeautifulSoup(response['content'], 'html.parser')
+            
+            # Get main band info
+            band_info = self._find_band_info(soup)
+            if not band_info:
+                raise ValueError(f"Could not find band info section for {url}")
+
+            details = {
+                'url': url,
+                'name': self._extract_text(band_info.find('h1', {'class': 'band-name'})),
+                'genre': self._extract_text(band_info.find('div', {'class': 'band-genre'})),
+                'country': self._extract_text(band_info.find('div', {'class': 'band-country'})),
+                'description': self._find_band_description(soup),
+                'members': self._find_band_members(soup),
+                'albums': list(self._find_band_albums(soup)),
+                'scraped_at': datetime.now().isoformat()
+            }
+
+            # Clean data
+            details = {k.strip(): v for k, v in details.items() if v}
+            
+            # Validate required fields
+            required_fields = ['name', 'genre', 'country']
+            missing_fields = [f for f in required_fields if not details.get(f)]
+            if missing_fields:
+                raise ValueError(f"Missing required fields: {', '.join(missing_fields)}")
+            
+            return details
+            
+        except Exception as e:
+            logger.error(f"Error getting band details from {url}: {e}")
+            return {'error': str(e)}
+
+    def _find_band_info(self, soup: BeautifulSoup) -> Optional[BeautifulSoup]:
+        """Extract main band info section."""
+        return soup.find('div', {'class': ['band-header', 'artist-header']})
+
+    def _extract_text(self, element) -> Optional[str]:
+        """Safely extract and clean text from an element."""
+        if element:
+            text = element.get_text().strip()
+            return text if text else None
+        return None
+
+    def _find_band_description(self, soup: BeautifulSoup) -> str:
+        """Extract band description/biography."""
+        desc_div = soup.find('div', {'class': ['band-description', 'artist-bio']})
+        return self._extract_text(desc_div) or ""
+
+    def _find_band_members(self, soup: BeautifulSoup) -> List[Dict]:
+        """Extract band member information."""
+        members = []
+        member_section = soup.find('div', {'class': ['members', 'lineup']})
+        if member_section:
+            for member in member_section.find_all(['div', 'li'], {'class': ['member', 'member-item']}):
+                try:
+                    name = member.find(['span', 'div'], {'class': 'name'})
+                    role = member.find(['span', 'div'], {'class': ['role', 'instrument']})
+                    years = member.find(['span', 'div'], {'class': 'years'})
                     
-                    # Check if this is a section header
-                    if element.name == 'h3':
-                        if 'studio' in text:
-                            current_section = 'Studio'
-                        elif any(x in text for x in ['ep', 'single']):
-                            current_section = 'EP'
-                        elif 'fan club' in text:
-                            current_section = 'Fan Club'
-                        elif 'promo' in text:
-                            current_section = 'Promo'
-                        continue
+                    if name:
+                        member_info = {
+                            'name': self._extract_text(name),
+                            'role': self._extract_text(role),
+                            'years': self._extract_text(years)
+                        }
+                        members.append({k: v for k, v in member_info.items() if v})
+                except Exception as e:
+                    logger.warning(f"Error parsing member: {e}")
+        return members
+
+    def _find_band_albums(self, soup: BeautifulSoup) -> Iterator[Dict]:
+        """Extract album information."""
+        album_section = soup.find('div', {'class': ['discography', 'albums']})
+        if album_section:
+            for album in album_section.find_all(['div', 'tr'], {'class': ['album', 'album-entry']}):
+                try:
+                    title_elem = album.find(['h3', 'td', 'div'], {'class': ['title', 'album-title']})
+                    year_elem = album.find(['span', 'td', 'div'], {'class': ['year', 'album-year']})
+                    type_elem = album.find(['span', 'td', 'div'], {'class': ['type', 'album-type']})
                     
-                    # Only process centered cells which typically contain album entries
-                    if element.get('align') != 'center':
-                        continue
-                        
-                    try:
-                        # Get album link
-                        album_link = element.find('a', href=re.compile(r'album\.asp\?id=\d+'))
-                        if not album_link:
-                            continue
-                            
-                        # Get year from the gray text
-                        year_span = element.find('span', {'style': 'color:#777'})
-                        if not year_span:
-                            continue
-                            
-                        year_match = re.search(r'\b(19|20)\d{2}\b', year_span.text)
-                        if not year_match:
-                            continue
-                            
-                        year = int(year_match.group())
-                        
-                        # Get rating - typically in red text
-                        rating = None
-                        rating_span = element.find('span', {'style': re.compile(r'color:#C75D4F')})
-                        if rating_span:
-                            try:
-                                rating = float(rating_span.text.strip())
-                            except (ValueError, TypeError):
-                                pass
-                        
-                        album_url = album_link['href']
-                        if not album_url.startswith('http'):
-                            album_url = self.base_url + '/' + album_url
-                        
-                        album = {
-                            'title': album_link.text.strip(),
-                            'url': album_url,
-                            'record_type': current_section,
-                            'year': year,
-                            'rating': rating
+                    # Extract and validate album type
+                    album_type = self._extract_text(type_elem)
+                    if album_type:
+                        album_type = album_type.strip().title()
+                        if 'Studio' in album_type:
+                            album_type = 'Studio Album'
+                        elif any(t in album_type for t in ['EP', 'Single']):
+                            album_type = 'Single/EP'
+                        elif 'Live' in album_type:
+                            album_type = 'Live'
+                        elif 'Compilation' in album_type:
+                            album_type = 'Compilation'
+                        else:
+                            album_type = 'Studio Album'  # Default to studio album
+
+                    title = self._extract_text(title_elem)
+                    if title:
+                        album_info = {
+                            'title': title,
+                            'year': self._extract_year(year_elem),
+                            'type': album_type,
+                            'url': self._extract_album_url(title_elem)
                         }
                         
-                        logger.info(f"Found album: {album['title']} ({album['year']}) - {current_section}")
-                        details['albums'].append(album)
-                        
-                    except Exception as e:
-                        logger.error(f"Error parsing album entry: {str(e)}")
-                        continue
-            
-            return details
-            
-        except Exception as e:
-            logger.error(f"Error parsing band page {band_url}: {str(e)}")
-            return {'error': str(e)}
+                        # Only yield if we have the minimum required fields
+                        if album_info['title'] and album_info['year'] and album_info['type']:
+                            yield album_info
 
-    def get_album_details(self, album_url: str) -> Dict:
-        """Get detailed information about an album."""
-        logger.info(f"Getting details for album at {album_url}")
-        content = self.get_page(album_url)
-        soup = BeautifulSoup(content, 'html.parser')
-        
-        try:
-            details = {'description': '', 'lineup': []}
-            
-            # Get album info from meta description
-            meta_desc = soup.find('meta', {'name': 'description'})
-            if meta_desc:
-                details['description'] = meta_desc.get('content', '')
-            
-            # Find the main content area
-            main_content = soup.find('div', {'id': 'main'})
-            if main_content:
-                # Look for lineup section which comes after "LINE-UP" text
-                lineup_heading = None
-                for element in main_content.find_all(['h3', 'div', 'td']):
-                    if 'LINE-UP' in element.get_text().upper():
-                        lineup_heading = element
-                        break
-                
-                if lineup_heading:
-                    current_role = None
-                    # Look at elements after the lineup heading
-                    for element in lineup_heading.find_next_siblings():
-                        text = element.get_text(strip=True)
-                        if not text:
-                            continue
-                            
-                        if text.endswith(':'):
-                            current_role = text[:-1].strip()
-                        elif current_role:
-                            details['lineup'].append({
-                                'role': current_role,
-                                'name': text.strip()
-                            })
-            
-            return details
-            
-        except Exception as e:
-            logger.error(f"Error parsing album page {album_url}: {str(e)}")
-            return {'error': str(e)}
+                except Exception as e:
+                    logger.warning(f"Error parsing album: {e}")
+
+    def _extract_year(self, element) -> Optional[str]:
+        """Extract and validate year from element."""
+        if element:
+            text = self._extract_text(element)
+            if text:
+                # Extract 4-digit year using regex
+                match = re.search(r'(19|20)\d{2}', text)
+                if match:
+                    return match.group(0)
+        return None
+
+    def _extract_album_url(self, element) -> Optional[str]:
+        """Extract album URL from element."""
+        if element:
+            link = element.find('a')
+            if link and link.get('href'):
+                url = link['href']
+                if not url.startswith('http'):
+                    url = f"{self.BASE_URL}/{url.lstrip('/')}"
+                return url
+        return None

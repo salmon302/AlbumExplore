@@ -51,7 +51,7 @@ test = [
 ]
 
 [project.scripts]
-albumexplore = "albumexplore:run"
+albumexplore = "albumexplore.tools.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

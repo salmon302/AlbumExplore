@@ -1,28 +1,65 @@
-"""Script to ethically scrape ProgArchives data."""
+"""Script to scrape ProgArchives data ethically."""
 import argparse
 import json
 import logging
 from pathlib import Path
-from typing import Dict, List
-from rich.progress import Progress, SpinnerColumn, TimeElapsedColumn
+from rich.progress import Progress, SpinnerColumn, TimeElapsedColumn, TextColumn
 from rich.logging import RichHandler
-from ..data.scrapers.progarchives_scraper import ProgArchivesScraper
+import sys
+from typing import List, Dict
 
-# Set up logging
+from albumexplore.data.scrapers.progarchives_scraper import ProgArchivesScraper
+
 logging.basicConfig(
     level=logging.INFO,
-    format="%(message)s",
-    datefmt="[%X]",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[RichHandler(rich_tracebacks=True)]
 )
 logger = logging.getLogger("rich")
 
-def save_json(data: Dict, filepath: Path):
-    """Save data to JSON file with proper encoding."""
-    with open(filepath, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def save_json(data: List[Dict], file_path: Path) -> None:
+    """Save data to JSON file with error handling."""
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        logger.error(f"Error saving data to {file_path}: {str(e)}")
 
-def main():
+def load_json(file_path: Path) -> List[Dict]:
+    """Load data from JSON file with error handling."""
+    if file_path.exists():
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error loading data from {file_path}: {str(e)}")
+    return []
+
+def deduplicate_albums(bands_data: List[Dict]) -> List[Dict]:
+    """Remove duplicate albums and review entries."""
+    for band in bands_data:
+        if 'albums' in band:
+            seen = set()
+            unique_albums = []
+            
+            for album in band.get('albums', []):
+                if 'title' not in album or 'Review this album' in album['title']:
+                    continue
+                    
+                title = album['title'].lower().strip()
+                year = album.get('year')
+                key = f"{title}:{year}"
+                
+                if key not in seen:
+                    seen.add(key)
+                    unique_albums.append(album)
+            
+            band['albums'] = unique_albums
+    
+    return bands_data
+
+def main() -> int:
+    """Main entry point. Returns exit code."""
     parser = argparse.ArgumentParser(description='Scrape ProgArchives data ethically')
     parser.add_argument(
         '--cache-dir',
@@ -39,36 +76,41 @@ def main():
     parser.add_argument(
         '--max-bands',
         type=int,
-        default=None,
-        help='Maximum number of bands to scrape (for testing)'
+        default=10,
+        help='Maximum number of bands to scrape'
     )
     parser.add_argument(
         '--resume-from',
         type=str,
         help='Resume from this band URL'
     )
+    parser.add_argument(
+        '--random-sample',
+        action='store_true',
+        help='Use random sampling strategy (first 5 + 5 random)'
+    )
     args = parser.parse_args()
 
-    # Create directories
-    args.cache_dir.mkdir(parents=True, exist_ok=True)
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Initialize scraper
-    scraper = ProgArchivesScraper(cache_dir=args.cache_dir)
-    resume = False
-    bands_data = []
-    
     try:
-        # Load existing data if resuming
+        # Create directories
+        args.cache_dir.mkdir(parents=True, exist_ok=True)
+        args.output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Initialize scraper
+        scraper = ProgArchivesScraper(
+            cache_dir=args.cache_dir,
+            max_bands=args.max_bands,
+            random_sample=args.random_sample
+        )
+
+        # Setup output file and load existing data if resuming
         output_file = args.output_dir / 'bands.json'
-        if args.resume_from and output_file.exists():
-            with open(output_file, 'r', encoding='utf-8') as f:
-                bands_data = json.load(f)
-            logger.info(f"Loaded {len(bands_data)} existing band entries")
-            resume = True
+        bands_data = load_json(output_file) if args.resume_from else []
+        resume = bool(args.resume_from)
 
         with Progress(
             SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
             *Progress.get_default_columns(),
             TimeElapsedColumn(),
             transient=False
@@ -76,15 +118,9 @@ def main():
             # Get band list
             band_task = progress.add_task("[yellow]Getting band list...", total=None)
             bands = list(scraper.get_all_bands())
-            progress.update(band_task, total=len(bands))
-            logger.info(f"Found {len(bands)} bands")
+            progress.remove_task(band_task)
 
-            # Limit bands if testing
-            if args.max_bands:
-                bands = bands[:args.max_bands]
-                logger.info(f"Limited to {args.max_bands} bands for testing")
-
-            # Process each band
+            # Setup progress bar for band processing
             band_task = progress.add_task(
                 "[green]Processing bands...",
                 total=len(bands)
@@ -109,46 +145,46 @@ def main():
 
                     # Combine band info with details
                     band_data = {**band, **details}
-
-                    # Process each album
-                    albums_with_details = []
-                    for album in band_data['albums']:
-                        album_details = scraper.get_album_details(album['url'])
-                        if 'error' not in album_details:
-                            albums_with_details.append({**album, **album_details})
-                        else:
-                            logger.error(f"Error processing album {album['title']}: {album_details['error']}")
-                            albums_with_details.append(album)
-
-                    band_data['albums'] = albums_with_details
                     bands_data.append(band_data)
 
                     # Save progress regularly
-                    save_json(bands_data, output_file)
+                    deduplicated_data = deduplicate_albums(bands_data)
+                    save_json(deduplicated_data, output_file)
                     
                 except Exception as e:
                     logger.error(f"Error processing band {band['name']}: {str(e)}")
                 finally:
                     progress.advance(band_task)
 
-        logger.info("Scraping complete!")
-        logger.info(f"Processed {len(bands_data)} bands")
-        
-        # Calculate some statistics
-        total_albums = sum(len(b['albums']) for b in bands_data)
-        albums_with_lineup = sum(
-            1 for b in bands_data 
-            for a in b['albums'] 
-            if 'lineup' in a and a['lineup']
-        )
-        
-        logger.info(f"Total albums: {total_albums}")
-        logger.info(f"Albums with lineup info: {albums_with_lineup}")
+            # Final deduplication and stats
+            bands_data = deduplicate_albums(bands_data)
+            total_albums = sum(len(band.get('albums', [])) for band in bands_data)
+            albums_with_lineup = sum(
+                1 for band in bands_data 
+                for album in band.get('albums', [])
+                if album.get('lineup', [])
+            )
+            
+            logger.info("Scraping complete!")
+            logger.info(f"Processed {len(bands_data)} bands")
+            logger.info(f"Total albums: {total_albums}")
+            logger.info(f"Albums with lineup info: {albums_with_lineup}")
+
+        return 0  # Success
 
     except KeyboardInterrupt:
-        logger.warning("\nScraping interrupted! Saving progress...")
-        save_json(bands_data, output_file)
-        logger.info("Progress saved")
+        logger.info("Saving progress before exit...")
+        if bands_data:
+            deduplicated_data = deduplicate_albums(bands_data)
+            save_json(deduplicated_data, output_file)
+        return 0  # Clean exit
+        
+    except Exception as e:
+        logger.error(f"Error during execution: {str(e)}")
+        if 'bands_data' in locals() and bands_data:
+            deduplicated_data = deduplicate_albums(bands_data)
+            save_json(deduplicated_data, output_file)
+        return 1  # Error exit
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
