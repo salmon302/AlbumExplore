@@ -4,12 +4,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set
 from sqlalchemy.orm import Session
 from datetime import datetime
-
-from ..models.album import Album
-from ..models.artist import Artist
-from ..models.track import Track
-from ..models.review import Review
-from ..models.tag import Tag
+from ...database.models import Album, Artist, Track, Review, Tag
 from ..scrapers.progarchives_scraper import ProgArchivesScraper
 from ..parsers.progarchives_parser import ProgArchivesParser
 

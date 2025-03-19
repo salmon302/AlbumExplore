@@ -130,45 +130,45 @@ class MainWindow(QMainWindow):
 		return widget
 
 
-	def load_data(self):
+	def load_data(self, csv_path: str):
 		try:
-			csv_dir = Path("/home/seth-n/PycharmProjects/AlbumExplore/csv")
+			csv_dir = Path(csv_path)
 			logging.info(f"Looking for CSV files in: {csv_dir}")
 			if not csv_dir.exists():
 				msg = f"CSV directory not found: {csv_dir}"
 				logging.error(msg)
 				self.status_bar.showMessage(msg)
 				return
-			
+
 			logging.info("Creating CSVParser...")
 			parser = CSVParser(csv_dir)
 			logging.info("Parsing CSV files...")
 			self.df = parser.parse()
-			
+
 			if self.df.empty:
 				msg = "No data parsed from CSV files"
 				logging.error(msg)
 				self.status_bar.showMessage(msg)
 				return
-			
+
 			logging.info(f"Successfully loaded {len(self.df)} rows of data")
-			
+
 			# Extract tags
 			logging.info("Extracting tags...")
 			for tags in self.df['tags']:
 				if isinstance(tags, list):
 					self.all_tags.update(tags)
-			
+
 			# Update tag comboboxes
 			sorted_tags = sorted(self.all_tags)
 			self.tag_select.addItems(sorted_tags)
 			self.consolidation_tag_select.addItems(sorted_tags)
-			
+
 			# Create network data
 			nodes = []
 			edges = []
 			tag_ids = {tag: f"tag_{i}" for i, tag in enumerate(self.all_tags)}
-			
+
 			for tag in self.all_tags:
 				nodes.append(VisualNode(
 					id=tag_ids[tag],
@@ -178,7 +178,7 @@ class MainWindow(QMainWindow):
 					shape="circle",
 					data={"type": "tag"}
 				))
-			
+
 			# Create edges based on tag co-occurrence
 			for tags in self.df['tags']:
 				if isinstance(tags, list) and len(tags) > 1:
@@ -191,24 +191,23 @@ class MainWindow(QMainWindow):
 								color="#999999",
 								thickness=1
 							))
-			
+
 			# Update network view with proper data update
 			if hasattr(self, 'network_view'):
 				self.network_view.update_data(nodes, edges)
 				self.network_view.adjust_viewport_to_content()
 				self.network_view.start_layout()
 
-
 			# Update tables
 			logging.info("Updating tables...")
 			self.update_albums_table()
 			self.update_tags_table()
 			self.update_consolidation_table()
-			
+
 			msg = f"Loaded {len(self.df)} albums with {len(self.all_tags)} unique tags"
 			logging.info(msg)
 			self.status_bar.showMessage(msg)
-			
+
 		except Exception as e:
 			msg = f"Error loading data: {str(e)}"
 			logging.error(msg, exc_info=True)

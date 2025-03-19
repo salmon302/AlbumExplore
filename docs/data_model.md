@@ -16,6 +16,8 @@ class Album:
 	tags: List[str]         # Normalized tags
 	raw_tags: List[str]     # Original tags before normalization
 	platforms: Dict[str, str] # Platform links (Bandcamp, Spotify, etc.)
+	latitude: float          # Latitude coordinate
+	longitude: float         # Longitude coordinate
 ```
 
 ### 1.2 Tag System

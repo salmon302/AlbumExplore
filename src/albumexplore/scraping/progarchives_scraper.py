@@ -8,6 +8,7 @@ from datetime import datetime
 import requests
 from typing import Dict, List, Optional, Iterator
 from bs4 import BeautifulSoup
+import string
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +74,6 @@ class ProgArchivesScraper:
             cached = self._get_cached_response(url)
             if cached:
                 return cached
-
         self._wait_for_rate_limit()
         
         try:
@@ -97,46 +97,91 @@ class ProgArchivesScraper:
             return {'error': error_msg}
 
     def get_bands_all(self) -> Iterator[Dict]:
-        """Get list of all bands, optionally using sampling strategy."""
+        """Get list of all bands using alphabetical listings."""
         bands_found = 0
         
-        for subgenre in self.SUBGENRES:
+        # Use alphabetical listings instead of subgenre listings
+        alphabet = string.ascii_lowercase
+        
+        for letter in alphabet:
             try:
                 page = 1
                 while True:
-                    url = f"{self.BASE_URL}/subgenre/{subgenre}/bands/{page}"
+                    url = f"{self.BASE_URL}/bands-alpha.asp?letter={letter}"
+                    if page > 1:
+                        url += f"&page={page}"
+                    
                     response = self._fetch_url(url)
                     
                     if 'error' in response:
                         break
                         
                     soup = BeautifulSoup(response['content'], 'html.parser')
-                    band_table = soup.find('table', class_='bands_list')
+                    
+                    # Find the band table - structure may have changed
+                    band_table = soup.find('table', class_='artists_list') or \
+                                soup.find('table', class_='bands_list') or \
+                                soup.select_one('table[cellpadding="2"][width="100%"]')
                     
                     if not band_table:
-                        break
+                        # Look for alternative structures - bands might be in different elements
+                        band_items = soup.select('.artist_item') or soup.select('.band_item')
+                        if not band_items:
+                            break
                         
-                    bands_on_page = []
-                    for row in band_table.find_all('tr')[1:]:  # Skip header
-                        try:
-                            cols = row.find_all('td')
-                            if len(cols) < 3:
-                                continue
+                        bands_on_page = []
+                        for item in band_items:
+                            try:
+                                link = item.find('a')
+                                if not link:
+                                    continue
                                 
-                            link = cols[0].find('a')
-                            if not link:
-                                continue
+                                # Extract subgenre/style
+                                style_span = item.select_one('span[style*="color:#777"]')
+                                subgenre = style_span.text.strip() if style_span else "Unknown"
                                 
-                            bands_on_page.append({
-                                'name': link.text.strip(),
-                                'url': f"{self.BASE_URL}{link['href']}",
-                                'country': cols[1].text.strip(),
-                                'subgenre': subgenre
-                            })
-                            
-                        except Exception as e:
-                            logger.warning(f"Error parsing band row: {e}")
-                            continue
+                                bands_on_page.append({
+                                    'name': link.text.strip(),
+                                    'url': f"{self.BASE_URL}{link['href']}",
+                                    'country': "Unknown",  # Country might not be visible in this view
+                                    'subgenre': subgenre
+                                })
+                            except Exception as e:
+                                logger.warning(f"Error parsing band item: {e}")
+                                continue
+                    else:
+                        # Parse traditional table structure
+                        bands_on_page = []
+                        for row in band_table.find_all('tr'):
+                            try:
+                                # Skip header rows
+                                if row.find('th'):
+                                    continue
+                                
+                                cols = row.find_all('td')
+                                if len(cols) < 2:
+                                    continue
+                                    
+                                link = cols[0].find('a')
+                                if not link:
+                                    continue
+                                
+                                country = cols[1].text.strip() if len(cols) > 1 else "Unknown"
+                                subgenre = cols[2].text.strip() if len(cols) > 2 else "Unknown"
+                                
+                                bands_on_page.append({
+                                    'name': link.text.strip(),
+                                    'url': f"{self.BASE_URL}{link['href'] if link['href'].startswith('/') else link['href']}",
+                                    'country': country,
+                                    'subgenre': subgenre
+                                })
+                            except Exception as e:
+                                logger.warning(f"Error parsing band row: {e}")
+                                continue
+                    
+                    if not bands_on_page:
+                        # If we found a page with no bands, we're done with this letter
+                        break
                     
                     if self.random_sample:
                         import random
@@ -153,14 +198,19 @@ class ProgArchivesScraper:
                         if self.max_bands and bands_found >= self.max_bands:
                             return
                             
-                    # Check for next page
-                    if not soup.find('a', string='>'):
+                    # Check for next page link - look for pagination
+                    pagination = soup.select_one('.pagination')
+                    next_link = None
+                    if pagination:
+                        next_link = pagination.find('a', string='>') or pagination.find('a', text=lambda t: t and '>' in t)
+                    
+                    if not next_link:
                         break
                         
                     page += 1
                     
             except Exception as e:
-                logger.error(f"Error getting bands for {subgenre}: {e}")
+                logger.error(f"Error getting bands for letter {letter}: {e}")
                 continue
 
     def get_band_details(self, url: str, use_cache: bool = True) -> Dict:

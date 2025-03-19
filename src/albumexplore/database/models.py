@@ -36,6 +36,8 @@ class Album(Base):
     vocal_style = Column(String)
     country = Column(String)
     genre = Column(String)
+    latitude = Column(Float)
+    longitude = Column(Float)
     x = Column(Float)
     y = Column(Float)
     last_updated = Column(DateTime)

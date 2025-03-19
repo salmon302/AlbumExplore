@@ -8,16 +8,32 @@
 - Graph Engine (Implemented)
 - Visualization Layer (Implemented)
 - Database Layer (Implemented)
-- API Interface (Planned)
 
 ### 1.2 Component Interactions
 ```ascii
 [Data Sources] -> [Data Processing Layer]
-		   ↓
+                   ↓
 [Database Layer] <-> [Tag Management System] <-> [Graph Engine]
-		   ↓                      ↓
+                   ↓                      ↓
 [API Interface] <----------> [Visualization Layer]
 ```
+
+### 1.3 Data Flow
+1. Input Processing
+   - CSV/TSV files parsed by Data Processing Layer
+   - Data validated and normalized
+   - Initial tag analysis performed
+
+2. Tag Processing
+   - Tags normalized and relationships computed
+   - Hierarchies established
+   - Similarities detected and analyzed
+
+3. Visualization Generation
+   - Graph structure computed
+   - Multiple view layouts generated
+   - Interactive elements bound
+   - State management initialized
 
 ## 2. Component Specifications
 
@@ -26,6 +42,8 @@
 - Data Normalizer with automated cleaning pipeline
 - Validation Engine with comprehensive checks
 - Tag frequency analysis
+- Support for multiple input formats
+- Error recovery and reporting
 
 ### 2.2 Tag Management System (Implemented)
 - Tag Normalizer with fuzzy matching
@@ -33,12 +51,15 @@
 - Search Engine with similarity detection
 - Tag Grouping System
 - Network Analysis Engine
+- Co-occurrence Analysis System
 
 ### 2.3 Graph Engine (Implemented)
 - Force-directed Layout with configurable parameters
 - Node Manager with selection and filtering
 - Edge Calculator with weight-based relationships
 - Filter Engine with multi-criteria support
+- Clustering System with LOD support
+- Performance optimization features
 
 ### 2.4 Visualization Layer (Implemented)
 - Multiple View Types:
@@ -63,25 +84,16 @@
   - Filter Updates
 
 ### 2.5 Database Layer (Implemented)
-- Schema Design:
-	- Core tables for albums and tags
-	- Tag hierarchy support
-	- Relationship tracking
-	- Update history logging
-- ORM Models:
-	- SQLAlchemy models
-	- Hierarchical relationships
-	- Many-to-many associations
-	- JSON field handling
-- Data Access Layer:
-	- CRUD operations
-	- Transaction management
-	- Error handling
-	- Update tracking
-- Migration System:
-	- Schema versioning
-	- Database initialization
-	- Structure verification
+- SQLAlchemy ORM Integration
+- Alembic Migration Support
+- Transaction Management
+- Schema:
+  - Albums Table
+  - Tags Table
+  - Relationships Table
+  - History Table
+- Query Optimization
+- Connection Pooling
 
 ### 2.6 API Interface (Planned)
 - Data Access Layer
@@ -90,24 +102,16 @@
 - Cache System
 
 ## 3. Technology Stack
-
-### 3.1 Backend (Current)
-- Python 3.8+
-- Key Libraries:
-	- pandas: Data processing
-	- networkx: Graph computations and tag relationships
-	- pytest: Testing framework
-	- numpy: Numerical computations
-	- sqlalchemy: Database ORM and migrations
-	- sqlite: Database engine
-
-### 3.2 Frontend (Implemented)
-- Visualization Libraries:
-  - Base visualization framework
-  - Custom renderers for each view type
-  - State management system
-  - Filter system
-  - Information display system
+- Backend:
+  - Python 3.x
+  - SQLAlchemy (ORM)
+  - Alembic (Migrations)
+  - NumPy/Pandas (Data Processing)
+  - NetworkX (Graph Analysis)
+- Frontend:
+  - Qt Framework (GUI)
+  - D3.js (Visualization)
+  - Custom View Components
 
 ## 4. Data Flow
 
