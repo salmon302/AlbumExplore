@@ -1,0 +1,143 @@
+{
+  "test_date": "2025-03-24T15:22:25.942837",
+  "duration": "0:01:57.983132",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 20,
+    "albums_successful": 0,
+    "albums_failed": 20,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "YA HO WHA 13",
+      "url": "https://www.progarchives.com/artist.asp?id=3962",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=19582",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=19582 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=19583",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=19583 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=24291",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=24291 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=24292",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=24292 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=24293",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=24293 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=19584",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=19584 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 6,
+      "albums_processed": 6
+    },
+    {
+      "name": "YABUKI, TAKU",
+      "url": "https://www.progarchives.com/artist.asp?id=8351",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=42509",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=42509 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=42512",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=42512 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=42510",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=42510 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=74852",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=74852 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "FASER",
+      "url": "https://www.progarchives.com/artist.asp?id=9215",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=48088",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=48088 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=48086",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=48086 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=48089",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=48089 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "YOBREPUS",
+      "url": "https://www.progarchives.com/artist.asp?id=11560",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71433",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71433 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71434",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71434 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=84555",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=84555 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=86644",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=86644 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "B F",
+      "url": "https://www.progarchives.com/artist.asp?id=4450",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=54474",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=54474 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=25669",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=25669 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=23022",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=23022 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "test_date": "2025-03-25T17:53:20.844219",
+  "duration": "0:02:27.021710",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 25,
+    "albums_successful": 0,
+    "albums_failed": 25,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "Q'UQ'UMATZ",
+      "url": "https://www.progarchives.com/artist.asp?id=10117",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=54545",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=54545 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=54546",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=54546 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=54547",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=54547 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "MUD MOTHS",
+      "url": "https://www.progarchives.com/artist.asp?id=9950",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=53310",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=53310 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=53311",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=53311 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=53312",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=53312 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "DELVOID",
+      "url": "https://www.progarchives.com/artist.asp?id=7683",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=39882",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=39882 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=50866",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=50866 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=74554",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=74554 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "NEUROSIS",
+      "url": "https://www.progarchives.com/artist.asp?id=2489",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11862",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11862 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11863",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11863 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11859",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11859 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11864",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11864 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11865",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11865 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11861",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11861 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11866",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11866 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11869",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11869 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11860",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11860 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=14851",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=14851 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=39405",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=39405 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=52466",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=52466 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 12,
+      "albums_processed": 12
+    },
+    {
+      "name": "C & K VOCAL",
+      "url": "https://www.progarchives.com/artist.asp?id=4248",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21343",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21343 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21342",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21342 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21344",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21344 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21345",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21345 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    }
+  ]
+}

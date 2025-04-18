@@ -1,0 +1,175 @@
+{
+  "test_date": "2025-03-25T17:32:02.000822",
+  "duration": "0:02:58.856374",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 28,
+    "albums_successful": 0,
+    "albums_failed": 28,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "P. G. SIX",
+      "url": "https://www.progarchives.com/artist.asp?id=3158",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=16387",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=16387 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=16388",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=16388 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=16389",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=16389 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=16390",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=16390 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=37408",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=37408 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 5,
+      "albums_processed": 5
+    },
+    {
+      "name": "NINE INCH NAILS",
+      "url": "https://www.progarchives.com/artist.asp?id=5427",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28282",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28282 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28284",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28284 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28285",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28285 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28286",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28286 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28287",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28287 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28288",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28288 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=28289",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=28289 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=42258",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=42258 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=59151",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=59151 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=65473",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=65473 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=65474",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=65474 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 11,
+      "albums_processed": 11
+    },
+    {
+      "name": "S VREMENA NA VREME",
+      "url": "https://www.progarchives.com/artist.asp?id=2473",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11705",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11705 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11723",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11723 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=25433",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=25433 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=13984",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=13984 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "PESSIMIST",
+      "url": "https://www.progarchives.com/artist.asp?id=11502",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=70604",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=70604 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=70603",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=70603 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=70605",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=70605 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "S.O.T.E. (SONGS OF THE EXILE)",
+      "url": "https://www.progarchives.com/artist.asp?id=7031",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=36154",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=36154 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=36155",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=36155 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=36156",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=36156 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=36157",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=36157 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=50401",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=50401 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 5,
+      "albums_processed": 5
+    }
+  ]
+}

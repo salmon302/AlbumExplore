@@ -1,0 +1,167 @@
+{
+  "test_date": "2025-03-25T18:02:29.229408",
+  "duration": "0:02:12.033545",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 26,
+    "albums_successful": 0,
+    "albums_failed": 26,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "LYMBYC SYSTYM",
+      "url": "https://www.progarchives.com/artist.asp?id=5687",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=29614",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=29614 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=29613",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=29613 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=56594",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=56594 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=29612",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=29612 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=56596",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=56596 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=56598",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=56598 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 6,
+      "albums_processed": 6
+    },
+    {
+      "name": "MELODIC ENERGY COMMISSION",
+      "url": "https://www.progarchives.com/artist.asp?id=10928",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=62575",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=62575 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=62576",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=62576 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=62577",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=62577 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=62578",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=62578 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=73134",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=73134 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 5,
+      "albums_processed": 5
+    },
+    {
+      "name": "VAGO SAGRADO",
+      "url": "https://www.progarchives.com/artist.asp?id=10025",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=53864",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=53864 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=61172",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=61172 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=62542",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=62542 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "ONO, RYOKO",
+      "url": "https://www.progarchives.com/artist.asp?id=7405",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=38292",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=38292 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=47245",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=47245 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=52144",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=52144 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=51977",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=51977 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=81461",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=81461 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=82756",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=82756 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=87732",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=87732 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 7,
+      "albums_processed": 7
+    },
+    {
+      "name": "AMARTIA",
+      "url": "https://www.progarchives.com/artist.asp?id=11719",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=72279",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=72279 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=72280",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=72280 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=72281",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=72281 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=72283",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=72283 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=72278",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=72278 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 5,
+      "albums_processed": 5
+    }
+  ]
+}

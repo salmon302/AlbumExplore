@@ -1,0 +1,140 @@
+{
+  "stats": {
+    "total_bands": 4,
+    "total_albums": 10,
+    "bands_with_lineup": 1,
+    "albums_with_lineup": 0,
+    "total_members": 6
+  },
+  "results": [
+    {
+      "name": "HIGH WHEEL",
+      "url": "https://www.progarchives.com/artist.asp?id=149",
+      "genre": "Symphonic Prog \u2022 Germany",
+      "members": [
+        {
+          "name": "apps79",
+          "role": "Honorary Collaborator"
+        },
+        {
+          "name": "b_olariu",
+          "role": null
+        },
+        {
+          "name": "Mellotron Storm",
+          "role": null
+        },
+        {
+          "name": "ZowieZiggy",
+          "role": null
+        },
+        {
+          "name": "Windhawk",
+          "role": "Honorary Collaborator"
+        },
+        {
+          "name": "erik neuteboom",
+          "role": null
+        }
+      ],
+      "id": "149",
+      "scraped_at": "2025-03-24T19:01:50.043431",
+      "albums": [
+        {
+          "title": "BUY",
+          "url": "https://www.progarchives.com/album.asp?id=563#buymusic",
+          "id": "563",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "Review this album",
+          "url": "https://www.progarchives.com/album.asp?id=563#postAReview",
+          "id": "563",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "BUY",
+          "url": "https://www.progarchives.com/album.asp?id=561#buymusic",
+          "id": "561",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "Review this album",
+          "url": "https://www.progarchives.com/album.asp?id=561#postAReview",
+          "id": "561",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "BUY",
+          "url": "https://www.progarchives.com/album.asp?id=562#buymusic",
+          "id": "562",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "Review this album",
+          "url": "https://www.progarchives.com/album.asp?id=562#postAReview",
+          "id": "562",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "BUY",
+          "url": "https://www.progarchives.com/album.asp?id=560#buymusic",
+          "id": "560",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "Review this album",
+          "url": "https://www.progarchives.com/album.asp?id=560#postAReview",
+          "id": "560",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "BUY",
+          "url": "https://www.progarchives.com/album.asp?id=13732#buymusic",
+          "id": "13732",
+          "year": 2002,
+          "type": "Studio Album"
+        },
+        {
+          "title": "Review this album",
+          "url": "https://www.progarchives.com/album.asp?id=13732#postAReview",
+          "id": "13732",
+          "year": 2002,
+          "type": "Studio Album"
+        }
+      ]
+    },
+    {
+      "name": "\u00c5",
+      "url": "https://www.progarchives.com/artist.asp?id=12469",
+      "id": "12469",
+      "genre": "Krautrock \u2022 Italy",
+      "scraped_at": "2025-03-24T19:01:50.801565",
+      "albums": []
+    },
+    {
+      "name": "\u00c5",
+      "url": "https://www.progarchives.com/artist.asp?id=12827",
+      "id": "12827",
+      "genre": "Eclectic Prog \u2022 Sweden",
+      "scraped_at": "2025-03-24T19:01:50.894486",
+      "albums": []
+    },
+    {
+      "name": "THE A BAND",
+      "url": "https://www.progarchives.com/artist.asp?id=7277",
+      "id": "7277",
+      "genre": "RIO/Avant-Prog \u2022 United Kingdom",
+      "scraped_at": "2025-03-24T19:01:51.022187",
+      "albums": []
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "test_date": "2025-03-24T22:03:28.381031",
+  "duration": "0:02:31.607421",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 29,
+    "albums_successful": 0,
+    "albums_failed": 29,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "INCANDESCENT SKY",
+      "url": "https://www.progarchives.com/artist.asp?id=6609",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=34338",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=34338 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=34337",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=34337 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=34336",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=34336 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=34335",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=34335 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "C & K VOCAL",
+      "url": "https://www.progarchives.com/artist.asp?id=4248",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21343",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21343 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21342",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21342 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21344",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21344 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=21345",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=21345 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "Z., WILL",
+      "url": "https://www.progarchives.com/artist.asp?id=10263",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55838",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55838 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55837",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55837 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55836",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55836 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55835",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55835 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55833",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55833 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55834",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55834 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 6,
+      "albums_processed": 6
+    },
+    {
+      "name": "CARLTON, MARC",
+      "url": "https://www.progarchives.com/artist.asp?id=2059",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=9412",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=9412 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=9413",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=9413 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=9396",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=9396 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=9395",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=9395 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=9394",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=9394 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=31040",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=31040 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=16673",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=16673 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=22870",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=22870 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=38580",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=38580 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=50897",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=50897 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71198",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71198 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 11,
+      "albums_processed": 11
+    },
+    {
+      "name": "H.P. LOVECRAFT",
+      "url": "https://www.progarchives.com/artist.asp?id=2273",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=10447",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=10447 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=10448",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=10448 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=10449",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=10449 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=10450",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=10450 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "stats": {
+    "total_bands": 4,
+    "total_albums": 11,
+    "bands_with_lineup": 1,
+    "albums_with_lineup": 0,
+    "total_members": 6
+  },
+  "results": [
+    {
+      "name": "HIGH WHEEL",
+      "url": "https://www.progarchives.com/artist.asp?id=149",
+      "genre": "Symphonic Prog \u2022 Germany",
+      "members": [
+        {
+          "name": "apps79",
+          "role": "Honorary Collaborator"
+        },
+        {
+          "name": "b_olariu",
+          "role": null
+        },
+        {
+          "name": "Mellotron Storm",
+          "role": null
+        },
+        {
+          "name": "ZowieZiggy",
+          "role": null
+        },
+        {
+          "name": "Windhawk",
+          "role": "Honorary Collaborator"
+        },
+        {
+          "name": "erik neuteboom",
+          "role": null
+        }
+      ],
+      "id": "149",
+      "scraped_at": "2025-03-24T20:01:00.696124",
+      "albums": [
+        {
+          "title": "1910",
+          "url": "https://www.progarchives.com/album.asp?id=560",
+          "year": 1970,
+          "id": "560",
+          "type": "Studio Album"
+        },
+        {
+          "title": "Remember The Colours",
+          "url": "https://www.progarchives.com/album.asp?id=561",
+          "year": 1970,
+          "id": "561",
+          "type": "Studio Album"
+        },
+        {
+          "title": "There",
+          "url": "https://www.progarchives.com/album.asp?id=562",
+          "year": 1970,
+          "id": "562",
+          "type": "Studio Album"
+        },
+        {
+          "title": "Back From The Void",
+          "url": "https://www.progarchives.com/album.asp?id=563",
+          "year": 1970,
+          "id": "563",
+          "type": "Studio Album"
+        }
+      ]
+    },
+    {
+      "name": "\u00c5",
+      "url": "https://www.progarchives.com/artist.asp?id=12469",
+      "id": "12469",
+      "genre": "Krautrock \u2022 Italy",
+      "scraped_at": "2025-03-24T20:01:01.200215",
+      "albums": [
+        {
+          "title": "\u00c5",
+          "url": "https://www.progarchives.com/album.asp?id=80720",
+          "year": 2000,
+          "id": "80720",
+          "type": "Studio Album"
+        }
+      ]
+    },
+    {
+      "name": "\u00c5",
+      "url": "https://www.progarchives.com/artist.asp?id=12827",
+      "id": "12827",
+      "genre": "Eclectic Prog \u2022 Sweden",
+      "scraped_at": "2025-03-24T20:01:01.292585",
+      "albums": [
+        {
+          "title": "\u00c5",
+          "url": "https://www.progarchives.com/album.asp?id=87186",
+          "year": 2000,
+          "id": "87186",
+          "type": "Studio Album"
+        },
+        {
+          "title": "\u00c5nyo",
+          "url": "https://www.progarchives.com/album.asp?id=87187",
+          "year": 2000,
+          "id": "87187",
+          "type": "Studio Album"
+        },
+        {
+          "title": "\u00c5tr\u00e5v\u00e4rld",
+          "url": "https://www.progarchives.com/album.asp?id=87184",
+          "year": 2000,
+          "id": "87184",
+          "type": "Studio Album"
+        }
+      ]
+    },
+    {
+      "name": "THE A BAND",
+      "url": "https://www.progarchives.com/artist.asp?id=7277",
+      "id": "7277",
+      "genre": "RIO/Avant-Prog \u2022 United Kingdom",
+      "scraped_at": "2025-03-24T20:01:01.413748",
+      "albums": [
+        {
+          "title": "April Twelfth Nineteen-Ninety-Two",
+          "url": "https://www.progarchives.com/album.asp?id=65252",
+          "year": 2000,
+          "id": "65252",
+          "type": "Studio Album"
+        },
+        {
+          "title": "A",
+          "url": "https://www.progarchives.com/album.asp?id=65253",
+          "year": 2000,
+          "id": "65253",
+          "type": "Studio Album"
+        },
+        {
+          "title": "Acronyms - Volume 1",
+          "url": "https://www.progarchives.com/album.asp?id=65254",
+          "year": 2000,
+          "id": "65254",
+          "type": "Studio Album"
+        }
+      ]
+    }
+  ]
+}

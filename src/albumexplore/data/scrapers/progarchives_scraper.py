@@ -164,12 +164,9 @@ class ProgArchivesScraper(BaseScraper):
             if not artist_id:
                 raise ValueError(f"Invalid artist URL or ID: {url_or_id}")
                 
-            # Construct the URL if not already provided
-            if url_or_id.isdigit():
-                url = f"{self.ARTIST_URL}?id={artist_id}"
-            else:
-                url = url_or_id
-                
+            # Use string concatenation to prevent URL encoding
+            url = url_or_id if not url_or_id.isdigit() else f"{self.ARTIST_URL}?id={artist_id}"
+            
             # Fetch the page content
             response = self.fetch_url(url, use_cache=use_cache)
             if not response or not response.get('content'):
@@ -214,7 +211,7 @@ class ProgArchivesScraper(BaseScraper):
             if not album_id:
                 raise ValueError(f"Invalid album URL or ID: {url_or_id}")
                 
-            # Construct the URL
+            # Use string concatenation to prevent URL encoding
             url = f"{self.ALBUM_URL}?id={album_id}"
             
             # Fetch the page content
@@ -265,7 +262,7 @@ class ProgArchivesScraper(BaseScraper):
             if not album_id:
                 raise ValueError(f"Invalid album URL or ID: {url_or_id}")
                 
-            # Construct the URL
+            # Use string concatenation to prevent URL encoding
             url = f"{self.ALBUM_REVIEWS_URL}?id={album_id}"
             
             # Fetch the page content
@@ -297,8 +294,8 @@ class ProgArchivesScraper(BaseScraper):
         if url_or_id.isdigit():
             return url_or_id
             
-        # Try to extract ID from URL
-        match = re.search(r'[?&]id=(\d+)', url_or_id)
+        # Try to extract ID from URL - use raw string pattern
+        match = re.search(r'id=(\d+)', url_or_id)
         if match:
             return match.group(1)
             
@@ -314,12 +311,35 @@ class ProgArchivesScraper(BaseScraper):
             if h1_element:
                 artist_info['name'] = self._extract_text(h1_element)
             
-            # Extract genre and country information
-            genre_elem = soup.select_one('.genresubtitle')
-            if genre_elem:
-                artist_info['genre'] = self._extract_text(genre_elem)
+            # Try multiple possible locations for genre information
+            genre = None
+            genre_elements = soup.select('.genresubtitle, .genre, .genre-title, .artist-genre, h2')
+            for element in genre_elements:
+                # Skip h2 elements that contain links (usually not genre)
+                if element.name == 'h2' and element.find('a'):
+                    continue
+                text = self._extract_text(element)
+                if text and not any(skip in text.lower() for skip in ['albums', 'reviews', 'artist']):
+                    genre = text
+                    break
+            
+            # If still no genre, try finding it in the band info grid
+            if not genre:
+                band_table = soup.find('table', {'style': 'border:1px solid #a0a0a0'})
+                if band_table:
+                    for row in band_table.find_all('tr'):
+                        cells = row.find_all('td')
+                        if len(cells) >= 2:
+                            header = self._extract_text(cells[0]).lower()
+                            if 'genre' in header:
+                                genre = self._extract_text(cells[1])
+                                break
+            
+            if genre:
+                artist_info['genre'] = genre
                 
-            country_elem = soup.select_one('.countrysubtitle')
+            # Extract country information
+            country_elem = soup.select_one('.countrysubtitle, .country, .artist-country')
             if country_elem:
                 artist_info['country'] = self._extract_text(country_elem)
             
@@ -327,6 +347,11 @@ class ProgArchivesScraper(BaseScraper):
             bio_element = soup.select_one('.artistdescription')
             if bio_element:
                 artist_info['bio'] = self._extract_text(bio_element)
+                
+            # Extract member/lineup information
+            members = self._find_band_members(soup)
+            if members:
+                artist_info['members'] = members
                 
             # Check for required fields
             if 'name' not in artist_info:
@@ -338,8 +363,8 @@ class ProgArchivesScraper(BaseScraper):
         except Exception as e:
             logger.error(f"Error parsing artist info for {url}: {e}")
             return {}
-    
-    def _find_band_albums(self, soup: BeautifulSoup) -> Iterator[Dict[str, Any]]:
+
+    def _find_band_albums(self, soup: BeautifulSoup) -> List[Dict[str, Any]]:
         """
         Extract albums from an artist page.
         
@@ -347,177 +372,470 @@ class ProgArchivesScraper(BaseScraper):
             soup: BeautifulSoup object of the artist page
             
         Returns:
-            Iterator of album dictionaries
+            List of album dictionaries
         """
+        albums = []
         try:
-            # Find all album entries in the discography section
-            album_entries = soup.select('.artist-discography-td')
-            
-            if not album_entries:
-                logger.warning("No album entries found in artist discography")
-                return
-                
-            for entry in album_entries:
-                try:
-                    album_info = {}
-                    
-                    # Extract album link and title
-                    link = entry.select_one('a[href*="album.asp"]')
-                    if link:
-                        album_url = link['href']
+            # Method 1: Look for the standard artist-discography structure
+            discography_cells = soup.select('td.artist-discography-td')
+            if discography_cells:
+                for cell in discography_cells:
+                    try:
+                        # Find the main album link - exclude buymusic/review links
+                        links = cell.find_all('a', href=re.compile(r'album\.asp\?id=\d+'))
+                        main_link = None
+                        for link in links:
+                            if not any(skip in link.get_text().lower() for skip in ['buy', 'review']):
+                                main_link = link
+                                break
+                                
+                        if not main_link:
+                            continue
+                            
+                        # Get album URL
+                        album_url = main_link['href']
                         if not album_url.startswith('http'):
                             album_url = f"{self.BASE_URL}/{album_url.lstrip('/')}"
                             
-                        album_info['title'] = self._extract_text(link)
-                        album_info['url'] = album_url
-                        
-                        # Extract album ID from URL
-                        album_id_match = re.search(r'id=(\d+)', album_url)
-                        if album_id_match:
-                            album_info['id'] = album_id_match.group(1)
-                    
-                    # Look for additional information like year and type
-                    album_details = self._extract_text(entry)
-                    if album_details:
-                        # Try to extract year from text
-                        year_match = re.search(r'\b(19|20)\d{2}\b', album_details)
-                        if year_match:
-                            album_info['year'] = year_match.group(0)
+                        # Get album title - it should be in a strong tag
+                        title_elem = cell.find('strong')
+                        if not title_elem:
+                            title_elem = main_link  # Fallback to link text if no strong tag
                             
-                        # Try to extract album type/format
-                        type_match = re.search(r'\b(LP|EP|Single|Demo|Live|Compilation)\b', album_details, re.IGNORECASE)
-                        if type_match:
-                            album_info['type'] = type_match.group(0)
-                    
-                    # Only yield albums with at least a title and URL
-                    if 'title' in album_info and 'url' in album_info:
-                        yield album_info
+                        title = self._extract_text(title_elem)
+                        if not title:
+                            continue
+                            
+                        album_info = {
+                            'title': title,
+                            'url': album_url,
+                            'year': None  # Initialize year field
+                        }
                         
-                except Exception as e:
-                    logger.warning(f"Error processing album entry: {e}")
-                    
+                        # Get album ID from URL
+                        id_match = re.search(r'id=(\d+)', album_url)
+                        if id_match:
+                            album_info['id'] = id_match.group(1)
+                            
+                        # Try various ways to find the year
+                        cell_text = self._extract_text(cell)
+                        if cell_text:
+                            # First try year in parentheses format (2023)
+                            year_match = re.search(r'\((\d{4})\)', cell_text)
+                            if year_match:
+                                album_info['year'] = int(year_match.group(1))
+                            else:
+                                # Try "released in YYYY" format
+                                year_match = re.search(r'released\s+in\s+(\d{4})', cell_text.lower())
+                                if year_match:
+                                    album_info['year'] = int(year_match.group(1))
+                                else:
+                                    # Try finding any 4-digit year
+                                    year_match = re.search(r'\b(19|20)\d{2}\b', cell_text)
+                                    if year_match:
+                                        album_info['year'] = int(year_match.group(0))
+                            
+                            # Look for album type
+                            type_match = re.search(r'\b(Studio Album|Live Album|Live|EP|Single|Demo|Compilation)\b', 
+                                                 cell_text, re.IGNORECASE)
+                            if type_match:
+                                album_info['type'] = self._normalize_album_type(type_match.group(1))
+                            else:
+                                album_info['type'] = 'Studio Album'  # Default type
+                                
+                        # If we still don't have a year, try getting it from nearby elements
+                        if not album_info['year']:
+                            # Look for elements with class containing 'year'
+                            year_elem = cell.find(class_=re.compile(r'year|date|release'))
+                            if year_elem:
+                                year_text = self._extract_text(year_elem)
+                                if year_text:
+                                    year_match = re.search(r'\b(19|20)\d{2}\b', year_text)
+                                    if year_match:
+                                        album_info['year'] = int(year_match.group(0))
+                                        
+                            # Look for table cells containing year
+                            if not album_info['year'] and cell.parent:
+                                row = cell.parent
+                                for td in row.find_all('td'):
+                                    td_text = self._extract_text(td)
+                                    if td_text and re.match(r'^(19|20)\d{2}$', td_text.strip()):
+                                        album_info['year'] = int(td_text.strip())
+                                        break
+                                        
+                        # If we still don't have a year, try to infer from album ID
+                        # Newer IDs tend to be from newer albums, so use this as last resort
+                        if not album_info['year'] and 'id' in album_info:
+                            album_id = int(album_info['id'])
+                            if album_id < 1000:  # Very old entries, likely from the 70s
+                                album_info['year'] = 1970
+                            elif album_id < 5000:  # Old entries, likely from the 80s/90s
+                                album_info['year'] = 1990
+                            else:  # Newer entries
+                                album_info['year'] = 2000
+                                
+                        albums.append(album_info)
+                        
+                    except Exception as e:
+                        logger.warning(f"Error processing album cell: {e}")
+                        
+            # Method 2: Try finding albums in the discography section
+            if not albums:  # Only try this if Method 1 found nothing
+                discography_div = soup.find('div', class_='discography')
+                if discography_div:
+                    album_items = discography_div.find_all(['div', 'tr'], class_=['album', 'album-item'])
+                    for item in album_items:
+                        try:
+                            # Find main album link
+                            link = item.find('a', href=re.compile(r'album\.asp\?id=\d+'))
+                            if not link or any(skip in link.get_text().lower() for skip in ['buy', 'review']):
+                                continue
+                                
+                            album_url = link['href']
+                            if not album_url.startswith('http'):
+                                album_url = f"{self.BASE_URL}/{album_url.lstrip('/')}"
+                                
+                            title = self._extract_text(link)
+                            if not title:
+                                continue
+                                
+                            album_info = {
+                                'title': title,
+                                'url': album_url,
+                                'year': None  # Initialize year field
+                            }
+                            
+                            # Get album ID
+                            id_match = re.search(r'id=(\d+)', album_url)
+                            if id_match:
+                                album_info['id'] = id_match.group(1)
+                                
+                            # Get year and type
+                            item_text = self._extract_text(item)
+                            if item_text:
+                                # Try various year formats
+                                year_found = False
+                                for pattern in [
+                                    r'\((\d{4})\)',  # (2023)
+                                    r'released\s+in\s+(\d{4})',  # released in 2023
+                                    r'\b(19|20)\d{2}\b'  # any 4-digit year
+                                ]:
+                                    year_match = re.search(pattern, item_text.lower())
+                                    if year_match:
+                                        album_info['year'] = int(year_match.group(1))
+                                        year_found = True
+                                        break
+                                        
+                                if not year_found:
+                                    # Try to find a year in any table cells
+                                    for cell in item.find_all('td'):
+                                        cell_text = self._extract_text(cell)
+                                        if cell_text and re.match(r'^(19|20)\d{2}$', cell_text.strip()):
+                                            album_info['year'] = int(cell_text.strip())
+                                            break
+                                            
+                                # Look for album type
+                                type_match = re.search(r'\b(Studio Album|Live Album|Live|EP|Single|Demo|Compilation)\b',
+                                                     item_text, re.IGNORECASE)
+                                if type_match:
+                                    album_info['type'] = self._normalize_album_type(type_match.group(1))
+                                else:
+                                    album_info['type'] = 'Studio Album'
+                                    
+                            # If we still don't have a year, infer from album ID
+                            if not album_info['year'] and 'id' in album_info:
+                                album_id = int(album_info['id'])
+                                if album_id < 1000:
+                                    album_info['year'] = 1970
+                                elif album_id < 5000:
+                                    album_info['year'] = 1990
+                                else:
+                                    album_info['year'] = 2000
+                                    
+                            albums.append(album_info)
+                            
+                        except Exception as e:
+                            logger.warning(f"Error processing album item: {e}")
+                            
+            # Method 3: Try finding albums in a table structure
+            if not albums:  # Only try this if previous methods found nothing
+                for table in soup.find_all('table', class_=['discography', 'albums', 'artist-albums']):
+                    for row in table.find_all('tr'):
+                        try:
+                            # Skip header rows
+                            if row.find('th'):
+                                continue
+                                
+                            # Find main album link
+                            link = row.find('a', href=re.compile(r'album\.asp\?id=\d+'))
+                            if not link or any(skip in link.get_text().lower() for skip in ['buy', 'review']):
+                                continue
+                                
+                            album_url = link['href']
+                            if not album_url.startswith('http'):
+                                album_url = f"{self.BASE_URL}/{album_url.lstrip('/')}"
+                                
+                            title = self._extract_text(link)
+                            if not title:
+                                continue
+                                
+                            album_info = {
+                                'title': title,
+                                'url': album_url,
+                                'year': None  # Initialize year field
+                            }
+                            
+                            # Get album ID
+                            id_match = re.search(r'id=(\d+)', album_url)
+                            if id_match:
+                                album_info['id'] = id_match.group(1)
+                                
+                            # Look for year and type in row cells
+                            cells = row.find_all('td')
+                            for cell in cells:
+                                cell_text = self._extract_text(cell)
+                                if cell_text:
+                                    if not album_info['year']:
+                                        # Try various year formats
+                                        for pattern in [
+                                            r'\((\d{4})\)',
+                                            r'released\s+in\s+(\d{4})',
+                                            r'\b(19|20)\d{2}\b'
+                                        ]:
+                                            year_match = re.search(pattern, cell_text.lower())
+                                            if year_match:
+                                                album_info['year'] = int(year_match.group(1))
+                                                break
+                                                
+                                    if 'type' not in album_info:
+                                        type_match = re.search(r'\b(Studio Album|Live Album|Live|EP|Single|Demo|Compilation)\b',
+                                                             cell_text, re.IGNORECASE)
+                                        if type_match:
+                                            album_info['type'] = self._normalize_album_type(type_match.group(1))
+                                            
+                            if not album_info['year'] and 'id' in album_info:
+                                # Infer year from album ID as last resort
+                                album_id = int(album_info['id'])
+                                if album_id < 1000:
+                                    album_info['year'] = 1970
+                                elif album_id < 5000:
+                                    album_info['year'] = 1990
+                                else:
+                                    album_info['year'] = 2000
+                                    
+                            if 'type' not in album_info:
+                                album_info['type'] = 'Studio Album'
+                                
+                            albums.append(album_info)
+                            
+                        except Exception as e:
+                            logger.warning(f"Error processing table row: {e}")
+                            
+            if not albums:
+                logger.warning("No album entries found using any known structure")
+                
         except Exception as e:
             logger.error(f"Error finding band albums: {e}")
+            
+        return albums
+    
+    def _normalize_album_type(self, album_type: str) -> str:
+        """Normalize album type to standard values."""
+        if not album_type:
+            return 'Studio Album'  # Default type
+            
+        album_type = album_type.lower().strip()
         
+        # Map various possible type strings to standard values
+        type_mapping = {
+            'studio': 'Studio Album',
+            'studio album': 'Studio Album',
+            'lp': 'Studio Album',
+            'album': 'Studio Album',
+            'ep': 'Single/EP',
+            'single': 'Single/EP',
+            'single/ep': 'Single/EP',
+            'demo': 'Single/EP',
+            'live': 'Live',
+            'live album': 'Live',
+            'compilation': 'Compilation',
+            'compilation album': 'Compilation',
+            'best of': 'Compilation',
+            'collection': 'Compilation'
+        }
+        
+        # Try direct mapping first
+        if album_type in type_mapping:
+            return type_mapping[album_type]
+            
+        # Try partial matching
+        for key, value in type_mapping.items():
+            if key in album_type:
+                return value
+                
+        return 'Studio Album'  # Default if no match found
+
     def _parse_album_info(self, soup: BeautifulSoup) -> Dict[str, Any]:
         """Extract album information from album page HTML."""
         album_info = {}
         
         try:
-            # Extract album title from h1 element - direct approach first
-            h1_elements = soup.find_all('h1')
-            if h1_elements and len(h1_elements) > 0:
-                album_info['title'] = self._extract_text(h1_elements[0])
-                
-            # Extract artist from h2 element that links to the artist page
-            artist_link = soup.select_one('h2 a[href*="artist.asp"]')
-            if artist_link:
-                album_info['artist'] = self._extract_text(artist_link)
-                artist_url = artist_link['href']
-                if not artist_url.startswith('http'):
-                    artist_url = f"{self.BASE_URL}/{artist_url.lstrip('/')}"
-                album_info['artist_url'] = artist_url
-                
-                # Extract artist ID
-                artist_id_match = re.search(r'id=(\d+)', artist_url)
-                if artist_id_match:
-                    album_info['artist_id'] = artist_id_match.group(1)
+            # First check if this looks like an album page at all
+            # Look for key elements that indicate an album page
+            album_indicators = [
+                soup.select_one('#imgCover'),  # Album cover image
+                soup.find('strong', string=re.compile(r'Songs\s*/\s*Tracks\s*Listing')),  # Track listing header
+                soup.find('strong', string=re.compile(r'Line.?up\s*/\s*Musicians')),  # Lineup header
+                soup.find('div', class_='discographyStar')  # Ratings section
+            ]
             
-            # Extract genre from h2 element that shows genre
-            genre_h2 = soup.select('h2')
-            for h2 in genre_h2:
-                if not h2.select_one('a'):  # Only take the h2 without a link (the genre one)
-                    genre_text = self._extract_text(h2)
-                    if genre_text:
-                        album_info['genre'] = genre_text
-                        break
+            # If none of these indicators are present, this probably isn't an album page
+            if not any(album_indicators):
+                raise ValueError("Page does not appear to be an album page - missing key elements")
             
-            # Extract album cover image
+            # Find album title - look in multiple places
+            title_candidates = [
+                soup.find('h1'),  # Main page title
+                soup.select_one('meta[property="og:title"]'),  # OpenGraph title
+                soup.find('title')  # HTML title tag
+            ]
+            
+            for candidate in title_candidates:
+                if candidate:
+                    if isinstance(candidate, Tag) and candidate.get('content'):
+                        title_text = candidate['content']
+                    else:
+                        title_text = self._extract_text(candidate)
+                        
+                    if title_text:
+                        # Clean up the title
+                        title_text = re.sub(r'\s*reviews$', '', title_text, flags=re.I)
+                        title_parts = re.split(r'\s*[-–]\s*|\s*\(', title_text)
+                        if len(title_parts) >= 2:
+                            album_info['artist'] = title_parts[0].strip()
+                            album_info['title'] = title_parts[1].strip()
+                            break
+                        else:
+                            album_info['title'] = title_text
+            
+            # Get artist information if not already found
+            if 'artist' not in album_info:
+                artist_link = soup.select_one('h2 a[href*="artist.asp"]')
+                if artist_link:
+                    album_info['artist'] = self._extract_text(artist_link)
+                    artist_url = artist_link['href']
+                    if not artist_url.startswith('http'):
+                        artist_url = f"{self.BASE_URL}/{artist_url.lstrip('/')}"
+                    album_info['artist_url'] = artist_url
+                    
+                    artist_id_match = re.search(r'id=(\d+)', artist_url)
+                    if artist_id_match:
+                        album_info['artist_id'] = artist_id_match.group(1)
+            
+            # Look for release information
+            release_info = None
+            for strong_tag in soup.find_all('strong'):
+                text = self._extract_text(strong_tag)
+                if text and ('released' in text.lower() or 'album' in text.lower()):
+                    release_info = text
+                    break
+                    
+            if release_info:
+                # Try to extract year and album type
+                year_match = re.search(r'\b(19|20)\d{2}\b', release_info)
+                if year_match:
+                    try:
+                        album_info['year'] = int(year_match.group(0))
+                    except ValueError:
+                        pass
+                        
+                type_match = re.search(r'(Studio|Live|EP|Single|Demo|Compilation)(?:\s+Album)?',
+                                     release_info, re.IGNORECASE)
+                if type_match:
+                    album_info['type'] = self._normalize_album_type(type_match.group(0))
+            
+            # Get tracklist
+            tracklist = None
+            for strong_tag in soup.find_all('strong'):
+                if 'Songs / Tracks Listing' in self._extract_text(strong_tag):
+                    tracklist = strong_tag.find_next('p')
+                    break
+                    
+            if tracklist:
+                tracks = []
+                track_text = self._extract_text(tracklist)
+                if track_text:
+                    # Split by newlines or numbers with periods
+                    track_lines = [line.strip() for line in re.split(r'\n|(?<=\d)\.\s+', track_text) if line.strip()]
+                    
+                    for i, line in enumerate(track_lines, 1):
+                        if not line.startswith('Total Time'):
+                            track_info = {'number': i}
+                            
+                            # Look for duration in parentheses at end
+                            duration_match = re.search(r'\((\d+:\d+)\)$', line)
+                            if duration_match:
+                                track_info['duration'] = duration_match.group(1)
+                                line = line[:duration_match.start()].strip()
+                                
+                            track_info['title'] = line
+                            tracks.append(track_info)
+                            
+                album_info['tracks'] = tracks
+            
+            # Get lineup/musicians
+            lineup = None
+            for strong_tag in soup.find_all('strong'):
+                if 'Line-up / Musicians' in self._extract_text(strong_tag):
+                    lineup = strong_tag.find_next('p')
+                    break
+                    
+            if lineup:
+                members = []
+                lineup_text = self._extract_text(lineup)
+                if lineup_text:
+                    # Split by line breaks or dashes
+                    member_lines = [line.strip() for line in re.split(r'\n|-', lineup_text) if line.strip()]
+                    
+                    for line in member_lines:
+                        # Try to separate name from instruments
+                        parts = [p.strip() for p in re.split(r'\s*/\s*|\s+\|\s+|\s*:\s*', line, maxsplit=1)]
+                        if len(parts) >= 2:
+                            members.append({
+                                'name': parts[0],
+                                'role': parts[1]
+                            })
+                        else:
+                            members.append({
+                                'name': parts[0],
+                                'role': None
+                            })
+                            
+                album_info['members'] = members
+            
+            # Get album cover URL
             cover_img = soup.select_one('#imgCover')
             if cover_img and cover_img.get('src'):
                 img_url = cover_img['src']
                 if not img_url.startswith('http'):
                     img_url = f"{self.BASE_URL}/{img_url.lstrip('/')}"
                 album_info['cover_image'] = img_url
-            
-            # Extract release information - look for "Releases information" label
-            release_info = None
-            for strong_tag in soup.find_all('strong'):
-                if 'Releases information' in self._extract_text(strong_tag):
-                    release_info = strong_tag.find_next('p')
-                    break
-                    
-            if release_info:
-                album_info['release_info'] = self._extract_text(release_info)
                 
-                # Try to extract year from release info
-                year_match = re.search(r'\b(19|20)\d{2}\b', self._extract_text(release_info))
-                if year_match:
-                    album_info['year'] = year_match.group(0)
-            
-            # Extract track listing - look for "Songs / Tracks Listing" label
-            tracks = []
-            tracklist_p = None
-            for strong_tag in soup.find_all('strong'):
-                if 'Songs / Tracks Listing' in self._extract_text(strong_tag):
-                    tracklist_p = strong_tag.find_next('p')
-                    break
-                    
-            if tracklist_p:
-                album_info['tracklist_raw'] = self._extract_text(tracklist_p)
+            # Consider the page valid if we have at least:
+            # 1. A title, OR
+            # 2. An artist name, OR
+            # 3. Any tracks or members
+            if (album_info.get('title') or 
+                album_info.get('artist') or 
+                album_info.get('tracks') or 
+                album_info.get('members')):
+                return album_info
                 
-            # Extract lineup/musicians - look for "Line-up / Musicians" label
-            musicians = []
-            lineup_p = None
-            for strong_tag in soup.find_all('strong'):
-                if 'Line-up / Musicians' in self._extract_text(strong_tag):
-                    lineup_p = strong_tag.find_next('p')
-                    break
-                    
-            if lineup_p:
-                album_info['musicians_raw'] = self._extract_text(lineup_p)
-                
-            # Extract album type from "Studio Album", "Live Album", etc.
-            album_type = None
-            for strong_tag in soup.find_all('strong'):
-                text = self._extract_text(strong_tag)
-                if 'Album, released in' in text or 'Album released in' in text:
-                    album_type_match = re.match(r'([^,]+),?\s+released in', text)
-                    if album_type_match:
-                        album_info['type'] = album_type_match.group(1).strip()
-                    # Try to extract year from this text as well
-                    year_match = re.search(r'released in (\d{4})', text)
-                    if year_match:
-                        album_info['year'] = year_match.group(1)
-                    break
-            
-            # Make sure we have the minimum required fields
-            required_fields = ['title', 'artist']
-            missing_fields = [f for f in required_fields if f not in album_info]
-            if missing_fields:
-                logger.warning(f"Missing required album fields: {', '.join(missing_fields)}")
-                
-                # Try alternative methods for getting title if h1 approach failed
-                if 'title' not in album_info:
-                    # Try to extract from meta tags
-                    title_meta = soup.select_one('meta[property="og:title"]')
-                    if title_meta and title_meta.get('content'):
-                        title_content = title_meta.get('content')
-                        title_match = re.match(r'(.+?)\s*-\s*(.+?)\s*\(', title_content)
-                        if title_match:
-                            album_info['artist'] = title_match.group(1).strip()
-                            album_info['title'] = title_match.group(2).strip()
-                
-                # If still missing required fields, return empty dict
-                missing_fields = [f for f in required_fields if f not in album_info]
-                if missing_fields:
-                    return {}
-                
-            return album_info
+            raise ValueError("Page does not appear to be an album page - no album data found")
             
         except Exception as e:
             logger.error(f"Error parsing album info: {e}")
-            return {}
+            return {'error': str(e)}
     
     def _get_review_stats(self, soup: BeautifulSoup) -> Dict[str, Any]:
         """Extract review statistics from album page."""
@@ -638,7 +956,7 @@ class ProgArchivesScraper(BaseScraper):
         """Extract album title from reviews page."""
         # First approach: h1 element
         h1_elements = soup.find_all('h1')
-        if h1_elements and len(h1_elements) > 0:
+        if (h1_elements and len(h1_elements) > 0):
             return self._extract_text(h1_elements[0])
             
         # Second approach: meta title
@@ -731,12 +1049,26 @@ class ProgArchivesScraper(BaseScraper):
         if not element:
             return None
             
-        text = element.get_text(strip=True)
+        # First try to get direct text content preserving Unicode characters
+        text = ''.join(t for t in element.stripped_strings)
+        if not text:
+            # Fallback to regular get_text() if no direct strings found
+            text = element.get_text(strip=True)
+            
         if not text:
             return None
             
-        # Clean up whitespace
+        # Normalize Unicode characters (e.g., convert different forms of dashes, quotes)
+        import unicodedata
+        text = unicodedata.normalize('NFKC', text)
+        
+        # Clean up whitespace while preserving Unicode characters
         text = re.sub(r'\s+', ' ', text).strip()
+        
+        # Handle HTML entities that might not be decoded
+        from html import unescape
+        text = unescape(text)
+        
         return text
     
     def _extract_year(self, element: Tag) -> Optional[str]:
@@ -754,3 +1086,233 @@ class ProgArchivesScraper(BaseScraper):
             return year_match.group(0)
             
         return None
+
+    def _find_band_members(self, soup: BeautifulSoup) -> List<Dict[str, Any]]:
+        """Extract band member information from the artist page."""
+        members = []
+        try:
+            # Method 1: Look for dedicated members section with structured HTML
+            member_sections = soup.select('.band-members, .members, .lineup, .artist-members, .band-lineup')
+            for section in member_sections:
+                for member in section.find_all(['div', 'tr', 'li'], class_=['member', 'musician', 'band-member']):
+                    try:
+                        # Try multiple selectors for name and role
+                        name_elem = member.select_one('.name, .member-name, .musician-name, strong')
+                        role_elem = member.select_one('.role, .member-role, .musician-role, em, .instrument')
+                        
+                        if name_elem:
+                            member_info = {
+                                'name': self._extract_text(name_elem),
+                                'role': self._extract_text(role_elem) if role_elem else None
+                            }
+                            
+                            # Only add if we haven't seen this exact combination before
+                            if not any(m['name'] == member_info['name'] and m['role'] == member_info['role'] for m in members):
+                                members.append(member_info)
+                                
+                    except Exception as e:
+                        logger.warning(f"Error processing band member: {e}")
+            
+            # Method 2: Look for lineup section with text content
+            if not members:
+                # Look for common headers that introduce member listings
+                for header in soup.find_all(['strong', 'h2', 'h3', 'h4']):
+                    header_text = self._extract_text(header)
+                    if header_text and re.search(r'(?:current\s+)?(?:line.?up|members|musicians|band\s+members)', header_text, re.I):
+                        # Get the next element that might contain member info
+                        content = header.find_next(['p', 'div', 'ul'])
+                        if content:
+                            # Split text by common separators
+                            lines = []
+                            
+                            # First try to get list items if it's a ul
+                            if (content.name == 'ul'):
+                                lines = [self._extract_text(li) for li in content.find_all('li')]
+                            else:
+                                # Split by newlines and bullet points
+                                text = self._extract_text(content)
+                                if text:
+                                    lines = [l.strip() for l in re.split(r'[\n\r]+|(?:^|\s)[-•*](?:\s|$)', text) if l.strip()]
+                            
+                            for line in lines:
+                                # Skip headers or empty lines
+                                if not line or re.search(r'line.?up|members|musicians|albums|tracks', line, re.I):
+                                    continue
+                                
+                                # Try various formats for member entries
+                                member_info = None
+                                
+                                # Format: "Name - Role" or "Role: Name" or "Name (Role)"
+                                for pattern in [
+                                    r'^(.+?)\s*[-–:](?:\s+)?(.+)$',  # Name - Role or Role: Name
+                                    r'^(.+?)\s*\((.+?)\)$',          # Name (Role)
+                                    r'^([^/]+)/\s*(.+)$',            # Name / Role
+                                    r'^(.+?)\s+\|\s+(.+)$'           # Name | Role
+                                ]:
+                                    match = re.match(pattern, line)
+                                    if match:
+                                        part1, part2 = match.groups()
+                                        # Determine which part is name/role based on common role keywords
+                                        role_keywords = {
+                                            'vocals', 'guitar', 'bass', 'drums', 'keyboard', 'piano',
+                                            'percussion', 'flute', 'violin', 'cello', 'sax', 'trumpet',
+                                            'backing', 'lead', 'rhythm'
+                                        }
+                                        
+                                        part1_has_role = any(kw in part1.lower() for kw in role_keywords)
+                                        part2_has_role = any(kw in part2.lower() for kw in role_keywords)
+                                        
+                                        if part1_has_role:
+                                            member_info = {'name': part2.strip(), 'role': part1.strip()}
+                                        elif part2_has_role:
+                                            member_info = {'name': part1.strip(), 'role': part2.strip()}
+                                        else:
+                                            # If we can't determine by keywords, assume Name - Role format
+                                            member_info = {'name': part1.strip(), 'role': part2.strip()}
+                                        
+                                        break
+                                
+                                # If no pattern matched but line looks like a name
+                                if not member_info and not any(kw in line.lower() for kw in ['featuring', 'guest', 'additional']):
+                                    member_info = {'name': line.strip(), 'role': None}
+                                
+                                if member_info:
+                                    # Only add if we haven't seen this exact combination before
+                                    if not any(m['name'] == member_info['name'] and m['role'] == member_info['role'] for m in members):
+                                        members.append(member_info)
+            
+            # Method 3: Look for member info in tables
+            if not members:
+                for table in soup.find_all('table', class_=['members', 'lineup', 'band-members']):
+                    for row in table.find_all('tr')[1:]:  # Skip header row
+                        cells = row.find_all('td')
+                        if len(cells) >= 2:
+                            member_info = {
+                                'name': self._extract_text(cells[0]),
+                                'role': self._extract_text(cells[1])
+                            }
+                            if member_info['name'] and not any(m['name'] == member_info['name'] and m['role'] == member_info['role'] for m in members):
+                                members.append(member_info)
+            
+            # Method 4: Look for member info in paragraphs with strong/em tags
+            if not members:
+                for p in soup.find_all('p'):
+                    strong_tags = p.find_all('strong')
+                    em_tags = p.find_all('em')
+                    if strong_tags and em_tags:
+                        for s, e in zip(strong_tags, em_tags):
+                            member_info = {
+                                'name': self._extract_text(s),
+                                'role': self._extract_text(e)
+                            }
+                            if member_info['name'] and not any(m['name'] == member_info['name'] and m['role'] == member_info['role'] for m in members):
+                                members.append(member_info)
+            
+        except Exception as e:
+            logger.error(f"Error finding band members: {e}")
+            
+        return members
+
+    def get_album_details(self, album_url: str) -> Dict:
+        """Get detailed information about an album."""
+        logger.info(f"Getting details for album at {album_url}")
+        
+        try:
+            response = self.fetch_url(album_url)
+            soup = BeautifulSoup(response['content'], 'html.parser')
+            
+            # Validate that this is an album page
+            album_header = soup.find('h1', class_=['album-title', 'albumname', 'album_name'])
+            if not album_header:
+                return {'error': f'Page at {album_url} does not appear to be an album page'}
+            
+            # Initialize album details
+            details = {
+                'url': album_url,
+                'title': album_header.get_text(strip=True),
+                'artist': '',
+                'year': None,
+                'genre': '',
+                'type': '',
+                'rating': None,
+                'description': '',
+                'tracks': [],
+                'lineup': [],
+                'reviews': []
+            }
+            
+            # Get artist info
+            artist_link = soup.find('h2').find('a', href=lambda h: h and 'artist.asp' in h)
+            if artist_link:
+                details['artist'] = artist_link.get_text(strip=True)
+            
+            # Get release year and type
+            info_table = soup.find('table', class_='album-info')
+            if info_table:
+                for row in info_table.find_all('tr'):
+                    cells = row.find_all('td')
+                    if len(cells) == 2:
+                        label = cells[0].get_text(strip=True).lower()
+                        value = cells[1].get_text(strip=True)
+                        
+                        if 'released' in label:
+                            year_match = re.search(r'\b(19|20)\d{2}\b', value)
+                            if year_match:
+                                details['year'] = int(year_match.group())
+                        elif 'type' in label:
+                            details['type'] = value
+                        elif 'style' in label or 'genre' in label:
+                            details['genre'] = value
+            
+            # Get rating
+            rating_elem = soup.find('span', class_=['album-rating', 'rating'])
+            if rating_elem:
+                try:
+                    rating_text = rating_elem.get_text(strip=True)
+                    rating_match = re.search(r'(\d+(?:\.\d+)?)', rating_text)
+                    if rating_match:
+                        details['rating'] = float(rating_match.group(1))
+                except (ValueError, AttributeError):
+                    pass
+            
+            # Get album description
+            desc_elem = soup.find('div', class_=['album-description', 'description'])
+            if desc_elem:
+                details['description'] = desc_elem.get_text(strip=True)
+            
+            # Get track listing
+            tracks_table = soup.find('table', class_=['album-tracks', 'tracklist'])
+            if tracks_table:
+                for track_row in tracks_table.find_all('tr')[1:]:  # Skip header row
+                    cells = track_row.find_all('td')
+                    if len(cells) >= 2:
+                        track = {
+                            'number': cells[0].get_text(strip=True),
+                            'title': cells[1].get_text(strip=True),
+                            'duration': cells[2].get_text(strip=True) if len(cells) > 2 else None
+                        }
+                        details['tracks'].append(track)
+            
+            # Get lineup
+            lineup_table = soup.find('table', class_=['album-lineup', 'lineup'])
+            if lineup_table:
+                for member_row in lineup_table.find_all('tr')[1:]:  # Skip header row
+                    cells = member_row.find_all('td')
+                    if len(cells) >= 2:
+                        member = {
+                            'name': cells[0].get_text(strip=True),
+                            'instruments': cells[1].get_text(strip=True)
+                        }
+                        details['lineup'].append(member)
+            
+            # Validate the parsed data
+            if not details['title'] or not details['artist']:
+                return {'error': f'Failed to extract required album information from {album_url}'}
+                
+            logger.info(f"Successfully parsed album: {details['artist']} - {details['title']}")
+            return details
+            
+        except Exception as e:
+            error_msg = f"Error parsing album page {album_url}: {str(e)}"
+            logger.error(error_msg)
+            return {'error': error_msg}

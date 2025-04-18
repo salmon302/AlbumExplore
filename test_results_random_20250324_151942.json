@@ -1,0 +1,175 @@
+{
+  "test_date": "2025-03-24T15:19:42.678438",
+  "duration": "0:01:52.689680",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 28,
+    "albums_successful": 0,
+    "albums_failed": 28,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "DEFORMICA",
+      "url": "https://www.progarchives.com/artist.asp?id=3213",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=16613",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=16613 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=29035",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=29035 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=43790",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=43790 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "LASRY, TEDDY",
+      "url": "https://www.progarchives.com/artist.asp?id=7836",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=40383",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=40383 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=40384",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=40384 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=40386",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=40386 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=40387",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=40387 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=40388",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=40388 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=40385",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=40385 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71037",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71037 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71039",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71039 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71040",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71040 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71041",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71041 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71042",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71042 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71043",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71043 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=71045",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=71045 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 13,
+      "albums_processed": 13
+    },
+    {
+      "name": "PLASTIC DOGS",
+      "url": "https://www.progarchives.com/artist.asp?id=11053",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=63972",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=63972 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=74533",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=74533 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=85014",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=85014 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "S VREMENA NA VREME",
+      "url": "https://www.progarchives.com/artist.asp?id=2473",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11705",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11705 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=11723",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=11723 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=25433",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=25433 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=13984",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=13984 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "D PROJECT",
+      "url": "https://www.progarchives.com/artist.asp?id=3792",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=18781",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=18781 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=18785",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=18785 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=32373",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=32373 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=45376",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=45376 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=59088",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=59088 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 5,
+      "albums_processed": 5
+    }
+  ]
+}

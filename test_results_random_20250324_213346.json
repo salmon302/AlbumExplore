@@ -1,0 +1,139 @@
+{
+  "test_date": "2025-03-24T21:33:46.680648",
+  "duration": "0:02:28.848473",
+  "statistics": {
+    "bands_total": 5,
+    "bands_successful": 5,
+    "bands_failed": 0,
+    "band_error_rate": 0.0,
+    "albums_total": 19,
+    "albums_successful": 0,
+    "albums_failed": 19,
+    "album_error_rate": 1.0
+  },
+  "band_errors": [],
+  "album_errors": [],
+  "test_data": [
+    {
+      "name": "MASTER'S HAMMER",
+      "url": "https://www.progarchives.com/artist.asp?id=5914",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=30920",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=30920 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=30921",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=30921 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=31121",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=31121 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=37849",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=37849 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "GALLEY BEGGAR",
+      "url": "https://www.progarchives.com/artist.asp?id=10196",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55066",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55066 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55067",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55067 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55068",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55068 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=55069",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=55069 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "ACTIVE HEED",
+      "url": "https://www.progarchives.com/artist.asp?id=8393",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=42688",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=42688 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=45729",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=45729 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=86952",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=86952 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 3,
+      "albums_processed": 3
+    },
+    {
+      "name": "HERE & NOW",
+      "url": "https://www.progarchives.com/artist.asp?id=1882",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=8721",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=8721 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=8905",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=8905 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=8906",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=8906 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=8720",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=8720 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    },
+    {
+      "name": "OWL WATCHES, THE",
+      "url": "https://www.progarchives.com/artist.asp?id=1594",
+      "errors": [],
+      "albums": [
+        {
+          "url": "https://www.progarchives.com/album.asp?id=7452",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=7452 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=10709",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=10709 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=17421",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=17421 does not appear to be an album page"
+        },
+        {
+          "url": "https://www.progarchives.com/album.asp?id=29307",
+          "error": "Failed to get album details: Page at https://www.progarchives.com/album.asp?id=29307 does not appear to be an album page"
+        }
+      ],
+      "albums_total": 4,
+      "albums_processed": 4
+    }
+  ]
+}
