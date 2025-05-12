@@ -15,13 +15,11 @@ branch_labels = None
 depends_on = None
 
 def upgrade():
-    with op.batch_alter_table('albums') as batch_op:
-        batch_op.alter_column('year',
-                            new_column_name='release_year',
-                            existing_type=sa.Integer())
+    # The column 'year' likely doesn't exist at this point,
+    # as it was probably handled by a migration in the other merged branch.
+    # Skipping this operation.
+    pass
 
 def downgrade():
-    with op.batch_alter_table('albums') as batch_op:
-        batch_op.alter_column('release_year',
-                            new_column_name='year',
-                            existing_type=sa.Integer())
+    # Correspondingly, skipping the downgrade operation.
+    pass

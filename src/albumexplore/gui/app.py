@@ -43,18 +43,31 @@ class AlbumExplorer(QMainWindow):
 def main():
     """Run the GUI application."""
     try:
-        # Create application
+        gui_logger.info("[main] Creating QApplication...")
         app = QApplication(sys.argv)
-        
-        # Create and show main window
-        window = AlbumExplorer()
+        gui_logger.info("[main] QApplication created.")
+
+        gui_logger.info("[main] Creating AlbumExplorer window...")
+        window = AlbumExplorer() # This logs "Album Explorer initialized successfully" from its __init__
+        gui_logger.info("[main] AlbumExplorer window created.") # This log will be new, after __init__ completes
+
+        gui_logger.info("[main] Calling window.show()...")
         window.show()
-        
-        return app.exec()
-        
+        gui_logger.info("[main] window.show() called.")
+
+        gui_logger.info("[main] Calling app.exec()...")
+        exit_code = app.exec()
+        gui_logger.info(f"[main] app.exec() returned with exit code: {exit_code}")
+        return exit_code
+
     except Exception as e:
-        gui_logger.error(f"Error starting GUI: {str(e)}", exc_info=True)
-        return 1
+        gui_logger.error(f"[main] Error starting GUI: {str(e)}", exc_info=True)
+        return 1 # Ensure non-zero exit code for errors in main
 
 if __name__ == "__main__":
-    sys.exit(main())
+    effective_exit_code = main()
+    
+    # Using print for this final message as logging might be shut down
+    # or if the issue is with logging itself.
+    print(f"[app.py __main__] Script completing. main() returned: {effective_exit_code}. Exiting with sys.exit({effective_exit_code}).", flush=True)
+    sys.exit(effective_exit_code)
