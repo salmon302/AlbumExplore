@@ -16,6 +16,7 @@ webdriver_manager>=3.8.0
 matplotlib>=3.4.0
 rich>=10.0.0
 pyppeteer>=1.0.2
+psutil>=5.9.0 # Added for performance testing
 
 # Development dependencies
 black>=22.0.0
@@ -29,3 +30,4 @@ pytest-cov>=4.0.0
 pytest-qt>=4.2.0
 pytest-xvfb>=3.0.0
 pytest-mock>=3.10.0
+pytest-asyncio>=0.18.0 # Added for async tests

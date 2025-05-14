@@ -1087,7 +1087,7 @@ class ProgArchivesScraper(BaseScraper):
             
         return None
 
-    def _find_band_members(self, soup: BeautifulSoup) -> List<Dict[str, Any]]:
+    def _find_band_members(self, soup: BeautifulSoup) -> List[Dict[str, Any]]:
         """Extract band member information from the artist page."""
         members = []
         try:

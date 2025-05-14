@@ -6,6 +6,7 @@ from PyQt6.QtGui import QPainter, QColor
 from albumexplore.visualization.state import ViewType
 from albumexplore.gui.models import AlbumTableModel
 from albumexplore.gui.views.base_view import BaseView
+from .network_view import NetworkView # Add this line to import NetworkView
 from albumexplore.gui.gui_logging import graphics_logger
 
 class TableView(BaseView):

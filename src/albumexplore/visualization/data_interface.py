@@ -64,6 +64,10 @@ class DataInterface:
             tags = self._tag_cache[album.id]
         
         # Create node
+        # DEBUG: Log the original album.release_year
+        from albumexplore.gui.gui_logging import graphics_logger # Temporary import for logging
+        graphics_logger.debug(f"DataInterface: Creating node for album '{album.title}', release_year: {album.release_year} (type: {type(album.release_year)})")
+
         node = VisualNode(
             id=str(album.id),
             label=f"{album.artist} - {album.title}",

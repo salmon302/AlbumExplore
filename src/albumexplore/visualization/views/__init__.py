@@ -16,7 +16,7 @@ from albumexplore.gui.gui_logging import gui_logger
 # Export view_map for use in ViewManager
 view_map: Dict[ViewType, Type[BaseView]] = {
     ViewType.TABLE: TableView,  # Use the visualization TableView implementation
-    ViewType.NETWORK: EnhancedNetworkView,
+    ViewType.NETWORK: EnhancedNetworkView,  # Changed NetworkView to EnhancedNetworkView
     ViewType.CHORD: ChordView,
     ViewType.ARC: ArcView,
     ViewType.TAG_EXPLORER: TagExplorerView,

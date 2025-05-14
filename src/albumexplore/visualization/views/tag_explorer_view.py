@@ -2,12 +2,12 @@ from PyQt6.QtWidgets import (QTableWidget, QTableWidgetItem, QHeaderView,
                            QVBoxLayout, QHBoxLayout, QSizePolicy, QScrollBar,
                            QWidget, QPushButton, QLabel, QMenu, QSplitter,
                            QComboBox, QRadioButton, QButtonGroup, QToolButton, 
-                           QStackedWidget)
-from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QTime
-from PyQt6.QtGui import QColor, QPalette, QIcon, QAction, QPainter
+                           QStackedWidget, QLineEdit, QCheckBox, QDialog, QMessageBox) # Added QDialog, QMessageBox
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QSortFilterProxyModel, QRegularExpression, QTime # Added QTime
+from PyQt6.QtGui import QStandardItemModel, QStandardItem, QColor, QPainter, QFontMetrics, QPalette, QAction # Added QAction
 from typing import Dict, Any, Set, List, Optional
 from collections import Counter, defaultdict
-import json
+import pandas as pd # Added pandas import
 
 from .base_view import BaseView
 from ..state import ViewType, ViewState
@@ -16,6 +16,8 @@ from ...tags.analysis.single_instance_handler import SingleInstanceHandler
 from ...tags.analysis.tag_analyzer import TagAnalyzer
 from ...tags.analysis.tag_similarity import TagSimilarity
 from .tag_cloud_widget import TagCloudWidget
+from .single_instance_dialog import SingleInstanceDialog # Added import
+from albumexplore.gui.gui_logging import graphics_logger # Added import
 
 # Ensure we're properly importing tag cloud widget
 try:
@@ -51,31 +53,25 @@ class SortableTableWidgetItem(QTableWidgetItem):
     """Custom table widget item for proper sorting."""
     
     def __lt__(self, other):
-        # Sort numerically if possible, otherwise as strings
         my_data = self.data(Qt.ItemDataRole.UserRole)
         other_data = other.data(Qt.ItemDataRole.UserRole)
-        
+
         if my_data is not None and other_data is not None:
-            return my_data < other_data
+            # Try direct numeric comparison if types are already numeric
+            if isinstance(my_data, (int, float)) and isinstance(other_data, (int, float)):
+                return my_data < other_data
+            
+            # Try conversion to float if not directly numeric
+            try:
+                val_my_data = float(my_data)
+                val_other_data = float(other_data)
+                return val_my_data < val_other_data
+            except (ValueError, TypeError):
+                # If UserRole data cannot be converted to numeric, fall back to string comparison of display text
+                return self.text() < other.text()
         
+        # Fallback to default QTableWidgetItem comparison (based on display text)
         return super().__lt__(other)
-
-
-class DoubleBufferedViewport(QWidget):
-    """Custom viewport for double buffering."""
-    
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent)
-        self.setAttribute(Qt.WidgetAttribute.WA_PaintOnScreen, True)
-        self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, True)
-        self.setAutoFillBackground(False)
-    
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-        painter.setRenderHint(QPainter.RenderHint.TextAntialiasing)
-        super().paintEvent(event)
 
 
 class TagExplorerView(BaseView):
@@ -92,18 +88,19 @@ class TagExplorerView(BaseView):
     
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent)  # Avoid unnecessary background redraws
-        self.setUpdatesEnabled(False)  # Disable updates during initialization
-        self.view_state = ViewState(ViewType.TAG_EXPLORER)  # Fixed: Use TAG_EXPLORER instead of TABLE
+        self.setAttribute(Qt.WidgetAttribute.WA_OpaquePaintEvent)
+        self.setUpdatesEnabled(False)
+        self.view_state = ViewState(ViewType.TAG_EXPLORER)
         self.tag_normalizer = TagNormalizer()
         
         # For storing data
-        self.tag_counts = Counter()        # All tags and their counts
-        self.raw_tag_counts = Counter()    # Raw tag counts before normalization
-        self.matching_counts = Counter()   # Tags in current filtered selection
-        self.tag_filters = {}              # Current filter state for each tag
-        self.filtered_albums = []          # Albums matching current filters
-        self.normalized_mapping = {}       # Mapping from original to normalized tags
+        self.album_nodes_original = [] # Store original album node data
+        self.tag_counts = Counter()        # Processed tags (normalized or cleaned raw) for display and filtering, and their counts
+        self.raw_tag_counts = Counter()    # Raw tag counts before any processing
+        self.matching_counts = Counter()   # Tags in current filtered selection (reflects normalization state)
+        self.tag_filters = {}              # Current filter state for each tag (keys are processed tags)
+        self.filtered_albums = []          # Stores Node objects that match current filters
+        self.normalized_mapping = {}       # Mapping from original raw to its processed form (primarily for reference)
         self.single_instance_tags = set()  # Tags that appear only once
         self.tag_mode = self.MODE_TABLE    # Current tag visualization mode
         
@@ -137,11 +134,27 @@ class TagExplorerView(BaseView):
         self.tag_count_label = QLabel("Tags: 0")
         filter_header_layout.addWidget(self.tag_count_label)
         
+        # Search input for tags
+        self.tag_search_input = QLineEdit()
+        self.tag_search_input.setPlaceholderText("Search tags and press Enter...")
+        self.tag_search_input.returnPressed.connect(self._handle_tag_search)
+        filter_header_layout.addWidget(self.tag_search_input)
+        
+        self.tag_search_button = QPushButton("Search Tag")
+        self.tag_search_button.clicked.connect(self._handle_tag_search)
+        filter_header_layout.addWidget(self.tag_search_button)
+        
         # Add view mode selector
         self.view_mode_combo = QComboBox()
         self.view_mode_combo.addItems(["Table View", "Cloud View"])
         self.view_mode_combo.currentIndexChanged.connect(self._change_tag_view_mode)
         filter_header_layout.addWidget(self.view_mode_combo)
+        
+        # Add normalization toggle
+        self.normalize_checkbox = QCheckBox("Normalize Tags")
+        self.normalize_checkbox.setChecked(True)  # Default to normalization enabled
+        self.normalize_checkbox.stateChanged.connect(self._toggle_normalization)
+        filter_header_layout.addWidget(self.normalize_checkbox)
         
         filter_header_layout.addStretch()
         
@@ -176,75 +189,50 @@ class TagExplorerView(BaseView):
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)  # Tag name stretches
         header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
-        header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents) # Filter column
         header.setSectionsClickable(True)
         header.setHighlightSections(True)
-        header.setSortIndicatorShown(True)
+        # header.setSortIndicatorShown(True) # Managed manually
         header.sectionClicked.connect(self._handle_tag_sort)
         
         self.tags_table.setShowGrid(True)
         self.tags_table.setAlternatingRowColors(True)
-        self.tags_table.setSortingEnabled(True)
-        self.tags_sort_column = 1  # Default sort by count
+        self.tags_table.setSortingEnabled(False) # Disable native sorting, will handle manually
+        self.tags_sort_column = 1  # Default sort by count (index 1)
         self.tags_sort_order = Qt.SortOrder.DescendingOrder
-        self.tags_table.cellDoubleClicked.connect(self._cycle_tag_filter_state)
-        
-        # Create tag cloud view
-        self.tag_cloud = TagCloudWidget()
-        self.tag_cloud.tagClicked.connect(self._handle_tag_cloud_click)
-        
-        # Add both views to stack
+        # self.tags_table.cellDoubleClicked.connect(self._cycle_tag_filter_state) # Ensure this is removed or commented
+
+        # Add tag views (table and cloud) to the QStackedWidget
         self.tag_views_stack.addWidget(self.tags_table)
-        self.tag_views_stack.addWidget(self.tag_cloud)
+        self.tag_cloud_widget = TagCloudWidget(self) # Initialize TagCloudWidget
+        self.tag_views_stack.addWidget(self.tag_cloud_widget)
         
+        # Add the QStackedWidget (tag_views_stack) to the tag_panel_layout
         tag_panel_layout.addWidget(self.tag_views_stack)
-        
-        # Create album panel widget
+
+        # Create the album panel, its layout, and its widgets (album_count_label, album_table)
         self.album_panel = QWidget()
-        self.album_panel.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.album_panel.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         album_panel_layout = QVBoxLayout(self.album_panel)
-        
-        # Add album panel header
-        self.album_header = QWidget()
-        album_header_layout = QHBoxLayout(self.album_header)
-        album_header_layout.setContentsMargins(5, 5, 5, 5)
-        
+
         self.album_count_label = QLabel("Albums: 0")
-        album_header_layout.addWidget(self.album_count_label)
-        
-        album_header_layout.addStretch()
-        
-        album_panel_layout.addWidget(self.album_header)
-        
-        # Create album table
-        self.album_table = QTableWidget()
+        album_panel_layout.addWidget(self.album_count_label)
+
+        self.album_table = QTableWidget() # Definition of self.album_table
         self.album_table.setColumnCount(4)
         self.album_table.setHorizontalHeaderLabels(["Artist", "Album", "Year", "Tags"])
-        
-        # Configure album table headers
         album_header = self.album_table.horizontalHeader()
-        album_header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive) 
+        album_header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
         album_header.setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
         album_header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         album_header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
-        album_header.setSectionsClickable(True)
-        album_header.setHighlightSections(True)
-        album_header.setSortIndicatorShown(True)
-        album_header.sectionClicked.connect(self._handle_album_sort)
-        
-        self.album_table.setShowGrid(True)
-        self.album_table.setAlternatingRowColors(True)
-        self.album_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.album_table.setSelectionMode(QTableWidget.SelectionMode.MultiSelection)
-        self.album_table.verticalHeader().setVisible(False)
         self.album_table.setSortingEnabled(True)
-        
-        # Connect signals
-        self.album_table.itemSelectionChanged.connect(self._handle_album_selection_change)
-        self.tags_table.cellDoubleClicked.connect(self._cycle_tag_filter_state)
-        
+        self.album_table.setAlternatingRowColors(True)
+        self.album_table.setShowGrid(True)
+        self.album_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.album_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         album_panel_layout.addWidget(self.album_table)
-        
+
         # Add both panels to the splitter
         self.splitter.addWidget(self.tag_panel)
         self.splitter.addWidget(self.album_panel)
@@ -275,575 +263,489 @@ class TagExplorerView(BaseView):
         self._last_paint_time = 0
         self._paint_throttle = 16  # ~60fps
         
-        # Configure tables for optimized painting
-        self.tags_table.setViewport(DoubleBufferedViewport())
-        self.album_table.setViewport(DoubleBufferedViewport())
-        
         # Set unified styling
         self._apply_unified_styling()
         
         self.setUpdatesEnabled(True)  # Re-enable updates
-        self.show()
-        
-    def _apply_unified_styling(self):
-        """Apply consistent styling to all components."""
-        style = """
-            QTableWidget {
-                background-color: white;
-                alternate-background-color: #f5f5f5;
-                color: black;
-            }
-            QTableWidget::item {
-                color: black;
-            }
-            QTableWidget::item:selected {
-                background-color: #e3f2fd;
-                color: black;
-            }
-            QHeaderView::section {
-                background-color: #f0f0f0;
-                color: black;
-                padding: 6px;
-                border: none;
-                border-bottom: 1px solid #d0d0d0;
-                font-weight: bold;
-            }
-            QPushButton {
-                padding: 5px 10px;
-                border: 1px solid #ccc;
-                border-radius: 3px;
-                background-color: #f5f5f5;
-                color: black;
-            }
-            QPushButton:hover {
-                background-color: #e8e8e8;
-            }
-            QPushButton:pressed {
-                background-color: #dcdcdc;
-            }
-            QToolButton {
-                border: 1px solid transparent;
-                border-radius: 3px;
-                padding: 3px;
-                color: black;
-            }
-            QToolButton:hover {
-                background-color: #e8e8e8;
-                border: 1px solid #ccc;
-            }
-            QLabel {
-                color: black;
-            }
-            QSplitter {
-                background-color: white;
-            }
-            QWidget {
-                background-color: white;
-                color: black;
-            }
-        """
-        self.setStyleSheet(style)
-    
-    def update_data(self, nodes, edges):
-        """Update view with new data."""
-        super().update_data(nodes, edges)
-        
-        # Process the data
-        self.process_tag_data(nodes)
-        
-        # Apply any existing filters
-        self.apply_tag_filters()
-        
-    def process_tag_data(self, nodes):
-        """Process tag data from the nodes."""
-        self.raw_tag_counts = Counter()
-        self.normalized_mapping = {}  # Map from original to normalized tags
-        self.tag_counts = Counter()
-        
-        # First pass: collect raw tag counts and create normalization mapping
-        for node in nodes:
-            if 'tags' in node.data:
-                for tag in node.data['tags']:
-                    self.raw_tag_counts[tag] += 1
-                    # Apply normalization to consolidate tags
-                    normalized_tag = self.tag_normalizer.normalize(tag)
-                    self.normalized_mapping[tag] = normalized_tag
-                    self.tag_counts[normalized_tag] += 1
-        
-        # Update node data with normalized tags (in-memory only, doesn't affect database)
-        for node in nodes:
-            if 'tags' in node.data:
-                # Create a new list with normalized tags
-                normalized_tags = [self.normalized_mapping.get(tag, tag) for tag in node.data['tags']]
-                # Remove duplicates that might appear after normalization
-                node.data['normalized_tags'] = list(dict.fromkeys(normalized_tags))
-        
-        # Identify single-instance tags
-        self.single_instance_tags = {tag for tag, count in self.raw_tag_counts.items() if count == 1}
-        
-        # Initialize tag analysis components if we have enough data
-        if len(nodes) > 0:
-            # Create a pandas DataFrame from the nodes for the tag analyzer
-            import pandas as pd
-            data = []
-            for node in nodes:
-                if 'tags' in node.data:
-                    data.append({
-                        'id': node.id,
-                        'artist': node.data.get('artist', ''),
-                        'title': node.data.get('title', ''),
-                        'year': node.data.get('year', 0),
-                        'tags': node.data.get('tags', [])
-                    })
-            
-            if data:
-                df = pd.DataFrame(data)
-                self.tag_analyzer = TagAnalyzer(df)
-                self.tag_similarity = TagSimilarity(self.tag_analyzer)
-                self.single_instance_handler = SingleInstanceHandler(
-                    self.tag_analyzer,
-                    self.tag_normalizer,
-                    self.tag_similarity
-                )
-                
-                # Initialize relationships and identify single-instance tags
-                self.tag_analyzer.calculate_relationships()
-                self.single_instance_handler.identify_single_instance_tags()
-        
-        # Refresh the tag table with consolidated counts
-        self.refresh_tag_table()
-        
-        # Update album table with all albums initially
-        self.filtered_albums = self.nodes
-        self.refresh_album_table()
-    
-    def refresh_tag_table(self):
-        """Refresh the tag table with current data."""
-        self.tags_table.setSortingEnabled(False)
-        self.tags_table.setRowCount(len(self.tag_counts))
-        
-        for i, (tag, count) in enumerate(sorted(self.tag_counts.items())):
-            # Tag column
-            tag_item = SortableTableWidgetItem(tag)
-            tag_item.setData(Qt.ItemDataRole.UserRole, tag.lower())  # For sorting
-            tag_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.tags_table.setItem(i, 0, tag_item)
-            
-            # Count column
-            count_item = SortableTableWidgetItem(str(count))
-            count_item.setData(Qt.ItemDataRole.UserRole, count)  # For numeric sorting
-            count_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.tags_table.setItem(i, 1, count_item)
-            
-            # Matching count column (initially same as count)
-            matching_item = SortableTableWidgetItem(str(self.matching_counts.get(tag, count)))
-            matching_item.setData(Qt.ItemDataRole.UserRole, self.matching_counts.get(tag, count))
-            matching_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.tags_table.setItem(i, 2, matching_item)
-            
-            # Filter state column
-            filter_state = self.tag_filters.get(tag, self.FILTER_NEUTRAL)
-            filter_text = ""
-            if filter_state == self.FILTER_INCLUDE:
-                filter_text = "✓"
-            elif filter_state == self.FILTER_EXCLUDE:
-                filter_text = "✕"
-            
-            filter_item = QTableWidgetItem(filter_text)
-            filter_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            filter_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            
-            # Set background color based on filter state
-            if filter_state == self.FILTER_INCLUDE:
-                filter_item.setBackground(QColor(200, 255, 200))  # Light green
-            elif filter_state == self.FILTER_EXCLUDE:
-                filter_item.setBackground(QColor(255, 200, 200))  # Light red
-            
-            self.tags_table.setItem(i, 3, filter_item)
-        
-        self.tags_table.setSortingEnabled(True)
-        
-        # Apply stored sort settings
-        if self.tags_sort_column is not None:
-            self.tags_table.sortItems(self.tags_sort_column, self.tags_sort_order)
-            
-        # Update tag count display
-        self.tag_count_label.setText(f"Tags: {len(self.tag_counts)}")
-        
-        # Update tag cloud
-        self.tag_cloud.update_tags(self.tag_counts)
-        self.tag_cloud.update_filter_states(self.tag_filters)
-    
-    def refresh_album_table(self):
-        """Refresh the album table with filtered data."""
-        self.album_table.setUpdatesEnabled(False)
-        self.album_table.setSortingEnabled(False)
-        self.album_table.clearContents()
-        self.album_table.setRowCount(len(self.filtered_albums))
-        
-        for i, album in enumerate(self.filtered_albums):
-            data = album.data
-            
-            # Artist
-            artist_item = SortableTableWidgetItem(data.get('artist', ''))
-            artist_item.setData(Qt.ItemDataRole.UserRole, album.id)
-            artist_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.album_table.setItem(i, 0, artist_item)
-            
-            # Album title
-            title_item = SortableTableWidgetItem(data.get('title', ''))
-            title_item.setData(Qt.ItemDataRole.UserRole, album.id)
-            title_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.album_table.setItem(i, 1, title_item)
-            
-            # Year
-            year_str = str(data.get('year', ''))
-            year_item = SortableTableWidgetItem(year_str)
-            year_item.setData(Qt.ItemDataRole.UserRole, data.get('year', 0))
-            year_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.album_table.setItem(i, 2, year_item)
-            
-            # Tags - show original tags, not normalized ones
-            tags_list = data.get('tags', [])
-            tags_str = ', '.join(tags_list)
-            tags_item = SortableTableWidgetItem(tags_str)
-            tags_item.setData(Qt.ItemDataRole.UserRole, album.id)
-            tags_item.setForeground(QColor(0, 0, 0))  # Explicitly set black text
-            self.album_table.setItem(i, 3, tags_item)
-        
-        self.album_table.setSortingEnabled(True)
-        
-        # Update album count display
-        self.album_count_label.setText(f"Albums: {len(self.filtered_albums)}")
-        
-        self.album_table.setUpdatesEnabled(True)
-        self.album_table.viewport().update()
-    
-    def _cycle_tag_filter_state(self, row, column):
-        """Cycle through filter states on double-click."""
-        tag_item = self.tags_table.item(row, 0)
-        if not tag_item:
-            return
-            
-        tag = tag_item.text()
-        current_state = self.tag_filters.get(tag, self.FILTER_NEUTRAL)
-        
-        # Cycle through states: NEUTRAL -> INCLUDE -> EXCLUDE -> NEUTRAL
-        if current_state == self.FILTER_NEUTRAL:
-            self.tag_filters[tag] = self.FILTER_INCLUDE
-        elif current_state == self.FILTER_INCLUDE:
-            self.tag_filters[tag] = self.FILTER_EXCLUDE
-        else:
-            self.tag_filters[tag] = self.FILTER_NEUTRAL
-            
-        # Apply filters
-        self.apply_tag_filters()
-    
-    def apply_tag_filters(self):
-        """Apply tag filters to the album list."""
-        # Start timer to measure performance
-        start_time = QTime.currentTime()
-        
-        # If no filters are active, show all albums
-        active_filters = {tag: state for tag, state in self.tag_filters.items() 
-                         if state != self.FILTER_NEUTRAL}
-        
-        if not active_filters:
-            self.filtered_albums = self.nodes
-            self.matching_counts = self.tag_counts.copy()
-            self.refresh_album_table()
-            self.refresh_tag_table()
-            return
-        
-        # Separate include and exclude filters for more efficient processing
-        include_tags = {tag for tag, state in active_filters.items() if state == self.FILTER_INCLUDE}
-        exclude_tags = {tag for tag, state in active_filters.items() if state == self.FILTER_EXCLUDE}
-        
-        # Pre-filter albums using set operations for better performance
-        candidate_albums = []
-        
-        # First apply include filters (must have all included tags)
-        if include_tags:
-            for node in self.nodes:
-                # Use faster set operations for filtering
-                if include_tags.issubset(set(node.data.get('normalized_tags', []))):
-                    candidate_albums.append(node)
-        else:
-            candidate_albums = self.nodes.copy()
-        
-        # Then apply exclude filters (must not have any excluded tags)
-        if exclude_tags:
-            self.filtered_albums = []
-            for node in candidate_albums:
-                node_tags = set(node.data.get('normalized_tags', []))
-                if not exclude_tags.intersection(node_tags):  # No intersection with exclude tags
-                    self.filtered_albums.append(node)
-        else:
-            self.filtered_albums = candidate_albums
-        
-        # Calculate matching counts using Counter for better performance
-        self.matching_counts = Counter()
-        tag_collection = []
-        for album in self.filtered_albums:
-            tag_collection.extend(album.data.get('normalized_tags', []))
-        self.matching_counts.update(tag_collection)
-        
-        # Update both tables
-        self.refresh_album_table()
-        self.refresh_tag_table()
-        
-        # If any albums were selected, update selection to match filtered set
-        if self.selected_ids:
-            new_selection = {node_id for node_id in self.selected_ids 
-                           if any(node.id == node_id for node in self.filtered_albums)}
-            
-            if new_selection != self.selected_ids:
-                self.update_selection(new_selection)
-        
-        # Log performance metrics
-        elapsed_ms = start_time.msecsTo(QTime.currentTime())
-        if elapsed_ms > 100:  # Only log if filtering took significant time
-            from albumexplore.gui.gui_logging import performance_logger
-            performance_logger.debug(f"Tag filtering took {elapsed_ms}ms for {len(self.nodes)} albums with {len(active_filters)} filters")
-    
-    def _export_tag_data(self):
-        """Export tag data to console for analysis."""
-        print("\n===== TAG EXPLORER DATA ANALYSIS =====")
-        
-        # Basic stats
-        print(f"Total unique raw tags: {len(self.raw_tag_counts)}")
-        print(f"Total unique normalized tags: {len(self.tag_counts)}")
-        print(f"Consolidation ratio: {len(self.tag_counts)/len(self.raw_tag_counts):.2f}")
-        
-        # Calculate variants per normalized tag
-        variants_per_tag = defaultdict(list)
-        for original, normalized in self.normalized_mapping.items():
-            if original != normalized:  # Only track actual changes
-                variants_per_tag[normalized].append(original)
-        
-        # Tags with the most variants
-        print("\n--- TAGS WITH MOST VARIANTS ---")
-        for normalized, variants in sorted(variants_per_tag.items(), 
-                                          key=lambda x: len(x[1]), reverse=True)[:20]:
-            print(f"{normalized} ({self.tag_counts[normalized]}): {len(variants)} variants")
-            # Show up to 5 variants
-            for variant in variants[:5]:
-                print(f"  - {variant} ({self.raw_tag_counts[variant]})")
-            if len(variants) > 5:
-                print(f"  - ... and {len(variants)-5} more")
-        
-        # Most popular tags after normalization
-        print("\n--- TOP 20 NORMALIZED TAGS ---")
-        for tag, count in self.tag_counts.most_common(20):
-            variants = variants_per_tag.get(tag, [])
-            print(f"{tag}: {count} occurrences, {len(variants)} variants")
-        
-        # Tags that were never consolidated (single-instance tags)
-        single_instance_tags = [tag for tag, count in self.raw_tag_counts.items()
-                               if count == 1 and tag == self.normalized_mapping.get(tag, tag)]
-        print(f"\n--- SINGLE-INSTANCE TAGS ({len(single_instance_tags)}) ---")
-        print(f"Sample of 20: {', '.join(single_instance_tags[:20])}")
-        
-        # If we have the single instance handler, show suggestions
-        if self.single_instance_handler:
-            suggestions = self.single_instance_handler.get_consolidation_suggestions()
-            if suggestions:
-                print("\n--- SUGGESTED NORMALIZATIONS FOR SINGLE-INSTANCE TAGS ---")
-                for tag, tag_suggestions in list(suggestions.items())[:20]:  # Show top 20
-                    if tag_suggestions:
-                        best_suggestion = tag_suggestions[0]  # First suggestion is highest confidence
-                        print(f"{tag} -> {best_suggestion[0]} (confidence: {best_suggestion[1]:.2f}, reason: {best_suggestion[2]})")
-                
-                # Show stats on suggestions
-                high_confidence = sum(1 for tag_suggestions in suggestions.values()
-                                     if tag_suggestions and tag_suggestions[0][1] >= 0.8)
-                medium_confidence = sum(1 for tag_suggestions in suggestions.values()
-                                       if tag_suggestions and 0.5 <= tag_suggestions[0][1] < 0.8)
-                low_confidence = sum(1 for tag_suggestions in suggestions.values()
-                                    if tag_suggestions and tag_suggestions[0][1] < 0.5)
-                
-                print(f"\nSuggestion confidence levels:")
-                print(f"  High confidence (>=0.8): {high_confidence}")
-                print(f"  Medium confidence (0.5-0.8): {medium_confidence}")
-                print(f"  Low confidence (<0.5): {low_confidence}")
-                print(f"  No suggestions: {len(single_instance_tags) - len(suggestions)}")
-        
-        # Export full data for deeper analysis
-        print("\n--- EXPORTING FULL DATA ---")
-        analysis_data = {
-            "raw_tag_counts": dict(self.raw_tag_counts),
-            "normalized_tag_counts": dict(self.tag_counts),
-            "normalization_mapping": self.normalized_mapping,
-            "single_instance_tags": single_instance_tags
-        }
-        
-        print("Data analysis complete. Check console output for results.")
-        return analysis_data
-    
-    def clear_tag_filters(self):
-        """Clear all tag filters."""
-        self.tag_filters.clear()
-        self.apply_tag_filters()
-    
-    def _handle_tag_sort(self, column_index):
-        """Handle sorting of tag table."""
-        self.tags_sort_column = column_index
-        self.tags_sort_order = self.tags_table.horizontalHeader().sortIndicatorOrder()
-    
-    def _handle_album_sort(self, column_index):
-        """Handle sorting of album table."""
-        # Sort is handled automatically by QTableWidget
-        pass
-    
-    def _handle_album_selection_change(self):
-        """Handle album selection changes."""
-        selected_ids = set()
-        for item in self.album_table.selectedItems():
-            node_id = item.data(Qt.ItemDataRole.UserRole)
-            if node_id and isinstance(node_id, str):
-                selected_ids.add(node_id)
-        
-        self._pending_selection = selected_ids
-        if not self._selection_timer.isActive():
-            self._selection_timer.start(50)  # Process selection every 50ms
     
     def _process_selection(self):
-        """Process pending selection changes."""
-        if self._pending_selection != self.selected_ids:
-            self.update_selection(self._pending_selection)
+        """Placeholder for processing pending selections."""
+        graphics_logger.info("TagExplorerView._process_selection called (placeholder)")
+        # Actual implementation will process self._pending_selection
+        pass
+
+    def _reprocess_base_tag_data(self):
+        """
+        Repopulate raw_tag_counts and tag_counts (and normalized_mapping)
+        from album_nodes_original based on the current normalization state.
+        self.tag_counts will hold tags ready for display and filtering.
+        """
+        self.raw_tag_counts.clear()
+        self.tag_counts.clear()
+        self.normalized_mapping.clear()
+
+        is_normalization_active = self.tag_normalizer.is_active()
+
+        for node in self.album_nodes_original:
+            raw_tags_from_node = node.get("tags", [])
+
+            for raw_tag in raw_tags_from_node:
+                if not raw_tag:  # Skip empty raw tags
+                    continue
+                
+                self.raw_tag_counts[raw_tag] += 1
+                
+                processed_tag_for_display_and_filtering = ""
+                if is_normalization_active:
+                    normalized_tag = self.tag_normalizer.normalize(raw_tag)
+                    if normalized_tag:
+                        processed_tag_for_display_and_filtering = normalized_tag
+                        self.normalized_mapping[raw_tag] = normalized_tag
+                    # If normalization results in an empty tag, it's effectively filtered out here for self.tag_counts
+                else: # Normalization is not active, use the "cleaned" raw tag
+                    cleaned_raw_tag = self.tag_normalizer.normalize(raw_tag) # normalizer.normalize also cleans when inactive
+                    if cleaned_raw_tag:
+                        processed_tag_for_display_and_filtering = cleaned_raw_tag
+                
+                if processed_tag_for_display_and_filtering:
+                    self.tag_counts[processed_tag_for_display_and_filtering] += 1
+        
+        graphics_logger.debug(f"Reprocessed base tag data. Raw tags: {len(self.raw_tag_counts)}, Processed tags for display: {len(self.tag_counts)}")
+
+    def apply_tag_filters(self):
+        """Apply current tag filters to the album list and update views."""
+        self.setUpdatesEnabled(False)
+        graphics_logger.debug(f"Applying tag filters. Normalization active: {self.tag_normalizer.is_active()}")
+        graphics_logger.debug(f"Current tag_filters: {self.tag_filters}")
+
+        # Keys in self.tag_filters are processed tags (normalized or cleaned raw)
+        include_filters = {tag for tag, state in self.tag_filters.items() if state == self.FILTER_INCLUDE}
+        exclude_filters = {tag for tag, state in self.tag_filters.items() if state == self.FILTER_EXCLUDE}
+
+        self.filtered_albums.clear()
+        self.matching_counts.clear() # This will be populated with processed tags
+
+        is_normalization_active = self.tag_normalizer.is_active()
+        
+        for node in self.album_nodes_original: # Iterate over the original stored nodes
+            node_raw_tags = node.get("tags", [])
             
-    def _show_single_instance_dialog(self):
-        """Show dialog for managing single-instance tags."""
-        if not self.single_instance_handler:
-            from PyQt6.QtWidgets import QMessageBox
-            QMessageBox.warning(
-                self,
-                "Not Available",
-                "Single-instance tag management is not available. Please load data first."
-            )
-            return
-            
-        dialog = SingleInstanceDialog(
-            self,
-            self.single_instance_handler,
-            self.tag_normalizer
-        )
-        
-        # Connect the changes_applied signal
-        dialog.changes_applied.connect(self._handle_tag_changes)
-        
-        # Show the dialog
-        dialog.exec()
-        
-    def _handle_tag_changes(self, changes):
-        """Handle changes from the single-instance dialog."""
-        if not changes:
-            return
-            
-        # Reprocess tag data to apply changes
-        self.process_tag_data(self.nodes)
-        
-        # Refresh the view
-        self.refresh_tag_table()
-        self.refresh_album_table()
+            # Determine the set of processed tags for the current node, based on normalization state
+            current_node_processed_tags = []
+            if is_normalization_active:
+                normalized_node_tags = [self.tag_normalizer.normalize(tag) for tag in node_raw_tags]
+                current_node_processed_tags = [tag for tag in normalized_node_tags if tag]
+            else:
+                cleaned_raw_node_tags = [self.tag_normalizer.normalize(tag) for tag in node_raw_tags] # normalizer also cleans
+                current_node_processed_tags = [tag for tag in cleaned_raw_node_tags if tag]
+
+            # Check if the node matches the include filters (filters use processed tags)
+            if include_filters and not any(tag in include_filters for tag in current_node_processed_tags):
+                continue
+
+            # Check if the node matches the exclude filters
+            if exclude_filters and any(tag in exclude_filters for tag in current_node_processed_tags):
+                continue
+
+            # If we reach here, the node matches the current filters
+            self.filtered_albums.append(node) # Store the original node object
+            for tag in current_node_processed_tags: # These are the processed tags that made the album match
+                self.matching_counts[tag] += 1
+
+        # Update tag views and album count label
+        self._update_tag_views() 
+        self._update_album_table_display() # ADDED: Update the album table display
+        # self._update_album_count_label() # This is now called within _update_album_table_display
+
+        self.setUpdatesEnabled(True)
     
-    def _show_tag_context_menu(self, position):
-        """Show context menu for tag table."""
-        row = self.tags_table.rowAt(position.y())
-        if row < 0:
+    def _update_tag_views(self):
+        """Update the tag views (table and cloud) with the current tag data."""
+        self.setUpdatesEnabled(False)
+        
+        # self.matching_counts is populated by apply_tag_filters. No need to update it here.
+
+        # Update tag table
+        self.tags_table.setRowCount(0)
+        # self.tag_counts contains processed tags (normalized or cleaned raw)
+        for tag, count in self.tag_counts.items(): 
+            filter_state = self.tag_filters.get(tag, self.FILTER_NEUTRAL) # Keys in tag_filters match tags in tag_counts
+            matching_count = self.matching_counts.get(tag, 0) # Keys in matching_counts also match
+            row_position = self.tags_table.rowCount()
+            self.tags_table.insertRow(row_position)
+
+            # Tag column (Column 0)
+            tag_item = SortableTableWidgetItem(tag)
+            self.tags_table.setItem(row_position, 0, tag_item)
+
+            # Count column (Column 1)
+            count_item = SortableTableWidgetItem(str(count)) # Display string
+            count_item.setData(Qt.ItemDataRole.UserRole, int(count)) # Store actual int for numeric sort
+            self.tags_table.setItem(row_position, 1, count_item)
+            
+            # Matching column (Column 2)
+            matching_item = SortableTableWidgetItem(str(matching_count)) # Display string
+            matching_item.setData(Qt.ItemDataRole.UserRole, int(matching_count)) # Store actual int for numeric sort
+            self.tags_table.setItem(row_position, 2, matching_item)
+
+            # Filter column (Column 3)
+            filter_text = "Neutral"
+            if filter_state == self.FILTER_INCLUDE:
+                filter_text = "Include"
+            elif filter_state == self.FILTER_EXCLUDE:
+                filter_text = "Exclude"
+            # Use standard QTableWidgetItem for Filter column as it's not typically sorted by value
+            filter_q_item = QTableWidgetItem(filter_text)
+            filter_q_item.setData(Qt.ItemDataRole.UserRole, filter_state) # Store state if needed
+            self.tags_table.setItem(row_position, 3, filter_q_item)
+
+        # Update tag cloud widget
+        self.tag_cloud_widget.update_tags(self.tag_counts)
+        self.tag_cloud_widget.update_filter_states(self.tag_filters)
+        
+        # Sort the table based on the current sort column and order
+        self.tags_table.sortItems(self.tags_sort_column, self.tags_sort_order)
+        
+        self.setUpdatesEnabled(True)
+    
+    def _update_album_count_label(self):
+        """Update the album count label in the album panel."""
+        self.album_count_label.setText(f"Albums: {len(self.filtered_albums)}")
+    
+    def _update_album_table_display(self):
+        """Populate the album_table with data from self.filtered_albums."""
+        # It's good practice to disable sorting during bulk updates for performance,
+        # though self.album_table.setSortingEnabled(True) is set in __init__.
+        # If issues arise, explicitly disable/enable sorting around population.
+        # self.album_table.setSortingEnabled(False) 
+        self.album_table.setRowCount(0) # Clear existing rows
+        
+        for album_node in self.filtered_albums:
+            row_position = self.album_table.rowCount()
+            self.album_table.insertRow(row_position)
+
+            artist = album_node.get('artist', '')
+            album_title = album_node.get('album', album_node.get('title', '')) 
+            year_val = album_node.get('year', '')
+            year_str = str(year_val)
+            
+            tags_list = album_node.get('tags', [])
+            if isinstance(tags_list, list):
+                tags_str = ", ".join(map(str, tags_list))
+            else:
+                tags_str = str(tags_list) # Fallback for unexpected type
+
+            self.album_table.setItem(row_position, 0, QTableWidgetItem(artist))
+            self.album_table.setItem(row_position, 1, QTableWidgetItem(album_title))
+            
+            year_item = QTableWidgetItem(year_str)
+            # Attempt to set UserRole for potential numeric sorting if album_table uses SortableTableWidgetItem for year
+            try:
+                if year_val != '': # Avoid converting empty string
+                    year_item.setData(Qt.ItemDataRole.UserRole, int(year_val))
+            except (ValueError, TypeError):
+                pass # Keep as text if not convertible to int
+            self.album_table.setItem(row_position, 2, year_item)
+            
+            self.album_table.setItem(row_position, 3, QTableWidgetItem(tags_str))
+        
+        # self.album_table.setSortingEnabled(True) # Re-enable if disabled above
+        # self.album_table.resizeColumnsToContents() # Optional: adjust column sizes
+
+        self._update_album_count_label() # Ensure album count is also up-to-date
+
+    def _process_updates(self):
+        """Process pending updates to tag and album data."""
+        self.setUpdatesEnabled(False)
+        graphics_logger.debug(f"Processing {len(self._pending_updates)} pending updates.")
+        
+        changed = False
+        for update in self._pending_updates:
+            action, data_node = update # Assuming data is a node object
+            if action == "add":
+                self._add_album_data(data_node)
+                changed = True
+            elif action == "remove":
+                self._remove_album_data(data_node)
+                changed = True
+            elif action == "modify":
+                self._modify_album_data(data_node)
+                changed = True
+        
+        self._pending_updates.clear()
+        
+        if changed:
+            self._reprocess_base_tag_data() # Reprocess all tag data if original nodes changed
+        
+        self.apply_tag_filters()  # Reapply filters and update views
+        
+        self.setUpdatesEnabled(True)
+    
+    def _add_album_data(self, data_node):
+        """Add new album data to the view's original data store."""
+        self.album_nodes_original.append(data_node)
+        # Actual tag counting is deferred to _reprocess_base_tag_data
+    
+    def _remove_album_data(self, data_node):
+        """Remove album data from the view's original data store."""
+        try:
+            self.album_nodes_original.remove(data_node)
+        except ValueError:
+            graphics_logger.warning(f"Attempted to remove a node that was not in album_nodes_original: {data_node}")
+        # Actual tag counting is deferred to _reprocess_base_tag_data
+
+    def _modify_album_data(self, data_node):
+        """Modify existing album data in the view's original data store."""
+        # Assuming data_node has a unique identifier, e.g., in its .data attribute
+        node_id_to_modify = data_node.data.get("id") # Example: using node.data['id']
+        if node_id_to_modify is None:
+            graphics_logger.warning("Cannot modify album data: node has no ID.")
             return
             
+        for i, existing_node in enumerate(self.album_nodes_original):
+            if existing_node.data.get("id") == node_id_to_modify:
+                self.album_nodes_original[i] = data_node
+                # Actual tag counting is deferred to _reprocess_base_tag_data
+                return
+        graphics_logger.warning(f"Attempted to modify a node not found in album_nodes_original: ID {node_id_to_modify}")
+
+    def _change_tag_view_mode(self, index):
+        """Change the tag view mode between table and cloud."""
+        self.setUpdatesEnabled(False)
+        self.tag_views_stack.setCurrentIndex(index)
+        self.tag_mode = index
+        
+        # Update the display based on the new mode
+        if index == self.MODE_TABLE:
+            self.tags_table.setVisible(True)
+            self.tag_cloud_widget.setVisible(False)
+        else:
+            self.tags_table.setVisible(False)
+            self.tag_cloud_widget.setVisible(True)
+            self.tag_cloud_widget.update_tags(self.tag_counts)  # Update cloud view
+        
+        self.setUpdatesEnabled(True)
+    
+    def _toggle_normalization(self, state):
+        """Toggle tag normalization on or off."""
+        self.setUpdatesEnabled(False) # Defer updates during processing
+        if state == Qt.CheckState.Checked:
+            self.tag_normalizer.set_active(True)
+            graphics_logger.info("Tag normalization enabled.")
+        else:
+            self.tag_normalizer.set_active(False)
+            graphics_logger.info("Tag normalization disabled.")
+        
+        # Clear existing filters as their context (normalized vs. raw keys) has changed.
+        # User will need to re-apply filters if desired.
+        self.tag_filters.clear()
+        graphics_logger.debug("Tag filters cleared due to normalization change.")
+        
+        # Reprocess all tag data with the new normalization setting
+        self._reprocess_base_tag_data() # This rebuilds self.tag_counts, self.raw_tag_counts
+
+        # Apply filters (now empty) and update views accordingly
+        self.apply_tag_filters() 
+        self.setUpdatesEnabled(True)
+    
+    def clear_tag_filters(self):
+        """Clear all active tag filters and refresh the view."""
+        self.tag_filters.clear()
+        self.apply_tag_filters() # This will refresh tables and matching counts
+        graphics_logger.info("All tag filters cleared.")
+
+    def _handle_tag_search(self):
+        search_term_original = self.tag_search_input.text().strip()
+        if not search_term_original:
+            return
+
+        # Process the search term according to the current normalization state
+        # This ensures tag_to_filter_on matches the keys in self.tag_counts and self.tag_filters
+        tag_to_filter_on = self.tag_normalizer.normalize(search_term_original) 
+
+        if not tag_to_filter_on: 
+            print(f"Search term '{search_term_original}' processed to an empty string or is invalid.")
+            # self.tag_search_input.clear() # Optionally clear
+            return
+            
+        # self.tag_counts contains the tags as they are currently displayed (normalized or cleaned raw)
+        if tag_to_filter_on in self.tag_counts:
+            # Apply this tag as an "include" filter
+            self.tag_filters[tag_to_filter_on] = self.FILTER_INCLUDE
+            
+            self.apply_tag_filters() # This will refresh tables and matching counts
+            
+            # self.tag_search_input.clear() # Optionally clear after successful search
+
+            # Scroll to the tag in the tags_table
+            # The tag displayed in the table (item.text()) should be tag_to_filter_on
+            for row in range(self.tags_table.rowCount()):
+                item = self.tags_table.item(row, 0)
+                if item and item.text() == tag_to_filter_on:
+                    self.tags_table.scrollToItem(item, QTableWidget.ScrollHint.PositionAtCenter)
+                    self.tags_table.selectRow(row) # Optionally select the row
+                    break
+        else:
+            # Tag not found in the current displayable tag list (self.tag_counts)
+            print(f"Tag '{search_term_original}' (searched as '{tag_to_filter_on}') not found in the current tag list.")
+            # self.tag_search_input.clear() # Optionally clear if tag not found
+
+    def _export_tag_data(self):
+        """Exports tag data to the console for analysis."""
+        graphics_logger.info("Exporting tag data...")
+        # This is a placeholder. Implement actual export logic here.
+        # For example, print raw_tag_counts, tag_counts, or filtered_albums tags.
+        print("--- Raw Tag Counts ---")
+        for tag, count in self.raw_tag_counts.most_common(20): # Print top 20 raw tags
+            print(f"{tag}: {count}")
+        print("\n--- Processed Tag Counts (Current Normalization) ---")
+        for tag, count in self.tag_counts.most_common(20): # Print top 20 processed tags
+            print(f"{tag}: {count}")
+        
+        if self.tag_normalizer.is_active():
+            print("\n--- Normalized Tag Mappings ---")
+            if self.normalized_mapping:
+                for raw_tag, normalized_tag in self.normalized_mapping.items():
+                    if raw_tag != normalized_tag: # Only print if actual change occurred
+                        print(f"'{raw_tag}' -> '{normalized_tag}'")
+            else:
+                print("No tags were altered by normalization (or mapping is empty).")
+        
+        print("\n--- Tag Filters Active ---")
+        if self.tag_filters:
+            for tag, state in self.tag_filters.items():
+                state_str = "INCLUDE" if state == self.FILTER_INCLUDE else "EXCLUDE" if state == self.FILTER_EXCLUDE else "NEUTRAL"
+                print(f"{tag}: {state_str}")
+        else:
+            print("No active tag filters.")
+        graphics_logger.info("Tag data export placeholder executed.")
+
+    def _show_single_instance_dialog(self):
+        """Shows a dialog to manage single-instance tags."""
+        graphics_logger.info("Showing single-instance dialog (placeholder)...")
+        # This is a placeholder. Implement actual dialog logic here.
+        # Example:
+        # if self.single_instance_handler:
+        #     dialog = SingleInstanceDialog(self.single_instance_handler, self)
+        #     dialog.exec()
+        # else:
+        #     QMessageBox.information(self, "Single Instance Tags", "Tag analysis data not yet available.")
+        pass
+
+    def _handle_tag_sort(self, column_index):
+        """Handles sorting of the tag table when a header is clicked."""
+        graphics_logger.debug(f"Tag table sort requested for column: {column_index}")
+        
+        # Column 3 (Filter) is not sortable by value, but we could cycle states or show menu.
+        # For now, we make it non-sortable in the traditional sense.
+        if column_index == 3:  
+            return
+
+        if self.tags_sort_column == column_index:
+            self.tags_sort_order = Qt.SortOrder.DescendingOrder if self.tags_sort_order == Qt.SortOrder.AscendingOrder else Qt.SortOrder.AscendingOrder
+        else:
+            self.tags_sort_column = column_index
+            self.tags_sort_order = Qt.SortOrder.AscendingOrder # Default to ascending for new column
+
+        self._update_tag_views() # This will re-populate and apply sort via tags_table.sortItems
+
+    def _show_tag_context_menu(self, position):
+        """Shows the tag context menu."""
+        item = self.tags_table.itemAt(position)
+        if not item:
+            return
+
+        row = item.row()
         tag_item = self.tags_table.item(row, 0)
         if not tag_item:
             return
             
-        tag = tag_item.text()
-        menu = QMenu(self)
-        
-        include_action = QAction("Include", self)
-        include_action.triggered.connect(lambda: self._set_tag_filter(tag, self.FILTER_INCLUDE))
-        menu.addAction(include_action)
-        
-        exclude_action = QAction("Exclude", self)
-        exclude_action.triggered.connect(lambda: self._set_tag_filter(tag, self.FILTER_EXCLUDE))
-        menu.addAction(exclude_action)
-        
-        neutral_action = QAction("Clear Filter", self)
-        neutral_action.triggered.connect(lambda: self._set_tag_filter(tag, self.FILTER_NEUTRAL))
-        menu.addAction(neutral_action)
-        
-        menu.addSeparator()
-        
-        select_all_action = QAction("Select All Albums With This Tag", self)
-        select_all_action.triggered.connect(lambda: self._select_albums_by_tag(tag))
-        menu.addAction(select_all_action)
-        
-        menu.exec(self.tags_table.mapToGlobal(position))
-    
-    def _set_tag_filter(self, tag, state):
-        """Set filter state for a specific tag."""
-        self.tag_filters[tag] = state
-        self.apply_tag_filters()
-    
-    def _select_albums_by_tag(self, tag):
-        """Select all albums that have the specified tag."""
-        album_ids = set()
-        for node in self.filtered_albums:
-            # Use normalized tags for selection
-            if 'normalized_tags' in node.data and tag in node.data['normalized_tags']:
-                album_ids.add(node.id)
-        
-        self.update_selection(album_ids)
-        
-        # Also select the corresponding rows in the album table
-        self.album_table.clearSelection()
-        for row in range(self.album_table.rowCount()):
-            for col in range(self.album_table.columnCount()):
-                item = self.album_table.item(row, col)
-                if item and item.data(Qt.ItemDataRole.UserRole) in album_ids:
-                    item.setSelected(True)
-                    break
-    
-    def _process_updates(self):
-        """Process pending updates."""
-        # This would handle batch updates if needed
-        pass
-    
-    def resizeEvent(self, event):
-        """Handle resize events."""
-        super().resizeEvent(event)
-        self.splitter.resize(self.size())
-    
-    def paintEvent(self, event):
-        """Handle paint events with throttling."""
-        current_time = QTime.currentTime().msecsSinceStartOfDay()
-        if current_time - self._last_paint_time < self._paint_throttle and not self._needs_full_update:
-            event.accept()
+        tag_name = tag_item.text()
+
+        menu = QMenu()
+        include_action = menu.addAction("Include Tag")
+        exclude_action = menu.addAction("Exclude Tag")
+        neutral_action = menu.addAction("Set to Neutral")
+
+        action = menu.exec(self.tags_table.mapToGlobal(position))
+
+        if action == include_action:
+            self.tag_filters[tag_name] = self.FILTER_INCLUDE
+        elif action == exclude_action:
+            self.tag_filters[tag_name] = self.FILTER_EXCLUDE
+        elif action == neutral_action:
+            if tag_name in self.tag_filters:
+                del self.tag_filters[tag_name] # Or set to FILTER_NEUTRAL explicitly
+        else: # No action or menu dismissed
             return
             
-        super().paintEvent(event)
-        self._last_paint_time = current_time
-        self._needs_full_update = False
-    
-    def _change_tag_view_mode(self, index):
-        """Change the tag view mode."""
-        self.tag_mode = index
-        self.tag_views_stack.setCurrentIndex(index)
-    
-    def _handle_tag_cloud_click(self, tag):
-        """Handle tag click in the tag cloud."""
-        current_state = self.tag_filters.get(tag, self.FILTER_NEUTRAL)
-        
-        # Cycle through states: NEUTRAL -> INCLUDE -> EXCLUDE -> NEUTRAL
-        if current_state == self.FILTER_NEUTRAL:
-            self.tag_filters[tag] = self.FILTER_INCLUDE
-        elif current_state == self.FILTER_INCLUDE:
-            self.tag_filters[tag] = self.FILTER_EXCLUDE
-        else:
-            self.tag_filters[tag] = self.FILTER_NEUTRAL
-            
-        # Update tag cloud filter states
-        self.tag_cloud.update_filter_states(self.tag_filters)
-        
-        # Apply filters
         self.apply_tag_filters()
+
+    def update_data(self, nodes, edges):
+        """Update the view with new album data (nodes) and tag relationships (edges)."""
+        self.setUpdatesEnabled(False)
+        graphics_logger.info(f"Updating data: {len(nodes)} nodes, {len(edges)} edges received.")
+
+        # Store the new nodes; existing data is implicitly cleared by _reprocess_base_tag_data
+        self.album_nodes_original = list(nodes) # Make a copy if nodes is an iterator or shared
+        
+        # Reprocess all tag data based on the new album_nodes_original and current normalization
+        self._reprocess_base_tag_data()
+        
+        # Note: 'edges' are not currently used in this revised tag processing logic.
+        # If they represent tag relationships that should affect counts or display,
+        # _reprocess_base_tag_data or another method would need to handle them.
+        if edges:
+            graphics_logger.debug(f"Received {len(edges)} edges, but they are not currently processed by TagExplorerView's update_data.")
+
+        # Apply filters (which might be empty or pre-existing) and update views
+        self.apply_tag_filters()
+
+        self.setUpdatesEnabled(True)
+
+    def _apply_unified_styling(self):
+        """Apply unified styling to all child widgets."""
+        palette = self.palette()
+        # Define your unified colors and fonts here
+        background_color = QColor(30, 30, 30)
+        foreground_color = QColor(220, 220, 220)
+        header_color = QColor(50, 50, 50)
+        accent_color = QColor(0, 120, 215)
+        font = self.font()
+        font.setPointSize(10)
+        
+        # Apply to all widgets recursively
+        def apply_style_recursive(widget):
+            widget.setAutoFillBackground(True)
+            palette = widget.palette()
+            palette.setColor(QPalette.ColorRole.Window, background_color)
+            palette.setColor(QPalette.ColorRole.WindowText, foreground_color)
+            widget.setPalette(palette)
+            widget.setFont(font)
+            
+            if isinstance(widget, QTableWidget):
+                # Special handling for QTableWidget
+                widget.setAlternatingRowColors(True)
+                widget.setStyleSheet("QTableWidget::item { padding: 4px; }")
+            
+            for child in widget.findChildren(QWidget):
+                apply_style_recursive(child)
+        
+        apply_style_recursive(self)
+        
+        # Header specific styling
+        header = self.tags_table.horizontalHeader()
+        header.setStyleSheet(f"QHeaderView::section {{ background-color: {header_color.name()}; padding: 4px; }}")
+        header.setFont(font)
+        
+        # Accent color for selected items
+        self.setStyleSheet(f"""
+            QTableWidget::item:selected {{
+                background-color: {accent_color.name()} !important;
+                color: {foreground_color.name()} !important;
+            }}
+            QHeaderView::section:selected {{
+                background-color: {accent_color.name()} !important;
+                color: {foreground_color.name()} !important;
+            }}
+        """)

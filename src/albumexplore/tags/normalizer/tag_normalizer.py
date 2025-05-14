@@ -24,24 +24,36 @@ class TagNormalizer:
         self._merge_history = []
         self._similarity_threshold = 0.7
         self._min_frequency_for_normalization = 2
+        self._active = True  # Added: Normalization is active by default
         
+    def set_active(self, active: bool):
+        """Set the active state of the normalizer."""
+        self._active = active
+
+    def is_active(self) -> bool:
+        """Check if normalization is currently active."""
+        return self._active
+
     def normalize(self, tag: str) -> str:
         """Convert a tag to its normalized form."""
         if not tag:
             return tag
             
         # Convert to lowercase and strip whitespace
-        tag = tag.lower().strip()
-        
+        original_cleaned_tag = tag.lower().strip()
+
+        if not self._active:
+            return original_cleaned_tag # Return cleaned original if normalization is off
+            
         # Check cache first
-        if tag in self._variant_cache:
-            return self._variant_cache[tag]
+        if original_cleaned_tag in self._variant_cache:
+            return self._variant_cache[original_cleaned_tag]
             
         # Get normalized form from config
-        normalized = self._rules_config.get_normalized_form(tag)
+        normalized = self._rules_config.get_normalized_form(original_cleaned_tag)
         
         # Cache and return result
-        self._variant_cache[tag] = normalized
+        self._variant_cache[original_cleaned_tag] = normalized
         return normalized
         
     def get_category(self, tag: str) -> str:

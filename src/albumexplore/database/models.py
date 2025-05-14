@@ -100,6 +100,21 @@ class TagVariant(Base):
     def __repr__(self):
         return f"<TagVariant {self.variant} -> {self.canonical_tag.name}>"
 
+class Artist(Base):
+    __tablename__ = "artists"
+
+    id = Column(String, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+    # Add other artist-specific fields here, e.g.:
+    # country = Column(String)
+    # formation_year = Column(Integer)
+
+    # Relationship to albums (if one artist can have multiple albums)
+    # albums = relationship("Album", back_populates="artist_obj") # Assuming Album has an artist_obj relationship
+
+    def __repr__(self):
+        return f"<Artist {self.name}>"
+
 class TagRelation(Base):
     __tablename__ = "tag_relationships"
 

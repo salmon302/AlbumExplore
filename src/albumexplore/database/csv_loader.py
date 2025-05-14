@@ -62,27 +62,62 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
                 # Check if album already exists
                 existing = session.query(Album).filter(
                     Album.artist == artist,
-                    Album.title == title
+                    Album.title == title,
+                    Album.release_year == year # Also check year to differentiate re-releases if any
                 ).first()
                 
                 if existing:
-                    db_logger.debug(f"Album already exists: {artist} - {title}")
+                    db_logger.debug(f"Album already exists: {artist} - {title} ({year})")
+                    # Optionally, update existing record if new data is more complete
+                    # For now, we skip if it exists with the same year.
                     continue
+                
+                # Attempt to parse the full release date
+                release_date_str = row.get('Release Date', '').strip()
+                parsed_release_date = None
+                if release_date_str:
+                    try:
+                        # Handle potential "TBD" or other non-date strings
+                        if release_date_str.upper() == "TBD":
+                            db_logger.debug(f"Release date is TBD for {artist} - {title}")
+                        else:
+                            # Try to parse formats like "Month Day" e.g. "April 29"
+                            # Add the year from the filename to complete the date
+                            full_date_str = f"{release_date_str} {year}"
+                            parsed_release_date = datetime.strptime(full_date_str, "%B %d %Y").date()
+                    except ValueError:
+                        db_logger.warning(f"Could not parse date: '{release_date_str}' for {artist} - {title} in year {year}. Row: {row}")
                 
                 # Create new album
                 album = Album(
                     artist=artist,
                     title=title,
-                    release_year=year,
-                    genre=row.get('Genre', '').strip(),
-                    country=row.get('Country', '').strip()
+                    release_year=year, # Year from filename
+                    release_date=parsed_release_date, # Parsed full date (Month, Day, Year)
+                    genre=row.get('Genre', '').strip(), # Assuming 'Genre' might be the primary genre string
+                    # country=row.get('Country', '').strip() # 'Country' seems to be missing from provided CSV snippets, ensure it exists or handle
+                    country=row.get('Country of Origin', row.get('Country', '')).strip(), # Check for 'Country of Origin' or 'Country'
+                    # Ensure other fields from your Album model are populated if available in CSV
+                    # e.g., length, vocal_style, raw_tags, platforms
+                    raw_tags=row.get('Tags', '').strip() # Assuming 'Tags' column from CSV maps to raw_tags
                 )
                 
-                # Process tags
-                tags_str = row.get('Tags', '').strip()
-                if tags_str:
-                    tags = [t.strip() for t in tags_str.split(',') if t.strip()]
-                    for tag_name in tags:
+                # Process tags (from 'Genre / Subgenres' or a dedicated 'Tags' column if different)
+                # The existing code uses 'Tags' for tag processing. Let's assume 'Genre / Subgenres' is for the main genre field
+                # and 'Tags' column (if it exists and is different) or 'Genre / Subgenres' can be used for the tag list.
+                # For clarity, let's assume the 'Tags' column in the CSV is what should be split into multiple tags.
+                # If 'Tags' is not present, but 'Genre / Subgenres' is, and it's meant to be split, adjust accordingly.
+                
+                tags_source_column = 'Tags' # Default to 'Tags' column for individual tags
+                if tags_source_column not in row and 'Genre / Subgenres' in row:
+                    tags_source_column = 'Genre / Subgenres' # Fallback if 'Tags' isn't there but 'Genre / Subgenres' is
+
+                tags_str_from_csv = row.get(tags_source_column, '').strip()
+                if tags_str_from_csv:
+                    # Split by comma, semicolon, or other common delimiters if necessary
+                    # The original code splits by comma. If other delimiters are used, expand this.
+                    individual_tags = [t.strip() for t in re.split(r'[,;/]', tags_str_from_csv) if t.strip()]
+                    for tag_name in individual_tags:
                         # Get or create tag
                         tag = session.query(Tag).filter(
                             Tag.name == tag_name

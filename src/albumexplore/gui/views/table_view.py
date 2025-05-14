@@ -66,8 +66,10 @@ class TableView(BaseView):
                              QTableWidgetItem(row.get('album', '')))
             
             # Year
+            year_val = row.get('year', '')
+            graphics_logger.debug(f"TableView: Populating year for row {row_idx}, album '{row.get('album', '')}', year: '{year_val}', type: {type(year_val)}") # DEBUG
             year_item = QTableWidgetItem()
-            year_item.setData(Qt.ItemDataRole.DisplayRole, row.get('year', ''))
+            year_item.setData(Qt.ItemDataRole.DisplayRole, year_val)
             self.table.setItem(row_idx, 2, year_item)
             
             # Genre
