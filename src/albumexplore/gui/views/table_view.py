@@ -57,7 +57,9 @@ class TableView(BaseView):
         
         for row_idx, row in enumerate(rows):
             # Artist
-            item = QTableWidgetItem(row.get('artist', ''))
+            artist_data = row.get('artist', '')
+            artist_name = str(artist_data) if artist_data is not None else ''
+            item = QTableWidgetItem(artist_name)
             item.setData(Qt.ItemDataRole.UserRole, row.get('id'))
             self.table.setItem(row_idx, 0, item)
             

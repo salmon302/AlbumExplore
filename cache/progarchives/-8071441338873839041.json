@@ -1,0 +1,38 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist6a70.html",
+  "name": "PLANET X",
+  "genre": "Jazz Rock/Fusion",
+  "country": "United States",
+  "biography": "Planet X biography\n\nFounded in USA in 2000 - Disbanded in 2012\n\nPLANET X started as a solo project of keyboardist\n\nDerek SHERINIAN\n\n, who left\n\nDREAM THEATER\n\nin 1999 after recording one album with the band. He immediately started to work in a solo album, in which he invited talented drummer Virgil DONATI as a guest musician. The result was so satisfying that the couple decided to make a new project and build up a formal band.\n\nThe band took the name of that first solo album of SHERINIAN, PLANET X, and invited legendary guitar player and studio musician\n\nTony MACALPINE\n\nto join the band. The mixture of these different styles gave for result an instrumental rock band with tendencies to jazz/fusion, Hard rock and progressive. The chemistry of the three talented musicians brought an impressive level of skills, time signature changes, heavy riffing and back to back soloing in which the band shows a huge level of musicianship.\n\nThey published their first album \"Universe\" in 2000. The success and acceptance of the album, especially between prog metal fans and instrumental followers made possible a tour in 2002. During this tour, the band recorded a live album called \"Live From Oz\". Soon after the tour, the band rejoined in the studio to bring out their most acclaimed album: \"Moonbabies\". Keeping the spirit of the first album, now improved and better oriented their second album it's their own masterpiece, very popular and successful.\n\nThe different compromises of the players made them stay in hiatus until 2007, when the band decided to release their third album, now having talented jazz guitar man\n\nAllan HOLDSWORTH\n\nand Brett GARSED replacing MACALPINE. The name of the album was \"Quantum\".\n\nLater, in April of 2009, MACALPINE announced his comeback to the band but there's, as of yet, no official information of the next release of the band.\n\nPLANET X has participated with other great guest musicians such as: Billy SHEEHAN, Tom KENNEDY, Jimmy JOHNSON, Brett GARSED and Rufus PHILPOT.\n\nBio by jampa17\n\nSee also:\n\nHERE",
+  "albums": [
+    {
+      "title": "Universe",
+      "local_path": "album355c.html",
+      "year": 2000,
+      "rating": 3.69,
+      "type": "Studio Album"
+    },
+    {
+      "title": "MoonBabies",
+      "local_path": "album8a13.html",
+      "year": 2002,
+      "rating": 3.98,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Quantum",
+      "local_path": "album4fe1.html",
+      "year": 2007,
+      "rating": 4.08,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Live from Oz",
+      "local_path": "album9426.html",
+      "year": 2002,
+      "rating": 3.77,
+      "type": "Live Album"
+    }
+  ],
+  "scraped_at": "2025-05-18T11:05:58.713986"
+}

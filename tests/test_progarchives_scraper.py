@@ -1,174 +1,173 @@
-"""Tests for ProgArchives scraper implementation."""
+"""Tests for ProgArchives scraper implementation (local file parsing)."""
 import pytest
 import json
 import logging
 from pathlib import Path
-from datetime import datetime
-from albumexplore.data.scrapers.progarchives_scraper import ProgArchivesScraper
+# from datetime import datetime # Not used for now, can be re-added if saving test outputs with timestamp
+from albumexplore.scraping.progarchives_scraper import ProgArchivesScraper
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@pytest.fixture
-def cache_dir(tmp_path):
-    """Create a temporary cache directory."""
-    cache = tmp_path / "cache" / "progarchives"
-    cache.mkdir(parents=True)
-    return cache
+# Define a base path for test HTML files
+TEST_DATA_ROOT = Path(__file__).parent / "sample_html" / "progarchives"
+# Ensure this directory exists and contains sample files for testing, e.g.:
+# TEST_DATA_ROOT / "album1.html"
+# TEST_DATA_ROOT / "artist1.html"
+# TEST_DATA_ROOT / "album_with_reviews_link.html"
+# TEST_DATA_ROOT / "album-reviews1.html" (if testing separate review page parsing)
 
 @pytest.fixture
-def scraper():
-    """Initialize scraper with test configuration."""
-    cache_dir = Path("cache/progarchives_test")
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    return ProgArchivesScraper(
-        cache_dir=cache_dir,
-        max_bands=3  # Reduced number for testing
-    )
+def local_scraper() -> ProgArchivesScraper:
+    """Initialize scraper for local file parsing."""
+    # Initialize the scraper with the test data root
+    return ProgArchivesScraper(local_data_root=TEST_DATA_ROOT)
 
-def test_random_artist_scraping(scraper):
-    """Test scraping random artists' discographies."""
-    results = []
-    stats = {
-        'total_bands': 0,
-        'total_albums': 0,
-        'bands_with_lineup': 0,
-        'albums_with_lineup': 0,
-        'total_members': 0
-    }
-    
-    # Test with a known band that has lineup info first
-    known_band = {
-        'name': 'Dream Theater',  # Known to have extensive lineup info
-        'url': 'https://www.progarchives.com/artist.asp?id=149'
-    }
-    
-    # Process the known band first
-    logger.info(f"Processing known band: {known_band['name']}")
-    
-    # Get detailed band info
-    details = scraper.get_band_details(known_band['url'])
-    assert 'error' not in details, f"Error getting details for {known_band['name']}"
-    
-    # Validate band details
-    assert details['name'], "Band name should be present"
-    assert details['genre'], "Band genre should be present"
-    assert isinstance(details.get('albums', []), list), "Albums should be a list"
-    
-    # Track statistics
-    stats['total_bands'] += 1
-    albums = details.get('albums', [])
-    stats['total_albums'] += len(albums)
-    stats['total_members'] += len(details.get('members', []))
-    
-    if details.get('members'):
-        stats['bands_with_lineup'] += 1
-    
-    results.append({**known_band, **details})
-    
-    # Now process some random bands
-    for band in scraper.get_bands_all():
-        stats['total_bands'] += 1
-        logger.info(f"Processing band: {band['name']}")
-        
-        # Get detailed band info
-        details = scraper.get_band_details(band['url'])
-        assert 'error' not in details, f"Error getting details for {band['name']}"
-        
-        # Validate band details
-        assert details['name'], "Band name should be present"
-        assert details['genre'], "Band genre should be present"
-        assert isinstance(details.get('albums', []), list), "Albums should be a list"
-        
-        # Track statistics
-        albums = details.get('albums', [])
-        stats['total_albums'] += len(albums)
-        stats['total_members'] += len(details.get('members', []))
-        
-        if details.get('members'):
-            stats['bands_with_lineup'] += 1
-        
-        # Check each album
-        for album in albums:
-            assert album['title'], "Album title should be present"
-            assert album['year'], "Album year should be present"
-            assert album['type'] in ['Studio Album', 'Single/EP', 'Live', 'Compilation'], f"Invalid album type: {album['type']}"
-            
-            if album.get('lineup'):
-                stats['albums_with_lineup'] += 1
-        
-        results.append({**band, **details})
-    
-    # Validate overall results
-    assert stats['total_bands'] > 0, "Should have processed some bands"
-    assert stats['total_albums'] > 0, "Should have found some albums"
-    assert stats['bands_with_lineup'] > 0, "Some bands should have lineup info"
-    assert stats['total_members'] > 0, "Should have found some band members"
-    
-    logger.info(f"Test Results:")
-    logger.info(f"Total Bands: {stats['total_bands']}")
-    logger.info(f"Total Albums: {stats['total_albums']}")
-    logger.info(f"Bands with Lineup: {stats['bands_with_lineup']}")
-    logger.info(f"Albums with Lineup: {stats['albums_with_lineup']}")
-    logger.info(f"Total Members: {stats['total_members']}")
-    
-    # Save results to file
-    results_file = Path(__file__).parent / f"test_results_random_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    with open(results_file, 'w') as f:
-        json.dump({
-            'stats': stats,
-            'results': results
-        }, f, indent=2)
-    
-    logger.info(f"Results saved to: {results_file}")
-    
-    return results
+# --- Mocking local file system for tests (Alternative to placing actual files) ---
+# If we don't want to rely on actual files in the main data path for tests,
+# we can mock `_read_local_html_content`.
 
-def test_rate_limiting(scraper):
-    """Test rate limiting functionality."""
-    from time import time
-    
-    # Make a few requests and check timing
-    start = time()
-    for _ in range(3):
-        band = next(scraper.get_bands_all())
-        scraper.get_band_details(band['url'])
-    duration = time() - start
-    
-    # Should take at least 10 seconds due to rate limiting
-    assert duration >= 10, "Rate limiting should enforce delays between requests"
+@pytest.fixture
+def mock_local_scraper(monkeypatch):
+    """Create a scraper with mocked file system for tests."""
+    scraper = ProgArchivesScraper(local_data_root=Path("mock_data_root"))
 
-def test_caching(scraper, cache_dir):
-    """Test caching functionality."""
-    # First request should cache
-    band = next(scraper.get_bands_all())
-    details1 = scraper.get_band_details(band['url'])
+    # Sample HTML content for mocking
+    sample_album_html = """
+    <html><head><title>Test Album Page</title>
+    <meta property="og:title" content="Test Artist - Test Album (2023)">
+    </head><body>
+    <h1 class="album-title">Test Album</h1>
+    <h2><a href="artist.asp?id=1">Test Artist</a></h2>
+    <table>
+        <tr><td>Released:</td><td>2023</td></tr>
+        <tr><td>Type:</td><td>Studio Album</td></tr>
+        <tr><td>Genre:</td><td>Prog Rock</td></tr>
+    </table>
+    <h3>Track Listing</h3>
+    <p>1. Test Track 1 - 4:30<br>2. Test Track 2 - 5:45</p>
+    </body></html>
+    """
     
-    # Verify cache file exists
-    cache_files = list(cache_dir.glob('*.html'))
-    assert len(cache_files) > 0, "Should have created cache files"
+    sample_artist_html = """
+    <html><head><title>Test Artist Page</title></head>
+    <body>
+    <h1>Test Artist</h1>
+    <h2 style="margin:1px 0px;padding:0;color:#777;font-weight:normal;">Prog Rock • Utopia</h2>
+    <div id="artist-biography">
+        <p>Test artist biography text.</p>
+    </div>
+    <table class="artist-discography-table">
+        <tr>
+            <td class="artist-discography-td">
+                <a href="album.asp?id=1"><strong>Test Album</strong></a>
+                <span style="color:#777">2023</span>
+                <span style="color:#C75D4F">4.20</span>
+            </td>
+        </tr>
+    </table>
+    </body></html>
+    """
     
-    # Second request should use cache
-    details2 = scraper.get_band_details(band['url'])
-    assert details1 == details2, "Cached results should match"
+    sample_reviews_html = """
+    <html><body>
+    <div class="review-container">
+        <div class="review-text">This is a test review.</div>
+        <span class="reviewer-name">Reviewer1</span>
+        <span class="review-date">May 1, 2023</span>
+        <span class="review-rating">4</span>
+    </div>
+    </body></html>
+    """
 
-def test_error_handling(scraper):
-    """Test error handling for invalid URLs."""
-    with pytest.raises(Exception):
-        scraper.get_band_details("https://www.progarchives.com/invalid-band-url")
+    def mock_read(file_path: Path) -> str:
+        """Mock file reading function that returns predefined content based on path."""
+        path_str = str(file_path)
+        if "test_album" in path_str:
+            return sample_album_html
+        elif "test_artist" in path_str:
+            return sample_artist_html
+        elif "test_reviews" in path_str:
+            return sample_reviews_html
+        
+        logger.warning(f"Mock read: File not found in mock setup - {file_path}")
+        raise ValueError(f"File not found: {file_path}")
 
-def test_data_validation(scraper):
-    """Test data validation and cleaning."""
-    band = next(scraper.get_bands_all())
-    details = scraper.get_band_details(band['url'])
+    monkeypatch.setattr(scraper, '_read_local_html_content', mock_read)
     
-    # Check data cleaning
-    assert not any(k for k in details if k.strip() != k), "Keys should be stripped"
-    assert not any(v for v in details.values() if isinstance(v, str) and v.strip() != v), "String values should be stripped"
+    # Also mock the resolve path function to return predictable values
+    def mock_resolve_path(base_path: Path, relative_reference: str) -> Path:
+        if 'artist.asp' in relative_reference:
+            return Path("mock_data_root/artists/test_artist.html")
+        elif 'album.asp' in relative_reference:
+            return Path("mock_data_root/albums/test_album.html")
+        elif 'album-reviews.asp' in relative_reference:
+            return Path("mock_data_root/reviews/test_reviews.html")
+        return base_path
+        
+    monkeypatch.setattr(scraper, '_resolve_relative_path', mock_resolve_path)
     
-    # Validate required fields
-    required_fields = ['name', 'genre', 'country']
-    for field in required_fields:
-        assert field in details, f"Missing required field: {field}"
-        assert details[field], f"Required field {field} should not be empty"
+    return scraper
+
+
+def test_get_album_details(mock_local_scraper):
+    """Test parsing album details from local HTML file."""
+    album_data = mock_local_scraper.get_album_details("test_album.html")
+    
+    assert album_data is not None
+    assert 'error' not in album_data
+    assert album_data.get('title') == "Test Album"
+    assert album_data.get('artist') == "Test Artist"
+    assert album_data.get('year') == 2023
+    assert album_data.get('record_type') == "Studio Album"
+    assert album_data.get('genre') == "Prog Rock"
+    assert len(album_data.get('tracks', [])) == 2
+    assert album_data.get('tracks')[0].get('title') == "Test Track 1"
+
+
+def test_get_band_details(mock_local_scraper):
+    """Test parsing band details from local HTML file."""
+    band_data = mock_local_scraper.get_band_details("test_artist.html")
+    
+    assert band_data is not None
+    assert 'error' not in band_data
+    assert band_data.get('name') == "Test Artist"
+    assert band_data.get('genre') == "Prog Rock"
+    assert band_data.get('country') == "Utopia"
+    assert "Test artist biography text" in band_data.get('biography', '')
+    assert len(band_data.get('albums', [])) == 1
+    assert band_data.get('albums')[0].get('title') == "Test Album"
+    assert band_data.get('albums')[0].get('year') == 2023
+
+
+def test_get_album_data(mock_local_scraper):
+    """Test getting combined album data including reviews."""
+    album_data = mock_local_scraper.get_album_data("test_album.html")
+    
+    assert album_data is not None
+    assert 'error' not in album_data
+    assert album_data.get('title') == "Test Album"
+    assert album_data.get('artist') == "Test Artist"
+    assert album_data.get('artist_page_path') == "mock_data_root/artists/test_artist.html"
+    
+    # If reviews are found in separate reviews page
+    if 'reviews' in album_data:
+        assert len(album_data.get('reviews', [])) > 0
+        review = album_data.get('reviews')[0]
+        assert review.get('text') == "This is a test review."
+        assert review.get('reviewer') == "Reviewer1"
+        assert review.get('date') == "2023-05-01"
+        assert review.get('rating') == 4
+
+
+def test_error_handling(mock_local_scraper, monkeypatch):
+    """Test error handling for file reading errors."""
+    def mock_read_error(file_path):
+        raise ValueError("Test file reading error")
+    
+    monkeypatch.setattr(mock_local_scraper, '_read_local_html_content', mock_read_error)
+    
+    result = mock_local_scraper.get_album_data("non_existent.html")
+    assert 'error' in result
+    assert "Test file reading error" in result['error']

@@ -1,0 +1,115 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artistf26b.html",
+  "name": "SKY",
+  "genre": "Eclectic Prog",
+  "country": "United Kingdom",
+  "biography": "Sky biography\n\nSKY is a British-Australian classic rock band formed in London in 1978 by classic guitarist John Williams (not to be confused with the American movie score composer of the same name), keyboarder Francis Monkman (of Curved Air fame), guitarist Kevin Peek, bassist Herbie Flowers and drummer Tristan Fry. Their unique style combined with the virtuosity of the individual members and easy accessibility of the compositions quickly gained them a huge and steady fan base. The absolute highlight of this era was a concert in Westminster Abbey in February 1981 (in fact the first ever rock concert there) which was video taped by BBC.\n\nUnfortunately after only two albums Monkman decided to leave the outfit and he was replaced by Steve Gray. Grey's influence made the band sound more jazz oriented. After the third album audience interest gradually declined. After two more studio albums and a (excellent) live double album the band fell into oblivion.\n\nThe highlights in their discography ar certainly \"Sky2\", a double album with a broad variety of songs from very funny to virtually symphonic compositions. The other one is the above mentioned live album \"Sky Five Live\" on which every member of the band is able to show his prowess.\n\nHighly recommended to everyone who likes easy listening and doesn't mind classical influences.",
+  "albums": [
+    {
+      "title": "Cadmium",
+      "local_path": "album798a.html",
+      "year": 1983,
+      "rating": 2.54,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Great Balloon Race",
+      "local_path": "albumac5a.html",
+      "year": 1985,
+      "rating": 3.49,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Mozart",
+      "local_path": "albumef2d.html",
+      "year": 1987,
+      "rating": 2.87,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Sky 5 Live",
+      "local_path": "album178f.html",
+      "year": 1983,
+      "rating": 2.55,
+      "type": "Live Album"
+    },
+    {
+      "title": "Live in Nottingham",
+      "local_path": "albumc878.html",
+      "year": 2002,
+      "rating": 3.08,
+      "type": "Live Album"
+    },
+    {
+      "title": "Classic Rock Legends (DVD)",
+      "local_path": "album218d.html",
+      "year": 2002,
+      "rating": 3.75,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Live In Concert: Bremen, Germany 1980 (DVD)",
+      "local_path": "albumf9da.html",
+      "year": 1980,
+      "rating": 4.08,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Squared",
+      "local_path": "album38db.html",
+      "year": 1999,
+      "rating": 3.57,
+      "type": "Compilation"
+    },
+    {
+      "title": "Carillon - The Singles Collection 1979 - 1987",
+      "local_path": "albumc0d5.html",
+      "year": 1979,
+      "rating": 4.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Toccata",
+      "local_path": "album5054-2.html",
+      "year": 1980,
+      "rating": 5.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Dies Irae",
+      "local_path": "albumda2e.html",
+      "year": 1980,
+      "rating": 2.64,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Masquerade",
+      "local_path": "albumb125-2.html",
+      "year": 1982,
+      "rating": 2.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Night Sky",
+      "local_path": "album0f25.html",
+      "year": 1985,
+      "rating": 0.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Desperate For Your Love",
+      "local_path": "albumf907.html",
+      "year": 1985,
+      "rating": 0.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Marriage of Figaro: Overture",
+      "local_path": "album88fe-2.html",
+      "year": 1987,
+      "rating": 0.0,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T00:12:58.825735"
+}

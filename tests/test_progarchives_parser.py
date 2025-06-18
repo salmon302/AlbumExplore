@@ -45,7 +45,7 @@ def tmp_html_files(tmp_path, sample_html, sample_html_ep):
     return [file1, file2]
 
 def test_parse_album(sample_html):
-    parser = ProgArchivesParser(Path("."))
+    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
     result = parser.parse_album(sample_html)
     
     assert result["title"] == "Sample Album"
@@ -56,7 +56,7 @@ def test_parse_album(sample_html):
     assert result["rating"] == 4.5
 
 def test_parse_album_ep(sample_html_ep):
-    parser = ProgArchivesParser(Path("."))
+    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
     result = parser.parse_album(sample_html_ep)
     
     assert result["title"] == "EP Album"
@@ -66,8 +66,11 @@ def test_parse_album_ep(sample_html_ep):
     assert result["rating"] == 4.0
 
 def test_parse_directory(tmp_path, tmp_html_files):
-    parser = ProgArchivesParser(tmp_path)
-    df = parser.parse()
+    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
+    # This test might need adjustment if ProgArchivesParser now expects input_dir at parse() or other methods
+    # For now, assuming parse() can work without input_dir or uses a default if not provided.
+    # If parse() now requires input_dir, it should be parser.parse(input_dir=tmp_path)
+    df = parser.parse(input_dir=tmp_path) # Added input_dir to parse method
     
     assert len(df) == 2
     assert "Studio" in df["record_type"].values
@@ -75,13 +78,13 @@ def test_parse_directory(tmp_path, tmp_html_files):
     assert all(year in df["year"].values for year in [2023, 2024])
 
 def test_invalid_html():
-    parser = ProgArchivesParser(Path("."))
+    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
     result = parser.parse_album("<invalid>html</invalid>")
     
     assert all(v is None for v in result.values())
 
 def test_parse_record_info():
-    parser = ProgArchivesParser(Path("."))
+    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
     
     test_cases = [
         ("Studio Album, 2023", ("Studio", 2023)),

@@ -372,9 +372,7 @@
         "heavy": "heavy-metal",
         "stoner": "stoner-rock"
     },
-    "categories": {
-        // ...existing code...
-    },
+    "categories": {},
     "prefix_patterns": {
         "post-": [
             "post-",

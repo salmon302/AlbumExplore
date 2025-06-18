@@ -1,0 +1,87 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist651a.html",
+  "name": "HATFIELD AND THE NORTH",
+  "genre": "Canterbury Scene",
+  "country": "United Kingdom",
+  "biography": "Hatfield And The North biography\n\nFormed in October 1972 - Disbanded June 1975 - Some reunions thereafter (1990, 2005)\n\nExcellent band from the Canterbury school, with extreme explored musicianship, led by the ex\n\nCARAVAN\n\nleader and bass player\n\nRichard SINCLAIR\n\n. His strong and characteristic vocals add a lot to the music, already rich in instrumentation. Keyboardist Dave Stewart is another big player here, bringing up the atmosphere with his valve saturation driven keyboard sounds.\n\nAgreed. But both \"The Rotter's Club\" and their self titled first are easily the best albums of the mid 70s. Basically \"TRC\" is probably the next step the average prog fan should take into exploring Canterbury after CARAVAN's best albums. This is outstanding music - Canterbury at its best!",
+  "albums": [
+    {
+      "title": "Hatfield and the North",
+      "local_path": "album2bc9.html",
+      "year": 1974,
+      "rating": 4.25,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Rotters' Club",
+      "local_path": "album88b9.html",
+      "year": 1975,
+      "rating": 4.21,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Hatfield and the North Live T.V. 1990",
+      "local_path": "albumdbb1.html",
+      "year": 1990,
+      "rating": 3.05,
+      "type": "Live Album"
+    },
+    {
+      "title": "Access All Areas",
+      "local_path": "albumdf80-2.html",
+      "year": 2015,
+      "rating": 4.1,
+      "type": "Live Album"
+    },
+    {
+      "title": "Classic Rock Legends",
+      "local_path": "album2fc1.html",
+      "year": 2001,
+      "rating": 3.14,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Afters",
+      "local_path": "album93d9.html",
+      "year": 1980,
+      "rating": 4.23,
+      "type": "Compilation"
+    },
+    {
+      "title": "Hatwise Choice - Archive Recordings 1973-1975, Volume 1",
+      "local_path": "album7bf9.html",
+      "year": 1973,
+      "rating": 4.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Hattitude",
+      "local_path": "album5477.html",
+      "year": 2006,
+      "rating": 4.07,
+      "type": "Compilation"
+    },
+    {
+      "title": "Let's Eat (Real Soon)",
+      "local_path": "album862f.html",
+      "year": 1974,
+      "rating": 4.12,
+      "type": "EP/Single"
+    },
+    {
+      "title": "John Peel Session (12th January 1973)",
+      "local_path": "album0558.html",
+      "year": 1973,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "BBC Langham Studios",
+      "local_path": "album4c64-2.html",
+      "year": 2023,
+      "rating": 0.0,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T00:16:04.694857"
+}

@@ -3,7 +3,7 @@ from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtTest import QTest
 from albumexplore.database import models
-from albumexplore.visualization.views import ChordView, NetworkView, ArcView
+from albumexplore.visualization.views import ChordView, EnhancedNetworkView, ArcView
 from albumexplore.visualization.models import VisualNode, VisualEdge
 
 @pytest.fixture
@@ -59,7 +59,7 @@ def test_chord_view_rendering(qtbot, sample_data):
 
 def test_network_view_rendering(qtbot, sample_data):
     albums = sample_data["albums"]
-    view = NetworkView()
+    view = EnhancedNetworkView()
     view.resize(800, 600)
     view.update_data({"albums": albums})
     
@@ -81,7 +81,7 @@ def test_arc_view_rendering(qtbot, sample_data):
 
 def test_view_interactions(qtbot, sample_data):
     albums = sample_data["albums"]
-    view = NetworkView()
+    view = EnhancedNetworkView()
     view.resize(800, 600)
     view.update_data({"albums": albums})
     
@@ -97,7 +97,7 @@ def test_view_interactions(qtbot, sample_data):
 
 def test_view_state_persistence(qtbot, sample_data):
     albums = sample_data["albums"]
-    view = NetworkView()
+    view = EnhancedNetworkView()
     view.update_data({"albums": albums})
     
     # Test state saving and loading

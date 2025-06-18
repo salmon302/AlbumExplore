@@ -1,0 +1,486 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist62d8.html",
+  "name": "MIKE OLDFIELD",
+  "genre": "Crossover Prog",
+  "country": "United Kingdom",
+  "biography": "Michael Gordon Oldfield\n\n- Born 15 May 1953 (Reading, Berkshire, England)\n\nMike OLDFIELD took up the guitar at seven and was composing instrumental pieces by age 10. With his sister Sally, he secured a record deal under the name SALLYANGIE and released the folkish album \"Children of the Sun\" in 1968. He then landed a position playing first bass and later guitar with WHOLE WORLD, led by ex-SOFT MACHINE co-founder Kevin Ayers. During the next few years he also served as a studio musician at Abbey Road, where he experimented with a wide range of instruments. He gradually built up a home studio and began working on a large-scale project, playing all of the parts himself. This was the prototype for \"Tubular Bells\", but OLDFIELD had no success generating label interest until he met with future Virgin Records founders Simon Draper and Richard Branson. They loved his ideas and gave him plenty of freedom to record in their state-of-the-art The Manor studio, and ended up releasing \"Tubular Bells\" on their brand new label when no other record company showed interest. The record shot to first place in the UK and elsewhere, attracting the attention of director William Friedkin, whose use of the intro segment in \"The Exorcist\" generated widespread recognition (OLDFIELD was not pleased by the association, however).\n\nRetreating from his newfound celebrity, OLDFIELD recorded several more critically acclaimed albums, similar in scope and approach but constantly developing new instrumental and compositional skills. In 1979 his single \"Guilty\" showed that shorter vocal-based pieces and more recent music styles were beginning to creep into his work; he also returned to touring in 1979 after undergoing therapy to combat his reclusive, solitary tendencies. His work in the 80s included such far-ranging releases as \"Crises\" (including vocals by Jon ANDERSON), the soundtrack to the film \"The Killing Fields\", and a song called \"Family Man\" which became a hit for HALL & OATES. Known for consistently offering a visual spectacular in his live performances, he also developed an interest in video artistry, including a video album called \"Wind Chimes\". The 90s saw a return to longer symphonic-style works, including \"Amarok\" and \"Tubular Bells II\", for which he departed the increasingly commercial Virgin Records for the smaller WEA label. His \"Songs of Distant Earth\" album was the first CD ever to include CD-ROM content, as well as album notes by legendary sci-fi author Arthur C. Clarke. \"Voyager\" showed his appreciation for Celtic folk influences, and he plays tribute to his first musical love on \"Guitars\". The huge surge of appreciation for electronic music from the 90s dance community led to renewed interest in OLDFIELD's work, and the third instalment of the \"Tubular Bells\" series shows a definite influence from the house music culture that surrounds his new home in Ibiza.\n\nMulti- instrumentalist, visual performance pioneer, symphonic rock master - all of these apply to the prodigious career of Mike OLDFIELD.\n\n: : : James Lee, USA : : :",
+  "albums": [
+    {
+      "title": "Platinum",
+      "local_path": "album683c.html",
+      "year": 1979,
+      "rating": 3.17,
+      "type": "Studio Album"
+    },
+    {
+      "title": "QE2",
+      "local_path": "album0769.html",
+      "year": 1980,
+      "rating": 3.51,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Five Miles Out",
+      "local_path": "albumecec.html",
+      "year": 1982,
+      "rating": 3.69,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Crises",
+      "local_path": "album8865.html",
+      "year": 1983,
+      "rating": 3.52,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Discovery",
+      "local_path": "album21ab.html",
+      "year": 1984,
+      "rating": 2.83,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Killing Fields",
+      "local_path": "albume4f1.html",
+      "year": 1984,
+      "rating": 2.72,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Islands",
+      "local_path": "album244a.html",
+      "year": 1987,
+      "rating": 2.63,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Earth Moving",
+      "local_path": "albuma00b.html",
+      "year": 1989,
+      "rating": 2.11,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Amarok",
+      "local_path": "album5228.html",
+      "year": 1990,
+      "rating": 4.03,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Heaven's Open",
+      "local_path": "album8ae9.html",
+      "year": 1991,
+      "rating": 2.5,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Tubular Bells II",
+      "local_path": "albumc919.html",
+      "year": 1992,
+      "rating": 3.6,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Songs Of Distant Earth",
+      "local_path": "album042e.html",
+      "year": 1994,
+      "rating": 3.73,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Voyager",
+      "local_path": "albuma227.html",
+      "year": 1996,
+      "rating": 3.11,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Tubular Bells III",
+      "local_path": "albuma341.html",
+      "year": 1998,
+      "rating": 3.36,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Guitars",
+      "local_path": "albuma40d.html",
+      "year": 1999,
+      "rating": 2.97,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Millenium Bell",
+      "local_path": "albumab0c.html",
+      "year": 1999,
+      "rating": 2.33,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Tr3s Lunas",
+      "local_path": "album1cc1.html",
+      "year": 2002,
+      "rating": 2.48,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Tubular Bells 2003",
+      "local_path": "album7b3f.html",
+      "year": 2003,
+      "rating": 3.76,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Light + Shade",
+      "local_path": "album965f.html",
+      "year": 2005,
+      "rating": 2.76,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Music of the Spheres",
+      "local_path": "albumb8f1.html",
+      "year": 2008,
+      "rating": 3.05,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Man on the Rocks",
+      "local_path": "album9397.html",
+      "year": 2014,
+      "rating": 3.16,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Return to Ommadawn",
+      "local_path": "albumec06.html",
+      "year": 2017,
+      "rating": 4.07,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Orchestral Tubular Bells",
+      "local_path": "album8a58.html",
+      "year": 1975,
+      "rating": 2.55,
+      "type": "Live Album"
+    },
+    {
+      "title": "Exposed",
+      "local_path": "albumb3ba.html",
+      "year": 1979,
+      "rating": 3.91,
+      "type": "Live Album"
+    },
+    {
+      "title": "Dark Star - Live American Radio Broadcast",
+      "local_path": "album876b-2.html",
+      "year": 2021,
+      "rating": 2.5,
+      "type": "Live Album"
+    },
+    {
+      "title": "Exposed",
+      "local_path": "album29e4.html",
+      "year": 2005,
+      "rating": 3.9,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Live At Montreux 1981",
+      "local_path": "album7bf4.html",
+      "year": 1981,
+      "rating": 4.49,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "The Complete Mike Oldfield",
+      "local_path": "album656c.html",
+      "year": 1985,
+      "rating": 3.73,
+      "type": "Compilation"
+    },
+    {
+      "title": "Collector's Edition Box I",
+      "local_path": "albumf53a.html",
+      "year": 1990,
+      "rating": 3.43,
+      "type": "Compilation"
+    },
+    {
+      "title": "Collector's Edition Box II",
+      "local_path": "album0d8d.html",
+      "year": 1990,
+      "rating": 3.26,
+      "type": "Compilation"
+    },
+    {
+      "title": "Elements: The Best of Mike Oldfield",
+      "local_path": "albumbd90-2.html",
+      "year": 1993,
+      "rating": 2.64,
+      "type": "Compilation"
+    },
+    {
+      "title": "Elements: 1973-1991",
+      "local_path": "album7e08.html",
+      "year": 1973,
+      "rating": 3.01,
+      "type": "Compilation"
+    },
+    {
+      "title": "XXV - The Essential Mike Oldfield",
+      "local_path": "albumd1ec-3.html",
+      "year": 1997,
+      "rating": 2.66,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Best Of Tubular Bells",
+      "local_path": "albumbf04-2.html",
+      "year": 2001,
+      "rating": 2.1,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Mike Oldfield Collection",
+      "local_path": "album99e6.html",
+      "year": 2002,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Complete Tubular Bells",
+      "local_path": "album28c7-2.html",
+      "year": 2003,
+      "rating": 2.75,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Platinum Collection",
+      "local_path": "album269e-2.html",
+      "year": 2006,
+      "rating": 2.6,
+      "type": "Compilation"
+    },
+    {
+      "title": "Two Sides: The Very Best of Mike Oldfield",
+      "local_path": "album5737-3.html",
+      "year": 2012,
+      "rating": 4.14,
+      "type": "Compilation"
+    },
+    {
+      "title": "Tubular Beats",
+      "local_path": "albumca17.html",
+      "year": 2013,
+      "rating": 2.54,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Studio Albums: 1992-2003",
+      "local_path": "albumb1bf.html",
+      "year": 1992,
+      "rating": 4.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Best Of: 1992-2003",
+      "local_path": "album00ca.html",
+      "year": 1992,
+      "rating": 3.25,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Space Movie",
+      "local_path": "album287d.html",
+      "year": 2015,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "The 1984 Suite",
+      "local_path": "album1c3d.html",
+      "year": 1984,
+      "rating": 3.5,
+      "type": "Compilation"
+    },
+    {
+      "title": "Tubular Bells (50th Anniversary Edition)",
+      "local_path": "albumdcff.html",
+      "year": 2023,
+      "rating": 4.09,
+      "type": "Compilation"
+    },
+    {
+      "title": "Portsmouth",
+      "local_path": "album29e3.html",
+      "year": 1976,
+      "rating": 3.29,
+      "type": "EP/Single"
+    },
+    {
+      "title": "William Tell Overture",
+      "local_path": "album2824.html",
+      "year": 1976,
+      "rating": 3.89,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Cuckoo Song",
+      "local_path": "album67d8.html",
+      "year": 1977,
+      "rating": 3.96,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Take 4",
+      "local_path": "album0e7f.html",
+      "year": 1978,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Guilty",
+      "local_path": "albumad8e.html",
+      "year": 1979,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Blue Peter",
+      "local_path": "album82d2.html",
+      "year": 1979,
+      "rating": 3.89,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Extract From Tubular Bells (live)",
+      "local_path": "albuma6a1.html",
+      "year": 1979,
+      "rating": 3.6,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Arrival",
+      "local_path": "album7d8e.html",
+      "year": 1980,
+      "rating": 3.71,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Wonderful Land",
+      "local_path": "albumb28f.html",
+      "year": 1981,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Singles",
+      "local_path": "albumd162.html",
+      "year": 1981,
+      "rating": 5.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Five Miles Out",
+      "local_path": "album6f2e.html",
+      "year": 1982,
+      "rating": 3.91,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Family Man",
+      "local_path": "album9126.html",
+      "year": 1982,
+      "rating": 3.5,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Mistake",
+      "local_path": "album0539.html",
+      "year": 1982,
+      "rating": 2.45,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Crime of Passion",
+      "local_path": "albumb209.html",
+      "year": 1983,
+      "rating": 3.24,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Moonlight Shadow",
+      "local_path": "album35e8.html",
+      "year": 1983,
+      "rating": 3.44,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Shadow on the Wall",
+      "local_path": "album0978.html",
+      "year": 1983,
+      "rating": 3.39,
+      "type": "EP/Single"
+    },
+    {
+      "title": "To France",
+      "local_path": "album29c9.html",
+      "year": 1984,
+      "rating": 3.88,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Pictures in the Dark",
+      "local_path": "albumba51.html",
+      "year": 1985,
+      "rating": 3.86,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Shine",
+      "local_path": "album4fc5.html",
+      "year": 1986,
+      "rating": 3.42,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Innocent",
+      "local_path": "album32e7.html",
+      "year": 1989,
+      "rating": 1.64,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Tattoo",
+      "local_path": "albumece0.html",
+      "year": 1992,
+      "rating": 3.08,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Man In The Rain",
+      "local_path": "album27d1.html",
+      "year": 1998,
+      "rating": 3.29,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Far Above The Clouds CD 1",
+      "local_path": "album1ffa.html",
+      "year": 1999,
+      "rating": 3.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Far Above The Clouds CD 2",
+      "local_path": "albume66d.html",
+      "year": 1999,
+      "rating": 2.5,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T00:14:25.645137"
+}

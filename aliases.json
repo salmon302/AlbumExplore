@@ -1,0 +1,18 @@
+{
+    "alternative": "alt",
+    "atmospheric": "atmo",
+    "a capella": "acapella",
+    "r&b": "rnb",
+    "hip hop": "hiphop",
+    "black metal": "blackmetal",
+    "death metal": "deathmetal",
+    "doom metal": "doommetal",
+    "nu-metal": "numetal",
+    "post-rock": "postrock",
+    "post-punk": "postpunk",
+    "post-hardcore": "posthardcore",
+    "post-metal": "postmetal",
+    "math rock": "mathrock",
+    "singer-songwriter": "singersongwriter",
+    "electronic dance music": "edm"
+}

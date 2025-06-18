@@ -12,6 +12,7 @@ class TagAnalyzer:
 		self.tag_clusters: Dict[str, List[str]] = {}
 		self.graph = nx.Graph()
 		self.normalizer = TagNormalizer()
+		self.enhanced_consolidator = None  # Will be set after initialization
 		self._initialize()
 
 	def _initialize(self):
@@ -28,6 +29,33 @@ class TagAnalyzer:
 		# Build initial graph with frequency weights
 		for tag, freq in self.tag_frequencies.items():
 			self.graph.add_node(tag, frequency=freq)
+
+	def set_enhanced_consolidator(self, consolidator):
+		"""Set the enhanced consolidator for advanced analysis."""
+		self.enhanced_consolidator = consolidator
+		# Update normalizer to work with consolidator
+		if hasattr(self.normalizer, 'set_consolidator'):
+			self.normalizer.set_consolidator(consolidator)
+
+	def get_consolidated_analysis(self) -> Dict:
+		"""Get comprehensive tag analysis with enhanced consolidation."""
+		if not self.enhanced_consolidator:
+			# Import here to avoid circular dependency
+			from .enhanced_tag_consolidator import EnhancedTagConsolidator
+			self.enhanced_consolidator = EnhancedTagConsolidator(self)
+		
+		categorized = self.enhanced_consolidator.categorize_and_consolidate()
+		hierarchies = self.enhanced_consolidator.build_enhanced_hierarchies()
+		suggestions = self.enhanced_consolidator.suggest_consolidations()
+		
+		return {
+			'categorized': categorized,
+			'hierarchies': hierarchies,
+			'suggestions': suggestions,
+			'original_count': len(self.tag_frequencies),
+			'consolidated_count': sum(len(tags) for tags in categorized.values()),
+			'reduction_percentage': ((len(self.tag_frequencies) - sum(len(tags) for tags in categorized.values())) / len(self.tag_frequencies)) * 100
+		}
 
 	def analyze_tags(self) -> Dict[str, Dict]:
 		"""Analyze tags and return comprehensive statistics."""
@@ -50,6 +78,12 @@ class TagAnalyzer:
 			'bridge_tags': sorted(betweenness.items(), key=lambda x: x[1], reverse=True)[:5],
 			'hierarchies': hierarchies
 		}
+		
+		# Add enhanced analysis if available
+		if self.enhanced_consolidator:
+			enhanced_stats = self.get_consolidated_analysis()
+			stats['enhanced'] = enhanced_stats
+		
 		return stats
 
 	def calculate_relationships(self) -> Dict[Tuple[str, str], float]:

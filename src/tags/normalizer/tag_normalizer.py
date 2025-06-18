@@ -64,7 +64,33 @@ class TagNormalizer:
 	def __init__(self):
 		self.known_tags: Set[str] = set()
 		self.tag_aliases: Dict[str, str] = {}
+		self.consolidator = None  # Enhanced consolidator reference
 		self._initialize_known_tags()
+
+	def set_consolidator(self, consolidator):
+		"""Set the enhanced consolidator for advanced normalization."""
+		self.consolidator = consolidator
+
+	def normalize_with_categorization(self, tag: str):
+		"""Normalize tag and return category information if consolidator is available."""
+		normalized_tag = self.normalize(tag)
+		
+		if self.consolidator:
+			# Try to get category from consolidator
+			for rule in self.consolidator.consolidation_rules:
+				if re.search(rule.pattern, tag, re.IGNORECASE):
+					if rule.filter_out:
+						return None, rule.category  # Filtered out tag
+					elif rule.primary_tag:
+						return rule.primary_tag, rule.category
+					else:
+						return normalized_tag, rule.category
+			
+			# Fallback to heuristic categorization
+			category = self.consolidator._heuristic_categorization(normalized_tag)
+			return normalized_tag, category
+		
+		return normalized_tag, None
 
 	def _initialize_known_tags(self):
 		"""Initialize set of known valid tags."""

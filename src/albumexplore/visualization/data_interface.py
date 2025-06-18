@@ -66,20 +66,28 @@ class DataInterface:
         # Create node
         # DEBUG: Log the original album.release_year
         from albumexplore.gui.gui_logging import graphics_logger # Temporary import for logging
-        graphics_logger.debug(f"DataInterface: Creating node for album '{album.title}', release_year: {album.release_year} (type: {type(album.release_year)})")
+        graphics_logger.debug(f"DataInterface: Creating/getting node for album '{album.title}'. DB album.release_year: {album.release_year} (type: {type(album.release_year)})")
+
+        # Ensure year is an integer
+        year = album.release_year
+        if not isinstance(year, int) and album.release_date:
+            try:
+                year = album.release_date.year
+            except AttributeError:
+                year = None # Or some default
 
         node = VisualNode(
             id=str(album.id),
-            label=f"{album.artist} - {album.title}",
+            label=f"{album.pa_artist_name_on_album} - {album.title}",
             size=10.0 + len(tags),
             color="#4287f5",  # Default blue
             data={
-                'artist': album.artist,
+                'artist': album.pa_artist_name_on_album,
                 'title': album.title,
-                'year': album.release_year,
+                'year': year,
                 'genre': album.genre,
                 'country': album.country,
-                'tags': list(tags),
+                'raw_tags': album.raw_tags or album.genre, # Use raw_tags and fallback to genre
                 'type': 'row'  # Indicate this is a table row
             }
         )

@@ -1,0 +1,339 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist1ce3.html",
+  "name": "KANSAS",
+  "genre": "Symphonic Prog",
+  "country": "United States",
+  "biography": "Founded in Topeka, Kansas, USA in 1970 - Continued activity with different line-ups - Still active as of 2017\n\nOriginal members\n\nKerry LIVGREN\n\n(guitar) and Phil EHART (drums) combined their two separate bands into one large band. Kerry's band was called SARATOGA, and Phil's was called WHITE CLOVER. The band changed its name to KANSAS. They were from the beginning just an ordinary rock band, but were quickly compared to other progressive bands in the 70's like GENESIS, YES and KING CRIMSON. Combining the musical complexities of British prog-rock with the soul and instrumentation of the American heartland, KANSAS became one of the biggest selling and most successful touring acts of the 1970s. With huge hits like \"Carry On Wayward Son\" and \"Dust In The Wind\", they helped define the sound of \"classic rock\". They are loved all over the world.\n\nI- THE 1970s\n\nThe Early Days: Their self-titled debut album was released in 1974, but nationwide response was slow. Their second album, \"Song For America\", saw a softening of KANSAS' sound, with more classical influences evident. The third album, \"Masque\", featured more pop songs and lyrically quite dark. They suffered ridicule from people around the world, because they wore overalls and had a violonist, which made people think that they were a country music group.\n\nThe Best of Times: \"Leftoverture\", with the popular single \"Carry On Wayward Son\", became a signature piece and pushed the album to platinum success. The followup, \"Point Of Know Return\" (1977) contained the ever-popular acoustic \"Dust In The Wind\". During their tour, they recorded their first live album, \"Two For The Show\" (1978) and the next studio album \"Monolith\" (1979).\n\nII- THE 1980s\n\nSeeds Of Change: A year later, the band followed up with \"Audio Visions\", the last production of the original band lineup. WALSH left the band due to creative differences. \"Vinyl Confessions\" had Christian lyrical content. The next album, \"Drastic Measures\" (1983), had some hard rock material on it, including the song \"Mainstream\". In 1984, the band released a greatest hits compilation, \"The Best Of Kansas\", which featured one new song, \"Perfect Lover\".\n\nThe Second Generation: The group split in 1983, only to reform in 1986 with the albums \"Power\" and with \"The Spirit Of Things\" (1988). Sales of these two albums were not very strong. Thus, the second generation of KANSAS had come to an abrupt end.\n\nIII- THE 1990s: The Third Generation\n\nThe new lineup released their second live album, \"Live At The Whiskey\", and featured live renditions of their classics. In 1995, the \"Freak Of Nature\" album featured some powerful new studio tracks. \"Always Never The Same\" featured old classics and new material, done with the London Symphony Orchestra.\n\nIV- The 2000s\n\nSeeing the return of founder singer/songwriter Kerry LIVGREN, \"Somewhere To Elsewhere\" was released in the summer of 2000. \"Early Recordings From Kansas 1971-1973\" is a true gem. Another live album, titled \"Device Voice Drum\", is different from their earlier live albums.\n\nSee also:\n\nPROTO-KAW",
+  "albums": [
+    {
+      "title": "Point of Know Return",
+      "local_path": "album4386.html",
+      "year": 1977,
+      "rating": 4.18,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Monolith",
+      "local_path": "album947d.html",
+      "year": 1979,
+      "rating": 3.26,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Audio-Visions",
+      "local_path": "albumc0ef.html",
+      "year": 1980,
+      "rating": 3.08,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Vinyl Confessions",
+      "local_path": "album0d79.html",
+      "year": 1982,
+      "rating": 2.81,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Drastic Measures",
+      "local_path": "album0f30.html",
+      "year": 1983,
+      "rating": 2.21,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Power",
+      "local_path": "album1fd8.html",
+      "year": 1986,
+      "rating": 2.7,
+      "type": "Studio Album"
+    },
+    {
+      "title": "In The Spirit Of Things",
+      "local_path": "album1c03.html",
+      "year": 1988,
+      "rating": 2.83,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Freaks Of Nature",
+      "local_path": "album9450.html",
+      "year": 1995,
+      "rating": 3.21,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Always Never The Same",
+      "local_path": "album9328.html",
+      "year": 1998,
+      "rating": 3.36,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Somewhere to Elsewhere",
+      "local_path": "album4306.html",
+      "year": 2000,
+      "rating": 3.48,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Prelude Implicit",
+      "local_path": "album9547.html",
+      "year": 2016,
+      "rating": 3.8,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Absence of Presence",
+      "local_path": "album3080.html",
+      "year": 2020,
+      "rating": 3.73,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Device, Voice, Drum",
+      "local_path": "albumb940.html",
+      "year": 2002,
+      "rating": 4.04,
+      "type": "Live Album"
+    },
+    {
+      "title": "Dust In The Wind",
+      "local_path": "album23b1.html",
+      "year": 2002,
+      "rating": 2.29,
+      "type": "Live Album"
+    },
+    {
+      "title": "Greatest Hits Live (Kansas)",
+      "local_path": "album5492.html",
+      "year": 2003,
+      "rating": 2.18,
+      "type": "Live Album"
+    },
+    {
+      "title": "From The Front Row...Live!",
+      "local_path": "albumb271.html",
+      "year": 2003,
+      "rating": 1.7,
+      "type": "Live Album"
+    },
+    {
+      "title": "There's Know Place Like Home",
+      "local_path": "albumffc6.html",
+      "year": 2009,
+      "rating": 4.19,
+      "type": "Live Album"
+    },
+    {
+      "title": "Bryn Mawr 1976",
+      "local_path": "album62f5.html",
+      "year": 1976,
+      "rating": 4.22,
+      "type": "Live Album"
+    },
+    {
+      "title": "Carry on for no Return",
+      "local_path": "albumd03b.html",
+      "year": 2016,
+      "rating": 2.72,
+      "type": "Live Album"
+    },
+    {
+      "title": "Leftoverture Live & Beyond",
+      "local_path": "albumce5d.html",
+      "year": 2017,
+      "rating": 4.55,
+      "type": "Live Album"
+    },
+    {
+      "title": "Point of Know Return Live & Beyond",
+      "local_path": "album7138.html",
+      "year": 2021,
+      "rating": 4.47,
+      "type": "Live Album"
+    },
+    {
+      "title": "Carry On - Cincinnati '95 Syndicated Broadcast",
+      "local_path": "album34c4.html",
+      "year": 2023,
+      "rating": 3.0,
+      "type": "Live Album"
+    },
+    {
+      "title": "Best of Kansas Live (VHS) [Aka: Live Confessions DVD]",
+      "local_path": "album9baf.html",
+      "year": 1982,
+      "rating": 3.25,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Device - Voice - Drum (DVD)",
+      "local_path": "album8b40.html",
+      "year": 2002,
+      "rating": 4.21,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "There\ufffds Know Place Like Home (DVD)",
+      "local_path": "album7bca.html",
+      "year": 2009,
+      "rating": 4.58,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Miracles Out Of Nowhere",
+      "local_path": "album4b1b-2.html",
+      "year": 2015,
+      "rating": 4.17,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Extended Versions",
+      "local_path": "albumd786.html",
+      "year": 2000,
+      "rating": 1.35,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Ultimate Kansas",
+      "local_path": "albumf7fe.html",
+      "year": 2002,
+      "rating": 3.94,
+      "type": "Compilation"
+    },
+    {
+      "title": "Closet Chronicles - The Best of Kansas",
+      "local_path": "album3903.html",
+      "year": 2003,
+      "rating": 4.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Dust In The Wind",
+      "local_path": "album3ac7.html",
+      "year": 2004,
+      "rating": 4.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Sail On: The 30th Anniversary Collection 1974-2004",
+      "local_path": "albumb327.html",
+      "year": 1974,
+      "rating": 4.17,
+      "type": "Compilation"
+    },
+    {
+      "title": "On The Other Side",
+      "local_path": "album5a67.html",
+      "year": 2005,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Works In Progress",
+      "local_path": "album742c.html",
+      "year": 2006,
+      "rating": 2.59,
+      "type": "Compilation"
+    },
+    {
+      "title": "Original Album Classics",
+      "local_path": "album34e2.html",
+      "year": 2009,
+      "rating": 4.42,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Music of Kansas",
+      "local_path": "album9af9.html",
+      "year": 2010,
+      "rating": 3.62,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Classic Albums Collection 1974-1983",
+      "local_path": "albumb73e.html",
+      "year": 1974,
+      "rating": 4.37,
+      "type": "Compilation"
+    },
+    {
+      "title": "Another Fork in the Road - 50 Years of Kansas",
+      "local_path": "albumecf6.html",
+      "year": 2022,
+      "rating": 3.33,
+      "type": "Compilation"
+    },
+    {
+      "title": "Dust in the Wind",
+      "local_path": "album7f13.html",
+      "year": 1978,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "People Of The Southwind",
+      "local_path": "album2325.html",
+      "year": 1979,
+      "rating": 2.35,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Hold On",
+      "local_path": "albumda61.html",
+      "year": 1980,
+      "rating": 3.19,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Play The Game Tonight",
+      "local_path": "albumba7f-2.html",
+      "year": 1982,
+      "rating": 3.86,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Right Away",
+      "local_path": "album3557.html",
+      "year": 1982,
+      "rating": 3.17,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Fight Fire With Fire",
+      "local_path": "album565d.html",
+      "year": 1983,
+      "rating": 3.33,
+      "type": "EP/Single"
+    },
+    {
+      "title": "All I Wanted",
+      "local_path": "album3ece-2.html",
+      "year": 1986,
+      "rating": 2.33,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Power",
+      "local_path": "album03eb.html",
+      "year": 1987,
+      "rating": 3.15,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Stand Beside Me",
+      "local_path": "album0d6e.html",
+      "year": 1988,
+      "rating": 1.61,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Light",
+      "local_path": "album18e4-2.html",
+      "year": 2001,
+      "rating": 3.0,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-17T12:21:09.354951"
+}

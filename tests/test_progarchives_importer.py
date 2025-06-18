@@ -7,11 +7,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from albumexplore.data.importers.progarchives_importer import ProgArchivesImporter
-from albumexplore.data.models.album import Album
-from albumexplore.data.models.artist import Artist
-from albumexplore.data.models.track import Track
-from albumexplore.data.models.review import Review
-from albumexplore.data.models.tag import Tag
+from albumexplore.database.models import Album # Corrected import
+from albumexplore.database.models import Artist # Corrected import
+from albumexplore.database.models import Track # Corrected import
+from albumexplore.database.models import Review # Corrected import
+from albumexplore.database.models import Tag # Corrected import
 
 @pytest.fixture
 def sample_album_data():
@@ -69,7 +69,7 @@ def db_session():
     Session = sessionmaker(bind=engine)
     
     # Create all tables
-    from albumexplore.data.models.base import Base
+    from albumexplore.database.models import Base # Changed import path
     Base.metadata.create_all(engine)
     
     return Session()
@@ -77,7 +77,11 @@ def db_session():
 @pytest.fixture
 def importer(db_session):
     """Create importer with mocked scraper."""
-    return ProgArchivesImporter(db_session)
+    # Provide a dummy path for local_data_root if required by ProgArchivesScraper
+    # or ensure ProgArchivesScraper handles None appropriately.
+    # For testing, it might be better to mock ProgArchivesScraper itself if its
+    # initialization is complex or has external dependencies.
+    return ProgArchivesImporter(db_session, local_data_root=Path("dummy_data_root"))
 
 def test_import_new_album(importer, sample_album_data, db_session):
     """Test importing a new album."""

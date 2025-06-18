@@ -8,6 +8,7 @@ from PyQt6.QtGui import QStandardItemModel, QStandardItem, QColor, QPainter, QFo
 from typing import Dict, Any, Set, List, Optional
 from collections import Counter, defaultdict
 import pandas as pd # Added pandas import
+import re # Added re import
 
 from .base_view import BaseView
 from ..state import ViewType, ViewState
@@ -269,51 +270,70 @@ class TagExplorerView(BaseView):
         self.setUpdatesEnabled(True)  # Re-enable updates
     
     def _process_selection(self):
-        """Placeholder for processing pending selections."""
-        graphics_logger.info("TagExplorerView._process_selection called (placeholder)")
-        # Actual implementation will process self._pending_selection
-        pass
+        self.apply_tag_filters()
 
     def _reprocess_base_tag_data(self):
         """
-        Repopulate raw_tag_counts and tag_counts (and normalized_mapping)
-        from album_nodes_original based on the current normalization state.
-        self.tag_counts will hold tags ready for display and filtering.
+        Recalculates tag counts and mappings from the original album node data.
+        This should be called when normalization settings change or data is first loaded.
         """
         self.raw_tag_counts.clear()
         self.tag_counts.clear()
         self.normalized_mapping.clear()
 
-        is_normalization_active = self.tag_normalizer.is_active()
+        graphics_logger.info(f"TagExplorerView: Processing {len(self.album_nodes_original)} album nodes for tags")
 
-        for node in self.album_nodes_original:
-            raw_tags_from_node = node.get("tags", [])
-
-            for raw_tag in raw_tags_from_node:
-                if not raw_tag:  # Skip empty raw tags
-                    continue
+        # First, gather all raw tags from all original albums
+        for i, album_node in enumerate(self.album_nodes_original):
+            # Fallback to 'genre' if 'raw_tags' is not present
+            raw_tags_str = album_node.get('raw_tags') or album_node.get('genre', '')
+            
+            # Debug log for first few albums
+            if i < 5:
+                album_title = album_node.get('title', 'Unknown')
+                graphics_logger.info(f"TagExplorerView: Album {i} '{album_title}': raw_tags_str='{raw_tags_str}'")
+            
+            if raw_tags_str:
+                # Split tags by common delimiters like comma or semicolon
+                tags = [tag.strip() for tag in re.split(r'[;,]', raw_tags_str) if tag.strip()]
                 
-                self.raw_tag_counts[raw_tag] += 1
+                # Debug log for first few albums with tags
+                if i < 5 and tags:
+                    graphics_logger.info(f"TagExplorerView: Album {i} processed tags: {tags}")
                 
-                processed_tag_for_display_and_filtering = ""
-                if is_normalization_active:
-                    normalized_tag = self.tag_normalizer.normalize(raw_tag)
-                    if normalized_tag:
-                        processed_tag_for_display_and_filtering = normalized_tag
-                        self.normalized_mapping[raw_tag] = normalized_tag
-                    # If normalization results in an empty tag, it's effectively filtered out here for self.tag_counts
-                else: # Normalization is not active, use the "cleaned" raw tag
-                    cleaned_raw_tag = self.tag_normalizer.normalize(raw_tag) # normalizer.normalize also cleans when inactive
-                    if cleaned_raw_tag:
-                        processed_tag_for_display_and_filtering = cleaned_raw_tag
-                
-                if processed_tag_for_display_and_filtering:
-                    self.tag_counts[processed_tag_for_display_and_filtering] += 1
+                for tag in tags:
+                    self.raw_tag_counts[tag] += 1
         
-        graphics_logger.debug(f"Reprocessed base tag data. Raw tags: {len(self.raw_tag_counts)}, Processed tags for display: {len(self.tag_counts)}")
+        # Now, process tags based on whether normalization is active
+        if self.normalize_checkbox.isChecked():
+            # If normalizing, we use the TagNormalizer
+            for raw_tag, count in self.raw_tag_counts.items():
+                normalized_tag = self.tag_normalizer.normalize(raw_tag)
+                if normalized_tag:
+                    self.tag_counts[normalized_tag] += count
+                    self.normalized_mapping[raw_tag] = normalized_tag
+        else:
+            # If not normalizing, the processed tags are the same as the raw tags
+            self.tag_counts = self.raw_tag_counts.copy()
+            for tag in self.raw_tag_counts.keys():
+                self.normalized_mapping[tag] = tag
+
+        # Update single instance tags after reprocessing
+        if self.tag_analyzer:
+            self.single_instance_tags = self.tag_analyzer.find_single_instance_tags(self.tag_counts)
+        else:
+            self.single_instance_tags = {tag for tag, count in self.tag_counts.items() if count == 1}
+
+        # Log summary after processing
+        graphics_logger.info(f"TagExplorerView: Processed tags summary - Raw tags: {len(self.raw_tag_counts)}, Processed tags: {len(self.tag_counts)}")
+        
+        # After reprocessing, we should re-apply filters and update views
+        self.apply_tag_filters()
 
     def apply_tag_filters(self):
-        """Apply current tag filters to the album list and update views."""
+        """
+        Filters albums based on the current tag filters and updates the view.
+        """
         self.setUpdatesEnabled(False)
         graphics_logger.debug(f"Applying tag filters. Normalization active: {self.tag_normalizer.is_active()}")
         graphics_logger.debug(f"Current tag_filters: {self.tag_filters}")
@@ -328,7 +348,12 @@ class TagExplorerView(BaseView):
         is_normalization_active = self.tag_normalizer.is_active()
         
         for node in self.album_nodes_original: # Iterate over the original stored nodes
-            node_raw_tags = node.get("tags", [])
+            # Get raw tags from the node data - same logic as _reprocess_base_tag_data
+            raw_tags_str = node.get('raw_tags') or node.get('genre', '')
+            node_raw_tags = []
+            if raw_tags_str:
+                # Split tags by common delimiters like comma or semicolon
+                node_raw_tags = [tag.strip() for tag in re.split(r'[;,]', raw_tags_str) if tag.strip()]
             
             # Determine the set of processed tags for the current node, based on normalization state
             current_node_processed_tags = []
@@ -426,8 +451,28 @@ class TagExplorerView(BaseView):
 
             artist = album_node.get('artist', '')
             album_title = album_node.get('album', album_node.get('title', '')) 
-            year_val = album_node.get('year', '')
-            year_str = str(year_val)
+            
+            # +++ Add this debugging block +++
+            if album_title == "Every Dawn's a Mountain": # Pick an album that shows a blank year
+                graphics_logger.debug(f"DEBUG_NODE for '{album_title}': {album_node}")
+            # +++++++++++++++++++++++++++++++
+            
+            # Get year value, preferring 'release_year' (matching DB model), then 'year'
+            year_value_from_node = album_node.get('release_year')
+            if year_value_from_node is None: # Handles if key 'release_year' doesn't exist or its value is None
+                year_value_from_node = album_node.get('year') # Fallback to 'year'
+
+            year_display_string = ""
+            year_sort_integer = None
+
+            if year_value_from_node is not None and str(year_value_from_node).strip() != "":
+                year_display_string = str(year_value_from_node)
+                try:
+                    # Attempt to convert to float first for robustness (e.g., "2020.0"), then to int
+                    year_sort_integer = int(float(year_value_from_node))
+                except (ValueError, TypeError):
+                    # If it can't be an int, don't set sort data. Log for debugging.
+                    graphics_logger.debug(f"Could not convert year '{year_value_from_node}' to int for sorting for album '{album_title}'")
             
             tags_list = album_node.get('tags', [])
             if isinstance(tags_list, list):
@@ -438,13 +483,11 @@ class TagExplorerView(BaseView):
             self.album_table.setItem(row_position, 0, QTableWidgetItem(artist))
             self.album_table.setItem(row_position, 1, QTableWidgetItem(album_title))
             
-            year_item = QTableWidgetItem(year_str)
-            # Attempt to set UserRole for potential numeric sorting if album_table uses SortableTableWidgetItem for year
-            try:
-                if year_val != '': # Avoid converting empty string
-                    year_item.setData(Qt.ItemDataRole.UserRole, int(year_val))
-            except (ValueError, TypeError):
-                pass # Keep as text if not convertible to int
+            year_item = QTableWidgetItem(year_display_string)
+            if year_sort_integer is not None:
+                # Ensure SortableTableWidgetItem is used if custom sorting logic for year is desired beyond simple int.
+                # For now, assuming QTableWidgetItem and relying on UserRole for QTableWidget's native sort.
+                year_item.setData(Qt.ItemDataRole.UserRole, year_sort_integer)
             self.album_table.setItem(row_position, 2, year_item)
             
             self.album_table.setItem(row_position, 3, QTableWidgetItem(tags_str))
@@ -555,83 +598,131 @@ class TagExplorerView(BaseView):
         graphics_logger.info("All tag filters cleared.")
 
     def _handle_tag_search(self):
-        search_term_original = self.tag_search_input.text().strip()
-        if not search_term_original:
-            return
-
-        # Process the search term according to the current normalization state
-        # This ensures tag_to_filter_on matches the keys in self.tag_counts and self.tag_filters
-        tag_to_filter_on = self.tag_normalizer.normalize(search_term_original) 
-
-        if not tag_to_filter_on: 
-            print(f"Search term '{search_term_original}' processed to an empty string or is invalid.")
-            # self.tag_search_input.clear() # Optionally clear
+        """Handle tag search from the input field."""
+        search_text = self.tag_search_input.text().strip()
+        if not search_text:
+            # If search is cleared, reset the view
+            self._update_tag_views()
             return
             
-        # self.tag_counts contains the tags as they are currently displayed (normalized or cleaned raw)
-        if tag_to_filter_on in self.tag_counts:
-            # Apply this tag as an "include" filter
-            self.tag_filters[tag_to_filter_on] = self.FILTER_INCLUDE
-            
-            self.apply_tag_filters() # This will refresh tables and matching counts
-            
-            # self.tag_search_input.clear() # Optionally clear after successful search
-
-            # Scroll to the tag in the tags_table
-            # The tag displayed in the table (item.text()) should be tag_to_filter_on
-            for row in range(self.tags_table.rowCount()):
-                item = self.tags_table.item(row, 0)
-                if item and item.text() == tag_to_filter_on:
-                    self.tags_table.scrollToItem(item, QTableWidget.ScrollHint.PositionAtCenter)
-                    self.tags_table.selectRow(row) # Optionally select the row
-                    break
-        else:
-            # Tag not found in the current displayable tag list (self.tag_counts)
-            print(f"Tag '{search_term_original}' (searched as '{tag_to_filter_on}') not found in the current tag list.")
-            # self.tag_search_input.clear() # Optionally clear if tag not found
+        # Create a filtered model for the tag table
+        # NOTE: This assumes we are using a QTableView with a model.
+        # Since we use QTableWidget, we need to manually filter rows.
+        
+        # Manual filter for QTableWidget
+        for i in range(self.tags_table.rowCount()):
+            item = self.tags_table.item(i, 0) # Tag name is in column 0
+            if item:
+                # Simple case-insensitive search
+                is_match = search_text.lower() in item.text().lower()
+                self.tags_table.setRowHidden(i, not is_match)
 
     def _export_tag_data(self):
-        """Exports tag data to the console for analysis."""
-        graphics_logger.info("Exporting tag data...")
-        # This is a placeholder. Implement actual export logic here.
-        # For example, print raw_tag_counts, tag_counts, or filtered_albums tags.
-        print("--- Raw Tag Counts ---")
-        for tag, count in self.raw_tag_counts.most_common(20): # Print top 20 raw tags
-            print(f"{tag}: {count}")
-        print("\n--- Processed Tag Counts (Current Normalization) ---")
-        for tag, count in self.tag_counts.most_common(20): # Print top 20 processed tags
-            print(f"{tag}: {count}")
+        """Exports various tag-related data for analysis."""
+        graphics_logger.info("--- Exporting Tag Data ---")
         
-        if self.tag_normalizer.is_active():
-            print("\n--- Normalized Tag Mappings ---")
-            if self.normalized_mapping:
-                for raw_tag, normalized_tag in self.normalized_mapping.items():
-                    if raw_tag != normalized_tag: # Only print if actual change occurred
-                        print(f"'{raw_tag}' -> '{normalized_tag}'")
-            else:
-                print("No tags were altered by normalization (or mapping is empty).")
+        # 1. Basic counts
+        graphics_logger.info(f"Total unique tags (current mode): {len(self.tag_counts)}")
+        graphics_logger.info(f"Total raw tags: {len(self.raw_tag_counts)}")
         
-        print("\n--- Tag Filters Active ---")
-        if self.tag_filters:
-            for tag, state in self.tag_filters.items():
-                state_str = "INCLUDE" if state == self.FILTER_INCLUDE else "EXCLUDE" if state == self.FILTER_EXCLUDE else "NEUTRAL"
-                print(f"{tag}: {state_str}")
+        # 2. Filtered data
+        included_tags = {tag for tag, state in self.tag_filters.items() if state == self.FILTER_INCLUDE}
+        excluded_tags = {tag for tag, state in self.tag_filters.items() if state == self.FILTER_EXCLUDE}
+        graphics_logger.info(f"Included tags ({len(included_tags)}): {included_tags}")
+        graphics_logger.info(f"Excluded tags ({len(excluded_tags)}): {excluded_tags}")
+        graphics_logger.info(f"Filtered album count: {len(self.filtered_albums)}")
+        
+        # 3. Normalization info
+        if self.normalize_checkbox.isChecked():
+            graphics_logger.info("Normalization is ON.")
+            # Log a sample of the normalization mapping
+            sample_mapping = {k: v for i, (k, v) in enumerate(self.normalized_mapping.items()) if i < 10}
+            graphics_logger.info(f"Normalization mapping sample: {sample_mapping}")
         else:
-            print("No active tag filters.")
-        graphics_logger.info("Tag data export placeholder executed.")
+            graphics_logger.info("Normalization is OFF.")
+            
+        # 4. Single-instance tags
+        graphics_logger.info(f"Single-instance tags found: {len(self.single_instance_tags)}")
+        
+        # 5. Create and export a DataFrame for detailed analysis
+        try:
+            # Consolidate all tags from both raw and normalized counts
+            all_tags = set(self.raw_tag_counts.keys()) | set(self.tag_counts.keys())
+            
+            export_data = []
+            for tag in sorted(list(all_tags)):
+                export_data.append({
+                    "Tag": tag,
+                    "Raw Count": self.raw_tag_counts.get(tag, 0),
+                    "Processed Count": self.tag_counts.get(tag, 0),
+                    "Matching Count": self.matching_counts.get(tag, 0),
+                    "Is Single": tag in self.single_instance_tags,
+                    "Normalized Form": self.normalized_mapping.get(tag, tag),
+                    "Filter State": self.tag_filters.get(tag, self.FILTER_NEUTRAL)
+                })
+            
+            df = pd.DataFrame(export_data)
+            
+            # Use a dialog to show the dataframe content or save it
+            self._show_export_dialog(df)
+            
+        except Exception as e:
+            graphics_logger.error(f"Failed to create and export tag DataFrame: {e}", exc_info=True)
+            
+        graphics_logger.info("--- End of Tag Data Export ---")
+
+    def _show_export_dialog(self, df):
+        """Shows a dialog with the exported data in a table and an option to save."""
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Exported Tag Data")
+        dialog.setMinimumSize(800, 600)
+        
+        layout = QVBoxLayout(dialog)
+        
+        table = QTableWidget()
+        table.setRowCount(len(df))
+        table.setColumnCount(len(df.columns))
+        table.setHorizontalHeaderLabels(df.columns)
+        
+        for i, row in df.iterrows():
+            for j, col in enumerate(df.columns):
+                table.setItem(i, j, QTableWidgetItem(str(row[col])))
+                
+        table.resizeColumnsToContents()
+        
+        save_button = QPushButton("Save to CSV")
+        
+        def save_csv():
+            from PyQt6.QtWidgets import QFileDialog
+            
+            # Show file dialog to get save path
+            path, _ = QFileDialog.getSaveFileName(dialog, "Save CSV", "", "CSV Files (*.csv)")
+            
+            if path:
+                try:
+                    df.to_csv(path, index=False)
+                    QMessageBox.information(dialog, "Success", f"Successfully saved to {path}")
+                except Exception as e:
+                    QMessageBox.warning(dialog, "Error", f"Failed to save file: {e}")
+        
+        save_button.clicked.connect(save_csv)
+        
+        layout.addWidget(table)
+        layout.addWidget(save_button)
+        
+        dialog.exec()
 
     def _show_single_instance_dialog(self):
-        """Shows a dialog to manage single-instance tags."""
-        graphics_logger.info("Showing single-instance dialog (placeholder)...")
-        # This is a placeholder. Implement actual dialog logic here.
-        # Example:
-        # if self.single_instance_handler:
-        #     dialog = SingleInstanceDialog(self.single_instance_handler, self)
-        #     dialog.exec()
-        # else:
-        #     QMessageBox.information(self, "Single Instance Tags", "Tag analysis data not yet available.")
-        pass
-
+        """Shows the dialog for managing single-instance tags."""
+        if not self.single_instance_tags:
+            QMessageBox.information(self, "No Single-Instance Tags", "No single-instance tags were found in the current dataset.")
+            return
+            
+        dialog = SingleInstanceDialog(list(self.single_instance_tags), self)
+        if dialog.exec():
+            # Future: Handle updates from the dialog if needed
+            pass
+            
     def _handle_tag_sort(self, column_index):
         """Handles sorting of the tag table when a header is clicked."""
         graphics_logger.debug(f"Tag table sort requested for column: {column_index}")

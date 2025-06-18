@@ -26,7 +26,7 @@ class UpdateManager:
 			return None
 
 		old_data = {
-			"artist": album.artist,
+			"artist": album.pa_artist_name_on_album,
 			"title": album.title,
 			"release_date": album.release_date,
 			"release_year": album.release_year,

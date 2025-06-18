@@ -1,0 +1,176 @@
+{
+  "album_title": "LEFTOVERTURE",
+  "artist_name": "Kansas",
+  "year": 1976,
+  "rating_value": 4.24,
+  "genre": "Symphonic Prog",
+  "album_type": "Studio Album",
+  "cover_image_url": "http://www.progarchives.com/progressive_rock_discography_covers/630/cover_56177862016_r.jpg",
+  "tracks": [
+    {
+      "number": 1,
+      "title": "Carry On Wayward Son",
+      "duration": "5:13",
+      "is_sub_track": false
+    },
+    {
+      "number": 2,
+      "title": "The Wall",
+      "duration": "4:47",
+      "is_sub_track": false
+    },
+    {
+      "number": 3,
+      "title": "What's on My Mind",
+      "duration": "3:27",
+      "is_sub_track": false
+    },
+    {
+      "number": 4,
+      "title": "Miracles Out of Nowhere",
+      "duration": "6:29",
+      "is_sub_track": false
+    },
+    {
+      "number": 5,
+      "title": "Opus Insert",
+      "duration": "4:26",
+      "is_sub_track": false
+    },
+    {
+      "number": 6,
+      "title": "Questions of My Childhood",
+      "duration": "3:38",
+      "is_sub_track": false
+    },
+    {
+      "number": 7,
+      "title": "Cheyenne Anthem",
+      "duration": "6:50",
+      "is_sub_track": false
+    },
+    {
+      "number": 8,
+      "title": "Magnum Opus",
+      "duration": "8:27",
+      "is_sub_track": false
+    },
+    {
+      "number": "a",
+      "title": "Father Padilla Meets the Perfect Gnat",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "b",
+      "title": "Howling at the Moon",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "c",
+      "title": "Man Overboard",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "d",
+      "title": "Industry on Parade",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "e",
+      "title": "Release the Beavers",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "f",
+      "title": "Gnat Attack",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": 9,
+      "title": "Carry on Wayward Son (live *)",
+      "duration": "4:53",
+      "is_sub_track": false
+    },
+    {
+      "number": 10,
+      "title": "Cheyenne Anthem (live $)",
+      "duration": "6:42",
+      "is_sub_track": false
+    }
+  ],
+  "lineup": [
+    {
+      "name": "Steve Walsh",
+      "instruments": [
+        "lead",
+        "backing vocals",
+        "organ",
+        "piano",
+        "vibes",
+        "synths"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Rich Williams",
+      "instruments": [
+        "acoustic",
+        "electric guitars"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Kerry Livgren",
+      "instruments": [
+        "electric guitar",
+        "piano",
+        "clavinet",
+        "Moog",
+        "Oberheim",
+        "ARP synths"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Robby Steinhardt",
+      "instruments": [
+        "violin",
+        "viola",
+        "lead (4",
+        "7)",
+        "backing vocals"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Dave Hope",
+      "instruments": [
+        "bass"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Phil Ehart",
+      "instruments": [
+        "drums",
+        "percussion"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Toye La Rocca, Cheryl Norman",
+      "instruments": [
+        "children voices (7)"
+      ],
+      "is_guest": true
+    }
+  ],
+  "source_file": "album38b1.html",
+  "last_parsed": "2025-05-17T10:41:54.715754"
+}

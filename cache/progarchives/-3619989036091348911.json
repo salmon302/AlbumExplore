@@ -1,0 +1,128 @@
+{
+  "album_title": "PERMANENT WAVES",
+  "artist_name": "Rush",
+  "year": 1980,
+  "rating_value": 4.28,
+  "genre": "Heavy Prog",
+  "album_type": "Studio Album",
+  "cover_image_url": "http://www.progarchives.com/progressive_rock_discography_covers/609/cover_523316452016_r.jpg",
+  "tracks": [
+    {
+      "number": 1,
+      "title": "The Spirit of Radio",
+      "duration": "4:56",
+      "is_sub_track": false
+    },
+    {
+      "number": 2,
+      "title": "Freewill",
+      "duration": "5:21",
+      "is_sub_track": false
+    },
+    {
+      "number": 3,
+      "title": "Jacob's Ladder",
+      "duration": "7:26",
+      "is_sub_track": false
+    },
+    {
+      "number": 4,
+      "title": "Entre Nous",
+      "duration": "4:37",
+      "is_sub_track": false
+    },
+    {
+      "number": 5,
+      "title": "Different Strings",
+      "duration": "3:48",
+      "is_sub_track": false
+    },
+    {
+      "number": 6,
+      "title": "Natural Science",
+      "duration": "9:17",
+      "is_sub_track": false
+    },
+    {
+      "number": "i",
+      "title": "Tide Pools",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "ii",
+      "title": "Hyperspace",
+      "duration": null,
+      "is_sub_track": true
+    },
+    {
+      "number": "iii",
+      "title": "Permanent Waves",
+      "duration": null,
+      "is_sub_track": true
+    }
+  ],
+  "lineup": [
+    {
+      "name": "Alex Lifeson",
+      "instruments": [
+        "6-",
+        "12-string electric",
+        "acoustic guitars",
+        "Taurus bass pedals"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Geddy Lee",
+      "instruments": [
+        "basses",
+        "bass pedals",
+        "synthesizers (Oberheim Polyphonic",
+        "OB-1",
+        "Minimoog)",
+        "vocals"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Neil Peart",
+      "instruments": [
+        "drums",
+        "timpani",
+        "orchestral",
+        "tubular bells",
+        "timbales",
+        "wind chimes",
+        "crotales",
+        "triangle"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Hugh Syme",
+      "instruments": [
+        "piano (5)"
+      ],
+      "is_guest": true
+    },
+    {
+      "name": "Erwig Chuapchuaduah",
+      "instruments": [
+        "steel drums (1)"
+      ],
+      "is_guest": true
+    },
+    {
+      "name": "Terry Brown",
+      "instruments": [
+        "mixing",
+        "co-arranger",
+        "co-producer"
+      ],
+      "is_guest": true
+    }
+  ],
+  "source_file": "albumffdb.html",
+  "last_parsed": "2025-05-17T11:14:15.861626"
+}

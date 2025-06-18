@@ -1,0 +1,101 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist32fa.html",
+  "name": "SALLY OLDFIELD",
+  "genre": "Crossover Prog",
+  "country": "Ireland",
+  "biography": "Sally Oldfield biography\n\nSally Patricia Oldfield\n\n- Born 10th March 1947  (Dublin, Ireland)\n\nSally Oldfield  has been active since 1968, first forming the folk duo The Sallyangie with famous brother Mike Oldfield and releasing just one album.\n\nIn 1978 Sally Oldfield released her first debut album  Water Bearer and became a cult favourite combining lots of vocal harmonies, classical and poetic influences, not to mention some pop charcteristics too. Most notably the single  Mirrors was released off this album. She has released 15 albums since 1978 including live releases her last being  Cantadora in 2009. Oldfield has always been devoted to the mythical and spiritual side hence this influences a vast majority of her works. In 1984 she relocated to Germany as she had a large following in Europe and also subsequent to the demise of her current label at the time, Bronze Records.\n\nShe has collaborated with numerous other musicians, most notably Steve Hackett on ' Voyage of The Acolyte and Mike Oldfield's various albums as well as Terry Oldfield.\n\nHer music has all the ingredients of Crossover and is further enhanced by her many conceptual works released since 1978.You will find elements of complexity of folk, pop and just plain progressive soundscapes.",
+  "albums": [
+    {
+      "title": "Strange Day In Berlin",
+      "local_path": "albumfb65.html",
+      "year": 1983,
+      "rating": 2.84,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Femme",
+      "local_path": "albumadc1.html",
+      "year": 1987,
+      "rating": 2.02,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Instincts",
+      "local_path": "album0833.html",
+      "year": 1988,
+      "rating": 2.28,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Natasha",
+      "local_path": "albumdb12-3.html",
+      "year": 1990,
+      "rating": 3.79,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Flame",
+      "local_path": "album7612.html",
+      "year": 1992,
+      "rating": 4.14,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Three Rings",
+      "local_path": "album61b5.html",
+      "year": 1994,
+      "rating": 3.5,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Secret Songs",
+      "local_path": "albuma529-2.html",
+      "year": 1996,
+      "rating": 3.56,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Flaming Star",
+      "local_path": "albume93d.html",
+      "year": 2001,
+      "rating": 3.81,
+      "type": "Studio Album"
+    },
+    {
+      "title": "In Concert",
+      "local_path": "albumc799.html",
+      "year": 1982,
+      "rating": 3.5,
+      "type": "Live Album"
+    },
+    {
+      "title": "The Enchanted Way",
+      "local_path": "albumd629.html",
+      "year": 2018,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Mirrors",
+      "local_path": "album5d4d.html",
+      "year": 1978,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Morning of My Life",
+      "local_path": "album7578-2.html",
+      "year": 1980,
+      "rating": 0.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Playing in the Flame",
+      "local_path": "album6252.html",
+      "year": 1981,
+      "rating": 0.0,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T00:38:00.102575"
+}

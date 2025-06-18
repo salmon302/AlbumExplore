@@ -23,7 +23,7 @@ def test_url_functionality():
     cache_dir = Path("cache/progarchives_test")
     cache_dir.mkdir(parents=True, exist_ok=True)
     
-    scraper = ProgArchivesScraper(cache_dir=cache_dir)
+    scraper = ProgArchivesScraper(cache_dir=cache_dir)  # Removed local_data_root
     
     # Test 1: Bands alphabetical listing
     logger.info("Testing bands alphabetical listing (bands-alpha.asp?letter=*)")

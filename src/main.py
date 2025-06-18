@@ -64,14 +64,14 @@ def get_tag_relationships(tag: str, normalizer: TagNormalizer,
 	}
 
 
-def run_cli():
+def run_cli(csv_directory="csv"):
 	"""Run the command-line interface version."""
 	try:
 		logging.basicConfig(level=logging.INFO)
 		logging.info("Starting Album Explorer")
 		
 		# Initialize components
-		csv_dir = Path(__file__).parent.parent / 'csv'
+		csv_dir = Path(csv_directory)
 		if not csv_dir.exists():
 			csv_dir.mkdir(parents=True)
 			logging.info(f"Created CSV directory at {csv_dir}")
@@ -234,6 +234,7 @@ def main():
 	# Parse command line arguments
 	parser = argparse.ArgumentParser(description="Album Explorer")
 	parser.add_argument("--gui", action="store_true", help="Launch GUI version")
+	parser.add_argument("--csv-dir", type=str, help="CSV directory for CLI mode", default="csv")
 	args = parser.parse_args()
 	
 	if args.gui:
@@ -248,8 +249,8 @@ def main():
 			logging.error(f"Error launching GUI: {str(e)}")
 			print(f"Error launching GUI: {str(e)}")
 	else:
-		# Run CLI version
-		run_cli()
+		# Run CLI version with specified CSV directory
+		run_cli(args.csv_dir)
 
 if __name__ == "__main__":
 	main()

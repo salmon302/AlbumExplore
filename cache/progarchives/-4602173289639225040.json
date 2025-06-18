@@ -1,0 +1,66 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist7fa9.html",
+  "name": "MAHAVISHNU ORCHESTRA",
+  "genre": "Jazz Rock/Fusion",
+  "country": "Multi-National",
+  "biography": "Mahavishnu Orchestra biography\n\nFormed in New York City, USA in 1971 - Disbanded in 1976 - Reformed from 1984-1987\n\nLed by the incomparable guitar of\n\nJohn MCLAUGHLIN\n\n, The MAHAVISHNU ORCHESTRA combined jazz, rock, and eastern influences into a fiery, dynamic tour de force. They recorded three intense albums during 1971-1973 and then the personnel changed completely for the second version of the group. A reformation of the group in 1974 brought\n\nJean-Luc PONTY\n\non board to play violin, along with a host of new supporting musicians.\n\nTheir first two albums are absolute masterpieces of the genre. A stunning achievement and surely one of the greatest albums ever made, \"The Inner Mounting Flame\" defies categorization as it juxtaposes rock, jazz, classical, Indian, and Celtic influences in a way that is at once aggressive and subtle just one short year after Miles Davis' \"Bitches Brew\" milestone album. \"Birds of Fire\" was the culmination of a solid year opening gigs for the likes of EMERSON, LAKE & PALMER, and YES. The incredible \"Visions Of The Emerald Beyond\" is the essential album from the second formation. The focus is the interplay between guitar and violin and it is complex and interwined.\n\nSee also:\n\n-\n\nShakti With John McLaughlin\n\n-\n\nAl di Meola, John McLaughlin, Paco de Luc\ufffda\n\n-\n\nJan HAMMER\n\n-\n\nJerry GOODMAN",
+  "albums": [
+    {
+      "title": "Inner Worlds",
+      "local_path": "album8171.html",
+      "year": 1976,
+      "rating": 2.64,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Mahavishnu",
+      "local_path": "album1e6b.html",
+      "year": 1984,
+      "rating": 2.3,
+      "type": "Studio Album"
+    },
+    {
+      "title": "John McLaughlin & Mahavishnu: Adventures In Radioland",
+      "local_path": "album9847.html",
+      "year": 1986,
+      "rating": 2.67,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Lost Trident Sessions",
+      "local_path": "albumfc6e.html",
+      "year": 1999,
+      "rating": 4.21,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Between Nothingness & Eternity",
+      "local_path": "albumb944.html",
+      "year": 1973,
+      "rating": 3.79,
+      "type": "Live Album"
+    },
+    {
+      "title": "Live At Montreux 74/84",
+      "local_path": "albume9d6.html",
+      "year": 2007,
+      "rating": 3.61,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "The Best Of The Mahavishnu Orchestra",
+      "local_path": "album0251.html",
+      "year": 1991,
+      "rating": 3.57,
+      "type": "Compilation"
+    },
+    {
+      "title": "Original Album Classics",
+      "local_path": "album6c24-2.html",
+      "year": 2007,
+      "rating": 4.58,
+      "type": "Compilation"
+    }
+  ],
+  "scraped_at": "2025-05-18T12:56:17.572995"
+}

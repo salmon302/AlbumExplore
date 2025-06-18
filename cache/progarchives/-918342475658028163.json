@@ -1,0 +1,633 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artistfb6c.html",
+  "name": "RUSH",
+  "genre": "Heavy Prog",
+  "country": "Canada",
+  "biography": "Formed in Toronto, Canada in 1968\n\nRUSH are a pioneering line-up of Seventies Progressive rock, who influenced many Prog, hard-rock and heavy metal bands. This Canadian band is composed of bassist, singer and keyboard player\n\nGeddy LEE\n\n, guitarist\n\nAlex LIFESON\n\nand renowned drummer Neil PEART. In 1974 John RUTSEY was replaced by Peart who also assumed the role of the band's primary songwriter. Acclaimed for their instrumental virtuosity, their lyrics and longevity, throughout their 40+ year career they've proved to be the masters of their respective instruments while creating challenging yet popular music. They have the record for the third most consecutive gold or platinum albums for a band on the US album chart behind The Beatles and The Rolling Stones.\n\nNow, a brief summary of the band's career ...\n\nThrough the history of RUSH, they have passed through many distinct phases. Every one of these phases represents a triumph in music, allowing the band to move on. As at the end of all of RUSH's phases, a live LP was released. This tradition began with \"All The World's A Stage\", recorded live at Massey Hall in Toronto, Canada. Since then, the group has released three additional live albums: the best selling \"Exit... Stage Left\" (1981), \"A Show of Hands\" (1989), and the three-disc set \"Different Stages\" (1998), which encompasses three decades of the group's music.\n\nFIRST PHASE (1974-1976):\n\nIn the beginning, they started off as hard rock blues outfit with John-boy before he left and Neil came in, bringing his sci-fi mind into the works. The music seems to be a transition between straight-ahead rock tunes and more complex progressive tracks. \"Caress of Steel\" is a landmark album in the history of RUSH. Lyrically and musically, \"2112\" was a masterpiece. This multi-platinum release remains one of RUSH's best-selling albums.\n\nSECOND PHASE (1977-1981):\n\nThey moved headlong into progressive rock in the later part of the decade, starting with the album previous and right on to their massive breakthrough, 1981's \"Moving Pictures\".  Synthesizers were now employed by the band, played in the studio and on stage by Geddy. This was the end of transition from long epic pieces to shorter, more concise, and intricate songs. \"Permanent Waves\" is widely considered to be second only to \"Moving Pictures\" as RUSH's finest achievement.\n\nTHIRD PHASE (1982-1989):\n\nRUSH embraced the 1980s sound with \"Signals\", making heavy use of synthesizers and keyboards for the first time in the band's history. Keyboards have become a very large part of the music, and the interplay of guitar, drums, bass, and keyboards became technically almost impossible to play live. The two LPs that followed, \"Grace Under Pressure\" and \"Power Windows\", also followed nearly the same mold. They reached the zenith of its keyboard experimentation with \"Hold Your Fire\".\n\nPRESENT PHASE (1990 to today):\n\nMoving to a new label, RUSH embarked on their present phase with \"Presto\". So, after mercifully ending their synth period, RUSH went into a sort of pop/rock phase for this stage in their career. They sought to remove the dominance of keyboards in the music, and go back to a bass-drum-guitar sound. But after their tour for their 1996 record \"Test For Echo\", the band took six years off before returning in 2002 with the release of their new album \"Vapor Trails\". In 2004 they released a covers album, \"Feedback\" to celebrate the band's 30th anniversary in the current lineup. A tribute to Rush's early influences it contains covers of such luminaries as \"Cream\", \"The Who\" and \"Blue Cheer\".\n\nSince their 30th anniversary the band has seen a major resurgence in popularity with the release of \"Snakes & Arrows\" in 2007 and the critically acclaimed concept album \"Clockwork Angels\" in 2012. In 2013 they were inducted into the \"Rock And Roll Hall Of Fame\" to complete their journey towards critical mainstream acceptance.",
+  "albums": [
+    {
+      "title": "A Farewell to Kings",
+      "local_path": "album4710.html",
+      "year": 1977,
+      "rating": 4.34,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Hemispheres",
+      "local_path": "album86af.html",
+      "year": 1978,
+      "rating": 4.4,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Permanent Waves",
+      "local_path": "albumffdb.html",
+      "year": 1980,
+      "rating": 4.28,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Moving Pictures",
+      "local_path": "album023e.html",
+      "year": 1981,
+      "rating": 4.39,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Signals",
+      "local_path": "album3c35.html",
+      "year": 1982,
+      "rating": 3.95,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Grace Under Pressure",
+      "local_path": "album36bc.html",
+      "year": 1984,
+      "rating": 3.69,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Power Windows",
+      "local_path": "albumf633.html",
+      "year": 1985,
+      "rating": 3.58,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Hold Your Fire",
+      "local_path": "album54fc.html",
+      "year": 1987,
+      "rating": 3.27,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Presto",
+      "local_path": "album5262.html",
+      "year": 1989,
+      "rating": 3.18,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Roll the Bones",
+      "local_path": "album949c.html",
+      "year": 1991,
+      "rating": 3.12,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Counterparts",
+      "local_path": "album8c60.html",
+      "year": 1993,
+      "rating": 3.76,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Test for Echo",
+      "local_path": "albumb013.html",
+      "year": 1996,
+      "rating": 2.89,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Vapor Trails",
+      "local_path": "album2732.html",
+      "year": 2002,
+      "rating": 3.42,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Snakes & Arrows",
+      "local_path": "album3b25.html",
+      "year": 2007,
+      "rating": 3.56,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Clockwork Angels",
+      "local_path": "album566f.html",
+      "year": 2012,
+      "rating": 3.93,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Rush - In Rio",
+      "local_path": "album14da.html",
+      "year": 2003,
+      "rating": 3.8,
+      "type": "Live Album"
+    },
+    {
+      "title": "R30 - 30th Anniversary World Tour",
+      "local_path": "albumca18.html",
+      "year": 2005,
+      "rating": 4.15,
+      "type": "Live Album"
+    },
+    {
+      "title": "Snakes & Arrows Live",
+      "local_path": "album546e.html",
+      "year": 2008,
+      "rating": 3.62,
+      "type": "Live Album"
+    },
+    {
+      "title": "Grace Under Pressure 1984 Tour",
+      "local_path": "album60c9.html",
+      "year": 1984,
+      "rating": 3.98,
+      "type": "Live Album"
+    },
+    {
+      "title": "ABC 1974",
+      "local_path": "album4547.html",
+      "year": 1974,
+      "rating": 3.57,
+      "type": "Live Album"
+    },
+    {
+      "title": "Time Machine 2011: Live in Cleveland",
+      "local_path": "albumb476.html",
+      "year": 2011,
+      "rating": 3.38,
+      "type": "Live Album"
+    },
+    {
+      "title": "Moving Pictures: Live 2011",
+      "local_path": "albumb6af.html",
+      "year": 2011,
+      "rating": 3.45,
+      "type": "Live Album"
+    },
+    {
+      "title": "Clockwork Angels Tour",
+      "local_path": "album05cd.html",
+      "year": 2013,
+      "rating": 3.91,
+      "type": "Live Album"
+    },
+    {
+      "title": "Kiel Auditorium, St. Louis, Missouri - 14 February 1980",
+      "local_path": "albumf942.html",
+      "year": 1980,
+      "rating": 3.93,
+      "type": "Live Album"
+    },
+    {
+      "title": "R40 Live",
+      "local_path": "album022e.html",
+      "year": 2015,
+      "rating": 3.96,
+      "type": "Live Album"
+    },
+    {
+      "title": "Chronicles",
+      "local_path": "albumcf46-2.html",
+      "year": 1990,
+      "rating": 3.06,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Rush in Rio",
+      "local_path": "album43e6.html",
+      "year": 2003,
+      "rating": 4.37,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "R30 - 30th Anniversary World Tour",
+      "local_path": "album365a.html",
+      "year": 2005,
+      "rating": 4.4,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Replay x 3",
+      "local_path": "album8eab.html",
+      "year": 2006,
+      "rating": 4.09,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Snakes & Arrows Live",
+      "local_path": "albume936.html",
+      "year": 2008,
+      "rating": 4.12,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Working Men",
+      "local_path": "album8ca5.html",
+      "year": 2009,
+      "rating": 2.82,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Beyond the Lighted Stage",
+      "local_path": "albumf26b.html",
+      "year": 2010,
+      "rating": 4.68,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Classic Albums: 2112 - Moving Pictures",
+      "local_path": "albumba0c.html",
+      "year": 2010,
+      "rating": 4.21,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Time Machine 2011: Live in Cleveland",
+      "local_path": "albumd723.html",
+      "year": 2011,
+      "rating": 3.95,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Clockwork Angels Tour",
+      "local_path": "album831f.html",
+      "year": 2013,
+      "rating": 3.95,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "R 40 (DVD Box Set)",
+      "local_path": "album2174.html",
+      "year": 2014,
+      "rating": 4.76,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "R40 Live",
+      "local_path": "album4789.html",
+      "year": 2015,
+      "rating": 4.47,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Time Stand Still",
+      "local_path": "album245c.html",
+      "year": 2016,
+      "rating": 4.35,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Retrospective I (1974-1980)",
+      "local_path": "albumf6af.html",
+      "year": 1974,
+      "rating": 3.36,
+      "type": "Compilation"
+    },
+    {
+      "title": "Retrospective II (1981-1987)",
+      "local_path": "album1e45.html",
+      "year": 1981,
+      "rating": 3.21,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Spirit Of Radio (Greatest Hits 1974-1987)",
+      "local_path": "albumc270.html",
+      "year": 1974,
+      "rating": 3.24,
+      "type": "Compilation"
+    },
+    {
+      "title": "Gold",
+      "local_path": "albuma421.html",
+      "year": 2006,
+      "rating": 3.15,
+      "type": "Compilation"
+    },
+    {
+      "title": "Retrospective III 1989 - 2008",
+      "local_path": "album53ab.html",
+      "year": 1989,
+      "rating": 2.95,
+      "type": "Compilation"
+    },
+    {
+      "title": "Working Men",
+      "local_path": "album87c6.html",
+      "year": 2009,
+      "rating": 2.82,
+      "type": "Compilation"
+    },
+    {
+      "title": "Time Stand Still: The Collection",
+      "local_path": "albumbd08.html",
+      "year": 2010,
+      "rating": 1.98,
+      "type": "Compilation"
+    },
+    {
+      "title": "Icon",
+      "local_path": "album721d-3.html",
+      "year": 2010,
+      "rating": 2.33,
+      "type": "Compilation"
+    },
+    {
+      "title": "Sector 1",
+      "local_path": "album1305.html",
+      "year": 2011,
+      "rating": 4.15,
+      "type": "Compilation"
+    },
+    {
+      "title": "Sector 2",
+      "local_path": "album4978.html",
+      "year": 2011,
+      "rating": 4.65,
+      "type": "Compilation"
+    },
+    {
+      "title": "Sector 3",
+      "local_path": "albume447.html",
+      "year": 2011,
+      "rating": 4.44,
+      "type": "Compilation"
+    },
+    {
+      "title": "Moving Pictures  30TH Anniversary Deluxe Edition",
+      "local_path": "album31b0.html",
+      "year": 2011,
+      "rating": 4.71,
+      "type": "Compilation"
+    },
+    {
+      "title": "Icon 2",
+      "local_path": "album163c.html",
+      "year": 2011,
+      "rating": 3.44,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Studio Albums 1989-2007",
+      "local_path": "album0ecb.html",
+      "year": 1989,
+      "rating": 4.18,
+      "type": "Compilation"
+    },
+    {
+      "title": "2112  40th Anniversary edition",
+      "local_path": "album5b61.html",
+      "year": 2016,
+      "rating": 3.69,
+      "type": "Compilation"
+    },
+    {
+      "title": "A Farewell To Kings (40th Anniversary)",
+      "local_path": "album1bed.html",
+      "year": 2017,
+      "rating": 4.66,
+      "type": "Compilation"
+    },
+    {
+      "title": "Permanent Waves (40th Anniversary Edition)",
+      "local_path": "album3c4f.html",
+      "year": 2020,
+      "rating": 4.84,
+      "type": "Compilation"
+    },
+    {
+      "title": "Fly by Night",
+      "local_path": "album3071.html",
+      "year": 1975,
+      "rating": 3.15,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Twilight Zone",
+      "local_path": "album9ea7.html",
+      "year": 1976,
+      "rating": 3.14,
+      "type": "EP/Single"
+    },
+    {
+      "title": "2112: Overture/The Temples of Syrinx",
+      "local_path": "album07b0.html",
+      "year": 1976,
+      "rating": 3.68,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Closer to The Heart",
+      "local_path": "albumca43.html",
+      "year": 1977,
+      "rating": 3.7,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Everything Your Listeners Wanted To Hear By Rush... But Were Afraid To Play",
+      "local_path": "album006a.html",
+      "year": 1977,
+      "rating": 2.37,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Trees",
+      "local_path": "album51ce.html",
+      "year": 1978,
+      "rating": 3.65,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Spirit of Radio",
+      "local_path": "album8268.html",
+      "year": 1980,
+      "rating": 4.16,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Entre Nous",
+      "local_path": "album2d38.html",
+      "year": 1980,
+      "rating": 2.96,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Tom Sawyer",
+      "local_path": "albumf0ae.html",
+      "year": 1981,
+      "rating": 3.99,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Tom Sawyer / A Passage To Bangkok / Red Barchetta",
+      "local_path": "album123d.html",
+      "year": 1981,
+      "rating": 4.28,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Vital Signs / Passage To Bangkok / Circumstances / In The Mood",
+      "local_path": "albuma316-2.html",
+      "year": 1981,
+      "rating": 4.06,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Subdivisions",
+      "local_path": "albume4b1.html",
+      "year": 1982,
+      "rating": 4.28,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Countdown",
+      "local_path": "albume930-2.html",
+      "year": 1982,
+      "rating": 3.94,
+      "type": "EP/Single"
+    },
+    {
+      "title": "New World Man",
+      "local_path": "album43bd.html",
+      "year": 1982,
+      "rating": 3.22,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Body Electric",
+      "local_path": "album7aa2.html",
+      "year": 1984,
+      "rating": 3.71,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Distant Early Warning",
+      "local_path": "album62bc.html",
+      "year": 1984,
+      "rating": 3.62,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Afterimage",
+      "local_path": "albumc821.html",
+      "year": 1984,
+      "rating": 4.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Big Money",
+      "local_path": "album893e.html",
+      "year": 1986,
+      "rating": 3.17,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Prime Mover",
+      "local_path": "album8f19-2.html",
+      "year": 1987,
+      "rating": 3.75,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Closer To The Heart",
+      "local_path": "album8011.html",
+      "year": 1989,
+      "rating": 4.27,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Pass",
+      "local_path": "albumc92e.html",
+      "year": 1989,
+      "rating": 3.88,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Ghost of a chance",
+      "local_path": "album565a.html",
+      "year": 1992,
+      "rating": 2.89,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Roll The Bones",
+      "local_path": "album2d7b.html",
+      "year": 1992,
+      "rating": 3.58,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Story Of Kings",
+      "local_path": "albumbd2a.html",
+      "year": 1992,
+      "rating": 1.93,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Stick It Out",
+      "local_path": "album6bc3.html",
+      "year": 1993,
+      "rating": 3.1,
+      "type": "EP/Single"
+    },
+    {
+      "title": "One Little Victory",
+      "local_path": "album1c08.html",
+      "year": 2002,
+      "rating": 3.37,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Feedback",
+      "local_path": "album83a1.html",
+      "year": 2004,
+      "rating": 2.91,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Summertime Blues",
+      "local_path": "album430a.html",
+      "year": 2004,
+      "rating": 3.5,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Far Cry",
+      "local_path": "album7c04.html",
+      "year": 2007,
+      "rating": 3.53,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Caravan / BU2B",
+      "local_path": "albumbef5.html",
+      "year": 2010,
+      "rating": 4.1,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Headlong Flight",
+      "local_path": "albuma3c1.html",
+      "year": 2012,
+      "rating": 3.77,
+      "type": "EP/Single"
+    },
+    {
+      "title": "The Garden",
+      "local_path": "albumcac6.html",
+      "year": 2013,
+      "rating": 4.43,
+      "type": "EP/Single"
+    },
+    {
+      "title": "7 and 7 is",
+      "local_path": "album8f9c.html",
+      "year": 2014,
+      "rating": 2.88,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Roll The Bones",
+      "local_path": "albumc6ff.html",
+      "year": 2015,
+      "rating": 3.91,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T00:14:25.511320"
+}

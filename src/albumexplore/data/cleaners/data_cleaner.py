@@ -54,10 +54,16 @@ class DataCleaner:
 		
 		# Check for dates outside expected range
 		if 'release_date' in df.columns:
-			current_year = datetime.now().year
-			future_dates = df[df['release_date'].notna() & (df['release_date'].dt.year > current_year + 1)]
-			if not future_dates.empty:
-				self.errors.append("dates outside expected year")
+			try:
+				current_year = datetime.now().year
+				# Only check if the column actually contains datetime objects
+				if df['release_date'].dtype.name.startswith('datetime'):
+					future_dates = df[df['release_date'].notna() & (df['release_date'].dt.year > current_year + 1)]
+					if not future_dates.empty:
+						self.errors.append("dates outside expected year")
+			except (AttributeError, TypeError):
+				# Column exists but doesn't contain datetime data, skip validation
+				pass
 		
 		# Check for single-word tags
 		if 'tags' in df.columns:

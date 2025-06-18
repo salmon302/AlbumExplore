@@ -1,0 +1,148 @@
+{
+  "album_title": "ENIGMATIC OCEAN",
+  "artist_name": "Jean-Luc Ponty",
+  "year": 1977,
+  "rating_value": 4.3,
+  "genre": "Jazz Rock/Fusion",
+  "album_type": "Studio Album",
+  "cover_image_url": "http://www.progarchives.com/progressive_rock_discography_covers/2094/cover_50181782013_r.JPG",
+  "tracks": [
+    {
+      "number": 1,
+      "title": "Overture",
+      "duration": "0:47",
+      "is_sub_track": false
+    },
+    {
+      "number": 2,
+      "title": "The Trans-Love Express",
+      "duration": "3:56",
+      "is_sub_track": false
+    },
+    {
+      "number": 3,
+      "title": "Mirage",
+      "duration": "4:54",
+      "is_sub_track": false
+    },
+    {
+      "number": 4,
+      "title": "Enigmatic Ocean",
+      "duration": null,
+      "is_sub_track": false
+    },
+    {
+      "number": 5,
+      "title": "Part I",
+      "duration": "2:20",
+      "is_sub_track": false
+    },
+    {
+      "number": 6,
+      "title": "Part II",
+      "duration": "3:35",
+      "is_sub_track": false
+    },
+    {
+      "number": 7,
+      "title": "Part III",
+      "duration": "3:43",
+      "is_sub_track": false
+    },
+    {
+      "number": 8,
+      "title": "Part IV",
+      "duration": "2:24",
+      "is_sub_track": false
+    },
+    {
+      "number": 5,
+      "title": "Nostalgic Lady",
+      "duration": "5:20",
+      "is_sub_track": false
+    },
+    {
+      "number": 6,
+      "title": "Struggle Of The Sea Turtle",
+      "duration": null,
+      "is_sub_track": false
+    },
+    {
+      "number": 7,
+      "title": "Part I",
+      "duration": "3:32",
+      "is_sub_track": false
+    },
+    {
+      "number": 8,
+      "title": "Part II",
+      "duration": "3:33",
+      "is_sub_track": false
+    },
+    {
+      "number": 9,
+      "title": "Part III",
+      "duration": "6:05",
+      "is_sub_track": false
+    }
+  ],
+  "lineup": [
+    {
+      "name": "Jean-Luc Ponty",
+      "instruments": [
+        "4-",
+        "5-string electric violins",
+        "violectra",
+        "piano (5)",
+        "bells",
+        "conductor",
+        "orchestrations",
+        "producer"
+      ],
+      "is_guest": false
+    },
+    {
+      "name": "Allan Holdsworth",
+      "instruments": [
+        "lead electric guitar"
+      ],
+      "is_guest": true
+    },
+    {
+      "name": "Daryl Stuermer",
+      "instruments": [
+        "lead",
+        "rhythm electric guitars"
+      ],
+      "is_guest": true
+    },
+    {
+      "name": "Allan Zavod",
+      "instruments": [
+        "clavinet",
+        "piano",
+        "electric piano",
+        "synthesizer",
+        "organ"
+      ],
+      "is_guest": true
+    },
+    {
+      "name": "Ralphe Armstrong",
+      "instruments": [
+        "bass and fretless bass (5)"
+      ],
+      "is_guest": true
+    },
+    {
+      "name": "Steve Smith",
+      "instruments": [
+        "drums",
+        "percussion"
+      ],
+      "is_guest": true
+    }
+  ],
+  "source_file": "albumce62.html",
+  "last_parsed": "2025-05-17T11:13:33.560538"
+}

@@ -34,6 +34,12 @@ dependencies = [
     "scipy>=1.7.0",
     "python-dateutil>=2.8.2",
     "pycountry>=22.3.5",
+    "beautifulsoup4>=4.9.3",
+    "psutil",
+    "rich",
+    "requests",
+    "pyppeteer",
+    "backoff",
 ]
 
 [project.optional-dependencies]
@@ -48,6 +54,7 @@ test = [
     "pytest-cov>=4.0.0",
     "pytest-qt>=4.2.0",
     "pytest-xvfb>=3.0.0",
+    "pytest-asyncio",
 ]
 
 [project.scripts]

@@ -1,0 +1,157 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artistdc9b.html",
+  "name": "QUEENSRYCHE",
+  "genre": "Progressive Metal",
+  "country": "United States",
+  "biography": "Founded in    Bellevue, Washington, USA in 1981 (as The Mob) - Still active as of 2019\n\nQuite simply, Queensryche was one of the essential bands in the development of progressive metal. Merging the metal of Iron Maiden with the atmospheres of Pink Floyd, the band created what may still be the quintessential metal concept album, OPERATION: MINDCRIME. The band's sound has centered on the operatic vocals of Geoff Tate singing over numerous versions of heavy rock over a 30 year career.\n\nStarting in the early 1980's in Seattle, Washington, guitarists Chris Degarmo and Michael Wilton, along with bassist Eddie Jackson and drummer Scott Rockenfield, were in a cover band, the Mob, cutting their teeth on the work of Judas Priest and Iron Maiden. Singer Geoff Tate of local progressive bands Babylon and the Myth was brought in sporadically for gigs and then an EP. The EP, fueled by the anthemic \"Queen of the Reich\" gained the band national exposure. The band acquired Tate permanently, changed their name in honor of their then signature song, and were signed to EMI.\n\nInitially tagged as an Iron Maiden descendent, Queensryche folded in more and more progressive influences under Tate and DeGarmo's direction on the LPs THE WARNING and RAGE FOR ORDER. The latter is one of several albums that may be considered the first true progressive metal album, as it melded keyboards, conceptual themes, and more complex song structures. However, Queensryche's defining moment was the full concept album from 1988, OPERATION: MINDCRIME. Its ambitious story covered government, religion, sex, drugs, and mental illness. The interconnected songs included an over ten minute epic, several MTV hit singles, and fueled the band's rise supporting several of the top metal tours of the time.\n\nThe following album, EMPIRE, took an intentionally more commercial tone and catapulted the band to major arenas where they performed MINDCRIME in its entirety as a headliner. The Pink Floyd influenced single \"Silent Lucidity\" was one of the major hits of the year. This would be the band's peak with eclectic PROMISED LAND being the last of the band's classic era. Musical tastes had changed, and the band attempted unsuccessfully to accommodate to alternative / grunge with HEAR IN THE NOW FRONTIER. DeGarmo left the band soon after, and Queensryche has had an up and down career. TRIBE and OPERATION: MINDCRIME II were much better received than their predecessors, and the band's continuing tours have included co-headlining with fellow prog-metal pioneers Dream Theater. Though never reaching their early 90's heights, the band still produces \"thinking man's metal,\" and their place in the history of progressive metal is without question.",
+  "albums": [
+    {
+      "title": "Promised Land",
+      "local_path": "albume728.html",
+      "year": 1994,
+      "rating": 3.97,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Hear In the Now Frontier",
+      "local_path": "album512a.html",
+      "year": 1997,
+      "rating": 2.49,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Q2K",
+      "local_path": "album2401.html",
+      "year": 1999,
+      "rating": 2.2,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Tribe",
+      "local_path": "albumddea-2.html",
+      "year": 2003,
+      "rating": 3.05,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Operation : Mindcrime II",
+      "local_path": "album9422.html",
+      "year": 2006,
+      "rating": 3.23,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Take Cover",
+      "local_path": "album19f3.html",
+      "year": 2007,
+      "rating": 2.25,
+      "type": "Studio Album"
+    },
+    {
+      "title": "American Soldier",
+      "local_path": "album8e41-2.html",
+      "year": 2009,
+      "rating": 2.76,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Dedicated To Chaos",
+      "local_path": "album4b48.html",
+      "year": 2011,
+      "rating": 1.84,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Frequency Unknown",
+      "local_path": "album6cef.html",
+      "year": 2013,
+      "rating": 1.96,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Queensr\ufffdche",
+      "local_path": "albumf2c0-3.html",
+      "year": 2013,
+      "rating": 3.48,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Condition H\ufffdman",
+      "local_path": "albuma0e2.html",
+      "year": 2015,
+      "rating": 3.64,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Verdict",
+      "local_path": "album178d.html",
+      "year": 2019,
+      "rating": 3.53,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Digital Noise Alliance",
+      "local_path": "albumedc6.html",
+      "year": 2022,
+      "rating": 3.48,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Extended Versions",
+      "local_path": "album20d6.html",
+      "year": 2007,
+      "rating": 2.0,
+      "type": "Live Album"
+    },
+    {
+      "title": "Mindcrime at The Moore",
+      "local_path": "album9139.html",
+      "year": 2007,
+      "rating": 3.86,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Greatest Hits",
+      "local_path": "albumb704.html",
+      "year": 2000,
+      "rating": 3.71,
+      "type": "Compilation"
+    },
+    {
+      "title": "Classic Masters",
+      "local_path": "albumdbde.html",
+      "year": 2003,
+      "rating": 1.44,
+      "type": "Compilation"
+    },
+    {
+      "title": "Face To Face",
+      "local_path": "albumd129.html",
+      "year": 2006,
+      "rating": 1.33,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Best Of Queensryche: Sign Of The Times",
+      "local_path": "albumca36-2.html",
+      "year": 2007,
+      "rating": 3.57,
+      "type": "Compilation"
+    },
+    {
+      "title": "Queensr\ufffdche",
+      "local_path": "albume9b7.html",
+      "year": 1983,
+      "rating": 3.5,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Anybody Listening?",
+      "local_path": "albumf496.html",
+      "year": 1992,
+      "rating": 3.94,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T00:13:00.125313"
+}

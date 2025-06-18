@@ -61,7 +61,8 @@ gui_logger.setLevel(logging.DEBUG)
 gui_file_handler = SafeRotatingFileHandler(
     log_dir / f"gui_{time.strftime('%Y%m%d')}.log",
     maxBytes=10*1024*1024,  # 10MB
-    backupCount=5
+    backupCount=5,
+    encoding='utf-8'  # Added encoding
 )
 gui_file_handler.setFormatter(formatter)
 gui_logger.addHandler(gui_file_handler)
@@ -73,7 +74,8 @@ graphics_logger.setLevel(logging.DEBUG)
 graphics_file_handler = SafeRotatingFileHandler(
     log_dir / f"graphics_{time.strftime('%Y%m%d')}.log",
     maxBytes=10*1024*1024,  # 10MB
-    backupCount=5
+    backupCount=5,
+    encoding='utf-8'  # Added encoding
 )
 graphics_file_handler.setFormatter(formatter)
 graphics_logger.addHandler(graphics_file_handler)
@@ -85,7 +87,8 @@ db_logger.setLevel(logging.DEBUG)
 db_file_handler = SafeRotatingFileHandler(
     log_dir / f"database_{time.strftime('%Y%m%d')}.log",
     maxBytes=10*1024*1024,  # 10MB
-    backupCount=5
+    backupCount=5,
+    encoding='utf-8'  # Added encoding
 )
 db_file_handler.setFormatter(formatter)
 db_logger.addHandler(db_file_handler)
@@ -97,7 +100,8 @@ performance_logger.setLevel(logging.DEBUG)
 performance_file_handler = SafeRotatingFileHandler(
     log_dir / f"performance_{time.strftime('%Y%m%d')}.log",
     maxBytes=10*1024*1024,  # 10MB
-    backupCount=5
+    backupCount=5,
+    encoding='utf-8'  # Added encoding
 )
 performance_file_handler.setFormatter(formatter)
 performance_logger.addHandler(performance_file_handler)

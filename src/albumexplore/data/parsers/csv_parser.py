@@ -54,6 +54,64 @@ class CSVParser:
         
         return tags if tags else ['untagged']
 
+    def _detect_header_row(self, file_path: Path, delimiter: str, encoding: str) -> int:
+        """Detect which row contains the actual headers by looking for data patterns."""
+        try:
+            # Read first 20 rows to analyze (these files have headers around line 12)
+            with open(file_path, 'r', encoding=encoding) as f:
+                lines = f.readlines()
+            
+            # Look for the row containing "Artist,Album,Release Date" pattern
+            for i, line in enumerate(lines[:25]):  # Check first 25 lines
+                line_lower = line.lower().strip()
+                # Look for the standard header pattern for Reddit CSV files
+                if ('artist' in line_lower and 
+                    'album' in line_lower and 
+                    ('release date' in line_lower or 'date' in line_lower) and
+                    'genre' in line_lower):
+                    logger.debug(f"Found header row at line {i} in {file_path.name}")
+                    return i
+            
+            # If no clear headers found, use default based on Reddit CSV structure
+            logger.warning(f"Could not find header row in {file_path.name}, using default row 12")
+            return 12  # Reddit CSV files typically have headers at row 12-13
+            
+        except Exception as e:
+            logger.warning(f"Error detecting header row in {file_path.name}: {e}")
+            return 12  # Default to row 12
+
+    def _assign_standard_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Assign standard column names based on position and content analysis."""
+        if df.empty:
+            return df
+            
+        # Expected column order based on the CSV structure we observed
+        standard_mapping = {
+            0: 'Artist',
+            1: 'Album', 
+            2: 'Release Date',
+            3: 'Length',
+            4: 'Genre / Subgenres',
+            5: 'Vocal Style',
+            6: 'Country / State',
+            7: 'Bandcamp',
+            8: 'Spotify',
+            9: 'YouTube',
+            10: 'Amazon',
+            11: 'Apple Music'
+        }
+        
+        # Create new column names
+        new_columns = []
+        for i, col in enumerate(df.columns):
+            if i in standard_mapping:
+                new_columns.append(standard_mapping[i])
+            else:
+                new_columns.append(f'Extra_Column_{i}')
+        
+        df.columns = new_columns
+        return df
+
     def parse_single_csv(self, file_path: Path) -> pd.DataFrame:
         """Parse a single CSV/TSV file and return a cleaned DataFrame."""
         logger.debug(f"Parsing file: {file_path}")
@@ -67,8 +125,18 @@ class CSVParser:
             
             for encoding in encodings:
                 try:
-                    # Skip the metadata rows at the top
-                    df = pd.read_csv(file_path, delimiter=delimiter, encoding=encoding, skiprows=5)
+                    # First, try to detect if there are proper headers
+                    header_row = self._detect_header_row(file_path, delimiter, encoding)
+                    
+                    # Read the CSV starting from the header row
+                    df = pd.read_csv(file_path, delimiter=delimiter, encoding=encoding, 
+                                   skiprows=header_row, header=0)
+                    
+                    # If we still don't have proper column names, assign standard ones
+                    if df.columns[0] != 'Artist' or len(df.columns) < 5:
+                        logger.debug(f"Assigning standard column names for {file_path.name}")
+                        df = self._assign_standard_columns(df)
+                    
                     break
                 except UnicodeDecodeError:
                     continue

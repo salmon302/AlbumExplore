@@ -163,6 +163,8 @@ class TableRenderer(RendererBase):
                 'title': title,  # Include both keys for compatibility
                 'year': year,    # Ensure year is a string
                 'country': node.data.get('country', ''),
+                'genre': node.data.get('genre', ''),  # Add genre field
+                'raw_tags': node.data.get('raw_tags', ''),  # Add raw_tags field
                 'tags': node.data.get('tags', []),
                 'selected': node.id in getattr(viewport, 'selected_ids', set())
             }

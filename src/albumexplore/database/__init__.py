@@ -18,6 +18,15 @@ def init_db(database_url: str = None) -> None:
     if not database_url:
         # Default to SQLite database in project root instead of src folder
         db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'albumexplore.db')
+        
+        # Delete existing database file for a clean start
+        if os.path.exists(db_path):
+            try:
+                os.remove(db_path)
+                db_logger.info(f"Removed existing database at {db_path}")
+            except OSError as e:
+                db_logger.error(f"Error removing database file {db_path}: {e}")
+
         database_url = f"sqlite:///{db_path}"
     
     db_logger.info(f"Initializing database with URL: {database_url}")

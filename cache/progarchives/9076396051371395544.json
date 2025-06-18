@@ -1,0 +1,59 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artist5717.html",
+  "name": "NATIONAL HEALTH",
+  "genre": "Canterbury Scene",
+  "country": "United Kingdom",
+  "biography": "National Health biography\n\nFounded in Canterbury, England in 1975 - Disbanded in 1980\n\nNATIONAL HEALTH was one of the last of the great \"Canterbury-style\" progressive rock bands. This band performed the same shiny Canterbury Progressive with a touch of jazz-rock, following\n\nHATFIELD AND THE NORTH\n\n's philosophy, with  complex keyboards parts, the saturated guitar of\n\nPhil MILLER\n\n. Their first eponymous opus is one of the most important albums of the Canterbury scene, containing a unique mixture of rock, jazz and classical music. This is a great find for Canterbury fans and a rare treat in the spirit of the likes of GENTLE GIANT, SPOCK'S BEARD and ECHOLYN.",
+  "albums": [
+    {
+      "title": "National Health",
+      "local_path": "album786d.html",
+      "year": 1978,
+      "rating": 4.13,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Of Queues and Cures",
+      "local_path": "albumc1ca.html",
+      "year": 1978,
+      "rating": 4.28,
+      "type": "Studio Album"
+    },
+    {
+      "title": "D.S. al Coda",
+      "local_path": "album7ba9.html",
+      "year": 1982,
+      "rating": 3.43,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Playtime",
+      "local_path": "albumef71.html",
+      "year": 2001,
+      "rating": 3.74,
+      "type": "Live Album"
+    },
+    {
+      "title": "Complete",
+      "local_path": "album6f94.html",
+      "year": 1990,
+      "rating": 4.17,
+      "type": "Compilation"
+    },
+    {
+      "title": "Missing Pieces",
+      "local_path": "albumedb0.html",
+      "year": 1996,
+      "rating": 3.67,
+      "type": "Compilation"
+    },
+    {
+      "title": "Dreams Wide Awake",
+      "local_path": "albumed74.html",
+      "year": 2005,
+      "rating": 2.52,
+      "type": "Compilation"
+    }
+  ],
+  "scraped_at": "2025-05-18T12:32:07.143607"
+}

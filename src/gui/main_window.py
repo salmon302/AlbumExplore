@@ -1,8 +1,9 @@
 import logging
 from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
 						   QTabWidget, QTableWidget, QTableWidgetItem, QPushButton, 
-						   QLineEdit, QLabel, QComboBox, QStatusBar, QTextEdit)
+						   QLineEdit, QLabel, QComboBox, QStatusBar, QTextEdit, QMenuBar, QMenu)
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QAction
 import pandas as pd
 from pathlib import Path
 from albumexplore.data.parsers.csv_parser import CSVParser
@@ -15,6 +16,7 @@ from albumexplore.visualization.view_manager import ViewManager
 from albumexplore.visualization.data_interface import DataInterface
 from albumexplore.visualization.state import ViewType
 from albumexplore.database import get_db_session
+from .data_loader_dialog import DataLoaderDialog
 
 logging.basicConfig(level=logging.INFO)
 
@@ -36,14 +38,17 @@ class MainWindow(QMainWindow):
 		self.normalizer = TagNormalizer()
 		self.relationships = TagRelationships() 
 		
+		# Create menu bar
+		self._create_menu_bar()
+		
 		# Create central widget and layout
 		central_widget = QWidget()
 		self.setCentralWidget(central_widget)
 		layout = QVBoxLayout(central_widget)
 		
 		# Create tab widget
-		tabs = QTabWidget()
-		layout.addWidget(tabs)
+		self.tabs = QTabWidget()
+		layout.addWidget(self.tabs)
 		
 		# Create tabs
 		logging.info("Creating UI tabs")
@@ -53,19 +58,71 @@ class MainWindow(QMainWindow):
 		self.consolidation_tab = self._create_consolidation_tab()
 		self.network_tab = self._create_network_tab()
 		
-		tabs.addTab(self.albums_tab, "Albums")
-		tabs.addTab(self.tags_tab, "Tags")
-		tabs.addTab(self.relationships_tab, "Relationships")
-		tabs.addTab(self.consolidation_tab, "Consolidation")
-		tabs.addTab(self.network_tab, "Network")
+		self.tabs.addTab(self.albums_tab, "Albums")
+		self.tabs.addTab(self.tags_tab, "Tags")
+		self.tabs.addTab(self.relationships_tab, "Relationships")
+		self.tabs.addTab(self.consolidation_tab, "Consolidation")
+		self.tabs.addTab(self.network_tab, "Network")
 
 		
 		# Create status bar
 		self.status_bar = QStatusBar()
 		self.setStatusBar(self.status_bar)
+		self.status_bar.showMessage("Ready - Use File > Load Data to begin")
 		
-		# Load data
-		self.load_data()
+		# Disable tabs until data is loaded
+		self._set_tabs_enabled(False)
+
+	def _create_menu_bar(self):
+		"""Create the application menu bar."""
+		menubar = self.menuBar()
+		
+		# File menu
+		file_menu = menubar.addMenu('File')
+		
+		load_data_action = QAction('Load Data...', self)
+		load_data_action.setShortcut('Ctrl+O')
+		load_data_action.triggered.connect(self._show_data_loader)
+		file_menu.addAction(load_data_action)
+		
+		file_menu.addSeparator()
+		
+		exit_action = QAction('Exit', self)
+		exit_action.setShortcut('Ctrl+Q')
+		exit_action.triggered.connect(self.close)
+		file_menu.addAction(exit_action)
+		
+		# View menu
+		view_menu = menubar.addMenu('View')
+		
+		refresh_action = QAction('Refresh Data', self)
+		refresh_action.setShortcut('F5')
+		refresh_action.triggered.connect(self._refresh_data)
+		refresh_action.setEnabled(False)  # Disabled until data is loaded
+		view_menu.addAction(refresh_action)
+		self.refresh_action = refresh_action  # Store reference
+		
+	def _set_tabs_enabled(self, enabled: bool):
+		"""Enable or disable all tabs."""
+		for i in range(self.tabs.count()):
+			self.tabs.setTabEnabled(i, enabled)
+			
+	def _show_data_loader(self):
+		"""Show the data loader dialog."""
+		csv_dir = Path("csv")  # Default CSV directory
+		dialog = DataLoaderDialog(self, csv_dir)
+		dialog.data_loaded.connect(self._on_data_loaded)
+		dialog.exec()
+		
+	def _on_data_loaded(self, dataframe):
+		"""Handle data loaded from the dialog."""
+		self.df = dataframe
+		self._process_loaded_data()
+		
+	def _refresh_data(self):
+		"""Refresh the current data display."""
+		if self.df is not None:
+			self._process_loaded_data()
 
 	def _create_albums_tab(self):
 		widget = QWidget()
@@ -130,36 +187,28 @@ class MainWindow(QMainWindow):
 		return widget
 
 
-	def load_data(self, csv_path: str):
+	def _process_loaded_data(self):
+		"""Process the loaded DataFrame and update the UI."""
 		try:
-			csv_dir = Path(csv_path)
-			logging.info(f"Looking for CSV files in: {csv_dir}")
-			if not csv_dir.exists():
-				msg = f"CSV directory not found: {csv_dir}"
-				logging.error(msg)
-				self.status_bar.showMessage(msg)
+			if self.df is None or self.df.empty:
+				self.status_bar.showMessage("No data to process")
 				return
 
-			logging.info("Creating CSVParser...")
-			parser = CSVParser(csv_dir)
-			logging.info("Parsing CSV files...")
-			self.df = parser.parse()
+			logging.info(f"Processing {len(self.df)} rows of data")
 
-			if self.df.empty:
-				msg = "No data parsed from CSV files"
-				logging.error(msg)
-				self.status_bar.showMessage(msg)
-				return
-
-			logging.info(f"Successfully loaded {len(self.df)} rows of data")
-
+			# Clear existing tags
+			self.all_tags.clear()
+			
 			# Extract tags
 			logging.info("Extracting tags...")
 			for tags in self.df['tags']:
 				if isinstance(tags, list):
 					self.all_tags.update(tags)
 
-			# Update tag comboboxes
+			# Clear and update tag comboboxes
+			self.tag_select.clear()
+			self.consolidation_tag_select.clear()
+			
 			sorted_tags = sorted(self.all_tags)
 			self.tag_select.addItems(sorted_tags)
 			self.consolidation_tag_select.addItems(sorted_tags)
@@ -204,12 +253,17 @@ class MainWindow(QMainWindow):
 			self.update_tags_table()
 			self.update_consolidation_table()
 
+			# Enable tabs and refresh action
+			self._set_tabs_enabled(True)
+			if hasattr(self, 'refresh_action'):
+				self.refresh_action.setEnabled(True)
+
 			msg = f"Loaded {len(self.df)} albums with {len(self.all_tags)} unique tags"
 			logging.info(msg)
 			self.status_bar.showMessage(msg)
 
 		except Exception as e:
-			msg = f"Error loading data: {str(e)}"
+			msg = f"Error processing data: {str(e)}"
 			logging.error(msg, exc_info=True)
 			self.status_bar.showMessage(msg)
 

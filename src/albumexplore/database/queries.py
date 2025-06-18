@@ -76,7 +76,7 @@ def search_albums(session: Session, query: str) -> List[Album]:
     """Search albums by artist or title."""
     return session.query(Album).filter(
         or_(
-            Album.artist.ilike(f"%{query}%"),
+            Album.pa_artist_name_on_album.ilike(f"%{query}%"),
             Album.title.ilike(f"%{query}%")
         )
     ).all()

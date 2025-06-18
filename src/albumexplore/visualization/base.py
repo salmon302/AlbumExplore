@@ -43,7 +43,7 @@ class NetworkGraph(VisualizationBase):
 		for album in albums:
 			self.nodes.append(VisualNode(
 				id=album.id,
-				label=f"{album.artist} - {album.title}",
+				label=f"{album.pa_artist_name_on_album} - {album.title}",
 				size=len(album.tags),
 				color=self._get_primary_genre_color(album),
 				shape="circle" if album.length == "LP" else "square",
@@ -104,7 +104,7 @@ class TableView(VisualizationBase):
 				shape="row",
 				data={
 					"type": "row",
-					"artist": album.artist,
+					"artist": album.pa_artist_name_on_album,
 					"title": album.title,
 					"year": album.release_year,
 					"tags": [t.name for t in album.tags]

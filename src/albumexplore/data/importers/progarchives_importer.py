@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set
 from sqlalchemy.orm import Session
 from datetime import datetime
-from ...database.models import Album, Artist, Track, Review, Tag
+from ...database.models import Album, Artist, Review, Tag, Track # Added Track
 from ..scrapers.progarchives_scraper import ProgArchivesScraper
 from ..parsers.progarchives_parser import ProgArchivesParser
 
@@ -13,11 +13,11 @@ logger = logging.getLogger(__name__)
 class ProgArchivesImporter:
     """Import ProgArchives data with deduplication and database integration."""
     
-    def __init__(self, session: Session, cache_dir: Optional[Path] = None):
+    def __init__(self, session: Session):  # Removed local_data_root and cache_dir
         """Initialize importer with database session."""
         self.session = session
-        self.scraper = ProgArchivesScraper(cache_dir=cache_dir)
-        self.parser = ProgArchivesParser()
+        self.scraper = ProgArchivesScraper()  # Initialize without arguments
+        self.parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
         self._seen_albums: Set[str] = set()  # Track processed albums
         
     def import_album(self, url: str, use_cache: bool = True) -> Optional[Album]:
@@ -130,11 +130,11 @@ class ProgArchivesImporter:
             for track_data in data.get('tracks', []):
                 track = Track(
                     title=track_data['title'],
-                    number=track_data.get('number'),
-                    duration=track_data.get('duration')
+                    length=track_data.get('length'),
+                    track_number=track_data.get('track_number')
                 )
                 album.tracks.append(track)
-                
+
             # Add reviews
             for review_data in data.get('reviews', []):
                 review = Review(

@@ -1,0 +1,395 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artistfe6b.html",
+  "name": "CARAVAN",
+  "genre": "Canterbury Scene",
+  "country": "United Kingdom",
+  "biography": "Formed in 1968 in Canterbury, UK - Disbanded in 1978 - Reformed several times (1980-85, 90-92 and since 1995)\n\nCARAVAN were the other half of the\n\nWILDE FLOWERS\n\n- the\n\nSOFT MACHINE\n\nbeing the other - that originated in Canterbury, Kent. The band itself was originally formed in early 1968 by guitarist/vocalist Pye HASTINGS, keyboardist\n\nDave SINCLAIR\n\n, bassist/vocalist\n\nRichard SINCLAIR\n\n(later of\n\nHATFIELD & THE NORTH\n\n,\n\nNATIONAL HEALTH\n\n, etc.), and drummer Richard COUGHLAN. All four members of CARAVAN were, at one time or another, in that band. They were a leading exponent of what became known as \"the Canterbury sound\".\n\nThe band's 1968 self-titled debut was a hybrid of jazz and psychedelia. Things became serious with the second album, \"If I Could Do It All Over Again,I'd Do It All Over You\" and would mark the start of their classic period. The material was a very original mixture of styles including classical, jazz, and traditional English influences. A MILESTONE IN THEIR HISTORY. This recipe was used to great success on the next album, \"In the Land of Grey and Pink\". This album was a perfect blend between simple northern-English pop and complex progressive rock. Quite simply one of the greatest progressive rock classics. The style dominated the next album, \"Waterloo Lily\", released in May of 1972, which marked a clear step towards jazz. Yet, Richard SINCLAIR's influence was clearly apparent on the first side. \"For Girls Who Grow Plump in the Night\" marked another change in the band's sound, this time towards a more streamlined symphonic approach. This album is not a bad album taken by itself, but the classic Canterbury sound stopped here. For a more representative look at CARAVAN in their prime, check out the preceding three albums. This lineup also recorded the live album \"Caravan and the New Symphonia\", a  live 1973 performance accompanied by a full orchestra.\n\n\"Cunning Stunts\" (1975) marked the beginning of a series of mediocre releases and lineup changes, eventually leading to the reunion of the original members on \"Back to Front\". Many different compilations and live albums were released in the intervening twelve years before a new studio album, \"Battle of Hastings\", which was released in 1995. This album was a nice collection of poppy tunes retaining the classic CARAVAN sound (organ, violin, flute, sax and HASTINGS' inimitable vocals). CARAVAN is still active today, playing many live dates in Britain and Holland and in 2000 saw the beginning of renewed activity (festival, concert, etc.). In February 2001, all the albums from \"If I Could...\" to \"Cunning Stunts\" were reissued with a myriad of bonus material, copious liner notes and impeccable sound quality. 2002 also saw the band plays their first performance in the United States in 28 years at NEARFEST 2002.",
+  "albums": [
+    {
+      "title": "For Girls Who Grow Plump in the Night",
+      "local_path": "album7eaf.html",
+      "year": 1973,
+      "rating": 4.19,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Cunning Stunts",
+      "local_path": "album5a2d.html",
+      "year": 1975,
+      "rating": 3.22,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Blind Dog At St. Dunstans",
+      "local_path": "album22d0.html",
+      "year": 1976,
+      "rating": 3.31,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Better by Far",
+      "local_path": "albumc9ea.html",
+      "year": 1977,
+      "rating": 2.91,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Album",
+      "local_path": "albumd130.html",
+      "year": 1980,
+      "rating": 2.33,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Back to Front",
+      "local_path": "album5bd7.html",
+      "year": 1982,
+      "rating": 2.61,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Battle of Hastings",
+      "local_path": "album2ca8.html",
+      "year": 1995,
+      "rating": 2.86,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Unauthorised Breakfast Item",
+      "local_path": "album5659.html",
+      "year": 2003,
+      "rating": 3.39,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Paradise Filter",
+      "local_path": "album78c9.html",
+      "year": 2013,
+      "rating": 3.18,
+      "type": "Studio Album"
+    },
+    {
+      "title": "The Back Catalogue Songs",
+      "local_path": "albuma220.html",
+      "year": 2014,
+      "rating": 3.0,
+      "type": "Studio Album"
+    },
+    {
+      "title": "It's None of Your Business",
+      "local_path": "albuma33f.html",
+      "year": 2021,
+      "rating": 3.23,
+      "type": "Studio Album"
+    },
+    {
+      "title": "Live 1990",
+      "local_path": "album9a64.html",
+      "year": 1990,
+      "rating": 2.85,
+      "type": "Live Album"
+    },
+    {
+      "title": "Canterbury Comes to London - Live from the Astoria",
+      "local_path": "album6ff9.html",
+      "year": 1997,
+      "rating": 3.83,
+      "type": "Live Album"
+    },
+    {
+      "title": "Back On The Tracks",
+      "local_path": "album1311.html",
+      "year": 1998,
+      "rating": 3.46,
+      "type": "Live Album"
+    },
+    {
+      "title": "Ether Way: BBC Sessions 1975-77",
+      "local_path": "album0c10.html",
+      "year": 1975,
+      "rating": 3.62,
+      "type": "Live Album"
+    },
+    {
+      "title": "Surprise Supplies [Aka: Here Am I]",
+      "local_path": "album1064.html",
+      "year": 1999,
+      "rating": 3.1,
+      "type": "Live Album"
+    },
+    {
+      "title": "Green Bottles For Marjorie",
+      "local_path": "album5222.html",
+      "year": 2002,
+      "rating": 3.23,
+      "type": "Live Album"
+    },
+    {
+      "title": "Live At Fairfield Halls - 1974",
+      "local_path": "album1328.html",
+      "year": 1974,
+      "rating": 4.47,
+      "type": "Live Album"
+    },
+    {
+      "title": "Live UK Tour 1975",
+      "local_path": "albumd0de.html",
+      "year": 1975,
+      "rating": 3.86,
+      "type": "Live Album"
+    },
+    {
+      "title": "Nowhere to Hide",
+      "local_path": "album3ea2.html",
+      "year": 2003,
+      "rating": 2.8,
+      "type": "Live Album"
+    },
+    {
+      "title": "Live in Nottingham",
+      "local_path": "album8fe2.html",
+      "year": 2003,
+      "rating": 3.16,
+      "type": "Live Album"
+    },
+    {
+      "title": "With Strings Attached",
+      "local_path": "album6c3e-2.html",
+      "year": 2003,
+      "rating": 2.75,
+      "type": "Live Album"
+    },
+    {
+      "title": "The Show Of Our Lives: Caravan At The BBC 1968-1975",
+      "local_path": "albumcf32.html",
+      "year": 1968,
+      "rating": 4.24,
+      "type": "Live Album"
+    },
+    {
+      "title": "A Hunting We Shall Go: Live in 1974",
+      "local_path": "album7697.html",
+      "year": 1974,
+      "rating": 2.55,
+      "type": "Live Album"
+    },
+    {
+      "title": "The European Tour 2011 - Live at Shepherds Bush Empire",
+      "local_path": "albumf114.html",
+      "year": 2011,
+      "rating": 2.4,
+      "type": "Live Album"
+    },
+    {
+      "title": "Live in Concert at Metropolis Studios, London",
+      "local_path": "album06c9.html",
+      "year": 2012,
+      "rating": 3.6,
+      "type": "Live Album"
+    },
+    {
+      "title": "Colour Me Pop",
+      "local_path": "albumd5e7.html",
+      "year": 2023,
+      "rating": 3.0,
+      "type": "Live Album"
+    },
+    {
+      "title": "The Anthology/The Ultimate Anthology",
+      "local_path": "album3eb1.html",
+      "year": 2007,
+      "rating": 2.9,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Classic Rock Legends: Caravan Live At Metropolis Studios",
+      "local_path": "album7933.html",
+      "year": 2011,
+      "rating": 3.14,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Live At Rosfest Gettysburg USA",
+      "local_path": "album0b4f.html",
+      "year": 2014,
+      "rating": 2.83,
+      "type": "Video/DVD"
+    },
+    {
+      "title": "Caravan (Compilation)",
+      "local_path": "albume669.html",
+      "year": 1979,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Canterbury Collection",
+      "local_path": "album48d3.html",
+      "year": 1984,
+      "rating": 2.09,
+      "type": "Compilation"
+    },
+    {
+      "title": "And I Wish I Were Stoned Don't Worry",
+      "local_path": "album2597-2.html",
+      "year": 1985,
+      "rating": 4.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Songs And Signs",
+      "local_path": "album3a98.html",
+      "year": 1991,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "The Best Of Caravan",
+      "local_path": "albumb7ce.html",
+      "year": 1993,
+      "rating": 4.05,
+      "type": "Compilation"
+    },
+    {
+      "title": "Canterbury Tales: The Best Of Caravan 1968-1975",
+      "local_path": "albumd26f-2.html",
+      "year": 1968,
+      "rating": 3.77,
+      "type": "Compilation"
+    },
+    {
+      "title": "Cool Water",
+      "local_path": "albumf353.html",
+      "year": 1994,
+      "rating": 2.48,
+      "type": "Compilation"
+    },
+    {
+      "title": "All Over You",
+      "local_path": "album8e3e.html",
+      "year": 1997,
+      "rating": 3.15,
+      "type": "Compilation"
+    },
+    {
+      "title": "Travelling Man",
+      "local_path": "albumab49.html",
+      "year": 1998,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Songs For Oblivion Fishermen",
+      "local_path": "album9b05.html",
+      "year": 1998,
+      "rating": 3.31,
+      "type": "Compilation"
+    },
+    {
+      "title": "All Over You ... Too",
+      "local_path": "album05b4.html",
+      "year": 1999,
+      "rating": 3.44,
+      "type": "Compilation"
+    },
+    {
+      "title": "Headloss",
+      "local_path": "albumf71c.html",
+      "year": 1999,
+      "rating": 3.04,
+      "type": "Compilation"
+    },
+    {
+      "title": "The HTD Years",
+      "local_path": "album5403.html",
+      "year": 2000,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Where But For Caravan Would  I?",
+      "local_path": "album2e5f.html",
+      "year": 2000,
+      "rating": 3.28,
+      "type": "Compilation"
+    },
+    {
+      "title": "Travelling Ways",
+      "local_path": "album6a8a.html",
+      "year": 2002,
+      "rating": 2.29,
+      "type": "Compilation"
+    },
+    {
+      "title": "The World Is Yours  -  The Anthology 1968-1976",
+      "local_path": "album2139.html",
+      "year": 1968,
+      "rating": 4.87,
+      "type": "Compilation"
+    },
+    {
+      "title": "Place of My Own: The Collection",
+      "local_path": "albumb059.html",
+      "year": 2014,
+      "rating": 3.0,
+      "type": "Compilation"
+    },
+    {
+      "title": "Love to Love You",
+      "local_path": "albumab4c.html",
+      "year": 1971,
+      "rating": 3.44,
+      "type": "EP/Single"
+    },
+    {
+      "title": "A Hunting We Shall Go",
+      "local_path": "album4698.html",
+      "year": 1974,
+      "rating": 3.67,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Headloss",
+      "local_path": "album80ee.html",
+      "year": 1974,
+      "rating": 3.2,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Stuck in a Hole",
+      "local_path": "albuma1bd.html",
+      "year": 1975,
+      "rating": 3.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "All The Way",
+      "local_path": "album0eeb.html",
+      "year": 1976,
+      "rating": 3.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Better By Far",
+      "local_path": "albumf701.html",
+      "year": 1977,
+      "rating": 2.0,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Heartbreaker",
+      "local_path": "album1db9.html",
+      "year": 1980,
+      "rating": 2.2,
+      "type": "EP/Single"
+    },
+    {
+      "title": "Keepin' Up De Fences",
+      "local_path": "album9ec3.html",
+      "year": 1980,
+      "rating": 2.0,
+      "type": "EP/Single"
+    }
+  ],
+  "scraped_at": "2025-05-18T11:16:01.898833"
+}

@@ -1,0 +1,17 @@
+{
+  "local_path": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\ProgArchives Data\\Website\\ProgArchives\\www.progarchives.com\\artista932.html",
+  "name": "HERMANN SZOBEL",
+  "genre": "RIO/Avant-Prog",
+  "country": "Austria",
+  "biography": "Hermann Szobel biography\n\nAn Austrian pianist / composer Hermann SZOBEL, born in 1958 and given lessons in classical piano in Vienna, has appeared on the stage as a jazz pianist apparently influenced by Martial Solal, Keith Jarrett, or so. Simultaneously he came to acquire methods of complex composing, and his intriguing knowledge of production, in collaboration with Michael VISCEGLIA (bass), Bob GOLDMAN (drums), Dave SAMUELS (percussion, marimba, vibraphone), and Vadim VYADRO (tenor saxophone, clarinet, flute), has crystallized to create only one album \"Szobel\", that was released in 1976 via Arista Records (and reissued as a CD via The Laser's Edge Records in 2012).",
+  "albums": [
+    {
+      "title": "Szobel",
+      "local_path": "album6aa9.html",
+      "year": 1976,
+      "rating": 4.68,
+      "type": "Studio Album"
+    }
+  ],
+  "scraped_at": "2025-05-18T11:15:58.681745"
+}
