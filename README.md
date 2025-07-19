@@ -29,6 +29,9 @@ from albumexplore import run
 
 # Launch the GUI application
 run()
+
+#tmp command for dev use
+#  set PYTHONPATH=C:\Users\salmo\Documents\GitHub\AlbumExplore\src && C:\Users\salmo\Documents\GitHub\AlbumExplore\.venv-1\Scripts\python.exe -m albumexplore.gui.app
 ```
 
 ## Development

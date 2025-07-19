@@ -1,0 +1,761 @@
+{
+    "substitutions": {
+        "^prog\\s+": "progressive ",
+        "^alt\\s+": "alternative ",
+        "^exp\\s+": "experimental ",
+        "^atmo\\s+": "atmospheric ",
+        "^tech\\s+": "technical ",
+        "^synth\\s+": "synthesizer ",
+        "^electro\\s+": "electronic ",
+        "metal\\s*core": "metalcore",
+        "death\\s*core": "deathcore",
+        "post[- ](\\w+)": "post-$1",
+        "neo[- ](\\w+)": "neo-$1",
+        "psychedelic\\s+(\\w+)": "psychedelic $1",
+        "melodic\\s+(\\w+)": "melodic $1",
+        "symphonic\\s+(\\w+)": "symphonic $1"
+    },
+    "prefix_standardization": {
+        "progressive": "prog-",
+        "alternative": "alt-",
+        "experimental": "exp-",
+        "atmospheric": "atmo-",
+        "technical": "tech-",
+        "electronic": "electro-"
+    },
+    "common_misspellings": {
+        "progresive": "progressive",
+        "progessive": "progressive",
+        "proggressive": "progressive",
+        "expirimental": "experimental",
+        "alternitive": "alternative",
+        "altrock": "alt-rock",
+        "atmopheric": "atmospheric",
+        "blackend": "blackened",
+        "blackned": "blackened",
+        "deathmetal": "death-metal",
+        "doommetal": "doom-metal",
+        "progmetal": "prog-metal",
+        "techdeath": "tech-death",
+        "postrock": "post-rock",
+        "postmetal": "post-metal",
+        "psychrock": "psychedelic-rock",
+        "psychadelic": "psychedelic",
+        "psycedelic": "psychedelic",
+        "sike-delic": "psychedelic",
+        "space black metal": "cosmic black metal",
+        "heavymetal": "heavy-metal",
+        "industrialmetal": "industrial-metal",
+        "exprock": "exp-rock",
+        "avant-gardemetal": "avant-garde-metal",
+        "altmetal": "alt-metal",
+        "sludgemetal": "sludge-metal",
+        "stonerrock": "stoner-rock",
+        "symphonic-deathmetal": "symphonic-death-metal",
+        "atmo-postmetal": "atmospheric-post-metal",
+        "prog-deathmetal": "prog-death-metal",
+        "darkjazz": "dark-jazz",
+        "comedyrock": "comedy-rock",
+        "orchestral deathmetal": "orchestral-death-metal",
+        "exp-doommetal": "exp-doom-metal",
+        "dissonant blackmetal": "dissonant-black-metal",
+        "electrometal": "electro-metal",
+        "cinematicrock": "cinematic-rock",
+        "atmo-sludgemetal": "atmospheric-sludge-metal",
+        "avant-garde deathmetal": "avant-garde-death-metal",
+        "techmetal": "tech-metal",
+        "darkambient": "dark-ambient",
+        "dronemetal": "drone-metal",
+        "freejazz": "free-jazz",
+        "atmo-deathmetal": "atmospheric-death-metal",
+        "mathmetal": "math-metal",
+        "dissonantmetal": "dissonant-metal",
+        "exp-blackmetal": "exp-black-metal",
+        "atmo-doommetal": "atmospheric-doom-metal",
+        "dissonant deathmetal": "dissonant-death-metal",
+        "psychedelic-deathmetal": "psychedelic-death-metal",
+        "tech-blackmetal": "tech-black-metal",
+        "exp-deathmetal": "exp-death-metal",
+        "death-doommetal": "death-doom-metal",
+        "psychedelic-blackmetal": "psychedelic-black-metal",
+        "ghoticmetal": "gothic-metal",
+        "space blackmetal": "cosmic-black-metal",
+        "artrock": "art-rock",
+        "hardrock": "hard-rock",
+        "funeral doommetal": "funeral-doom-metal",
+        "groovemetal": "groove-metal",
+        "atmo-darkrock": "atmospheric-dark-rock",
+        "exp-hardcore": "exp-hardcore",
+        "medieval blackmetal": "medieval-black-metal",
+        "ethereal doommetal": "ethereal-doom-metal",
+        "medieval folkmetal": "medieval-folk-metal",
+        "dreampop": "dream-pop",
+        "jazzrock": "jazz-rock",
+        "orchestralpop": "orchestral-pop",
+        "postpunk": "post-punk",
+        "symphonicrock": "symphonic-rock",
+        "desertrock": "desert-rock",
+        "indierock": "indie-rock",
+        "heavyrock": "heavy-rock",
+        "avantrock": "avant-rock",
+        "artpop": "art-pop",
+        "pyschedelicrock": "psychedelic-rock",
+        "indiepop": "indie-pop",
+        "avantpop": "avant-pop",
+        "contemporaryrock": "contemporary-rock",
+        "artpunk": "art-punk",
+        "classicrock": "classic-rock",
+        "partymetal": "party-metal",
+        "ambientpop": "ambient-pop",
+        "funkrock": "funk-rock",
+        "southernrock": "southern-rock",
+        "melodicrock": "melodic-rock",
+        "countryrock": "country-rock",
+        "powerpop": "power-pop",
+        "poprock": "pop-rock",
+        "poppunk": "pop-punk",
+        "jrock": "j-rock",
+        "dronerock": "drone-rock",
+        "melodic-doommetal": "melodic-doom-metal",
+        "traditional doommetal": "traditional-doom-metal",
+        "tech-thrashmetal": "tech-thrash-metal",
+        "expmetal": "exp-metal",
+        "grungerock": "grunge-rock",
+        "epic blackmetal": "epic-black-metal",
+        "cybermetal": "cyber-metal",
+        "etherealwave": "ethereal-wave",
+        "piratemetal": "pirate-metal",
+        "brutal deathmetal": "brutal-death-metal",
+        "crustpunk": "crust-punk",
+        "acousticrock": "acoustic-rock",
+        "jazzmetal": "jazz-metal",
+        "synthpunk": "synth-punk",
+        "psychedelic-sludgemetal": "psychedelic-sludge-metal",
+        "depressive blackmetal": "depressive-black-metal",
+        "garagerock": "garage-rock",
+        "industrialrock": "industrial-rock",
+        "surfrock": "surf-rock",
+        "contemporarypop": "contemporary-pop",
+        "doompop": "doom-pop",
+        "punkrock": "punk-rock",
+        "chamberpop": "chamber-pop",
+        "progpop": "prog-pop",
+        "noisepop": "noise-pop",
+        "nujazz": "nu-jazz",
+        "pianorock": "piano-rock",
+        "futurepop": "future-pop",
+        "garagepunk": "garage-punk",
+        "reggaerock": "reggae-rock",
+        "exppop": "exp-pop",
+        "gothrock": "goth-rock",
+        "darkrock": "dark-rock",
+        "altpop": "alt-pop",
+        "atmorock": "atmo-rock",
+        "heavyblues": "heavy-blues",
+        "ambientrock": "ambient-rock",
+        "modernjazz": "modern-jazz",
+        "numetal": "nu-metal",
+        "extrememetal": "extreme-metal",
+        "western blackmetal": "western-black-metal",
+        "spacemetal": "space-metal",
+        "parodymetal": "parody-metal",
+        "kawaiimetal": "kawaii-metal",
+        "mitteraltermetal": "mittelalter-metal",
+        "nauticalmetal": "nautical-metal",
+        "operaticmetal": "operatic-metal",
+        "slam deathmetal": "slam-death-metal",
+        "popmetal": "pop-metal",
+        "prog-sludgemetal": "prog-sludge-metal",
+        "dancepop": "dance-pop",
+        "spaceambient": "space-ambient",
+        "eclecticrock": "eclectic-rock",
+        "psychedelic/spacerock": "psychedelic/space-rock",
+        "darkpop": "dark-pop",
+        "futurejazz": "future-jazz",
+        "new wave and progrock": "prog-rock",
+        "progrock": "prog-rock",
+        "arenarock": "arena-rock",
+        "orchestralrock": "orchestral-rock",
+        "dancepunk": "dance-punk",
+        "emopop": "emo-pop",
+        "gothicpop": "gothic-pop",
+        "crossoverjazz": "crossover-jazz",
+        "anatolianrock": "anatolian-rock",
+        "electrorock": "electro-rock",
+        "surfpunk": "surf-punk",
+        "janglepop": "jangle-pop",
+        "celticrock": "celtic-rock",
+        "glamrock": "glam-rock",
+        "mathjazz": "math-jazz",
+        "fuzzrock": "fuzz-rock",
+        "occultrock": "occult-rock",
+        "slackerrock": "slacker-rock",
+        "orchestral postrock": "orchestral-post-rock",
+        "ritualambient": "ritual-ambient",
+        "dreampunk": "dream-punk",
+        "improvisedrock": "improvised-rock",
+        "cosmicrock": "cosmic-rock",
+        "avant-gardejazz": "avant-garde-jazz",
+        "yachtrock": "yacht-rock",
+        "tribalambient": "tribal-ambient",
+        "instrumentalrock": "instrumental-rock",
+        "sludgerock": "sludge-rock",
+        "folkpop": "folk-pop",
+        "skapunk": "ska-punk",
+        "raprock": "rap-rock",
+        "mathrock": "math-rock",
+        "spiritualjazz": "spiritual-jazz",
+        "glitchpop": "glitch-pop",
+        "bedroompop": "bedroom-pop",
+        "janglerock": "jangle-rock",
+        "anarchopunk": "anarcho-punk",
+        "instrumental postrock": "instrumental-post-rock",
+        "noiserock": "noise-rock",
+        "countrypop": "country-pop",
+        "chamberjazz": "chamber-jazz",
+        "baroquepop": "baroque-pop",
+        "drone/dark ambient/atmospheric blackmetal": "drone/dark-ambient/atmospheric-black-metal",
+        "old school deathmetal": "old-school-death-metal",
+        "melodicmetal": "melodic-metal",
+        "glammetal": "glam-metal",
+        "adventuremetal": "adventure-metal",
+        "blackened deathmetal": "blackened-death-metal",
+        "melodic-heavymetal": "melodic-heavy-metal",
+        "powerviolence/black metal/deathmetal": "powerviolence/black-metal/death-metal",
+        "psychedelicmetal": "psychedelic-metal",
+        "epic heavymetal": "epic-heavy-metal",
+        "trancemetal": "trance-metal",
+        "black-metal/deathmetal": "black-metal/death-metal",
+        "exp-sludgemetal": "exp-sludge-metal",
+        "death-metal/heavy metal/osdm": "death-metal/heavy-metal/osdm",
+        "prog-jazzmetal": "prog-jazz-metal",
+        "raw blackmetal": "raw-black-metal",
+        "cavernous deathmetal": "cavernous-death-metal",
+        "glitchmetal": "glitch-metal",
+        "harshnoise": "harsh-noise",
+        "avant-doommetal": "avant-doom-metal",
+        "trapmetal": "trap-metal",
+        "traditional heavymetal": "traditional-heavy-metal",
+        "epic doommetal": "epic-doom-metal",
+        "instrumental progressivemetal": "instrumental-progressive-metal",
+        "modernmetal": "modern-metal",
+        "hellenic blackmetal": "hellenic-black-metal",
+        "pagan-blackmetal": "pagan-black-metal",
+        "warmetal": "war-metal",
+        "horrorpunk": "horror-punk",
+        "cosmic doommetal": "cosmic-doom-metal",
+        "exp-noise": "exp-noise",
+        "mittelalter-metal": "mittelalter-metal",
+        "frenchpop": "french-pop",
+        "christian progressiverock": "christian-progressive-rock",
+        "instrumental progressiverock": "instrumental-progressive-rock",
+        "synthfunk": "synth-funk",
+        "hardcorefunk": "hardcore-funk",
+        "doomjazz": "doom-jazz",
+        "alternative rock/indie rock/emo": "alt-rock/indie-rock/emo",
+        "electrofunk": "electro-funk",
+        "dancerock": "dance-rock",
+        "instrumental mathrock": "instrumental-math-rock",
+        "newwave": "new-wave",
+        "jpop": "j-pop",
+        "discofunk": "disco-funk",
+        "expjazz": "exp-jazz",
+        "retrorock": "retro-rock",
+        "mathpop": "math-pop",
+        "doomrock": "doom-rock",
+        "modernrock": "modern-rock",
+        "psychedelicjazz": "psychedelic-jazz",
+        "synthrock": "synth-rock",
+        "rockpop": "rock-pop",
+        "theatricalpop": "theatrical-pop",
+        "contemporaryjazz": "contemporary-jazz",
+        "industrialnoise": "industrial-noise",
+        "exp-folk": "exp-folk",
+        "nowave": "no-wave",
+        "softrock": "soft-rock",
+        "rhythm &blues": "rhythm-&-blues",
+        "latinjazz": "latin-jazz",
+        "garagepop": "garage-pop",
+        "heartlandrock": "heartland-rock",
+        "contemporaryblues": "contemporary-blues",
+        "exp-poprock": "exp-pop-rock",
+        "dronepop": "drone-pop",
+        "avantjazz": "avant-jazz",
+        "janglepunk": "jangle-punk",
+        "pscyhedelicrock": "psychedelic-rock",
+        "acidjazz": "acid-jazz",
+        "sunshinepop": "sunshine-pop",
+        "yatchrock": "yacht-rock",
+        "noiseambient": "noise-ambient",
+        "pubrock": "pub-rock",
+        "soulrock": "soul-rock",
+        "angularpop": "angular-pop",
+        "jazzcore": "jazz-core",
+        "scumrock": "scum-rock",
+        "indiepunk": "indie-punk",
+        "skatepunk": "skate-punk",
+        "discopunk": "disco-punk",
+        "protopunk": "proto-punk",
+        "postblues": "post-blues",
+        "persianpop": "persian-pop",
+        "psychedelicfunk": "psychedelic-funk",
+        "nordicjazz": "nordic-jazz",
+        "tweepop": "twee-pop",
+        "grungejazz": "grunge-jazz",
+        "sophistipop": "sophisti-pop",
+        "post-modernpop": "post-modern-pop",
+        "noisepunk": "noise-punk",
+        "glampunk": "glam-punk",
+        "traditionalpop": "traditional-pop",
+        "southernmetal": "southern-metal",
+        "protometal": "proto-metal",
+        "classicaljazz": "classical-jazz",
+        "tharshmetal": "thrash-metal",
+        "exp-dronemetal": "exp-drone-metal",
+        "metalcore/noiserock": "metalcore/noise-rock",
+        "samuraimetal": "samurai-metal",
+        "exp-big band": "exp-big-band",
+        "industrialpunk": "industrial-punk",
+        "vocaljazz": "vocal-jazz",
+        "swamprock": "swamp-rock",
+        "electropop": "electro-pop",
+        "deathrock": "death-rock",
+        "stadiumrock": "stadium-rock",
+        "anxietypop": "anxiety-pop",
+        "arabicjazz": "arabic-jazz",
+        "retropop": "retro-pop",
+        "neopunk": "neo-punk",
+        "contemporaryfunk": "contemporary-funk",
+        "altblues": "alt-blues",
+        "minimalwave": "minimal-wave",
+        "exp-electronic": "exp-electronic",
+        "afrofunk": "afro-funk",
+        "afrorock": "afro-rock",
+        "altjazz": "alt-jazz",
+        "souljazz": "soul-jazz",
+        "latinpop": "latin-pop",
+        "progjazz": "prog-jazz",
+        "ethiojazz": "ethio-jazz",
+        "soulpop": "soul-pop",
+        "exp-folkrock": "exp-folk-rock",
+        "nordic folkrock": "nordic-folk-rock",
+        "arabicpop": "arabic-pop"
+    },
+    "single_instance_tag_rules": {
+        "raw": "raw-black-metal",
+        "dsbm": "depressive-black-metal",
+        "gore": "goregrind",
+        "slam": "slam-death-metal",
+        "brutal": "brutal-death-metal",
+        "symphonic": "symphonic",
+        "atmospheric": "atmospheric",
+        "experimental": "experimental",
+        "alternative": "alternative",
+        "technical": "technical",
+        "electronic": "electronic",
+        "progressive": "progressive",
+        "psychedelic": "psychedelic",
+        "l": "l",
+        "post": "post-rock",
+        "death": "death-metal",
+        "hardcore": "hardcore-punk",
+        "rock": "rock",
+        "folk": "folk",
+        "power": "power",
+        "doom": "doom-metal",
+        "sludge": "sludge-metal",
+        "gothic": "gothic-metal",
+        "melodic": "melodic",
+        "jazz": "jazz",
+        "noise": "noise",
+        "ambient": "ambient",
+        "heavy": "heavy-metal",
+        "stoner": "stoner-rock"
+    },
+    "categories": {},
+    "prefix_patterns": {
+        "post-": [
+            "post-",
+            "post "
+        ],
+        "prog-": [
+            "progressive ",
+            "prog-",
+            "prog "
+        ],
+        "alt-": [
+            "alternative ",
+            "alt-",
+            "alt "
+        ],
+        "exp-": [
+            "experimental ",
+            "exp-",
+            "exp "
+        ],
+        "atmo-": [
+            "atmospheric ",
+            "atmo-",
+            "atmo "
+        ],
+        "tech-": [
+            "technical ",
+            "tech-",
+            "tech "
+        ],
+        "electro-": [
+            "electronic ",
+            "electro-",
+            "electro "
+        ],
+        "black-": [
+            "black "
+        ],
+        "death-": [
+            "death "
+        ],
+        "doom-": [
+            "doom "
+        ],
+        "sludge-": [
+            "sludge "
+        ],
+        "stoner-": [
+            "stoner "
+        ],
+        "thrash-": [
+            "thrash "
+        ],
+        "speed-": [
+            "speed "
+        ],
+        "power-": [
+            "power "
+        ],
+        "folk-": [
+            "folk "
+        ],
+        "viking-": [
+            "viking "
+        ],
+        "pagan-": [
+            "pagan "
+        ],
+        "celtic-": [
+            "celtic "
+        ],
+        "gothic-": [
+            "gothic "
+        ],
+        "melodic-": [
+            "melodic "
+        ],
+        "symphonic-": [
+            "symphonic "
+        ],
+        "neo-": [
+            "neo-",
+            "neo "
+        ],
+        "psychedelic-": [
+            "psychedelic "
+        ]
+    },
+    "suffix_patterns": {
+        "core": [
+            "-core",
+            " core"
+        ],
+        "metal": [
+            "-metal",
+            " metal"
+        ],
+        "rock": [
+            "-rock",
+            " rock"
+        ],
+        "grind": [
+            "-grind",
+            " grind"
+        ],
+        "punk": [
+            "-punk",
+            " punk"
+        ],
+        "pop": [
+            "-pop",
+            " pop"
+        ],
+        "wave": [
+            "-wave",
+            " wave"
+        ],
+        "jazz": [
+            "-jazz",
+            " jazz"
+        ],
+        "blues": [
+            "-blues",
+            " blues"
+        ],
+        "funk": [
+            "-funk",
+            " funk"
+        ],
+        "ambient": [
+            " ambient"
+        ],
+        "noise": [
+            " noise"
+        ]
+    },
+    "compound_terms": {
+        "prog-metal": [
+            "progressive metal",
+            "prog metal"
+        ],
+        "prog-rock": [
+            "progressive rock",
+            "prog rock"
+        ],
+        "alt-rock": [
+            "alternative rock",
+            "alt rock"
+        ],
+        "exp-rock": [
+            "experimental rock",
+            "exp rock",
+            "exprock"
+        ],
+        "exp-metal": [
+            "experimental metal",
+            "exp metal",
+            "expmetal"
+        ],
+        "atmo-black-metal": [
+            "atmospheric black metal",
+            "atmo black metal",
+            "atmospheric-black-metal"
+        ],
+        "atmo-doom-metal": [
+            "atmospheric doom metal",
+            "atmo doom metal",
+            "atmospheric-doom-metal"
+        ],
+        "atmo-sludge-metal": [
+            "atmospheric sludge metal",
+            "atmo sludge metal",
+            "atmospheric-sludge-metal"
+        ],
+        "atmo-post-metal": [
+            "atmospheric post-metal",
+            "atmo post metal",
+            "atmospheric-post-metal"
+        ],
+        "atmo-death-metal": [
+            "atmospheric death metal",
+            "atmo death metal",
+            "atmospheric-death-metal"
+        ],
+        "atmo-dark-rock": [
+            "atmospheric dark rock",
+            "atmo dark rock"
+        ],
+        "atmo-rock": [
+            "atmospheric rock",
+            "atmo rock"
+        ],
+        "tech-death-metal": [
+            "technical death metal",
+            "tech death metal",
+            "techdeath",
+            "technical-deathmetal"
+        ],
+        "tech-metal": [
+            "technical metal",
+            "tech metal",
+            "techmetal"
+        ],
+        "tech-black-metal": [
+            "technical black metal",
+            "tech black metal",
+            "tech-blackmetal"
+        ],
+        "tech-deathcore": [
+            "technical deathcore",
+            "tech deathcore"
+        ],
+        "tech-thrash-metal": [
+            "technical thrash metal",
+            "tech thrash metal",
+            "tech-thrashmetal"
+        ],
+        "post-rock": [
+            "post rock"
+        ],
+        "post-metal": [
+            "post metal"
+        ],
+        "post-hardcore": [
+            "post hardcore",
+            "posthardcore"
+        ],
+        "post-punk": [
+            "post punk"
+        ],
+        "post-black-metal": [
+            "post black metal",
+            "post blackmetal",
+            "post-blackmetal"
+        ],
+        "psychedelic-rock": [
+            "psychedelic rock",
+            "psych rock",
+            "psychrock",
+            "pyschedelic rock",
+            "pscyhedelic rock"
+        ],
+        "psychedelic-folk": [
+            "psychedelic folk"
+        ],
+        "psychedelic-pop": [
+            "psychedelic pop"
+        ],
+        "psychedelic-metal": [
+            "psychedelic metal",
+            "psychedelicmetal"
+        ],
+        "psychedelic-death-metal": [
+            "psychedelic death metal",
+            "psychedelic-deathmetal"
+        ],
+        "psychedelic-black-metal": [
+            "psychedelic black metal",
+            "psychedelic-blackmetal"
+        ],
+        "psychedelic-sludge-metal": [
+            "psychedelic sludge metal",
+            "psychedelic-sludgemetal"
+        ],
+        "psychedelic-soul": [
+            "psychedelic soul"
+        ],
+        "psychedelic-trance": [
+            "psychedelic trance"
+        ],
+        "psychedelic-funk": [
+            "psychedelic funk"
+        ],
+        "space-rock": [
+            "space rock",
+            "spacerock"
+        ],
+        "krautrock": [
+            "kraut rock"
+        ],
+        "noise-rock": [
+            "noise rock",
+            "noiserock"
+        ],
+        "art-rock": [
+            "art rock",
+            "artrock"
+        ],
+        "math-rock": [
+            "math rock",
+            "mathrock"
+        ],
+        "jazz-fusion": [
+            "jazz fusion",
+            "jazzfusion"
+        ],
+        "jazz-rock": [
+            "jazz rock",
+            "jazzrock"
+        ],
+        "blues-rock": [
+            "blues rock",
+            "bluesrock"
+        ],
+        "folk-rock": [
+            "folk rock",
+            "folkrock"
+        ],
+        "folk-metal": [
+            "folk metal",
+            "folkmetal"
+        ],
+        "pagan-metal": [
+            "pagan metal"
+        ],
+        "viking-metal": [
+            "viking metal"
+        ],
+        "celtic-metal": [
+            "celtic metal"
+        ],
+        "black-metal": [
+            "black metal",
+            "blackmetal"
+        ],
+        "death-metal": [
+            "death metal",
+            "deathmetal"
+        ],
+        "doom-metal": [
+            "doom metal",
+            "doommetal"
+        ],
+        "sludge-metal": [
+            "sludge metal",
+            "sludgemetal"
+        ],
+        "stoner-metal": [
+            "stoner metal",
+            "stonermetal"
+        ],
+        "stoner-rock": [
+            "stoner rock",
+            "stonerrock"
+        ],
+        "thrash-metal": [
+            "thrash metal",
+            "tharshmetal"
+        ],
+        "speed-metal": [
+            "speed metal",
+            "speedmetal"
+        ],
+        "power-metal": [
+            "power metal",
+            "powermetal"
+        ],
+        "heavy-metal": [
+            "heavy metal",
+            "heavymetal"
+        ],
+        "symphonic-metal": [
+            "symphonic metal",
+            "symphonicmetal"
+        ],
+        "symphonic-black-metal": [
+            "symphonic-blackmetal"
+        ],
+        "symphonic-death-metal": [
+            "orchestral-death-metal"
+        ],
+        "symphonic-rock": [
+            "symphonicrock"
+        ],
+        "symphonic-prog": [
+            "symphonic prog"
+        ],
+        "gothic-metal": [
+            "gothic metal",
+            "ghoticmetal"
+        ],
+        "gothic-rock": [
+            "gothrock"
+        ]
+    }
+}

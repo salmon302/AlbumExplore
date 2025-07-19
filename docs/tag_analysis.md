@@ -1,6 +1,6 @@
-# Tag Analysis System Design
+# Enhanced Tag Analysis System Design
 
-## 1. Tag Extraction and Analysis
+## 1. Enhanced Tag Extraction and Analysis
 
 ### 1.1 Initial Tag Processing
 - Extract unique tags from dataset
@@ -8,184 +8,151 @@
 - Identify tag patterns and variations
 - Generate tag statistics
 - Detect outliers and anomalies
+- **NEW**: Component-based tag decomposition
+- **NEW**: Hierarchical relationship mapping
 
-### 1.2 Tag Clustering
+### 1.2 Enhanced Tag Clustering
 - Group similar tags based on:
 	- Edit distance with threshold matching
 	- Common prefixes/suffixes
 	- Co-occurrence patterns
 	- Network-based relationships
-	- Hierarchical relationships
+	- **NEW**: Hierarchical component analysis
+	- **NEW**: Semantic component grouping
 
-### 1.3 Tag Hierarchy
-- Primary genres
-- Subgenres with relationship mapping
-- Modifiers (e.g., "atmospheric", "technical")
-- Style indicators
-- Regional/Cultural indicators
+### 1.3 Enhanced Tag Hierarchy
 
-## 2. Relationship Analysis
+#### 1.3.1 Primary Genre Structure
+- **Metal**: black metal, death metal, doom metal, progressive metal, heavy metal, power metal, thrash metal
+- **Rock**: hard rock, progressive rock, psychedelic rock, alternative rock, indie rock, art rock
+- **Electronic**: ambient, techno, house, trance, drum and bass, experimental electronic
+- **Jazz**: bebop, cool jazz, free jazz, fusion, jazz rock
+- **Classical**: baroque, romantic, contemporary classical, symphonic, orchestral
+- **Folk**: traditional folk, contemporary folk, folk rock, regional folk
 
-### 2.1 Tag Co-occurrence
-- Calculate co-occurrence matrix
-- Identify strong relationshipsPASSED [ 15%]FAILED [ 16%]
-tests/test_data_validator.py:24 (TestDataValidator.test_check_date_validity)
-self = <tests.test_data_validator.TestDataValidator testMethod=test_check_date_validity>
+#### 1.3.2 Hierarchical Component Types
+- **Primary Genres**: Core musical categories (metal, rock, electronic, etc.)
+- **Subgenres**: Specific derivatives with relationship mapping (death metal → metal)
+- **Style Modifiers**: Descriptive qualities (atmospheric, technical, melodic, progressive)
+- **Prefixes**: Separable evolution indicators (post-, neo-, proto-, avant-)
+- **Regional/Cultural**: Geographic and cultural indicators (viking, celtic, scandinavian)
+- **Vocal Styles**: Vocal characteristics (clean, harsh, growl, scream)
+- **Instrumental**: Instrumentation focus (guitar-driven, orchestral, electronic)
 
-    def test_check_date_validity(self):
-    	df = pd.DataFrame({
-    		'Artist': ['Test'],
-    		'Album': ['Test'],
-    		'Release Date': ['2025-01-01'],
-    		'Length': ['LP'],
-    		'Genre / Subgenres': ['Test'],
-    		'Vocal Style': ['Clean'],
-    		'Country / State': ['US'],
-    		'release_date': [datetime(2025, 1, 1)]
-    	})
-    	validator = DataValidator(df)
-    	validator.validate()
->   	self.assertIn("dates outside expected year", str(validator.errors))
-E    AssertionError: 'dates outside expected year' not found in '[]'
+#### 1.3.3 Prefix Separation System
+- **post-**: Genre evolution beyond traditional boundaries
+  - Examples: post-metal, post-rock, post-punk, post-hardcore
+- **neo-**: Modern revival or reinterpretation
+  - Examples: neo-classical, neo-folk, neo-soul
+- **proto-**: Early or foundational form
+  - Examples: proto-metal, proto-punk
+- **avant-**: Experimental and forward-thinking
+  - Examples: avant-garde, avant-metal
 
-tests/test_data_validator.py:38: AssertionError
-PASSED [ 16%]PASSED [ 17%]PASSED [ 18%]PASSED [ 18%]FAILED [ 19%]
-tests/test_data_validator.py:54 (TestDataValidator.test_check_tag_frequency)
-self = <tests.test_data_validator.TestDataValidator testMethod=test_check_tag_frequency>
+## 2. Enhanced Relationship Analysis
 
-    def test_check_tag_frequency(self):
-    	df = pd.DataFrame({
-    		'Artist': ['Test'] * 3,
-    		'Album': ['Test'] * 3,
-    		'Release Date': ['2024-01-01'] * 3,
-    		'Length': ['LP'] * 3,
-    		'Genre / Subgenres': ['Test'] * 3,
-    		'Vocal Style': ['Clean'] * 3,
-    		'Country / State': ['US'] * 3,
-    		'tags': [['tag1'], ['tag2'], ['tag1']]
-    	})
-    	validator = DataValidator(df)
-    	validator.validate()
-    	self.assertNotIn("single-use tags", str(validator.warnings))
-    
-    	df_single = pd.DataFrame({
-    		'Artist': ['Test'] * 2,
-    		'Album': ['Test'] * 2,
-    		'Release Date': ['2024-01-01'] * 2,
-    		'Length': ['LP'] * 2,
-    		'Genre / Subgenres': ['Test'] * 2,
-    		'Vocal Style': ['Clean'] * 2,
-    		'Country / State': ['US'] * 2,
-    		'tags': [['tag1'], ['tag2']]
-    	})
-    	validator_single = DataValidator(df_single)
-    	validator_single.validate()
->   	self.assertIn("single-use tags", str(validator_single.warnings))
-E    AssertionError: 'single-use tags' not found in '[]'
+### 2.1 Tag Co-occurrence with Component Analysis
+- Calculate co-occurrence matrix with component awareness
+- Identify strong relationships between tag components
+- Detect outlier combinations that break hierarchy rules
+- Generate relationship weights based on semantic similarity
+- **NEW**: Component-level relationship mapping
+- **NEW**: Cross-hierarchy relationship detection
 
-tests/test_data_validator.py:82: AssertionError
-PASSED [ 19%]PASSED [ 20%]PASSED [ 20%]FAILED [ 21%]
-tests/test_data_validator.py:134 (TestDataValidator.test_valid_data_validation)
-0 != 1
+### 2.2 Album Similarity with Hierarchical Awareness
+- Tag-based similarity metrics enhanced with hierarchy
+- Weighted relationships considering component types
+- Genre cluster analysis with primary genre grouping
+- Temporal patterns within genre hierarchies
+- **NEW**: Component-based similarity scoring
+- **NEW**: Hierarchical distance metrics
 
-Expected :1
-Actual   :0
-<Click to see difference>
+### 2.3 Enhanced Network Analysis
+- Centrality measures with hierarchy weighting
+- Community detection respecting genre boundaries
+- Path analysis through hierarchical structures
+- Influence metrics considering component types
+- Co-occurrence strength with semantic weighting
+- **NEW**: Multi-level hierarchy graphs
+- **NEW**: Component interaction networks
 
-self = <tests.test_data_validator.TestDataValidator testMethod=test_valid_data_validation>
+## 3. Enhanced Implementation Components
 
-    def test_valid_data_validation(self):
-    	"""Test validation with valid data."""
-    	df = pd.DataFrame({
-    		'Artist': ['Test Band', 'Another Band'],
-    		'Album': ['Test Album', 'Second Album'],
-    		'Release Date': ['2024-01-15', '2024-01-20'],
-    		'Length': ['LP', 'EP'],
-    		'Genre / Subgenres': ['Progressive Metal, Heavy Metal', 'Black Metal, Death Metal'],
-    		'Vocal Style': ['Clean', 'Harsh'],
-    		'Country / State': ['US', 'GB'],
-    		'tags': [
-    			['progressive metal', 'heavy metal'],
-    			['black metal', 'death metal']
-    		]
-    	})
-    	validator = DataValidator(df)
-    	self.assertTrue(validator.validate())
-    	self.assertEqual(len(validator.errors), 0)
->   	self.assertEqual(len(validator.warnings), 0)
-
-tests/test_data_validator.py:153: AssertionError
-
-- Detect outlier combinations
-- Generate relationship weights
-- Network-based analysis
-
-### 2.2 Album Similarity
-- Tag-based similarity metrics
-- Weighted relationships
-- Genre cluster analysis
-- Temporal patterns
-- Hierarchical relationships
-
-### 2.3 Network Analysis
-- Centrality measures
-- Community detection
-- Path analysis
-- Influence metrics
-- Co-occurrence strength
-- Relationship graphs
-
-## 3. Implementation Components
-
-### 3.1 TagAnalyzer Class
+### 3.1 EnhancedTagHierarchy Class
 ```python
-class TagAnalyzer:
-		def __init__(self, df: pd.DataFrame):
-				self.df = df
-				self.tag_frequencies = {}
-				self.tag_relationships = {}
-				self.tag_clusters = {}
-				self.graph = nx.Graph()
+class EnhancedTagHierarchy:
+    def __init__(self):
+        self.primary_genres = {...}
+        self.style_modifiers = {...}
+        self.separable_prefixes = {...}
+        self.regional_cultural = {...}
+        self.vocal_styles = {...}
+        self.tag_hierarchy = {}
 
-		def analyze_tags(self) -> Dict[str, Dict]:
-				# Extract and analyze tags with statistics
-				pass
+    def decompose_tag(self, tag_name: str) -> List[TagComponent]:
+        # Decompose composite tags into components
+        # Examples:
+        # - "atmospheric black metal" -> [atmospheric(modifier), black(modifier), metal(primary)]
+        # - "post-rock" -> [post(prefix), rock(primary)]
+        pass
 
-		def calculate_relationships(self) -> Dict[Tuple[str, str], float]:
-				# Calculate tag relationships with weights
-				pass
+    def suggest_consolidation(self, tag_name: str) -> Dict[str, Any]:
+        # Suggest consolidation based on hierarchy
+        pass
 
-		def find_similar_tags(self, tag: str, threshold: float = 0.3) -> List[Tuple[str, float]]:
-				# Find similar tags using multiple metrics
-				pass
-
-		def get_tag_clusters(self, min_size: int = 2) -> Dict[str, List[str]]:
-				# Generate tag clusters using network analysis
-				pass
+    def analyze_tag_collection(self, tags: List[str]) -> Dict[str, Any]:
+        # Comprehensive collection analysis
+        pass
 ```
 
-### 3.2 TagSimilarity Class
+### 3.2 EnhancedTagConsolidator Class
 ```python
-class TagSimilarity:
-		def __init__(self, tag_analyzer: TagAnalyzer):
-				self.analyzer = tag_analyzer
-				self.similarity_matrix = {}
+class EnhancedTagConsolidator:
+    def __init__(self, analyzer: TagAnalyzer, strategy: ConsolidationStrategy):
+        self.analyzer = analyzer
+        self.strategy = strategy
+        self.hierarchy = EnhancedTagHierarchy()
 
-		def calculate_similarities(self) -> Dict[Tuple[str, str], float]:
-				# Calculate similarities using multiple metrics
-				pass
+    def consolidate_tag(self, tag: str) -> ConsolidationResult:
+        # Consolidate single tag using hierarchy-aware rules
+        pass
 
-		def _calculate_tag_similarity(self, tag1: str, tag2: str) -> float:
-				# Calculate similarity between tags using multiple metrics
-				pass
+    def consolidate_tag_collection(self, tags: List[str]) -> Dict[str, Any]:
+        # Consolidate entire collection with comprehensive analysis
+        pass
 
-		def _calculate_cooccurrence_similarity(self, tag1: str, tag2: str) -> float:
-				# Calculate similarity based on co-occurrences
-				pass
+    def _create_prefix_separation_rules(self) -> List[ConsolidationRule]:
+        # Create rules for separating prefixes
+        pass
 
-		def _calculate_network_similarity(self, tag1: str, tag2: str) -> float:
-				# Calculate similarity based on network structure
-				pass
+    def _create_hierarchical_rules(self) -> List[ConsolidationRule]:
+        # Create rules focused on building proper hierarchies
+        pass
+```
+
+### 3.3 Enhanced TagAnalyzer Integration
+```python
+class TagAnalyzer:
+    def __init__(self, df: pd.DataFrame):
+        self.df = df
+        self.hierarchy = EnhancedTagHierarchy()  # NEW
+        self.consolidator = EnhancedTagConsolidator(self)  # NEW
+        self.tag_frequencies = {}
+        self.tag_relationships = {}
+        self.tag_clusters = {}
+        self.graph = nx.Graph()
+
+    def analyze_tags_with_hierarchy(self) -> Dict[str, Dict]:
+        # Enhanced analysis with hierarchy awareness
+        pass
+
+    def get_component_statistics(self) -> Dict[str, Any]:
+        # Statistics by component type
+        pass
+
+    def get_hierarchy_coverage(self) -> Dict[str, Any]:
+        # Coverage analysis of hierarchy
+        pass
 ```
 
 ## 4. Performance Considerations

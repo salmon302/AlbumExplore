@@ -1,4 +1,4 @@
-"""Tag normalization system."""
+"""Tag normalization system with atomic tag support."""
 import re
 import json
 import os
@@ -10,13 +10,14 @@ from albumexplore.tags.config.tag_rules_config import TagRulesConfig
 logger = logging.getLogger(__name__)
 
 class TagNormalizer:
-    """Handles tag normalization and variant consolidation."""
+    """Handles tag normalization and variant consolidation with atomic tag support."""
     
-    def __init__(self, test_mode: bool = False):
+    def __init__(self, test_mode: bool = False, enable_atomic_tags: bool = True):
         """Initialize the normalizer with rules.
         
         Args:
             test_mode: If True, use test configuration instead of production rules
+            enable_atomic_tags: If True, enable atomic tag decomposition
         """
         self._rules_config = TagRulesConfig(test_mode=test_mode)
         self._variant_cache = {}
@@ -25,6 +26,15 @@ class TagNormalizer:
         self._similarity_threshold = 0.7
         self._min_frequency_for_normalization = 2
         self._active = True  # Added: Normalization is active by default
+        
+        # Atomic tag system
+        self._enable_atomic_tags = enable_atomic_tags
+        self._atomic_config = {}
+        self._atomic_decomposition_cache = {}
+        self._valid_atomic_tags = set()
+        
+        if self._enable_atomic_tags:
+            self._load_atomic_config()
         
     def set_active(self, active: bool):
         """Set the active state of the normalizer."""
@@ -157,3 +167,150 @@ class TagNormalizer:
         """Get current timestamp for merge history."""
         from datetime import datetime
         return datetime.now().isoformat()
+    
+    # ===== ATOMIC TAG SYSTEM METHODS =====
+    
+    def _load_atomic_config(self):
+        """Load atomic tag configuration from the main config file."""
+        try:
+            # Get the config file path relative to this module
+            config_dir = os.path.dirname(os.path.dirname(__file__))  # tags/
+            config_path = os.path.join(config_dir, 'config', 'tag_rules.json')
+            
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+            
+            # Load atomic decomposition rules
+            self._atomic_config = config.get('atomic_decomposition', {})
+            
+            # Load valid atomic tags
+            atomic_tags_config = config.get('atomic_tags', {})
+            if 'all_valid_tags' in atomic_tags_config:
+                self._valid_atomic_tags = set(atomic_tags_config['all_valid_tags'])
+            
+            logger.info(f"Loaded {len(self._atomic_config)} atomic decomposition rules")
+            logger.info(f"Loaded {len(self._valid_atomic_tags)} valid atomic tags")
+            
+        except Exception as e:
+            logger.warning(f"Could not load atomic config: {e}")
+            self._atomic_config = {}
+            self._valid_atomic_tags = set()
+    
+    def is_atomic_enabled(self) -> bool:
+        """Check if atomic tag system is enabled."""
+        return self._enable_atomic_tags
+    
+    def enable_atomic_tags(self, enable: bool = True):
+        """Enable or disable atomic tag processing."""
+        self._enable_atomic_tags = enable
+        if enable and not self._atomic_config:
+            self._load_atomic_config()
+    
+    def normalize_to_atomic(self, tag: str) -> List[str]:
+        """Normalize a tag and decompose to atomic components.
+        
+        Args:
+            tag: The tag to normalize and decompose
+            
+        Returns:
+            List of atomic components for the tag
+        """
+        if not tag or not self._enable_atomic_tags:
+            return [self.normalize(tag)] if tag else []
+        
+        # Clean and normalize basic format
+        cleaned_tag = tag.lower().strip()
+        
+        # Check cache first
+        if cleaned_tag in self._atomic_decomposition_cache:
+            return self._atomic_decomposition_cache[cleaned_tag]
+        
+        # Apply atomic decomposition if rule exists
+        if cleaned_tag in self._atomic_config:
+            atomic_components = self._atomic_config[cleaned_tag].copy()
+            self._atomic_decomposition_cache[cleaned_tag] = atomic_components
+            return atomic_components
+        
+        # Check for case variations and format variations
+        normalized_for_lookup = cleaned_tag.replace('-', ' ').replace('_', ' ')
+        for rule_tag, components in self._atomic_config.items():
+            rule_normalized = rule_tag.replace('-', ' ').replace('_', ' ')
+            if rule_normalized == normalized_for_lookup:
+                atomic_components = components.copy()
+                self._atomic_decomposition_cache[cleaned_tag] = atomic_components
+                return atomic_components
+        
+        # If no decomposition rule found, return normalized single tag
+        normalized_single = self.normalize(tag)
+        result = [normalized_single]
+        self._atomic_decomposition_cache[cleaned_tag] = result
+        return result
+    
+    def normalize_tag_list_to_atomic(self, tags: List[str]) -> List[str]:
+        """Normalize a list of tags using atomic decomposition.
+        
+        Args:
+            tags: List of tags to normalize and decompose
+            
+        Returns:
+            List of unique atomic components from all tags
+        """
+        if not tags:
+            return []
+        
+        if not self._enable_atomic_tags:
+            return [self.normalize(tag) for tag in tags if tag]
+        
+        atomic_tags = []
+        for tag in tags:
+            if tag:  # Skip empty tags
+                atomic_components = self.normalize_to_atomic(tag)
+                atomic_tags.extend(atomic_components)
+        
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_atomic_tags = []
+        for tag in atomic_tags:
+            if tag and tag not in seen:
+                seen.add(tag)
+                unique_atomic_tags.append(tag)
+        
+        return unique_atomic_tags
+    
+    def validate_atomic_tag(self, tag: str) -> bool:
+        """Check if a tag is a valid atomic component.
+        
+        Args:
+            tag: The tag to validate
+            
+        Returns:
+            True if the tag is a valid atomic component
+        """
+        if not self._enable_atomic_tags:
+            return True
+        
+        return tag.lower().strip() in self._valid_atomic_tags
+    
+    def get_atomic_statistics(self) -> Dict[str, any]:
+        """Get statistics about atomic tag system usage.
+        
+        Returns:
+            Dictionary containing atomic tag statistics
+        """
+        return {
+            'atomic_enabled': self._enable_atomic_tags,
+            'decomposition_rules': len(self._atomic_config),
+            'decomposition_cache_size': len(self._atomic_decomposition_cache),
+            'valid_atomic_tags': len(self._valid_atomic_tags),
+            'version': '1.0'
+        }
+    
+    def clear_atomic_cache(self):
+        """Clear the atomic decomposition cache."""
+        self._atomic_decomposition_cache.clear()
+    
+    def reload_atomic_config(self):
+        """Reload the atomic tag configuration."""
+        if self._enable_atomic_tags:
+            self._load_atomic_config()
+            self.clear_atomic_cache()

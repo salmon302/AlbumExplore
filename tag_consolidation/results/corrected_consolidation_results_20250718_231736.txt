@@ -1,0 +1,550 @@
+CORRECTED TAG CONSOLIDATION RESULTS
+============================================================
+
+OVERALL ACHIEVEMENT:
+  Original unique tags: 1057
+  Final unique tags: 485
+  Total reduction: 572 (54.1%)
+
+CORRECTED CONSOLIDATIONS:
+
+  Case: 'electronic' -> 'Electronic' (68 instances)
+  Case: 'symphonic' -> 'Symphonic' (115 instances)
+  Case: 'Pop' -> 'pop' (66 instances)
+  Case: 'classical' -> 'Classical' (2 instances)
+  Case: 'Punk' -> 'punk' (22 instances)
+  Decompose: 'progressive-metal' -> 'progressive' + 'metal' (3281 instances)
+  Decompose: 'progressive-rock' -> 'progressive' + 'rock' (1848 instances)
+  Decompose: 'Progressive Metal' -> 'progressive' + 'metal' (37 instances)
+  Decompose: 'Progressive Rock' -> 'progressive' + 'rock' (49 instances)
+  Decompose: 'psychedelic-rock' -> 'psychedelic' + 'rock' (677 instances)
+  Decompose: 'Psychedelic rock' -> 'psychedelic' + 'rock' (664 instances)
+  Decompose: 'psychedelic-metal' -> 'psychedelic' + 'metal' (222 instances)
+  Decompose: 'Psychedelic metal' -> 'psychedelic' + 'metal' (8 instances)
+  Decompose: 'experimental-rock' -> 'experimental' + 'rock' (390 instances)
+  Decompose: 'experimental-metal' -> 'experimental' + 'metal' (117 instances)
+  Decompose: 'experimental-folk' -> 'experimental' + 'folk' (16 instances)
+  Decompose: 'experimental-pop' -> 'experimental' + 'pop' (68 instances)
+  Decompose: 'alternative-rock' -> 'alternative' + 'rock' (1235 instances)
+  Decompose: 'alternative-metal' -> 'alternative' + 'metal' (219 instances)
+  Decompose: 'alternative-pop' -> 'alternative' + 'pop' (173 instances)
+  Decompose: 'Post-rock' -> 'post' + 'rock' (1356 instances)
+  Decompose: 'Post-metal' -> 'post' + 'metal' (783 instances)
+  Decompose: 'Post-punk' -> 'post' + 'punk' (11 instances)
+  Decompose: 'death-metal' -> 'death' + 'metal' (879 instances)
+  Decompose: 'Death metal' -> 'death' + 'metal' (835 instances)
+  Decompose: 'black-metal' -> 'black' + 'metal' (453 instances)
+  Decompose: 'Black metal' -> 'black' + 'metal' (833 instances)
+  Decompose: 'doom-metal' -> 'doom' + 'metal' (1748 instances)
+  Decompose: 'Doom Metal' -> 'doom' + 'metal' (21 instances)
+  Decompose: 'Technical metal' -> 'technical' + 'metal' (8 instances)
+  Decompose: 'Melodic metal' -> 'melodic' + 'metal' (4 instances)
+  Decompose: 'hard-rock' -> 'hard' + 'rock' (222 instances)
+  Decompose: 'Hard Rock' -> 'hard' + 'rock' (8 instances)
+  Decompose: 'math-rock' -> 'math' + 'rock' (215 instances)
+  Decompose: 'Math Rock' -> 'math' + 'rock' (13 instances)
+  Decompose: 'art-rock' -> 'art' + 'rock' (196 instances)
+  Decompose: 'Art Rock' -> 'art' + 'rock' (16 instances)
+  Decompose: 'Noise Rock' -> 'noise' + 'rock' (4 instances)
+  Decompose: 'space-rock' -> 'space' + 'rock' (94 instances)
+  Decompose: 'Space Rock' -> 'space' + 'rock' (10 instances)
+  Decompose: 'Stoner Rock' -> 'stoner' + 'rock' (4 instances)
+  Decompose: 'folk-pop' -> 'folk' + 'pop' (14 instances)
+  Decompose: 'jazz-fusion' -> 'jazz' + 'fusion' (153 instances)
+  Decompose: 'jazz-rock' -> 'jazz' + 'rock' (55 instances)
+  Decompose: 'free-jazz' -> 'free' + 'jazz' (19 instances)
+  Decompose: 'nu-jazz' -> 'nu' + 'jazz' (13 instances)
+  Decompose: 'art-pop' -> 'art' + 'pop' (109 instances)
+  Decompose: 'Dance-Pop' -> 'dance' + 'pop' (7 instances)
+  Decompose: 'pop-punk' -> 'pop' + 'punk' (74 instances)
+  Decompose: 'punk-rock' -> 'punk' + 'rock' (70 instances)
+  Decompose: 'Dance-Punk' -> 'dance' + 'punk' (6 instances)
+
+
+FINAL ATOMIC TAG FREQUENCIES:
+
+    1. metal: 9818
+    2. rock: 7428
+    3. progressive: 5215
+    4. post: 2150
+    5. doom: 1769
+    6. death: 1714
+    7. alternative: 1627
+    8. psychedelic: 1574
+    9. black: 1286
+   10. Shoegaze: 722
+   11. folk: 639
+   12. experimental: 591
+   13. pop: 579
+   14. hardcore: 507
+   15. jazz: 501
+   16. Metalcore: 471
+   17. art: 321
+   18. Experimental: 311
+   19. Electronic: 311
+   20. Ambient: 274
+   21. Symphonic: 260
+   22. Power metal: 257
+   23. hard: 230
+   24. math: 228
+   25. Thrash metal: 225
+   26. punk: 207
+   27. Deathcore: 200
+   28. fusion: 154
+   29. world-music: 112
+   30. space: 104
+   31. Post-Black metal: 101
+   32. Grunge: 76
+   33. Industrial: 73
+   34. pop-rock: 65
+   35. Alt-Country: 56
+   36. Groove metal: 56
+   37. Slowcore: 55
+   38. Gothic metal: 55
+   39. Drone metal: 53
+   40. Dissonant Death metal: 53
+   41. Singer/Songwriter: 50
+   42. Americana: 48
+   43. Emo: 45
+   44. Gothic rock: 43
+   45. Speed metal: 43
+   46. Acoustic: 43
+   47. Avant-Garde metal: 41
+   48. Classical: 41
+   49. Synthpop: 40
+   50. Midwest Emo: 37
+   51. Power Pop: 37
+   52. Chamber Pop: 37
+   53. Industrial metal: 37
+   54. Symphonic Prog: 36
+   55. Doomgaze: 35
+   56. Symphonic rock: 35
+   57. Prog-rock/metal: 32
+   58. Avant-garde Black metal: 32
+   59. Funk: 31
+   60. Funk rock: 30
+   61. Atmospheric: 29
+   62. Art Punk: 28
+   63. Slacker rock: 28
+   64. Neo-Prog: 28
+   65. heavy-prog: 28
+   66. Nu-metal: 28
+   67. Funeral Doom metal: 27
+   68. Sludge: 27
+   69. AOR: 25
+   70. Heavy rock: 24
+   71. Powerviolence: 22
+   72. Crust Punk: 21
+   73. Indie: 21
+   74. Garage Punk: 21
+   75. Gothic: 21
+   76. Neoclassical: 20
+   77. Crossover Prog: 20
+   78. Avant-Garde Jazz: 20
+   79. Dissonant Black metal: 19
+   80. Surf rock: 19
+   81. Eclectic: 19
+   82. Experimental Black metal: 19
+   83. free: 19
+   84. Crust: 18
+   85. Deathgrind: 18
+   86. Soul: 17
+   87. Melodic: 17
+   88. RPI: 17
+   89. Doom: 17
+   90. new-wave: 17
+   91. Desert rock: 16
+   92. Jangle Pop: 16
+   93. Power: 16
+   94. Post: 16
+   95. Indietronica: 16
+   96. Electroacoustic: 16
+   97. trip-hop: 16
+   98. prog-rock: 16
+   99. Crossover Thrash: 15
+  100. Progressive Pop: 15
+  101. Modern Classical: 15
+  102. Alternative R&B: 15
+  103. Psychedelic Black metal: 14
+  104. Virtuoso: 14
+  105. Melodic Doom metal: 14
+  106. Zeuhl: 14
+  107. Grunge rock: 13
+  108. Blackened Hardcore: 13
+  109. nu: 13
+  110. dance: 13
+  111. Blues: 12
+  112. Slam Death metal: 12
+  113. Industrial rock: 12
+  114. Deathrock: 12
+  115. Chamber: 12
+  116. Ethereal Wave: 12
+  117. RIO: 12
+  118. Neocrust: 12
+  119. Sludge Metal: 12
+  120. Post-Grunge: 12
+  121. Jam Band: 12
+  122. Groove: 11
+  123. Indie Rock: 11
+  124. Harsh Noise: 11
+  125. Stoner: 10
+  126. Swancore: 10
+  127. Cyber metal: 10
+  128. Bedroom Pop: 10
+  129. Emoviolence: 10
+  130. Emo-Pop: 10
+  131. Extreme metal: 9
+  132. Technical Thrash metal: 9
+  133. Canterbury: 9
+  134. Dark rock: 9
+  135. Singer-songwriter: 9
+  136. Symphonic Death metal: 9
+  137. Epic Heavy metal: 9
+  138. Western: 9
+  139. Sasscore: 9
+  140. Epic Doom metal: 9
+  141. Acoustic rock: 9
+  142. Psychedelic Folk: 9
+  143. New Age: 9
+  144. Cybergrind: 9
+  145. Space: 9
+  146. Cinematic: 9
+  147. Rock Opera: 9
+  148. Avant-garde Death metal: 9
+  149. Post-rock/metal: 8
+  150. Post-metal/rock: 8
+  151. Traditional Doom metal: 8
+  152. Rap metal: 8
+  153. Electronic rock: 8
+  154. Jam: 8
+  155. Heavy Metal: 8
+  156. Math metal: 8
+  157. Neoclassical Darkwave: 8
+  158. djent: 8
+  159. rap: 8
+  160. Avant-Garde: 8
+  161. technical: 8
+  162. Skramz: 7
+  163. Cosmic Black metal: 7
+  164. Free Improv: 7
+  165. Black 'n' Roll: 7
+  166. Alternative Dance: 7
+  167. Acoustic Folk: 7
+  168. Improv: 7
+  169. Psychedelia: 7
+  170. Jazz metal: 7
+  171. Metallic Hardcore: 7
+  172. Prog Rock: 7
+  173. Technical: 6
+  174. Pagan Black metal: 6
+  175. Beatdown Hardcore: 6
+  176. Brutal Prog: 6
+  177. Afrobeat: 6
+  178. Gothic Country: 6
+  179. Piano rock: 6
+  180. Dark Jazz: 6
+  181. Post-Punk Revival: 6
+  182. Atmospheric Doom metal: 6
+  183. Traditional: 6
+  184. Neo-Soul: 6
+  185. R&B: 6
+  186. Folk Punk: 6
+  187. Pop Soul: 6
+  188. Contemporary Jazz: 6
+  189. vocal: 6
+  190. prog-metal: 6
+  191. NWOBHM: 5
+  192. Eclectic Prog: 5
+  193. Experimental Death metal: 5
+  194. Dark Pop: 5
+  195. Glam rock: 5
+  196. Dissonant: 5
+  197. Avant-prog: 5
+  198. Soul rock: 5
+  199. Folktronica: 5
+  200. Minimalism: 5
+  201. Noisecore: 5
+  202. Dungeon Synth: 5
+  203. Soundtrack: 5
+  204. No Wave: 5
+  205. Mathgrind: 5
+  206. Neo-Classical: 5
+  207. Progressive Death Metal: 5
+  208. World music: 5
+  209. Ambient rock: 4
+  210. Technical Deathcore: 4
+  211. Breakcore: 4
+  212. Atmospheric Post-metal: 4
+  213. Bluegrass: 4
+  214. Medieval Black metal: 4
+  215. Neo-Psychedelic: 4
+  216. Drone rock: 4
+  217. Modern Jazz: 4
+  218. Fuzz rock: 4
+  219. Occult rock: 4
+  220. Tishoumaren: 4
+  221. Post-Bop: 4
+  222. Ska Punk: 4
+  223. Spiritual Jazz: 4
+  224. Anarcho-Punk: 4
+  225. Chamber Jazz: 4
+  226. Fuzz: 4
+  227. Hyperpop: 4
+  228. Roots rock: 4
+  229. Nordic Folk: 4
+  230. Psychedelic Soul: 4
+  231. Alt-Punk: 4
+  232. Dub: 4
+  233. Sound Collage: 4
+  234. Hypnagogic Pop: 4
+  235. Alt-Folk: 4
+  236. Synth Funk: 4
+  237. Pop Rock: 4
+  238. Drone Doom: 4
+  239. Garage Pop: 4
+  240. Math: 4
+  241. Cinematic rock: 4
+  242. instrumental: 4
+  243. melodic: 4
+  244. noise: 4
+  245. stoner: 4
+  246. Grungegaze: 3
+  247. Goth: 3
+  248. New wave: 3
+  249. Contemporary R&B: 3
+  250. Post-Minimalism: 3
+  251. Digital Hardcore: 3
+  252. Abstract Hip Hop: 3
+  253. Thrash: 3
+  254. Country: 3
+  255. Acid: 3
+  256. Goregrind: 3
+  257. Black: 3
+  258. Post-black: 3
+  259. Atmospheric Sludge: 3
+  260. experimental-hip-hop: 3
+  261. Piano: 2
+  262. Melodic Deathcore: 2
+  263. Experimental Noise: 2
+  264. Dark Cabaret: 2
+  265. Poetry: 2
+  266. Melancolic: 2
+  267. Heavy: 2
+  268. Epic: 2
+  269. Dark: 2
+  270. Experimental Big Band: 2
+  271. Chanson: 2
+  272. Vaporwave: 2
+  273. Downtempo: 2
+  274. Pigfuck: 2
+  275. American Primitivism: 2
+  276. Neoclassicism: 2
+  277. Warr Guitar: 2
+  278. Industrial Noise: 2
+  279. Rhythm & Blues: 2
+  280. Tex-Mex: 2
+  281. Livetronica: 2
+  282. EBM: 2
+  283. Surf: 2
+  284. Spoken Word: 2
+  285. Minimalist: 2
+  286. Kraut: 2
+  287. One-man-band: 2
+  288. Tribute: 2
+  289. Tropical: 2
+  290. Avant: 2
+  291. Progressive: 2
+  292. Progressive Post-Hardcore: 2
+  293. Stargaze: 2
+  294. Chaotic Hardcore: 2
+  295. Symphonic Deathcore: 2
+  296. Swing: 2
+  297. OSDM: 2
+  298. piano-oriented: 2
+  299. hip-hop: 2
+  300. death-industrial: 2
+  301. middle-eastern: 2
+  302. Nu-Disco: 2
+  303. Progressive Soul: 2
+  304. Electro-funk: 2
+  305. Disco-Funk: 2
+  306. D-Beat: 2
+  307. Movie Soundtrack: 1
+  308. Electro: 1
+  309. Psyechedelic: 1
+  310. Progressive noise: 1
+  311. Igorrr: 1
+  312. Shred: 1
+  313. Prog: 1
+  314. Cinmatic: 1
+  315. Improvisation: 1
+  316. Midi: 1
+  317. Beatdown Deathcore: 1
+  318. Slam: 1
+  319. Nintendocore: 1
+  320. Thall: 1
+  321. Trance House: 1
+  322. DSBM: 1
+  323. Crossover: 1
+  324. Big Band: 1
+  325. Keyboard: 1
+  326. Turkish Psychedelic: 1
+  327. High Fantasy: 1
+  328. Touhou: 1
+  329. Anime: 1
+  330. Death: 1
+  331. Carnatic: 1
+  332. Experimental hardcore: 1
+  333. Ethnic: 1
+  334. Art: 1
+  335. Retro Prog: 1
+  336. Heavy psych: 1
+  337. Microtonal: 1
+  338. Nu-gaze: 1
+  339. Musical Theatre: 1
+  340. Garage Psych: 1
+  341. Country Soul: 1
+  342. Twang: 1
+  343. Indie Soul: 1
+  344. Alt-Gothic: 1
+  345. Contemporary Funk: 1
+  346. Alt-Blues: 1
+  347. Industrial Hip Hop: 1
+  348. Power Noise: 1
+  349. Red Dirt: 1
+  350. Minimal Wave: 1
+  351. Shimokita-kei: 1
+  352. Windmill Scene: 1
+  353. Sea Shanty: 1
+  354. R&B Soul: 1
+  355. Comedy: 1
+  356. Black n' Roll: 1
+  357. Free Improvisation: 1
+  358. Dark Country: 1
+  359. Chamber music: 1
+  360. Mongolian: 1
+  361. Indian: 1
+  362. Fates Warning related: 1
+  363. EDM: 1
+  364. Theatrical: 1
+  365. Heavy Blues: 1
+  366. Anternative: 1
+  367. VGM: 1
+  368. Hardcore Funk: 1
+  369. Neo-Grunge: 1
+  370. Bluegras: 1
+  371. Lo-fi: 1
+  372. RnB: 1
+  373. Post-Indie: 1
+  374. Traditional Country: 1
+  375. Boogie: 1
+  376. Disco: 1
+  377. World Fusion: 1
+  378. Film Score: 1
+  379. French Electro: 1
+  380. Electro House: 1
+  381. Post-Noise: 1
+  382. Neo-Medieval: 1
+  383. Sadcore: 1
+  384. Kosmische: 1
+  385. Italian Prog: 1
+  386. Contemporary Blues: 1
+  387. Kawaii: 1
+  388. Neo Psych: 1
+  389. Chicago Soul: 1
+  390. Psychedelic Trance: 1
+  391. Avant-Funk: 1
+  392. World Music (Brazil): 1
+  393. Lo-fi Shoegaze: 1
+  394. Post-Americana: 1
+  395. Funk n' Roll: 1
+  396. Cabaret: 1
+  397. Field Recordings: 1
+  398. Bossa Nova: 1
+  399. Post-Apocalyptic: 1
+  400. Alt-Drone: 1
+  401. Western Noir: 1
+  402. Futuristic: 1
+  403. Bubblegum Bass: 1
+  404. Rautalanka: 1
+  405. Latin Big Band: 1
+  406. Noisegaze: 1
+  407. Melodic House: 1
+  408. Tech House: 1
+  409. Post-Blues: 1
+  410. Indie Surf: 1
+  411. Grunegaze: 1
+  412. Third Stream: 1
+  413. Psychedelic Funk: 1
+  414. Emo Rap: 1
+  415. Deep House: 1
+  416. Scottish Music: 1
+  417. Kosmsiche: 1
+  418. Nugaze: 1
+  419. Eastern European: 1
+  420. Southern Soul: 1
+  421. Elcectic: 1
+  422. Gong-related: 1
+  423. Soft Machine-related: 1
+  424. Zappa: 1
+  425. Documentary: 1
+  426. Wind: 1
+  427. Guitar virtuoso: 1
+  428. King Gizzard-like: 1
+  429. Zheul: 1
+  430. Riverside-esque: 1
+  431. Garage: 1
+  432. Primus-related: 1
+  433. Melodic prog: 1
+  434. Keyboard-driven: 1
+  435. Fleetwood Mac?: 1
+  436. Religious: 1
+  437. Steelpan: 1
+  438. Post Prog: 1
+  439. Soundscape: 1
+  440. Sympohnic: 1
+  441. Horror: 1
+  442. Djent-ish lite: 1
+  443. Rush-oriented: 1
+  444. Middle eastern: 1
+  445. Hawkwind-ish: 1
+  446. Drum-oriented: 1
+  447. Deep Purple-ish: 1
+  448. Crimson-y: 1
+  449. Crimson-esque: 1
+  450. Floyd-esque: 1
+  451. Minimal: 1
+  452. Prog-?: 1
+  453. Musical: 1
+  454. Canterbury scene: 1
+  455. Death black: 1
+  456. Blackened doom: 1
+  457. Djenty: 1
+  458. Emoviolence/Skramz: 1
+  459. Beatdown: 1
+  460. Blackened Crust: 1
+  461. Sludgecore: 1
+  462. Easycore: 1
+  463. Blackend Hardcore: 1
+  464. Emocrust: 1
+  465. Country Doom: 1
+  466. Heavy Twang: 1
+  467. Musical Parody: 1
+  468. Deathgaze: 1
+  469. Spacegrind: 1
+  470. Avant-black: 1
+  471. Modern: 1
+  472. Artcore: 1
+  473. l: 1
+  474. Lo-fi House: 1
+  475. Blackened Grindcore: 1
+  476. Dadaist: 1
+  477. Electonic: 1
+  478. Seventh Wonder-ish: 1
+  479. World: 1
+  480. Pschedelic: 1
+  481. Doom-gaze: 1
+  482. Neoclassica: 1
+  483. Hard Prog: 1
+  484. symphonic black: 1
+  485. Contemporary: 1
