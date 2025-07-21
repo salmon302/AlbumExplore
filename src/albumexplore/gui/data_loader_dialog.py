@@ -244,8 +244,13 @@ class DataLoaderDialog(QDialog):
         self.use_data_button.clicked.connect(self._use_loaded_data)
         self.use_data_button.setEnabled(False)
         
+        self.performance_button = QPushButton("Performance Monitor")
+        self.performance_button.clicked.connect(self._show_performance_monitor)
+        self.performance_button.setEnabled(True)
+        
         button_layout.addWidget(self.load_button)
         button_layout.addWidget(self.cancel_button)
+        button_layout.addWidget(self.performance_button)
         button_layout.addStretch()
         button_layout.addWidget(self.use_data_button)
         button_layout.addWidget(self.close_button)
@@ -508,4 +513,16 @@ class DataLoaderDialog(QDialog):
                     f.write(self.log_viewer.toPlainText())
                 self._add_log_message("INFO", f"Logs exported to {filename}")
             except Exception as e:
-                self._add_log_message("ERROR", f"Failed to export logs: {str(e)}") 
+                self._add_log_message("ERROR", f"Failed to export logs: {str(e)}")
+    
+    def _show_performance_monitor(self):
+        """Show the performance monitoring dialog."""
+        try:
+            from albumexplore.performance.performance_monitor import PerformanceViewer
+            
+            dialog = PerformanceViewer(self)
+            dialog.exec()
+        except ImportError:
+            self._add_log_message("WARNING", "Performance monitoring module not available")
+        except Exception as e:
+            self._add_log_message("ERROR", f"Failed to open performance monitor: {str(e)}") 

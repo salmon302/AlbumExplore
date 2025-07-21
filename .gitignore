@@ -44,3 +44,36 @@ logs/
 
 # Jupyter notebooks
 .ipynb_checkpoints
+
+# Project specific ignores
+cache/
+raw_data/
+*.csv
+*.backup
+*.bak
+*temp*
+*tmp*
+debug_*
+test_*
+add_*
+simulate_*
+validate_*
+verify_*
+analyze_*
+benchmark_*
+atomic_*
+final_*
+single_*
+expand_*
+generate_*
+diagnose_*
+mock_data_root/
+memory-bank/
+tag_consolidation/
+plans/
+-p/
+.roo*
+.benchmarks/
+NO
+{*}
+="*"

@@ -8,8 +8,7 @@ import os
 # Add the project root directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.albumexplore.database import Base
-from src.albumexplore.database import models
+from src.albumexplore.database.models import Base
 
 config = context.config
 if config.config_file_name is not None:

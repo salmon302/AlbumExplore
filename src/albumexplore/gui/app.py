@@ -96,7 +96,7 @@ class AlbumExplorer(QMainWindow):
     
     def _on_data_loaded(self, dataframe):
         """Handle data loaded from the dialog."""
-        graphics_logger.info(f"Data loaded: {len(dataframe)} rows. Saving to database...")
+        graphics_logger.info(f"Data loaded: {len(dataframe)} rows. Saving to database with optimized processing...")
         
         # Debug: Check what columns are in the DataFrame
         graphics_logger.info(f"DataFrame columns: {list(dataframe.columns)}")
@@ -108,11 +108,14 @@ class AlbumExplorer(QMainWindow):
                 graphics_logger.info(f"Row {i}: Artist='{row.get('Artist', 'N/A')}', Album='{row.get('Album', 'N/A')}'")
                 graphics_logger.info(f"Row {i}: Genre='{row.get('Genre / Subgenres', 'N/A')}', Country='{row.get('Country / State', 'N/A')}'")
         
-        # Load the dataframe into the database
+        # Load the dataframe into the database using optimized method
         try:
             session = get_session()
-            load_dataframe_data(dataframe, session)
-            graphics_logger.info("Successfully saved data to database.")
+            
+            # Use optimized loader for better performance
+            from albumexplore.database.optimized_csv_loader import load_dataframe_data_optimized
+            load_dataframe_data_optimized(dataframe, session)
+            graphics_logger.info("Successfully saved data to database using optimized processing.")
             
             # Debug: Check what was actually saved to the database
             from albumexplore.database.csv_loader import debug_database_tags
@@ -120,8 +123,15 @@ class AlbumExplorer(QMainWindow):
             
         except Exception as e:
             graphics_logger.error(f"Failed to save data to database: {e}", exc_info=True)
-            # Optionally, show an error message to the user
-            return
+            # Fall back to original method if optimized fails
+            graphics_logger.info("Falling back to original data loading method...")
+            try:
+                from albumexplore.database.csv_loader import load_dataframe_data
+                load_dataframe_data(dataframe, session)
+                graphics_logger.info("Successfully saved data using fallback method.")
+            except Exception as fallback_error:
+                graphics_logger.error(f"Fallback method also failed: {fallback_error}", exc_info=True)
+                return
         
         # Enable view menu actions
         self.table_action.setEnabled(True)

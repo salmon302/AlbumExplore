@@ -174,8 +174,10 @@ class TagNormalizer:
         """Load atomic tag configuration from the main config file."""
         try:
             # Get the config file path relative to this module
-            config_dir = os.path.dirname(os.path.dirname(__file__))  # tags/
-            config_path = os.path.join(config_dir, 'config', 'tag_rules.json')
+            # Navigate from tags/normalizer/ to the config directory
+            current_file_dir = os.path.dirname(os.path.abspath(__file__))
+            albumexplore_dir = os.path.dirname(os.path.dirname(current_file_dir))  # Go up from tags/normalizer/ to albumexplore/
+            config_path = os.path.join(albumexplore_dir, 'config', 'tag_rules.json')
             
             with open(config_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
@@ -205,6 +207,22 @@ class TagNormalizer:
         self._enable_atomic_tags = enable
         if enable and not self._atomic_config:
             self._load_atomic_config()
+    
+    def set_atomic_mode(self, enabled: bool):
+        """Set atomic mode on/off (alias for enable_atomic_tags for compatibility).
+        
+        Args:
+            enabled: True to enable atomic tag processing, False to disable
+        """
+        self.enable_atomic_tags(enabled)
+    
+    def get_atomic_mode(self) -> bool:
+        """Get current atomic mode state (alias for is_atomic_enabled for compatibility).
+        
+        Returns:
+            True if atomic mode is enabled, False otherwise
+        """
+        return self.is_atomic_enabled()
     
     def normalize_to_atomic(self, tag: str) -> List[str]:
         """Normalize a tag and decompose to atomic components.

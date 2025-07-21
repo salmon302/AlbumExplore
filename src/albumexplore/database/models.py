@@ -7,12 +7,31 @@ from sqlalchemy.orm import relationship, DeclarativeBase
 class Base(DeclarativeBase):
     pass
 
+"""Database models."""
+from datetime import datetime
+from typing import List
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, Float, DateTime, Text, Boolean
+from sqlalchemy.orm import relationship, DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
+
 # Association tables
 album_tags = Table(
     'album_tags',
     Base.metadata,
     Column('album_id', String, ForeignKey('albums.id')),
     Column('tag_id', String, ForeignKey('tags.id'))
+)
+
+album_atomic_tags = Table(
+    'album_atomic_tags',
+    Base.metadata,
+    Column('album_id', String, ForeignKey('albums.id')),
+    Column('atomic_tag_id', String, ForeignKey('atomic_tags.id')),
+    Column('source_tag_id', String, ForeignKey('tags.id'), nullable=True),
+    Column('confidence', Float, nullable=False, default=1.0),
+    Column('created_at', DateTime, nullable=False, default=datetime.utcnow)
 )
 
 tag_hierarchy = Table(
@@ -59,6 +78,7 @@ class Album(Base):
     # Relationships
     artist_obj = relationship("Artist", back_populates="albums") # Renamed to avoid confusion with old 'artist' column
     tags = relationship("Tag", secondary=album_tags, back_populates="albums")
+    atomic_tags = relationship("AtomicTag", secondary=album_atomic_tags, back_populates="albums")
     tracks = relationship("Track", order_by="Track.track_number_raw", back_populates="album")
     reviews = relationship("Review", back_populates="album")
 
@@ -73,8 +93,9 @@ class TagCategory(Base):
     name = Column(String, nullable=False)
     description = Column(String)
     
-    # Relationship to tags
+    # Relationships to tags and atomic tags
     tags = relationship("Tag", back_populates="category")
+    atomic_tags = relationship("AtomicTag", back_populates="category")
     
     def __repr__(self):
         return f"<TagCategory {self.name}>"
@@ -89,6 +110,13 @@ class Tag(Base):
     frequency = Column(Integer, default=0)
     is_canonical = Column(Integer, default=1)
     
+    # Atomic tag support columns
+    is_atomic = Column(Boolean, default=False)
+    is_composite = Column(Boolean, default=False)
+    atomic_components = Column(Text, nullable=True)  # JSON list of atomic tag IDs
+    decomposition_confidence = Column(Float, nullable=True)
+    last_atomic_update = Column(DateTime, nullable=True)
+    
     # Relationships
     category = relationship("TagCategory", back_populates="tags")
     parent_tags = relationship(
@@ -100,9 +128,49 @@ class Tag(Base):
     )
     albums = relationship("Album", secondary=album_tags, back_populates="tags")
     variants = relationship("TagVariant", back_populates="canonical_tag")
+    decompositions = relationship("TagDecomposition", back_populates="composite_tag")
 
     def __repr__(self):
         return f"<Tag {self.name}>"
+
+class AtomicTag(Base):
+    """Atomic tag model - represents fundamental, indivisible tag concepts."""
+    __tablename__ = "atomic_tags"
+    
+    id = Column(String, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+    description = Column(Text, nullable=True)
+    category_id = Column(String, ForeignKey('tag_categories.id'))
+    is_core = Column(Boolean, default=False)  # Core vs derived atomic tag
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Relationships
+    category = relationship("TagCategory", back_populates="atomic_tags")
+    decompositions = relationship("TagDecomposition", back_populates="atomic_tag")
+    albums = relationship("Album", secondary=album_atomic_tags, back_populates="atomic_tags")
+    
+    def __repr__(self):
+        return f"<AtomicTag {self.name}>"
+
+
+class TagDecomposition(Base):
+    """Tracks decomposition rules and history for composite tags."""
+    __tablename__ = "tag_decompositions"
+    
+    id = Column(Integer, primary_key=True)
+    composite_tag_id = Column(String, ForeignKey('tags.id'), nullable=False)
+    atomic_tag_id = Column(String, ForeignKey('atomic_tags.id'), nullable=False)
+    rule_source = Column(String, nullable=True)  # "manual", "automatic", "inferred"
+    confidence = Column(Float, default=1.0)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Relationships
+    composite_tag = relationship("Tag", back_populates="decompositions")
+    atomic_tag = relationship("AtomicTag", back_populates="decompositions")
+    
+    def __repr__(self):
+        return f"<TagDecomposition {self.composite_tag_id} -> {self.atomic_tag_id}>"
+
 
 class TagVariant(Base):
     __tablename__ = "tag_variants"
