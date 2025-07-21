@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import (QTableWidget, QTableWidgetItem, QHeaderView,
                            QWidget, QPushButton, QLabel, QMenu, QSplitter,
                            QComboBox, QRadioButton, QButtonGroup, QToolButton, 
                            QStackedWidget, QLineEdit, QCheckBox, QDialog, QMessageBox,
-                           QListWidgetItem) # Added QDialog, QMessageBox, QListWidgetItem
+                           QListWidgetItem, QTabWidget) # Added QDialog, QMessageBox, QListWidgetItem, QTabWidget
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QSortFilterProxyModel, QRegularExpression, QTime # Added QTime
 from PyQt6.QtGui import QStandardItemModel, QStandardItem, QColor, QPainter, QFontMetrics, QPalette, QAction # Added QAction
 from typing import Dict, Any, Set, List, Optional
@@ -1019,71 +1019,174 @@ class TagExplorerView(BaseView):
         # 4. Single-instance tags
         graphics_logger.info(f"Single-instance tags found: {len(self.single_instance_tags)}")
         
-        # 5. Create and export a DataFrame for detailed analysis
+        # 5. Create and export DataFrames for detailed analysis
         try:
-            # Consolidate all tags from both raw and normalized counts
-            all_tags = set(self.raw_tag_counts.keys()) | set(self.tag_counts.keys())
-            
-            export_data = []
-            for tag in sorted(list(all_tags)):
-                export_data.append({
+            # Create raw tags DataFrame (input tags prior to normalization)
+            raw_export_data = []
+            for tag in sorted(self.raw_tag_counts.keys()):
+                raw_export_data.append({
                     "Tag": tag,
-                    "Raw Count": self.raw_tag_counts.get(tag, 0),
-                    "Processed Count": self.tag_counts.get(tag, 0),
-                    "Matching Count": self.matching_counts.get(tag, 0),
-                    "Is Single": tag in self.single_instance_tags,
+                    "Count": self.raw_tag_counts[tag],
                     "Normalized Form": self._get_normalized_tag_display(tag),
                     "Filter State": self.tag_filters.get(tag, self.FILTER_NEUTRAL)
                 })
+            raw_df = pd.DataFrame(raw_export_data)
             
-            df = pd.DataFrame(export_data)
+            # Create normalized/atomic tags DataFrame (processed tags)
+            normalized_export_data = []
+            for tag in sorted(self.tag_counts.keys()):
+                normalized_export_data.append({
+                    "Tag": tag,
+                    "Count": self.tag_counts[tag],
+                    "Matching Count": self.matching_counts.get(tag, 0),
+                    "Is Single": tag in self.single_instance_tags,
+                    "Filter State": self.tag_filters.get(tag, self.FILTER_NEUTRAL)
+                })
+            normalized_df = pd.DataFrame(normalized_export_data)
             
-            # Use a dialog to show the dataframe content or save it
-            self._show_export_dialog(df)
+            # Use a dialog to show both dataframes in separate tabs
+            self._show_export_dialog(raw_df, normalized_df)
             
         except Exception as e:
             graphics_logger.error(f"Failed to create and export tag DataFrame: {e}", exc_info=True)
             
         graphics_logger.info("--- End of Tag Data Export ---")
 
-    def _show_export_dialog(self, df):
-        """Shows a dialog with the exported data in a table and an option to save."""
+    def _show_export_dialog(self, raw_df, normalized_df):
+        """Shows a dialog with the exported data in separate tabs with options to save."""
         dialog = QDialog(self)
-        dialog.setWindowTitle("Exported Tag Data")
-        dialog.setMinimumSize(800, 600)
+        dialog.setWindowTitle("Tag Data Export")
+        dialog.setMinimumSize(1000, 700)
         
         layout = QVBoxLayout(dialog)
         
-        table = QTableWidget()
-        table.setRowCount(len(df))
-        table.setColumnCount(len(df.columns))
-        table.setHorizontalHeaderLabels(df.columns)
+        # Create tab widget
+        tab_widget = QTabWidget()
         
-        for i, row in df.iterrows():
-            for j, col in enumerate(df.columns):
-                table.setItem(i, j, QTableWidgetItem(str(row[col])))
+        # Raw Tags Tab
+        raw_tab_widget = QWidget()
+        raw_tab_layout = QVBoxLayout(raw_tab_widget)
+        
+        # Add info label for raw tags
+        raw_info_label = QLabel(f"Raw Input Tags (before normalization): {len(raw_df)} unique tags")
+        raw_info_label.setStyleSheet("font-weight: bold; color: #333; padding: 5px;")
+        raw_tab_layout.addWidget(raw_info_label)
+        
+        raw_table = QTableWidget()
+        raw_table.setRowCount(len(raw_df))
+        raw_table.setColumnCount(len(raw_df.columns))
+        raw_table.setHorizontalHeaderLabels(raw_df.columns)
+        
+        for i, row in raw_df.iterrows():
+            for j, col in enumerate(raw_df.columns):
+                raw_table.setItem(i, j, QTableWidgetItem(str(row[col])))
                 
-        table.resizeColumnsToContents()
+        raw_table.resizeColumnsToContents()
+        raw_tab_layout.addWidget(raw_table)
         
-        save_button = QPushButton("Save to CSV")
+        raw_save_button = QPushButton("Save Raw Tags to CSV")
+        raw_save_button.setStyleSheet("QPushButton { background-color: #4CAF50; color: white; font-weight: bold; padding: 8px; }")
         
-        def save_csv():
+        def save_raw_csv():
             from PyQt6.QtWidgets import QFileDialog
             
             # Show file dialog to get save path
-            path, _ = QFileDialog.getSaveFileName(dialog, "Save CSV", "", "CSV Files (*.csv)")
+            path, _ = QFileDialog.getSaveFileName(dialog, "Save Raw Tags CSV", "raw_tags_export.csv", "CSV Files (*.csv)")
             
             if path:
                 try:
-                    df.to_csv(path, index=False)
-                    QMessageBox.information(dialog, "Success", f"Successfully saved to {path}")
+                    raw_df.to_csv(path, index=False)
+                    QMessageBox.information(dialog, "Success", f"Raw tags successfully saved to {path}")
                 except Exception as e:
                     QMessageBox.warning(dialog, "Error", f"Failed to save file: {e}")
         
-        save_button.clicked.connect(save_csv)
+        raw_save_button.clicked.connect(save_raw_csv)
+        raw_tab_layout.addWidget(raw_save_button)
         
-        layout.addWidget(table)
-        layout.addWidget(save_button)
+        # Normalized/Atomic Tags Tab
+        normalized_tab_widget = QWidget()
+        normalized_tab_layout = QVBoxLayout(normalized_tab_widget)
+        
+        # Add info label for normalized tags
+        mode_text = "atomic processing" if self.tag_normalizer.get_atomic_mode() else "normalization"
+        normalized_info_label = QLabel(f"Processed Tags (after {mode_text}): {len(normalized_df)} unique tags")
+        normalized_info_label.setStyleSheet("font-weight: bold; color: #333; padding: 5px;")
+        normalized_tab_layout.addWidget(normalized_info_label)
+        
+        normalized_table = QTableWidget()
+        normalized_table.setRowCount(len(normalized_df))
+        normalized_table.setColumnCount(len(normalized_df.columns))
+        normalized_table.setHorizontalHeaderLabels(normalized_df.columns)
+        
+        for i, row in normalized_df.iterrows():
+            for j, col in enumerate(normalized_df.columns):
+                normalized_table.setItem(i, j, QTableWidgetItem(str(row[col])))
+                
+        normalized_table.resizeColumnsToContents()
+        normalized_tab_layout.addWidget(normalized_table)
+        
+        normalized_save_button = QPushButton("Save Processed Tags to CSV")
+        normalized_save_button.setStyleSheet("QPushButton { background-color: #2196F3; color: white; font-weight: bold; padding: 8px; }")
+        
+        def save_normalized_csv():
+            from PyQt6.QtWidgets import QFileDialog
+            
+            # Show file dialog to get save path
+            default_name = "atomic_tags_export.csv" if self.tag_normalizer.get_atomic_mode() else "normalized_tags_export.csv"
+            path, _ = QFileDialog.getSaveFileName(dialog, "Save Processed Tags CSV", default_name, "CSV Files (*.csv)")
+            
+            if path:
+                try:
+                    normalized_df.to_csv(path, index=False)
+                    tag_type = "Atomic" if self.tag_normalizer.get_atomic_mode() else "Normalized"
+                    QMessageBox.information(dialog, "Success", f"{tag_type} tags successfully saved to {path}")
+                except Exception as e:
+                    QMessageBox.warning(dialog, "Error", f"Failed to save file: {e}")
+        
+        normalized_save_button.clicked.connect(save_normalized_csv)
+        normalized_tab_layout.addWidget(normalized_save_button)
+        
+        # Add tabs to tab widget
+        tab_widget.addTab(raw_tab_widget, "Raw Input Tags")
+        tab_widget.addTab(normalized_tab_widget, "Processed Tags")
+        
+        # Add tab widget to main layout
+        layout.addWidget(tab_widget)
+        
+        # Add overall save both button
+        button_layout = QHBoxLayout()
+        save_both_button = QPushButton("Save Both Datasets")
+        save_both_button.setStyleSheet("QPushButton { background-color: #FF9800; color: white; font-weight: bold; padding: 8px; }")
+        
+        def save_both_csv():
+            from PyQt6.QtWidgets import QFileDialog
+            import os
+            
+            # Show directory dialog to save both files
+            directory = QFileDialog.getExistingDirectory(dialog, "Select Directory to Save Both CSV Files")
+            
+            if directory:
+                try:
+                    raw_path = os.path.join(directory, "raw_tags_export.csv")
+                    normalized_name = "atomic_tags_export.csv" if self.tag_normalizer.get_atomic_mode() else "normalized_tags_export.csv"
+                    normalized_path = os.path.join(directory, normalized_name)
+                    
+                    raw_df.to_csv(raw_path, index=False)
+                    normalized_df.to_csv(normalized_path, index=False)
+                    
+                    QMessageBox.information(dialog, "Success", 
+                                          f"Both datasets saved successfully:\n• Raw tags: {raw_path}\n• Processed tags: {normalized_path}")
+                except Exception as e:
+                    QMessageBox.warning(dialog, "Error", f"Failed to save files: {e}")
+        
+        save_both_button.clicked.connect(save_both_csv)
+        button_layout.addWidget(save_both_button)
+        
+        close_button = QPushButton("Close")
+        close_button.clicked.connect(dialog.accept)
+        button_layout.addWidget(close_button)
+        
+        layout.addLayout(button_layout)
         
         dialog.exec()
 
