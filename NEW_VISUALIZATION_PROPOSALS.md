@@ -5,6 +5,27 @@ This document outlines new visualization approaches to replace the removed netwo
 
 ## Proposed New Visualizations
 
+### 0. 🔗 Album Similarity View (NEW - High Priority)
+
+**Description**: An interactive view for exploring albums similar to a selected album based on shared tags, genre, and other attributes.
+
+**Status**: ✅ **DETAILED DESIGN COMPLETE** - See [ALBUM_SIMILARITY_VISUALIZATION.md](ALBUM_SIMILARITY_VISUALIZATION.md)
+
+**Key Features**:
+- **Focus Album Approach**: Select one album to see its most similar albums
+- **Bar Chart Display**: Horizontal bars showing top N similar albums sorted by score
+- **Multi-Factor Scoring**: Combines tag similarity, genre match, year proximity, and more
+- **Interactive Exploration**: Click any album to re-center and explore its similarities
+- **Performance Optimized**: < 200ms for 17k+ album database
+
+**Why This Matters**:
+- **Discovery**: Help users find albums they might like
+- **Exploration**: Navigate the collection by similarity relationships
+- **Context**: Understand how albums relate to each other
+- **Scalable**: Works efficiently with large datasets
+
+---
+
 ### 1. 🗺️ Geographic Map View (RECOMMENDED - High Priority)
 
 **Description**: An interactive world map showing the geographic distribution of albums based on artist/band location data.
@@ -158,6 +179,8 @@ This document outlines new visualization approaches to replace the removed netwo
 
 **Description**: A sortable, filterable matrix showing connections between albums through shared attributes.
 
+**Note**: The simpler **Album Similarity View** (see item 0 above) is recommended as a more performant and user-friendly alternative for exploring album relationships.
+
 **Matrix Types**:
 1. **Tag Similarity Matrix**:
    - Rows and columns are albums
@@ -190,12 +213,23 @@ This document outlines new visualization approaches to replace the removed netwo
 - **Scalable**: Matrix operations are fast
 - **Unique**: Different from typical music apps
 
+**Disadvantages**:
+- Less intuitive than focus-based similarity view
+- O(N²) complexity limits practical size
+- More suited to data analysts than casual users
+
 ---
 
 ## Implementation Priority
 
 ### Phase 1 (Immediate - Next 2 Weeks)
-1. **Geographic Map View** ✅ HIGHEST PRIORITY
+0. **Album Similarity View** ✅ HIGHEST PRIORITY (DESIGN COMPLETE)
+   - Critical for album discovery and exploration
+   - Leverages existing tag and metadata
+   - High user value, proven scalable design
+   - See [ALBUM_SIMILARITY_VISUALIZATION.md](ALBUM_SIMILARITY_VISUALIZATION.md)
+
+1. **Geographic Map View** ✅ HIGH PRIORITY
    - Most requested by user
    - High impact, medium complexity
    - Leverages existing location data
@@ -248,10 +282,12 @@ This document outlines new visualization approaches to replace the removed netwo
 ## Next Steps
 
 1. ✅ Remove legacy network view (COMPLETED)
-2. 🎯 **Implement Geographic Map View** (NEXT)
-3. Gather user feedback on map view
-4. Design and implement Statistics Dashboard
-5. Iterate based on usage patterns
+2. ✅ **Design Album Similarity View** (COMPLETED) - See [ALBUM_SIMILARITY_VISUALIZATION.md](ALBUM_SIMILARITY_VISUALIZATION.md)
+3. 🎯 **Implement Album Similarity View** (NEXT - Ready to start)
+4. 🎯 Implement Geographic Map View
+5. Gather user feedback on new views
+6. Design and implement Statistics Dashboard
+7. Iterate based on usage patterns
 
 ---
 

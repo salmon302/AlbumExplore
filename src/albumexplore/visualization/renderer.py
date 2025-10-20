@@ -100,6 +100,7 @@ def create_renderer(view_type: ViewType, config: RenderConfig = None) -> Rendere
         ViewType.ARC: ArcRenderer,
         ViewType.TAG_EXPLORER: TableRenderer,
         ViewType.MAP: TableRenderer  # Temporary until MapRenderer is implemented
+            ,ViewType.SIMILARITY: TableRenderer  # Use TableRenderer as stub for similarity view
     }
     
     renderer_class = renderers.get(view_type)

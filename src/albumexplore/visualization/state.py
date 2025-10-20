@@ -9,6 +9,7 @@ class ViewType(Enum):
     ARC = "arc"
     TAG_EXPLORER = "tag_explorer"
     MAP = "map"  # Geographic world map view
+    SIMILARITY = "similarity"  # Album similarity bar chart view
 
 class TransitionType(Enum):
     """Available transition types between views."""

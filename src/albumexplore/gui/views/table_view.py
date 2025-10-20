@@ -1,8 +1,9 @@
 """Table visualization view."""
 from typing import Dict, Any, Set, List
 from PyQt6.QtWidgets import (QTableWidget, QTableWidgetItem, QHeaderView,
-                          QAbstractItemView, QVBoxLayout)
+                          QAbstractItemView, QVBoxLayout, QMenu)
 from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QAction
 from .base_view import BaseView
 from albumexplore.visualization.state import ViewType
 from albumexplore.gui.gui_logging import graphics_logger
@@ -11,6 +12,7 @@ class TableView(BaseView):
     """Table visualization view."""
     
     sort_changed = pyqtSignal(str, str)  # column, direction
+    show_similar_requested = pyqtSignal(str)  # album_id - signal to request similarity view
     
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -41,6 +43,10 @@ class TableView(BaseView):
         layout = self.layout() or QVBoxLayout(self)
         layout.addWidget(self.table)
         layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Enable context menu
+        self.table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.table.customContextMenuRequested.connect(self._show_context_menu)
         
         # Connect signals
         self.table.itemSelectionChanged.connect(self._handle_selection)
@@ -140,3 +146,31 @@ class TableView(BaseView):
                 Qt.SortOrder.DescendingOrder if direction == "desc"
                 else Qt.SortOrder.AscendingOrder
             )
+    
+    def _show_context_menu(self, position):
+        """Show context menu for table row."""
+        item = self.table.itemAt(position)
+        if not item:
+            return
+        
+        row = item.row()
+        album_item = self.table.item(row, 0)
+        if not album_item:
+            return
+        
+        album_id = album_item.data(Qt.ItemDataRole.UserRole)
+        if not album_id:
+            return
+        
+        menu = QMenu(self)
+        
+        show_similar_action = QAction("Show Similar Albums", self)
+        show_similar_action.triggered.connect(lambda: self._request_show_similar(album_id))
+        menu.addAction(show_similar_action)
+        
+        menu.exec(self.table.viewport().mapToGlobal(position))
+    
+    def _request_show_similar(self, album_id: str):
+        """Request to show similar albums for the given album."""
+        graphics_logger.info(f"Requesting to show similar albums for: {album_id}")
+        self.show_similar_requested.emit(album_id)

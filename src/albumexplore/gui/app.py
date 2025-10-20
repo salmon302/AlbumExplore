@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QApplicat
 from PyQt6.QtGui import QAction # Added QAction
 from PyQt6.QtCore import Qt
 from .views.table_view import TableView
+from .views.similarity_bar_view import SimilarityBarChartView
 from albumexplore.visualization.views.tag_explorer_view import TagExplorerView # Corrected import
 try:
     from .views.world_map_view import WorldMapView
@@ -43,6 +44,8 @@ class AlbumExplorer(QMainWindow):
             # Initialize views
             self.table_view = TableView()
             self.tag_explorer_view = TagExplorerView()
+            self.similarity_view = SimilarityBarChartView()
+            self.similarity_view.set_session(self.session)
             if MAP_VIEW_AVAILABLE:
                 self.map_view = WorldMapView()
             else:
@@ -52,12 +55,19 @@ class AlbumExplorer(QMainWindow):
             self._setup_menu_bar()
 
             # Connect view_manager signals
-            self.view_manager.view_changed.connect(self._update_active_view) 
+            self.view_manager.view_changed.connect(self._update_active_view)
+            
+            # Connect table view's "show similar" signal
+            self.table_view.show_similar_requested.connect(self._show_similar_albums)
+            
+            # Connect similarity view's "focus requested" signal
+            self.similarity_view.album_focus_requested.connect(self._show_similar_albums) 
 
             # Create a stacked widget to hold different views
             self.stacked_widget = QStackedWidget()
             self.stacked_widget.addWidget(self.table_view)
             self.stacked_widget.addWidget(self.tag_explorer_view) # Add TagExplorerView to stack
+            self.stacked_widget.addWidget(self.similarity_view) # Add SimilarityView to stack
             if MAP_VIEW_AVAILABLE and self.map_view:
                 self.stacked_widget.addWidget(self.map_view)
 
@@ -147,6 +157,7 @@ class AlbumExplorer(QMainWindow):
         # Enable view menu actions
         self.table_action.setEnabled(True)
         self.tag_explorer_action.setEnabled(True)
+        self.similarity_action.setEnabled(True)
         if MAP_VIEW_AVAILABLE and hasattr(self, 'map_action'):
             self.map_action.setEnabled(True)
         
@@ -195,6 +206,12 @@ class AlbumExplorer(QMainWindow):
         view_menu.addAction(tag_explorer_action)
         self.tag_explorer_action = tag_explorer_action
 
+        similarity_action = QAction("&Similarity View", self)
+        similarity_action.triggered.connect(lambda: self._handle_view_switch(ViewType.SIMILARITY))
+        similarity_action.setEnabled(False)  # Disabled until data is loaded
+        view_menu.addAction(similarity_action)
+        self.similarity_action = similarity_action
+
         if MAP_VIEW_AVAILABLE:
             map_action = QAction("&Map View", self)
             map_action.triggered.connect(lambda: self._handle_view_switch(ViewType.MAP))
@@ -240,6 +257,15 @@ class AlbumExplorer(QMainWindow):
             edges = render_data.get('edges', []) # edges might not be directly used by TagExplorerView but good to pass if available
             self.tag_explorer_view.update_data(nodes, edges)
             self.stacked_widget.setCurrentWidget(self.tag_explorer_view)
+        elif current_view_type == ViewType.SIMILARITY:
+            graphics_logger.info(f"AlbumExplorer: Setting SimilarityView. Data type: {render_data.get('type')}")
+            # For similarity view, we need to set an album first
+            # Check if there's a selected album
+            selected_ids = render_data.get('selected_ids', set())
+            if selected_ids:
+                album_id = list(selected_ids)[0]
+                self.similarity_view.set_album(album_id)
+            self.stacked_widget.setCurrentWidget(self.similarity_view)
         elif current_view_type == ViewType.MAP and MAP_VIEW_AVAILABLE and self.map_view:
             graphics_logger.info(f"AlbumExplorer: Setting MapView. Data type: {render_data.get('type')}")
             self.map_view.update_data(render_data)
@@ -249,6 +275,16 @@ class AlbumExplorer(QMainWindow):
         
         # Ensure the window is shown and brought to front - REMOVED, handled by main()
 
+    def _show_similar_albums(self, album_id: str):
+        """Switch to similarity view and focus on the given album."""
+        graphics_logger.info(f"Switching to similarity view for album: {album_id}")
+        
+        # Set the album in the similarity view
+        self.similarity_view.set_album(album_id)
+        
+        # Switch to similarity view
+        self.view_manager.switch_view(ViewType.SIMILARITY)
+    
     def init_data_and_views(self): # This method seems to be called from main after window.show()
         """Load initial data and trigger the first view update."""
         graphics_logger.info("[AlbumExplorer.init_data_and_views] Called.")
