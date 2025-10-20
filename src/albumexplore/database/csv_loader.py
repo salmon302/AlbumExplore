@@ -2,7 +2,7 @@
 import csv
 import os
 from pathlib import Path
-from typing import Dict, Set, List
+from typing import Dict, Set, List, Optional
 from datetime import datetime
 import re
 import uuid # Added import for uuid
@@ -39,6 +39,136 @@ POTENTIAL_DATE_TOKENS = [
     "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december",
     "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"
 ]
+
+# Vocal style extraction helpers
+VOCAL_STYLE_PRIMARY_SPLIT_PATTERN = re.compile(r"[,/;]", re.IGNORECASE)
+VOCAL_STYLE_SECONDARY_SPLIT_PATTERN = re.compile(r"\s+(?:&|\+|and|with)\s+", re.IGNORECASE)
+VOCAL_STYLE_IGNORED_TOKENS = {"", "n/a", "na", "tbd", "?", "-", "unknown"}
+VOCAL_STYLE_MAX_VALUE_LENGTH = 500
+VOCAL_STYLE_MAX_TOKEN_LENGTH = 80
+
+def _normalize_vocal_style_token(token: str) -> Optional[str]:
+    """Convert a raw vocal style token into a normalized tag name."""
+    if not token:
+        return None
+
+    cleaned = token.strip().lower()
+    if not cleaned or cleaned in VOCAL_STYLE_IGNORED_TOKENS:
+        return None
+
+    # Remove parentheses content and punctuation that frequently appears in source data
+    cleaned = re.sub(r"\(.*?\)", "", cleaned)
+    cleaned = cleaned.replace("w/", "with").replace("%", "")
+    cleaned = cleaned.replace("instr.", "instrumental").replace("instru.", "instrumental")
+    cleaned = re.sub(r"[\.\!\?]$", "", cleaned).strip()
+
+    if len(cleaned) > VOCAL_STYLE_MAX_TOKEN_LENGTH:
+        return None
+
+    # Canonical mappings
+    if cleaned in {"instrumental", "instrumental only", "instrumental 100", "instrumental 100%", "instrumental (mostly)", "instr", "instru", "no vocals"}:
+        return "instrumental"
+    if cleaned in {"clean", "cleans", "clean vocals", "mostly clean", "all clean", "sung", "singing", "clean singing"}:
+        return "clean vocals"
+    if cleaned in {"harsh", "harsh vocals", "unclean", "extreme", "extreme vocals"}:
+        return "harsh vocals"
+    if cleaned in {"mixed", "both", "combo", "combined"}:
+        return "mixed vocals"
+    if cleaned in {"spoken", "spoken word", "narration", "narrated"}:
+        return "spoken vocals"
+    if cleaned in {"choir", "choral"}:
+        return "choral vocals"
+    if cleaned in {"operatic", "opera"}:
+        return "operatic vocals"
+    if cleaned in {"female", "female vocals"}:
+        return "female vocals"
+    if cleaned in {"male", "male vocals"}:
+        return "male vocals"
+
+    # Substring-based mappings (order matters to avoid misclassification)
+    if "instrumental" in cleaned or cleaned.startswith("instr"):
+        return "instrumental"
+    if "clean" in cleaned:
+        return "clean vocals"
+    if any(keyword in cleaned for keyword in ["harsh", "growl", "growled", "growling", "scream", "screamed", "screaming", "death", "black", "unclean", "shout", "guttural", "raspy"]):
+        return "harsh vocals"
+    if "mixed" in cleaned or "both" in cleaned or "split" in cleaned:
+        return "mixed vocals"
+    if "spoken" in cleaned or "narr" in cleaned:
+        return "spoken vocals"
+    if "choir" in cleaned or "choral" in cleaned:
+        return "choral vocals"
+    if "operatic" in cleaned or "opera" in cleaned:
+        return "operatic vocals"
+    if cleaned in {"none", "n/a"}:
+        return None
+
+    # Default: keep descriptive token and ensure it ends with 'vocals' unless instrumental
+    if cleaned == "instrumental":
+        return "instrumental"
+
+    if cleaned.endswith("vocals"):
+        normalized = cleaned
+    else:
+        normalized = f"{cleaned} vocals"
+
+    return normalized
+
+def extract_vocal_style_tags(raw_value: str) -> List[str]:
+    """Parse and normalize vocal style values into a list of tag names."""
+    if not raw_value:
+        return []
+
+    if isinstance(raw_value, float) and pd.isna(raw_value):  # type: ignore[arg-type]
+        return []
+
+    value = str(raw_value).strip()
+    if not value:
+        return []
+
+    if len(value) > VOCAL_STYLE_MAX_VALUE_LENGTH:
+        db_logger.debug(
+            "Skipping vocal style parsing for unusually long value (len=%s)",
+            len(value)
+        )
+        return []
+
+    primary_tokens = [tok.strip() for tok in VOCAL_STYLE_PRIMARY_SPLIT_PATTERN.split(value) if tok.strip()]
+    tokens: List[str] = []
+
+    for token in primary_tokens:
+        if len(token) > VOCAL_STYLE_MAX_TOKEN_LENGTH:
+            continue
+
+        subtokens = [sub.strip() for sub in VOCAL_STYLE_SECONDARY_SPLIT_PATTERN.split(token) if sub.strip()]
+        if subtokens:
+            tokens.extend(subtokens)
+        else:
+            tokens.append(token)
+
+    normalized_tags: List[str] = []
+
+    for token in tokens:
+        normalized = _normalize_vocal_style_token(token)
+        if not normalized:
+            continue
+
+        # Vocal-style tokens are already canonical (e.g., "clean vocals", "instrumental")
+        # so skip the expensive tag normalizer for these specific terms
+        if normalized and normalized not in normalized_tags:
+            normalized_tags.append(normalized)
+
+    return normalized_tags
+
+def build_raw_tags_string(primary_tags: str, additional_tags: List[str]) -> str:
+    """Combine primary genre tags with additional tags (e.g., vocal styles)."""
+    parts: List[str] = []
+    primary = (primary_tags or "").strip()
+    if primary:
+        parts.append(primary)
+    if additional_tags:
+        parts.append(", ".join(additional_tags))
+    return ", ".join(parts)
 
 def extract_year(filename: str) -> int:
     """Extract year from filename."""
@@ -191,17 +321,28 @@ def load_dataframe_data(df, session: Session):
             
             # Get genre and tags data
             genre_and_tags_str = row.get('genre / subgenres', '') or row.get('genre', '') or row.get('genres', '')
+            vocal_style_str = row.get('vocal style', '') or row.get('vocal_style', '')
             country_str = row.get('country / state', '') or row.get('country', '')
-            
-            # Handle NaN values in genre and country fields
+
+            # Handle NaN values in genre, vocal style, and country fields
             if pd.isna(genre_and_tags_str):
                 genre_and_tags_str = ''
+            if pd.isna(vocal_style_str):
+                vocal_style_str = ''
             if pd.isna(country_str):
                 country_str = ''
+
+            genre_and_tags_str = str(genre_and_tags_str).strip() if genre_and_tags_str else ''
+            vocal_style_str = str(vocal_style_str).strip() if vocal_style_str else ''
+            country_str = str(country_str).strip() if country_str else ''
+
+            vocal_style_tags = extract_vocal_style_tags(vocal_style_str)
+            vocal_style_display = ', '.join(vocal_style_tags) if vocal_style_tags else ''
+            combined_raw_tags = build_raw_tags_string(genre_and_tags_str, vocal_style_tags)
             
             # Debug log for the first few rows to see what's happening with tags
             if processed_count < 5:  # Only log first 5 rows to avoid spam
-                db_logger.info(f"Row {processed_count}: genre_and_tags_str='{genre_and_tags_str}', country_str='{country_str}'")
+                db_logger.info(f"Row {processed_count}: genre_and_tags_str='{genre_and_tags_str}', vocal_style_str='{vocal_style_str}', country_str='{country_str}'")
 
             # Create Album object
             album = Album(
@@ -210,9 +351,10 @@ def load_dataframe_data(df, session: Session):
                 title=album_title,
                 release_date=release_date_obj,
                 release_year=release_year,
+                vocal_style=vocal_style_display or None,
                 genre=genre_and_tags_str,
                 country=country_str,
-                raw_tags=genre_and_tags_str,
+                raw_tags=combined_raw_tags,
                 last_updated=datetime.now()
             )
             
@@ -295,6 +437,40 @@ def load_dataframe_data(df, session: Session):
                         else:
                             # Use the existing country tag
                             album.tags.append(existing_country_tag)
+            
+            # Handle vocal style tags if available
+            if vocal_style_tags:
+                processed_vocal_styles = set()
+
+                if processed_count < 5:
+                    db_logger.info(f"Row {processed_count}: vocal style tags: {vocal_style_tags}")
+
+                for normalized_vocal_style in vocal_style_tags:
+                    if normalized_vocal_style in processed_vocal_styles:
+                        continue
+
+                    processed_vocal_styles.add(normalized_vocal_style)
+
+                    existing_vocal_tag = session.query(Tag).filter(Tag.normalized_name == normalized_vocal_style).first()
+                    if not existing_vocal_tag:
+                        vocal_tag_id = str(uuid.uuid4())
+                        new_vocal_tag = Tag(
+                            id=vocal_tag_id,
+                            name=normalized_vocal_style,
+                            normalized_name=normalized_vocal_style,
+                            is_canonical=1
+                        )
+                        session.add(new_vocal_tag)
+                        session.flush()
+                        album.tags.append(new_vocal_tag)
+
+                        if processed_count < 5:
+                            db_logger.info(f"Row {processed_count}: created new vocal style tag '{normalized_vocal_style}' for {artist} - {album_title}")
+                    else:
+                        album.tags.append(existing_vocal_tag)
+
+                        if processed_count < 5:
+                            db_logger.info(f"Row {processed_count}: using existing vocal style tag '{normalized_vocal_style}' for {artist} - {album_title}")
             
             # Add to existing albums set to handle duplicates within the dataframe
             existing_albums.add((artist, album_title))
@@ -482,6 +658,7 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
         release_date_col = "Release Date"
         length_col = "Length"  # Often contains LP/EP info
         genre_col = "Genre / Subgenres"
+        vocal_style_col = "Vocal Style"
         country_col = "Country / State"
         
         # Make sure we're using the actual column names from the file
@@ -490,9 +667,10 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
         release_date_col_key = next((col for col in reader.fieldnames if col and "release" in col.lower()), reader.fieldnames[2] if len(reader.fieldnames) > 2 else None)
         length_col_key = next((col for col in reader.fieldnames if col and "length" in col.lower()), None)
         genre_col_key = next((col for col in reader.fieldnames if col and "genre" in col.lower()), None)
+        vocal_style_col_key = next((col for col in reader.fieldnames if col and "vocal" in col.lower()), None)
         country_col_key = next((col for col in reader.fieldnames if col and "country" in col.lower()), None)
         
-        db_logger.debug(f"Using columns: Artist='{artist_col_key}', Album='{album_col_key}', Release Date='{release_date_col_key}', Length='{length_col_key}', Genre='{genre_col_key}', Country='{country_col_key}'")
+        db_logger.debug(f"Using columns: Artist='{artist_col_key}', Album='{album_col_key}', Release Date='{release_date_col_key}', Length='{length_col_key}', Genre='{genre_col_key}', Vocal Style='{vocal_style_col_key}', Country='{country_col_key}'")
         
         processing_started_for_file = False
         row_count = 0
@@ -523,7 +701,12 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
                 release_date_str = row.get(release_date_col_key, '').strip()
                 length_info = row.get(length_col_key, '').strip() if length_col_key else ''
                 genre_and_tags_str = row.get(genre_col_key, '').strip() if genre_col_key else ''
+                vocal_style_str = row.get(vocal_style_col_key, '').strip() if vocal_style_col_key else ''
                 country_str = row.get(country_col_key, '').strip() if country_col_key else ''
+
+                vocal_style_tags = extract_vocal_style_tags(vocal_style_str)
+                vocal_style_display = ', '.join(vocal_style_tags) if vocal_style_tags else ''
+                combined_raw_tags = build_raw_tags_string(genre_and_tags_str, vocal_style_tags)
                 
                 # Skip empty rows and header-like rows
                 if not artist or artist.lower() in ["artist", "albums:", "singles:", "eps:"]:
@@ -686,13 +869,14 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
                 album = Album(
                     id=album_id,
                     title=album_title,
-                    pa_artist_name_on_album=artist,  # Use the correct column name
+                    pa_artist_name_on_album=artist,
                     release_date=release_date_obj,
                     release_year=release_date_obj.year,
                     length=length_info if not format_info else length_info,
+                    vocal_style=vocal_style_display or None,
                     genre=genre_and_tags_str,
                     country=country_str,
-                    raw_tags=genre_and_tags_str,
+                    raw_tags=combined_raw_tags,
                     last_updated=datetime.now()
                 )
                 session.add(album)
@@ -774,6 +958,40 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
                             else:
                                 # Use the existing country tag
                                 album.tags.append(existing_country_tag)
+                
+                # Handle vocal style tags if available
+                if vocal_style_tags:
+                    processed_vocal_styles = set()
+
+                    if processed_count < 5:
+                        db_logger.info(f"Row {processed_count}: vocal style tags: {vocal_style_tags}")
+
+                    for normalized_vocal_style in vocal_style_tags:
+                        if normalized_vocal_style in processed_vocal_styles:
+                            continue
+
+                        processed_vocal_styles.add(normalized_vocal_style)
+
+                        existing_vocal_tag = session.query(Tag).filter(Tag.normalized_name == normalized_vocal_style).first()
+                        if not existing_vocal_tag:
+                            vocal_tag_id = str(uuid.uuid4())
+                            new_vocal_tag = Tag(
+                                id=vocal_tag_id,
+                                name=normalized_vocal_style,
+                                normalized_name=normalized_vocal_style,
+                                is_canonical=1
+                            )
+                            session.add(new_vocal_tag)
+                            session.flush()
+                            album.tags.append(new_vocal_tag)
+
+                            if processed_count < 5:
+                                db_logger.info(f"Row {processed_count}: created new vocal style tag '{normalized_vocal_style}' for {artist} - {album_title}")
+                        else:
+                            album.tags.append(existing_vocal_tag)
+
+                            if processed_count < 5:
+                                db_logger.info(f"Row {processed_count}: using existing vocal style tag '{normalized_vocal_style}' for {artist} - {album_title}")
                 
                 processed_count += 1
                 db_logger.debug(f"Added album: {artist} - {album_title} (ID: {album_id}, Release Date: {release_date_obj.strftime('%Y-%m-%d')})")

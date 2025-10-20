@@ -1,0 +1,6 @@
+2025-07-21 20:39:32,081 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 651 atomic decomposition rules
+2025-07-21 20:39:32,081 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 292 valid atomic tags
+Traceback (most recent call last):
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\test_vocal_loading.py", line 9, in <module>
+    from albumexplore.database.csv_loader import CSVLoader
+ImportError: cannot import name 'CSVLoader' from 'albumexplore.database.csv_loader' (C:\Users\salmo\Documents\GitHub\AlbumExplore\src\albumexplore\database\csv_loader.py)

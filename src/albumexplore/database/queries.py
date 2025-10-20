@@ -5,10 +5,9 @@ from sqlalchemy import func, and_, or_
 from .models import Album, Tag, AtomicTag, TagDecomposition, album_tags, album_atomic_tags
 
 def get_albums_with_tags(session: Session) -> List[Album]:
-    """Get all albums with their tags."""
-    # Avoid eager loading tags to prevent recursion issues
-    # Tags will be loaded lazily when accessed
-    return session.query(Album).all()
+    """Get all albums with their tags eagerly loaded to prevent N+1 queries."""
+    # Use joinedload to eager load tags in a single query for better performance
+    return session.query(Album).options(joinedload(Album.tags)).all()
 
 def get_album_tags(session: Session, album_id: int) -> List[Tag]:
     """Get tags for a specific album."""

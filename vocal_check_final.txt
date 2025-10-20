@@ -1,0 +1,20 @@
+2025-07-21 20:51:44,703 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 651 atomic decomposition rules
+2025-07-21 20:51:44,703 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 292 valid atomic tags
+2025-07-21 20:51:44,704 - albumexplore.database - INFO - Removed existing database at C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 20:51:44,704 - albumexplore.database - INFO - Initializing database with URL: sqlite:///C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 20:51:44,812 - albumexplore.database - INFO - Database initialized successfully
+=== FINAL VOCAL STYLE TAG CHECK ===
+
+1. Checking database for vocal style tags...
+Found 0 vocal style tags:
+
+2. Checking specific albums with vocal styles...
+3. Checking visualization node data...
+Traceback (most recent call last):
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\check_vocal_tags_final.py", line 77, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\check_vocal_tags_final.py", line 42, in main
+    node_data = data_interface.get_node_data()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataInterface' object has no attribute 'get_node_data'

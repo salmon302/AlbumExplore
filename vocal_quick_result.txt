@@ -1,0 +1,17 @@
+2025-07-21 21:27:08,919 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 651 atomic decomposition rules
+2025-07-21 21:27:08,919 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 292 valid atomic tags
+2025-07-21 21:27:08,920 - albumexplore.database - INFO - Removed existing database at C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 21:27:08,920 - albumexplore.database - INFO - Initializing database with URL: sqlite:///C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 21:27:09,025 - albumexplore.database - INFO - Database initialized successfully
+Traceback (most recent call last):
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\quick_vocal_test.py", line 44, in <module>
+    print("\n\u274c No vocal style tags found")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 2: character maps to <undefined>
+=== Simple Vocal Tags Test ===
+Total albums: 0
+Vocal style tags found: 0
+Error: 'charmap' codec can't encode character '\u274c' in position 2: character maps to <undefined>

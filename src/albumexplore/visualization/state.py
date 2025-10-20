@@ -5,11 +5,10 @@ from typing import Dict, Any, Set
 class ViewType(Enum):
     """Available view types."""
     TABLE = "table"
-    NETWORK = "network"
     CHORD = "chord"
     ARC = "arc"
     TAG_EXPLORER = "tag_explorer"
-    TAG_GRAPH = "tag_graph"
+    MAP = "map"  # Geographic world map view
 
 class TransitionType(Enum):
     """Available transition types between views."""

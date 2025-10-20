@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional
 from ..database import models
 from .models import VisualNode, VisualEdge
-from .layout import ForceDirectedLayout, ForceParams
 
 class VisualizationBase(ABC):
 
@@ -27,62 +26,6 @@ class VisualizationBase(ABC):
 	def apply_filters(self, filters: Dict[str, Any]) -> None:
 		"""Apply filters to the visualization."""
 		pass
-
-class NetworkGraph(VisualizationBase):
-	"""Force-directed network graph visualization."""
-	
-	def __init__(self):
-		super().__init__()
-		self.layout = ForceDirectedLayout()
-		self.width = 800.0
-		self.height = 600.0
-		self.is_layout_initialized = False
-	
-	def process_data(self, albums: List[models.Album], tags: List[models.Tag]) -> None:
-		# Process albums into nodes
-		for album in albums:
-			self.nodes.append(VisualNode(
-				id=album.id,
-				label=f"{album.pa_artist_name_on_album} - {album.title}",
-				size=len(album.tags),
-				color=self._get_primary_genre_color(album),
-				shape="circle" if album.length == "LP" else "square",
-				data={"type": "album", "album": album}
-			))
-		
-		# Create edges based on shared tags
-		self._create_album_connections(albums)
-	
-	def update_layout(self) -> None:
-		"""Update force-directed layout."""
-		if not self.is_layout_initialized:
-			self.layout.initialize_positions(self.nodes, self.width, self.height)
-			self.is_layout_initialized = True
-		
-		return self.layout.apply_forces(self.nodes, self.edges)
-	
-	def apply_filters(self, filters: Dict[str, Any]) -> None:
-		# Placeholder for filter implementation
-		pass
-	
-	def _get_primary_genre_color(self, album: models.Album) -> str:
-		# Placeholder for genre color mapping
-		return "#808080"
-	
-	def _create_album_connections(self, albums: List[models.Album]) -> None:
-		# Create edges between albums based on shared tags
-		for i, album1 in enumerate(albums):
-			for album2 in albums[i+1:]:
-				shared_tags = set(t.id for t in album1.tags) & set(t.id for t in album2.tags)
-				if shared_tags:
-					self.edges.append(VisualEdge(
-						source=album1.id,
-						target=album2.id,
-						weight=len(shared_tags),
-						color="#666666",
-						thickness=len(shared_tags) * 0.5,
-						data={"shared_tags": list(shared_tags)}
-					))
 
 class TableView(VisualizationBase):
 	"""Table visualization with sorting capabilities."""

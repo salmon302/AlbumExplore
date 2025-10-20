@@ -34,6 +34,7 @@ class DataCleaner:
 		# Clean and normalize data
 		df = self._standardize_dates(df)
 		df = self._standardize_locations(df)
+		df = self._standardize_vocal_styles(df)
 		
 		# Handle tags - ensure this happens after checking for missing columns
 		if 'Genre / Subgenres' not in df.columns:
@@ -120,6 +121,12 @@ class DataCleaner:
 		"""Standardize locations in the DataFrame."""
 		if 'Country / State' in df.columns:
 			df['country_code'] = df['Country / State'].apply(self._get_country_code)
+		return df
+
+	def _standardize_vocal_styles(self, df: pd.DataFrame) -> pd.DataFrame:
+		"""Standardize vocal styles in the DataFrame."""
+		if 'Vocal Style' in df.columns:
+			df['vocal_style_normalized'] = df['Vocal Style'].apply(self._normalize_vocal_style)
 		return df
 
 	def _clean_tags(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -243,3 +250,30 @@ class DataCleaner:
 		
 		# Try to find country code from pycountry
 		return self.country_codes.get(country, location)
+
+	def _normalize_vocal_style(self, vocal_style: str) -> str:
+		"""Normalize vocal style values."""
+		if pd.isna(vocal_style) or not str(vocal_style).strip():
+			return ''
+		
+		vocal_style = str(vocal_style).strip().lower()
+		
+		# Map common vocal style variations to standardized values
+		vocal_style_mapping = {
+			'clean': 'clean',
+			'harsh': 'harsh', 
+			'mixed': 'mixed',
+			'instrumental': 'instrumental',
+			'screaming': 'harsh',
+			'growling': 'harsh',
+			'death': 'harsh',
+			'black': 'harsh',
+			'melodic': 'clean',
+			'sung': 'clean',
+			'singing': 'clean',
+			'vocals': 'clean',  # Default vocals to clean
+			'screamed': 'harsh',
+			'growled': 'harsh'
+		}
+		
+		return vocal_style_mapping.get(vocal_style, vocal_style)

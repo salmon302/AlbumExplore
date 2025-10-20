@@ -33,6 +33,40 @@ class TagNormalizer:
         self._atomic_decomposition_cache = {}
         self._valid_atomic_tags = set()
         
+        # Enhanced normalization patterns
+        self._hyphen_compounds = {
+            # Post- prefixes
+            'post-metal', 'post-rock', 'post-punk', 'post-hardcore',
+            'post-black', 'post-grunge', 'post-industrial', 'post-bop',
+            # Alt- prefixes
+            'alt-rock', 'alt-metal', 'alt-country', 'alt-folk', 'alt-pop',
+            'alt-blues', 'alt-jazz', 'alt-punk', 'alt-prog',
+            # Avant- prefixes
+            'avant-garde', 'avant-metal', 'avant-folk', 'avant-jazz',
+            'avant-pop', 'avant-prog', 'avant-rock', 'avant-punk',
+            'avant-black', 'avant-funk', 'avant-latin',
+            # Neo- prefixes
+            'neo-prog', 'neo-psychedelia', 'neo-folk', 'neo-soul',
+            'neo-classical', 'neo-medieval', 'neo-punk',
+            # Art- prefixes (only art-rock and art-punk use hyphens)
+            'art-rock', 'art-punk',
+            # Prog- prefixes  
+            'prog-metal', 'prog-rock',
+            # Death- compounds
+            'death-doom', 'death-industrial',
+            # Other compounds
+            'singer-songwriter', 'stoner-rock',
+            'd-beat', 'no-wave', 'lo-fi',
+        }
+        
+        # Suffix patterns for compound normalization
+        # These should generally NOT use hyphens (e.g., "blackgaze" not "black-gaze")
+        self._suffix_compounds = {
+            'gaze': {'blackgaze', 'doomgaze', 'grungegaze', 'noisegaze', 'nugaze', 'shoegaze'},
+            'core': {'deathcore', 'metalcore', 'grindcore', 'hardcore', 'emocore', 'mathcore'},
+            'wave': {'darkwave', 'coldwave', 'chillwave', 'synthwave', 'dolewave'},
+        }
+        
         if self._enable_atomic_tags:
             self._load_atomic_config()
         
@@ -332,3 +366,188 @@ class TagNormalizer:
         if self._enable_atomic_tags:
             self._load_atomic_config()
             self.clear_atomic_cache()
+    
+    # ===== ENHANCED NORMALIZATION METHODS =====
+    
+    def normalize_enhanced(self, tag: str) -> str:
+        """
+        Enhanced normalization with improved pattern recognition.
+        
+        This method provides better handling of:
+        - Case normalization
+        - Whitespace standardization
+        - Hyphen vs space for known compounds
+        - Special character cleanup
+        - Misspelling corrections (word-level)
+        
+        Args:
+            tag: Raw tag string to normalize
+            
+        Returns:
+            Normalized tag string
+        """
+        if not tag:
+            return tag
+        
+        # Basic cleanup
+        tag = tag.strip()
+        
+        # Lowercase (maintain acronyms if needed in future)
+        tag = tag.lower()
+        
+        # Normalize whitespace and special characters
+        tag = self._normalize_whitespace(tag)
+        
+        # Apply word-level misspelling corrections
+        # This handles multi-word tags like "atmosheric black metal"
+        tag = self._correct_misspellings_in_phrase(tag)
+        
+        # Apply standard normalization for complete tag
+        tag = self.normalize(tag)
+        
+        # Then handle hyphen vs space for known compounds
+        # This must come after misspelling correction
+        tag = self._normalize_compound_format(tag)
+        
+        return tag
+    
+    def _correct_misspellings_in_phrase(self, tag: str) -> str:
+        """
+        Correct misspellings in multi-word tags.
+        
+        Example: "atmosheric black metal" -> "atmospheric black metal"
+        """
+        misspellings = self._rules_config.get_misspellings()
+        
+        # Build a reverse mapping: variant -> correct
+        variant_map = {}
+        for correct, variants in misspellings.items():
+            for variant in variants:
+                variant_map[variant.lower()] = correct
+        
+        # Split tag into words and correct each
+        words = tag.split()
+        corrected_words = []
+        
+        for word in words:
+            # Check if this word is a misspelling
+            if word in variant_map:
+                corrected_words.append(variant_map[word])
+            else:
+                corrected_words.append(word)
+        
+        return ' '.join(corrected_words)
+    
+    def _normalize_whitespace(self, tag: str) -> str:
+        """Normalize whitespace and remove extra spaces."""
+        # Replace tabs, newlines, multiple spaces with single space
+        tag = re.sub(r'\s+', ' ', tag)
+        
+        # Remove spaces around hyphens for consistency
+        tag = re.sub(r'\s*-\s*', '-', tag)
+        
+        # Remove spaces around slashes
+        tag = re.sub(r'\s*/\s*', '/', tag)
+        
+        return tag.strip()
+    
+    def _normalize_compound_format(self, tag: str) -> str:
+        """
+        Normalize hyphen vs space for known compound tags.
+        
+        Priority:
+        1. Check suffix compounds (should be no hyphen/space)
+        2. If exact match in hyphen_compounds, use hyphen
+        3. Otherwise, check normalized versions
+        """
+        tag_normalized = tag.replace('-', ' ').replace('_', ' ')
+        tag_normalized = ' '.join(tag_normalized.split())  # Normalize spaces
+        
+        # Check suffix compounds first (blackgaze, doomgaze, etc.)
+        for suffix, compounds in self._suffix_compounds.items():
+            for compound in compounds:
+                # Create spaced version for comparison
+                compound_spaced = re.sub(f'{suffix}$', f' {suffix}', compound)
+                if tag_normalized == compound_spaced or tag_normalized == compound:
+                    return compound  # Return without space/hyphen
+        
+        # Check if it matches a hyphen compound
+        for compound in self._hyphen_compounds:
+            compound_normalized = compound.replace('-', ' ')
+            if tag_normalized == compound_normalized:
+                return compound
+        
+        # No match, return with spaces normalized
+        return tag_normalized
+    
+    def split_multi_tags(self, tag: str) -> List[str]:
+        """
+        Split tags containing slashes or other separators.
+        
+        Examples:
+            "Death Metal/Heavy Metal/OSDM" -> ["death metal", "heavy metal", "osdm"]
+            "Alternative Rock/Indie Rock/Emo" -> ["alternative rock", "indie rock", "emo"]
+        
+        Args:
+            tag: Tag potentially containing multiple tags
+            
+        Returns:
+            List of individual normalized tags
+        """
+        # Check for slash separator
+        if '/' in tag:
+            parts = [p.strip() for p in tag.split('/')]
+            return [self.normalize_enhanced(part) for part in parts if part.strip()]
+        
+        # Single tag
+        return [self.normalize_enhanced(tag)]
+    
+    def analyze_tag_consistency(self, tags: List[str]) -> Dict[str, any]:
+        """
+        Analyze tag list for consistency issues.
+        
+        Args:
+            tags: List of tags to analyze
+        
+        Returns:
+            Dictionary with analysis results including:
+            - case_variants: Tags differing only in case
+            - hyphen_variants: Tags differing in hyphen/space usage
+            - multi_tags: Tags containing slashes
+            - total_tags: Total number of tags
+            - unique_normalized: Unique tags after normalization
+            - reduction_count: Number of tags that would be eliminated
+        """
+        case_variants = defaultdict(list)
+        hyphen_variants = defaultdict(list)
+        multi_tags = []
+        
+        for tag in tags:
+            # Check for case variants
+            normalized_lower = tag.lower()
+            case_variants[normalized_lower].append(tag)
+            
+            # Check for hyphen variants
+            normalized_hyphen = normalized_lower.replace('-', ' ').replace('_', ' ')
+            normalized_hyphen = ' '.join(normalized_hyphen.split())
+            hyphen_variants[normalized_hyphen].append(tag)
+            
+            # Check for multi-tags
+            if '/' in tag:
+                multi_tags.append(tag)
+        
+        # Filter to only variants (more than one version)
+        case_variants = {k: v for k, v in case_variants.items() if len(v) > 1}
+        hyphen_variants = {k: v for k, v in hyphen_variants.items() if len(v) > 1}
+        
+        unique_normalized = len(set(self.normalize_enhanced(t) for t in tags))
+        
+        return {
+            'case_variants': dict(case_variants),
+            'hyphen_variants': dict(hyphen_variants),
+            'multi_tags': multi_tags,
+            'total_tags': len(tags),
+            'unique_normalized': unique_normalized,
+            'reduction_count': len(tags) - unique_normalized,
+        }
+

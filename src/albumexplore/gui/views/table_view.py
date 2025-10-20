@@ -22,9 +22,9 @@ class TableView(BaseView):
         """Set up UI elements."""
         # Create table
         self.table = QTableWidget(self)
-        self.table.setColumnCount(6)
+        self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels([
-            'Artist', 'Album', 'Year', 'Genre', 'Country', 'Tags'
+            'Artist', 'Album', 'Year', 'Genre', 'Country', 'Vocal Style', 'Tags'
         ])
         
         # Configure selection
@@ -81,10 +81,15 @@ class TableView(BaseView):
             # Country
             self.table.setItem(row_idx, 4, 
                              QTableWidgetItem(row.get('country', '')))
+
+            # Vocal style
+            vocal_style_value = row.get('vocal_style', '')
+            self.table.setItem(row_idx, 5,
+                             QTableWidgetItem(vocal_style_value))
             
             # Tags
             tags = row.get('tags', [])
-            self.table.setItem(row_idx, 5, 
+            self.table.setItem(row_idx, 6, 
                              QTableWidgetItem(', '.join(tags)))
         
         # Update selection
@@ -125,7 +130,7 @@ class TableView(BaseView):
         direction = "desc" if current_direction == Qt.SortOrder.AscendingOrder else "asc"
         
         # Map column index to name
-        columns = ['artist', 'album', 'year', 'genre', 'country', 'tags']
+        columns = ['artist', 'album', 'year', 'genre', 'country', 'vocal_style', 'tags']
         if 0 <= column_index < len(columns):
             self.sort_changed.emit(columns[column_index], direction)
             

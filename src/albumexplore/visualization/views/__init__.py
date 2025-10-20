@@ -5,22 +5,18 @@ from PyQt6.QtGui import QPalette, QColor
 
 from ..state import ViewState, ViewType
 from .base_view import BaseView
-from .enhanced_network_view import EnhancedNetworkView
 from .chord_view import ChordView
 from .arc_view import ArcView
 from .table_view import TableView
 from .tag_explorer_view import TagExplorerView
-from .tag_graph_view import TagGraphView
 from albumexplore.gui.gui_logging import gui_logger
 
 # Export view_map for use in ViewManager
 view_map: Dict[ViewType, Type[BaseView]] = {
-    ViewType.TABLE: TableView,  # Use the visualization TableView implementation
-    ViewType.NETWORK: EnhancedNetworkView,  # Changed NetworkView to EnhancedNetworkView
+    ViewType.TABLE: TableView,
     ViewType.CHORD: ChordView,
     ViewType.ARC: ArcView,
-    ViewType.TAG_EXPLORER: TagExplorerView,
-    ViewType.TAG_GRAPH: TagGraphView
+    ViewType.TAG_EXPLORER: TagExplorerView
 }
 
 def create_view(view_type: ViewType, parent: Optional[QWidget] = None) -> Optional[BaseView]:

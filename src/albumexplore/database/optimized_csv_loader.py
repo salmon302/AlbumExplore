@@ -18,9 +18,19 @@ from albumexplore.gui.gui_logging import db_logger, performance_logger
 from albumexplore.tags.normalizer.tag_normalizer import TagNormalizer
 from albumexplore.database.tag_validator import TagValidationFilter
 
+# Import vocal-style helpers (now with length checks)
+from albumexplore.database.csv_loader import (
+    extract_vocal_style_tags,
+    build_raw_tags_string
+)
+
 # Initialize advanced tag normalizer and validator
 _tag_normalizer = TagNormalizer()
 _tag_validator = TagValidationFilter(strict_mode=False)
+
+# Pre-compiled regex patterns for performance
+_TAG_SPLIT_PATTERN = re.compile(r'[;,]')
+_YEAR_PATTERN = re.compile(r'20\d{2}')
 
 def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
     """Optimized version of load_dataframe_data with batch processing and caching."""
@@ -67,12 +77,13 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         existing_albums = {(artist, title) for artist, title in existing_albums_query}
         db_logger.info(f"Found {len(existing_albums)} existing albums in database")
         
-        # Filter out duplicates
+        # Filter out duplicates using vectorized operations (much faster than apply)
         df_clean['artist_clean'] = df_clean['artist'].astype(str).str.strip()
         df_clean['album_clean'] = df_clean['album'].astype(str).str.strip()
-        df_clean['is_duplicate'] = df_clean.apply(
-            lambda row: (row['artist_clean'], row['album_clean']) in existing_albums, axis=1
-        )
+        
+        # Create tuples and check membership in set - vectorized approach
+        album_tuples = list(zip(df_clean['artist_clean'], df_clean['album_clean']))
+        df_clean['is_duplicate'] = [tuple_val in existing_albums for tuple_val in album_tuples]
         
         df_new = df_clean[~df_clean['is_duplicate']].copy()
         duplicates_count = len(df_clean) - len(df_new)
@@ -89,35 +100,61 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         if perf_monitor:
             perf_monitor.start_operation("Tag Processing")
         
+        # Vectorized NaN handling - much faster than iterating
+        genre_col = 'genre / subgenres' if 'genre / subgenres' in df_new.columns else 'genre' if 'genre' in df_new.columns else 'genres'
+        country_col = 'country / state' if 'country / state' in df_new.columns else 'country'
+        vocal_col = 'vocal style' if 'vocal style' in df_new.columns else 'vocal_style'
+        
+        df_new[genre_col] = df_new[genre_col].fillna('').astype(str)
+        if country_col in df_new.columns:
+            df_new[country_col] = df_new[country_col].fillna('').astype(str)
+        if vocal_col in df_new.columns:
+            df_new[vocal_col] = df_new[vocal_col].fillna('').astype(str)
+        
         # Collect all unique tags from all rows
         all_raw_tags = set()
         row_tag_mapping = {}  # row_index -> list of normalized tags
+        row_vocal_style_tags = {}  # row_index -> list of vocal style tags
+        row_vocal_style_display = {}  # row_index -> string for display
         
-        for idx, row in df_new.iterrows():
-            genre_and_tags_str = row.get('genre / subgenres', '') or row.get('genre', '') or row.get('genres', '')
-            country_str = row.get('country / state', '') or row.get('country', '')
+        total_rows = len(df_new)
+        for row_num, (idx, row) in enumerate(df_new.iterrows()):
+            if row_num % 1000 == 0:
+                db_logger.info(f"Phase 2: Processing row {row_num}/{total_rows}...")
             
-            # Handle NaN values
-            if pd.isna(genre_and_tags_str):
-                genre_and_tags_str = ''
-            if pd.isna(country_str):
-                country_str = ''
+            genre_and_tags_str = row.get(genre_col, '')
+            country_str = row.get(country_col, '')
+            vocal_style_str = row.get(vocal_col, '')
             
-            # Extract tags
+            # Extract tags using pre-compiled regex
             row_tags = []
             if genre_and_tags_str:
-                raw_tags = [tag.strip() for tag in re.split(r'[;,]', str(genre_and_tags_str)) if tag.strip()]
+                raw_tags = [tag.strip() for tag in _TAG_SPLIT_PATTERN.split(genre_and_tags_str) if tag.strip()]
                 all_raw_tags.update(raw_tags)
                 row_tags.extend(raw_tags)
             
             if country_str:
-                countries = [c.strip() for c in re.split(r'[;,]', str(country_str)) if c.strip()]
+                countries = [c.strip() for c in _TAG_SPLIT_PATTERN.split(country_str) if c.strip()]
                 all_raw_tags.update(countries)
                 row_tags.extend(countries)
+
+            if row_num == 0:
+                db_logger.info(f"Phase 2: Row 0 vocal_style_str length={len(vocal_style_str)}, preview={repr(vocal_style_str[:100])}")
             
+            vocal_style_tags = extract_vocal_style_tags(vocal_style_str)
+            
+            if row_num == 0:
+                db_logger.info(f"Phase 2: Row 0 extracted {len(vocal_style_tags)} vocal tags")
+            
+            if vocal_style_tags:
+                row_vocal_style_tags[idx] = vocal_style_tags
+                row_vocal_style_display[idx] = ', '.join(vocal_style_tags)
+                all_raw_tags.update(vocal_style_tags)
+                row_tags.extend(vocal_style_tags)
+
             row_tag_mapping[idx] = row_tags
         
-        db_logger.info(f"Collected {len(all_raw_tags)} unique raw tags across all rows")
+        db_logger.info(f"Phase 2: Tag collection complete. Collected {len(all_raw_tags)} unique raw tags across {total_rows} rows")
         
         # Batch validate all tags
         context = {'source': 'dataframe_import_batch'}
@@ -128,12 +165,12 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         if rejected_tags:
             db_logger.warning(f"Rejected tags: {rejected_tags[:10]}...")  # Show first 10
         
-        # Batch normalize all valid tags
-        tag_normalization_cache = {}
-        for tag in valid_tags:
-            normalized = _tag_normalizer.normalize(tag)
-            if normalized:
-                tag_normalization_cache[tag] = normalized
+        # Batch normalize all valid tags using more efficient comprehension
+        tag_normalization_cache = {
+            tag: normalized 
+            for tag in valid_tags 
+            if (normalized := _tag_normalizer.normalize(tag)) is not None
+        }
         
         db_logger.info(f"Normalized {len(tag_normalization_cache)} tags")
         
@@ -155,31 +192,34 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         
         db_logger.info(f"Found {len(existing_tags_map)} existing tags in database")
         
-        # Prepare new tags to create
-        new_tags_to_create = []
+        # Prepare new tags to create as dictionaries for bulk insert
+        new_tags_to_insert = []
+        new_tag_objects = {}  # Track new tags for tags_map
         tags_map = existing_tags_map.copy()  # Will contain all tags (existing + new)
         
         for normalized_tag in unique_normalized_tags:
             if normalized_tag not in existing_tags_map:
-                new_tag = Tag(
-                    id=str(uuid.uuid4()),
-                    name=normalized_tag,
-                    normalized_name=normalized_tag,
-                    is_canonical=1
-                )
-                new_tags_to_create.append(new_tag)
-                tags_map[normalized_tag] = new_tag
+                tag_id = str(uuid.uuid4())
+                new_tags_to_insert.append({
+                    'id': tag_id,
+                    'name': normalized_tag,
+                    'normalized_name': normalized_tag,
+                    'is_canonical': 1
+                })
+                # Create a minimal Tag object for relationship tracking
+                tag_obj = Tag(id=tag_id, name=normalized_tag, normalized_name=normalized_tag, is_canonical=1)
+                new_tag_objects[normalized_tag] = tag_obj
+                tags_map[normalized_tag] = tag_obj
         
-        # Batch insert new tags
-        if new_tags_to_create:
-            session.add_all(new_tags_to_create)
-            session.flush()  # Get IDs for new tags
-            db_logger.info(f"Created {len(new_tags_to_create)} new tags")
+        # Bulk insert new tags using bulk_insert_mappings (faster than add_all)
+        if new_tags_to_insert:
+            session.bulk_insert_mappings(Tag, new_tags_to_insert)
+            db_logger.info(f"Created {len(new_tags_to_insert)} new tags")
         
         phase_time = (datetime.now() - phase_start).total_seconds()
         performance_logger.info(f"[PERF] Phase 3 completed in {phase_time:.2f}s")
         if perf_monitor:
-            perf_monitor.complete_operation("Database Operations", len(new_tags_to_create))
+            perf_monitor.complete_operation("Database Operations", len(new_tags_to_insert))
 
         # === PHASE 4: Batch Album Creation ===
         phase_start = datetime.now()
@@ -187,9 +227,15 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         if perf_monitor:
             perf_monitor.start_operation("Album Creation")
         
-        albums_to_create = []
-        album_tag_relationships = []  # List of (album_id, tag_id) tuples
+        # Use dictionaries for bulk insert - much faster than ORM objects
+        albums_to_insert = []
+        album_tag_associations = []  # List of dicts for album_tags association table
+        album_id_map = {}  # idx -> album_id for relationship tracking
         
+        # Pre-compute tag ID lookups for better performance in inner loop
+        tag_id_cache = {normalized_tag: tag_obj.id for normalized_tag, tag_obj in tags_map.items()}
+        
+        current_time = datetime.now()
         for idx, row in df_new.iterrows():
             artist = row['artist_clean']
             album_title = row['album_clean']
@@ -206,55 +252,65 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
             # Get other fields
             genre_and_tags_str = row.get('genre / subgenres', '') or row.get('genre', '') or row.get('genres', '')
             country_str = row.get('country / state', '') or row.get('country', '')
+            vocal_style_tags = row_vocal_style_tags.get(idx, [])
+            vocal_style_display = row_vocal_style_display.get(idx, '')
             
             if pd.isna(genre_and_tags_str):
                 genre_and_tags_str = ''
             if pd.isna(country_str):
                 country_str = ''
+            combined_raw_tags = build_raw_tags_string(genre_and_tags_str, vocal_style_tags)
             
-            # Create album
+            # Create album as dictionary for bulk insert
             album_id = str(uuid.uuid4())
-            album = Album(
-                id=album_id,
-                pa_artist_name_on_album=artist,
-                title=album_title,
-                release_date=release_date_obj,
-                release_year=release_year,
-                genre=genre_and_tags_str,
-                country=country_str,
-                raw_tags=genre_and_tags_str,
-                last_updated=datetime.now()
-            )
-            albums_to_create.append(album)
+            album_id_map[idx] = album_id
             
-            # Prepare tag relationships
+            album_dict = {
+                'id': album_id,
+                'pa_artist_name_on_album': artist,
+                'title': album_title,
+                'release_date': release_date_obj,
+                'release_year': release_year,
+                'vocal_style': vocal_style_display or None,
+                'genre': genre_and_tags_str,
+                'country': country_str,
+                'raw_tags': combined_raw_tags,
+                'last_updated': current_time
+            }
+            albums_to_insert.append(album_dict)
+            
+            # Prepare tag relationships as dictionaries using pre-computed cache
             row_raw_tags = row_tag_mapping.get(idx, [])
             album_tags = set()
             
             for raw_tag in row_raw_tags:
-                if raw_tag in tag_normalization_cache:
-                    normalized_tag = tag_normalization_cache[raw_tag]
-                    if normalized_tag in tags_map and normalized_tag not in album_tags:
-                        album_tags.add(normalized_tag)
-                        tag_obj = tags_map[normalized_tag]
-                        album_tag_relationships.append((album, tag_obj))
+                normalized_tag = tag_normalization_cache.get(raw_tag)
+                if normalized_tag and normalized_tag in tag_id_cache and normalized_tag not in album_tags:
+                    album_tags.add(normalized_tag)
+                    album_tag_associations.append({
+                        'album_id': album_id,
+                        'tag_id': tag_id_cache[normalized_tag]
+                    })
         
-        # Batch insert albums
-        session.add_all(albums_to_create)
-        session.flush()  # Get IDs for albums
+        # Bulk insert albums using bulk_insert_mappings (much faster than add_all)
+        if albums_to_insert:
+            session.bulk_insert_mappings(Album, albums_to_insert)
+            db_logger.info(f"Created {len(albums_to_insert)} new albums")
         
-        db_logger.info(f"Created {len(albums_to_create)} new albums")
-        
-        # Batch create tag relationships
-        for album, tag in album_tag_relationships:
-            album.tags.append(tag)
-        
-        db_logger.info(f"Created {len(album_tag_relationships)} album-tag relationships")
+        # Bulk insert album-tag relationships using raw SQL for maximum performance
+        if album_tag_associations:
+            # Use executemany for bulk insert into association table
+            from sqlalchemy import text as sql_text
+            insert_stmt = sql_text(
+                "INSERT INTO album_tags (album_id, tag_id) VALUES (:album_id, :tag_id)"
+            )
+            session.execute(insert_stmt, album_tag_associations)
+            db_logger.info(f"Created {len(album_tag_associations)} album-tag relationships")
         
         phase_time = (datetime.now() - phase_start).total_seconds()
         performance_logger.info(f"[PERF] Phase 4 completed in {phase_time:.2f}s")
         if perf_monitor:
-            perf_monitor.complete_operation("Album Creation", len(albums_to_create))
+            perf_monitor.complete_operation("Album Creation", len(albums_to_insert))
 
         # === PHASE 5: Final Commit ===
         phase_start = datetime.now()
@@ -290,7 +346,7 @@ def _parse_release_date_optimized(release_date_str: str, source_file: str = '') 
     if not release_date_str:
         # Try to extract year from source file
         if source_file:
-            year_match = re.search(r'20\d{2}', source_file)
+            year_match = _YEAR_PATTERN.search(source_file)
             if year_match:
                 year = int(year_match.group())
                 return datetime(year, 1, 1), year
@@ -306,8 +362,8 @@ def _parse_release_date_optimized(release_date_str: str, source_file: str = '') 
         except ValueError:
             pass
     
-    # Extract year from any format
-    year_match = re.search(r'20\d{2}', release_date_str)
+    # Extract year from any format using pre-compiled pattern
+    year_match = _YEAR_PATTERN.search(release_date_str)
     if year_match:
         year = int(year_match.group())
         

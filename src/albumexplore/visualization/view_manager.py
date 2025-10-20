@@ -112,18 +112,6 @@ class ViewManager(QObject): # Inherit from QObject
         """Render current view and cache it."""
         view_type = self.state_manager.current_view.view_type
         
-        if nodes and view_type == ViewType.NETWORK:
-            graphics_logger.info(f"[ViewManager._render_view] Applying layout for {len(nodes)} nodes and {len(edges)} edges.")
-            layout_width = self.state_manager.current_view.viewport_width
-            layout_height = self.state_manager.current_view.viewport_height
-            
-            # compute_layout modifies nodes in-place via its internal PhysicsSystem
-            self.layout_engine.compute_layout(nodes, edges, layout_width, layout_height)
-            if nodes: # Check again as nodes list could theoretically be empty after layout (though unlikely)
-                graphics_logger.info(f"[ViewManager._render_view] Layout computation finished. First node new pos: {nodes[0].pos}")
-            else:
-                graphics_logger.info("[ViewManager._render_view] Layout computation finished. No nodes to report position for.")
-
         graphics_logger.info(f"[ViewManager._render_view] Rendering for view type: {view_type.value}")
         graphics_logger.debug(f"[ViewManager._render_view] Input: {len(nodes)} VisualNode objects, {len(edges)} VisualEdge objects.")
         if nodes:

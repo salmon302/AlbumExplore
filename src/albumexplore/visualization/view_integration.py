@@ -29,17 +29,7 @@ class ViewIntegrationManager:
     
     def _init_default_transitions(self):
         """Initialize default transition configurations."""
-        # Table to Network: Morph rows into nodes
-        self.transition_configs[(ViewType.TABLE, ViewType.NETWORK)] = ViewTransition(
-            ViewType.TABLE, ViewType.NETWORK, TransitionType.MORPH, 500
-        )
-        
-        # Network to Table: Quick fade
-        self.transition_configs[(ViewType.NETWORK, ViewType.TABLE)] = ViewTransition(
-            ViewType.NETWORK, ViewType.TABLE, TransitionType.FADE, 200
-        )
-        
-        # Other transitions default to fade
+        # All transitions default to fade
         for source in ViewType:
             for target in ViewType:
                 key = (source, target)

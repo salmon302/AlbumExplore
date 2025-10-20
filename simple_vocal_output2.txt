@@ -1,0 +1,28 @@
+2025-07-21 20:54:56,084 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 651 atomic decomposition rules
+2025-07-21 20:54:56,084 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 292 valid atomic tags
+2025-07-21 20:54:56,085 - albumexplore.database - INFO - Loading CSV data from csv
+2025-07-21 20:54:56,085 - albumexplore.database - ERROR - Error removing database file C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\albumexplore.db'
+2025-07-21 20:54:56,086 - albumexplore.database - INFO - Initializing database with URL: sqlite:///C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 20:54:56,103 - albumexplore.database - INFO - Database initialized successfully
+2025-07-21 20:54:56,137 - albumexplore.database - INFO - Current album count in database: 15860
+2025-07-21 20:54:56,139 - albumexplore.database - INFO - Reddit CSV data appears to already be loaded (found non-uppercase albums). Skipping CSV loading.
+=== LOADING CSV AND CHECKING VOCAL TAGS ===
+
+1. Loading CSV files...
+   CSV loading complete
+
+2. Checking database for vocal style tags...
+Found 0 vocal style tags:
+
+Found 0 albums with vocal_style field:
+Traceback (most recent call last):
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\simple_vocal_test.py", line 56, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\simple_vocal_test.py", line 53, in main
+    print("\u274c ISSUE: No vocal style tags found")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 0: character maps to <undefined>

@@ -157,10 +157,6 @@ class DataInterface:
                 atomic_tags = self._atomic_tag_cache[album.id]
         
         # Create node
-        # DEBUG: Log the original album.release_year
-        from albumexplore.gui.gui_logging import graphics_logger # Temporary import for logging
-        graphics_logger.debug(f"DataInterface: Creating/getting node for album '{album.title}'. DB album.release_year: {album.release_year} (type: {type(album.release_year)})")
-
         # Ensure year is an integer
         year = album.release_year
         if not isinstance(year, int) and album.release_date:
@@ -168,6 +164,9 @@ class DataInterface:
                 year = album.release_date.year
             except AttributeError:
                 year = None # Or some default
+
+        vocal_style_display = album.vocal_style or ''
+        vocal_styles = [style.strip() for style in vocal_style_display.split(',') if style.strip()]
 
         # Prepare data for node
         node_data = {
@@ -179,7 +178,9 @@ class DataInterface:
             'raw_tags': album.raw_tags or album.genre, # Use raw_tags and fallback to genre
             'type': 'row',  # Indicate this is a table row
             'tags': list(tags),
-            'atomic_tags': list(atomic_tags) if self._config.use_atomic_tags else []
+            'atomic_tags': list(atomic_tags) if self._config.use_atomic_tags else [],
+            'vocal_style': vocal_style_display,
+            'vocal_styles': vocal_styles
         }
 
         node = VisualNode(

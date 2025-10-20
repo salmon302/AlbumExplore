@@ -1,0 +1,6 @@
+2025-07-21 20:50:20,822 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 651 atomic decomposition rules
+2025-07-21 20:50:20,822 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 292 valid atomic tags
+Traceback (most recent call last):
+  File "C:\Users\salmo\Documents\GitHub\AlbumExplore\check_vocal_tags_final.py", line 8, in <module>
+    from albumexplore.database.database_interface import DatabaseInterface
+ModuleNotFoundError: No module named 'albumexplore.database.database_interface'

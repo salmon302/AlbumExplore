@@ -5,9 +5,16 @@ from pathlib import Path # Added Path
 from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QApplication, QStackedWidget
 from PyQt6.QtGui import QAction # Added QAction
 from PyQt6.QtCore import Qt
-from .views.network_view import NetworkView
 from .views.table_view import TableView
 from albumexplore.visualization.views.tag_explorer_view import TagExplorerView # Corrected import
+try:
+    from .views.world_map_view import WorldMapView
+    MAP_VIEW_AVAILABLE = True
+except ImportError as e:
+    graphics_logger = logging.getLogger('albumexplore.graphics')
+    graphics_logger.warning(f"Map view not available: {e}. Install 'folium' and 'PyQt6-WebEngine' to enable.")
+    MAP_VIEW_AVAILABLE = False
+    WorldMapView = None
 from albumexplore.visualization.view_manager import ViewManager
 from albumexplore.visualization.state import ViewType
 from albumexplore.gui.gui_logging import graphics_logger # Changed from gui_logger to graphics_logger
@@ -34,9 +41,12 @@ class AlbumExplorer(QMainWindow):
             self.view_manager = ViewManager(self.data_interface, parent=self) 
             
             # Initialize views
-            self.network_view = NetworkView()
             self.table_view = TableView()
             self.tag_explorer_view = TagExplorerView()
+            if MAP_VIEW_AVAILABLE:
+                self.map_view = WorldMapView()
+            else:
+                self.map_view = None
 
             # Setup Menu Bar for view switching and data loading
             self._setup_menu_bar()
@@ -46,9 +56,10 @@ class AlbumExplorer(QMainWindow):
 
             # Create a stacked widget to hold different views
             self.stacked_widget = QStackedWidget()
-            self.stacked_widget.addWidget(self.network_view)
             self.stacked_widget.addWidget(self.table_view)
             self.stacked_widget.addWidget(self.tag_explorer_view) # Add TagExplorerView to stack
+            if MAP_VIEW_AVAILABLE and self.map_view:
+                self.stacked_widget.addWidget(self.map_view)
 
             # Set the central widget
             self.setCentralWidget(self.stacked_widget)
@@ -135,8 +146,9 @@ class AlbumExplorer(QMainWindow):
         
         # Enable view menu actions
         self.table_action.setEnabled(True)
-        self.network_action.setEnabled(True)
         self.tag_explorer_action.setEnabled(True)
+        if MAP_VIEW_AVAILABLE and hasattr(self, 'map_action'):
+            self.map_action.setEnabled(True)
         
         # Update the window title
         self.setWindowTitle(f"Album Explorer - {len(dataframe)} albums loaded")
@@ -177,17 +189,18 @@ class AlbumExplorer(QMainWindow):
         view_menu.addAction(table_action)
         self.table_action = table_action
 
-        network_action = QAction("&Network View", self)
-        network_action.triggered.connect(lambda: self._handle_view_switch(ViewType.NETWORK))
-        network_action.setEnabled(False)  # Disabled until data is loaded
-        view_menu.addAction(network_action)
-        self.network_action = network_action
-
         tag_explorer_action = QAction("&Tag Explorer View", self)
         tag_explorer_action.triggered.connect(lambda: self._handle_view_switch(ViewType.TAG_EXPLORER))
         tag_explorer_action.setEnabled(False)  # Disabled until data is loaded
         view_menu.addAction(tag_explorer_action)
         self.tag_explorer_action = tag_explorer_action
+
+        if MAP_VIEW_AVAILABLE:
+            map_action = QAction("&Map View", self)
+            map_action.triggered.connect(lambda: self._handle_view_switch(ViewType.MAP))
+            map_action.setEnabled(False)  # Disabled until data is loaded
+            view_menu.addAction(map_action)
+            self.map_action = map_action
 
     def _handle_view_switch(self, view_type: ViewType):
         """Switches the current view in the ViewManager."""
@@ -221,16 +234,16 @@ class AlbumExplorer(QMainWindow):
             graphics_logger.info(f"AlbumExplorer: Setting TableView. Data type: {render_data.get('type')}")
             self.table_view.update_data(render_data)
             self.stacked_widget.setCurrentWidget(self.table_view)
-        elif current_view_type == ViewType.NETWORK:
-            graphics_logger.info(f"AlbumExplorer: Setting NetworkView. Data type: {render_data.get('type')}")
-            self.network_view.update_data(render_data)
-            self.stacked_widget.setCurrentWidget(self.network_view)
         elif current_view_type == ViewType.TAG_EXPLORER: # Added condition for TagExplorerView
             graphics_logger.info(f"AlbumExplorer: Setting TagExplorerView. Data type: {render_data.get('type')}")
             nodes = render_data.get('nodes', [])
             edges = render_data.get('edges', []) # edges might not be directly used by TagExplorerView but good to pass if available
             self.tag_explorer_view.update_data(nodes, edges)
             self.stacked_widget.setCurrentWidget(self.tag_explorer_view)
+        elif current_view_type == ViewType.MAP and MAP_VIEW_AVAILABLE and self.map_view:
+            graphics_logger.info(f"AlbumExplorer: Setting MapView. Data type: {render_data.get('type')}")
+            self.map_view.update_data(render_data)
+            self.stacked_widget.setCurrentWidget(self.map_view)
         else:
             graphics_logger.warning(f"AlbumExplorer: Unknown view type {current_view_type}")
         

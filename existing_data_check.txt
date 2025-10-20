@@ -1,0 +1,10 @@
+2025-07-21 20:41:32,955 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 651 atomic decomposition rules
+2025-07-21 20:41:32,955 - albumexplore.tags.normalizer.tag_normalizer - INFO - Loaded 292 valid atomic tags
+2025-07-21 20:41:32,956 - albumexplore.database - INFO - Removed existing database at C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 20:41:32,956 - albumexplore.database - INFO - Initializing database with URL: sqlite:///C:\Users\salmo\Documents\GitHub\AlbumExplore\albumexplore.db
+2025-07-21 20:41:33,057 - albumexplore.database - INFO - Database initialized successfully
+Total albums in database: 0
+Vocal tags found: []
+Albums with vocal_style field: 0
+Albums with vocal tags: 0
+Instrumental tags found: []
