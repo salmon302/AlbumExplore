@@ -19,3 +19,20 @@ def log_update(db: Session, entity_type: str, entity_id: str,
 	except Exception as e:
 		db.rollback()
 		raise ValueError(f"Error logging update: {e}") from e
+
+
+def generate_stable_id(*parts: str) -> str:
+	"""Generate a stable UUID based on the provided string parts.
+
+	This uses UUID5 with a namespaced value derived from the joined
+   , lowercased parts. Use this for entity IDs that should remain
+	stable across re-imports when the identifying fields (e.g.
+	artist and album title) are the same.
+	"""
+	try:
+		import uuid
+	except Exception:
+		raise
+
+	normalized = "||".join([(p or "").strip().lower() for p in parts])
+	return str(uuid.uuid5(uuid.NAMESPACE_URL, normalized))

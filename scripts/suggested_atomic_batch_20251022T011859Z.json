@@ -1,0 +1,455 @@
+{
+  "generated": "20251022T011859Z",
+  "suggestions": [
+    {
+      "tag": "dance music",
+      "count": 1,
+      "decomposition": [
+        "dance",
+        "music"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "dance punk",
+      "count": 1,
+      "decomposition": [
+        "dance",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "dance rock",
+      "count": 1,
+      "decomposition": [
+        "dance",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "dark country",
+      "count": 1,
+      "decomposition": [
+        "dark",
+        "country"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "dark punk",
+      "count": 1,
+      "decomposition": [
+        "dark",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "dark synth",
+      "count": 1,
+      "decomposition": [
+        "dark",
+        "synth"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "deep funk",
+      "count": 1,
+      "decomposition": [
+        "deep",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "deep soul",
+      "count": 1,
+      "decomposition": [
+        "deep",
+        "soul"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "depressive rock",
+      "count": 1,
+      "decomposition": [
+        "depressive",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "disco funk",
+      "count": 1,
+      "decomposition": [
+        "disco",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "doom folk",
+      "count": 1,
+      "decomposition": [
+        "doom",
+        "folk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "doom fuzz",
+      "count": 1,
+      "decomposition": [
+        "doom",
+        "fuzz"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "drum machine",
+      "count": 1,
+      "decomposition": [
+        "drum",
+        "machine"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "eastern european",
+      "count": 1,
+      "decomposition": [
+        "eastern",
+        "european"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "eclectic rock",
+      "count": 1,
+      "decomposition": [
+        "eclectic",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "experimental hip-hop",
+      "count": 1,
+      "decomposition": [
+        "experimental",
+        "hip-hop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "finland/england",
+      "count": 1,
+      "decomposition": [
+        "finland",
+        "england"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "french electro",
+      "count": 1,
+      "decomposition": [
+        "french",
+        "electro"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "future funk",
+      "count": 1,
+      "decomposition": [
+        "future",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "future pop",
+      "count": 1,
+      "decomposition": [
+        "future",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "fuzz funk",
+      "count": 1,
+      "decomposition": [
+        "fuzz",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "fuzz pop",
+      "count": 1,
+      "decomposition": [
+        "fuzz",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "germany/uk",
+      "count": 1,
+      "decomposition": [
+        "germany",
+        "uk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "glitch hop",
+      "count": 1,
+      "decomposition": [
+        "glitch",
+        "hop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "glitch metal",
+      "count": 1,
+      "decomposition": [
+        "glitch",
+        "metal"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "grunge punk",
+      "count": 1,
+      "decomposition": [
+        "grunge",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hard prog",
+      "count": 1,
+      "decomposition": [
+        "hard",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hardcore funk",
+      "count": 1,
+      "decomposition": [
+        "hardcore",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hardcore rap",
+      "count": 1,
+      "decomposition": [
+        "hardcore",
+        "rap"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "heavy americana",
+      "count": 1,
+      "decomposition": [
+        "heavy",
+        "americana"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "heavy fuzz",
+      "count": 1,
+      "decomposition": [
+        "heavy",
+        "fuzz"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hip-hop soul",
+      "count": 1,
+      "decomposition": [
+        "hip-hop",
+        "soul"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "horror synth",
+      "count": 1,
+      "decomposition": [
+        "horror",
+        "synth"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "indie soul",
+      "count": 1,
+      "decomposition": [
+        "indie",
+        "soul"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "industrial hardcore",
+      "count": 1,
+      "decomposition": [
+        "industrial",
+        "hardcore"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "industrial punk",
+      "count": 1,
+      "decomposition": [
+        "industrial",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "instrumental hip-hop",
+      "count": 1,
+      "decomposition": [
+        "instrumental",
+        "hip-hop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "jangle punk",
+      "count": 1,
+      "decomposition": [
+        "jangle",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "jangle rock",
+      "count": 1,
+      "decomposition": [
+        "jangle",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "japan / greece",
+      "count": 1,
+      "decomposition": [
+        "japan",
+        "greece"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "jazz blues",
+      "count": 1,
+      "decomposition": [
+        "jazz",
+        "blues"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "latin pop",
+      "count": 1,
+      "decomposition": [
+        "latin",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "minimal folk",
+      "count": 1,
+      "decomposition": [
+        "minimal",
+        "folk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "minimal wave",
+      "count": 1,
+      "decomposition": [
+        "minimal",
+        "wave"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "neo psych",
+      "count": 1,
+      "decomposition": [
+        "neo",
+        "psych"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "netherlands / italy",
+      "count": 1,
+      "decomposition": [
+        "netherlands",
+        "italy"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "new england",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "england"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "noise electronics",
+      "count": 1,
+      "decomposition": [
+        "noise",
+        "electronics"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "nordic jazz",
+      "count": 1,
+      "decomposition": [
+        "nordic",
+        "jazz"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "norway / france",
+      "count": 1,
+      "decomposition": [
+        "norway",
+        "france"
+      ],
+      "score": 32
+    }
+  ]
+}

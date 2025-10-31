@@ -6,6 +6,7 @@ from typing import Dict, Set, List, Tuple
 from datetime import datetime
 import re
 import uuid
+from albumexplore.database.utils import generate_stable_id
 import pandas as pd
 from collections import defaultdict
 
@@ -262,7 +263,9 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
             combined_raw_tags = build_raw_tags_string(genre_and_tags_str, vocal_style_tags)
             
             # Create album as dictionary for bulk insert
-            album_id = str(uuid.uuid4())
+            # Use stable deterministic IDs so favorites tied to album IDs
+            # remain valid across re-imports when artist/title/year match.
+            album_id = generate_stable_id(artist, album_title, str(release_year) if release_year else "")
             album_id_map[idx] = album_id
             
             album_dict = {

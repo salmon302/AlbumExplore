@@ -1,0 +1,1813 @@
+{
+  "generated": "20251022T013325Z",
+  "suggestions": [
+    {
+      "tag": "fuzz funk",
+      "count": 1,
+      "decomposition": [
+        "fuzz",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "fuzz pop",
+      "count": 1,
+      "decomposition": [
+        "fuzz",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "germany/uk",
+      "count": 1,
+      "decomposition": [
+        "germany",
+        "uk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "glitch hop",
+      "count": 1,
+      "decomposition": [
+        "glitch",
+        "hop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "glitch metal",
+      "count": 1,
+      "decomposition": [
+        "glitch",
+        "metal"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "grunge punk",
+      "count": 1,
+      "decomposition": [
+        "grunge",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hard prog",
+      "count": 1,
+      "decomposition": [
+        "hard",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hardcore funk",
+      "count": 1,
+      "decomposition": [
+        "hardcore",
+        "funk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hardcore rap",
+      "count": 1,
+      "decomposition": [
+        "hardcore",
+        "rap"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "heavy americana",
+      "count": 1,
+      "decomposition": [
+        "heavy",
+        "americana"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "heavy fuzz",
+      "count": 1,
+      "decomposition": [
+        "heavy",
+        "fuzz"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "hip-hop soul",
+      "count": 1,
+      "decomposition": [
+        "hip-hop",
+        "soul"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "horror synth",
+      "count": 1,
+      "decomposition": [
+        "horror",
+        "synth"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "indie soul",
+      "count": 1,
+      "decomposition": [
+        "indie",
+        "soul"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "industrial hardcore",
+      "count": 1,
+      "decomposition": [
+        "industrial",
+        "hardcore"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "industrial punk",
+      "count": 1,
+      "decomposition": [
+        "industrial",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "instrumental hip-hop",
+      "count": 1,
+      "decomposition": [
+        "instrumental",
+        "hip-hop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "jangle punk",
+      "count": 1,
+      "decomposition": [
+        "jangle",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "jangle rock",
+      "count": 1,
+      "decomposition": [
+        "jangle",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "japan / greece",
+      "count": 1,
+      "decomposition": [
+        "japan",
+        "greece"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "jazz blues",
+      "count": 1,
+      "decomposition": [
+        "jazz",
+        "blues"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "latin pop",
+      "count": 1,
+      "decomposition": [
+        "latin",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "minimal folk",
+      "count": 1,
+      "decomposition": [
+        "minimal",
+        "folk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "minimal wave",
+      "count": 1,
+      "decomposition": [
+        "minimal",
+        "wave"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "neo psych",
+      "count": 1,
+      "decomposition": [
+        "neo",
+        "psych"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "netherlands / italy",
+      "count": 1,
+      "decomposition": [
+        "netherlands",
+        "italy"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "new england",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "england"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "noise electronics",
+      "count": 1,
+      "decomposition": [
+        "noise",
+        "electronics"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "nordic jazz",
+      "count": 1,
+      "decomposition": [
+        "nordic",
+        "jazz"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "norway / france",
+      "count": 1,
+      "decomposition": [
+        "norway",
+        "france"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "norway / uk",
+      "count": 1,
+      "decomposition": [
+        "norway",
+        "uk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "occult metal",
+      "count": 1,
+      "decomposition": [
+        "occult",
+        "metal"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pagan folk",
+      "count": 1,
+      "decomposition": [
+        "pagan",
+        "folk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop art",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "art"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop metal",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "metal"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop prog",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop rap",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "rap"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "post prog",
+      "count": 1,
+      "decomposition": [
+        "post",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "post punk",
+      "count": 1,
+      "decomposition": [
+        "post",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "psych rock",
+      "count": 1,
+      "decomposition": [
+        "psych",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "retro pop",
+      "count": 1,
+      "decomposition": [
+        "retro",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "retro prog",
+      "count": 1,
+      "decomposition": [
+        "retro",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "rock hill",
+      "count": 1,
+      "decomposition": [
+        "rock",
+        "hill"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "sludge rock",
+      "count": 1,
+      "decomposition": [
+        "sludge",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "smooth soul",
+      "count": 1,
+      "decomposition": [
+        "smooth",
+        "soul"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "soul pop",
+      "count": 1,
+      "decomposition": [
+        "soul",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "sweden / england",
+      "count": 1,
+      "decomposition": [
+        "sweden",
+        "england"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "sweden / finland",
+      "count": 1,
+      "decomposition": [
+        "sweden",
+        "finland"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "sweden / italy",
+      "count": 1,
+      "decomposition": [
+        "sweden",
+        "italy"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "sweden/uk",
+      "count": 1,
+      "decomposition": [
+        "sweden",
+        "uk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "techno house",
+      "count": 1,
+      "decomposition": [
+        "techno",
+        "house"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "trance house",
+      "count": 1,
+      "decomposition": [
+        "trance",
+        "house"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "uk / netherlands",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "netherlands"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "uk / sweden",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "sweden"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "uk house",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "house"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "uk/australia",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "australia"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "us / japan",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "japan"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "us / netherlands",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "netherlands"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "us / norway",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "norway"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "us / sweden",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "sweden"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "powerviolence/black metal/death metal",
+      "count": 1,
+      "decomposition": [
+        "powerviolence",
+        "black metal",
+        "death metal"
+      ],
+      "score": 30
+    },
+    {
+      "tag": "scottish folk music",
+      "count": 1,
+      "decomposition": [
+        "scottish",
+        "folk",
+        "music"
+      ],
+      "score": 30
+    },
+    {
+      "tag": "southend on sea",
+      "count": 1,
+      "decomposition": [
+        "southend",
+        "on",
+        "sea"
+      ],
+      "score": 30
+    },
+    {
+      "tag": "welsh folk music",
+      "count": 1,
+      "decomposition": [
+        "welsh",
+        "folk",
+        "music"
+      ],
+      "score": 30
+    },
+    {
+      "tag": "world music (brazil)",
+      "count": 1,
+      "decomposition": [
+        "world",
+        "music",
+        "(brazil)"
+      ],
+      "score": 30
+    },
+    {
+      "tag": "american privitsm",
+      "count": 1,
+      "decomposition": [
+        "american",
+        "privitsm"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "angular pop",
+      "count": 1,
+      "decomposition": [
+        "angular",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "anxiety pop",
+      "count": 1,
+      "decomposition": [
+        "anxiety",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "bleep techno",
+      "count": 1,
+      "decomposition": [
+        "bleep",
+        "techno"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "boogie rock",
+      "count": 1,
+      "decomposition": [
+        "boogie",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "cherry hill",
+      "count": 1,
+      "decomposition": [
+        "cherry",
+        "hill"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "dark synthwave",
+      "count": 1,
+      "decomposition": [
+        "dark",
+        "synthwave"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "deep purple-ish",
+      "count": 1,
+      "decomposition": [
+        "deep",
+        "purple-ish"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "djent-ish lite",
+      "count": 1,
+      "decomposition": [
+        "djent-ish",
+        "lite"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "doom metal/rock",
+      "count": 1,
+      "decomposition": [
+        "doom metal",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "doom rock/metal",
+      "count": 1,
+      "decomposition": [
+        "doom rock",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "east java",
+      "count": 1,
+      "decomposition": [
+        "east",
+        "java"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "el salvador",
+      "count": 1,
+      "decomposition": [
+        "el",
+        "salvador"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "extreme prog-metal",
+      "count": 1,
+      "decomposition": [
+        "extreme",
+        "prog-metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "ghotic metal",
+      "count": 1,
+      "decomposition": [
+        "ghotic",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "glen rock",
+      "count": 1,
+      "decomposition": [
+        "glen",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "glitch bitpop",
+      "count": 1,
+      "decomposition": [
+        "glitch",
+        "bitpop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "global groove",
+      "count": 1,
+      "decomposition": [
+        "global",
+        "groove"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "griot music",
+      "count": 1,
+      "decomposition": [
+        "griot",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "guitar virtuoso",
+      "count": 1,
+      "decomposition": [
+        "guitar",
+        "virtuoso"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "halloween music",
+      "count": 1,
+      "decomposition": [
+        "halloween",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "hardcore break",
+      "count": 1,
+      "decomposition": [
+        "hardcore",
+        "break"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "heavy twang",
+      "count": 1,
+      "decomposition": [
+        "heavy",
+        "twang"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "improvised rock",
+      "count": 1,
+      "decomposition": [
+        "improvised",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "in space",
+      "count": 1,
+      "decomposition": [
+        "in",
+        "space"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "indie twang",
+      "count": 1,
+      "decomposition": [
+        "indie",
+        "twang"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "italian prog",
+      "count": 1,
+      "decomposition": [
+        "italian",
+        "prog"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "italy/usa",
+      "count": 1,
+      "decomposition": [
+        "italy",
+        "usa"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "japan / usa",
+      "count": 1,
+      "decomposition": [
+        "japan",
+        "usa"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "jewish folk",
+      "count": 1,
+      "decomposition": [
+        "jewish",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "king gizzard-like",
+      "count": 1,
+      "decomposition": [
+        "king",
+        "gizzard-like"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "korean folk",
+      "count": 1,
+      "decomposition": [
+        "korean",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "la paz",
+      "count": 1,
+      "decomposition": [
+        "la",
+        "paz"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "la plata",
+      "count": 1,
+      "decomposition": [
+        "la",
+        "plata"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "la rochelle",
+      "count": 1,
+      "decomposition": [
+        "la",
+        "rochelle"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "latvia / georgia",
+      "count": 1,
+      "decomposition": [
+        "latvia",
+        "georgia"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "lover rock",
+      "count": 1,
+      "decomposition": [
+        "lover",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "mitteralter metal",
+      "count": 1,
+      "decomposition": [
+        "mitteralter",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "modular synth",
+      "count": 1,
+      "decomposition": [
+        "modular",
+        "synth"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "moorish music",
+      "count": 1,
+      "decomposition": [
+        "moorish",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "movie soundtrack",
+      "count": 1,
+      "decomposition": [
+        "movie",
+        "soundtrack"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "netherlands / hungary",
+      "count": 1,
+      "decomposition": [
+        "netherlands",
+        "hungary"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new braunfels",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "braunfels"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new city",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "city"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new rave",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "rave"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new westminster",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "westminster"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "nocturnal pop",
+      "count": 1,
+      "decomposition": [
+        "nocturnal",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "north east",
+      "count": 1,
+      "decomposition": [
+        "north",
+        "east"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "northampton. uk",
+      "count": 1,
+      "decomposition": [
+        "northampton.",
+        "uk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "novi sad",
+      "count": 1,
+      "decomposition": [
+        "novi",
+        "sad"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "operatic metal",
+      "count": 1,
+      "decomposition": [
+        "operatic",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "oriental rock",
+      "count": 1,
+      "decomposition": [
+        "oriental",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "outsider house",
+      "count": 1,
+      "decomposition": [
+        "outsider",
+        "house"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "parody metal",
+      "count": 1,
+      "decomposition": [
+        "parody",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "persian pop",
+      "count": 1,
+      "decomposition": [
+        "persian",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "philly soul",
+      "count": 1,
+      "decomposition": [
+        "philly",
+        "soul"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "piano oriented",
+      "count": 1,
+      "decomposition": [
+        "piano",
+        "oriented"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "prairie gothic",
+      "count": 1,
+      "decomposition": [
+        "prairie",
+        "gothic"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "prog -rock",
+      "count": 1,
+      "decomposition": [
+        "prog",
+        "-rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "pscyhedelic rock",
+      "count": 1,
+      "decomposition": [
+        "pscyhedelic",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "quasi metal",
+      "count": 1,
+      "decomposition": [
+        "quasi",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "red bank",
+      "count": 1,
+      "decomposition": [
+        "red",
+        "bank"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "romanian folk",
+      "count": 1,
+      "decomposition": [
+        "romanian",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "samurai metal",
+      "count": 1,
+      "decomposition": [
+        "samurai",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "scottish music",
+      "count": 1,
+      "decomposition": [
+        "scottish",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "scum rock",
+      "count": 1,
+      "decomposition": [
+        "scum",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "seventh wonder-ish",
+      "count": 1,
+      "decomposition": [
+        "seventh",
+        "wonder-ish"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "slugde metal",
+      "count": 1,
+      "decomposition": [
+        "slugde",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "soft machine-related",
+      "count": 1,
+      "decomposition": [
+        "soft",
+        "machine-related"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "southern california",
+      "count": 1,
+      "decomposition": [
+        "southern",
+        "california"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spaghetti western",
+      "count": 1,
+      "decomposition": [
+        "spaghetti",
+        "western"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spain / japan",
+      "count": 1,
+      "decomposition": [
+        "spain",
+        "japan"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spain / uk",
+      "count": 1,
+      "decomposition": [
+        "spain",
+        "uk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spain / us",
+      "count": 1,
+      "decomposition": [
+        "spain",
+        "us"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "stoner metal/rock",
+      "count": 1,
+      "decomposition": [
+        "stoner metal",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "stoner rock/metal",
+      "count": 1,
+      "decomposition": [
+        "stoner rock",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tape music",
+      "count": 1,
+      "decomposition": [
+        "tape",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tech house",
+      "count": 1,
+      "decomposition": [
+        "tech",
+        "house"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tharsh metal",
+      "count": 1,
+      "decomposition": [
+        "tharsh",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "theatrical pop",
+      "count": 1,
+      "decomposition": [
+        "theatrical",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "theatrical rock",
+      "count": 1,
+      "decomposition": [
+        "theatrical",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tokyo japan",
+      "count": 1,
+      "decomposition": [
+        "tokyo",
+        "japan"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "trad folk",
+      "count": 1,
+      "decomposition": [
+        "trad",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "turkey/france",
+      "count": 1,
+      "decomposition": [
+        "turkey",
+        "france"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "turkish psychedelic",
+      "count": 1,
+      "decomposition": [
+        "turkish",
+        "psychedelic"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / austria",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "austria"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / denmark",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "denmark"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / international",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "international"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / worldwide",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "worldwide"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk/poland",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "poland"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "us / swiss",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "swiss"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "us/ita",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "ita"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "usa/finland",
+      "count": 1,
+      "decomposition": [
+        "usa",
+        "finland"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "usa/uk",
+      "count": 1,
+      "decomposition": [
+        "usa",
+        "uk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "vibraphone jazz",
+      "count": 1,
+      "decomposition": [
+        "vibraphone",
+        "jazz"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "welsh rock",
+      "count": 1,
+      "decomposition": [
+        "welsh",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "western ma",
+      "count": 1,
+      "decomposition": [
+        "western",
+        "ma"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "wonky techno",
+      "count": 1,
+      "decomposition": [
+        "wonky",
+        "techno"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "yatch rock",
+      "count": 1,
+      "decomposition": [
+        "yatch",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new york city",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "york",
+        "city"
+      ],
+      "score": 15
+    },
+    {
+      "tag": "paços de ferreira",
+      "count": 1,
+      "decomposition": [
+        "paços",
+        "de",
+        "ferreira"
+      ],
+      "score": 15
+    },
+    {
+      "tag": "puerto la cruz",
+      "count": 1,
+      "decomposition": [
+        "puerto",
+        "la",
+        "cruz"
+      ],
+      "score": 15
+    },
+    {
+      "tag": "al kuwayt",
+      "count": 1,
+      "decomposition": [
+        "al",
+        "kuwayt"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "aliso viejo",
+      "count": 1,
+      "decomposition": [
+        "aliso",
+        "viejo"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "arlington heights",
+      "count": 1,
+      "decomposition": [
+        "arlington",
+        "heights"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "baden baden",
+      "count": 1,
+      "decomposition": [
+        "baden",
+        "baden"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "berlin school",
+      "count": 1,
+      "decomposition": [
+        "berlin",
+        "school"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "bielsko biala",
+      "count": 1,
+      "decomposition": [
+        "bielsko",
+        "biala"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "bielsko biała",
+      "count": 1,
+      "decomposition": [
+        "bielsko",
+        "biała"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "blue eyed-soul",
+      "count": 1,
+      "decomposition": [
+        "blue",
+        "eyed-soul"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "blue mountains",
+      "count": 1,
+      "decomposition": [
+        "blue",
+        "mountains"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "boca raton",
+      "count": 1,
+      "decomposition": [
+        "boca",
+        "raton"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "boom bap",
+      "count": 1,
+      "decomposition": [
+        "boom",
+        "bap"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "buena park",
+      "count": 1,
+      "decomposition": [
+        "buena",
+        "park"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "canterbury scene",
+      "count": 1,
+      "decomposition": [
+        "canterbury",
+        "scene"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cape girardeau",
+      "count": 1,
+      "decomposition": [
+        "cape",
+        "girardeau"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "castrop rauxel",
+      "count": 1,
+      "decomposition": [
+        "castrop",
+        "rauxel"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cathedral bells",
+      "count": 1,
+      "decomposition": [
+        "cathedral",
+        "bells"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cesky krumlov",
+      "count": 1,
+      "decomposition": [
+        "cesky",
+        "krumlov"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "chula vista",
+      "count": 1,
+      "decomposition": [
+        "chula",
+        "vista"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "ciudad juárez",
+      "count": 1,
+      "decomposition": [
+        "ciudad",
+        "juárez"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "ciudad real",
+      "count": 1,
+      "decomposition": [
+        "ciudad",
+        "real"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "clarence center",
+      "count": 1,
+      "decomposition": [
+        "clarence",
+        "center"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "coffs harbour",
+      "count": 1,
+      "decomposition": [
+        "coffs",
+        "harbour"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "coral springs",
+      "count": 1,
+      "decomposition": [
+        "coral",
+        "springs"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "corpus christi",
+      "count": 1,
+      "decomposition": [
+        "corpus",
+        "christi"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cottonwood heights",
+      "count": 1,
+      "decomposition": [
+        "cottonwood",
+        "heights"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "culver city",
+      "count": 1,
+      "decomposition": [
+        "culver",
+        "city"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "dana point",
+      "count": 1,
+      "decomposition": [
+        "dana",
+        "point"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "den helder",
+      "count": 1,
+      "decomposition": [
+        "den",
+        "helder"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "dewey humboldt",
+      "count": 1,
+      "decomposition": [
+        "dewey",
+        "humboldt"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "emoviolence/skramz",
+      "count": 1,
+      "decomposition": [
+        "emoviolence",
+        "skramz"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "entre ríos",
+      "count": 1,
+      "decomposition": [
+        "entre",
+        "ríos"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "fall river",
+      "count": 1,
+      "decomposition": [
+        "fall",
+        "river"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "farr west",
+      "count": 1,
+      "decomposition": [
+        "farr",
+        "west"
+      ],
+      "score": 2
+    }
+  ]
+}

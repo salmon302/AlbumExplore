@@ -1,5 +1,5 @@
 # src/albumexplore/gui/views/tag_explorer.py
-\"\"\"TagChipBar container and example in-memory filter model.
+"""TagChipBar container and example in-memory filter model.
 
 Component contract:
 - TagChip props: { tagName: string, count?: number, operator?: 'AND'|'NOT', removable?: boolean }
@@ -10,14 +10,14 @@ Component contract:
 This file implements a minimal TagChipBar that manages TagChipData entries,
 handles keyboard navigation and reordering, and emits on_change when the
 chips collection mutates. It is framework-agnostic and suitable for unit tests.
-\"\"\"
+"""
 
 from typing import Callable, List, Optional
 from dataclasses import dataclass
 from src.albumexplore.gui.widgets.tag_chip import TagChipData
 
 class TagChipBar:
-    \"\"\"Container for TagChipData items.
+    """Container for TagChipData items.
 
     Props:
       chips: List[TagChipData]
@@ -27,7 +27,7 @@ class TagChipBar:
       Left/Right move focus between chips.
       Delete/Backspace removes focused chip.
       Enter/Space toggles operator on focused chip.
-    \"\"\"
+        """
     def __init__(self, chips: Optional[List[TagChipData]] = None,
                  on_change: Optional[Callable[[List[TagChipData]], None]] = None):
         self.chips: List[TagChipData] = chips[:] if chips else []
@@ -60,7 +60,7 @@ class TagChipBar:
     def toggle_operator_by_id(self, chip_id: str):
         for c in self.chips:
             if c.id == chip_id:
-                c.operator = \"NOT\" if c.operator == \"AND\" else \"AND\"
+                c.operator = "NOT" if c.operator == "AND" else "AND"
                 self.emit_change()
                 return
 
@@ -84,7 +84,7 @@ class TagChipBar:
     def drop_to_exclude(self, chip_id: str):
         for c in self.chips:
             if c.id == chip_id:
-                c.operator = \"NOT\"
+                c.operator = "NOT"
                 self.emit_change()
                 return
 
@@ -100,28 +100,28 @@ class TagChipBar:
         self.focus_index = min(len(self.chips)-1, self.focus_index + 1)
 
     def key_press_on_focused(self, key: str):
-        \"\"\"Simulate keyboard action for the focused chip.
+        """Simulate keyboard action for the focused chip.
         Keys: 'Left','Right','Enter',' ','Delete','Backspace'
-        \"\"\"
+        """
         if self.focus_index is None:
             return
-        if key == \"Left\":
+        if key == "Left":
             self.focus_left()
-        elif key == \"Right\":
+        elif key == "Right":
             self.focus_right()
-        elif key in (\"Enter\",\" \"):
+        elif key in ("Enter"," "):
             chip = self.chips[self.focus_index]
             self.toggle_operator_by_id(chip.id)
-        elif key in (\"Delete\",\"Backspace\"):
+        elif key in ("Delete","Backspace"):
             chip = self.chips[self.focus_index]
             self.remove_chip_by_id(chip.id)
 
     def to_dict(self):
-        return [ {\"id\": c.id, \"name\": c.name, \"operator\": c.operator, \"count\": c.count} for c in self.chips ]
+        return [ {"id": c.id, "name": c.name, "operator": c.operator, "count": c.count} for c in self.chips ]
 
 # Example in-memory filter model used by the demo
 class InMemoryFilterModel:
-    \"\"\"Simple client-side filter state to be used in demos/tests.\"\"\"
+    """Simple client-side filter state to be used in demos/tests."""
     def __init__(self):
         self.filters: List[TagChipData] = []
 
@@ -133,4 +133,4 @@ class InMemoryFilterModel:
         self.set_filters(chips)
 
     def to_dict(self):
-        return [ {\"id\": c.id, \"name\": c.name, \"operator\": c.operator, \"count\": c.count} for c in self.filters ]
+        return [ {"id": c.id, "name": c.name, "operator": c.operator, "count": c.count} for c in self.filters ]

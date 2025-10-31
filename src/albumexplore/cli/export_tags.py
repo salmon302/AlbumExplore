@@ -22,26 +22,52 @@ from ..tags.normalizer.tag_normalizer import TagNormalizer
               help='Only export tags with count <= this value (e.g., 1 for singles)')
 @click.option('--min-count', type=int, default=None,
               help='Only export tags with count >= this value')
-def export_tags(output_dir, use_enhanced, max_count, min_count):
+@click.option('--no-db', is_flag=True, default=False,
+              help='Run export without initializing or touching the on-disk database (faster dry runs)')
+@click.option('--dry-run', is_flag=True, default=False,
+              help='Perform a dry run: compute normalization effects but do not write CSV files')
+@click.option('--rules-file', type=click.Path(), default=None,
+              help='Path to an alternate tag_rules.json (useful for testing suggested batches)')
+@click.option('--input-csv', type=click.Path(), default=None,
+              help='Optional input CSV of tags to use instead of querying the DB (for dry-runs)')
+def export_tags(output_dir, use_enhanced, max_count, min_count, no_db, dry_run, rules_file, input_csv):
     """Export all tags to CSV files with normalization."""
     
     output_path = Path(output_dir)
     output_path.mkdir(exist_ok=True, parents=True)
     
-    session = get_session()
-    normalizer = TagNormalizer()
-    
-    # Get all tags with their usage counts
-    tag_stats = (
-        session.query(
-            Tag.name,
-            func.count(album_tags.c.album_id).label('count')
+    # Initialize normalizer, optionally with alternate rules file
+    normalizer = TagNormalizer(rules_file=rules_file)
+
+    # If input_csv provided, we won't touch DB; use CSV as source
+    if input_csv:
+        tag_stats = []
+        with open(input_csv, newline='', encoding='utf-8') as fh:
+            reader = csv.DictReader(fh)
+            for r in reader:
+                tag = r.get('Tag') or r.get('tag')
+                count = int(r.get('Count') or r.get('count') or 1)
+                if tag:
+                    tag_stats.append((tag.strip(), count))
+    else:
+        if no_db:
+            # If not using DB and no input, nothing to export
+            click.echo('No input CSV provided and --no-db selected; nothing to export.')
+            return
+        session = get_session()
+        # Get all tags with their usage counts
+        tag_stats = (
+            session.query(
+                Tag.name,
+                func.count(album_tags.c.album_id).label('count')
+            )
+            .outerjoin(album_tags, Tag.id == album_tags.c.tag_id)
+            .group_by(Tag.id, Tag.name)
+            .order_by(Tag.name)
+            .all()
         )
-        .outerjoin(album_tags, Tag.id == album_tags.c.tag_id)
-        .group_by(Tag.id, Tag.name)
-        .order_by(Tag.name)
-        .all()
-    )
+    
+    # (tag_stats already populated above either from CSV or DB)
     
     # Apply count filters if specified
     if max_count is not None or min_count is not None:
@@ -79,20 +105,21 @@ def export_tags(output_dir, use_enhanced, max_count, min_count):
     click.echo(f"Exporting {len(tag_stats)} tags{filter_text}...")
     click.echo(f"Using {'enhanced' if use_enhanced else 'standard'} normalization")
     
-    # Export raw tags
-    with open(raw_file, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        writer.writerow(['Tag', 'Count', 'Normalized Form', 'Filter State'])
-        
-        for tag_name, count in tag_stats:
-            if use_enhanced:
-                normalized = normalizer.normalize_enhanced(tag_name)
-            else:
-                normalized = normalizer.normalize(tag_name)
+    # Export raw tags (unless dry-run)
+    if not dry_run:
+        with open(raw_file, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Tag', 'Count', 'Normalized Form', 'Filter State'])
             
-            writer.writerow([tag_name, count, normalized, 0])
-    
-    click.echo(f"✓ Raw tags exported to {raw_file}")
+            for tag_name, count in tag_stats:
+                if use_enhanced:
+                    normalized = normalizer.normalize_enhanced(tag_name)
+                else:
+                    normalized = normalizer.normalize(tag_name)
+                writer.writerow([tag_name, count, normalized, 0])
+        click.echo(f"✓ Raw tags exported to {raw_file}")
+    else:
+        click.echo(f"(dry-run) Would have written raw tags CSV to {raw_file}")
     
     # Export atomic tags (if enabled)
     if normalizer._enable_atomic_tags:
@@ -114,19 +141,20 @@ def export_tags(output_dir, use_enhanced, max_count, min_count):
                 # Tag doesn't decompose, count it as-is
                 atomic_tag_counts[normalized] = atomic_tag_counts.get(normalized, 0) + count
         
-        # Write atomic tags
-        with open(atomic_file, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(['Tag', 'Count', 'Matching Count', 'Is Single', 'Filter State'])
-            
-            for atomic_tag, count in sorted(atomic_tag_counts.items()):
-                # Check if this appears as exact match
-                matching_count = sum(1 for name, _ in tag_stats if normalizer.normalize_enhanced(name) == atomic_tag)
-                is_single = count == 1
+        # Write atomic tags (unless dry-run)
+        if not dry_run:
+            with open(atomic_file, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow(['Tag', 'Count', 'Matching Count', 'Is Single', 'Filter State'])
                 
-                writer.writerow([atomic_tag, count, matching_count, is_single, 0])
-        
-        click.echo(f"✓ Atomic tags exported to {atomic_file}")
+                for atomic_tag, count in sorted(atomic_tag_counts.items()):
+                    # Check if this appears as exact match
+                    matching_count = sum(1 for name, _ in tag_stats if normalizer.normalize_enhanced(name) == atomic_tag)
+                    is_single = count == 1
+                    writer.writerow([atomic_tag, count, matching_count, is_single, 0])
+            click.echo(f"✓ Atomic tags exported to {atomic_file}")
+        else:
+            click.echo(f"(dry-run) Would have written atomic tags CSV to {atomic_file}")
     
     # Print summary statistics
     click.echo("\nExport Summary:")
@@ -147,7 +175,8 @@ def export_tags(output_dir, use_enhanced, max_count, min_count):
         for tag_name, count in tag_stats:
             normalized = normalizer.normalize_enhanced(tag_name)
             if tag_name.lower() != normalized:
-                click.echo(f"  '{tag_name}' → '{normalized}' (count: {count})")
+                # Use ASCII arrow to avoid Unicode encoding issues on some consoles
+                click.echo(f"  '{tag_name}' -> '{normalized}' (count: {count})")
                 examples_shown += 1
                 if examples_shown >= 10:
                     break

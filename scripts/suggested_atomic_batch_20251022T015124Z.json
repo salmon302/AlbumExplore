@@ -1,0 +1,1808 @@
+{
+  "generated": "20251022T015124Z",
+  "suggestions": [
+    {
+      "tag": "jazz blues",
+      "count": 1,
+      "decomposition": [
+        "jazz",
+        "blues"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "latin pop",
+      "count": 1,
+      "decomposition": [
+        "latin",
+        "pop"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "minimal folk",
+      "count": 1,
+      "decomposition": [
+        "minimal",
+        "folk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "minimal wave",
+      "count": 1,
+      "decomposition": [
+        "minimal",
+        "wave"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "neo psych",
+      "count": 1,
+      "decomposition": [
+        "neo",
+        "psych"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "netherlands / italy",
+      "count": 1,
+      "decomposition": [
+        "netherlands",
+        "italy"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "new england",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "england"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "noise electronics",
+      "count": 1,
+      "decomposition": [
+        "noise",
+        "electronics"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "nordic jazz",
+      "count": 1,
+      "decomposition": [
+        "nordic",
+        "jazz"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "norway / france",
+      "count": 1,
+      "decomposition": [
+        "norway",
+        "france"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "norway / uk",
+      "count": 1,
+      "decomposition": [
+        "norway",
+        "uk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "occult metal",
+      "count": 1,
+      "decomposition": [
+        "occult",
+        "metal"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pagan folk",
+      "count": 1,
+      "decomposition": [
+        "pagan",
+        "folk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop art",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "art"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop metal",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "metal"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop prog",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "pop rap",
+      "count": 1,
+      "decomposition": [
+        "pop",
+        "rap"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "post prog",
+      "count": 1,
+      "decomposition": [
+        "post",
+        "prog"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "post punk",
+      "count": 1,
+      "decomposition": [
+        "post",
+        "punk"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "psych rock",
+      "count": 1,
+      "decomposition": [
+        "psych",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "scottish music",
+      "count": 1,
+      "decomposition": [
+        "scottish",
+        "music"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "welsh rock",
+      "count": 1,
+      "decomposition": [
+        "welsh",
+        "rock"
+      ],
+      "score": 32
+    },
+    {
+      "tag": "glen rock",
+      "count": 1,
+      "decomposition": [
+        "glen",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "glitch bitpop",
+      "count": 1,
+      "decomposition": [
+        "glitch",
+        "bitpop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "global groove",
+      "count": 1,
+      "decomposition": [
+        "global",
+        "groove"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "griot music",
+      "count": 1,
+      "decomposition": [
+        "griot",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "guitar virtuoso",
+      "count": 1,
+      "decomposition": [
+        "guitar",
+        "virtuoso"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "halloween music",
+      "count": 1,
+      "decomposition": [
+        "halloween",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "hardcore break",
+      "count": 1,
+      "decomposition": [
+        "hardcore",
+        "break"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "heavy twang",
+      "count": 1,
+      "decomposition": [
+        "heavy",
+        "twang"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "improvised rock",
+      "count": 1,
+      "decomposition": [
+        "improvised",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "in space",
+      "count": 1,
+      "decomposition": [
+        "in",
+        "space"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "indie twang",
+      "count": 1,
+      "decomposition": [
+        "indie",
+        "twang"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "italian prog",
+      "count": 1,
+      "decomposition": [
+        "italian",
+        "prog"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "italy/usa",
+      "count": 1,
+      "decomposition": [
+        "italy",
+        "usa"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "japan / usa",
+      "count": 1,
+      "decomposition": [
+        "japan",
+        "usa"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "jewish folk",
+      "count": 1,
+      "decomposition": [
+        "jewish",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "king gizzard-like",
+      "count": 1,
+      "decomposition": [
+        "king",
+        "gizzard-like"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "korean folk",
+      "count": 1,
+      "decomposition": [
+        "korean",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "la paz",
+      "count": 1,
+      "decomposition": [
+        "la",
+        "paz"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "la plata",
+      "count": 1,
+      "decomposition": [
+        "la",
+        "plata"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "la rochelle",
+      "count": 1,
+      "decomposition": [
+        "la",
+        "rochelle"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "latvia / georgia",
+      "count": 1,
+      "decomposition": [
+        "latvia",
+        "georgia"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "lover rock",
+      "count": 1,
+      "decomposition": [
+        "lover",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "mitteralter metal",
+      "count": 1,
+      "decomposition": [
+        "mitteralter",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "modular synth",
+      "count": 1,
+      "decomposition": [
+        "modular",
+        "synth"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "moorish music",
+      "count": 1,
+      "decomposition": [
+        "moorish",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "movie soundtrack",
+      "count": 1,
+      "decomposition": [
+        "movie",
+        "soundtrack"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "netherlands / hungary",
+      "count": 1,
+      "decomposition": [
+        "netherlands",
+        "hungary"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new braunfels",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "braunfels"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new city",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "city"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new rave",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "rave"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new westminster",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "westminster"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "nocturnal pop",
+      "count": 1,
+      "decomposition": [
+        "nocturnal",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "north east",
+      "count": 1,
+      "decomposition": [
+        "north",
+        "east"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "northampton. uk",
+      "count": 1,
+      "decomposition": [
+        "northampton.",
+        "uk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "novi sad",
+      "count": 1,
+      "decomposition": [
+        "novi",
+        "sad"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "operatic metal",
+      "count": 1,
+      "decomposition": [
+        "operatic",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "oriental rock",
+      "count": 1,
+      "decomposition": [
+        "oriental",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "outsider house",
+      "count": 1,
+      "decomposition": [
+        "outsider",
+        "house"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "parody metal",
+      "count": 1,
+      "decomposition": [
+        "parody",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "persian pop",
+      "count": 1,
+      "decomposition": [
+        "persian",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "philly soul",
+      "count": 1,
+      "decomposition": [
+        "philly",
+        "soul"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "piano oriented",
+      "count": 1,
+      "decomposition": [
+        "piano",
+        "oriented"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "prairie gothic",
+      "count": 1,
+      "decomposition": [
+        "prairie",
+        "gothic"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "prog -rock",
+      "count": 1,
+      "decomposition": [
+        "prog",
+        "-rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "pscyhedelic rock",
+      "count": 1,
+      "decomposition": [
+        "pscyhedelic",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "quasi metal",
+      "count": 1,
+      "decomposition": [
+        "quasi",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "red bank",
+      "count": 1,
+      "decomposition": [
+        "red",
+        "bank"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "romanian folk",
+      "count": 1,
+      "decomposition": [
+        "romanian",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "samurai metal",
+      "count": 1,
+      "decomposition": [
+        "samurai",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "san salvador",
+      "count": 1,
+      "decomposition": [
+        "san",
+        "salvador"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "scum rock",
+      "count": 1,
+      "decomposition": [
+        "scum",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "seventh wonder-ish",
+      "count": 1,
+      "decomposition": [
+        "seventh",
+        "wonder-ish"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "slugde metal",
+      "count": 1,
+      "decomposition": [
+        "slugde",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "soft machine-related",
+      "count": 1,
+      "decomposition": [
+        "soft",
+        "machine-related"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "southern california",
+      "count": 1,
+      "decomposition": [
+        "southern",
+        "california"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spaghetti western",
+      "count": 1,
+      "decomposition": [
+        "spaghetti",
+        "western"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spain / japan",
+      "count": 1,
+      "decomposition": [
+        "spain",
+        "japan"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spain / uk",
+      "count": 1,
+      "decomposition": [
+        "spain",
+        "uk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "spain / us",
+      "count": 1,
+      "decomposition": [
+        "spain",
+        "us"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "stoner metal/rock",
+      "count": 1,
+      "decomposition": [
+        "stoner metal",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "stoner rock/metal",
+      "count": 1,
+      "decomposition": [
+        "stoner rock",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tape music",
+      "count": 1,
+      "decomposition": [
+        "tape",
+        "music"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tech house",
+      "count": 1,
+      "decomposition": [
+        "tech",
+        "house"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tharsh metal",
+      "count": 1,
+      "decomposition": [
+        "tharsh",
+        "metal"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "theatrical pop",
+      "count": 1,
+      "decomposition": [
+        "theatrical",
+        "pop"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "theatrical rock",
+      "count": 1,
+      "decomposition": [
+        "theatrical",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "tokyo japan",
+      "count": 1,
+      "decomposition": [
+        "tokyo",
+        "japan"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "trad folk",
+      "count": 1,
+      "decomposition": [
+        "trad",
+        "folk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "turkey/france",
+      "count": 1,
+      "decomposition": [
+        "turkey",
+        "france"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "turkish psychedelic",
+      "count": 1,
+      "decomposition": [
+        "turkish",
+        "psychedelic"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / austria",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "austria"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / denmark",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "denmark"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / international",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "international"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk / worldwide",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "worldwide"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "uk/poland",
+      "count": 1,
+      "decomposition": [
+        "uk",
+        "poland"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "us / swiss",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "swiss"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "us/ita",
+      "count": 1,
+      "decomposition": [
+        "us",
+        "ita"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "usa/finland",
+      "count": 1,
+      "decomposition": [
+        "usa",
+        "finland"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "usa/uk",
+      "count": 1,
+      "decomposition": [
+        "usa",
+        "uk"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "vibraphone jazz",
+      "count": 1,
+      "decomposition": [
+        "vibraphone",
+        "jazz"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "western ma",
+      "count": 1,
+      "decomposition": [
+        "western",
+        "ma"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "wonky techno",
+      "count": 1,
+      "decomposition": [
+        "wonky",
+        "techno"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "yatch rock",
+      "count": 1,
+      "decomposition": [
+        "yatch",
+        "rock"
+      ],
+      "score": 17
+    },
+    {
+      "tag": "new york city",
+      "count": 1,
+      "decomposition": [
+        "new",
+        "york",
+        "city"
+      ],
+      "score": 15
+    },
+    {
+      "tag": "paços de ferreira",
+      "count": 1,
+      "decomposition": [
+        "paços",
+        "de",
+        "ferreira"
+      ],
+      "score": 15
+    },
+    {
+      "tag": "puerto la cruz",
+      "count": 1,
+      "decomposition": [
+        "puerto",
+        "la",
+        "cruz"
+      ],
+      "score": 15
+    },
+    {
+      "tag": "al kuwayt",
+      "count": 1,
+      "decomposition": [
+        "al",
+        "kuwayt"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "aliso viejo",
+      "count": 1,
+      "decomposition": [
+        "aliso",
+        "viejo"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "arlington heights",
+      "count": 1,
+      "decomposition": [
+        "arlington",
+        "heights"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "baden baden",
+      "count": 1,
+      "decomposition": [
+        "baden",
+        "baden"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "berlin school",
+      "count": 1,
+      "decomposition": [
+        "berlin",
+        "school"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "bielsko biala",
+      "count": 1,
+      "decomposition": [
+        "bielsko",
+        "biala"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "bielsko biała",
+      "count": 1,
+      "decomposition": [
+        "bielsko",
+        "biała"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "blue eyed-soul",
+      "count": 1,
+      "decomposition": [
+        "blue",
+        "eyed-soul"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "blue mountains",
+      "count": 1,
+      "decomposition": [
+        "blue",
+        "mountains"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "boca raton",
+      "count": 1,
+      "decomposition": [
+        "boca",
+        "raton"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "boom bap",
+      "count": 1,
+      "decomposition": [
+        "boom",
+        "bap"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "buena park",
+      "count": 1,
+      "decomposition": [
+        "buena",
+        "park"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "canterbury scene",
+      "count": 1,
+      "decomposition": [
+        "canterbury",
+        "scene"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cape girardeau",
+      "count": 1,
+      "decomposition": [
+        "cape",
+        "girardeau"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "castrop rauxel",
+      "count": 1,
+      "decomposition": [
+        "castrop",
+        "rauxel"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cathedral bells",
+      "count": 1,
+      "decomposition": [
+        "cathedral",
+        "bells"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cesky krumlov",
+      "count": 1,
+      "decomposition": [
+        "cesky",
+        "krumlov"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "chula vista",
+      "count": 1,
+      "decomposition": [
+        "chula",
+        "vista"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "ciudad juárez",
+      "count": 1,
+      "decomposition": [
+        "ciudad",
+        "juárez"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "ciudad real",
+      "count": 1,
+      "decomposition": [
+        "ciudad",
+        "real"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "clarence center",
+      "count": 1,
+      "decomposition": [
+        "clarence",
+        "center"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "coffs harbour",
+      "count": 1,
+      "decomposition": [
+        "coffs",
+        "harbour"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "coral springs",
+      "count": 1,
+      "decomposition": [
+        "coral",
+        "springs"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "corpus christi",
+      "count": 1,
+      "decomposition": [
+        "corpus",
+        "christi"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "cottonwood heights",
+      "count": 1,
+      "decomposition": [
+        "cottonwood",
+        "heights"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "culver city",
+      "count": 1,
+      "decomposition": [
+        "culver",
+        "city"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "dana point",
+      "count": 1,
+      "decomposition": [
+        "dana",
+        "point"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "den helder",
+      "count": 1,
+      "decomposition": [
+        "den",
+        "helder"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "dewey humboldt",
+      "count": 1,
+      "decomposition": [
+        "dewey",
+        "humboldt"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "emoviolence/skramz",
+      "count": 1,
+      "decomposition": [
+        "emoviolence",
+        "skramz"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "entre ríos",
+      "count": 1,
+      "decomposition": [
+        "entre",
+        "ríos"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "fall river",
+      "count": 1,
+      "decomposition": [
+        "fall",
+        "river"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "farr west",
+      "count": 1,
+      "decomposition": [
+        "farr",
+        "west"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "fleetwood mac?",
+      "count": 1,
+      "decomposition": [
+        "fleetwood",
+        "mac?"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "fort myers",
+      "count": 1,
+      "decomposition": [
+        "fort",
+        "myers"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "fort walton",
+      "count": 1,
+      "decomposition": [
+        "fort",
+        "walton"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "gloucester township",
+      "count": 1,
+      "decomposition": [
+        "gloucester",
+        "township"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "gmina przeworsk",
+      "count": 1,
+      "decomposition": [
+        "gmina",
+        "przeworsk"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "greater sudbury",
+      "count": 1,
+      "decomposition": [
+        "greater",
+        "sudbury"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "hampton roads",
+      "count": 1,
+      "decomposition": [
+        "hampton",
+        "roads"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "hermosa beach",
+      "count": 1,
+      "decomposition": [
+        "hermosa",
+        "beach"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "heroica veracruz",
+      "count": 1,
+      "decomposition": [
+        "heroica",
+        "veracruz"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "highland heights",
+      "count": 1,
+      "decomposition": [
+        "highland",
+        "heights"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "idaho falls",
+      "count": 1,
+      "decomposition": [
+        "idaho",
+        "falls"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "ivano frankivsk",
+      "count": 1,
+      "decomposition": [
+        "ivano",
+        "frankivsk"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "jelenia góra",
+      "count": 1,
+      "decomposition": [
+        "jelenia",
+        "góra"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "jensen beach",
+      "count": 1,
+      "decomposition": [
+        "jensen",
+        "beach"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "joshua tree",
+      "count": 1,
+      "decomposition": [
+        "joshua",
+        "tree"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "kings mountain",
+      "count": 1,
+      "decomposition": [
+        "kings",
+        "mountain"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "laguna beach",
+      "count": 1,
+      "decomposition": [
+        "laguna",
+        "beach"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "lake grove",
+      "count": 1,
+      "decomposition": [
+        "lake",
+        "grove"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "le puy",
+      "count": 1,
+      "decomposition": [
+        "le",
+        "puy"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "lehigh valley",
+      "count": 1,
+      "decomposition": [
+        "lehigh",
+        "valley"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "leighton buzzard",
+      "count": 1,
+      "decomposition": [
+        "leighton",
+        "buzzard"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "lightning ridge",
+      "count": 1,
+      "decomposition": [
+        "lightning",
+        "ridge"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "los osos",
+      "count": 1,
+      "decomposition": [
+        "los",
+        "osos"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "lower saxony",
+      "count": 1,
+      "decomposition": [
+        "lower",
+        "saxony"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "martins ferry",
+      "count": 1,
+      "decomposition": [
+        "martins",
+        "ferry"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "mayne island",
+      "count": 1,
+      "decomposition": [
+        "mayne",
+        "island"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "mexico/chile",
+      "count": 1,
+      "decomposition": [
+        "mexico",
+        "chile"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "michigan city",
+      "count": 1,
+      "decomposition": [
+        "michigan",
+        "city"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "mingo junction",
+      "count": 1,
+      "decomposition": [
+        "mingo",
+        "junction"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "mitzpe ramon",
+      "count": 1,
+      "decomposition": [
+        "mitzpe",
+        "ramon"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "mount kisco",
+      "count": 1,
+      "decomposition": [
+        "mount",
+        "kisco"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "mount sinai",
+      "count": 1,
+      "decomposition": [
+        "mount",
+        "sinai"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "muscle shoals",
+      "count": 1,
+      "decomposition": [
+        "muscle",
+        "shoals"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "musical parody",
+      "count": 1,
+      "decomposition": [
+        "musical",
+        "parody"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "musical theatre",
+      "count": 1,
+      "decomposition": [
+        "musical",
+        "theatre"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "native america",
+      "count": 1,
+      "decomposition": [
+        "native",
+        "america"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "newbury park",
+      "count": 1,
+      "decomposition": [
+        "newbury",
+        "park"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "north augusta",
+      "count": 1,
+      "decomposition": [
+        "north",
+        "augusta"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "north macedonia",
+      "count": 1,
+      "decomposition": [
+        "north",
+        "macedonia"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "north savo",
+      "count": 1,
+      "decomposition": [
+        "north",
+        "savo"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "nova gorica",
+      "count": 1,
+      "decomposition": [
+        "nova",
+        "gorica"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "old tappan",
+      "count": 1,
+      "decomposition": [
+        "old",
+        "tappan"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "old town",
+      "count": 1,
+      "decomposition": [
+        "old",
+        "town"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "olgiate molgora",
+      "count": 1,
+      "decomposition": [
+        "olgiate",
+        "molgora"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "or & ak",
+      "count": 1,
+      "decomposition": [
+        "or",
+        "ak"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "oxford charter",
+      "count": 1,
+      "decomposition": [
+        "oxford",
+        "charter"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "philadelphia pennsylvania",
+      "count": 1,
+      "decomposition": [
+        "philadelphia",
+        "pennsylvania"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "piekary slaskie",
+      "count": 1,
+      "decomposition": [
+        "piekary",
+        "slaskie"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "plymouth meeting",
+      "count": 1,
+      "decomposition": [
+        "plymouth",
+        "meeting"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "port elizabeth",
+      "count": 1,
+      "decomposition": [
+        "port",
+        "elizabeth"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "port orchard",
+      "count": 1,
+      "decomposition": [
+        "port",
+        "orchard"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "punta arenas",
+      "count": 1,
+      "decomposition": [
+        "punta",
+        "arenas"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "quezon city",
+      "count": 1,
+      "decomposition": [
+        "quezon",
+        "city"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "rancho cucamonga",
+      "count": 1,
+      "decomposition": [
+        "rancho",
+        "cucamonga"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "rapid city",
+      "count": 1,
+      "decomposition": [
+        "rapid",
+        "city"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "redwood city",
+      "count": 1,
+      "decomposition": [
+        "redwood",
+        "city"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "rhode island",
+      "count": 1,
+      "decomposition": [
+        "rhode",
+        "island"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "rio grande",
+      "count": 1,
+      "decomposition": [
+        "rio",
+        "grande"
+      ],
+      "score": 2
+    },
+    {
+      "tag": "rochester hills",
+      "count": 1,
+      "decomposition": [
+        "rochester",
+        "hills"
+      ],
+      "score": 2
+    }
+  ]
+}

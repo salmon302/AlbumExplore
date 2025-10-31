@@ -13,6 +13,7 @@ from pathlib import Path
 from .base_view import BaseView
 from albumexplore.visualization.state import ViewType
 from albumexplore.gui.gui_logging import graphics_logger
+from albumexplore.gui.favorites import get_favorites_manager
 
 
 class LocationCache:
@@ -2679,6 +2680,21 @@ class WorldMapView(BaseView):
         self.year_max.setPrefix("To: ")
         self.year_max.valueChanged.connect(self._on_filter_changed)
         
+        # Favorites filter checkbox
+        try:
+            from PyQt6.QtWidgets import QCheckBox
+            self.fav_only_checkbox = QCheckBox("Only favorites")
+            self.fav_only_checkbox.setToolTip("Show only favorite albums on the map")
+            self.fav_only_checkbox.stateChanged.connect(self._on_filter_changed)
+            controls_layout.addWidget(self.fav_only_checkbox)
+
+            # Favorites manager
+            self._fav_mgr = get_favorites_manager()
+            # When favorites change externally, re-render map so markers/popups update
+            self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
+        except Exception:
+            # Best-effort: continue without favorites UI if favorites manager not available
+            pass
         controls_layout.addWidget(self.year_min)
         controls_layout.addWidget(self.year_max)
         
@@ -2868,6 +2884,8 @@ class WorldMapView(BaseView):
         genre_filter = self.genre_filter.currentText()
         year_min = self.year_min.value()
         year_max = self.year_max.value()
+        only_favs = getattr(self, 'fav_only_checkbox', None) and self.fav_only_checkbox.isChecked()
+        favs = self._fav_mgr.all() if only_favs and hasattr(self, '_fav_mgr') else None
         
         filtered = {}
         
@@ -2889,6 +2907,10 @@ class WorldMapView(BaseView):
                             continue
                     except (ValueError, TypeError):
                         # Skip albums with invalid year data
+                        continue
+                # Favorites-only filter
+                if favs is not None:
+                    if album.get('id') not in favs:
                         continue
                 
                 filtered_albums.append(album)
@@ -2918,10 +2940,16 @@ class WorldMapView(BaseView):
             for i, album in enumerate(albums[:15], 1):  # Show up to 15 albums
                 year_str = f" <span style='color: #95a5a6;'>({album['year']})</span>" if album.get('year') else ""
                 genre_str = f" <span style='color: #e67e22; font-size: 11px;'>[{album['genre']}]</span>" if album.get('genre') and album['genre'] != 'Unknown' else ""
-                
+
+                # Favorite marker for popup entry
+                try:
+                    fav_marker = '★ ' if (hasattr(self, '_fav_mgr') and self._fav_mgr.is_favorite(album.get('id'))) else ''
+                except Exception:
+                    fav_marker = ''
+
                 popup_html += f"""
                 <div style="margin: 8px 0; padding: 8px; background: #ecf0f1; border-radius: 4px;">
-                    <div style="font-weight: bold; color: #2c3e50;">{i}. {album['artist']}</div>
+                    <div style="font-weight: bold; color: #2c3e50;">{i}. {fav_marker}{album['artist']}</div>
                     <div style="font-size: 12px; color: #34495e; margin-top: 2px;">🎵 {album['label']}{year_str}{genre_str}</div>
                 </div>
                 """
@@ -2987,10 +3015,16 @@ class WorldMapView(BaseView):
             for i, album in enumerate(albums[:15], 1):
                 year_str = f" <span style='color: #95a5a6;'>({album['year']})</span>" if album.get('year') else ""
                 genre_str = f" <span style='color: #e67e22; font-size: 11px;'>[{album['genre']}]</span>" if album.get('genre') and album['genre'] != 'Unknown' else ""
-                
+
+                # Favorite marker for popup entry
+                try:
+                    fav_marker = '★ ' if (hasattr(self, '_fav_mgr') and self._fav_mgr.is_favorite(album.get('id'))) else ''
+                except Exception:
+                    fav_marker = ''
+
                 popup_html += f"""
                 <div style="margin: 8px 0; padding: 8px; background: #ecf0f1; border-radius: 4px;">
-                    <div style="font-weight: bold; color: #2c3e50;">{i}. {album['artist']}</div>
+                    <div style="font-weight: bold; color: #2c3e50;">{i}. {fav_marker}{album['artist']}</div>
                     <div style="font-size: 12px; color: #34495e; margin-top: 2px;">🎵 {album['label']}{year_str}{genre_str}</div>
                 </div>
                 """
@@ -3096,3 +3130,12 @@ class WorldMapView(BaseView):
         """Handle filter change."""
         graphics_logger.debug("Filter changed, re-rendering map")
         self._render_map()
+
+    def _on_favorites_changed(self):
+        """Handle favorites change by re-rendering the map so markers/popups update."""
+        try:
+            graphics_logger.debug("Favorites changed, re-rendering map")
+            # Re-render map to update star indicators or filtering
+            self._render_map()
+        except Exception:
+            graphics_logger.exception("Error re-rendering map after favorites change")

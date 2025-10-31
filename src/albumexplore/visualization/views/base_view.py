@@ -24,12 +24,17 @@ class BaseView(QWidget):
 		
 		# Set proper widget attributes for clean rendering
 		self.setAutoFillBackground(True)
-		
-		 # Ensure consistent background color
-		palette = self.palette()
-		palette.setColor(QPalette.ColorRole.Window, QColor(255, 255, 255))
-		palette.setColor(QPalette.ColorRole.Base, QColor(255, 255, 255))
-		self.setPalette(palette)
+		# Use the application's palette when available so global themes apply
+		try:
+			from PyQt6.QtWidgets import QApplication
+			app_palette = QApplication.instance().palette() if QApplication.instance() else self.palette()
+			self.setPalette(app_palette)
+		except Exception:
+			# Fallback to a white background if QApplication is not available
+			palette = self.palette()
+			palette.setColor(QPalette.ColorRole.Window, QColor(255, 255, 255))
+			palette.setColor(QPalette.ColorRole.Base, QColor(255, 255, 255))
+			self.setPalette(palette)
 		
 		# Set size policy to expand in both directions
 		self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)

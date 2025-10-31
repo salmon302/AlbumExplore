@@ -6,6 +6,7 @@ from typing import Dict, Set, List, Optional
 from datetime import datetime
 import re
 import uuid # Added import for uuid
+from albumexplore.database.utils import generate_stable_id
 import pandas as pd
 
 from sqlalchemy.orm import Session
@@ -344,9 +345,12 @@ def load_dataframe_data(df, session: Session):
             if processed_count < 5:  # Only log first 5 rows to avoid spam
                 db_logger.info(f"Row {processed_count}: genre_and_tags_str='{genre_and_tags_str}', vocal_style_str='{vocal_style_str}', country_str='{country_str}'")
 
-            # Create Album object
+            # Create Album object with a stable deterministic ID so favorites
+            # remain valid across data reloads when artist/title (and year)
+            # are unchanged.
+            album_id = generate_stable_id(artist, album_title, str(release_year) if release_year else "")
             album = Album(
-                id=str(uuid.uuid4()),
+                id=album_id,
                 pa_artist_name_on_album=artist,
                 title=album_title,
                 release_date=release_date_obj,
@@ -862,8 +866,9 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
                     release_date_obj = datetime(year, 1, 1)  # January 1st of the year from the filename
                     db_logger.debug(f"Using default date {release_date_obj.strftime('%Y-%m-%d')} for {artist} - {album_title}")
                 
-                # Generate a unique ID for the album
-                album_id = str(uuid.uuid4())
+                # Generate a stable deterministic ID for the album so that
+                # favorites (which reference album IDs) persist across reloads
+                album_id = generate_stable_id(artist, album_title, str(release_date_obj.year) if release_date_obj else "")
                 
                 # Create the album object
                 album = Album(

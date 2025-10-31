@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class TagNormalizer:
     """Handles tag normalization and variant consolidation with atomic tag support."""
     
-    def __init__(self, test_mode: bool = False, enable_atomic_tags: bool = True):
+    def __init__(self, test_mode: bool = False, enable_atomic_tags: bool = True, rules_file: str = None):
         """Initialize the normalizer with rules.
         
         Args:
@@ -29,6 +29,8 @@ class TagNormalizer:
         
         # Atomic tag system
         self._enable_atomic_tags = enable_atomic_tags
+        # Optional override for the rules file path (useful for dry-run/testing)
+        self._rules_file = rules_file
         self._atomic_config = {}
         self._atomic_decomposition_cache = {}
         self._valid_atomic_tags = set()
@@ -209,9 +211,12 @@ class TagNormalizer:
         try:
             # Get the config file path relative to this module
             # Navigate from tags/normalizer/ to the config directory
-            current_file_dir = os.path.dirname(os.path.abspath(__file__))
-            albumexplore_dir = os.path.dirname(os.path.dirname(current_file_dir))  # Go up from tags/normalizer/ to albumexplore/
-            config_path = os.path.join(albumexplore_dir, 'config', 'tag_rules.json')
+            if self._rules_file:
+                config_path = self._rules_file
+            else:
+                current_file_dir = os.path.dirname(os.path.abspath(__file__))
+                albumexplore_dir = os.path.dirname(os.path.dirname(current_file_dir))  # Go up from tags/normalizer/ to albumexplore/
+                config_path = os.path.join(albumexplore_dir, 'config', 'tag_rules.json')
             
             with open(config_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)

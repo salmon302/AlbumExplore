@@ -3,7 +3,7 @@ import sys
 import logging
 from pathlib import Path # Added Path
 from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QApplication, QStackedWidget
-from PyQt6.QtGui import QAction # Added QAction
+from PyQt6.QtGui import QAction, QColor, QPalette # Added QAction, QColor, QPalette
 from PyQt6.QtCore import Qt
 from .views.table_view import TableView
 from .views.similarity_bar_view import SimilarityBarChartView
@@ -300,6 +300,99 @@ def main():
     try:
         graphics_logger.info("[main] Creating QApplication...") # Changed to graphics_logger
         app = QApplication(sys.argv)
+        # Apply global dark theme so all views inherit the TagExplorer styling
+        try:
+            background_hex = "#121212"
+            surface_hex = "#181818"
+            raised_hex = "#202124"
+            border_hex = "#2a2d32"
+            hover_hex = "#2c3239"
+            text_primary_hex = "#f1f3f4"
+            text_muted_hex = "#9aa0a6"
+            accent_hex = "#64b5f6"
+            accent_hover_hex = "#81c9ff"
+            accent_pressed_hex = "#4aa4e3"
+            success_hex = "#7bd88f"
+            danger_hex = "#f77676"
+            control_base_hex = "#2c323a"
+            control_hover_hex = "#37414b"
+            control_pressed_hex = "#425163"
+
+            palette = app.palette()
+            palette.setColor(QPalette.ColorRole.Window, QColor(background_hex))
+            palette.setColor(QPalette.ColorRole.Base, QColor(surface_hex))
+            palette.setColor(QPalette.ColorRole.AlternateBase, QColor(raised_hex))
+            palette.setColor(QPalette.ColorRole.WindowText, QColor(text_primary_hex))
+            palette.setColor(QPalette.ColorRole.Text, QColor(text_primary_hex))
+            palette.setColor(QPalette.ColorRole.Button, QColor(control_base_hex))
+            palette.setColor(QPalette.ColorRole.ButtonText, QColor(text_primary_hex))
+            palette.setColor(QPalette.ColorRole.Highlight, QColor(accent_hex))
+            palette.setColor(QPalette.ColorRole.HighlightedText, QColor(background_hex))
+            palette.setColor(QPalette.ColorRole.ToolTipBase, QColor(raised_hex))
+            palette.setColor(QPalette.ColorRole.ToolTipText, QColor(text_primary_hex))
+
+            stylesheet = f"""
+            QWidget {{
+                background-color: {background_hex};
+                color: {text_primary_hex};
+                font-size: 10pt;
+            }}
+            QWidget#filterHeader {{
+                background-color: {surface_hex};
+                border-bottom: 1px solid {border_hex};
+                padding: 6px 10px;
+            }}
+            QWidget#tagPanel, QWidget#albumPanel {{
+                background-color: {surface_hex};
+            }}
+            QLabel#statusBarLabel {{
+                background-color: {raised_hex};
+                color: {text_primary_hex};
+                padding: 6px 12px;
+                border-top: 1px solid {border_hex};
+                font-size: 10pt;
+                font-weight: 500;
+            }}
+            QLabel {{ color: {text_primary_hex}; }}
+            QLabel#tagCountLabel {{ color: {accent_hex}; font-weight: 600; }}
+            QLineEdit {{
+                background-color: {control_base_hex};
+                border: 1px solid {border_hex};
+                border-radius: 4px;
+                padding: 4px 8px;
+                color: {text_primary_hex};
+            }}
+            QLineEdit:focus {{ border-color: {accent_hex}; background-color: {raised_hex}; }}
+            QPushButton {{
+                background-color: {control_base_hex};
+                border: 1px solid {border_hex};
+                border-radius: 4px;
+                padding: 4px 10px;
+                color: {text_primary_hex};
+                font-weight: 500;
+            }}
+            QPushButton:hover {{ background-color: {control_hover_hex}; border-color: {accent_hex}; }}
+            QPushButton:pressed {{ background-color: {control_pressed_hex}; border-color: {accent_pressed_hex}; }}
+            QPushButton:disabled {{ color: {text_muted_hex}; border-color: {border_hex}; }}
+            QComboBox {{ background-color: {control_base_hex}; border: 1px solid {border_hex}; border-radius: 4px; padding: 4px 24px 4px 8px; color: {text_primary_hex}; }}
+            QComboBox QAbstractItemView {{ background-color: {raised_hex}; selection-background-color: {accent_hex}; selection-color: {background_hex}; }}
+            QCheckBox {{ spacing: 6px; color: {text_primary_hex}; }}
+            QTableWidget {{ gridline-color: {border_hex}; background-color: {surface_hex}; alternate-background-color: {raised_hex}; selection-background-color: {accent_hex}; selection-color: {background_hex}; }}
+            QHeaderView::section {{ background-color: {raised_hex}; color: {text_primary_hex}; border: none; border-right: 1px solid {border_hex}; padding: 6px 8px; }}
+            QHeaderView::section:selected {{ background-color: {accent_hex}; color: {background_hex}; }}
+            QScrollBar:vertical {{ background: {surface_hex}; width: 14px; margin: 0px; }}
+            QScrollBar::handle:vertical {{ background: {raised_hex}; border-radius: 6px; min-height: 24px; }}
+            QScrollBar::handle:vertical:hover {{ background: {accent_hex}; }}
+            QSplitter::handle {{ background-color: {raised_hex}; width: 5px; }}
+            QSplitter::handle:hover {{ background-color: {accent_hex}; }}
+            QProgressBar {{ background-color: {surface_hex}; border: 1px solid {border_hex}; border-radius: 4px; text-align: center; color: {text_primary_hex}; }}
+            QProgressBar::chunk {{ background-color: {accent_hex}; }}
+            """
+
+            app.setPalette(palette)
+            app.setStyleSheet(stylesheet)
+        except Exception as e:
+            graphics_logger.debug(f"Failed to apply global dark theme: {e}")
         app.setQuitOnLastWindowClosed(False)
         graphics_logger.info("[main] QApplication created.") # Changed to graphics_logger
 

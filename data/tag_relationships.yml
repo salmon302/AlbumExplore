@@ -1,0 +1,36 @@
+# Example curated tag relationships for AlbumExplore
+# This file is human-editable. If PyYAML is installed this YAML can be
+# loaded directly; otherwise use the provided CSV or JSON formats.
+
+synth:
+  - tag: synth-pop
+    type: synonym
+  - tag: synthwave
+    type: related
+    weight: 0.8
+
+rnb:
+  - tag: jazz
+    type: historic
+    weight: 0.75
+  - tag: soul
+    type: related
+    weight: 0.85
+
+thrash:
+  - tag: punk
+    type: related
+    weight: 0.8
+
+krautrock:
+  - tag: psychedelic
+    type: related
+    weight: 0.7
+
+brutal-death:
+  - tag: death
+    type: parent_child
+    weight: 0.9
+  - tag: brutal
+    type: synonym
+    weight: 1.0

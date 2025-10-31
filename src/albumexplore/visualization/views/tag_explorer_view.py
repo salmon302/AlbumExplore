@@ -25,6 +25,7 @@ from ...gui.widgets.atomic_tag_widget import AtomicTagWidget # Added atomic tag 
 from ...gui.widgets.tag_filter_panel import TagFilterPanel # Added filter panel
 from ...tags.filters import TagFilterState # Added filter state
 from albumexplore.gui.gui_logging import graphics_logger # Added import
+from ...gui.favorites import get_favorites_manager
 
 # Ensure we're properly importing tag cloud widget
 try:
@@ -215,6 +216,24 @@ class TagExplorerView(BaseView):
         self.tag_count_label.setObjectName("tagCountLabel")
         top_layout.addWidget(self.tag_count_label)
         
+        # Favorites display and filter
+        try:
+            self._fav_mgr = get_favorites_manager()
+            self.fav_count_label = QLabel("Favorites: 0")
+            self.fav_count_label.setObjectName("favCountLabel")
+            top_layout.addWidget(self.fav_count_label)
+
+            self.fav_only_checkbox = QCheckBox("Only favorites")
+            self.fav_only_checkbox.setToolTip("Show only favorite albums in tag explorer")
+            self.fav_only_checkbox.stateChanged.connect(self._on_fav_only_toggled)
+            top_layout.addWidget(self.fav_only_checkbox)
+
+            # Subscribe to favorites changes
+            self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
+        except Exception:
+            # If favorites manager import fails, continue without favorites UI
+            pass
+        
         # Add progress indicator for large datasets
         from PyQt6.QtWidgets import QProgressBar
         self.progress_bar = QProgressBar()
@@ -342,98 +361,47 @@ class TagExplorerView(BaseView):
         filter_header_layout.addWidget(bottom_row)
         
         tag_panel_layout.addWidget(self.filter_header)
-        
-        # Add atomic tag widget
-        self.atomic_widget = AtomicTagWidget()
-        self.atomic_widget.setVisible(True)  # Make visible so users can access atomic mode
-        self.atomic_widget.atomic_mode_changed.connect(self._on_atomic_mode_toggle)
-        self.atomic_widget.tag_filter_changed.connect(self._on_atomic_filter_changed)
-        self.atomic_widget.breakdown_requested.connect(self._on_atomic_breakdown_requested)
-        # Connect preview (hover) requests to handler
-        self.atomic_widget.preview_requested.connect(self._on_atomic_preview_requested)
-        
-        # Add the atomic widget to the bottom row for easy access
-        bottom_layout.addWidget(self.atomic_widget)
-        
-        # Add toggle button for new filter panel
-        separator_panel = QLabel("|")
-        separator_panel.setStyleSheet("color: #3f4449; padding: 0 5px;")
-        bottom_layout.addWidget(separator_panel)
-        
-        self.toggle_filter_panel_button = QPushButton("🎯 Groups")
-        self.toggle_filter_panel_button.setObjectName("toggleFilterPanelButton")
-        self.toggle_filter_panel_button.setToolTip("Toggle advanced filter groups panel")
-        self.toggle_filter_panel_button.setCheckable(True)
-        self.toggle_filter_panel_button.setChecked(False)
-        self.toggle_filter_panel_button.clicked.connect(self._toggle_filter_panel)
-        bottom_layout.addWidget(self.toggle_filter_panel_button)
-        
-        # Create collapsible filter panel container with visual boundary
-        self.filter_panel_container = QFrame()
-        self.filter_panel_container.setObjectName("filterPanelContainer")
-        self.filter_panel_container.setFrameStyle(QFrame.Shape.StyledPanel | QFrame.Shadow.Raised)
-        self.filter_panel_container.setLineWidth(1)
-        self.filter_panel_container.setVisible(False)
-        self.filter_panel_container.setStyleSheet("""
-            QFrame#filterPanelContainer {
-                background-color: #0d0d0d;
-                border: 1px solid #2a2d32;
-                border-radius: 4px;
-                margin: 1px;
-            }
-        """)
-        
-        filter_container_layout = QVBoxLayout(self.filter_panel_container)
-        filter_container_layout.setContentsMargins(5, 5, 5, 5)
-        filter_container_layout.setSpacing(5)
-        
-        # Create advanced filter panel
-        self.filter_panel = TagFilterPanel(
-            filter_state=None,  # Will be created
-            available_tags=[]  # Will be populated when data loads
-        )
-        self.filter_panel.filtersChanged.connect(self._on_filter_panel_changed)
-        filter_container_layout.addWidget(self.filter_panel)
-        
-        # Add resize handle for adjustable height
-        self.filter_panel_resize_handle = QLabel("═")
-        self.filter_panel_resize_handle.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.filter_panel_resize_handle.setStyleSheet("""
-            QLabel {
-                background: #1a1d21;
-                color: #555;
-                padding: 1px;
-                font-size: 8px;
-                border-top: 1px solid #2a2d32;
-            }
-            QLabel:hover {
-                background: #2a2d32;
-                color: #777;
-                cursor: ns-resize;
-            }
-        """)
-        self.filter_panel_resize_handle.setCursor(Qt.CursorShape.SizeVerCursor)
-        self.filter_panel_resize_handle.mousePressEvent = self._start_resize_filter_panel
-        self.filter_panel_resize_handle.mouseMoveEvent = self._resize_filter_panel
-        self.filter_panel_resize_handle.mouseReleaseEvent = self._end_resize_filter_panel
-        filter_container_layout.addWidget(self.filter_panel_resize_handle)
-        
-        # Track resize state
-        self._filter_panel_resizing = False
-        self._filter_panel_resize_start_y = 0
-        self._filter_panel_start_height = 0
-        
+
+        # --- Begin moved UI: tag views, album panel, splitters, and related widgets ---
+        # Create filter panel container and filter panel widget
+        # (kept minimal to avoid NameError when favorites handler triggers)
+        try:
+            self.filter_panel_container = QWidget()
+            self.filter_panel_container.setObjectName("filterPanelContainer")
+            fp_layout = QVBoxLayout(self.filter_panel_container)
+            fp_layout.setContentsMargins(0, 0, 0, 0)
+            # Create TagFilterPanel if available
+            try:
+                self.filter_panel = TagFilterPanel(self)
+                fp_layout.addWidget(self.filter_panel)
+            except Exception:
+                # If TagFilterPanel construction fails, keep the container empty
+                pass
+        except Exception:
+            # Defensive: ensure attributes exist even if widget creation fails
+            self.filter_panel_container = QWidget()
+            self.filter_panel = None
+
         # Set initial size constraints (adjustable) - more compact
         self.filter_panel_container.setMinimumHeight(120)
         self.filter_panel_container.setMaximumHeight(400)
+        # Performance and worker attributes (ensure they exist before any deferred scheduling)
+        self._deferred_timer = None
+        self._filter_timer = None
+        self._tag_processing_cache = {}
+        self._normalization_cache = {}
+        self._tag_worker_thread = None
+        self._tag_worker = None
         
         tag_panel_layout.addWidget(self.filter_panel_container)
         
         # Create tag views stack
         self.tag_views_stack = QStackedWidget()
         self.tag_views_stack.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+
+        # Create tag table and cloud, and add them to the views stack
         self.tag_views_stack.setMinimumHeight(300)  # Ensure minimum usable height for tag views
-        
+
         # Create tag table
         self.tags_table = QTableWidget()
         self.tags_table.setColumnCount(4)
@@ -478,7 +446,6 @@ class TagExplorerView(BaseView):
         self.tags_table.setSortingEnabled(False) # Disable native sorting, will handle manually
         self.tags_sort_column = 1  # Default sort by count (index 1)
         self.tags_sort_order = Qt.SortOrder.DescendingOrder
-        # self.tags_table.cellDoubleClicked.connect(self._cycle_tag_filter_state) # Ensure this is removed or commented
         # Improve row height and hide the vertical header for a cleaner look
         self.tags_table.verticalHeader().setDefaultSectionSize(24)
         self.tags_table.verticalHeader().setVisible(False)
@@ -496,9 +463,37 @@ class TagExplorerView(BaseView):
             except Exception:
                 # Some cloud widgets might use different signal signatures; ignore if incompatible
                 pass
-        
+
         # Add the QStackedWidget (tag_views_stack) to the tag_panel_layout
         tag_panel_layout.addWidget(self.tag_views_stack, 1)  # Give stretch factor of 1 to expand
+
+        # Atomic tag widget (detailed atomic controls and preview)
+        try:
+            self.atomic_widget = AtomicTagWidget(self)
+            # Keep visibility in sync with atomic_mode
+            self.atomic_widget.setVisible(self.atomic_mode)
+            # Connect signals if available
+            try:
+                self.atomic_widget.atomic_mode_changed.connect(self._on_atomic_mode_toggle)
+            except Exception:
+                pass
+            try:
+                self.atomic_widget.tag_filter_changed.connect(self._on_atomic_filter_changed)
+            except Exception:
+                pass
+            try:
+                self.atomic_widget.breakdown_requested.connect(self._on_atomic_breakdown_requested)
+            except Exception:
+                pass
+            try:
+                self.atomic_widget.preview_requested.connect(self._on_atomic_preview_requested)
+            except Exception:
+                pass
+
+            tag_panel_layout.addWidget(self.atomic_widget)
+        except Exception:
+            # If AtomicTagWidget is unavailable, ensure attribute exists to avoid AttributeError
+            self.atomic_widget = None
 
         # Create the album panel, its layout, and its widgets (album_count_label, album_table)
         self.album_panel = QWidget()
@@ -537,7 +532,7 @@ class TagExplorerView(BaseView):
         album_header.setSectionsClickable(True)
         album_header.setHighlightSections(True)
         album_header.setSortIndicatorShown(True)
-        
+
         # Set reasonable initial column widths for albums
         self.album_table.setColumnWidth(0, 200)  # Artist column
         self.album_table.setColumnWidth(1, 250)  # Album column
@@ -553,55 +548,55 @@ class TagExplorerView(BaseView):
         # Tidy album rows and hide vertical header
         self.album_table.verticalHeader().setDefaultSectionSize(26)
         self.album_table.verticalHeader().setVisible(False)
-        
+
         album_panel_layout.addWidget(self.album_table, 1)  # Give stretch factor of 1 to expand
 
         # Add both panels to the splitter
         self.splitter.addWidget(self.tag_panel)
         self.splitter.addWidget(self.album_panel)
-        
+
         # Set initial sizes with better proportions (40% for tags, 60% for albums)
         # and allow user to resize as needed
         self.splitter.setSizes([400, 600])
         self.splitter.setStretchFactor(0, 2)  # Tag panel stretch factor
         self.splitter.setStretchFactor(1, 3)  # Album panel stretch factor
-        
+
         # Connect splitter moved signal to save settings
         self.splitter.splitterMoved.connect(self._save_splitter_state)
-        
+
         # Add splitter to main layout
         main_layout.addWidget(self.splitter)
-        
+
         # Add status bar at the bottom
         self.status_bar = QLabel("Ready")
         self.status_bar.setObjectName("statusBarLabel")
         self.status_bar.setMinimumHeight(28)
         self.status_bar.setMaximumHeight(28)
         main_layout.addWidget(self.status_bar)
-        
+
         # Setup right-click menu for tag table
         self.tags_table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.tags_table.customContextMenuRequested.connect(self._show_tag_context_menu)
-        
+
         # Setup timers for batch processing
         self._update_timer = QTimer(self)
         self._update_timer.setSingleShot(True)
         self._update_timer.timeout.connect(self._process_updates)
         self._pending_updates = []
-        
+
         self._selection_timer = QTimer(self)
         self._selection_timer.setSingleShot(True)
         self._selection_timer.timeout.connect(self._process_selection)
         self._pending_selection = set()
-        
+
         # Add paint optimization flags
         self._needs_full_update = False
         self._last_paint_time = 0
         self._paint_throttle = 16  # ~60fps
-        
+
         # Set unified styling
         self._apply_unified_styling()
-        
+
         # Initialize atomic tag system state.
         # Defaulting to atomic mode provides better tag consolidation and a more useful UI for complex tags.
         self.atomic_mode = True
@@ -613,8 +608,6 @@ class TagExplorerView(BaseView):
         # Worker thread and object for heavy tag processing
         self._tag_worker_thread = None
         self._tag_worker = None
-
-        # atomic_mode_changed already connected when the atomic widget was created above; avoid duplicate connections here
 
         # Performance optimization attributes
         self._tag_processing_cache = {}
@@ -629,6 +622,35 @@ class TagExplorerView(BaseView):
         self._setup_keyboard_shortcuts()
 
         self.setUpdatesEnabled(True)  # Re-enable updates
+    
+    def _on_fav_only_toggled(self, state: int):
+        """Handler for the 'Only favorites' checkbox toggle.
+
+        This should not create UI — only update internal state and trigger a refresh.
+        """
+        self._show_only_favorites = bool(state)
+        # Best-effort refresh of views
+        try:
+            self._try_refresh_views()
+        except Exception:
+            graphics_logger.exception("Error refreshing views after favorites-only toggle")
+    
+    def _on_favorites_changed(self):
+        """Update favorites UI elements and trigger refresh if needed.
+
+        This handler updates the favorites count label and triggers a refresh when
+        favorites-only mode is active. It intentionally avoids creating UI
+        elements (those belong in initialization).
+        """
+        try:
+            favs = self._fav_mgr.all() if hasattr(self, '_fav_mgr') else set()
+            if hasattr(self, 'fav_count_label'):
+                self.fav_count_label.setText(f"Favorites: {len(favs)}")
+        except Exception:
+            pass
+
+        if getattr(self, '_show_only_favorites', False):
+            self._try_refresh_views()
     
     def _process_selection(self):
         """Process pending selection changes."""
@@ -957,8 +979,49 @@ class TagExplorerView(BaseView):
             if total_albums > 5000 and processed_albums % 5000 == 0:
                 graphics_logger.debug(f"TagExplorerView: Filtered {processed_albums}/{total_albums} albums...")
 
+        # If favorites-only mode is enabled, filter the final album list to favorites
+        try:
+            if getattr(self, '_show_only_favorites', False) and hasattr(self, '_fav_mgr'):
+                favs = self._fav_mgr.all()
+                if favs:
+                    # Filter albums to only favorites
+                    self.filtered_albums = [n for n in self.filtered_albums if n.get('id') in favs]
+
+                # Recompute matching_counts from the filtered albums to keep tag counts accurate
+                self.matching_counts.clear()
+                is_normalization_active = self.tag_normalizer.is_active()
+                for node in self.filtered_albums:
+                    raw_tags_str = node.get('raw_tags') or node.get('genre', '')
+                    if not raw_tags_str:
+                        continue
+                    node_raw_tags = [tag.strip() for tag in tag_splitter.split(raw_tags_str) if tag.strip()]
+                    if not node_raw_tags:
+                        continue
+
+                    current_node_processed_tags = []
+                    if is_normalization_active:
+                        for tag in node_raw_tags:
+                            normalized_tag = self._get_normalized_tag_for_processing(tag)
+                            if normalized_tag == tag and tag not in self.normalized_mapping:
+                                fallback_normalized = self.tag_normalizer.normalize_enhanced(tag)
+                                if fallback_normalized:
+                                    self.normalized_mapping[tag] = fallback_normalized
+                                    normalized_tag = fallback_normalized
+                            if normalized_tag:
+                                current_node_processed_tags.append(normalized_tag)
+                    else:
+                        for tag in node_raw_tags:
+                            processed_tag = self._get_normalized_tag_for_processing(tag)
+                            current_node_processed_tags.append(processed_tag)
+
+                    for t in current_node_processed_tags:
+                        self.matching_counts[t] += 1
+        except Exception:
+            # Do not let favorites filtering break the main filter operation
+            graphics_logger.exception("Error applying favorites-only post-filtering in TagExplorer")
+
         # Update views efficiently
-        self._update_tag_views() 
+        self._update_tag_views()
         self._update_album_table_display()
         
         # Update status bar with filter summary
@@ -1311,11 +1374,19 @@ class TagExplorerView(BaseView):
                     # Trigger preview handler
                     self._on_atomic_preview_requested(tag_name)
                 else:
-                    # Clear preview if moving over non-tag area
-                    self.atomic_widget.show_preview_samples('', [])
+                    # Clear preview if moving over non-tag area (defensive)
+                    if getattr(self, 'atomic_widget', None):
+                        try:
+                            self.atomic_widget.show_preview_samples('', [])
+                        except Exception:
+                            graphics_logger.exception("Error while clearing atomic preview samples")
             elif event.type() in (QEvent.Type.Leave, QEvent.Type.FocusOut):
-                # Clear preview when leaving the widget
-                self.atomic_widget.show_preview_samples('', [])
+                # Clear preview when leaving the widget (defensive)
+                if getattr(self, 'atomic_widget', None):
+                    try:
+                        self.atomic_widget.show_preview_samples('', [])
+                    except Exception:
+                        graphics_logger.exception("Error while clearing atomic preview samples on leave")
 
         return super().eventFilter(source, event)
     
@@ -1989,8 +2060,12 @@ class TagExplorerView(BaseView):
         # Clear the LRU cache since atomic mode changed
         self._cached_normalize_tag.cache_clear()
         
-        # Show/hide atomic widget controls based on mode
-        self.atomic_widget.setVisible(enabled)
+        # Show/hide atomic widget controls based on mode (defensive)
+        if getattr(self, 'atomic_widget', None):
+            try:
+                self.atomic_widget.setVisible(enabled)
+            except Exception:
+                graphics_logger.exception("Error setting atomic_widget visibility")
         
         # Log the mode change
         mode_str = "ATOMIC" if enabled else "STANDARD"
@@ -2074,11 +2149,19 @@ class TagExplorerView(BaseView):
                 ]
             }
             
-            # Update the breakdown display in the atomic widget
-            self.atomic_widget.show_breakdown(breakdown_data)
+            # Update the breakdown display in the atomic widget (defensive)
+            if getattr(self, 'atomic_widget', None):
+                try:
+                    self.atomic_widget.show_breakdown(breakdown_data)
+                except Exception:
+                    graphics_logger.exception("Error showing atomic breakdown")
         else:
-            # No breakdown available
-            self.atomic_widget.show_breakdown(None)
+            # No breakdown available (defensive)
+            if getattr(self, 'atomic_widget', None):
+                try:
+                    self.atomic_widget.show_breakdown(None)
+                except Exception:
+                    graphics_logger.exception("Error clearing atomic breakdown")
 
     def _on_atomic_preview_requested(self, tag_name: str):
         """Handle hover preview requests for a tag. Return sample album titles."""
@@ -2118,7 +2201,12 @@ class TagExplorerView(BaseView):
                     if len(samples) >= 5:
                         break
 
-        self.atomic_widget.show_preview_samples(tag_name, samples)
+        # Defensive: only call if widget exists
+        if getattr(self, 'atomic_widget', None):
+            try:
+                self.atomic_widget.show_preview_samples(tag_name, samples)
+            except Exception:
+                graphics_logger.exception("Error showing atomic preview samples")
             
     def _update_atomic_filter(self):
         """Update the atomic filter display based on current mode."""
@@ -2137,8 +2225,12 @@ class TagExplorerView(BaseView):
                     'rule_source': 'tag_normalizer'
                 })
             
-            # Update the atomic widget with the atomic tags
-            self.atomic_widget.update_atomic_data(stats, atomic_tags)
+            # Update the atomic widget with the atomic tags (defensive)
+            if getattr(self, 'atomic_widget', None):
+                try:
+                    self.atomic_widget.update_atomic_data(stats, atomic_tags)
+                except Exception:
+                    graphics_logger.exception("Error updating atomic widget data")
         
     def _show_single_instance_dialog(self):
         """Shows the dialog for managing single-instance tags."""

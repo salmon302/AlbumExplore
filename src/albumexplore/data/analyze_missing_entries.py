@@ -34,9 +34,10 @@ class MissingEntriesAnalyzer:
 			# Find missing album titles
 			missing_albums = df[df['Album'].isna() | (df['Album'].astype(str).str.strip() == '')]
 			for _, row in missing_albums.iterrows():
+				missing_data['album_titles'].append({
 					'artist': row.get('Artist', 'Unknown'),
 					'file': row['_source_file'],
-					'row_number': row.name + 2  # +2 for header and 1-based indexing
+					'row_number': int(row.name) + 2  # +2 for header and 1-based indexing
 				})
 			
 			# Find missing genres

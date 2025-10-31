@@ -1010,6 +1010,14 @@
       "doom",
       "metal"
     ],
+    "acoustic folk": [
+      "acoustic",
+      "folk"
+    ],
+    "acoustic rock": [
+      "acoustic",
+      "rock"
+    ],
     "afro latin funk": [
       "afro",
       "latin",
@@ -1032,8 +1040,7 @@
       "folk"
     ],
     "big band jazz": [
-      "big",
-      "band",
+      "big band",
       "jazz"
     ],
     "atmospheric dark rock": [
@@ -1043,8 +1050,7 @@
     ],
     "atmospheric drum and bass": [
       "atmospheric",
-      "drum",
-      "bass"
+      "drum and bass"
     ],
     "dancefloor drum and bass": [
       "dancefloor",
@@ -1099,10 +1105,8 @@
       "rock"
     ],
     "black metal/death metal": [
-      "black",
-      "metal",
-      "death",
-      "metal"
+      "black metal",
+      "death metal"
     ],
     "alt-country": [
       "alt",
@@ -1175,6 +1179,15 @@
       "sludge",
       "metal"
     ],
+    "atmospheric dark rock": [
+      "atmospheric",
+      "dark",
+      "rock"
+    ],
+    "atmospheric drum and bass": [
+      "atmospheric",
+      "drum and bass"
+    ],
     "avant-folk": [
       "avant",
       "folk"
@@ -1226,6 +1239,11 @@
     ],
     "brutal death metal": [
       "brutal",
+      "death",
+      "metal"
+    ],
+    "old school death metal": [
+      "old school",
       "death",
       "metal"
     ],
@@ -1364,8 +1382,7 @@
     ],
     "electronic avant-garde": [
       "electronic",
-      "avant",
-      "garde"
+      "avant-garde"
     ],
     "electronic music": [
       "electronic"
@@ -1412,6 +1429,11 @@
     ],
     "experimental hip hop": [
       "experimental",
+      "hip",
+      "hop"
+    ],
+    "east coast hip hop": [
+      "east coast",
       "hip",
       "hop"
     ],
@@ -1516,6 +1538,10 @@
     "gothic rock": [
       "gothic",
       "rock"
+    ],
+    "gothic metal": [
+      "gothic",
+      "metal"
     ],
     "grindcore": [
       "grind",
@@ -1833,6 +1859,10 @@
       "jazz",
       "rock"
     ],
+    "big band jazz": [
+      "big band",
+      "jazz"
+    ],
     "jazz-funk": [
       "jazz",
       "funk"
@@ -2007,6 +2037,14 @@
       "power",
       "pop"
     ],
+    "power electronics": [
+      "power",
+      "electronics"
+    ],
+    "power metal": [
+      "power",
+      "metal"
+    ],
     "prog-metal/rock": [
       "prog",
       "metal/rock"
@@ -2121,6 +2159,10 @@
     ],
     "southern rock": [
       "southern",
+      "rock"
+    ],
+    "space rock": [
+      "space",
       "rock"
     ],
     "space black metal": [
@@ -2468,12 +2510,32 @@
       "noise",
       "wall"
     ],
+    "noise ambient": [
+      "noise",
+      "ambient"
+    ],
     "delta blues": [
       "delta",
       "blues"
     ],
+    "trip hop": [
+      "trip",
+      "hop"
+    ],
+    "uk bass": [
+      "uk",
+      "bass"
+    ],
+    "uk drill": [
+      "uk",
+      "drill"
+    ],
     "traditional country": [
       "traditional",
+      "country"
+    ],
+    "outlaw country": [
+      "outlaw",
       "country"
     ],
     "red dirt": [
@@ -2623,6 +2685,10 @@
       "ambient",
       "house"
     ],
+    "acid house": [
+      "acid",
+      "house"
+    ],
     "ambient noise": [
       "ambient",
       "noise"
@@ -2643,6 +2709,47 @@
       "heavy",
       "ambient"
     ],
+    "ambient country": [
+      "ambient",
+      "country"
+    ],
+    "ambient electronica": [
+      "ambient",
+      "electronica"
+    ],
+    "ambient folk": [
+      "ambient",
+      "folk"
+    ],
+    "ambient house": [
+      "ambient",
+      "house"
+    ],
+    "ambient noise": [
+      "ambient",
+      "noise"
+    ],
+    "ambient psychedelia": [
+      "ambient",
+      "psychedelia"
+    ],
+    "ambient trance": [
+      "ambient",
+      "trance"
+    ],
+    "african folk music": [
+      "african",
+      "folk"
+    ],
+    "afro indie": [
+      "afro",
+      "indie"
+    ],
+    "afro latin funk": [
+      "afro",
+      "latin",
+      "funk"
+    ],
     "american folk music": [
       "american",
       "folk"
@@ -2651,7 +2758,27 @@
       "appalachian",
       "folk"
     ],
+    "appalachian folk music": [
+      "appalachian",
+      "folk"
+    ],
+    "african folk music": [
+      "african",
+      "folk"
+    ],
+    "arabic folk music": [
+      "arabic",
+      "folk"
+    ],
+    "balkan folk music": [
+      "balkan",
+      "folk"
+    ],
     "arabic folk": [
+      "arabic",
+      "folk"
+    ],
+    "arabic folk music": [
       "arabic",
       "folk"
     ],
@@ -2691,6 +2818,10 @@
       "gothic",
       "folk"
     ],
+    "progressive folk": [
+      "progressive",
+      "folk"
+    ],
     "progressive country": [
       "progressive",
       "country"
@@ -2720,6 +2851,15 @@
     "progressive breaks": [
       "progressive",
       "breaks"
+    ],
+    "acoustic doom metal": [
+      "acoustic",
+      "doom",
+      "metal"
+    ],
+    "adventure metal": [
+      "adventure",
+      "metal"
     ],
     "atmospheric post-rock": [
       "atmospheric",
@@ -2751,6 +2891,11 @@
       "space",
       "metal"
     ],
+    "traditional heavy metal": [
+      "traditional",
+      "heavy",
+      "metal"
+    ],
     "us power metal": [
       "us",
       "power",
@@ -2769,6 +2914,11 @@
       "arabic",
       "jazz"
     ],
+    "big band jazz": [
+      "big",
+      "band",
+      "jazz"
+    ],
     "brutal jazz": [
       "brutal",
       "jazz"
@@ -2783,6 +2933,10 @@
     ],
     "doom jazz": [
       "doom",
+      "jazz"
+    ],
+    "ethio-jazz": [
+      "ethio",
       "jazz"
     ],
     "future jazz": [
@@ -2813,9 +2967,18 @@
       "punk",
       "jazz"
     ],
+    "electronic avant-garde": [
+      "electronic",
+      "avant",
+      "garde"
+    ],
     "electronic dance music": [
       "electronic",
       "dance"
+    ],
+    "electronic pop": [
+      "electronic",
+      "pop"
     ],
     "experimental electronic": [
       "experimental",
@@ -2827,6 +2990,10 @@
     ],
     "glitch electronica": [
       "glitch",
+      "electronica"
+    ],
+    "indie electronica": [
+      "indie",
       "electronica"
     ],
     "orchestral death metal": [
@@ -2841,6 +3008,10 @@
     "orchestral post-rock": [
       "orchestral",
       "post",
+      "rock"
+    ],
+    "orchestral rock": [
+      "orchestral",
       "rock"
     ],
     "alt-drone": [
@@ -2859,6 +3030,16 @@
       "alt",
       "prog"
     ],
+    "atmospheric drum and bass": [
+      "atmospheric",
+      "drum",
+      "bass"
+    ],
+    "atmospheric dark rock": [
+      "atmospheric",
+      "dark",
+      "rock"
+    ],
     "atmospheric rock": [
       "atmospheric",
       "rock"
@@ -2872,11 +3053,23 @@
       "hip",
       "hop"
     ],
+    "alternative pop": [
+      "alternative",
+      "pop"
+    ],
+    "alternative reggae": [
+      "alternative",
+      "reggae"
+    ],
     "alternative rock/indie rock/emo": [
       "alternative",
       "rock",
       "indie",
       "emo"
+    ],
+    "ambient country": [
+      "ambient",
+      "country"
     ],
     "ambient dub": [
       "ambient",
@@ -2898,6 +3091,12 @@
     "blackened/melodic death metal": [
       "blackened",
       "melodic",
+      "death",
+      "metal"
+    ],
+    "black metal/death metal": [
+      "black",
+      "metal",
       "death",
       "metal"
     ],
@@ -3012,9 +3211,28 @@
       "sludge",
       "metal"
     ],
+    "instrumental math rock": [
+      "instrumental",
+      "math",
+      "rock"
+    ],
     "instrumental post-rock": [
       "instrumental",
       "post",
+      "rock"
+    ],
+    "instrumental progressive metal": [
+      "instrumental",
+      "progressive",
+      "metal"
+    ],
+    "instrumental progressive rock": [
+      "instrumental",
+      "progressive",
+      "rock"
+    ],
+    "instrumental rock": [
+      "instrumental",
       "rock"
     ],
     "melodic guitar": [
@@ -3084,6 +3302,10 @@
       "doom",
       "metal"
     ],
+    "psychedelic funk": [
+      "psychedelic",
+      "funk"
+    ],
     "psychedelic sludge metal": [
       "psychedelic",
       "sludge",
@@ -3106,6 +3328,15 @@
     "psychedelick rock": [
       "psychedelic",
       "rock"
+    ],
+    "space black metal": [
+      "space",
+      "black",
+      "metal"
+    ],
+    "space-punk": [
+      "space",
+      "punk"
     ],
     "symphonic black": [
       "symphonic",
@@ -3131,6 +3362,16 @@
       "black",
       "metal"
     ],
+    "technical punk": [
+      "technical",
+      "punk"
+    ],
+    "technical/melodic death metal": [
+      "technical",
+      "melodic",
+      "death",
+      "metal"
+    ],
     "synth doom": [
       "synth",
       "doom"
@@ -3138,6 +3379,10 @@
     "synth pop": [
       "synth",
       "pop"
+    ],
+    "synth rock": [
+      "synth",
+      "rock"
     ],
     "synth-pop": [
       "synth",
@@ -3252,6 +3497,10 @@
       "electro",
       "funk"
     ],
+    "electro ambient": [
+      "electro",
+      "ambient"
+    ],
     "garde jazz": [
       "avant-garde",
       "jazz"
@@ -3321,661 +3570,6 @@
     "australia / uk": [
       "australia",
       "uk"
-    ],
-    "latin big band": [
-      "latin",
-      "big",
-      "band"
-    ],
-    "medieval folk metal": [
-      "medieval",
-      "folk",
-      "metal"
-    ],
-    "nordic folk rock": [
-      "nordic",
-      "folk",
-      "rock"
-    ],
-    "progressive jazz funk": [
-      "progressive",
-      "jazz",
-      "funk"
-    ],
-    "uk hip hop": [
-      "uk",
-      "hip",
-      "hop"
-    ],
-    "uk street soul": [
-      "uk",
-      "street",
-      "soul"
-    ],
-    "alt pop": [
-      "alt",
-      "pop"
-    ],
-    "alt rock": [
-      "alt",
-      "rock"
-    ],
-    "arabic pop": [
-      "arabic",
-      "pop"
-    ],
-    "belgium/norway": [
-      "belgium",
-      "norway"
-    ],
-    "big band": [
-      "big",
-      "band"
-    ],
-    "blackened punk": [
-      "blackened",
-      "punk"
-    ],
-    "blues jazz": [
-      "blues",
-      "jazz"
-    ],
-    "canada/france": [
-      "canada",
-      "france"
-    ],
-    "canada/uk": [
-      "canada",
-      "uk"
-    ],
-    "cinematic soul": [
-      "cinematic",
-      "soul"
-    ],
-    "classical music": [
-      "classical",
-      "music"
-    ],
-    "contemporary country": [
-      "contemporary",
-      "country"
-    ],
-    "cosmic rock": [
-      "cosmic",
-      "rock"
-    ],
-    "country jazz": [
-      "country",
-      "jazz"
-    ],
-    "dance music": [
-      "dance",
-      "music"
-    ],
-    "dance punk": [
-      "dance",
-      "punk"
-    ],
-    "dance rock": [
-      "dance",
-      "rock"
-    ],
-    "dark country": [
-      "dark",
-      "country"
-    ],
-    "dark punk": [
-      "dark",
-      "punk"
-    ],
-    "dark synth": [
-      "dark",
-      "synth"
-    ],
-    "deep funk": [
-      "deep",
-      "funk"
-    ],
-    "deep soul": [
-      "deep",
-      "soul"
-    ],
-    "depressive rock": [
-      "depressive",
-      "rock"
-    ],
-    "disco funk": [
-      "disco",
-      "funk"
-    ],
-    "doom folk": [
-      "doom",
-      "folk"
-    ],
-    "doom fuzz": [
-      "doom",
-      "fuzz"
-    ],
-    "drum machine": [
-      "drum",
-      "machine"
-    ],
-    "eastern european": [
-      "eastern",
-      "european"
-    ],
-    "eclectic rock": [
-      "eclectic",
-      "rock"
-    ],
-    "experimental hip-hop": [
-      "experimental",
-      "hip-hop"
-    ],
-    "finland/england": [
-      "finland",
-      "england"
-    ],
-    "french electro": [
-      "french",
-      "electro"
-    ],
-    "future funk": [
-      "future",
-      "funk"
-    ],
-    "future pop": [
-      "future",
-      "pop"
-    ],
-    "fuzz funk": [
-      "fuzz",
-      "funk"
-    ],
-    "fuzz pop": [
-      "fuzz",
-      "pop"
-    ],
-    "germany/uk": [
-      "germany",
-      "uk"
-    ],
-    "glitch hop": [
-      "glitch",
-      "hop"
-    ],
-    "glitch metal": [
-      "glitch",
-      "metal"
-    ],
-    "grunge punk": [
-      "grunge",
-      "punk"
-    ],
-    "hard prog": [
-      "hard",
-      "prog"
-    ],
-    "hardcore funk": [
-      "hardcore",
-      "funk"
-    ],
-    "hardcore rap": [
-      "hardcore",
-      "rap"
-    ],
-    "heavy americana": [
-      "heavy",
-      "americana"
-    ],
-    "heavy fuzz": [
-      "heavy",
-      "fuzz"
-    ],
-    "hip-hop soul": [
-      "hip-hop",
-      "soul"
-    ],
-    "horror synth": [
-      "horror",
-      "synth"
-    ],
-    "indie soul": [
-      "indie",
-      "soul"
-    ],
-    "industrial hardcore": [
-      "industrial",
-      "hardcore"
-    ],
-    "industrial punk": [
-      "industrial",
-      "punk"
-    ],
-    "instrumental hip-hop": [
-      "instrumental",
-      "hip-hop"
-    ],
-    "jangle punk": [
-      "jangle",
-      "punk"
-    ],
-    "jangle rock": [
-      "jangle",
-      "rock"
-    ],
-    "japan / greece": [
-      "japan",
-      "greece"
-    ],
-    "retro pop": [
-      "retro",
-      "pop"
-    ],
-    "retro prog": [
-      "retro",
-      "prog"
-    ],
-    "rock hill": [
-      "rock",
-      "hill"
-    ],
-    "sludge rock": [
-      "sludge",
-      "rock"
-    ],
-    "smooth soul": [
-      "smooth",
-      "soul"
-    ],
-    "soul pop": [
-      "soul",
-      "pop"
-    ],
-    "sweden / england": [
-      "sweden",
-      "england"
-    ],
-    "sweden / finland": [
-      "sweden",
-      "finland"
-    ],
-    "sweden / italy": [
-      "sweden",
-      "italy"
-    ],
-    "sweden/uk": [
-      "sweden",
-      "uk"
-    ],
-    "techno house": [
-      "techno",
-      "house"
-    ],
-    "trance house": [
-      "trance",
-      "house"
-    ],
-    "uk / netherlands": [
-      "uk",
-      "netherlands"
-    ],
-    "uk / sweden": [
-      "uk",
-      "sweden"
-    ],
-    "uk house": [
-      "uk",
-      "house"
-    ],
-    "uk/australia": [
-      "uk",
-      "australia"
-    ],
-    "us / japan": [
-      "us",
-      "japan"
-    ],
-    "us / netherlands": [
-      "us",
-      "netherlands"
-    ],
-    "us / norway": [
-      "us",
-      "norway"
-    ],
-    "us / sweden": [
-      "us",
-      "sweden"
-    ],
-    "powerviolence/black metal/death metal": [
-      "powerviolence",
-      "black metal",
-      "death metal"
-    ],
-    "scottish folk music": [
-      "scottish",
-      "folk",
-      "music"
-    ],
-    "southend on sea": [
-      "southend",
-      "on",
-      "sea"
-    ],
-    "welsh folk music": [
-      "welsh",
-      "folk",
-      "music"
-    ],
-    "world music (brazil)": [
-      "world",
-      "music",
-      "(brazil)"
-    ],
-    "american privitsm": [
-      "american",
-      "privitsm"
-    ],
-    "angular pop": [
-      "angular",
-      "pop"
-    ],
-    "anxiety pop": [
-      "anxiety",
-      "pop"
-    ],
-    "bleep techno": [
-      "bleep",
-      "techno"
-    ],
-    "boogie rock": [
-      "boogie",
-      "rock"
-    ],
-    "cherry hill": [
-      "cherry",
-      "hill"
-    ],
-    "dark synthwave": [
-      "dark",
-      "synthwave"
-    ],
-    "deep purple-ish": [
-      "deep",
-      "purple-ish"
-    ],
-    "djent-ish lite": [
-      "djent-ish",
-      "lite"
-    ],
-    "doom metal/rock": [
-      "doom metal",
-      "rock"
-    ],
-    "doom rock/metal": [
-      "doom rock",
-      "metal"
-    ],
-    "east java": [
-      "east",
-      "java"
-    ],
-    "el salvador": [
-      "el",
-      "salvador"
-    ],
-    "extreme prog-metal": [
-      "extreme",
-      "prog-metal"
-    ],
-    "ghotic metal": [
-      "ghotic",
-      "metal"
-    ],
-    "parody metal": [
-      "parody",
-      "metal"
-    ],
-    "persian pop": [
-      "persian",
-      "pop"
-    ],
-    "philly soul": [
-      "philly",
-      "soul"
-    ],
-    "piano oriented": [
-      "piano",
-      "oriented"
-    ],
-    "prairie gothic": [
-      "prairie",
-      "gothic"
-    ],
-    "prog -rock": [
-      "prog",
-      "-rock"
-    ],
-    "pscyhedelic rock": [
-      "pscyhedelic",
-      "rock"
-    ],
-    "quasi metal": [
-      "quasi",
-      "metal"
-    ],
-    "red bank": [
-      "red",
-      "bank"
-    ],
-    "romanian folk": [
-      "romanian",
-      "folk"
-    ],
-    "samurai metal": [
-      "samurai",
-      "metal"
-    ],
-    "san salvador": [
-      "san",
-      "salvador"
-    ],
-    "scum rock": [
-      "scum",
-      "rock"
-    ],
-    "seventh wonder-ish": [
-      "seventh",
-      "wonder-ish"
-    ],
-    "slugde metal": [
-      "slugde",
-      "metal"
-    ],
-    "soft machine-related": [
-      "soft",
-      "machine-related"
-    ],
-    "southern california": [
-      "southern",
-      "california"
-    ],
-    "spaghetti western": [
-      "spaghetti",
-      "western"
-    ],
-    "spain / japan": [
-      "spain",
-      "japan"
-    ],
-    "spain / uk": [
-      "spain",
-      "uk"
-    ],
-    "uk / worldwide": [
-      "uk",
-      "worldwide"
-    ],
-    "uk/poland": [
-      "uk",
-      "poland"
-    ],
-    "us / swiss": [
-      "us",
-      "swiss"
-    ],
-    "us/ita": [
-      "us",
-      "ita"
-    ],
-    "usa/finland": [
-      "usa",
-      "finland"
-    ],
-    "usa/uk": [
-      "usa",
-      "uk"
-    ],
-    "vibraphone jazz": [
-      "vibraphone",
-      "jazz"
-    ],
-    "western ma": [
-      "western",
-      "ma"
-    ],
-    "wonky techno": [
-      "wonky",
-      "techno"
-    ],
-    "yatch rock": [
-      "yatch",
-      "rock"
-    ],
-    "new york city": [
-      "new",
-      "york",
-      "city"
-    ],
-    "paços de ferreira": [
-      "paços",
-      "de",
-      "ferreira"
-    ],
-    "puerto la cruz": [
-      "puerto",
-      "la",
-      "cruz"
-    ],
-    "san fernando valley": [
-      "san",
-      "fernando",
-      "valley"
-    ],
-    "al kuwayt": [
-      "al",
-      "kuwayt"
-    ],
-    "aliso viejo": [
-      "aliso",
-      "viejo"
-    ],
-    "arlington heights": [
-      "arlington",
-      "heights"
-    ],
-    "baden baden": [
-      "baden",
-      "baden"
-    ],
-    "berlin school": [
-      "berlin",
-      "school"
-    ],
-    "bielsko biala": [
-      "bielsko",
-      "biala"
-    ],
-    "castrop rauxel": [
-      "castrop",
-      "rauxel"
-    ],
-    "cathedral bells": [
-      "cathedral",
-      "bells"
-    ],
-    "cesky krumlov": [
-      "cesky",
-      "krumlov"
-    ],
-    "chula vista": [
-      "chula",
-      "vista"
-    ],
-    "ciudad juárez": [
-      "ciudad",
-      "juárez"
-    ],
-    "ciudad real": [
-      "ciudad",
-      "real"
-    ],
-    "clarence center": [
-      "clarence",
-      "center"
-    ],
-    "coffs harbour": [
-      "coffs",
-      "harbour"
-    ],
-    "coral springs": [
-      "coral",
-      "springs"
-    ],
-    "corpus christi": [
-      "corpus",
-      "christi"
-    ],
-    "dana point": [
-      "dana",
-      "point"
-    ],
-    "den helder": [
-      "den",
-      "helder"
-    ],
-    "dewey humboldt": [
-      "dewey",
-      "humboldt"
-    ],
-    "emoviolence/skramz": [
-      "emoviolence",
-      "skramz"
-    ],
-    "entre ríos": [
-      "entre",
-      "ríos"
-    ],
-    "fall river": [
-      "fall",
-      "river"
-    ],
-    "farr west": [
-      "farr",
-      "west"
-    ],
-    "fleetwood mac?": [
-      "fleetwood",
-      "mac?"
-    ],
-    "fort myers": [
-      "fort",
-      "myers"
-    ],
-    "fort walton": [
-      "fort",
-      "walton"
     ]
   },
   "substitutions": {
