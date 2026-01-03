@@ -1,0 +1,282 @@
+[
+    {
+        "source_tag": "afro-funk",
+        "source_count": 1,
+        "target_tag": "afro funk",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "afro-rock",
+        "source_count": 1,
+        "target_tag": "afro rock",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "alt-blues",
+        "source_count": 2,
+        "target_tag": "alt blues",
+        "target_count": 0,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "bluegras",
+        "source_count": 1,
+        "target_tag": "bluegrass",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "plural->singular",
+        "rule": "plural->singular",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "bolero-beat",
+        "source_count": 1,
+        "target_tag": "bolero beat",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "disco-funk",
+        "source_count": 2,
+        "target_tag": "disco funk",
+        "target_count": 2,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "disco-pop",
+        "source_count": 1,
+        "target_tag": "disco pop",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "disco-punk",
+        "source_count": 1,
+        "target_tag": "disco punk",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "djent-ish lite",
+        "source_count": 1,
+        "target_tag": "djent ish lite",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "doom-gaze",
+        "source_count": 1,
+        "target_tag": "doom gaze",
+        "target_count": 0,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "electro-ambient",
+        "source_count": 1,
+        "target_tag": "electro ambient",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "electro-funk",
+        "source_count": 2,
+        "target_tag": "electro funk",
+        "target_count": 2,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "extreme prog-metal",
+        "source_count": 1,
+        "target_tag": "extreme prog metal",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "fleetwood mac?",
+        "source_count": 1,
+        "target_tag": "fleetwood mac",
+        "target_count": 1,
+        "confidence": "medium",
+        "reason": "punctuation-fold",
+        "rule": "punctuation-fold",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "italo-disco",
+        "source_count": 1,
+        "target_tag": "italo disco",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "jazz-core",
+        "source_count": 1,
+        "target_tag": "jazz core",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "jazz-pop",
+        "source_count": 1,
+        "target_tag": "jazz pop",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "latin-jazz",
+        "source_count": 1,
+        "target_tag": "latin jazz",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "lo-fi",
+        "source_count": 1,
+        "target_tag": "lo fi",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "metal-core",
+        "source_count": 2,
+        "target_tag": "metal core",
+        "target_count": 0,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "middle-eastern",
+        "source_count": 1,
+        "target_tag": "middle eastern",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "mittelalter-metal",
+        "source_count": 2,
+        "target_tag": "mittelalter metal",
+        "target_count": 0,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "one-man-band",
+        "source_count": 2,
+        "target_tag": "one man band",
+        "target_count": 2,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "prog -rock",
+        "source_count": 1,
+        "target_tag": "prog rock",
+        "target_count": 0,
+        "confidence": "medium",
+        "reason": "punctuation-fold",
+        "rule": "punctuation-fold",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "prog-?",
+        "source_count": 1,
+        "target_tag": "prog",
+        "target_count": 2,
+        "confidence": "medium",
+        "reason": "punctuation-fold",
+        "rule": "punctuation-fold",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "rock-pop",
+        "source_count": 1,
+        "target_tag": "rock pop",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "shimokita-kei",
+        "source_count": 1,
+        "target_tag": "shimokita kei",
+        "target_count": 1,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    },
+    {
+        "source_tag": "soul-jazz",
+        "source_count": 2,
+        "target_tag": "soul jazz",
+        "target_count": 2,
+        "confidence": "high",
+        "reason": "hyphen->space",
+        "rule": "hyphen->space",
+        "applied_at": "2025-11-16T22:19:40.359Z"
+    }
+]

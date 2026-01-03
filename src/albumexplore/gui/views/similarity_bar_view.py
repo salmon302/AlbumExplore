@@ -48,139 +48,273 @@ class SimilarityBarChartView(BaseView):
         """Setup UI components."""
         layout = QVBoxLayout(self)
         layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(10)
+        layout.setSpacing(8)
         
         # Header with selected album info
         self.header_widget = AlbumHeaderWidget()
         layout.addWidget(self.header_widget)
         
-        # Controls panel
-        controls_widget = QWidget()
-        controls_layout = QHBoxLayout(controls_widget)
-        controls_layout.setContentsMargins(0, 0, 0, 0)
+        # ===== PRIMARY CONTROLS (always visible) =====
+        primary_controls = QWidget()
+        primary_layout = QHBoxLayout(primary_controls)
+        primary_layout.setContentsMargins(0, 0, 0, 0)
+        primary_layout.setSpacing(15)
         
-        # Limit selector
-        controls_layout.addWidget(QLabel("Show top:"))
+        # Results limit
+        primary_layout.addWidget(QLabel("Show top:"))
         self.limit_combo = QComboBox()
         self.limit_combo.addItems(['10', '20', '50', '100'])
         self.limit_combo.setCurrentText('20')
         self.limit_combo.currentTextChanged.connect(self._schedule_refresh)
-        controls_layout.addWidget(self.limit_combo)
+        self.limit_combo.setMinimumWidth(60)
+        primary_layout.addWidget(self.limit_combo)
         
-        controls_layout.addSpacing(20)
+        primary_layout.addSpacing(10)
         
         # Threshold slider
-        controls_layout.addWidget(QLabel("Min similarity:"))
+        primary_layout.addWidget(QLabel("Min similarity:"))
         self.threshold_slider = QSlider(Qt.Orientation.Horizontal)
         self.threshold_slider.setRange(0, 100)
         self.threshold_slider.setValue(30)
         self.threshold_slider.setMinimumWidth(150)
         self.threshold_slider.valueChanged.connect(self._on_threshold_changed)
-        controls_layout.addWidget(self.threshold_slider)
+        primary_layout.addWidget(self.threshold_slider)
         
         self.threshold_label = QLabel("0.30")
         self.threshold_label.setMinimumWidth(40)
-        controls_layout.addWidget(self.threshold_label)
+        self.threshold_label.setStyleSheet("font-weight: bold;")
+        primary_layout.addWidget(self.threshold_label)
         
-        controls_layout.addStretch()
+        primary_layout.addStretch()
         
         # Back button
         self.back_button = QPushButton("← Back")
         self.back_button.setEnabled(False)
-        controls_layout.addWidget(self.back_button)
-
-        # Manual mapping controls
-        self.manual_enable_cb = QCheckBox("Apply manual mappings")
-        self.manual_enable_cb.setChecked(False)
-        self.manual_enable_cb.stateChanged.connect(self._on_manual_toggle)
-        controls_layout.addWidget(self.manual_enable_cb)
-
-        controls_layout.addWidget(QLabel("Manual weight:"))
-        self.manual_slider = QSlider(Qt.Orientation.Horizontal)
-        self.manual_slider.setRange(0, 100)
-        self.manual_slider.setValue(50)  # default advisory = 0.5
-        self.manual_slider.setMinimumWidth(120)
-        self.manual_slider.valueChanged.connect(self._on_manual_weight_changed)
-        controls_layout.addWidget(self.manual_slider)
-
-        self.manual_label = QLabel("0.50")
-        self.manual_label.setMinimumWidth(40)
-        controls_layout.addWidget(self.manual_label)
-
-        self.load_manual_btn = QPushButton("Load mappings")
-        self.load_manual_btn.clicked.connect(self._load_manual_file)
-        controls_layout.addWidget(self.load_manual_btn)
-        self.validate_manual_btn = QPushButton("Validate mappings")
-        self.validate_manual_btn.clicked.connect(self._validate_manual_mappings)
-        controls_layout.addWidget(self.validate_manual_btn)
-        self.edit_manual_btn = QPushButton("Edit mappings")
-        self.edit_manual_btn.clicked.connect(self._edit_manual_mappings)
-        controls_layout.addWidget(self.edit_manual_btn)
-        self.suggest_manual_btn = QPushButton("Suggest relationships")
-        self.suggest_manual_btn.clicked.connect(self._open_suggester)
-        controls_layout.addWidget(self.suggest_manual_btn)
-        layout.addWidget(controls_widget)
+        primary_layout.addWidget(self.back_button)
         
-        # Weight sliders (tags / vocals / location)
-        weights_widget = QWidget()
-        weights_layout = QHBoxLayout(weights_widget)
-        weights_layout.setContentsMargins(0, 0, 0, 0)
-
-        weights_layout.addWidget(QLabel("Weights:"))
-
+        layout.addWidget(primary_controls)
+        
+        # ===== SMART MATCHING CONTROLS (highlighted) =====
+        smart_group = QWidget()
+        smart_group.setStyleSheet("""
+            QWidget {
+                background-color: rgba(70, 130, 180, 0.15);
+                border: 1px solid rgba(70, 130, 180, 0.3);
+                border-radius: 4px;
+                padding: 8px;
+            }
+        """)
+        smart_layout = QHBoxLayout(smart_group)
+        smart_layout.setContentsMargins(8, 6, 8, 6)
+        smart_layout.setSpacing(20)
+        
+        smart_label = QLabel("🎯 Smart Matching:")
+        smart_label.setStyleSheet("font-weight: bold; background: transparent; border: none; padding: 0;")
+        smart_layout.addWidget(smart_label)
+        
+        # Fuzzy tag matching (prominently displayed)
+        self.fuzzy_tags_cb = QCheckBox("Fuzzy tag matching")
+        self.fuzzy_tags_cb.setChecked(True)
+        self.fuzzy_tags_cb.setToolTip("Match related tags (e.g., 'prog rock' ~ 'progressive rock')\nBased on curated tag relationships")
+        self.fuzzy_tags_cb.stateChanged.connect(self._on_fuzzy_toggle)
+        self.fuzzy_tags_cb.setStyleSheet("background: transparent; border: none; font-weight: bold;")
+        smart_layout.addWidget(self.fuzzy_tags_cb)
+        
+        # IDF weighting
+        self.idf_weights_cb = QCheckBox("Prioritize rare tags")
+        self.idf_weights_cb.setChecked(False)
+        self.idf_weights_cb.setToolTip("Give more importance to rare/specific tags\n(e.g., 'canterbury scene' > 'rock')")
+        self.idf_weights_cb.stateChanged.connect(self._on_idf_toggle)
+        self.idf_weights_cb.setStyleSheet("background: transparent; border: none;")
+        smart_layout.addWidget(self.idf_weights_cb)
+        
+        smart_layout.addStretch()
+        
+        # Advanced settings button (collapsible section)
+        self.advanced_btn = QPushButton("⚙ Advanced Settings")
+        self.advanced_btn.setCheckable(True)
+        self.advanced_btn.setChecked(False)
+        self.advanced_btn.clicked.connect(self._toggle_advanced)
+        self.advanced_btn.setStyleSheet("background: transparent; border: none;")
+        smart_layout.addWidget(self.advanced_btn)
+        
+        layout.addWidget(smart_group)
+        
+        # ===== ADVANCED SETTINGS (collapsible) =====
+        self.advanced_widget = QWidget()
+        self.advanced_widget.setVisible(False)  # Hidden by default
+        advanced_main_layout = QVBoxLayout(self.advanced_widget)
+        advanced_main_layout.setContentsMargins(0, 0, 0, 0)
+        advanced_main_layout.setSpacing(8)
+        
+        # Component Weights section
+        weights_group = QWidget()
+        weights_group.setStyleSheet("""
+            QWidget {
+                background-color: rgba(50, 50, 50, 0.3);
+                border: 1px solid rgba(100, 100, 100, 0.3);
+                border-radius: 4px;
+            }
+        """)
+        weights_main_layout = QVBoxLayout(weights_group)
+        weights_main_layout.setContentsMargins(10, 8, 10, 8)
+        weights_main_layout.setSpacing(6)
+        
+        weights_title = QLabel("Component Weights")
+        weights_title.setStyleSheet("font-weight: bold; background: transparent; border: none;")
+        weights_main_layout.addWidget(weights_title)
+        
+        weights_layout = QHBoxLayout()
+        weights_layout.setSpacing(15)
+        
         # Tags weight
-        weights_layout.addWidget(QLabel("Tags"))
+        tags_group = QVBoxLayout()
+        tags_label = QLabel("Tags")
+        tags_label.setStyleSheet("background: transparent; border: none;")
+        tags_group.addWidget(tags_label)
         self.tags_slider = QSlider(Qt.Orientation.Horizontal)
         self.tags_slider.setRange(0, 100)
-        # Default: prefer tags (use 70 as a default preference)
         self.tags_slider.setValue(70)
-        self.tags_slider.setMinimumWidth(120)
+        self.tags_slider.setMinimumWidth(100)
         self.tags_slider.valueChanged.connect(self._on_weights_changed)
-        weights_layout.addWidget(self.tags_slider)
+        tags_group.addWidget(self.tags_slider)
         self.tags_label = QLabel("70")
-        self.tags_label.setMinimumWidth(30)
-        weights_layout.addWidget(self.tags_label)
-
+        self.tags_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.tags_label.setStyleSheet("background: transparent; border: none; font-size: 10px;")
+        tags_group.addWidget(self.tags_label)
+        weights_layout.addLayout(tags_group)
+        
         # Vocals weight
-        weights_layout.addWidget(QLabel("Vocals"))
+        vocals_group = QVBoxLayout()
+        vocals_label = QLabel("Vocals")
+        vocals_label.setStyleSheet("background: transparent; border: none;")
+        vocals_group.addWidget(vocals_label)
         self.vocals_slider = QSlider(Qt.Orientation.Horizontal)
         self.vocals_slider.setRange(0, 100)
         self.vocals_slider.setValue(0)
-        self.vocals_slider.setMinimumWidth(120)
+        self.vocals_slider.setMinimumWidth(100)
         self.vocals_slider.valueChanged.connect(self._on_weights_changed)
-        weights_layout.addWidget(self.vocals_slider)
+        vocals_group.addWidget(self.vocals_slider)
         self.vocals_label = QLabel("0")
-        self.vocals_label.setMinimumWidth(30)
-        weights_layout.addWidget(self.vocals_label)
-
-        # Location weight (country)
-        weights_layout.addWidget(QLabel("Location"))
+        self.vocals_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.vocals_label.setStyleSheet("background: transparent; border: none; font-size: 10px;")
+        vocals_group.addWidget(self.vocals_label)
+        weights_layout.addLayout(vocals_group)
+        
+        # Location weight
+        location_group = QVBoxLayout()
+        location_label = QLabel("Location")
+        location_label.setStyleSheet("background: transparent; border: none;")
+        location_group.addWidget(location_label)
         self.location_slider = QSlider(Qt.Orientation.Horizontal)
         self.location_slider.setRange(0, 100)
         self.location_slider.setValue(5)
-        self.location_slider.setMinimumWidth(120)
+        self.location_slider.setMinimumWidth(100)
         self.location_slider.valueChanged.connect(self._on_weights_changed)
-        weights_layout.addWidget(self.location_slider)
+        location_group.addWidget(self.location_slider)
         self.location_label = QLabel("5")
-        self.location_label.setMinimumWidth(30)
-        weights_layout.addWidget(self.location_label)
-
-        # Reset weights button
-        self.reset_weights_btn = QPushButton("Reset Weights")
+        self.location_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.location_label.setStyleSheet("background: transparent; border: none; font-size: 10px;")
+        location_group.addWidget(self.location_label)
+        weights_layout.addLayout(location_group)
+        
+        weights_layout.addStretch()
+        
+        # Weight control buttons
+        self.reset_weights_btn = QPushButton("Reset")
         self.reset_weights_btn.clicked.connect(self._reset_weights)
+        self.reset_weights_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
         weights_layout.addWidget(self.reset_weights_btn)
-
-        # Per-tag weight controls
-        self.per_tag_btn = QPushButton("Per-tag weights")
+        
+        self.per_tag_btn = QPushButton("Per-tag...")
         self.per_tag_btn.clicked.connect(self._open_per_tag_dialog)
+        self.per_tag_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
         weights_layout.addWidget(self.per_tag_btn)
-
+        
         self.reset_per_tag_btn = QPushButton("Reset Per-tag")
         self.reset_per_tag_btn.clicked.connect(self._reset_per_tag_weights)
+        self.reset_per_tag_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
         weights_layout.addWidget(self.reset_per_tag_btn)
-
-        layout.addWidget(weights_widget)
-
+        
+        weights_main_layout.addLayout(weights_layout)
+        advanced_main_layout.addWidget(weights_group)
+        
+        # Developer Tools section (for manual mappings)
+        dev_group = QWidget()
+        dev_group.setStyleSheet("""
+            QWidget {
+                background-color: rgba(50, 50, 50, 0.3);
+                border: 1px solid rgba(100, 100, 100, 0.3);
+                border-radius: 4px;
+            }
+        """)
+        dev_layout = QVBoxLayout(dev_group)
+        dev_layout.setContentsMargins(10, 8, 10, 8)
+        dev_layout.setSpacing(6)
+        
+        dev_title = QLabel("Developer Tools (Tag Relationships)")
+        dev_title.setStyleSheet("font-weight: bold; background: transparent; border: none;")
+        dev_layout.addWidget(dev_title)
+        
+        dev_controls = QHBoxLayout()
+        dev_controls.setSpacing(8)
+        
+        # Manual mapping toggle
+        self.manual_enable_cb = QCheckBox("Override with custom mappings")
+        self.manual_enable_cb.setChecked(False)
+        self.manual_enable_cb.setToolTip("Replace default relationships with custom file")
+        self.manual_enable_cb.stateChanged.connect(self._on_manual_toggle)
+        self.manual_enable_cb.setStyleSheet("background: transparent; border: none;")
+        dev_controls.addWidget(self.manual_enable_cb)
+        
+        # Status indicator showing relationship count
+        self.manual_status_label = QLabel("(0 relationships)")
+        self.manual_status_label.setStyleSheet("background: transparent; border: none; color: #888; font-size: 10px;")
+        dev_controls.addWidget(self.manual_status_label)
+        
+        self.manual_slider = QSlider(Qt.Orientation.Horizontal)
+        self.manual_slider.setRange(0, 100)
+        self.manual_slider.setValue(50)
+        self.manual_slider.setMinimumWidth(100)
+        self.manual_slider.setMaximumWidth(120)
+        self.manual_slider.valueChanged.connect(self._on_manual_weight_changed)
+        self.manual_slider.setEnabled(False)
+        dev_controls.addWidget(self.manual_slider)
+        
+        self.manual_label = QLabel("0.50")
+        self.manual_label.setMinimumWidth(35)
+        self.manual_label.setStyleSheet("background: transparent; border: none;")
+        dev_controls.addWidget(self.manual_label)
+        
+        dev_controls.addStretch()
+        
+        self.load_manual_btn = QPushButton("Load File...")
+        self.load_manual_btn.clicked.connect(self._load_manual_file)
+        self.load_manual_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
+        self.load_manual_btn.setEnabled(False)
+        dev_controls.addWidget(self.load_manual_btn)
+        
+        self.validate_manual_btn = QPushButton("Validate")
+        self.validate_manual_btn.clicked.connect(self._validate_manual_mappings)
+        self.validate_manual_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
+        dev_controls.addWidget(self.validate_manual_btn)
+        
+        self.edit_manual_btn = QPushButton("Edit...")
+        self.edit_manual_btn.clicked.connect(self._edit_manual_mappings)
+        self.edit_manual_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
+        dev_controls.addWidget(self.edit_manual_btn)
+        
+        self.suggest_manual_btn = QPushButton("Discover...")
+        self.suggest_manual_btn.clicked.connect(self._open_suggester)
+        self.suggest_manual_btn.setStyleSheet("background: transparent; border: 1px solid #666; padding: 4px 8px;")
+        self.suggest_manual_btn.setToolTip("Auto-discover potential relationships from database")
+        dev_controls.addWidget(self.suggest_manual_btn)
+        
+        dev_layout.addLayout(dev_controls)
+        advanced_main_layout.addWidget(dev_group)
+        
+        layout.addWidget(self.advanced_widget)
+        
         # Results count label
         self.results_label = QLabel("Select an album to see similar albums")
         self.results_label.setStyleSheet("color: #888; font-style: italic;")
@@ -248,8 +382,21 @@ class SimilarityBarChartView(BaseView):
         self.session = session
         # per-tag weights are keyed by tag id -> multiplier (float, 1.0 = default)
         self.per_tag_weights = {}
+        # IDF weights for rare tag prioritization
+        self.idf_weights = {}
         # Manual relationships (loaded from file) - normalized by loader to lower-case keys
         self.manual_relationships = None
+        
+        # Try to load default comprehensive relationships
+        try:
+            from albumexplore.database.tag_relationship_similarity import load_default_relationships
+            self.manual_relationships = load_default_relationships()
+            if self.manual_relationships:
+                graphics_logger.info(f"Loaded {len(self.manual_relationships)} tag relationships")
+                # Update UI status
+                self._update_manual_status()
+        except Exception as e:
+            graphics_logger.warning(f"Could not load default relationships: {e}")
     
     def set_album(self, album_id: str):
         """Set the focus album and refresh similarity data."""
@@ -316,10 +463,56 @@ class SimilarityBarChartView(BaseView):
         """Handle enabling/disabling manual mappings and schedule refresh."""
         try:
             enabled = self.manual_enable_cb.isChecked()
+            self.manual_slider.setEnabled(enabled)
+            self.load_manual_btn.setEnabled(enabled)
+            
+            # Update status label
+            self._update_manual_status()
+            
             graphics_logger.info(f"Manual mappings enabled: {enabled}")
         except Exception:
             graphics_logger.exception("Error toggling manual mappings")
         self._schedule_refresh()
+    
+    
+    def _toggle_advanced(self):
+        """Toggle visibility of advanced settings panel."""
+        try:
+            is_visible = self.advanced_widget.isVisible()
+            self.advanced_widget.setVisible(not is_visible)
+            # Update button text to show state
+            if is_visible:
+                self.advanced_btn.setText("Advanced Settings ▼")
+            else:
+                self.advanced_btn.setText("Advanced Settings ▲")
+        except Exception:
+            graphics_logger.exception("Error toggling advanced settings")
+    
+    
+    def _update_manual_status(self):
+        """Update the manual relationships status indicator."""
+        try:
+            if not hasattr(self, 'manual_status_label'):
+                return
+            
+            # Count relationships
+            count = 0
+            if self.manual_relationships:
+                for tag_rels in self.manual_relationships.values():
+                    count += len(tag_rels)
+            
+            # Update label text and color
+            if count > 0:
+                self.manual_status_label.setText(f"({count} relationships loaded)")
+                if self.manual_enable_cb.isChecked():
+                    self.manual_status_label.setStyleSheet("background: transparent; border: none; color: #4CAF50; font-size: 10px; font-weight: bold;")
+                else:
+                    self.manual_status_label.setStyleSheet("background: transparent; border: none; color: #888; font-size: 10px;")
+            else:
+                self.manual_status_label.setText("(no relationships)")
+                self.manual_status_label.setStyleSheet("background: transparent; border: none; color: #888; font-size: 10px;")
+        except Exception:
+            graphics_logger.exception("Error updating manual status")
 
 
     def _on_manual_weight_changed(self):
@@ -340,6 +533,7 @@ class SimilarityBarChartView(BaseView):
             rels = manual_mod.load_relationships(fn)
             # Store loaded relationships (they are normalized to lower-case by loader)
             self.manual_relationships = rels
+            self._update_manual_status()
             graphics_logger.info(f"Loaded manual mappings from {fn} (entries: {len(rels)})")
         except Exception as e:
             graphics_logger.error(f"Failed loading manual mappings: {e}", exc_info=True)
@@ -451,6 +645,7 @@ class SimilarityBarChartView(BaseView):
                     try:
                         rels = manual_mod.load_relationships(dlg.path)
                         self.manual_relationships = rels
+                        self._update_manual_status()
                         graphics_logger.info(f"Loaded manual mappings from editor: {dlg.path}")
                     except Exception:
                         graphics_logger.exception("Failed to load mappings after edit")
@@ -483,9 +678,37 @@ class SimilarityBarChartView(BaseView):
                 try:
                     rels = manual_mod.load_relationships(dlg.saved_path)
                     self.manual_relationships = rels
+                    self._update_manual_status()
                     graphics_logger.info(f"Loaded manual mappings from suggester: {dlg.saved_path}")
                 except Exception:
                     graphics_logger.exception("Failed to load mappings after suggestions applied")
+        self._schedule_refresh()
+    
+    def _on_fuzzy_toggle(self):
+        """Handle fuzzy tag matching toggle."""
+        enabled = self.fuzzy_tags_cb.isChecked()
+        graphics_logger.info(f"Fuzzy tag matching: {enabled}")
+        self._schedule_refresh()
+    
+    def _on_idf_toggle(self):
+        """Handle IDF weighting toggle."""
+        enabled = self.idf_weights_cb.isChecked()
+        graphics_logger.info(f"IDF tag weighting: {enabled}")
+        
+        # Calculate IDF weights if needed
+        if enabled and not self.idf_weights and self.session:
+            try:
+                from albumexplore.database.tag_idf_weights import calculate_idf_weights, normalize_weights
+                raw_weights = calculate_idf_weights(self.session, min_frequency=1)
+                # Normalize so mean is 1.0 (neutral)
+                self.idf_weights = normalize_weights(raw_weights, target_mean=1.0)
+                graphics_logger.info(f"Calculated IDF weights for {len(self.idf_weights)} tags")
+            except Exception as e:
+                graphics_logger.error(f"Error calculating IDF weights: {e}", exc_info=True)
+                self.idf_weights_cb.setChecked(False)
+                QMessageBox.warning(self, "IDF Weights", f"Error calculating IDF weights: {e}")
+                return
+        
         self._schedule_refresh()
     
     def _perform_refresh(self):
@@ -549,6 +772,29 @@ class SimilarityBarChartView(BaseView):
             # Decide whether to apply manual relationships
             manual_rels = self.manual_relationships if getattr(self, 'manual_enable_cb', None) and self.manual_enable_cb.isChecked() else None
             alpha_manual = (self.manual_slider.value() / 100.0) if getattr(self, 'manual_slider', None) else 0.5
+            
+            # Determine if fuzzy tag matching should be used
+            use_fuzzy = getattr(self, 'fuzzy_tags_cb', None) and self.fuzzy_tags_cb.isChecked()
+            
+            # If fuzzy matching disabled but manual relationships enabled, use manual_relationships for old system
+            # If fuzzy matching enabled, relationships will be loaded automatically by similarity engine
+            if use_fuzzy:
+                # Fuzzy matching: load comprehensive relationships by default
+                if not manual_rels:
+                    manual_rels = self.manual_relationships
+            
+            # Combine IDF weights with per-tag weights if IDF is enabled
+            combined_tag_weights = self.per_tag_weights if hasattr(self, 'per_tag_weights') else {}
+            if getattr(self, 'idf_weights_cb', None) and self.idf_weights_cb.isChecked() and self.idf_weights:
+                # Merge IDF weights with user weights
+                from albumexplore.database.tag_idf_weights import combine_weights
+                idf_alpha = 0.5  # 50/50 blend between IDF and user weights
+                combined_tag_weights = combine_weights(
+                    self.idf_weights,
+                    self.per_tag_weights if hasattr(self, 'per_tag_weights') else {},
+                    idf_alpha=idf_alpha
+                )
+                graphics_logger.debug(f"Using combined IDF+user weights: {len(combined_tag_weights)} tags")
 
             self.similarities = calculate_album_similarity_optimized(
                 self.session,
@@ -556,9 +802,10 @@ class SimilarityBarChartView(BaseView):
                 limit=limit,
                 min_similarity=threshold,
                 weights=weights,
-                per_tag_weights=self.per_tag_weights if hasattr(self, 'per_tag_weights') else None,
+                per_tag_weights=combined_tag_weights,
                 manual_relationships=manual_rels,
                 alpha_manual=alpha_manual,
+                use_fuzzy_tags=use_fuzzy,
             )
             
             graphics_logger.info(f"Found {len(self.similarities)} similar albums")
@@ -588,6 +835,12 @@ class SimilarityBarChartView(BaseView):
             # Album name
             artist_name = album.pa_artist_name_on_album or "Unknown Artist"
             album_name = f"{artist_name} - {album.title}"
+            
+            # Add indicator if fuzzy matching contributed
+            use_fuzzy = getattr(self, 'fuzzy_tags_cb', None) and self.fuzzy_tags_cb.isChecked()
+            if use_fuzzy and breakdown.get('fuzzy_tag_score', 0) > 0:
+                album_name = "🔗 " + album_name  # Link emoji indicates relationship matching
+            
             album_item = QTableWidgetItem(album_name)
             album_item.setData(Qt.ItemDataRole.UserRole, album.id)
             
@@ -629,10 +882,22 @@ class SimilarityBarChartView(BaseView):
             "",
         ]
         
-        # Shared tags
+        # Check if fuzzy matching is active
+        use_fuzzy = getattr(self, 'fuzzy_tags_cb', None) and self.fuzzy_tags_cb.isChecked()
+        
+        # Shared tags with context about matching mode
         shared_count = breakdown.get('shared_tags_count', 0)
         total_count = breakdown.get('total_tags', 0)
-        lines.append(f"Shared Tags: {shared_count} / {total_count}")
+        
+        if use_fuzzy:
+            fuzzy_score = breakdown.get('fuzzy_tag_score')
+            if fuzzy_score is not None:
+                lines.append(f"<b style='color: #4CAF50;'>🔗 Fuzzy Tag Match: {fuzzy_score:.3f}</b>")
+                lines.append(f"(Using tag relationships)")
+            else:
+                lines.append(f"Tag Match: {shared_count} / {total_count} exact")
+        else:
+            lines.append(f"Tag Match: {shared_count} / {total_count} exact")
         
         shared_tag_names = breakdown.get('shared_tag_names', [])
         if shared_tag_names:
@@ -641,6 +906,26 @@ class SimilarityBarChartView(BaseView):
                 lines.append(f"  ... and {len(shared_tag_names) - 5} more")
         
         lines.append("")
+        
+        # Component breakdown
+        lines.append("<b>Score Breakdown:</b>")
+        components = []
+        if 'tag_score' in breakdown:
+            tag_contrib = breakdown.get('tag_score', 0) * breakdown.get('tag_weight', 0.7)
+            components.append(f"  Tags: {tag_contrib:.3f}")
+        if 'genre_match' in breakdown:
+            genre_contrib = (1.0 if breakdown['genre_match'] else 0.0) * breakdown.get('genre_weight', 0.15)
+            components.append(f"  Genre: {genre_contrib:.3f}")
+        if 'year_score' in breakdown:
+            year_contrib = breakdown['year_score'] * breakdown.get('year_weight', 0.1)
+            components.append(f"  Year: {year_contrib:.3f}")
+        if 'country_match' in breakdown:
+            country_contrib = (1.0 if breakdown['country_match'] else 0.0) * breakdown.get('country_weight', 0.05)
+            components.append(f"  Location: {country_contrib:.3f}")
+        
+        if components:
+            lines.extend(components)
+            lines.append("")
         
         # Genre match
         if breakdown.get('genre_match'):
@@ -661,17 +946,13 @@ class SimilarityBarChartView(BaseView):
         elif album.country:
             lines.append(f"Country: {album.country}")
         
+        # Show manual relationship impact if active
+        if use_fuzzy and shared_count > 0:
+            lines.append("")
+            lines.append("<span style='color: #4CAF50;'>✓ Tag relationships active</span>")
+        
         lines.append("")
         lines.append("<i>Double-click to explore this album</i>")
-        # Show manual mapping influence when available
-        manual_raw = breakdown.get('manual_raw')
-        manual_combined = breakdown.get('manual_combined')
-        if manual_raw is not None or manual_combined is not None:
-            lines.append("")
-            if manual_raw is not None:
-                lines.append(f"Manual mapping signal: {manual_raw}")
-            if manual_combined is not None:
-                lines.append(f"Combined (after manual boost): {manual_combined:.3f}")
         
         return "<br>".join(lines)
 

@@ -1,0 +1,2837 @@
+[
+  {
+    "tag": "8-bit",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "a capella",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "acapella",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "acid jazz",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "adult",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "adventure",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "african",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "afro",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "afro indie",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "afro-funk",
+    "count": 1,
+    "suggested_target": "afro funk",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "afro-rock",
+    "count": 1,
+    "suggested_target": "afro rock",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "afrolatin",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "alt-blues",
+    "count": 2,
+    "suggested_target": "alt blues",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "american",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "american privitsm",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "anatolian rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "and",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "angular pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "animistic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "anternative",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "anti",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "anxiety pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "apocalyptic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "appalachian",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "arabic pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "arena",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "artcore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "audiobook",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "baggy",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "banjo",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "beats",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "berlin school",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "big band",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "bitpop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "bitprog",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "blackend hardcore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "bluegras",
+    "count": 1,
+    "suggested_target": "bluegrass",
+    "reason": "plural->singular",
+    "rule": "plural->singular"
+  },
+  {
+    "tag": "bolero-beat",
+    "count": 1,
+    "suggested_target": "bolero beat",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "boogie",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "breakbeat",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "breakbeats",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "breaks",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "brostep",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "bubblegum bass",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cabaret",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "canterbury scene",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "carnatic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cathedral bells",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cavernous death metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "celtic punk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "celtic rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "chanson",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "chaotic",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "chicago",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "chill",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "chillout",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "chillstep",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "christian progressive rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cinematic soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cinmatic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "classical music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "collage",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "comedy",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "comedy rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cosmic doom metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cosmic rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "country blues",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "country folk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "crimson-esque",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "crimson-y",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cybergrunge",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "cyberpunk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dadaist",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dance music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dance rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dark country",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dark electro",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dark synth",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dark synthwave",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "darksynth",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "death metal/heavy metal/osdm",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "deathgaze",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "deathjazz",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "deep funk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "deep purple-ish",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "depressive rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "desert jangle",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dirt",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "disco funk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "disco-funk",
+    "count": 2,
+    "suggested_target": "disco funk",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "disco-pop",
+    "count": 1,
+    "suggested_target": "disco pop",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "disco-punk",
+    "count": 1,
+    "suggested_target": "disco punk",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "dissonant metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "djent-ish lite",
+    "count": 1,
+    "suggested_target": "djent ish lite",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "djenty",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "documentary",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dolewave",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "doom folk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "doom metal/rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "doom pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "doom rock/metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "doom-gaze",
+    "count": 1,
+    "suggested_target": "doom gaze",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "dreamcore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "drone pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "drum",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "drum-oriented",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dsbm",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "dubstep",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "east african music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "eastern european",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "easycore",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "eclectic rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "ecstatic black metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "edm",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "egg punk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "electonic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "electro house",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "electro-ambient",
+    "count": 1,
+    "suggested_target": "electro ambient",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "electro-funk",
+    "count": 2,
+    "suggested_target": "electro funk",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "electroclash",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "electronic music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "electronicore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "electropunk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "emo punk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "emo rap",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "emocore",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "emocrust",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "emoviolence/skramz",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "epic black metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "epic metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "epic vampyric black metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "ethereal doom metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "ethio",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "eurodance",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "experimental folk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "experimental noise",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "extreme prog-metal",
+    "count": 1,
+    "suggested_target": "extreme prog metal",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "fates warning related",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "fi house",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "fi shoegaze",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "film",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "flamenco",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "fleetwood mac?",
+    "count": 1,
+    "suggested_target": "fleetwood mac",
+    "reason": "punctuation-fold",
+    "rule": "punctuation-fold"
+  },
+  {
+    "tag": "floyd-esque",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "folk music",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "folklore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "french electro",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "french pop",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "funk metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "funk n' roll",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "future",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "future pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "futuristic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "fuzz funk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "gaelic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "garage psych",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "geek rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "ghotic metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "glam metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "glam punk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "glitch bitpop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "glitch hop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "glitch metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "global groove",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "gong-related",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "gospel",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "goth rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "gothic pop",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "grunegaze",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "guitar virtuoso",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hard prog",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hardcore funk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hardcore hip hop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hardcore rap",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hawkwind-ish",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "heavy blues",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "heavy pop rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "heavy twang",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hellenic black metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hill country blues",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hindustani",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hip hop soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "hip-hop soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "holler",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "igorrr",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "improvisation",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "improvised rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "indian",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "indie hip hop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "indie punk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "indie soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "industrial hardcore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "industrial punk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "irish folk music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "italian prog",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "italo-disco",
+    "count": 1,
+    "suggested_target": "italo disco",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "jangle punk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "jangle rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "jazz pop",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "jazz-core",
+    "count": 1,
+    "suggested_target": "jazz core",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "jazz-pop",
+    "count": 1,
+    "suggested_target": "jazz pop",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "jazzgrind",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "kawaii",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "kawaii metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "keyboard",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "keyboard-driven",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "king gizzard-like",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "korean folk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "kosmische",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "kosmsiche",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "kuduro",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "latin big band",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "latin pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "latin rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "latin-jazz",
+    "count": 1,
+    "suggested_target": "latin jazz",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "lo",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "lo-fi",
+    "count": 1,
+    "suggested_target": "lo fi",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "lounge",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "lover rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "mahraganat",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "malian soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "medieval folk metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "melancolic",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "metal-core",
+    "count": 2,
+    "suggested_target": "metal core",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "mex",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "micro",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "microtonal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "middle-eastern",
+    "count": 1,
+    "suggested_target": "middle eastern",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "midi",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "mincecore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "minimal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "minimal folk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "minimal synth",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "minimal techno",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "minimal wave",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "minimalist",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "mittelalter-metal",
+    "count": 2,
+    "suggested_target": "mittelalter metal",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "mitteralter metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "mitteralter-metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "mongolian",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "movie soundtrack",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "mpb",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "music",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "musical",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "musical parody",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "musical theatre",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "native america",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "nature",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "nautical metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "neoclassica",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "neoclassicism",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "neue deutsche härte",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "new rave",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "new wave and prog rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "nintendocore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "noir",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "noise electronics",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "noise punk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "noisegaze",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "nordic folk rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "nordic jazz",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "nugaze",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "occult metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "oi!",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "old school death metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "one-man-band",
+    "count": 2,
+    "suggested_target": "one man band",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "operatic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "operatic metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "orchestra",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "oriental rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "osdm",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "outsider house",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pagan folk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pagan metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "parody metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "party metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "persian pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "philly soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "piano music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "piano oriented",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "piano-oriented",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pirate metal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "plunderphonics",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "poems",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pop art",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pop metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pop prog",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pop rap",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "post prog",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "post-metal‎",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "powerviolence/black metal/death metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "prairie gothic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "primus-related",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "prog -rock",
+    "count": 1,
+    "suggested_target": "prog rock",
+    "reason": "punctuation-fold",
+    "rule": "punctuation-fold"
+  },
+  {
+    "tag": "prog-?",
+    "count": 1,
+    "suggested_target": "prog",
+    "reason": "punctuation-fold",
+    "rule": "punctuation-fold"
+  },
+  {
+    "tag": "proto-punk",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pschedelic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pscyhedelic rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "psych rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "psyechedelic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pub",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "pyschedelic rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "quartet",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "quasi metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "rautalanka",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "red",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "reductionism",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "reggae rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "reggaetón",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "religious",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "retro pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "retro prog",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "retro rock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "rhythm & blues",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "riverside-esque",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "rnb",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "rock n' roll",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "rock-pop",
+    "count": 1,
+    "suggested_target": "rock pop",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "rockabilly",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "romanian folk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "rush-oriented",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "sadcore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "samurai metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "saxophone",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "score",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "scottish folk music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "scottish music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "scum rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "sea",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "seventh wonder-ish",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "shaabi",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "shanty",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "shimokita-kei",
+    "count": 1,
+    "suggested_target": "shimokita kei",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "shred",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "skatepunk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "sludge rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "sludgecore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "slushwave",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "smooth",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "smooth soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "soft machine-related",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "son cubano",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "soul jazz",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "soul pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "soul-jazz",
+    "count": 2,
+    "suggested_target": "soul jazz",
+    "reason": "hyphen->space",
+    "rule": "hyphen->space"
+  },
+  {
+    "tag": "soundscape",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "southern soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "spacegrind",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "speed/thrash metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "spoken",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "stadium",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "stargaze",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "steampunk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "steelpan",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "stomp",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "stoner metal/rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "stoner rock/metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "street",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "sunshine pop",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "swamp",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "swing",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "sympohnic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "synthrock",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tape music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tech house",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "techno house",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tex",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "thall",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tharsh metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "theatrical",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "theatrical pop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "theatrical rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "thrashcore",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "trad folk",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "traditional pop",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "trance house",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "trance metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tribute",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tropical",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "tropicanibalismo",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "turkish psychedelic",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "twang",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "uk hip hop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "uk street soul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "vampyric black metal",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "vgm",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "vibraphone",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "visepop",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "vocal",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "war",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "warr",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "welsh folk music",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "welsh rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "western noir",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "wind",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "witch",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "word",
+    "count": 2,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "world",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "world fusion",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "world music (brazil)",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "yacht",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "yatch rock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "zamrock",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "zappa",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  },
+  {
+    "tag": "zheul",
+    "count": 1,
+    "suggested_target": null,
+    "reason": "no deterministic candidate",
+    "rule": "none"
+  }
+]

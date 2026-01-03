@@ -1,0 +1,567 @@
+# Comprehensive Tag Relationship Mappings for AlbumExplore
+# Developer-curated relationships to improve album similarity matching
+# 
+# Relationship Types:
+#   - synonym: Tags that mean the same thing (weight 1.0)
+#   - parent_child: Hierarchical relationship, child is subset of parent (weight 0.9)
+#   - related: Related but distinct concepts (weight 0.75)
+#   - close_related: Very closely related (weight 0.85)
+#   - influence: Historical influence relationship (weight 0.65)
+#   - exclude: Tags that are opposites/contradictory (weight -1.0)
+#
+# Format: tag_name: [list of relationships]
+
+# ============================================================================
+# PROGRESSIVE ROCK FAMILY
+# ============================================================================
+
+progressive rock:
+  - tag: prog rock
+    type: synonym
+  - tag: prog
+    type: synonym
+  - tag: progressive
+    type: synonym
+  - tag: symphonic prog
+    type: parent_child
+    weight: 0.9
+  - tag: technical prog
+    type: parent_child
+    weight: 0.9
+  - tag: canterbury scene
+    type: parent_child
+    weight: 0.85
+  - tag: krautrock
+    type: related
+    weight: 0.75
+  - tag: art rock
+    type: close_related
+    weight: 0.85
+  - tag: psychedelic rock
+    type: influence
+    weight: 0.65
+  - tag: jazz fusion
+    type: related
+    weight: 0.7
+
+prog rock:
+  - tag: progressive rock
+    type: synonym
+
+prog:
+  - tag: progressive rock
+    type: synonym
+
+symphonic prog:
+  - tag: symphonic rock
+    type: synonym
+  - tag: progressive rock
+    type: parent_child
+    weight: 0.9
+  - tag: symphonic
+    type: related
+    weight: 0.8
+  - tag: orchestral
+    type: related
+    weight: 0.75
+
+art rock:
+  - tag: progressive rock
+    type: close_related
+    weight: 0.85
+  - tag: experimental rock
+    type: close_related
+    weight: 0.8
+  - tag: avant-garde rock
+    type: close_related
+    weight: 0.8
+
+canterbury scene:
+  - tag: progressive rock
+    type: parent_child
+    weight: 0.85
+  - tag: jazz fusion
+    type: related
+    weight: 0.8
+  - tag: psychedelic rock
+    type: related
+    weight: 0.7
+
+krautrock:
+  - tag: kosmische
+    type: synonym
+  - tag: progressive rock
+    type: related
+    weight: 0.75
+  - tag: psychedelic rock
+    type: related
+    weight: 0.8
+  - tag: electronic
+    type: related
+    weight: 0.7
+  - tag: experimental
+    type: related
+    weight: 0.75
+
+# ============================================================================
+# METAL FAMILY
+# ============================================================================
+
+progressive metal:
+  - tag: prog metal
+    type: synonym
+  - tag: technical metal
+    type: close_related
+    weight: 0.85
+  - tag: progressive rock
+    type: related
+    weight: 0.7
+  - tag: metal
+    type: parent_child
+    weight: 0.9
+  - tag: djent
+    type: parent_child
+    weight: 0.8
+
+prog metal:
+  - tag: progressive metal
+    type: synonym
+
+djent:
+  - tag: progressive metal
+    type: parent_child
+    weight: 0.8
+  - tag: technical metal
+    type: close_related
+    weight: 0.85
+
+death metal:
+  - tag: brutal death metal
+    type: parent_child
+    weight: 0.9
+  - tag: technical death metal
+    type: parent_child
+    weight: 0.9
+  - tag: melodic death metal
+    type: parent_child
+    weight: 0.9
+  - tag: metal
+    type: parent_child
+    weight: 0.9
+
+brutal death metal:
+  - tag: death metal
+    type: parent_child
+    weight: 0.9
+  - tag: brutal
+    type: related
+    weight: 0.8
+
+technical death metal:
+  - tag: death metal
+    type: parent_child
+    weight: 0.9
+  - tag: technical
+    type: related
+    weight: 0.8
+  - tag: progressive death metal
+    type: close_related
+    weight: 0.85
+
+melodic death metal:
+  - tag: death metal
+    type: parent_child
+    weight: 0.9
+  - tag: melodic
+    type: related
+    weight: 0.8
+
+black metal:
+  - tag: atmospheric black metal
+    type: parent_child
+    weight: 0.9
+  - tag: symphonic black metal
+    type: parent_child
+    weight: 0.9
+  - tag: depressive black metal
+    type: parent_child
+    weight: 0.9
+  - tag: blackgaze
+    type: parent_child
+    weight: 0.85
+  - tag: metal
+    type: parent_child
+    weight: 0.9
+
+blackgaze:
+  - tag: black metal
+    type: parent_child
+    weight: 0.85
+  - tag: shoegaze
+    type: related
+    weight: 0.8
+  - tag: post-black metal
+    type: synonym
+
+atmospheric black metal:
+  - tag: black metal
+    type: parent_child
+    weight: 0.9
+  - tag: atmospheric
+    type: related
+    weight: 0.8
+
+symphonic metal:
+  - tag: symphonic black metal
+    type: parent_child
+    weight: 0.85
+  - tag: symphonic prog
+    type: related
+    weight: 0.75
+  - tag: orchestral
+    type: related
+    weight: 0.8
+
+doom metal:
+  - tag: stoner doom
+    type: parent_child
+    weight: 0.9
+  - tag: funeral doom
+    type: parent_child
+    weight: 0.9
+  - tag: sludge metal
+    type: related
+    weight: 0.75
+  - tag: metal
+    type: parent_child
+    weight: 0.9
+
+stoner rock:
+  - tag: stoner metal
+    type: close_related
+    weight: 0.9
+  - tag: stoner doom
+    type: close_related
+    weight: 0.85
+  - tag: psychedelic rock
+    type: related
+    weight: 0.7
+
+# ============================================================================
+# JAZZ FAMILY
+# ============================================================================
+
+jazz fusion:
+  - tag: fusion
+    type: synonym
+  - tag: jazz rock
+    type: close_related
+    weight: 0.9
+  - tag: jazz
+    type: parent_child
+    weight: 0.9
+  - tag: progressive rock
+    type: related
+    weight: 0.7
+
+jazz rock:
+  - tag: jazz fusion
+    type: close_related
+    weight: 0.9
+  - tag: jazz
+    type: parent_child
+    weight: 0.85
+
+bebop:
+  - tag: bop
+    type: synonym
+  - tag: jazz
+    type: parent_child
+    weight: 0.9
+
+free jazz:
+  - tag: jazz
+    type: parent_child
+    weight: 0.9
+  - tag: avant-garde jazz
+    type: close_related
+    weight: 0.85
+  - tag: experimental
+    type: related
+    weight: 0.75
+
+avant-garde jazz:
+  - tag: free jazz
+    type: close_related
+    weight: 0.85
+  - tag: jazz
+    type: parent_child
+    weight: 0.85
+  - tag: experimental
+    type: related
+    weight: 0.8
+
+# ============================================================================
+# PSYCHEDELIC FAMILY
+# ============================================================================
+
+psychedelic rock:
+  - tag: psych rock
+    type: synonym
+  - tag: psychedelic
+    type: synonym
+  - tag: acid rock
+    type: close_related
+    weight: 0.85
+  - tag: space rock
+    type: related
+    weight: 0.75
+  - tag: progressive rock
+    type: influence
+    weight: 0.65
+
+psych rock:
+  - tag: psychedelic rock
+    type: synonym
+
+space rock:
+  - tag: psychedelic rock
+    type: related
+    weight: 0.75
+  - tag: progressive rock
+    type: related
+    weight: 0.7
+
+# ============================================================================
+# ELECTRONIC FAMILY
+# ============================================================================
+
+electronic:
+  - tag: electronica
+    type: synonym
+  - tag: synthwave
+    type: parent_child
+    weight: 0.85
+  - tag: synth-pop
+    type: parent_child
+    weight: 0.85
+  - tag: idm
+    type: parent_child
+    weight: 0.85
+
+synthwave:
+  - tag: synth
+    type: related
+    weight: 0.8
+  - tag: electronic
+    type: parent_child
+    weight: 0.85
+  - tag: retro
+    type: related
+    weight: 0.7
+
+synth-pop:
+  - tag: synthpop
+    type: synonym
+  - tag: electronic
+    type: parent_child
+    weight: 0.85
+  - tag: pop
+    type: parent_child
+    weight: 0.8
+
+idm:
+  - tag: intelligent dance music
+    type: synonym
+  - tag: electronic
+    type: parent_child
+    weight: 0.85
+  - tag: experimental electronic
+    type: close_related
+    weight: 0.85
+
+ambient:
+  - tag: dark ambient
+    type: parent_child
+    weight: 0.9
+  - tag: ambient electronic
+    type: close_related
+    weight: 0.85
+  - tag: atmospheric
+    type: related
+    weight: 0.8
+
+# ============================================================================
+# POST- GENRES
+# ============================================================================
+
+post-rock:
+  - tag: instrumental rock
+    type: close_related
+    weight: 0.8
+  - tag: experimental rock
+    type: related
+    weight: 0.75
+  - tag: progressive rock
+    type: related
+    weight: 0.7
+
+post-punk:
+  - tag: punk
+    type: influence
+    weight: 0.7
+  - tag: new wave
+    type: related
+    weight: 0.75
+  - tag: gothic rock
+    type: related
+    weight: 0.7
+
+post-metal:
+  - tag: post-rock
+    type: related
+    weight: 0.8
+  - tag: metal
+    type: parent_child
+    weight: 0.85
+  - tag: atmospheric
+    type: related
+    weight: 0.75
+
+# ============================================================================
+# ROCK VARIANTS
+# ============================================================================
+
+hard rock:
+  - tag: heavy rock
+    type: synonym
+  - tag: rock
+    type: parent_child
+    weight: 0.9
+  - tag: metal
+    type: related
+    weight: 0.7
+
+heavy metal:
+  - tag: metal
+    type: synonym
+  - tag: heavy
+    type: related
+    weight: 0.8
+
+alternative rock:
+  - tag: alternative
+    type: synonym
+  - tag: alt rock
+    type: synonym
+  - tag: indie rock
+    type: related
+    weight: 0.75
+
+indie rock:
+  - tag: indie
+    type: synonym
+  - tag: alternative rock
+    type: related
+    weight: 0.75
+
+# ============================================================================
+# EXPERIMENTAL/AVANT-GARDE
+# ============================================================================
+
+experimental:
+  - tag: experimental rock
+    type: parent_child
+    weight: 0.85
+  - tag: experimental electronic
+    type: parent_child
+    weight: 0.85
+  - tag: avant-garde
+    type: close_related
+    weight: 0.9
+
+avant-garde:
+  - tag: experimental
+    type: close_related
+    weight: 0.9
+  - tag: avant-garde rock
+    type: parent_child
+    weight: 0.85
+  - tag: avant-garde metal
+    type: parent_child
+    weight: 0.85
+
+# ============================================================================
+# DESCRIPTIVE ATTRIBUTES
+# ============================================================================
+
+atmospheric:
+  - tag: ambient
+    type: related
+    weight: 0.75
+  - tag: cinematic
+    type: related
+    weight: 0.7
+
+melodic:
+  - tag: melody
+    type: synonym
+
+technical:
+  - tag: complex
+    type: close_related
+    weight: 0.85
+  - tag: virtuoso
+    type: related
+    weight: 0.75
+
+heavy:
+  - tag: crushing
+    type: synonym
+  - tag: brutal
+    type: close_related
+    weight: 0.8
+
+dark:
+  - tag: melancholic
+    type: related
+    weight: 0.7
+  - tag: depressive
+    type: related
+    weight: 0.75
+
+# ============================================================================
+# INSTRUMENTAL/VOCAL TAGS
+# ============================================================================
+
+instrumental:
+  - tag: no vocals
+    type: synonym
+  - tag: vocal
+    type: exclude
+    weight: -0.8
+
+# ============================================================================
+# ERA TAGS (These should have weak relationships)
+# ============================================================================
+
+70s:
+  - tag: 1970s
+    type: synonym
+  - tag: classic rock
+    type: related
+    weight: 0.6
+
+80s:
+  - tag: 1980s
+    type: synonym
+  - tag: new wave
+    type: related
+    weight: 0.6
+
+90s:
+  - tag: 1990s
+    type: synonym
+  - tag: grunge
+    type: related
+    weight: 0.6

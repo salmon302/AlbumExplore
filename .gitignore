@@ -42,6 +42,10 @@ logs/
 *.swo
 .DS_Store
 
+# Environment files with secrets
+.env
+!.env.template
+
 # Jupyter notebooks
 .ipynb_checkpoints
 
@@ -76,4 +80,4 @@ plans/
 .benchmarks/
 NO
 {*}
-="*"
+="*"etl_state.json

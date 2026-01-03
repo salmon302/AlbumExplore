@@ -3,7 +3,7 @@ Tag group widget - visual representation of a single filter group.
 """
 
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, 
-                             QPushButton, QFrame, QMenu, QLineEdit, QCompleter)
+                             QPushButton, QFrame, QMenu, QLineEdit, QCompleter, QCheckBox)
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QAction, QDragEnterEvent, QDropEvent
 
@@ -30,6 +30,7 @@ class TagGroupWidget(QWidget):
     groupNameChanged = pyqtSignal(str)
     tagDraggedOut = pyqtSignal(str)  # Emitted when tag dragged out of group
     tagDroppedIn = pyqtSignal(str)   # Emitted when tag dropped into group
+    expressionChanged = pyqtSignal()
     
     # Color palette for groups
     GROUP_COLORS = [
@@ -71,28 +72,44 @@ class TagGroupWidget(QWidget):
     def _setup_ui(self):
         """Setup the UI components."""
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(10, 10, 10, 10)
-        main_layout.setSpacing(8)
+        main_layout.setContentsMargins(4, 4, 4, 4)
+        main_layout.setSpacing(4)
         
-        # Frame for visual grouping
+        # Frame for visual grouping with better visibility
         self.frame = QFrame()
         self.frame.setFrameStyle(QFrame.Shape.Box | QFrame.Shadow.Raised)
-        self.frame.setLineWidth(2)
+        self.frame.setLineWidth(1)
+        # Apply styling for better visibility in dark theme
+        self.frame.setStyleSheet("""
+            QFrame {
+                background-color: #252830;
+                border: 1px solid #4a7ba7;
+                border-radius: 4px;
+            }
+        """)
         frame_layout = QVBoxLayout(self.frame)
-        frame_layout.setContentsMargins(10, 10, 10, 10)
-        frame_layout.setSpacing(8)
+        frame_layout.setContentsMargins(6, 6, 6, 6)
+        frame_layout.setSpacing(5)
         
         # Header with group name and controls
         header_layout = QHBoxLayout()
-        header_layout.setSpacing(8)
+        header_layout.setSpacing(6)
+        
+        # Enabled checkbox
+        self.enabled_checkbox = QCheckBox()
+        self.enabled_checkbox.setChecked(self.group.enabled)
+        self.enabled_checkbox.setToolTip("Enable/disable this group")
+        self.enabled_checkbox.toggled.connect(self._on_enabled_toggled)
+        header_layout.addWidget(self.enabled_checkbox)
         
         # Group name label (editable on double-click)
         self.name_label = QLabel(self.group.name)
         self.name_label.setStyleSheet("""
             QLabel {
                 font-weight: bold;
-                font-size: 12px;
-                color: #333;
+                font-size: 11px;
+                color: #e8e8e8;
+                padding: 1px 3px;
             }
         """)
         self.name_label.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -161,12 +178,15 @@ class TagGroupWidget(QWidget):
         self.add_tag_input.setMaximumWidth(150)
         self.add_tag_input.setStyleSheet("""
             QLineEdit {
-                background: #1a1d21;
-                color: #ccc;
-                border: 1px solid #2a2d32;
-                border-radius: 2px;
-                padding: 2px 4px;
-                font-size: 10px;
+                background: #1e2127;
+                color: #e8e8e8;
+                border: 1px solid #3f3f46;
+                border-radius: 3px;
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+            QLineEdit:focus {
+                border-color: #4a7ba7;
             }
         """)
         self.add_tag_input.returnPressed.connect(self._on_add_tag)
@@ -230,11 +250,13 @@ class TagGroupWidget(QWidget):
         self.operator_label.setText(operator_text)
         self._update_operator_style()
         
-        # Refresh all tag chips to update operator pills
-        self._refresh_tag_display()
-        
         # Emit signal so panel knows to update
         self.groupNameChanged.emit(self.group.name)  # Reuse this signal
+        # Operator change affects evaluation/expression
+        try:
+            self.expressionChanged.emit()
+        except Exception:
+            pass
     
     def _refresh_tag_display(self):
         """Refresh the entire tag display (used after operator changes)."""
@@ -302,12 +324,6 @@ class TagGroupWidget(QWidget):
         if tag in self.tag_chips:
             return  # Already exists
         
-        # Add operator pill before chip (if not first tag)
-        if len(self.tag_chips) > 0:
-            operator_pill = self._create_operator_pill()
-            insert_index = self.tags_layout.count() - 1
-            self.tags_layout.insertWidget(insert_index, operator_pill)
-        
         chip = TagChip(tag, color=self.group.color, removable=True, draggable=True)
         chip.removeClicked.connect(lambda t=tag: self._on_remove_tag(t))
         chip.dragStarted.connect(lambda t=tag: self.tagDraggedOut.emit(t))
@@ -318,41 +334,7 @@ class TagGroupWidget(QWidget):
         
         self.tag_chips[tag] = chip
     
-    def _create_operator_pill(self) -> QLabel:
-        """Create a small AND/OR operator pill between tags."""
-        operator_text = "AND" if self.group.operator == GroupOperator.AND else "OR"
-        pill = QLabel(operator_text)
-        pill.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
-        if self.group.operator == GroupOperator.AND:
-            style = """
-                QLabel {
-                    background: #3a4a5a;
-                    color: #c8d0d8;
-                    border: 1px solid #2a3a4a;
-                    border-radius: 4px;
-                    padding: 1px 4px;
-                    font-size: 7px;
-                    font-weight: bold;
-                    min-width: 22px;
-                }
-            """
-        else:
-            style = """
-                QLabel {
-                    background: #6d5199;
-                    color: #e0d8e8;
-                    border: 1px solid #5d4189;
-                    border-radius: 4px;
-                    padding: 1px 4px;
-                    font-size: 7px;
-                    font-weight: bold;
-                    min-width: 22px;
-                }
-            """
-        pill.setStyleSheet(style)
-        pill.setToolTip(f"Tags in this group are combined with {operator_text}")
-        return pill
+
     
     def _remove_tag_chip(self, tag: str):
         """Remove a tag chip from the display."""
@@ -374,6 +356,8 @@ class TagGroupWidget(QWidget):
         if self.group.add_tag(tag):
             # Add visual chip
             self._add_tag_chip(tag)
+            # Update expression
+            self._sync_expression()
             # Emit signal
             self.tagAdded.emit(tag)
             # Clear input
@@ -385,8 +369,44 @@ class TagGroupWidget(QWidget):
         if self.group.remove_tag(tag):
             # Remove visual chip
             self._remove_tag_chip(tag)
+            # Update expression
+            self._sync_expression()
             # Emit signal
             self.tagRemoved.emit(tag)
+    
+    def _sync_expression(self):
+        """Sync the expression list from the visual layout order."""
+        expression = []
+        
+        # Walk through the layout and build expression
+        for i in range(self.tags_layout.count()):
+            widget = self.tags_layout.itemAt(i).widget()
+            if widget is None:
+                continue
+            
+            # Check if it's a tag chip
+            if isinstance(widget, TagChip):
+                expression.append(widget.tag_text)
+            # Check if it's an operator
+            elif hasattr(widget, 'operator_type'):
+                from albumexplore.gui.widgets.operator_widget import OperatorWidget
+                if isinstance(widget, OperatorWidget):
+                    expression.append(widget.operator_type.value)
+        
+        old_expr = getattr(self.group, 'expression', None)
+        # Update the group's expression
+        self.group.expression = expression
+
+        # Debug: print the expression
+        if expression:
+            print(f"Group {self.group.name} expression: {' '.join(expression)}")
+
+        # Emit signal if expression changed so parent panel can react
+        if old_expr != expression:
+            try:
+                self.expressionChanged.emit()
+            except Exception:
+                pass
     
     def add_tag(self, tag: str):
         """Programmatically add a tag to this group."""
@@ -423,8 +443,21 @@ class TagGroupWidget(QWidget):
     def set_enabled(self, enabled: bool):
         """Enable or disable this group."""
         self.group.enabled = enabled
-        # Could add visual feedback here (graying out, etc.)
-        self.setEnabled(enabled)
+        self.enabled_checkbox.setChecked(enabled)
+        # The toggled signal will handle the rest
+    
+    def _on_enabled_toggled(self, checked: bool):
+        """Handle enabled checkbox toggled."""
+        self.group.enabled = checked
+        # Update visual state of other controls
+        self.name_label.setEnabled(checked)
+        self.operator_label.setEnabled(checked)
+        self.tags_widget.setEnabled(checked)
+        self.add_tag_input.setEnabled(checked)
+        self.add_tag_button.setEnabled(checked)
+        
+        # Emit signal to update filters
+        self.expressionChanged.emit()
     
     def _start_rename_group(self, event):
         """Start renaming the group."""
@@ -465,14 +498,17 @@ class TagGroupWidget(QWidget):
     
     def dragEnterEvent(self, event: QDragEnterEvent):
         """Handle drag enter events."""
-        if event.mimeData().hasText() or event.mimeData().hasFormat('application/x-tagchip'):
+        # Accept both tags and operators
+        if (event.mimeData().hasText() or 
+            event.mimeData().hasFormat('application/x-tagchip') or
+            event.mimeData().hasFormat('application/x-operator')):
             event.acceptProposedAction()
             # Visual feedback: highlight the group border
             self.frame.setStyleSheet(f"""
                 QFrame {{
-                    border: 3px dashed {self.group.color};
-                    border-radius: 8px;
-                    background: white;
+                    border: 3px dashed #4a7ba7;
+                    border-radius: 4px;
+                    background-color: #2a2d32;
                 }}
             """)
         else:
@@ -488,7 +524,18 @@ class TagGroupWidget(QWidget):
         # Reset visual feedback
         self._update_frame_color()
         
-        # Get the dropped tag text
+        # Find the drop position by checking which widget is closest to the drop point
+        drop_pos = event.position().toPoint() if hasattr(event.position(), 'toPoint') else event.pos()
+        insert_index = self._get_drop_index(drop_pos)
+        
+        # Check if it's an operator
+        if event.mimeData().hasFormat('application/x-operator'):
+            operator_text = event.mimeData().data('application/x-operator').data().decode()
+            self._add_operator(operator_text, insert_index)
+            event.acceptProposedAction()
+            return
+        
+        # Otherwise, handle as tag drop
         tag_text = None
         if event.mimeData().hasFormat('application/x-tagchip'):
             tag_text = event.mimeData().data('application/x-tagchip').data().decode()
@@ -500,3 +547,54 @@ class TagGroupWidget(QWidget):
             event.acceptProposedAction()
         else:
             event.ignore()
+    
+    def _get_drop_index(self, drop_pos):
+        """Determine the insertion index based on drop position."""
+        # Map the position to the tags_widget coordinate space
+        local_pos = self.tags_widget.mapFromParent(drop_pos)
+        
+        # Find which widget the drop is closest to
+        for i in range(self.tags_layout.count()):
+            widget = self.tags_layout.itemAt(i).widget()
+            if widget is None:
+                continue
+            
+            widget_geometry = widget.geometry()
+            
+            # If drop is before the center of this widget, insert before it
+            if local_pos.x() < widget_geometry.center().x():
+                return i
+        
+        # If we didn't find a position, insert before the stretch (at the end)
+        return self.tags_layout.count() - 1
+    
+    def _add_operator(self, operator_text: str, insert_index: int = None):
+        """Add an operator to this group at the specified index."""
+        from albumexplore.gui.widgets.operator_widget import OperatorWidget, OperatorType
+        
+        # Parse operator type
+        try:
+            op_type = OperatorType(operator_text)
+        except ValueError:
+            return
+        
+        # Create operator widget
+        operator = OperatorWidget(op_type, draggable=True, parent=self)
+        operator.deleteRequested.connect(lambda: self._remove_operator(operator))
+        
+        # Insert at specified index or before the stretch at the end
+        if insert_index is None:
+            insert_index = self.tags_layout.count() - 1
+        
+        self.tags_layout.insertWidget(insert_index, operator)
+        
+        # Update expression
+        self._sync_expression()
+    
+    def _remove_operator(self, operator_widget):
+        """Remove an operator widget from the group."""
+        self.tags_layout.removeWidget(operator_widget)
+        operator_widget.deleteLater()
+        
+        # Update expression
+        self._sync_expression()

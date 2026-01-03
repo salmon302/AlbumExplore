@@ -31,6 +31,8 @@ class TagFilterGroup:
     
     By default, tags within a group use AND logic (album must have ALL tags).
     Groups are combined with OR logic (album matches if ANY group matches).
+    
+    Supports complex expressions with operators (AND, OR, NOT) between tags.
     """
     
     group_id: str
@@ -39,6 +41,7 @@ class TagFilterGroup:
     operator: GroupOperator = GroupOperator.AND
     color: Optional[str] = None  # Visual color for UI (e.g., "#FFE0E0")
     enabled: bool = True  # Allow temporarily disabling groups
+    expression: List[str] = field(default_factory=list)  # Ordered expression: ['tag1', 'AND', 'tag2', 'OR', 'tag3']
     
     def __post_init__(self):
         """Initialize default values."""
@@ -60,6 +63,11 @@ class TagFilterGroup:
         if not self.enabled or not self.tags:
             return True  # Empty or disabled group matches everything
         
+        # If we have a complex expression, evaluate it
+        if self.expression:
+            return self._evaluate_expression(album_tags)
+        
+        # Otherwise fall back to simple operator logic
         if self.operator == GroupOperator.AND:
             # All tags in group must be present in album
             return self.tags.issubset(album_tags)
@@ -68,6 +76,123 @@ class TagFilterGroup:
             return bool(self.tags.intersection(album_tags))
         
         return False
+    
+    def _evaluate_expression(self, album_tags: Set[str]) -> bool:
+        """
+        Evaluate a complex expression with operators.
+        
+        Expression format: ['tag1', 'AND', 'tag2', 'OR', 'NOT', 'tag3', '( )', ...]
+        """
+        if not self.expression:
+            return True
+        # Implement a full evaluator with support for parentheses using the
+        # shunting-yard algorithm to convert to RPN, then evaluate the RPN.
+        # Also handle the UI convenience token '( )' by expanding it into
+        # an opening paren that wraps the following term up to the next
+        # binary operator (or end of expression).
+
+        tokens = list(self.expression)
+
+        # Preprocess: expand any '( )' into '(' and insert a matching ')'
+        i = 0
+        while i < len(tokens):
+            if tokens[i] == '( )':
+                # Replace current token with '(' and find insertion point for ')'
+                tokens[i] = '('
+                # Find position to insert the closing ')'
+                j = i + 1
+                while j < len(tokens):
+                    if tokens[j] in ('AND', 'OR'):
+                        break
+                    j += 1
+                # Insert ')' before operator at j (or at end if none)
+                tokens.insert(j, ')')
+                # Move past the inserted ')' to avoid infinite loop
+                i = j + 1
+                continue
+            i += 1
+
+        # Define operator properties
+        precedence = {'NOT': 3, 'AND': 2, 'OR': 1}
+        right_associative = {'NOT'}
+
+        # Shunting-yard: convert to RPN
+        output_queue = []
+        op_stack = []
+
+        def push_operator(op):
+            while op_stack:
+                top = op_stack[-1]
+                if top == '(':
+                    break
+                if ((top in precedence and precedence[top] > precedence.get(op, 0)) or
+                    (top in precedence and precedence[top] == precedence.get(op, 0) and op not in right_associative)):
+                    output_queue.append(op_stack.pop())
+                    continue
+                break
+            op_stack.append(op)
+
+        i = 0
+        while i < len(tokens):
+            tok = tokens[i]
+            if tok in ('AND', 'OR', 'NOT'):
+                push_operator(tok)
+            elif tok == '(':
+                op_stack.append('(')
+            elif tok == ')':
+                # Pop until matching '('
+                while op_stack and op_stack[-1] != '(':
+                    output_queue.append(op_stack.pop())
+                if op_stack and op_stack[-1] == '(':
+                    op_stack.pop()
+            else:
+                # Tag token
+                output_queue.append(('TAG', tok))
+            i += 1
+
+        while op_stack:
+            top = op_stack.pop()
+            if top in ('(', ')'):
+                # Mismatched parentheses - treat gracefully by ignoring
+                continue
+            output_queue.append(top)
+
+        # Evaluate RPN
+        eval_stack = []
+        for item in output_queue:
+            if isinstance(item, tuple) and item[0] == 'TAG':
+                tag = item[1]
+                eval_stack.append(tag in album_tags)
+            elif item == 'NOT':
+                if not eval_stack:
+                    # Unary NOT missing operand -> treat as False
+                    eval_stack.append(False)
+                else:
+                    v = eval_stack.pop()
+                    eval_stack.append(not v)
+            elif item in ('AND', 'OR'):
+                # Binary operator
+                if len(eval_stack) < 2:
+                    # Malformed expression -> be permissive
+                    if eval_stack:
+                        left = eval_stack.pop()
+                    else:
+                        left = False
+                    right = False
+                else:
+                    right = eval_stack.pop()
+                    left = eval_stack.pop()
+                if item == 'AND':
+                    eval_stack.append(left and right)
+                else:
+                    eval_stack.append(left or right)
+            else:
+                # Unknown token - ignore
+                continue
+
+        if not eval_stack:
+            return True
+        return bool(eval_stack[-1])
     
     def add_tag(self, tag: str) -> bool:
         """
@@ -115,7 +240,8 @@ class TagFilterGroup:
             'tags': list(self.tags),
             'operator': self.operator.value,
             'color': self.color,
-            'enabled': self.enabled
+            'enabled': self.enabled,
+            'expression': self.expression
         }
     
     @classmethod
@@ -128,7 +254,8 @@ class TagFilterGroup:
             tags=set(data.get('tags', [])),
             operator=operator,
             color=data.get('color'),
-            enabled=data.get('enabled', True)
+            enabled=data.get('enabled', True),
+            expression=data.get('expression', [])
         )
 
 

@@ -1,0 +1,1264 @@
+{
+  "stats": {
+    "total_singletons": 314,
+    "suggested": 314
+  },
+  "suggestions": {
+    "8-bit": {
+      "suggestion": "8-bit",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "a capella": {
+      "suggestion": "a capella",
+      "reason": "single-atomic-component"
+    },
+    "acapella": {
+      "suggestion": "a capella",
+      "reason": "single-atomic-component"
+    },
+    "adventure": {
+      "suggestion": "adventure",
+      "reason": "single-atomic-component"
+    },
+    "african": {
+      "suggestion": "african",
+      "reason": "single-atomic-component"
+    },
+    "afro": {
+      "suggestion": "afro",
+      "reason": "single-atomic-component"
+    },
+    "afro indie": {
+      "suggestion": "afro indie",
+      "reason": "atomic-decompose"
+    },
+    "afro-funk": {
+      "suggestion": "afro funk",
+      "reason": "single-atomic-component"
+    },
+    "afro-rock": {
+      "suggestion": "afro rock",
+      "reason": "single-atomic-component"
+    },
+    "afrolatin": {
+      "suggestion": "afrolatin",
+      "reason": "single-atomic-component"
+    },
+    "american": {
+      "suggestion": "american",
+      "reason": "single-atomic-component"
+    },
+    "american privitsm": {
+      "suggestion": "american primitivism",
+      "reason": "single-atomic-component"
+    },
+    "angular pop": {
+      "suggestion": "angular pop",
+      "reason": "atomic-decompose"
+    },
+    "animistic": {
+      "suggestion": "animistic",
+      "reason": "single-atomic-component"
+    },
+    "anternative": {
+      "suggestion": "alternative",
+      "reason": "single-atomic-component"
+    },
+    "anti": {
+      "suggestion": "anti",
+      "reason": "single-atomic-component"
+    },
+    "anxiety pop": {
+      "suggestion": "anxiety pop",
+      "reason": "atomic-decompose"
+    },
+    "apocalyptic": {
+      "suggestion": "apocalyptic",
+      "reason": "single-atomic-component"
+    },
+    "arabic pop": {
+      "suggestion": "arabic pop",
+      "reason": "atomic-decompose"
+    },
+    "arena": {
+      "suggestion": "arena",
+      "reason": "single-atomic-component"
+    },
+    "artcore": {
+      "suggestion": "art core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "audiobook": {
+      "suggestion": "audiobook",
+      "reason": "single-atomic-component"
+    },
+    "baggy": {
+      "suggestion": "baggy",
+      "reason": "single-atomic-component"
+    },
+    "banjo": {
+      "suggestion": "banjo",
+      "reason": "single-atomic-component"
+    },
+    "beats": {
+      "suggestion": "beats",
+      "reason": "single-atomic-component"
+    },
+    "berlin school": {
+      "suggestion": "berlin school",
+      "reason": "atomic-decompose"
+    },
+    "big band": {
+      "suggestion": "big band",
+      "reason": "atomic-decompose"
+    },
+    "bitpop": {
+      "suggestion": "bitpop",
+      "reason": "single-atomic-component"
+    },
+    "bitprog": {
+      "suggestion": "bitprog",
+      "reason": "single-atomic-component"
+    },
+    "blackend hardcore": {
+      "suggestion": "blackened hardcore",
+      "reason": "atomic-decompose"
+    },
+    "bluegras": {
+      "suggestion": "bluegrasss",
+      "reason": "single-atomic-component"
+    },
+    "bolero-beat": {
+      "suggestion": "bolero beat",
+      "reason": "single-atomic-component"
+    },
+    "boogie": {
+      "suggestion": "boogie",
+      "reason": "single-atomic-component"
+    },
+    "breakbeats": {
+      "suggestion": "breakbeats",
+      "reason": "single-atomic-component"
+    },
+    "breaks": {
+      "suggestion": "breaks",
+      "reason": "single-atomic-component"
+    },
+    "brostep": {
+      "suggestion": "brostep",
+      "reason": "single-atomic-component"
+    },
+    "bubblegum bass": {
+      "suggestion": "bubblegum bass",
+      "reason": "single-atomic-component"
+    },
+    "cabaret": {
+      "suggestion": "cabaret",
+      "reason": "single-atomic-component"
+    },
+    "canterbury scene": {
+      "suggestion": "canterbury scene",
+      "reason": "single-atomic-component"
+    },
+    "carnatic": {
+      "suggestion": "carnatic",
+      "reason": "single-atomic-component"
+    },
+    "cathedral bells": {
+      "suggestion": "cathedral bells",
+      "reason": "atomic-decompose"
+    },
+    "cavernous death metal": {
+      "suggestion": "cavernous death metal",
+      "reason": "atomic-decompose"
+    },
+    "celtic punk": {
+      "suggestion": "punk",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "chill": {
+      "suggestion": "chill",
+      "reason": "single-atomic-component"
+    },
+    "chillout": {
+      "suggestion": "chillout",
+      "reason": "single-atomic-component"
+    },
+    "chillstep": {
+      "suggestion": "chillstep",
+      "reason": "single-atomic-component"
+    },
+    "christian progressive rock": {
+      "suggestion": "christian progressive rock",
+      "reason": "atomic-decompose"
+    },
+    "cinematic soul": {
+      "suggestion": "cinematic soul",
+      "reason": "atomic-decompose"
+    },
+    "cinmatic": {
+      "suggestion": "cinematic",
+      "reason": "single-atomic-component"
+    },
+    "classical music": {
+      "suggestion": "classical music",
+      "reason": "atomic-decompose"
+    },
+    "comedy": {
+      "suggestion": "comedy",
+      "reason": "single-atomic-component"
+    },
+    "cosmic doom metal": {
+      "suggestion": "cosmic doom metal",
+      "reason": "atomic-decompose"
+    },
+    "cosmic rock": {
+      "suggestion": "cosmic rock",
+      "reason": "atomic-decompose"
+    },
+    "crimson-esque": {
+      "suggestion": "crimson esque",
+      "reason": "single-atomic-component"
+    },
+    "crimson-y": {
+      "suggestion": "crimson y",
+      "reason": "single-atomic-component"
+    },
+    "cybergrunge": {
+      "suggestion": "cybergrunge",
+      "reason": "single-atomic-component"
+    },
+    "dadaist": {
+      "suggestion": "dadaist",
+      "reason": "single-atomic-component"
+    },
+    "dance music": {
+      "suggestion": "dance music",
+      "reason": "atomic-decompose"
+    },
+    "dance rock": {
+      "suggestion": "dance rock",
+      "reason": "atomic-decompose"
+    },
+    "dark country": {
+      "suggestion": "dark country",
+      "reason": "atomic-decompose"
+    },
+    "dark synth": {
+      "suggestion": "dark synth",
+      "reason": "atomic-decompose"
+    },
+    "dark synthwave": {
+      "suggestion": "dark synthwave",
+      "reason": "atomic-decompose"
+    },
+    "darksynth": {
+      "suggestion": "darksynth",
+      "reason": "single-atomic-component"
+    },
+    "death metal/heavy metal/osdm": {
+      "suggestion": "death metal heavy metal osdm",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "deathgaze": {
+      "suggestion": "deathgaze",
+      "reason": "single-atomic-component"
+    },
+    "deathjazz": {
+      "suggestion": "deathjazz",
+      "reason": "single-atomic-component"
+    },
+    "deep funk": {
+      "suggestion": "deep funk",
+      "reason": "atomic-decompose"
+    },
+    "deep purple-ish": {
+      "suggestion": "deep purple-ish",
+      "reason": "atomic-decompose"
+    },
+    "depressive rock": {
+      "suggestion": "depressive rock",
+      "reason": "atomic-decompose"
+    },
+    "desert jangle": {
+      "suggestion": "desert jangle",
+      "reason": "atomic-decompose"
+    },
+    "dirt": {
+      "suggestion": "dirt",
+      "reason": "single-atomic-component"
+    },
+    "disco funk": {
+      "suggestion": "disco funk",
+      "reason": "atomic-decompose"
+    },
+    "disco-pop": {
+      "suggestion": "disco pop",
+      "reason": "atomic-decompose"
+    },
+    "disco-punk": {
+      "suggestion": "disco punk",
+      "reason": "atomic-decompose"
+    },
+    "djent-ish lite": {
+      "suggestion": "djent-ish lite",
+      "reason": "atomic-decompose"
+    },
+    "djenty": {
+      "suggestion": "djenty",
+      "reason": "single-atomic-component"
+    },
+    "documentary": {
+      "suggestion": "documentary",
+      "reason": "single-atomic-component"
+    },
+    "dolewave": {
+      "suggestion": "dolewave",
+      "reason": "single-atomic-component"
+    },
+    "doom folk": {
+      "suggestion": "doom folk",
+      "reason": "atomic-decompose"
+    },
+    "doom metal/rock": {
+      "suggestion": "doom metal rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "doom pop": {
+      "suggestion": "doom pop",
+      "reason": "atomic-decompose"
+    },
+    "doom rock/metal": {
+      "suggestion": "doom rock metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "doom-gaze": {
+      "suggestion": "doom shoegaze",
+      "reason": "atomic-decompose"
+    },
+    "dreamcore": {
+      "suggestion": "dream core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "drone pop": {
+      "suggestion": "drone pop",
+      "reason": "atomic-decompose"
+    },
+    "drum": {
+      "suggestion": "drum",
+      "reason": "single-atomic-component"
+    },
+    "drum-oriented": {
+      "suggestion": "drum oriented",
+      "reason": "single-atomic-component"
+    },
+    "dubstep": {
+      "suggestion": "dubstep",
+      "reason": "single-atomic-component"
+    },
+    "east african music": {
+      "suggestion": "east african music",
+      "reason": "atomic-decompose"
+    },
+    "eastern european": {
+      "suggestion": "eastern european",
+      "reason": "atomic-decompose"
+    },
+    "eclectic rock": {
+      "suggestion": "eclectic rock",
+      "reason": "atomic-decompose"
+    },
+    "edm": {
+      "suggestion": "edm",
+      "reason": "single-atomic-component"
+    },
+    "egg punk": {
+      "suggestion": "egg punk",
+      "reason": "single-atomic-component"
+    },
+    "electonic": {
+      "suggestion": "electronic",
+      "reason": "single-atomic-component"
+    },
+    "electro-ambient": {
+      "suggestion": "electro ambient",
+      "reason": "atomic-decompose"
+    },
+    "electroclash": {
+      "suggestion": "electroclash",
+      "reason": "single-atomic-component"
+    },
+    "electronic music": {
+      "suggestion": "electronic",
+      "reason": "single-atomic-component"
+    },
+    "electronicore": {
+      "suggestion": "electronicore",
+      "reason": "single-atomic-component"
+    },
+    "electropunk": {
+      "suggestion": "electropunk",
+      "reason": "single-atomic-component"
+    },
+    "emocrust": {
+      "suggestion": "emo crust",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "emoviolence/skramz": {
+      "suggestion": "emoviolence skramz",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "epic vampyric black metal": {
+      "suggestion": "epic vampyric black metal",
+      "reason": "atomic-decompose"
+    },
+    "ethereal doom metal": {
+      "suggestion": "ethereal doom metal",
+      "reason": "atomic-decompose"
+    },
+    "ethio": {
+      "suggestion": "ethio",
+      "reason": "single-atomic-component"
+    },
+    "eurodance": {
+      "suggestion": "eurodance",
+      "reason": "single-atomic-component"
+    },
+    "extreme prog-metal": {
+      "suggestion": "extreme prog-metal",
+      "reason": "atomic-decompose"
+    },
+    "fates warning related": {
+      "suggestion": "fates warning related",
+      "reason": "atomic-decompose"
+    },
+    "fi house": {
+      "suggestion": "fi house",
+      "reason": "single-atomic-component"
+    },
+    "fi shoegaze": {
+      "suggestion": "fi shoegaze",
+      "reason": "single-atomic-component"
+    },
+    "flamenco": {
+      "suggestion": "flamenco",
+      "reason": "single-atomic-component"
+    },
+    "fleetwood mac?": {
+      "suggestion": "fleetwood mac?",
+      "reason": "atomic-decompose"
+    },
+    "floyd-esque": {
+      "suggestion": "floyd esque",
+      "reason": "single-atomic-component"
+    },
+    "folklore": {
+      "suggestion": "folklore",
+      "reason": "single-atomic-component"
+    },
+    "french electro": {
+      "suggestion": "french electro",
+      "reason": "atomic-decompose"
+    },
+    "funk n' roll": {
+      "suggestion": "funk n' roll",
+      "reason": "atomic-decompose"
+    },
+    "future": {
+      "suggestion": "future",
+      "reason": "single-atomic-component"
+    },
+    "future pop": {
+      "suggestion": "future pop",
+      "reason": "atomic-decompose"
+    },
+    "futuristic": {
+      "suggestion": "futuristic",
+      "reason": "single-atomic-component"
+    },
+    "fuzz funk": {
+      "suggestion": "fuzz funk",
+      "reason": "atomic-decompose"
+    },
+    "gaelic": {
+      "suggestion": "gaelic",
+      "reason": "single-atomic-component"
+    },
+    "garage psych": {
+      "suggestion": "garage psych",
+      "reason": "atomic-decompose"
+    },
+    "ghotic metal": {
+      "suggestion": "gothic metal",
+      "reason": "atomic-decompose"
+    },
+    "glam punk": {
+      "suggestion": "glam punk",
+      "reason": "single-atomic-component"
+    },
+    "glitch bitpop": {
+      "suggestion": "glitch bitpop",
+      "reason": "single-atomic-component"
+    },
+    "glitch hop": {
+      "suggestion": "glitch hop",
+      "reason": "atomic-decompose"
+    },
+    "glitch metal": {
+      "suggestion": "glitch metal",
+      "reason": "atomic-decompose"
+    },
+    "global groove": {
+      "suggestion": "global groove",
+      "reason": "single-atomic-component"
+    },
+    "gong-related": {
+      "suggestion": "gong related",
+      "reason": "single-atomic-component"
+    },
+    "gospel": {
+      "suggestion": "gospel",
+      "reason": "single-atomic-component"
+    },
+    "goth rock": {
+      "suggestion": "goth rock",
+      "reason": "atomic-decompose"
+    },
+    "grunegaze": {
+      "suggestion": "grunegaze",
+      "reason": "single-atomic-component"
+    },
+    "guitar virtuoso": {
+      "suggestion": "guitar virtuoso",
+      "reason": "single-atomic-component"
+    },
+    "hard prog": {
+      "suggestion": "hard prog",
+      "reason": "atomic-decompose"
+    },
+    "hardcore funk": {
+      "suggestion": "hardcore funk",
+      "reason": "atomic-decompose"
+    },
+    "hardcore hip hop": {
+      "suggestion": "hardcore hip hop",
+      "reason": "atomic-decompose"
+    },
+    "hardcore rap": {
+      "suggestion": "hardcore rap",
+      "reason": "atomic-decompose"
+    },
+    "hawkwind-ish": {
+      "suggestion": "hawkwind ish",
+      "reason": "single-atomic-component"
+    },
+    "heavy pop rock": {
+      "suggestion": "heavy pop rock",
+      "reason": "atomic-decompose"
+    },
+    "heavy twang": {
+      "suggestion": "heavy twang",
+      "reason": "single-atomic-component"
+    },
+    "hellenic black metal": {
+      "suggestion": "hellenic black metal",
+      "reason": "atomic-decompose"
+    },
+    "hill country blues": {
+      "suggestion": "hill country blues",
+      "reason": "atomic-decompose"
+    },
+    "hip hop soul": {
+      "suggestion": "hip-hop soul",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "hip-hop soul": {
+      "suggestion": "hip-hop soul",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "igorrr": {
+      "suggestion": "igorrr",
+      "reason": "single-atomic-component"
+    },
+    "improvisation": {
+      "suggestion": "improvisation",
+      "reason": "single-atomic-component"
+    },
+    "improvised rock": {
+      "suggestion": "improvised rock",
+      "reason": "single-atomic-component"
+    },
+    "indian": {
+      "suggestion": "indian",
+      "reason": "single-atomic-component"
+    },
+    "indie hip hop": {
+      "suggestion": "indie hip hop",
+      "reason": "atomic-decompose"
+    },
+    "indie soul": {
+      "suggestion": "indie soul",
+      "reason": "atomic-decompose"
+    },
+    "industrial hardcore": {
+      "suggestion": "industrial hardcore",
+      "reason": "atomic-decompose"
+    },
+    "industrial punk": {
+      "suggestion": "industrial punk",
+      "reason": "atomic-decompose"
+    },
+    "irish folk music": {
+      "suggestion": "irish folk music",
+      "reason": "atomic-decompose"
+    },
+    "italian prog": {
+      "suggestion": "prog",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "italo-disco": {
+      "suggestion": "italo disco",
+      "reason": "single-atomic-component"
+    },
+    "jangle punk": {
+      "suggestion": "jangle punk",
+      "reason": "atomic-decompose"
+    },
+    "jangle rock": {
+      "suggestion": "jangle rock",
+      "reason": "atomic-decompose"
+    },
+    "jazz-core": {
+      "suggestion": "jazz hardcore",
+      "reason": "atomic-decompose"
+    },
+    "jazz-pop": {
+      "suggestion": "jazz pop",
+      "reason": "single-atomic-component"
+    },
+    "kawaii": {
+      "suggestion": "kawaii",
+      "reason": "single-atomic-component"
+    },
+    "keyboard": {
+      "suggestion": "keyboard",
+      "reason": "single-atomic-component"
+    },
+    "keyboard-driven": {
+      "suggestion": "keyboard driven",
+      "reason": "single-atomic-component"
+    },
+    "king gizzard-like": {
+      "suggestion": "king gizzard like",
+      "reason": "single-atomic-component"
+    },
+    "korean folk": {
+      "suggestion": "folk",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "kosmsiche": {
+      "suggestion": "kosmische",
+      "reason": "single-atomic-component"
+    },
+    "kuduro": {
+      "suggestion": "kuduro",
+      "reason": "single-atomic-component"
+    },
+    "latin big band": {
+      "suggestion": "latin big band",
+      "reason": "atomic-decompose"
+    },
+    "latin pop": {
+      "suggestion": "latin pop",
+      "reason": "single-atomic-component"
+    },
+    "latin rock": {
+      "suggestion": "latin rock",
+      "reason": "atomic-decompose"
+    },
+    "latin-jazz": {
+      "suggestion": "latin jazz",
+      "reason": "atomic-decompose"
+    },
+    "lo-fi": {
+      "suggestion": "lo-fi",
+      "reason": "single-atomic-component"
+    },
+    "lounge": {
+      "suggestion": "lounge",
+      "reason": "single-atomic-component"
+    },
+    "lover rock": {
+      "suggestion": "lover rock",
+      "reason": "single-atomic-component"
+    },
+    "mahraganat": {
+      "suggestion": "mahraganat",
+      "reason": "single-atomic-component"
+    },
+    "malian soul": {
+      "suggestion": "malian soul",
+      "reason": "single-atomic-component"
+    },
+    "medieval folk metal": {
+      "suggestion": "medieval folk metal",
+      "reason": "atomic-decompose"
+    },
+    "micro": {
+      "suggestion": "micro",
+      "reason": "single-atomic-component"
+    },
+    "microtonal": {
+      "suggestion": "microtonal",
+      "reason": "single-atomic-component"
+    },
+    "middle-eastern": {
+      "suggestion": "middle eastern",
+      "reason": "single-atomic-component"
+    },
+    "midi": {
+      "suggestion": "midi",
+      "reason": "single-atomic-component"
+    },
+    "mincecore": {
+      "suggestion": "mince core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "minimal": {
+      "suggestion": "minimal",
+      "reason": "single-atomic-component"
+    },
+    "minimal folk": {
+      "suggestion": "minimal folk",
+      "reason": "single-atomic-component"
+    },
+    "minimal synth": {
+      "suggestion": "minimal synth",
+      "reason": "single-atomic-component"
+    },
+    "minimal wave": {
+      "suggestion": "minimal wave",
+      "reason": "single-atomic-component"
+    },
+    "mitteralter metal": {
+      "suggestion": "medieval metal",
+      "reason": "single-atomic-component"
+    },
+    "mitteralter-metal": {
+      "suggestion": "medieval metal",
+      "reason": "single-atomic-component"
+    },
+    "mongolian": {
+      "suggestion": "mongolian",
+      "reason": "single-atomic-component"
+    },
+    "movie soundtrack": {
+      "suggestion": "movie soundtrack",
+      "reason": "single-atomic-component"
+    },
+    "mpb": {
+      "suggestion": "mpb",
+      "reason": "single-atomic-component"
+    },
+    "musical": {
+      "suggestion": "musical",
+      "reason": "single-atomic-component"
+    },
+    "musical parody": {
+      "suggestion": "musical parody",
+      "reason": "single-atomic-component"
+    },
+    "musical theatre": {
+      "suggestion": "musical theatre",
+      "reason": "single-atomic-component"
+    },
+    "native america": {
+      "suggestion": "native america",
+      "reason": "single-atomic-component"
+    },
+    "nature": {
+      "suggestion": "nature",
+      "reason": "single-atomic-component"
+    },
+    "neoclassica": {
+      "suggestion": "neoclassical",
+      "reason": "single-atomic-component"
+    },
+    "neue deutsche härte": {
+      "suggestion": "neue deutsche härte",
+      "reason": "single-atomic-component"
+    },
+    "new rave": {
+      "suggestion": "new rave",
+      "reason": "single-atomic-component"
+    },
+    "new wave and prog rock": {
+      "suggestion": "new wave progressive rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "nintendocore": {
+      "suggestion": "nintendo core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "noir": {
+      "suggestion": "noir",
+      "reason": "single-atomic-component"
+    },
+    "noise electronics": {
+      "suggestion": "noise electronics",
+      "reason": "single-atomic-component"
+    },
+    "noisegaze": {
+      "suggestion": "noisegaze",
+      "reason": "single-atomic-component"
+    },
+    "nordic folk rock": {
+      "suggestion": "nordic folk rock",
+      "reason": "atomic-decompose"
+    },
+    "nordic jazz": {
+      "suggestion": "jazz",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "occult metal": {
+      "suggestion": "occult metal",
+      "reason": "single-atomic-component"
+    },
+    "oi!": {
+      "suggestion": "oi!",
+      "reason": "single-atomic-component"
+    },
+    "old school death metal": {
+      "suggestion": "old school death metal",
+      "reason": "atomic-decompose"
+    },
+    "operatic": {
+      "suggestion": "operatic",
+      "reason": "single-atomic-component"
+    },
+    "operatic metal": {
+      "suggestion": "operatic metal",
+      "reason": "single-atomic-component"
+    },
+    "orchestra": {
+      "suggestion": "orchestra",
+      "reason": "single-atomic-component"
+    },
+    "oriental rock": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "outsider house": {
+      "suggestion": "outsider house",
+      "reason": "single-atomic-component"
+    },
+    "parody metal": {
+      "suggestion": "parody metal",
+      "reason": "atomic-decompose"
+    },
+    "persian pop": {
+      "suggestion": "persian pop",
+      "reason": "atomic-decompose"
+    },
+    "philly soul": {
+      "suggestion": "philly soul",
+      "reason": "atomic-decompose"
+    },
+    "piano music": {
+      "suggestion": "piano music",
+      "reason": "single-atomic-component"
+    },
+    "piano oriented": {
+      "suggestion": "piano oriented",
+      "reason": "atomic-decompose"
+    },
+    "piano-oriented": {
+      "suggestion": "piano oriented",
+      "reason": "atomic-decompose"
+    },
+    "plunderphonics": {
+      "suggestion": "plunderphonics",
+      "reason": "single-atomic-component"
+    },
+    "poems": {
+      "suggestion": "poems",
+      "reason": "single-atomic-component"
+    },
+    "pop art": {
+      "suggestion": "pop art",
+      "reason": "single-atomic-component"
+    },
+    "pop metal": {
+      "suggestion": "pop metal",
+      "reason": "single-atomic-component"
+    },
+    "pop prog": {
+      "suggestion": "pop prog",
+      "reason": "single-atomic-component"
+    },
+    "pop rap": {
+      "suggestion": "pop rap",
+      "reason": "single-atomic-component"
+    },
+    "post prog": {
+      "suggestion": "post prog",
+      "reason": "single-atomic-component"
+    },
+    "post-metal‎": {
+      "suggestion": "post metal‎",
+      "reason": "single-atomic-component"
+    },
+    "powerviolence/black metal/death metal": {
+      "suggestion": "powerviolence black metal death metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "prairie gothic": {
+      "suggestion": "prairie gothic",
+      "reason": "atomic-decompose"
+    },
+    "primus-related": {
+      "suggestion": "primus related",
+      "reason": "single-atomic-component"
+    },
+    "prog -rock": {
+      "suggestion": "progressive rock",
+      "reason": "atomic-decompose"
+    },
+    "prog-?": {
+      "suggestion": "prog ?",
+      "reason": "single-atomic-component"
+    },
+    "pschedelic": {
+      "suggestion": "psychedelic",
+      "reason": "single-atomic-component"
+    },
+    "pscyhedelic rock": {
+      "suggestion": "psychedelic rock",
+      "reason": "atomic-decompose"
+    },
+    "psych rock": {
+      "suggestion": "psych rock",
+      "reason": "single-atomic-component"
+    },
+    "psyechedelic": {
+      "suggestion": "psychedelic",
+      "reason": "single-atomic-component"
+    },
+    "pub": {
+      "suggestion": "pub",
+      "reason": "single-atomic-component"
+    },
+    "quartet": {
+      "suggestion": "quartet",
+      "reason": "single-atomic-component"
+    },
+    "quasi metal": {
+      "suggestion": "quasi metal",
+      "reason": "atomic-decompose"
+    },
+    "rautalanka": {
+      "suggestion": "rautalanka",
+      "reason": "single-atomic-component"
+    },
+    "red": {
+      "suggestion": "red",
+      "reason": "single-atomic-component"
+    },
+    "reductionism": {
+      "suggestion": "reductionism",
+      "reason": "single-atomic-component"
+    },
+    "reggaetón": {
+      "suggestion": "reggaetón",
+      "reason": "single-atomic-component"
+    },
+    "religious": {
+      "suggestion": "religious",
+      "reason": "single-atomic-component"
+    },
+    "retro pop": {
+      "suggestion": "retro pop",
+      "reason": "atomic-decompose"
+    },
+    "retro prog": {
+      "suggestion": "retro prog",
+      "reason": "atomic-decompose"
+    },
+    "riverside-esque": {
+      "suggestion": "riverside esque",
+      "reason": "single-atomic-component"
+    },
+    "rnb": {
+      "suggestion": "rnb",
+      "reason": "single-atomic-component"
+    },
+    "rock n' roll": {
+      "suggestion": "rock n' roll",
+      "reason": "single-atomic-component"
+    },
+    "rock-pop": {
+      "suggestion": "rock pop",
+      "reason": "single-atomic-component"
+    },
+    "romanian folk": {
+      "suggestion": "romanian folk",
+      "reason": "atomic-decompose"
+    },
+    "rush-oriented": {
+      "suggestion": "rush oriented",
+      "reason": "single-atomic-component"
+    },
+    "sadcore": {
+      "suggestion": "sad core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "samurai metal": {
+      "suggestion": "samurai metal",
+      "reason": "atomic-decompose"
+    },
+    "saxophone": {
+      "suggestion": "saxophone",
+      "reason": "single-atomic-component"
+    },
+    "scottish folk music": {
+      "suggestion": "scottish folk music",
+      "reason": "atomic-decompose"
+    },
+    "scottish music": {
+      "suggestion": "music",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "scum rock": {
+      "suggestion": "scum rock",
+      "reason": "atomic-decompose"
+    },
+    "sea": {
+      "suggestion": "sea",
+      "reason": "single-atomic-component"
+    },
+    "seventh wonder-ish": {
+      "suggestion": "seventh wonder-ish",
+      "reason": "atomic-decompose"
+    },
+    "shaabi": {
+      "suggestion": "shaabi",
+      "reason": "single-atomic-component"
+    },
+    "shanty": {
+      "suggestion": "shanty",
+      "reason": "single-atomic-component"
+    },
+    "shimokita-kei": {
+      "suggestion": "shimokita kei",
+      "reason": "single-atomic-component"
+    },
+    "shred": {
+      "suggestion": "shred",
+      "reason": "single-atomic-component"
+    },
+    "skatepunk": {
+      "suggestion": "skatepunk",
+      "reason": "single-atomic-component"
+    },
+    "sludge rock": {
+      "suggestion": "sludge rock",
+      "reason": "atomic-decompose"
+    },
+    "sludgecore": {
+      "suggestion": "sludge core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "smooth soul": {
+      "suggestion": "smooth soul",
+      "reason": "atomic-decompose"
+    },
+    "soft machine-related": {
+      "suggestion": "soft machine-related",
+      "reason": "atomic-decompose"
+    },
+    "son cubano": {
+      "suggestion": "son cubano",
+      "reason": "single-atomic-component"
+    },
+    "soul pop": {
+      "suggestion": "soul pop",
+      "reason": "atomic-decompose"
+    },
+    "soundscape": {
+      "suggestion": "soundscape",
+      "reason": "single-atomic-component"
+    },
+    "southern soul": {
+      "suggestion": "soul",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "spacegrind": {
+      "suggestion": "space grind",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "speed/thrash metal": {
+      "suggestion": "speed thrash metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "steampunk": {
+      "suggestion": "steampunk",
+      "reason": "single-atomic-component"
+    },
+    "steelpan": {
+      "suggestion": "steelpan",
+      "reason": "single-atomic-component"
+    },
+    "stoner metal/rock": {
+      "suggestion": "stoner metal/rock",
+      "reason": "single-atomic-component"
+    },
+    "stoner rock/metal": {
+      "suggestion": "stoner rock/metal",
+      "reason": "single-atomic-component"
+    },
+    "swamp": {
+      "suggestion": "swamp",
+      "reason": "single-atomic-component"
+    },
+    "sympohnic": {
+      "suggestion": "symphonic",
+      "reason": "single-atomic-component"
+    },
+    "tape music": {
+      "suggestion": "tape music",
+      "reason": "single-atomic-component"
+    },
+    "tech house": {
+      "suggestion": "tech house",
+      "reason": "single-atomic-component"
+    },
+    "techno house": {
+      "suggestion": "techno house",
+      "reason": "atomic-decompose"
+    },
+    "thall": {
+      "suggestion": "thall",
+      "reason": "single-atomic-component"
+    },
+    "tharsh metal": {
+      "suggestion": "thrash metal",
+      "reason": "atomic-decompose"
+    },
+    "theatrical": {
+      "suggestion": "theatrical",
+      "reason": "single-atomic-component"
+    },
+    "theatrical pop": {
+      "suggestion": "theatrical pop",
+      "reason": "single-atomic-component"
+    },
+    "theatrical rock": {
+      "suggestion": "theatrical rock",
+      "reason": "single-atomic-component"
+    },
+    "thrashcore": {
+      "suggestion": "thrash core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "trad folk": {
+      "suggestion": "trad folk",
+      "reason": "single-atomic-component"
+    },
+    "trance house": {
+      "suggestion": "trance house",
+      "reason": "atomic-decompose"
+    },
+    "trance metal": {
+      "suggestion": "trance metal",
+      "reason": "single-atomic-component"
+    },
+    "tropicanibalismo": {
+      "suggestion": "tropicanibalismo",
+      "reason": "single-atomic-component"
+    },
+    "turkish psychedelic": {
+      "suggestion": "turkish psychedelic",
+      "reason": "single-atomic-component"
+    },
+    "twang": {
+      "suggestion": "twang",
+      "reason": "single-atomic-component"
+    },
+    "uk hip hop": {
+      "suggestion": "uk hip hop",
+      "reason": "atomic-decompose"
+    },
+    "uk street soul": {
+      "suggestion": "uk street soul",
+      "reason": "atomic-decompose"
+    },
+    "vampyric black metal": {
+      "suggestion": "vampyric black metal",
+      "reason": "single-atomic-component"
+    },
+    "vgm": {
+      "suggestion": "vgm",
+      "reason": "single-atomic-component"
+    },
+    "vibraphone": {
+      "suggestion": "vibraphone",
+      "reason": "single-atomic-component"
+    },
+    "visepop": {
+      "suggestion": "visepop",
+      "reason": "single-atomic-component"
+    },
+    "welsh folk music": {
+      "suggestion": "welsh folk music",
+      "reason": "atomic-decompose"
+    },
+    "welsh rock": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "western noir": {
+      "suggestion": "noir",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "wind": {
+      "suggestion": "wind",
+      "reason": "single-atomic-component"
+    },
+    "witch": {
+      "suggestion": "witch",
+      "reason": "single-atomic-component"
+    },
+    "world": {
+      "suggestion": "world",
+      "reason": "single-atomic-component"
+    },
+    "world fusion": {
+      "suggestion": "world fusion",
+      "reason": "atomic-decompose"
+    },
+    "world music (brazil)": {
+      "suggestion": "world music (brazil)",
+      "reason": "atomic-decompose"
+    },
+    "yacht": {
+      "suggestion": "yacht",
+      "reason": "single-atomic-component"
+    },
+    "yatch rock": {
+      "suggestion": "yacht rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "zamrock": {
+      "suggestion": "zamrock",
+      "reason": "single-atomic-component"
+    },
+    "zappa": {
+      "suggestion": "zappa",
+      "reason": "single-atomic-component"
+    },
+    "zheul": {
+      "suggestion": "zheul",
+      "reason": "single-atomic-component"
+    }
+  }
+}

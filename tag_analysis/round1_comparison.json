@@ -1,0 +1,233 @@
+{
+  "baseline_total_tag_count": 640,
+  "post_total_tag_count": 669,
+  "tags_removed": -29,
+  "baseline_low_freq_count": 405,
+  "post_low_freq_count": 396,
+  "top_30_merged_or_removed": [
+    {
+      "source": "alt-blues",
+      "target": "alt blues",
+      "source_count": 2,
+      "target_count_post": 2,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "disco-funk",
+      "target": "disco funk",
+      "source_count": 2,
+      "target_count_post": 3,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "electro-funk",
+      "target": "electro funk",
+      "source_count": 2,
+      "target_count_post": 2,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "metal-core",
+      "target": "metal core",
+      "source_count": 2,
+      "target_count_post": 2,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "mittelalter-metal",
+      "target": "mittelalter metal",
+      "source_count": 2,
+      "target_count_post": 2,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "one-man-band",
+      "target": "one man band",
+      "source_count": 2,
+      "target_count_post": 2,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "soul-jazz",
+      "target": "soul jazz",
+      "source_count": 2,
+      "target_count_post": 4,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "afro-funk",
+      "target": "afro funk",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "afro-rock",
+      "target": "afro rock",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "bluegras",
+      "target": "bluegrass",
+      "source_count": 1,
+      "target_count_post": 6,
+      "reason": "plural->singular",
+      "confidence": "high"
+    },
+    {
+      "source": "bolero-beat",
+      "target": "bolero beat",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "disco-pop",
+      "target": "disco pop",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "disco-punk",
+      "target": "disco punk",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "djent-ish lite",
+      "target": "djent ish lite",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "doom-gaze",
+      "target": "doom gaze",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "electro-ambient",
+      "target": "electro ambient",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "extreme prog-metal",
+      "target": "extreme prog metal",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "fleetwood mac?",
+      "target": "fleetwood mac",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "punctuation-fold",
+      "confidence": "medium"
+    },
+    {
+      "source": "italo-disco",
+      "target": "italo disco",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "jazz-core",
+      "target": "jazz core",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "jazz-pop",
+      "target": "jazz pop",
+      "source_count": 1,
+      "target_count_post": 3,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "latin-jazz",
+      "target": "latin jazz",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "lo-fi",
+      "target": "lo fi",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "middle-eastern",
+      "target": "middle eastern",
+      "source_count": 1,
+      "target_count_post": 6,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "prog -rock",
+      "target": "prog rock",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "punctuation-fold",
+      "confidence": "medium"
+    },
+    {
+      "source": "prog-?",
+      "target": "prog",
+      "source_count": 1,
+      "target_count_post": 381,
+      "reason": "punctuation-fold",
+      "confidence": "medium"
+    },
+    {
+      "source": "rock-pop",
+      "target": "rock pop",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    },
+    {
+      "source": "shimokita-kei",
+      "target": "shimokita kei",
+      "source_count": 1,
+      "target_count_post": 1,
+      "reason": "hyphen->space",
+      "confidence": "high"
+    }
+  ]
+}

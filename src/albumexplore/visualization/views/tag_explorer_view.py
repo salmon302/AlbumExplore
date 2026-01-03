@@ -157,6 +157,9 @@ class TagExplorerView(BaseView):
         # Enable atomic mode by default for better tag consolidation
         self.tag_normalizer.set_atomic_mode(True)
         
+        # Deferred initialization flag
+        self._data_initialized = False
+        
         # For storing data
         self.album_nodes_original = [] # Store original album node data
         self.tag_counts = Counter()        # Processed tags (normalized or cleaned raw) for display and filtering, and their counts
@@ -372,19 +375,43 @@ class TagExplorerView(BaseView):
             fp_layout.setContentsMargins(0, 0, 0, 0)
             # Create TagFilterPanel if available
             try:
-                self.filter_panel = TagFilterPanel(self)
+                graphics_logger.info("TagExplorerView: Creating TagFilterPanel...")
+                # Pass parent explicitly as keyword argument to avoid confusion
+                self.filter_panel = TagFilterPanel(parent=self)
+                graphics_logger.info(f"TagExplorerView: TagFilterPanel created successfully, visible={self.filter_panel.isVisible()}")
                 fp_layout.addWidget(self.filter_panel)
-            except Exception:
+                graphics_logger.info("TagExplorerView: TagFilterPanel added to layout")
+                # Connect filter panel signals to apply filters
+                self.filter_panel.filtersChanged.connect(self.apply_tag_filters)
+                graphics_logger.info("TagExplorerView: Connected filter panel signals - setup complete!")
+            except Exception as e:
                 # If TagFilterPanel construction fails, keep the container empty
-                pass
-        except Exception:
+                graphics_logger.error(f"TagExplorerView: Failed to create filter panel: {type(e).__name__}: {e}", exc_info=True)
+                # Add a visible error label so user knows something went wrong
+                from PyQt6.QtWidgets import QLabel as ErrorLabel
+                error_label = ErrorLabel(f"Filter Panel Construction Failed\n{type(e).__name__}: {str(e)}")
+                error_label.setStyleSheet("color: #ff6b6b; padding: 10px; font-weight: bold; background: #2a1a1a;")
+                error_label.setWordWrap(True)
+                fp_layout.addWidget(error_label)
+                self.filter_panel = None
+        except Exception as e:
             # Defensive: ensure attributes exist even if widget creation fails
+            graphics_logger.error(f"TagExplorerView: Failed to create filter panel container: {e}", exc_info=True)
             self.filter_panel_container = QWidget()
             self.filter_panel = None
 
-        # Set initial size constraints (adjustable) - more compact
+        # Set initial size constraints - make it more compact
         self.filter_panel_container.setMinimumHeight(120)
         self.filter_panel_container.setMaximumHeight(400)
+        # Set a distinctive background for debugging visibility
+        self.filter_panel_container.setStyleSheet("""
+            QWidget#filterPanelContainer {
+                background-color: #1a1d21;
+                border: 2px solid #3a7db8;
+                border-radius: 4px;
+                padding: 2px;
+            }
+        """)
         # Performance and worker attributes (ensure they exist before any deferred scheduling)
         self._deferred_timer = None
         self._filter_timer = None
@@ -393,7 +420,14 @@ class TagExplorerView(BaseView):
         self._tag_worker_thread = None
         self._tag_worker = None
         
-        tag_panel_layout.addWidget(self.filter_panel_container)
+        # Create vertical splitter for filter panel and tag views to allow resizing
+        self.tag_panel_splitter = QSplitter(Qt.Orientation.Vertical)
+        self.tag_panel_splitter.setChildrenCollapsible(False)
+        self.tag_panel_splitter.setHandleWidth(4)
+        
+        # Add filter panel container to tag panel splitter
+        self.tag_panel_splitter.addWidget(self.filter_panel_container)
+        graphics_logger.info(f"TagExplorerView: Filter panel container added to splitter, visible={self.filter_panel_container.isVisible()}, height={self.filter_panel_container.height()}")
         
         # Create tag views stack
         self.tag_views_stack = QStackedWidget()
@@ -464,8 +498,16 @@ class TagExplorerView(BaseView):
                 # Some cloud widgets might use different signal signatures; ignore if incompatible
                 pass
 
-        # Add the QStackedWidget (tag_views_stack) to the tag_panel_layout
-        tag_panel_layout.addWidget(self.tag_views_stack, 1)  # Give stretch factor of 1 to expand
+        # Add the tag_views_stack to the vertical splitter
+        self.tag_panel_splitter.addWidget(self.tag_views_stack)
+        
+        # Set initial sizes for the splitter (30% filter panel, 70% tag views)
+        self.tag_panel_splitter.setSizes([200, 500])
+        self.tag_panel_splitter.setStretchFactor(0, 1)  # Filter panel
+        self.tag_panel_splitter.setStretchFactor(1, 3)  # Tag views
+        
+        # Add the vertical splitter to tag panel layout
+        tag_panel_layout.addWidget(self.tag_panel_splitter, 1)  # Give stretch factor of 1 to expand
 
         # Atomic tag widget (detailed atomic controls and preview)
         try:
@@ -858,9 +900,10 @@ class TagExplorerView(BaseView):
         graphics_logger.debug(f"Applying tag filters. Normalization active: {self.tag_normalizer.is_active()}")
         graphics_logger.debug(f"Current tag_filters: {self.tag_filters}")
 
-        # Get filter state from filter panel if visible
+        # Get filter state from filter panel if it exists and is visible
         filter_panel_state = None
-        if hasattr(self, 'filter_panel') and self.filter_panel_container.isVisible():
+        if (hasattr(self, 'filter_panel') and self.filter_panel is not None and 
+            hasattr(self, 'filter_panel_container') and self.filter_panel_container.isVisible()):
             filter_panel_state = self.filter_panel.get_filter_state()
             graphics_logger.debug(f"Using filter panel with {len(filter_panel_state.groups)} groups")
         
@@ -902,32 +945,50 @@ class TagExplorerView(BaseView):
                 # Get raw tags from the node data - optimized
                 raw_tags_str = node.get('raw_tags') or node.get('genre', '')
                 if not raw_tags_str:
-                    # No tags means no match if include filters exist
-                    if not include_filters:
+                    # No tags means no match if ANY positive filters exist (legacy or panel groups)
+                    has_positive_filters = bool(include_filters) or (filter_panel_state and filter_panel_state.groups)
+                    if not has_positive_filters:
                         batch_filtered_albums.append(node)
                     continue
                 
                 # Split tags efficiently
                 node_raw_tags = [tag.strip() for tag in tag_splitter.split(raw_tags_str) if tag.strip()]
                 if not node_raw_tags:
-                    if not include_filters:
+                    # No tags means no match if ANY positive filters exist (legacy or panel groups)
+                    has_positive_filters = bool(include_filters) or (filter_panel_state and filter_panel_state.groups)
+                    if not has_positive_filters:
                         batch_filtered_albums.append(node)
                     continue
                 
                 # Determine the set of processed tags for the current node, based on normalization state
                 if is_normalization_active:
-                    # Use cached normalization mapping where possible
+                    # Use cached normalization mapping where possible.
+                    # In atomic mode, a raw tag may map to multiple components; include all.
                     current_node_processed_tags = []
                     for tag in node_raw_tags:
-                        normalized_tag = self._get_normalized_tag_for_processing(tag)
-                        if normalized_tag == tag and tag not in self.normalized_mapping:
-                            # Fallback to enhanced normalization if not in cache
-                            fallback_normalized = self.tag_normalizer.normalize_enhanced(tag)
-                            if fallback_normalized:
-                                self.normalized_mapping[tag] = fallback_normalized
-                                normalized_tag = fallback_normalized
-                        if normalized_tag:
-                            current_node_processed_tags.append(normalized_tag)
+                        normalized = self.normalized_mapping.get(tag)
+                        if normalized is None:
+                            # Not cached yet - compute using normalizer
+                            if self.tag_normalizer.get_atomic_mode():
+                                comps = self.tag_normalizer.normalize_to_atomic(tag)
+                                if comps:
+                                    normalized = comps
+                                    self.normalized_mapping[tag] = comps
+                                else:
+                                    fallback = self.tag_normalizer.normalize_enhanced(tag)
+                                    if fallback:
+                                        normalized = fallback
+                                        self.normalized_mapping[tag] = fallback
+                            else:
+                                fallback = self.tag_normalizer.normalize_enhanced(tag)
+                                if fallback:
+                                    normalized = fallback
+                                    self.normalized_mapping[tag] = fallback
+
+                        if isinstance(normalized, list):
+                            current_node_processed_tags.extend(normalized)
+                        elif normalized:
+                            current_node_processed_tags.append(normalized)
                 else:
                     # In non-normalized mode, use cached mapping or create it
                     current_node_processed_tags = []
@@ -997,18 +1058,31 @@ class TagExplorerView(BaseView):
                     node_raw_tags = [tag.strip() for tag in tag_splitter.split(raw_tags_str) if tag.strip()]
                     if not node_raw_tags:
                         continue
-
                     current_node_processed_tags = []
                     if is_normalization_active:
                         for tag in node_raw_tags:
-                            normalized_tag = self._get_normalized_tag_for_processing(tag)
-                            if normalized_tag == tag and tag not in self.normalized_mapping:
-                                fallback_normalized = self.tag_normalizer.normalize_enhanced(tag)
-                                if fallback_normalized:
-                                    self.normalized_mapping[tag] = fallback_normalized
-                                    normalized_tag = fallback_normalized
-                            if normalized_tag:
-                                current_node_processed_tags.append(normalized_tag)
+                            normalized = self.normalized_mapping.get(tag)
+                            if normalized is None:
+                                if self.tag_normalizer.get_atomic_mode():
+                                    comps = self.tag_normalizer.normalize_to_atomic(tag)
+                                    if comps:
+                                        normalized = comps
+                                        self.normalized_mapping[tag] = comps
+                                    else:
+                                        fallback = self.tag_normalizer.normalize_enhanced(tag)
+                                        if fallback:
+                                            normalized = fallback
+                                            self.normalized_mapping[tag] = fallback
+                                else:
+                                    fallback = self.tag_normalizer.normalize_enhanced(tag)
+                                    if fallback:
+                                        normalized = fallback
+                                        self.normalized_mapping[tag] = fallback
+
+                            if isinstance(normalized, list):
+                                current_node_processed_tags.extend(normalized)
+                            elif normalized:
+                                current_node_processed_tags.append(normalized)
                     else:
                         for tag in node_raw_tags:
                             processed_tag = self._get_normalized_tag_for_processing(tag)
@@ -3070,6 +3144,13 @@ class TagExplorerView(BaseView):
             }}
             QProgressBar::chunk {{
                 background-color: {accent_hex};
+            }}
+            QToolTip {{
+                background-color: {raised_hex};
+                color: {text_primary_hex};
+                border: 1px solid {border_hex};
+                padding: 4px;
+                border-radius: 4px;
             }}
         """
         self.setStyleSheet(stylesheet)

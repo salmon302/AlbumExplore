@@ -1,0 +1,563 @@
+{
+  "original_unique_tags": 675,
+  "original_singletons": 314,
+  "normalized_unique_tags": 646,
+  "normalized_singletons": 286,
+  "total_originals_mapped": 94,
+  "sample_mappings": {
+    "n": [
+      {
+        "original": "'n'",
+        "count": 10
+      }
+    ],
+    "a capella": [
+      {
+        "original": "acapella",
+        "count": 1
+      }
+    ],
+    "afro funk": [
+      {
+        "original": "afro-funk",
+        "count": 1
+      }
+    ],
+    "afro rock": [
+      {
+        "original": "afro-rock",
+        "count": 1
+      }
+    ],
+    "alternative": [
+      {
+        "original": "alternitive",
+        "count": 91
+      },
+      {
+        "original": "anternative",
+        "count": 1
+      }
+    ],
+    "american primitivism": [
+      {
+        "original": "american privitsm",
+        "count": 1
+      }
+    ],
+    "art core": [
+      {
+        "original": "artcore",
+        "count": 1
+      }
+    ],
+    "blackened hardcore": [
+      {
+        "original": "blackend hardcore",
+        "count": 1
+      }
+    ],
+    "bluegrass": [
+      {
+        "original": "bluegras",
+        "count": 1
+      }
+    ],
+    "bolero beat": [
+      {
+        "original": "bolero-beat",
+        "count": 1
+      }
+    ],
+    "punk": [
+      {
+        "original": "celtic punk",
+        "count": 1
+      }
+    ],
+    "cinematic": [
+      {
+        "original": "cinmatic",
+        "count": 1
+      }
+    ],
+    "crimson esque": [
+      {
+        "original": "crimson-esque",
+        "count": 1
+      }
+    ],
+    "crimson y": [
+      {
+        "original": "crimson-y",
+        "count": 1
+      }
+    ],
+    "death metal heavy metal osdm": [
+      {
+        "original": "death metal/heavy metal/osdm",
+        "count": 1
+      }
+    ],
+    "deep purple ish": [
+      {
+        "original": "deep purple-ish",
+        "count": 1
+      }
+    ],
+    "disco funk": [
+      {
+        "original": "disco-funk",
+        "count": 2
+      }
+    ],
+    "disco pop": [
+      {
+        "original": "disco-pop",
+        "count": 1
+      }
+    ],
+    "disco punk": [
+      {
+        "original": "disco-punk",
+        "count": 1
+      }
+    ],
+    "djent ish lite": [
+      {
+        "original": "djent-ish lite",
+        "count": 1
+      }
+    ],
+    "doom metal rock": [
+      {
+        "original": "doom metal/rock",
+        "count": 1
+      }
+    ],
+    "doom rock metal": [
+      {
+        "original": "doom rock/metal",
+        "count": 1
+      }
+    ],
+    "doomgaze": [
+      {
+        "original": "doom-gaze",
+        "count": 1
+      }
+    ],
+    "dream core": [
+      {
+        "original": "dreamcore",
+        "count": 1
+      }
+    ],
+    "drum oriented": [
+      {
+        "original": "drum-oriented",
+        "count": 1
+      }
+    ],
+    "electronic": [
+      {
+        "original": "electonic",
+        "count": 1
+      }
+    ],
+    "electro ambient": [
+      {
+        "original": "electro-ambient",
+        "count": 1
+      }
+    ],
+    "electro funk": [
+      {
+        "original": "electro-funk",
+        "count": 2
+      }
+    ],
+    "emo crust": [
+      {
+        "original": "emocrust",
+        "count": 1
+      }
+    ],
+    "emoviolence skramz": [
+      {
+        "original": "emoviolence/skramz",
+        "count": 1
+      }
+    ],
+    "experimental": [
+      {
+        "original": "expirimental",
+        "count": 170
+      }
+    ],
+    "extreme prog metal": [
+      {
+        "original": "extreme prog-metal",
+        "count": 1
+      }
+    ],
+    "fleetwood mac": [
+      {
+        "original": "fleetwood mac?",
+        "count": 1
+      }
+    ],
+    "floyd esque": [
+      {
+        "original": "floyd-esque",
+        "count": 1
+      }
+    ],
+    "gothic metal": [
+      {
+        "original": "ghotic metal",
+        "count": 1
+      }
+    ],
+    "gong related": [
+      {
+        "original": "gong-related",
+        "count": 1
+      }
+    ],
+    "hawkwind ish": [
+      {
+        "original": "hawkwind-ish",
+        "count": 1
+      }
+    ],
+    "hip-hop soul": [
+      {
+        "original": "hip hop soul",
+        "count": 1
+      }
+    ],
+    "prog": [
+      {
+        "original": "italian prog",
+        "count": 1
+      },
+      {
+        "original": "prog-?",
+        "count": 1
+      }
+    ],
+    "italo disco": [
+      {
+        "original": "italo-disco",
+        "count": 1
+      }
+    ],
+    "j pop": [
+      {
+        "original": "j-pop",
+        "count": 3
+      }
+    ],
+    "j rock": [
+      {
+        "original": "j-rock",
+        "count": 3
+      }
+    ],
+    "jazz core": [
+      {
+        "original": "jazz-core",
+        "count": 1
+      }
+    ],
+    "jazz pop": [
+      {
+        "original": "jazz-pop",
+        "count": 1
+      }
+    ],
+    "keyboard driven": [
+      {
+        "original": "keyboard-driven",
+        "count": 1
+      }
+    ],
+    "king gizzard like": [
+      {
+        "original": "king gizzard-like",
+        "count": 1
+      }
+    ],
+    "kosmische": [
+      {
+        "original": "kosmsiche",
+        "count": 1
+      }
+    ],
+    "latin jazz": [
+      {
+        "original": "latin-jazz",
+        "count": 1
+      }
+    ],
+    "melancholic": [
+      {
+        "original": "melancolic",
+        "count": 2
+      }
+    ],
+    "metalcore": [
+      {
+        "original": "metal-core",
+        "count": 2
+      }
+    ],
+    "middle eastern": [
+      {
+        "original": "middle-eastern",
+        "count": 1
+      }
+    ],
+    "mince core": [
+      {
+        "original": "mincecore",
+        "count": 1
+      }
+    ],
+    "medieval metal": [
+      {
+        "original": "mittelalter-metal",
+        "count": 2
+      },
+      {
+        "original": "mitteralter metal",
+        "count": 1
+      },
+      {
+        "original": "mitteralter-metal",
+        "count": 1
+      }
+    ],
+    "neoclassical": [
+      {
+        "original": "neoclassica",
+        "count": 1
+      }
+    ],
+    "neue deutsche harte": [
+      {
+        "original": "neue deutsche härte",
+        "count": 1
+      }
+    ],
+    "new wave progressive rock": [
+      {
+        "original": "new wave and prog rock",
+        "count": 1
+      }
+    ],
+    "nintendo core": [
+      {
+        "original": "nintendocore",
+        "count": 1
+      }
+    ],
+    "oi": [
+      {
+        "original": "oi!",
+        "count": 1
+      }
+    ],
+    "one man band": [
+      {
+        "original": "one-man-band",
+        "count": 2
+      }
+    ],
+    "piano oriented": [
+      {
+        "original": "piano-oriented",
+        "count": 1
+      }
+    ],
+    "post metal‎": [
+      {
+        "original": "post-metal‎",
+        "count": 1
+      }
+    ],
+    "powerviolence black metal death metal": [
+      {
+        "original": "powerviolence/black metal/death metal",
+        "count": 1
+      }
+    ],
+    "primus related": [
+      {
+        "original": "primus-related",
+        "count": 1
+      }
+    ],
+    "prog-rock": [
+      {
+        "original": "prog -rock",
+        "count": 1
+      }
+    ],
+    "progressive": [
+      {
+        "original": "progresive",
+        "count": 3
+      }
+    ],
+    "proto metal": [
+      {
+        "original": "proto-metal",
+        "count": 3
+      }
+    ],
+    "proto punk": [
+      {
+        "original": "proto-punk",
+        "count": 2
+      }
+    ],
+    "psychedelic": [
+      {
+        "original": "pschedelic",
+        "count": 1
+      },
+      {
+        "original": "psyechedelic",
+        "count": 1
+      }
+    ],
+    "psychedelic rock": [
+      {
+        "original": "pscyhedelic rock",
+        "count": 1
+      }
+    ],
+    "reggaeton": [
+      {
+        "original": "reggaetón",
+        "count": 1
+      }
+    ],
+    "riverside esque": [
+      {
+        "original": "riverside-esque",
+        "count": 1
+      }
+    ],
+    "rock pop": [
+      {
+        "original": "rock-pop",
+        "count": 1
+      }
+    ],
+    "rush oriented": [
+      {
+        "original": "rush-oriented",
+        "count": 1
+      }
+    ],
+    "sad core": [
+      {
+        "original": "sadcore",
+        "count": 1
+      }
+    ],
+    "seventh wonder ish": [
+      {
+        "original": "seventh wonder-ish",
+        "count": 1
+      }
+    ],
+    "shimokita kei": [
+      {
+        "original": "shimokita-kei",
+        "count": 1
+      }
+    ],
+    "sludge core": [
+      {
+        "original": "sludgecore",
+        "count": 1
+      }
+    ],
+    "soft machine related": [
+      {
+        "original": "soft machine-related",
+        "count": 1
+      }
+    ],
+    "sophisti pop": [
+      {
+        "original": "sophisti-pop",
+        "count": 3
+      }
+    ],
+    "soul jazz": [
+      {
+        "original": "soul-jazz",
+        "count": 2
+      }
+    ],
+    "soul": [
+      {
+        "original": "southern soul",
+        "count": 1
+      }
+    ],
+    "space grind": [
+      {
+        "original": "spacegrind",
+        "count": 1
+      }
+    ],
+    "speed thrash metal": [
+      {
+        "original": "speed/thrash metal",
+        "count": 1
+      }
+    ],
+    "symphonic": [
+      {
+        "original": "sympohnic",
+        "count": 1
+      }
+    ],
+    "thrash metal": [
+      {
+        "original": "tharsh metal",
+        "count": 1
+      }
+    ],
+    "thrash core": [
+      {
+        "original": "thrashcore",
+        "count": 1
+      }
+    ],
+    "noir": [
+      {
+        "original": "western noir",
+        "count": 1
+      }
+    ],
+    "world music (brazil": [
+      {
+        "original": "world music (brazil)",
+        "count": 1
+      }
+    ],
+    "yacht rock": [
+      {
+        "original": "yatch rock",
+        "count": 1
+      }
+    ]
+  }
+}

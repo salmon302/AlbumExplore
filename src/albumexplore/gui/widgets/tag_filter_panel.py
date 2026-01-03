@@ -3,11 +3,20 @@ Tag filter panel - main UI for managing tag filter groups.
 """
 
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, 
-                             QPushButton, QScrollArea, QFrame, QSizePolicy, QLineEdit, QCompleter)
+                             QPushButton, QScrollArea, QFrame, QSizePolicy, QLineEdit, QCompleter, QCheckBox)
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QShortcut, QKeySequence
+from PyQt6.QtGui import QShortcut, QKeySequence, QPalette, QColor
 
-from albumexplore.tags.filters import TagFilterState, TagFilterGroup
+from albumexplore.tags.filters import TagFilterState, TagFilterGroup, FilterOperator
+from albumexplore.gui.widgets.operator_widget import OperatorPalette
+# Conditional import - TokenizedQueryInput may not exist yet
+try:
+    from .tokenized_query_input import TokenizedQueryInput
+    HAS_TOKENIZED_INPUT = True
+except ImportError:
+    HAS_TOKENIZED_INPUT = False
+    TokenizedQueryInput = None
+    
 from albumexplore.gui.widgets.tag_group_widget import TagGroupWidget
 from albumexplore.gui.widgets.tag_chip_widget import TagChip
 
@@ -54,15 +63,33 @@ class TagFilterPanel(QWidget):
     def _setup_ui(self):
         """Setup the UI components."""
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(4, 4, 4, 4)
-        main_layout.setSpacing(6)
+        main_layout.setContentsMargins(2, 2, 2, 2)
+        main_layout.setSpacing(3)
+        
+        # Fix tooltip colors
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.ToolTipBase, QColor("#2a2d32"))
+        palette.setColor(QPalette.ColorRole.ToolTipText, QColor("#f1f3f4"))
+        self.setPalette(palette)
         
         # Header with title and controls
         header_layout = QHBoxLayout()
+        header_layout.setSpacing(4)
         
-        title = QLabel("Tag Filters")
-        title.setStyleSheet("font-weight: bold; font-size: 11px; color: #bbb;")
-        header_layout.addWidget(title)
+        # Active checkbox
+        self.active_checkbox = QCheckBox("Tag Filters")
+        self.active_checkbox.setChecked(self.filter_state.active)
+        self.active_checkbox.toggled.connect(self._on_active_toggled)
+        self.active_checkbox.setStyleSheet("font-weight: bold; font-size: 10px; color: #bbb;")
+        header_layout.addWidget(self.active_checkbox)
+        
+        # Add Group Operator Toggle
+        self.group_operator_button = QPushButton("ANY Group")
+        self.group_operator_button.setToolTip("Click to switch between matching ANY group (OR) or ALL groups (AND)")
+        self.group_operator_button.setCheckable(True)
+        self.group_operator_button.clicked.connect(self._toggle_group_operator)
+        self._update_group_operator_ui()
+        header_layout.addWidget(self.group_operator_button)
         
         # Add query logic helper
         self.logic_helper = QLabel("Add tags to filter albums")
@@ -72,15 +99,13 @@ class TagFilterPanel(QWidget):
                 font-size: 9px;
                 font-style: italic;
                 padding: 2px 6px;
-                background: #1a1d21;
                 border-radius: 3px;
                 margin-left: 6px;
             }
         """)
-        self.logic_helper.setWordWrap(True)
-        header_layout.addWidget(self.logic_helper, 1)
-        
-        header_layout.addStretch()
+        self.logic_helper.setWordWrap(False)
+        self.logic_helper.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        header_layout.addWidget(self.logic_helper)
         
         # New group button
         self.new_group_button = QPushButton("+ Group")
@@ -90,9 +115,9 @@ class TagFilterPanel(QWidget):
                 background: #2c5f8d;
                 color: #e8e8e8;
                 border: 1px solid #1a3a5a;
-                border-radius: 3px;
-                padding: 3px 8px;
-                font-size: 10px;
+                border-radius: 2px;
+                padding: 2px 6px;
+                font-size: 9px;
                 font-weight: bold;
             }
             QPushButton:hover {
@@ -102,6 +127,45 @@ class TagFilterPanel(QWidget):
         """)
         header_layout.addWidget(self.new_group_button)
         
+        # Saved queries button
+        self.saved_queries_button = QPushButton("📋 Saved")
+        self.saved_queries_button.setToolTip("Manage saved query presets")
+        self.saved_queries_button.clicked.connect(self._open_saved_queries)
+        self.saved_queries_button.setStyleSheet("""
+            QPushButton {
+                background: #4d5a2c;
+                color: #e8e8e8;
+                border: 1px solid #3a451f;
+                border-radius: 2px;
+                padding: 2px 6px;
+                font-size: 9px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background: #6d7a3c;
+                border-color: #4d5a2c;
+            }
+        """)
+        header_layout.addWidget(self.saved_queries_button)
+        
+        # Advanced query button
+        self.advanced_query_button = QPushButton("Advanced")
+        self.advanced_query_button.setToolTip("Open advanced boolean query editor")
+        self.advanced_query_button.clicked.connect(self._on_open_advanced_query)
+        # Make it visually prominent so users can find the advanced editor quickly
+        self.advanced_query_button.setStyleSheet("""
+            QPushButton {
+                padding: 4px 10px;
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffb74d, stop:1 #ffa000);
+                color: #1b1b1b;
+                font-weight: bold;
+                border: 1px solid #8a5a00;
+                border-radius: 4px;
+            }
+            QPushButton:hover { background: #ffc54d; }
+        """)
+        header_layout.addWidget(self.advanced_query_button)
+        
         # Clear all button
         self.clear_all_button = QPushButton("Clear")
         self.clear_all_button.clicked.connect(self._on_clear_all)
@@ -110,9 +174,9 @@ class TagFilterPanel(QWidget):
                 background: #6d3030;
                 color: #e8e8e8;
                 border: 1px solid #4a1f1f;
-                border-radius: 3px;
-                padding: 3px 8px;
-                font-size: 10px;
+                border-radius: 2px;
+                padding: 2px 6px;
+                font-size: 9px;
             }
             QPushButton:hover {
                 background: #8d4040;
@@ -122,6 +186,47 @@ class TagFilterPanel(QWidget):
         header_layout.addWidget(self.clear_all_button)
         
         main_layout.addLayout(header_layout)
+        
+        # Add operator palette for drag-and-drop
+        self.operator_palette = OperatorPalette(self)
+        self.operator_palette.setMaximumHeight(30)
+        main_layout.addWidget(self.operator_palette)
+        
+        # Inline advanced query input (tokenized)
+        # We intentionally log construction errors so failures are visible during
+        # development instead of silently hiding the widget.
+        if HAS_TOKENIZED_INPUT:
+            try:
+                self.tokenized_query = TokenizedQueryInput(self)
+                # Make the inline input visually distinct so it's easy to find in dark themes
+                try:
+                    self.tokenized_query.setStyleSheet('''
+                        QWidget { border: 1px solid #3a7db8; border-radius: 4px; padding: 4px; background: #131417; }
+                    ''')
+                except Exception:
+                    pass
+                main_layout.addWidget(self.tokenized_query)
+                self.tokenized_query.applyQuery.connect(self._on_apply_tokenized_query)
+            except Exception as e:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.exception("Failed to create TokenizedQueryInput: %s", e)
+                # Provide a visible placeholder so users know the feature exists even
+                # if the inline widget couldn't be constructed.
+                error_msg = QLabel(f"⚠ Advanced query input unavailable: {str(e)}\n"
+                                 "Use the 'Advanced' button above for full query editor.")
+                error_msg.setStyleSheet('color: #b66; font-style: italic; font-size: 9px;')
+                error_msg.setWordWrap(True)
+                main_layout.addWidget(error_msg)
+                self.tokenized_query = None
+        else:
+            # TokenizedQueryInput not available
+            self.tokenized_query = None
+            placeholder = QLabel("Advanced query input: not yet implemented\n"
+                               "Use the 'Advanced' button above for full query editor.")
+            placeholder.setStyleSheet('color: #888; font-style: italic; font-size: 9px;')
+            placeholder.setWordWrap(True)
+            main_layout.addWidget(placeholder)
         
         # Scrollable area for groups
         scroll_area = QScrollArea()
@@ -133,7 +238,7 @@ class TagFilterPanel(QWidget):
         self.groups_container = QWidget()
         self.groups_layout = QVBoxLayout(self.groups_container)
         self.groups_layout.setContentsMargins(0, 0, 0, 0)
-        self.groups_layout.setSpacing(4)  # Tighter spacing
+        self.groups_layout.setSpacing(2)  # Very tight spacing
         # No stretch at bottom - let groups fill naturally
         
         scroll_area.setWidget(self.groups_container)
@@ -221,6 +326,148 @@ class TagFilterPanel(QWidget):
         clear_shortcut = QShortcut(QKeySequence("Ctrl+Shift+C"), self)
         clear_shortcut.activated.connect(self._on_clear_all)
     
+    def _open_saved_queries(self):
+        """Open the saved queries dialog."""
+        from albumexplore.gui.widgets.saved_query_dialog import SavedQueryDialog
+        
+        dialog = SavedQueryDialog(self.filter_state, self)
+        dialog.querySelected.connect(self._load_saved_query)
+        dialog.exec()
+    
+    def _load_saved_query(self, query):
+        """Load a saved query."""
+        from albumexplore.tags.filters import SavedQuery
+        
+        if isinstance(query, SavedQuery):
+            self.set_filter_state(query.filter_state)
+            self.filtersChanged.emit()
+
+    def _on_open_advanced_query(self):
+        """Open the advanced boolean query editor dialog."""
+        try:
+            from .query_editor import QueryEditorDialog
+        except Exception:
+            from albumexplore.gui.widgets.query_editor import QueryEditorDialog
+
+        # Create dialog with TagExplorerView as parent so it can access tag_to_album_nodes
+        parent_view = self.parent()
+        dialog = QueryEditorDialog(parent_view)
+        
+        # Make the filter panel accessible to the dialog for applying results
+        dialog.filter_panel = self
+        
+        # Prepopulate with simple filters converted to query
+        includes = []
+        for group in self.filter_state.groups:
+            includes.extend(sorted(group.tags))
+        excludes = sorted(self.filter_state.exclude_tags)
+        from ...search import api as search_api
+        q = search_api.simple_filters_to_query(includes, excludes)
+        dialog.set_query(q)
+        
+        # Execute dialog and apply results if accepted
+        if dialog.exec():
+            # The dialog's on_apply method will handle setting the filter state
+            # Just ensure the filters are emitted
+            self.filtersChanged.emit()
+
+    def _on_apply_tokenized_query(self, query: str):
+        """Apply a tokenized query from the inline editor by converting it to filter state."""
+        from ...search import api as search_api
+        from PyQt6.QtWidgets import QMessageBox
+
+        try:
+            state = search_api.query_to_filter_state(query)
+        except Exception as e:
+            QMessageBox.warning(self, "Cannot convert query",
+                                f"Advanced query cannot be converted to filter groups: {e}\nOpen Advanced dialog to keep as advanced-only.")
+            return
+
+        # Apply converted state
+        self.set_filter_state(state)
+        self.filtersChanged.emit()
+        QMessageBox.information(self, "Applied", "Advanced query converted and applied to filters.")
+    
+    def _toggle_group_operator(self):
+        """Toggle between AND and OR operators for combining groups."""
+        if self.filter_state.group_operator == FilterOperator.OR:
+            self.filter_state.group_operator = FilterOperator.AND
+        else:
+            self.filter_state.group_operator = FilterOperator.OR
+        
+        self._update_group_operator_ui()
+        self._update_group_separators()
+        self.filtersChanged.emit()
+
+    def _update_group_operator_ui(self):
+        """Update the group operator button UI."""
+        if self.filter_state.group_operator == FilterOperator.AND:
+            self.group_operator_button.setText("ALL Groups")
+            self.group_operator_button.setStyleSheet("""
+                QPushButton {
+                    background: #3a4a5a;
+                    color: #d0d8e0;
+                    border: 1px solid #2a3a4a;
+                    border-radius: 8px;
+                    padding: 2px 6px;
+                    font-size: 9px;
+                    font-weight: bold;
+                }
+                QPushButton:hover {
+                    background: #4a5a6a;
+                    border-color: #5a8ab8;
+                }
+            """)
+        else:
+            self.group_operator_button.setText("ANY Group")
+            self.group_operator_button.setStyleSheet("""
+                QPushButton {
+                    background: #6d5199;
+                    color: #e8e0f0;
+                    border: 1px solid #5d4189;
+                    border-radius: 8px;
+                    padding: 2px 6px;
+                    font-size: 9px;
+                    font-weight: bold;
+                }
+                QPushButton:hover {
+                    background: #7d61a9;
+                    border-color: #9d81c9;
+                }
+            """)
+
+    def _update_group_separators(self):
+        """Update the text and style of separators between groups."""
+        separator_text = "AND" if self.filter_state.group_operator == FilterOperator.AND else "OR"
+        separator_style = """
+            QLabel {
+                background: #2196F3;
+                color: #fff;
+                font-weight: bold;
+                padding: 4px 8px;
+                border-radius: 4px;
+                margin: 5px 0px;
+            }
+        """ if self.filter_state.group_operator == FilterOperator.AND else """
+            QLabel {
+                background: #FFC107;
+                color: #333;
+                font-weight: bold;
+                padding: 4px 8px;
+                border-radius: 4px;
+                margin: 5px 0px;
+            }
+        """
+        
+        for i in range(self.groups_layout.count()):
+            item = self.groups_layout.itemAt(i)
+            if item and isinstance(item.widget(), QLabel):
+                separator = item.widget()
+                # Check if it's a separator (not some other label)
+                if separator.text() in ("OR", "AND"):
+                    separator.setText(separator_text)
+                    separator.setStyleSheet(separator_style)
+
     def _populate_groups(self):
         """Populate groups from filter state."""
         for group in self.filter_state.groups:
@@ -243,26 +490,33 @@ class TagFilterPanel(QWidget):
         widget.groupDeleted.connect(lambda gid=group.group_id: self._on_group_deleted(gid))
         widget.tagDraggedOut.connect(lambda tag, gid=group.group_id: self._on_tag_dragged_out(tag, gid))
         widget.tagDroppedIn.connect(lambda tag, gid=group.group_id: self._on_tag_dropped_in(tag, gid))
+        widget.expressionChanged.connect(lambda gid=group.group_id: self._on_expression_changed(gid))
         
         # Add OR separator if not first group
         if len(self.group_widgets) > 0:
-            separator = QLabel("OR")
-            separator.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            separator.setStyleSheet("""
+            separator_text = "AND" if self.filter_state.group_operator == FilterOperator.AND else "OR"
+            separator_style = """
                 QLabel {
-                    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
-                                              stop:0 transparent, 
-                                              stop:0.45 #6d5199,
-                                              stop:0.5 #7c5fb3,
-                                              stop:0.55 #6d5199,
-                                              stop:1 transparent);
-                    color: #d0d0d0;
+                    background: #2196F3;
+                    color: #fff;
                     font-weight: bold;
-                    font-size: 9px;
-                    padding: 2px 6px;
-                    margin: 3px 0px;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    margin: 5px 0px;
                 }
-            """)
+            """ if self.filter_state.group_operator == FilterOperator.AND else """
+                QLabel {
+                    background: #FFC107;
+                    color: #333;
+                    font-weight: bold;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    margin: 5px 0px;
+                }
+            """
+            separator = QLabel(separator_text)
+            separator.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            separator.setStyleSheet(separator_style)
             self.groups_layout.addWidget(separator)
         
         # Add widget to end
@@ -285,7 +539,7 @@ class TagFilterPanel(QWidget):
             item = self.groups_layout.itemAt(widget_index - 1)
             if item and isinstance(item.widget(), QLabel):
                 separator = item.widget()
-                if separator.text() == "OR":
+                if separator.text() in ("OR", "AND"):
                     self.groups_layout.removeWidget(separator)
                     separator.deleteLater()
         # Or remove OR separator after this group (if this is first group)
@@ -293,7 +547,7 @@ class TagFilterPanel(QWidget):
             item = self.groups_layout.itemAt(1)
             if item and isinstance(item.widget(), QLabel):
                 separator = item.widget()
-                if separator.text() == "OR":
+                if separator.text() in ("OR", "AND"):
                     self.groups_layout.removeWidget(separator)
                     separator.deleteLater()
         
@@ -344,65 +598,77 @@ class TagFilterPanel(QWidget):
             parts.append(f"{num_groups} group{'s' if num_groups > 1 else ''} ({total_tags} tag{'s' if total_tags != 1 else ''})")
         if num_exclusions:
             parts.append(f"{num_exclusions} excluded")
-        
+
         summary = " • ".join(parts)
         self.logic_helper.setText(summary)
-    
+
+    def _on_active_toggled(self, checked: bool):
+        """Handle active checkbox toggled."""
+        self.filter_state.active = checked
+        self.filtersChanged.emit()
+
     def _on_new_group(self):
         """Handle creating a new group."""
         group = self.filter_state.add_group()
         self._add_group_widget(group)
         self._update_summary()
         self.filtersChanged.emit()
-    
+
     def _on_clear_all(self):
         """Handle clearing all filters."""
         # Clear all group widgets
         for group_id in list(self.group_widgets.keys()):
             self._remove_group_widget(group_id)
-        
+
         # Clear all exclusion chips
         for tag in list(self.filter_state.exclude_tags):
             self._remove_exclusion_chip(tag)
-        
+
         # Clear filter state
         self.filter_state.clear_all()
-        
+
         self._update_summary()
         self.filtersChanged.emit()
-    
+
     def _on_group_deleted(self, group_id: str):
         """Handle group deletion."""
         self.filter_state.remove_group(group_id)
         self._remove_group_widget(group_id)
         self._update_summary()
         self.filtersChanged.emit()
-    
+
     def _on_tag_added_to_group(self, tag: str, group_id: str):
         """Handle tag added to a group."""
         self._update_summary()
         self.tagAddedToGroup.emit(tag, group_id)
         self.filtersChanged.emit()
-    
+
     def _on_tag_removed_from_group(self, tag: str, group_id: str):
         """Handle tag removed from a group."""
         self._update_summary()
         self.tagRemovedFromGroup.emit(tag, group_id)
         self.filtersChanged.emit()
-    
+
+    def _on_expression_changed(self, group_id: str):
+        """Handle when a group's expression (operators/order) changes."""
+        # The group's TagFilterGroup.expression has already been updated by the widget.
+        # Ensure summary and filter application are triggered.
+        self._update_summary()
+        self.filtersChanged.emit()
+
     def _on_remove_exclusion(self, tag: str):
         """Handle removing an exclusion."""
         if self.filter_state.remove_exclusion(tag):
             self._remove_exclusion_chip(tag)
             self._update_summary()
             self.filtersChanged.emit()
-    
+
     def _on_add_exclusion_from_input(self):
         """Handle adding an exclusion from the input field."""
         tag = self.exclusion_input.text().strip()
         if not tag:
             return
-        
+
         # Add exclusion
         if self.filter_state.add_exclusion(tag):
             self._add_exclusion_chip(tag)
@@ -410,11 +676,11 @@ class TagFilterPanel(QWidget):
             self.filtersChanged.emit()
             # Clear input
             self.exclusion_input.clear()
-    
+
     def add_tag_to_group(self, tag: str, group_id: str = None):
         """
         Programmatically add a tag to a group.
-        
+
         Args:
             tag: Tag to add
             group_id: Group ID (uses/creates first group if None)
@@ -424,61 +690,56 @@ class TagFilterPanel(QWidget):
             if not self.filter_state.groups:
                 self._on_new_group()
             group_id = self.filter_state.groups[0].group_id
-        
+
         if group_id in self.group_widgets:
             self.group_widgets[group_id].add_tag(tag)
-    
+
     def add_exclusion(self, tag: str):
         """Programmatically add an exclusion tag."""
         if self.filter_state.add_exclusion(tag):
             self._add_exclusion_chip(tag)
             self._update_summary()
             self.filtersChanged.emit()
-    
+
     def get_filter_state(self) -> TagFilterState:
         """Get the current filter state."""
         return self.filter_state
-    
+
     def set_filter_state(self, filter_state: TagFilterState):
         """Set a new filter state (replaces current)."""
-        # Clear existing
+        # Clear existing UI
         self._on_clear_all()
-        
+
         # Set new state
         self.filter_state = filter_state
-        
+
         # Populate from new state
         self._populate_groups()
         self._populate_exclusions()
         self._update_summary()
+        self._update_group_operator_ui()
+        self.update_active_checkbox()
         self.filtersChanged.emit()
-    
-    def update_available_tags(self, tags: list):
-        """Update the list of available tags for autocomplete."""
-        self.available_tags = tags
-        for widget in self.group_widgets.values():
-            widget.update_available_tags(tags)
-        
-        # Update exclusion input autocomplete
-        if tags and hasattr(self, 'exclusion_input'):
-            completer = QCompleter(tags)
-            completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-            self.exclusion_input.setCompleter(completer)
-    
+
+    def update_active_checkbox(self):
+        """Ensure active checkbox matches filter state."""
+        if hasattr(self, 'active_checkbox'):
+            self.active_checkbox.setChecked(self.filter_state.active)
+
     def set_results_count(self, count: int):
         """Update the results count display - now integrated into logic helper."""
         # Results count is now shown in the main status bar instead
         pass
-    
+
     def is_empty(self) -> bool:
         """Check if there are no active filters."""
         return self.filter_state.is_empty()
-    
+
     def _on_tag_dragged_out(self, tag: str, source_group_id: str):
         """Handle tag being dragged out of a group."""
         # Tag will be removed from source when dropped elsewhere
         pass
-    
+
     def _on_tag_dropped_in(self, tag: str, target_group_id: str):
         """Handle tag being dropped into a group."""
         # Check if tag exists in another group and remove it
@@ -486,7 +747,7 @@ class TagFilterPanel(QWidget):
             if group_id != target_group_id:
                 if tag in widget.get_group().tags:
                     widget.remove_tag(tag)
-        
+
         # The tag has already been added by the group widget
         # Just ensure filters are updated
         self._update_summary()

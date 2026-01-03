@@ -1,0 +1,13 @@
+{
+  "backup": "C:\\Users\\salmo\\Documents\\GitHub\\AlbumExplore\\tag_rules_backup_manual_apply_20251114_183940.json",
+  "applied": {
+    "korean folk": "korean folk",
+    "nordic jazz": "nordic jazz",
+    "scottish music": "scottish music",
+    "welsh rock": "welsh rock",
+    "middle-eastern": "middle eastern"
+  },
+  "before_single_instance_mappings": 136,
+  "after_single_instance_mappings": 136,
+  "timestamp": "2025-11-14T18:39:40.348645"
+}

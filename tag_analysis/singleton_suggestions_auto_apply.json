@@ -1,0 +1,142 @@
+{
+  "stats": {
+    "total_singletons": 314
+  },
+  "suggestions": {
+    "afro-funk": {
+      "suggestion": "afro funk",
+      "reason": "single-atomic-component",
+      "score": 0.9333
+    },
+    "afro-rock": {
+      "suggestion": "afro rock",
+      "reason": "single-atomic-component",
+      "score": 0.9333
+    },
+    "bolero-beat": {
+      "suggestion": "bolero beat",
+      "reason": "single-atomic-component",
+      "score": 0.9455
+    },
+    "crimson-esque": {
+      "suggestion": "crimson esque",
+      "reason": "single-atomic-component",
+      "score": 0.9538
+    },
+    "crimson-y": {
+      "suggestion": "crimson y",
+      "reason": "single-atomic-component",
+      "score": 0.9333
+    },
+    "disco-pop": {
+      "suggestion": "disco pop",
+      "reason": "atomic-decompose",
+      "score": 0.9333
+    },
+    "disco-punk": {
+      "suggestion": "disco punk",
+      "reason": "atomic-decompose",
+      "score": 0.94
+    },
+    "drum-oriented": {
+      "suggestion": "drum oriented",
+      "reason": "single-atomic-component",
+      "score": 0.9538
+    },
+    "electro-ambient": {
+      "suggestion": "electro ambient",
+      "reason": "atomic-decompose",
+      "score": 0.96
+    },
+    "floyd-esque": {
+      "suggestion": "floyd esque",
+      "reason": "single-atomic-component",
+      "score": 0.9455
+    },
+    "gong-related": {
+      "suggestion": "gong related",
+      "reason": "single-atomic-component",
+      "score": 0.95
+    },
+    "hawkwind-ish": {
+      "suggestion": "hawkwind ish",
+      "reason": "single-atomic-component",
+      "score": 0.95
+    },
+    "hip hop soul": {
+      "suggestion": "hip-hop soul",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.95
+    },
+    "italo-disco": {
+      "suggestion": "italo disco",
+      "reason": "single-atomic-component",
+      "score": 0.9455
+    },
+    "jazz-pop": {
+      "suggestion": "jazz pop",
+      "reason": "single-atomic-component",
+      "score": 0.925
+    },
+    "keyboard-driven": {
+      "suggestion": "keyboard driven",
+      "reason": "single-atomic-component",
+      "score": 0.96
+    },
+    "king gizzard-like": {
+      "suggestion": "king gizzard like",
+      "reason": "single-atomic-component",
+      "score": 0.9647
+    },
+    "latin-jazz": {
+      "suggestion": "latin jazz",
+      "reason": "atomic-decompose",
+      "score": 0.94
+    },
+    "middle-eastern": {
+      "suggestion": "middle eastern",
+      "reason": "single-atomic-component",
+      "score": 0.9571
+    },
+    "piano-oriented": {
+      "suggestion": "piano oriented",
+      "reason": "atomic-decompose",
+      "score": 0.9571
+    },
+    "post-metal‎": {
+      "suggestion": "post metal‎",
+      "reason": "single-atomic-component",
+      "score": 0.9455
+    },
+    "primus-related": {
+      "suggestion": "primus related",
+      "reason": "single-atomic-component",
+      "score": 0.9571
+    },
+    "prog-?": {
+      "suggestion": "prog ?",
+      "reason": "single-atomic-component",
+      "score": 0.9
+    },
+    "riverside-esque": {
+      "suggestion": "riverside esque",
+      "reason": "single-atomic-component",
+      "score": 0.96
+    },
+    "rock-pop": {
+      "suggestion": "rock pop",
+      "reason": "single-atomic-component",
+      "score": 0.925
+    },
+    "rush-oriented": {
+      "suggestion": "rush oriented",
+      "reason": "single-atomic-component",
+      "score": 0.9538
+    },
+    "shimokita-kei": {
+      "suggestion": "shimokita kei",
+      "reason": "single-atomic-component",
+      "score": 0.9538
+    }
+  }
+}

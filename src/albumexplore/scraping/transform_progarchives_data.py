@@ -8,6 +8,7 @@ a structured format ready for database loading.
 import logging
 import json
 import re
+import hashlib
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -25,6 +26,7 @@ from albumexplore.database.models import (
     Base, Album, Artist, Track, Review, Tag, TagCategory,
     album_tags
 )
+from albumexplore.tags.normalizer.enhanced_normalizer import EnhancedTagNormalizer
 
 # Configure logging
 logging.basicConfig(
@@ -34,6 +36,33 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Helper functions for data cleaning
+def calculate_file_hash(file_path: Path) -> str:
+    """Calculate MD5 hash of a file."""
+    hash_md5 = hashlib.md5()
+    try:
+        with open(file_path, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_md5.update(chunk)
+        return hash_md5.hexdigest()
+    except FileNotFoundError:
+        return ""
+
+def load_state(state_file: Path) -> Dict[str, str]:
+    """Load processing state from JSON file."""
+    if state_file.exists():
+        try:
+            with open(state_file, 'r') as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            logger.warning(f"Could not decode state file {state_file}. Starting fresh.")
+            return {}
+    return {}
+
+def save_state(state_file: Path, state: Dict[str, str]):
+    """Save processing state to JSON file."""
+    with open(state_file, 'w') as f:
+        json.dump(state, f, indent=4)
+
 def clean_text(text: str) -> str:
     """
     Clean text from HTML tags and normalize whitespace.
@@ -127,20 +156,27 @@ def link_artists(session, raw_artists_df) -> Dict[str, Artist]:
     logger.info("Processing artists...")
     artist_map = {}
     
+    # Pre-load existing artists to minimize DB queries
+    existing_artists = {a.name.lower(): a for a in session.query(Artist).all()}
+    logger.info(f"Loaded {len(existing_artists)} existing artists.")
+
+    new_artists_count = 0
+
     for _, row in raw_artists_df.iterrows():
         if pd.isna(row.get('raw_artist_name_canonical')):
             continue
             
         canonical_name = clean_text(row['raw_artist_name_canonical'])
+        canonical_name_lower = canonical_name.lower()
         
-        # Skip if we already processed this artist
-        if canonical_name.lower() in artist_map:
+        # Skip if we already processed this artist in this batch
+        if canonical_name_lower in artist_map:
             continue
             
         # Check if artist already exists in database
-        artist = session.query(Artist).filter(Artist.name == canonical_name).first()
-        
-        if not artist:
+        if canonical_name_lower in existing_artists:
+            artist = existing_artists[canonical_name_lower]
+        else:
             # Create new artist
             artist_id = generate_id("art_")
             artist = Artist(
@@ -149,13 +185,15 @@ def link_artists(session, raw_artists_df) -> Dict[str, Artist]:
                 # Add other fields as needed, like country
             )
             session.add(artist)
-            logger.debug(f"Created artist: {canonical_name}")
+            existing_artists[canonical_name_lower] = artist # Add to local cache
+            new_artists_count += 1
+            # logger.debug(f"Created artist: {canonical_name}")
         
-        artist_map[canonical_name.lower()] = artist
+        artist_map[canonical_name_lower] = artist
     
     # Commit to get artist IDs
     session.commit()
-    logger.info(f"Processed {len(artist_map)} artists")
+    logger.info(f"Processed {len(artist_map)} artists (Created {new_artists_count} new).")
     return artist_map
 
 def process_recording_type(raw_type: str) -> str:
@@ -256,6 +294,9 @@ def process_subgenres(session, raw_subgenre_df) -> Dict[str, Tag]:
     subgenre_tag_map = {}
     category_name = "Prog Archives Subgenre"
     description_text = "Subgenres as defined by ProgArchives.com"
+    
+    # Initialize enhanced normalizer
+    normalizer = EnhancedTagNormalizer()
 
     # Ensure DataFrame is not empty and required columns exist
     if raw_subgenre_df.empty or 'raw_subgenre_name' not in raw_subgenre_df.columns:
@@ -284,7 +325,8 @@ def process_subgenres(session, raw_subgenre_df) -> Dict[str, Tag]:
             logger.debug("Skipping row with missing subgenre name.")
             continue
         
-        subgenre_name = clean_text(str(subgenre_name_raw))
+        # Use enhanced normalizer
+        subgenre_name = normalizer.normalize_enhanced(clean_text(str(subgenre_name_raw)))
         subgenre_definition = clean_text(str(subgenre_definition_raw))
 
         if not subgenre_name:
@@ -342,7 +384,7 @@ def parse_subgenres(subgenre_string: str) -> List[str]:
     subgenres = [s.strip() for s in re.split(r'[/,]', subgenre_string)]
     return [s for s in subgenres if s]  # Filter out empty strings
 
-def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = False) -> bool:
+def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = False, force: bool = False) -> bool:
     """
     Main function to orchestrate the data transformation pipeline.
 
@@ -350,12 +392,14 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
         raw_data_dir: Path to the directory containing raw CSV files
         db_uri: SQLAlchemy database URI
         dry_run: If True, simulate processing without committing to DB
+        force: If True, ignore change detection and force processing
 
     Returns:
         True if successful, False otherwise
     """
     logger.info(f"Starting data transformation. Raw data from: {raw_data_dir}")
     raw_data_path = Path(raw_data_dir)
+    state_file = raw_data_path / "etl_state.json"
 
     # Define paths to raw CSV files
     albums_raw_file = raw_data_path / "pa_raw_albums.csv"
@@ -364,6 +408,34 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
     reviews_raw_file = raw_data_path / "pa_raw_reviews.csv"
     lineups_raw_file = raw_data_path / "pa_raw_lineups.csv"
     subgenres_raw_file = raw_data_path / "pa_raw_subgenre_definitions.csv"
+
+    all_files = [albums_raw_file, artists_raw_file, tracks_raw_file, reviews_raw_file, lineups_raw_file, subgenres_raw_file]
+    
+    # Change Detection Logic
+    current_hashes = {}
+    files_changed = False
+    
+    if not force:
+        logger.info("Checking for file changes...")
+        previous_state = load_state(state_file)
+        
+        for file_path in all_files:
+            file_name = file_path.name
+            current_hash = calculate_file_hash(file_path)
+            current_hashes[file_name] = current_hash
+            
+            if previous_state.get(file_name) != current_hash:
+                logger.info(f"File changed: {file_name}")
+                files_changed = True
+        
+        if not files_changed:
+            logger.info("No files changed since last run. Skipping transformation.")
+            return True
+    else:
+        logger.info("Force mode enabled. Skipping change detection.")
+        # Calculate hashes anyway to update state after run
+        for file_path in all_files:
+            current_hashes[file_path.name] = calculate_file_hash(file_path)
 
     # Load raw data
     try:
@@ -417,14 +489,27 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
         # Phase 4: Process Albums, Tracks, and Reviews
         logger.info("Processing albums, tracks, and reviews...")
         
+        # Initialize enhanced normalizer for album tags
+        normalizer = EnhancedTagNormalizer()
+        
         album_id_map = {} # Maps pa_album_id to internal Album object ID
+
+        # Pre-load existing albums to check for updates (Idempotency)
+        existing_albums = {}
+        if not dry_run:
+            existing_albums_query = session.query(Album).filter(Album.pa_album_id != None).all()
+            for alb in existing_albums_query:
+                existing_albums[str(alb.pa_album_id)] = alb
+            logger.info(f"Loaded {len(existing_albums)} existing albums for idempotency check.")
 
         for index, album_row in raw_albums_df.iterrows():
             # Ensure pa_album_id is not NaN
-            pa_album_id = album_row.get('pa_album_id')
-            if pd.isna(pa_album_id):
+            pa_album_id_raw = album_row.get('pa_album_id')
+            if pd.isna(pa_album_id_raw):
                 logger.warning(f"Skipping album row {index} due to missing 'pa_album_id'.")
                 continue
+            
+            pa_album_id = str(pa_album_id_raw) # Ensure it's a string for consistent lookup
 
             # --- 1. Link to Artist ---
             # The artist_link_local can be used if your artist_map is keyed by local links.
@@ -434,14 +519,25 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             # Assuming 'raw_artist_name' from album data needs to be mapped to an Artist object
             raw_artist_name_on_album = clean_text(album_row.get('raw_artist_name'))
             album_artist_obj = None
-            if raw_artist_name_on_album and raw_artist_name_on_album.lower() in artist_map:
-                album_artist_obj = artist_map[raw_artist_name_on_album.lower()]
+            
+            if raw_artist_name_on_album:
+                artist_key = raw_artist_name_on_album.lower()
+                if artist_key in artist_map:
+                    album_artist_obj = artist_map[artist_key]
+                else:
+                    # Create new artist on the fly
+                    logger.info(f"Artist '{raw_artist_name_on_album}' not found in artist_map. Creating new artist from album data.")
+                    artist_id = generate_id("art_")
+                    album_artist_obj = Artist(
+                        id=artist_id,
+                        name=raw_artist_name_on_album
+                    )
+                    session.add(album_artist_obj)
+                    artist_map[artist_key] = album_artist_obj # Add to map for future lookups
             else:
-                logger.warning(f"Artist '{raw_artist_name_on_album}' for album '{album_row.get('raw_album_title')}' not found in artist_map. Skipping artist linkage for this album.")
-                # Decide if you want to create a new artist here or skip. For now, skipping.
+                logger.warning(f"No artist name for album '{album_row.get('raw_album_title')}'. Skipping artist linkage.")
 
-            # --- 2. Create Album Entity ---
-            album_id = generate_id("alb_")
+            # --- 2. Create or Update Album Entity ---
             album_title = clean_text(album_row.get('raw_album_title'))
             
             release_year_str = str(album_row.get('raw_release_year', '')).strip()
@@ -453,42 +549,64 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
                     logger.warning(f"Could not convert release year '{release_year_str}' to int for album '{album_title}'.")
 
 
-            album_type_raw = album_row.get('raw_album_type')
+            album_type_raw = album_row.get('raw_recording_type')
             album_type_processed = process_recording_type(album_type_raw) # Already exists
 
             # Basic album data
             album_data = {
-                'id': album_id,
                 'title': album_title,
                 'release_year': release_year,
                 'type': album_type_processed,
-                'cover_image_url': clean_text(album_row.get('raw_cover_image_url_local')),
+                'cover_image_url': clean_text(album_row.get('pa_cover_image_url')),
                 'pa_album_id': pa_album_id, # Store the original ProgArchives ID
                 'pa_artist_name_on_album': raw_artist_name_on_album, # Store for reference
-                'pa_rating_value': pd.to_numeric(album_row.get('raw_rating_value'), errors='coerce'),
-                'pa_rating_count': pd.to_numeric(album_row.get('raw_rating_count'), errors='coerce'),
-                'pa_review_count': pd.to_numeric(album_row.get('raw_review_count'), errors='coerce'),
+                'pa_rating_value': pd.to_numeric(album_row.get('pa_average_rating'), errors='coerce'),
+                'pa_rating_count': pd.to_numeric(album_row.get('pa_rating_count'), errors='coerce'),
+                'pa_review_count': pd.to_numeric(album_row.get('pa_review_count'), errors='coerce'),
                 'source_html_file': album_row.get('source_html_file')
             }
             
             if album_artist_obj:
                 album_data['artist_id'] = album_artist_obj.id
-                # If your model supports direct object assignment:
-                # album_data['artist'] = album_artist_obj
+            
+            # Check if album exists
+            if pa_album_id in existing_albums:
+                album = existing_albums[pa_album_id]
+                # Update fields
+                for key, value in album_data.items():
+                    if hasattr(album, key):
+                        setattr(album, key, value)
+                logger.debug(f"Updated existing album: {album_title} ({pa_album_id})")
+            else:
+                # Create new
+                album_id = generate_id("alb_")
+                album_data['id'] = album_id
+                album = Album(**album_data)
+                session.add(album)
+                logger.debug(f"Created new album: {album_title} ({pa_album_id})")
 
-            album = Album(**album_data)
-            session.add(album)
             album_id_map[pa_album_id] = album.id # Map PA ID to new internal Album ID
 
             # --- 3. Link Subgenres (Tags) ---
-            # Assuming 'raw_subgenre' in album_row contains the subgenre name(s)
-            album_subgenre_name = clean_text(album_row.get('raw_subgenre'))
-            if album_subgenre_name and album_subgenre_name.lower() in subgenre_tag_map:
-                tag_to_link = subgenre_tag_map[album_subgenre_name.lower()]
-                if tag_to_link not in album.tags: # Avoid duplicate associations
-                    album.tags.append(tag_to_link)
-            elif album_subgenre_name:
-                 logger.warning(f"Subgenre '{album_subgenre_name}' for album '{album_title}' not found in subgenre_tag_map.")
+            # Use enhanced normalizer to split and normalize tags
+            raw_subgenre_string = clean_text(album_row.get('raw_subgenre_string'))
+            
+            if raw_subgenre_string:
+                # Split multi-tags (e.g. "Death Metal/Heavy Metal")
+                subgenres = normalizer.split_multi_tags(raw_subgenre_string)
+                
+                for subgenre in subgenres:
+                    # Normalize each tag
+                    normalized_subgenre = normalizer.normalize_enhanced(subgenre)
+                    
+                    if normalized_subgenre.lower() in subgenre_tag_map:
+                        tag_to_link = subgenre_tag_map[normalized_subgenre.lower()]
+                        if tag_to_link not in album.tags: # Avoid duplicate associations
+                            album.tags.append(tag_to_link)
+                    else:
+                        # Optional: Create new tag if not found in definitions?
+                        # For now, just log warning as per original logic
+                        logger.warning(f"Subgenre '{normalized_subgenre}' (raw: '{subgenre}') for album '{album_title}' not found in subgenre_tag_map.")
 
 
             # --- 4. Add Lineup ---
@@ -505,11 +623,28 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             session.commit() # Commit albums to get their IDs for tracks and reviews
 
         # --- 5. Process Tracks ---
-        logger.info("Processing tracks...")
+        # For idempotency, we'll delete existing tracks for processed albums and re-insert.
+        # This is simpler than trying to match tracks by title/number which can change.
+        logger.info("Processing tracks (wiping existing tracks for processed albums)...")
+        
+        if not dry_run:
+            # Get all internal album IDs we are processing
+            processed_album_ids = list(album_id_map.values())
+            # Delete tracks for these albums
+            if processed_album_ids:
+                session.query(Track).filter(Track.album_id.in_(processed_album_ids)).delete(synchronize_session=False)
+                session.commit() # Commit deletion
+
         tracks_to_add = []
         for _, track_row in raw_tracks_df.iterrows():
-            track_pa_album_id = track_row.get('pa_album_id')
-            if pd.isna(track_pa_album_id) or track_pa_album_id not in album_id_map:
+            track_pa_album_id_raw = track_row.get('pa_album_id')
+            if pd.isna(track_pa_album_id_raw):
+                 logger.warning(f"Skipping track due to missing pa_album_id.")
+                 continue
+            
+            track_pa_album_id = str(track_pa_album_id_raw)
+
+            if track_pa_album_id not in album_id_map:
                 logger.warning(f"Skipping track for pa_album_id '{track_pa_album_id}' as album was not found or not processed.")
                 continue
 
@@ -541,11 +676,24 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
         logger.info(f"Processed {len(tracks_to_add)} tracks.")
 
         # --- 6. Process Reviews ---
-        logger.info("Processing reviews...")
+        logger.info("Processing reviews (wiping existing reviews for processed albums)...")
+        
+        if not dry_run:
+            # Delete reviews for these albums to ensure idempotency
+            if processed_album_ids:
+                session.query(Review).filter(Review.album_id.in_(processed_album_ids)).delete(synchronize_session=False)
+                session.commit()
+
         reviews_to_add = []
         for _, review_row in raw_reviews_df.iterrows():
-            review_pa_album_id = review_row.get('pa_album_id')
-            if pd.isna(review_pa_album_id) or review_pa_album_id not in album_id_map:
+            review_pa_album_id_raw = review_row.get('pa_album_id')
+            if pd.isna(review_pa_album_id_raw):
+                logger.warning(f"Skipping review due to missing pa_album_id.")
+                continue
+            
+            review_pa_album_id = str(review_pa_album_id_raw)
+
+            if review_pa_album_id not in album_id_map:
                 logger.warning(f"Skipping review for pa_album_id '{review_pa_album_id}' as album was not found or not processed.")
                 continue
             
@@ -560,11 +708,16 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             review_date = None
             if pd.notna(review_date_str):
                 try:
+                    # Clean the date string
+                    clean_date_str = str(review_date_str).strip()
+                    if clean_date_str.lower().startswith('posted '):
+                        clean_date_str = clean_date_str[7:].strip()
+                    
                     # Example format: "2004-02-12" or "January 1, 2022"
                     # Pandas to_datetime is quite flexible
-                    review_date = pd.to_datetime(review_date_str, errors='coerce').date()
+                    review_date = pd.to_datetime(clean_date_str, errors='coerce').date()
                     if pd.isna(review_date): # if conversion failed
-                        logger.warning(f"Could not parse review date '{review_date_str}' for album {review_pa_album_id}.")
+                        logger.warning(f"Could not parse review date '{review_date_str}' (cleaned: '{clean_date_str}') for album {review_pa_album_id}.")
                         review_date = None
                 except Exception as e:
                     logger.warning(f"Error parsing review date '{review_date_str}': {e}")
@@ -608,6 +761,10 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             logger.info("Committing all changes to the database...")
             session.commit()
             logger.info("Database commit successful.")
+            
+            # Update state file only on successful commit
+            save_state(state_file, current_hashes)
+            logger.info("Updated ETL state file.")
         else:
             logger.info("Dry run: Rolling back changes.")
             session.rollback()
@@ -636,6 +793,7 @@ def main():
     parser.add_argument("--raw-data-dir", default="./raw_data", help="Directory containing raw CSV files")
     parser.add_argument("--db-uri", default="sqlite:///albumexplore.db", help="Database URI")
     parser.add_argument("--dry-run", action="store_true", help="Run without committing changes to database")
+    parser.add_argument("--force", action="store_true", help="Force processing even if files haven't changed")
     parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"], 
                         help="Set logging level")
     
@@ -647,7 +805,8 @@ def main():
     success = transform_progarchives_data(
         raw_data_dir=args.raw_data_dir,
         db_uri=args.db_uri,
-        dry_run=args.dry_run
+        dry_run=args.dry_run,
+        force=args.force
     )
     
     if success:

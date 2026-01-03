@@ -1,0 +1,16 @@
+{
+  "total_suggestions": 35,
+  "flagged_forbidden_count": 0,
+  "flagged_typos_count": 2,
+  "flagged_forbidden": [],
+  "flagged_typos": [
+    {
+      "original": "latin-jazz",
+      "target": "latin jazz"
+    },
+    {
+      "original": "nordic jazz",
+      "target": "jazz"
+    }
+  ]
+}

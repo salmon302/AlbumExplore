@@ -4,10 +4,11 @@ import logging
 from pathlib import Path # Added Path
 from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QApplication, QStackedWidget
 from PyQt6.QtGui import QAction, QColor, QPalette # Added QAction, QColor, QPalette
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QTimer
 from .views.table_view import TableView
 from .views.similarity_bar_view import SimilarityBarChartView
 from albumexplore.visualization.views.tag_explorer_view import TagExplorerView # Corrected import
+from .widgets.loading_widget import LoadingWidget
 try:
     from .views.world_map_view import WorldMapView
     MAP_VIEW_AVAILABLE = True
@@ -41,35 +42,27 @@ class AlbumExplorer(QMainWindow):
             self.data_interface = DataInterface(self.session) 
             self.view_manager = ViewManager(self.data_interface, parent=self) 
             
-            # Initialize views
-            self.table_view = TableView()
-            self.tag_explorer_view = TagExplorerView()
-            self.similarity_view = SimilarityBarChartView()
-            self.similarity_view.set_session(self.session)
-            if MAP_VIEW_AVAILABLE:
-                self.map_view = WorldMapView()
-            else:
-                self.map_view = None
+            # Initialize views dictionary for lazy loading
+            self._views = {}  # Will be populated on-demand
+            self._view_initialized = {
+                ViewType.TABLE: False,
+                ViewType.TAG_EXPLORER: False,
+                ViewType.SIMILARITY: False,
+                ViewType.MAP: False
+            }
 
             # Setup Menu Bar for view switching and data loading
             self._setup_menu_bar()
 
             # Connect view_manager signals
-            self.view_manager.view_changed.connect(self._update_active_view)
-            
-            # Connect table view's "show similar" signal
-            self.table_view.show_similar_requested.connect(self._show_similar_albums)
-            
-            # Connect similarity view's "focus requested" signal
-            self.similarity_view.album_focus_requested.connect(self._show_similar_albums) 
+            self.view_manager.view_changed.connect(self._update_active_view) 
 
             # Create a stacked widget to hold different views
             self.stacked_widget = QStackedWidget()
-            self.stacked_widget.addWidget(self.table_view)
-            self.stacked_widget.addWidget(self.tag_explorer_view) # Add TagExplorerView to stack
-            self.stacked_widget.addWidget(self.similarity_view) # Add SimilarityView to stack
-            if MAP_VIEW_AVAILABLE and self.map_view:
-                self.stacked_widget.addWidget(self.map_view)
+            
+            # Create and add loading widget
+            self.loading_widget = LoadingWidget()
+            self.stacked_widget.addWidget(self.loading_widget)
 
             # Set the central widget
             self.setCentralWidget(self.stacked_widget)
@@ -82,6 +75,40 @@ class AlbumExplorer(QMainWindow):
         except Exception as e:
             graphics_logger.error(f"Failed to initialize Album Explorer: {e}", exc_info=True) 
             raise
+    
+    def _get_or_create_view(self, view_type: ViewType):
+        """Get or create a view lazily on first access."""
+        if view_type in self._views:
+            graphics_logger.debug(f"Reusing cached view for {view_type.value}")
+            return self._views[view_type]
+        
+        graphics_logger.info(f"Creating view for {view_type.value}...")
+        
+        if view_type == ViewType.TABLE:
+            view = TableView()
+            view.show_similar_requested.connect(self._show_similar_albums)
+            self._views[ViewType.TABLE] = view
+        elif view_type == ViewType.TAG_EXPLORER:
+            view = TagExplorerView()
+            self._views[ViewType.TAG_EXPLORER] = view
+        elif view_type == ViewType.SIMILARITY:
+            view = SimilarityBarChartView()
+            view.set_session(self.session)
+            view.album_focus_requested.connect(self._show_similar_albums)
+            self._views[ViewType.SIMILARITY] = view
+        elif view_type == ViewType.MAP and MAP_VIEW_AVAILABLE:
+            view = WorldMapView()
+            self._views[ViewType.MAP] = view
+        else:
+            graphics_logger.warning(f"Unknown or unavailable view type: {view_type.value}")
+            return None
+        
+        # Add to stacked widget
+        self.stacked_widget.addWidget(view)
+        self._view_initialized[view_type] = True
+        
+        graphics_logger.info(f"View {view_type.value} created and added to stack")
+        return view
     
     def _show_welcome_view(self):
         """Show a welcome message until data is loaded."""
@@ -167,10 +194,29 @@ class AlbumExplorer(QMainWindow):
         # Switch to table view to show the data
         self.view_manager.switch_view(ViewType.TABLE)
         
-        # Remove welcome widget if it exists
+        # Remove welcome widget if it exists (guard against deleted C/C++ object)
         if hasattr(self, 'welcome_widget'):
-            self.stacked_widget.removeWidget(self.welcome_widget)
-            self.welcome_widget.deleteLater()
+            try:
+                # indexOf will return -1 if the widget isn't in the stack; it may
+                # raise RuntimeError if the underlying C++ object was already deleted.
+                if self.stacked_widget.indexOf(self.welcome_widget) != -1:
+                    self.stacked_widget.removeWidget(self.welcome_widget)
+            except RuntimeError:
+                graphics_logger.warning("welcome_widget already deleted when attempting to remove it from stacked_widget")
+            finally:
+                try:
+                    # Safe to call deleteLater(); if the object is already deleted
+                    # this may raise, so guard it.
+                    self.welcome_widget.deleteLater()
+                except Exception:
+                    pass
+            # Remove attribute reference so future calls won't attempt removal again
+            try:
+                delattr(self, 'welcome_widget')
+            except Exception:
+                # fallback to deleting attribute directly if delattr fails
+                if hasattr(self, 'welcome_widget'):
+                    del self.welcome_widget
 
     def _setup_menu_bar(self):
         """Sets up the main menu bar with data loading and view switching actions."""
@@ -235,10 +281,19 @@ class AlbumExplorer(QMainWindow):
         """Updates the currently displayed view based on ViewManager's state."""
         graphics_logger.info("AlbumExplorer: Updating active view")
         current_view_type = self.view_manager.current_view_type
+        
+        # Show loading widget
+        self.loading_widget.set_message(f"Loading {current_view_type.value} view...")
+        self.loading_widget.set_status("Preparing data...")
+        self.stacked_widget.setCurrentWidget(self.loading_widget)
+        QApplication.processEvents()  # Force UI update
+        
         render_data = self.view_manager.get_render_data() # Get current render data
 
         if not render_data:
             graphics_logger.warning("AlbumExplorer: No render data available from get_render_data(). Attempting to force render.")
+            self.loading_widget.set_status("Rendering view data...")
+            QApplication.processEvents()
             # Attempt to render if data is missing, might be initial call
             render_data = self.view_manager._render_view() # Call internal method as a fallback
             if not render_data:
@@ -247,16 +302,27 @@ class AlbumExplorer(QMainWindow):
             else:
                 graphics_logger.info("AlbumExplorer: Successfully fetched render_data via _render_view fallback.")
 
+        # Lazy load the view if not already created
+        self.loading_widget.set_status("Initializing view components...")
+        QApplication.processEvents()
+        view = self._get_or_create_view(current_view_type)
+        if not view:
+            graphics_logger.error(f"Failed to create or get view for {current_view_type.value}")
+            return
+
+        self.loading_widget.set_status("Populating view data...")
+        QApplication.processEvents()
+        
         if current_view_type == ViewType.TABLE:
             graphics_logger.info(f"AlbumExplorer: Setting TableView. Data type: {render_data.get('type')}")
-            self.table_view.update_data(render_data)
-            self.stacked_widget.setCurrentWidget(self.table_view)
+            view.update_data(render_data)
+            self.stacked_widget.setCurrentWidget(view)
         elif current_view_type == ViewType.TAG_EXPLORER: # Added condition for TagExplorerView
             graphics_logger.info(f"AlbumExplorer: Setting TagExplorerView. Data type: {render_data.get('type')}")
             nodes = render_data.get('nodes', [])
             edges = render_data.get('edges', []) # edges might not be directly used by TagExplorerView but good to pass if available
-            self.tag_explorer_view.update_data(nodes, edges)
-            self.stacked_widget.setCurrentWidget(self.tag_explorer_view)
+            view.update_data(nodes, edges)
+            self.stacked_widget.setCurrentWidget(view)
         elif current_view_type == ViewType.SIMILARITY:
             graphics_logger.info(f"AlbumExplorer: Setting SimilarityView. Data type: {render_data.get('type')}")
             # For similarity view, we need to set an album first
@@ -264,12 +330,12 @@ class AlbumExplorer(QMainWindow):
             selected_ids = render_data.get('selected_ids', set())
             if selected_ids:
                 album_id = list(selected_ids)[0]
-                self.similarity_view.set_album(album_id)
-            self.stacked_widget.setCurrentWidget(self.similarity_view)
-        elif current_view_type == ViewType.MAP and MAP_VIEW_AVAILABLE and self.map_view:
+                view.set_album(album_id)
+            self.stacked_widget.setCurrentWidget(view)
+        elif current_view_type == ViewType.MAP and MAP_VIEW_AVAILABLE:
             graphics_logger.info(f"AlbumExplorer: Setting MapView. Data type: {render_data.get('type')}")
-            self.map_view.update_data(render_data)
-            self.stacked_widget.setCurrentWidget(self.map_view)
+            view.update_data(render_data)
+            self.stacked_widget.setCurrentWidget(view)
         else:
             graphics_logger.warning(f"AlbumExplorer: Unknown view type {current_view_type}")
         
@@ -387,6 +453,13 @@ def main():
             QSplitter::handle:hover {{ background-color: {accent_hex}; }}
             QProgressBar {{ background-color: {surface_hex}; border: 1px solid {border_hex}; border-radius: 4px; text-align: center; color: {text_primary_hex}; }}
             QProgressBar::chunk {{ background-color: {accent_hex}; }}
+            QToolTip {{
+                background-color: {raised_hex};
+                color: {text_primary_hex};
+                border: 1px solid {border_hex};
+                padding: 4px;
+                border-radius: 4px;
+            }}
             """
 
             app.setPalette(palette)

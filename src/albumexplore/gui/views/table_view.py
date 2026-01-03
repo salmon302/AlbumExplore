@@ -19,6 +19,9 @@ class TableView(BaseView):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.view_type = ViewType.TABLE
+        self._all_rows = []  # Cache all rows for filtering
+        self._filtered_row_indices = []  # Indices of visible rows after filtering
+        self._batch_size = 100  # Number of rows to render at once
         self._setup_ui()
         graphics_logger.debug("Table view initialized")
     
@@ -85,69 +88,18 @@ class TableView(BaseView):
         self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
     
     def update_data(self, render_data: Dict[str, Any], edges=None):
-        """Update table data."""
+        """Update table data with batch rendering for performance."""
         super().update_data(render_data)
         
         if 'rows' not in render_data:
             return
-            
-        rows = render_data['rows']
-        self.table.setRowCount(len(rows))
         
-        for row_idx, row in enumerate(rows):
-            album_id = row.get('id')
-
-            # Favorite button in column 0
-            try:
-                fav_btn = QPushButton(self)
-                fav_btn.setFlat(True)
-                fav_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-                is_fav = self._fav_mgr.is_favorite(album_id) if album_id else False
-                fav_btn.setText('★' if is_fav else '☆')
-                fav_btn.setToolTip('Toggle favorite')
-                # Closure to capture album_id and button reference
-                def _make_handler(aid, btn):
-                    return lambda checked=False: self._toggle_favorite(aid, btn)
-                fav_btn.clicked.connect(_make_handler(album_id, fav_btn))
-                self.table.setCellWidget(row_idx, 0, fav_btn)
-            except Exception:
-                graphics_logger.exception('Failed to create favorite button')
-
-            # Artist
-            artist_data = row.get('artist', '')
-            artist_name = str(artist_data) if artist_data is not None else ''
-            item = QTableWidgetItem(artist_name)
-            item.setData(Qt.ItemDataRole.UserRole, album_id)
-            self.table.setItem(row_idx, 1, item)
-
-            # Album
-            self.table.setItem(row_idx, 2,
-                             QTableWidgetItem(row.get('album', '')))
-
-            # Year
-            year_val = row.get('year', '')
-            graphics_logger.debug(f"TableView: Populating year for row {row_idx}, album '{row.get('album', '')}', year: '{year_val}', type: {type(year_val)}") # DEBUG
-            year_item = QTableWidgetItem()
-            year_item.setData(Qt.ItemDataRole.DisplayRole, year_val)
-            self.table.setItem(row_idx, 3, year_item)
-
-            # Genre
-            self.table.setItem(row_idx, 4,
-                             QTableWidgetItem(row.get('genre', '')))
-
-            # Country
-            self.table.setItem(row_idx, 5,
-                             QTableWidgetItem(row.get('country', '')))
-
-            # Vocal style
-            vocal_style_value = row.get('vocal_style', '')
-            self.table.setItem(row_idx, 6,
-                             QTableWidgetItem(vocal_style_value))
-
-            # Tags
-            tags = row.get('tags', [])
-            self.table.setItem(row_idx, 7,
-                             QTableWidgetItem(', '.join(tags)))
+        # Store all rows for filtering
+        self._all_rows = render_data['rows']
+        self._filtered_row_indices = list(range(len(self._all_rows)))
+        
+        # Initially render only first batch
+        self._render_visible_rows()
         
         # Update selection
         self.table.clearSelection()
@@ -158,7 +110,8 @@ class TableView(BaseView):
                 if item and item.data(Qt.ItemDataRole.UserRole) in selected_ids:
                     self.table.selectRow(row)
         
-        graphics_logger.debug(f"Updated table view with {len(rows)} rows")
+        graphics_logger.debug(f"Updated table view with {len(self._all_rows)} total rows, showing first {min(self._batch_size, len(self._all_rows))}")
+        
         # Re-apply filter after populating rows so the search stays in effect
         try:
             current_search = self.search_input.text() if hasattr(self, 'search_input') else ''
@@ -167,6 +120,71 @@ class TableView(BaseView):
         except Exception:
             # Don't let filtering errors break the UI
             graphics_logger.exception("Error applying search filter after data update")
+    
+    def _render_visible_rows(self):
+        """Render only visible rows for better performance."""
+        visible_count = min(len(self._filtered_row_indices), self._batch_size)
+        self.table.setRowCount(visible_count)
+        
+        for display_row in range(visible_count):
+            data_row_idx = self._filtered_row_indices[display_row]
+            row = self._all_rows[data_row_idx]
+            self._populate_row(display_row, row)
+    
+    def _populate_row(self, row_idx: int, row: Dict[str, Any]):
+        """Populate a single table row."""
+        album_id = row.get('id')
+
+        # Favorite button in column 0
+        try:
+            fav_btn = QPushButton(self)
+            fav_btn.setFlat(True)
+            fav_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+            is_fav = self._fav_mgr.is_favorite(album_id) if album_id else False
+            fav_btn.setText('★' if is_fav else '☆')
+            fav_btn.setToolTip('Toggle favorite')
+            # Closure to capture album_id and button reference
+            def _make_handler(aid, btn):
+                return lambda checked=False: self._toggle_favorite(aid, btn)
+            fav_btn.clicked.connect(_make_handler(album_id, fav_btn))
+            self.table.setCellWidget(row_idx, 0, fav_btn)
+        except Exception:
+            graphics_logger.exception('Failed to create favorite button')
+
+        # Artist
+        artist_data = row.get('artist', '')
+        artist_name = str(artist_data) if artist_data is not None else ''
+        item = QTableWidgetItem(artist_name)
+        item.setData(Qt.ItemDataRole.UserRole, album_id)
+        self.table.setItem(row_idx, 1, item)
+
+        # Album
+        self.table.setItem(row_idx, 2,
+                         QTableWidgetItem(row.get('album', '')))
+
+        # Year
+        year_val = row.get('year', '')
+        year_item = QTableWidgetItem()
+        year_item.setData(Qt.ItemDataRole.DisplayRole, year_val)
+        self.table.setItem(row_idx, 3, year_item)
+
+        # Genre
+        self.table.setItem(row_idx, 4,
+                         QTableWidgetItem(row.get('genre', '')))
+
+        # Country
+        self.table.setItem(row_idx, 5,
+                         QTableWidgetItem(row.get('country', '')))
+
+        # Vocal style
+        vocal_style_value = row.get('vocal_style', '')
+        self.table.setItem(row_idx, 6,
+                         QTableWidgetItem(vocal_style_value))
+
+        # Tags
+        tags = row.get('tags', [])
+        self.table.setItem(row_idx, 7,
+                         QTableWidgetItem(', '.join(tags)))
     
     def _handle_selection(self, selected_ids=None):
         """Handle table selection changes."""
@@ -283,38 +301,45 @@ class TableView(BaseView):
             only_favs = getattr(self, 'fav_only_checkbox', None) and self.fav_only_checkbox.isChecked()
             favs = self._fav_mgr.all() if only_favs else None
 
-            row_count = self.table.rowCount()
-            # If no tokens and not favorites-only, show all
+            # If no filters, show all rows
             if not tokens and not only_favs:
-                for r in range(row_count):
-                    self.table.setRowHidden(r, False)
+                self._filtered_row_indices = list(range(len(self._all_rows)))
+                self._render_visible_rows()
                 return
 
-            # Columns to search: Fav(0), Artist(1), Album(2), Year(3), Genre(4), Country(5), Vocal style(6), Tags(7)
-            for r in range(row_count):
-                # If favorites-only, quickly hide rows not in favorites
+            # Filter rows based on search criteria
+            self._filtered_row_indices = []
+            for idx, row in enumerate(self._all_rows):
+                # Check favorites filter
                 if favs is not None:
-                    artist_item = self.table.item(r, 1)
-                    aid = artist_item.data(Qt.ItemDataRole.UserRole) if artist_item else None
+                    aid = row.get('id')
                     if aid not in favs:
-                        self.table.setRowHidden(r, True)
                         continue
-
-                if not tokens:
-                    # Favorites-only and matched above, keep visible
-                    self.table.setRowHidden(r, False)
-                    continue
-
-                combined = []
-                for c in range(self.table.columnCount()):
-                    item = self.table.item(r, c)
-                    if item is not None:
-                        combined.append(str(item.text()).lower())
-                combined_text = ' '.join(combined)
-
-                # All tokens must be present
-                hide = not all(tok in combined_text for tok in tokens)
-                self.table.setRowHidden(r, hide)
+                
+                # Check search tokens if present
+                if tokens:
+                    # Build searchable text from all columns
+                    searchable_parts = [
+                        str(row.get('artist', '')),
+                        str(row.get('album', '')),
+                        str(row.get('year', '')),
+                        str(row.get('genre', '')),
+                        str(row.get('country', '')),
+                        str(row.get('vocal_style', '')),
+                        ', '.join(row.get('tags', []))
+                    ]
+                    combined_text = ' '.join(searchable_parts).lower()
+                    
+                    # All tokens must be present
+                    if not all(tok in combined_text for tok in tokens):
+                        continue
+                
+                # Row passes all filters
+                self._filtered_row_indices.append(idx)
+            
+            # Re-render with filtered rows
+            self._render_visible_rows()
+            
         except Exception:
             graphics_logger.exception("Error during table search filtering")
 

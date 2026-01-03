@@ -1,0 +1,91 @@
+{
+  "total_tag_count": 669,
+  "total_tag_instances": 58527,
+  "number_of_low_freq_tags_<3": 396,
+  "top_20_tags": [
+    {
+      "tag": "metal",
+      "count": 12211
+    },
+    {
+      "tag": "rock",
+      "count": 7829
+    },
+    {
+      "tag": "progressive",
+      "count": 4927
+    },
+    {
+      "tag": "post",
+      "count": 2775
+    },
+    {
+      "tag": "death",
+      "count": 2213
+    },
+    {
+      "tag": "black",
+      "count": 1610
+    },
+    {
+      "tag": "pop",
+      "count": 1500
+    },
+    {
+      "tag": "doom",
+      "count": 1181
+    },
+    {
+      "tag": "alt",
+      "count": 1106
+    },
+    {
+      "tag": "indie",
+      "count": 1057
+    },
+    {
+      "tag": "psychedelic",
+      "count": 959
+    },
+    {
+      "tag": "punk",
+      "count": 945
+    },
+    {
+      "tag": "sludge",
+      "count": 886
+    },
+    {
+      "tag": "hardcore",
+      "count": 799
+    },
+    {
+      "tag": "stoner",
+      "count": 712
+    },
+    {
+      "tag": "melodic",
+      "count": 681
+    },
+    {
+      "tag": "folk",
+      "count": 654
+    },
+    {
+      "tag": "core",
+      "count": 628
+    },
+    {
+      "tag": "heavy",
+      "count": 553
+    },
+    {
+      "tag": "jazz",
+      "count": 518
+    }
+  ],
+  "low_freq_tag_summary": {
+    "freq_1": 309,
+    "freq_2": 87
+  }
+}

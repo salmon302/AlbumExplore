@@ -296,9 +296,22 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
                     })
         
         # Bulk insert albums using bulk_insert_mappings (much faster than add_all)
+        inserted_count = 0
         if albums_to_insert:
-            session.bulk_insert_mappings(Album, albums_to_insert)
-            db_logger.info(f"Created {len(albums_to_insert)} new albums")
+            # Deduplicate by album id in case the dataframe contained duplicates
+            unique_albums = {a['id']: a for a in albums_to_insert}
+            album_ids = list(unique_albums.keys())
+
+            # Remove any IDs that already exist in the database to avoid UNIQUE constraint errors
+            existing_ids = set(r[0] for r in session.query(Album.id).filter(Album.id.in_(album_ids)).all())
+            to_insert = [unique_albums[a_id] for a_id in album_ids if a_id not in existing_ids]
+
+            if to_insert:
+                session.bulk_insert_mappings(Album, to_insert)
+                inserted_count = len(to_insert)
+                db_logger.info(f"Created {inserted_count} new albums (skipped {len(album_ids) - inserted_count} existing)")
+            else:
+                db_logger.info("No new albums to insert after deduplication and existing-id filtering")
         
         # Bulk insert album-tag relationships using raw SQL for maximum performance
         if album_tag_associations:
@@ -327,14 +340,14 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         # === SUMMARY ===
         total_time = (datetime.now() - start_time).total_seconds()
         total_tags = session.query(Tag).count()
-        
+
         db_logger.info(f"Optimized data loading completed successfully in {total_time:.2f} seconds")
-        db_logger.info(f"Processed {len(albums_to_create)} new albums. Total tags in database: {total_tags}")
-        performance_logger.info(f"[PERF] Total optimized load time: {total_time:.2f}s for {len(albums_to_create)} albums")
-        
+        db_logger.info(f"Processed {inserted_count} new albums. Total tags in database: {total_tags}")
+        performance_logger.info(f"[PERF] Total optimized load time: {total_time:.2f}s for {inserted_count} albums")
+
         # Complete overall performance monitoring
         if perf_monitor:
-            perf_monitor.complete_operation("Optimized Data Loading", len(albums_to_create))
+            perf_monitor.complete_operation("Optimized Data Loading", inserted_count)
 
     except Exception as e:
         session.rollback()

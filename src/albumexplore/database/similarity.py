@@ -3,6 +3,7 @@ from typing import List, Tuple, Set, Dict, Any, Optional
 from sqlalchemy.orm import Session, joinedload
 from .models import Album, Tag
 from albumexplore.similarity import manual as manual_mod
+from .tag_relationship_similarity import TagRelationshipSimilarity, load_default_relationships
 
 
 def calculate_album_similarity_optimized(
@@ -14,6 +15,7 @@ def calculate_album_similarity_optimized(
     per_tag_weights: Dict[str, float] = None,
     manual_relationships: Optional[Dict[str, List[Dict[str, Any]]]] = None,
     alpha_manual: float = 0.5,
+    use_fuzzy_tags: bool = True,
 ) -> List[Tuple[Album, float, Dict[str, Any]]]:
     """
     Calculate similarity scores for top N albums compared to a target album.
@@ -23,6 +25,11 @@ def calculate_album_similarity_optimized(
         album_id: ID of the target album to find similar albums for
         limit: Maximum number of similar albums to return
         min_similarity: Minimum similarity threshold (0.0 to 1.0)
+        weights: Optional weight overrides for similarity components
+        per_tag_weights: Optional per-tag importance weights
+        manual_relationships: Optional manual tag relationship mappings
+        alpha_manual: Weight for manual relationships (0.0 to 1.0)
+        use_fuzzy_tags: Whether to use fuzzy tag matching with relationships (default True)
         
     Returns:
         List of (album, similarity_score, breakdown_dict) tuples, sorted by score descending
@@ -60,6 +67,14 @@ def calculate_album_similarity_optimized(
     
     candidate_albums = query.distinct().all()
     
+    # Initialize tag relationship similarity engine if fuzzy matching enabled
+    tag_rel_sim = None
+    if use_fuzzy_tags:
+        # Load relationships (try manual first, fall back to default)
+        relationships = manual_relationships if manual_relationships else load_default_relationships()
+        if relationships:
+            tag_rel_sim = TagRelationshipSimilarity(relationships)
+    
     # 4. Calculate similarity scores (in-memory, fast)
     similarities = []
     for candidate in candidate_albums:
@@ -69,6 +84,7 @@ def calculate_album_similarity_optimized(
             album_genre, album_year, album_country,
             weights=weights,
             per_tag_weights=per_tag_weights,
+            tag_rel_sim=tag_rel_sim,
         )
         # If manual relationships provided, compute manual signal between any tag pairs
         manual_raw = None
@@ -119,41 +135,75 @@ def _calculate_similarity(
     album1_country: str,
     weights: Dict[str, float] = None,
     per_tag_weights: Dict[str, float] = None,
+    tag_rel_sim: Optional[TagRelationshipSimilarity] = None,
 ) -> Tuple[float, Dict[str, Any]]:
     """
     Calculate similarity score between two albums with detailed breakdown.
     
+    Args:
+        album1: First album
+        album2: Second album
+        album1_tag_ids: Pre-extracted tag IDs for album1
+        album1_atomic_ids: Pre-extracted atomic tag IDs for album1
+        album1_genre: Genre for album1
+        album1_year: Release year for album1
+        album1_country: Country for album1
+        weights: Optional component weight overrides
+        per_tag_weights: Optional per-tag importance weights
+        tag_rel_sim: Optional TagRelationshipSimilarity for fuzzy matching
+    
     Returns:
         Tuple of (total_similarity_score, breakdown_dict)
     """
-    # Composite tag similarity (Jaccard similarity)
+    # Composite tag similarity
     album2_tag_ids = {t.id for t in album2.tags}
-    shared_tags = album1_tag_ids & album2_tag_ids
-    union_tags = album1_tag_ids | album2_tag_ids
-
-    # If per_tag_weights provided, use weighted Jaccard similarity
-    def _tag_weight(tag_id: str, tag_objs: List[Any]) -> float:
-        # Default weight 1.0, allow per_tag_weights keyed by id or name
-        if not per_tag_weights:
-            return 1.0
-        # Try by id first
-        if tag_id in per_tag_weights:
-            return float(per_tag_weights[tag_id])
-        # Fallback: try to find tag object's name mapping (build mapping once)
-        return float(per_tag_weights.get(tag_id, 1.0))
-
-    if per_tag_weights:
-        weighted_shared = 0.0
-        weighted_union = 0.0
-        # Build set of all tag ids in union and sum weights accordingly
-        for tid in union_tags:
-            w = _tag_weight(tid, None)
-            if tid in shared_tags:
-                weighted_shared += w
-            weighted_union += w
-        tag_similarity = (weighted_shared / weighted_union) if weighted_union else 0.0
+    
+    # Use fuzzy tag matching if relationship engine provided
+    if tag_rel_sim is not None:
+        # Get tag names for fuzzy matching
+        album1_tag_names = {t.name for t in album1.tags if t.name}
+        album2_tag_names = {t.name for t in album2.tags if t.name}
+        
+        # Calculate fuzzy similarity
+        tag_similarity = tag_rel_sim.calculate_tag_similarity_score(
+            album1_tag_names,
+            album2_tag_names,
+            tag_objects1=list(album1.tags),
+            tag_objects2=list(album2.tags),
+            use_fuzzy=True
+        )
+        
+        # For breakdown, still track exact matches
+        shared_tags = album1_tag_ids & album2_tag_ids
+        union_tags = album1_tag_ids | album2_tag_ids
     else:
-        tag_similarity = len(shared_tags) / len(union_tags) if union_tags else 0
+        # Fall back to exact Jaccard similarity
+        shared_tags = album1_tag_ids & album2_tag_ids
+        union_tags = album1_tag_ids | album2_tag_ids
+
+        # If per_tag_weights provided, use weighted Jaccard similarity
+        def _tag_weight(tag_id: str, tag_objs: List[Any]) -> float:
+            # Default weight 1.0, allow per_tag_weights keyed by id or name
+            if not per_tag_weights:
+                return 1.0
+            # Try by id first
+            if tag_id in per_tag_weights:
+                return float(per_tag_weights[tag_id])
+            # Fallback: try to find tag object's name mapping (build mapping once)
+            return float(per_tag_weights.get(tag_id, 1.0))
+
+        if per_tag_weights:
+            weighted_shared = 0.0
+            weighted_union = 0.0
+            # Build set of all tag ids in union and sum weights accordingly
+            for tid in union_tags:
+                w = _tag_weight(tid, None)
+                if tid in shared_tags:
+                    weighted_shared += w
+                weighted_union += w
+            tag_similarity = (weighted_shared / weighted_union) if weighted_union else 0.0
+        else:
+            tag_similarity = len(shared_tags) / len(union_tags) if union_tags else 0
     
     # Atomic tag similarity (more granular)
     album2_atomic_ids = {t.id for t in album2.atomic_tags}

@@ -1,0 +1,212 @@
+[
+  {
+    "source_tag": "breakbeats",
+    "source_count": 1,
+    "target_tag": "breakbeat",
+    "target_count": 2,
+    "reason": "plural",
+    "rule": "plural->singular",
+    "confidence": "medium",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "crimson-esque",
+    "source_count": 1,
+    "target_tag": "crimson esque",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "crimson-y",
+    "source_count": 1,
+    "target_tag": "crimson y",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "deep purple-ish",
+    "source_count": 1,
+    "target_tag": "deep purple ish",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "drum-oriented",
+    "source_count": 1,
+    "target_tag": "drum oriented",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "floyd-esque",
+    "source_count": 1,
+    "target_tag": "floyd esque",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "gong-related",
+    "source_count": 1,
+    "target_tag": "gong related",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "hawkwind-ish",
+    "source_count": 1,
+    "target_tag": "hawkwind ish",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "hip-hop soul",
+    "source_count": 1,
+    "target_tag": "hip hop soul",
+    "target_count": 1,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "keyboard-driven",
+    "source_count": 1,
+    "target_tag": "keyboard driven",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "king gizzard-like",
+    "source_count": 1,
+    "target_tag": "king gizzard like",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "mitteralter-metal",
+    "source_count": 1,
+    "target_tag": "mitteralter metal",
+    "target_count": 1,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "oi!",
+    "source_count": 1,
+    "target_tag": "oi",
+    "target_count": 0,
+    "reason": "punctuation-fold",
+    "rule": "punctuation-fold",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "piano-oriented",
+    "source_count": 1,
+    "target_tag": "piano oriented",
+    "target_count": 1,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "post-metal‎",
+    "source_count": 1,
+    "target_tag": "post metal‎",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "primus-related",
+    "source_count": 1,
+    "target_tag": "primus related",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "riverside-esque",
+    "source_count": 1,
+    "target_tag": "riverside esque",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "rush-oriented",
+    "source_count": 1,
+    "target_tag": "rush oriented",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "seventh wonder-ish",
+    "source_count": 1,
+    "target_tag": "seventh wonder ish",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "soft machine-related",
+    "source_count": 1,
+    "target_tag": "soft machine related",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  },
+  {
+    "source_tag": "proto-punk",
+    "source_count": 2,
+    "target_tag": "proto punk",
+    "target_count": 0,
+    "reason": "hyphen",
+    "rule": "hyphen->space",
+    "confidence": "high",
+    "expected_removed": 1
+  }
+]

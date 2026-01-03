@@ -1,0 +1,148 @@
+{
+  "stats": {
+    "total_singletons": 314,
+    "suggested": 35
+  },
+  "suggestions": {
+    "artcore": {
+      "suggestion": "art core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "blackend hardcore": {
+      "suggestion": "blackened hardcore",
+      "reason": "atomic-decompose"
+    },
+    "celtic punk": {
+      "suggestion": "punk",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "death metal/heavy metal/osdm": {
+      "suggestion": "death metal heavy metal osdm",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "disco-pop": {
+      "suggestion": "disco pop",
+      "reason": "atomic-decompose"
+    },
+    "disco-punk": {
+      "suggestion": "disco punk",
+      "reason": "atomic-decompose"
+    },
+    "doom metal/rock": {
+      "suggestion": "doom metal rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "doom rock/metal": {
+      "suggestion": "doom rock metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "doom-gaze": {
+      "suggestion": "doom shoegaze",
+      "reason": "atomic-decompose"
+    },
+    "dreamcore": {
+      "suggestion": "dream core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "electro-ambient": {
+      "suggestion": "electro ambient",
+      "reason": "atomic-decompose"
+    },
+    "emocrust": {
+      "suggestion": "emo crust",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "emoviolence/skramz": {
+      "suggestion": "emoviolence skramz",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "ghotic metal": {
+      "suggestion": "gothic metal",
+      "reason": "atomic-decompose"
+    },
+    "hip hop soul": {
+      "suggestion": "hip-hop soul",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "italian prog": {
+      "suggestion": "prog",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "jazz-core": {
+      "suggestion": "jazz hardcore",
+      "reason": "atomic-decompose"
+    },
+    "latin-jazz": {
+      "suggestion": "latin jazz",
+      "reason": "atomic-decompose"
+    },
+    "mincecore": {
+      "suggestion": "mince core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "new wave and prog rock": {
+      "suggestion": "new wave progressive rock",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "nintendocore": {
+      "suggestion": "nintendo core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "nordic jazz": {
+      "suggestion": "jazz",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "piano-oriented": {
+      "suggestion": "piano oriented",
+      "reason": "atomic-decompose"
+    },
+    "powerviolence/black metal/death metal": {
+      "suggestion": "powerviolence black metal death metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "prog -rock": {
+      "suggestion": "progressive rock",
+      "reason": "atomic-decompose"
+    },
+    "pscyhedelic rock": {
+      "suggestion": "psychedelic rock",
+      "reason": "atomic-decompose"
+    },
+    "sadcore": {
+      "suggestion": "sad core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "sludgecore": {
+      "suggestion": "sludge core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "southern soul": {
+      "suggestion": "soul",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "spacegrind": {
+      "suggestion": "space grind",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "speed/thrash metal": {
+      "suggestion": "speed thrash metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "tharsh metal": {
+      "suggestion": "thrash metal",
+      "reason": "atomic-decompose"
+    },
+    "thrashcore": {
+      "suggestion": "thrash core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "western noir": {
+      "suggestion": "noir",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "yatch rock": {
+      "suggestion": "yacht rock",
+      "reason": "rules-mapped-after-enhanced"
+    }
+  }
+}

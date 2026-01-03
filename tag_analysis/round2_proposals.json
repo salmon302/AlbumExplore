@@ -1,0 +1,107 @@
+[
+    {
+        "source": "breakbeats",
+        "target": "breakbeat",
+        "reason": "plural"
+    },
+    {
+        "source": "crimson-esque",
+        "target": "crimson esque",
+        "reason": "hyphen"
+    },
+    {
+        "source": "crimson-y",
+        "target": "crimson y",
+        "reason": "hyphen"
+    },
+    {
+        "source": "deep purple-ish",
+        "target": "deep purple ish",
+        "reason": "hyphen"
+    },
+    {
+        "source": "drum-oriented",
+        "target": "drum oriented",
+        "reason": "hyphen"
+    },
+    {
+        "source": "floyd-esque",
+        "target": "floyd esque",
+        "reason": "hyphen"
+    },
+    {
+        "source": "gong-related",
+        "target": "gong related",
+        "reason": "hyphen"
+    },
+    {
+        "source": "hawkwind-ish",
+        "target": "hawkwind ish",
+        "reason": "hyphen"
+    },
+    {
+        "source": "hip-hop soul",
+        "target": "hip hop soul",
+        "reason": "hyphen"
+    },
+    {
+        "source": "keyboard-driven",
+        "target": "keyboard driven",
+        "reason": "hyphen"
+    },
+    {
+        "source": "king gizzard-like",
+        "target": "king gizzard like",
+        "reason": "hyphen"
+    },
+    {
+        "source": "mitteralter-metal",
+        "target": "mitteralter metal",
+        "reason": "hyphen"
+    },
+    {
+        "source": "oi!",
+        "target": "oi",
+        "reason": "punctuation-fold"
+    },
+    {
+        "source": "piano-oriented",
+        "target": "piano oriented",
+        "reason": "hyphen"
+    },
+    {
+        "source": "post-metal‎",
+        "target": "post metal‎",
+        "reason": "hyphen"
+    },
+    {
+        "source": "primus-related",
+        "target": "primus related",
+        "reason": "hyphen"
+    },
+    {
+        "source": "riverside-esque",
+        "target": "riverside esque",
+        "reason": "hyphen"
+    },
+    {
+        "source": "rush-oriented",
+        "target": "rush oriented",
+        "reason": "hyphen"
+    },
+    {
+        "source": "seventh wonder-ish",
+        "target": "seventh wonder ish",
+        "reason": "hyphen"
+    },
+    {
+        "source": "soft machine-related",
+        "target": "soft machine related",
+        "reason": "hyphen"
+    },
+    {
+        "source": "proto-punk",
+        "target": "proto punk",
+        "reason": "hyphen"
+    }
+]

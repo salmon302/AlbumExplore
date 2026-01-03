@@ -29,8 +29,8 @@ class ProgArchivesScraper:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
         # Regex for matching album links (e.g., albumXXXX.html or albumXXXX.html?id=YYYY)
-        # Allows for alphanumeric characters, dots, and hyphens in the album identifier part.
-        self.album_link_pattern = re.compile(r"album[a-zA-Z0-9.-]+\.html(?:\?id=\d+)?$")
+        # Allows for alphanumeric characters, dots, hyphens, and underscores in the album identifier part.
+        self.album_link_pattern = re.compile(r"album[a-zA-Z0-9._-]+\.html(?:\?id=\d+)?$")
         self.year_pattern = re.compile(r"(?:\b|\()((?:19|20)\d{2})(?:\b|\))") # (YYYY) or YYYY
         self.rating_pattern = re.compile(r"\b(\d\.\d{2})\b") # X.YY
         
@@ -547,6 +547,8 @@ class ProgArchivesScraper:
 
             lineup = self._extract_lineup(lineup_content_element) # Pass the found element (could be div or p)
 
+            releases_info = self._extract_releases_info(soup)
+
             # Parse reviews from the main album page
             reviews = self._parse_reviews_from_page(soup, source_file_path=resolved_f_path)
             processed_review_files = {resolved_f_path.name} # Keep track of files already processed for reviews
@@ -646,6 +648,7 @@ class ProgArchivesScraper:
                 "cover_image_url": cover_image_url,
                 "tracks": tracks,
                 "lineup": lineup,
+                "releases_info": releases_info,
                 "reviews": reviews, # Add reviews here
                 "source_file": resolved_f_path.name,
                 "last_parsed": datetime.now().isoformat()
@@ -901,6 +904,25 @@ class ProgArchivesScraper:
                     text = self._clean_text(review_text_tag) if review_text_tag else ""
                     current_review['text'] = text
                     
+                    # Extract Review ID
+                    review_id = None
+                    # 1. Try "Report this review (#XXXXXX)"
+                    report_link = container.find('a', href=re.compile(r'report', re.I))
+                    if report_link:
+                        match = re.search(r'#(\d+)', report_link.get_text())
+                        if match:
+                            review_id = match.group(1)
+                    
+                    # 2. Try Permalink if not found
+                    if not review_id:
+                        permalink = container.find('a', string=re.compile(r'Review Permalink', re.I))
+                        if permalink and permalink.get('href'):
+                            match = re.search(r'id=(\d+)', permalink.get('href'))
+                            if match:
+                                review_id = match.group(1)
+                    
+                    current_review['review_id'] = review_id
+                    
                     if current_review.get('text') or current_review.get('rating') is not None:
                         reviews.append(current_review)
                     else:
@@ -1023,7 +1045,8 @@ class ProgArchivesScraper:
         # <span id="ratingLabel" style="cursor:help;" title="4.03 based on 1,460 ratings and 30 reviews">
         
         # Primary target: The span with itemprop="average" for the rating value
-        rating_span_avg = soup.find('span', {'itemprop': 'average', 'id': re.compile(r"avgRatings_\\d+")})
+        # Fixed regex to correctly match digits (removed double backslash if present in raw string)
+        rating_span_avg = soup.find('span', {'itemprop': 'average', 'id': re.compile(r"avgRatings_\d+")})
         if rating_span_avg:
             try:
                 rating_text = rating_span_avg.get_text(strip=True)
@@ -1031,13 +1054,23 @@ class ProgArchivesScraper:
                 logger.debug(f"Rating value found with itemprop='average': {rating_value}")
 
                 # Try to find rating_count and review_count in sibling/parent structures
-                parent_div = rating_span_avg.find_parent('div') # Common case
-                if not parent_div: # Sometimes it might be a direct sibling span
-                    parent_div = rating_span_avg.parent
+                # FIX: Look for the Review-aggregate span specifically, as it contains the votes and count
+                review_aggregate_span = rating_span_avg.find_parent('span', itemtype=re.compile(r"Review-aggregate"))
+                
+                # Fallback to old logic if specific schema isn't found
+                parent_container = review_aggregate_span
+                if not parent_container:
+                    parent_container = rating_span_avg.find_parent('div') # Common case
+                if not parent_container: # Sometimes it might be a direct sibling span
+                    parent_container = rating_span_avg.parent
 
-                if parent_div:
+                if parent_container:
                     # Rating count (itemprop="votes")
-                    votes_span = parent_div.find('span', {'itemprop': 'votes', 'id': re.compile(r"nbRatings_\\d+")})
+                    votes_span = parent_container.find('span', {'itemprop': 'votes', 'id': re.compile(r"nbRatings_\d+")})
+                    # Also try finding without ID if ID regex fails but itemprop exists (more robust)
+                    if not votes_span:
+                         votes_span = parent_container.find('span', itemprop='votes')
+
                     if votes_span:
                         try:
                             rating_count = int(self._clean_text(votes_span.get_text(strip=True)).replace(',', ''))
@@ -1045,24 +1078,35 @@ class ProgArchivesScraper:
                         except ValueError:
                             logger.warning(f"Could not parse rating count from itemprop='votes': {votes_span.get_text(strip=True)}")
                     
-                    # Review count (link with "reviews")
-                    reviews_link = parent_div.find('a', href=re.compile(r"(album-reviews|reviews\\.asp\\?id=)"), string=re.compile(r"reviews", re.I))
-                    if reviews_link:
-                        review_text = reviews_link.get_text(strip=True)
-                        review_match = re.search(r'(\\d+)\\s+reviews', review_text, re.I)
-                        if review_match:
-                            try:
-                                review_count = int(review_match.group(1))
-                                logger.debug(f"Review count found from 'a' tag: {review_count}")
-                            except ValueError:
-                                logger.warning(f"Could not parse review count from 'a' tag: {review_text}")
-                        elif "Show all reviews" in review_text and not review_count: # If it just says "Show all reviews" and we haven't found a count yet
-                            logger.debug(f"Found 'Show all reviews' link, but no specific count. Review count might be on reviews page.")
+                    # Review count (link with "reviews" OR itemprop="count")
+                    # First try itemprop="count" which is in the schema
+                    count_span = parent_container.find('span', itemprop='count')
+                    if count_span:
+                        try:
+                            review_count = int(self._clean_text(count_span.get_text(strip=True)).replace(',', ''))
+                            logger.debug(f"Review count found with itemprop='count': {review_count}")
+                        except ValueError:
+                             logger.warning(f"Could not parse review count from itemprop='count': {count_span.get_text(strip=True)}")
+
+                    # Fallback to link with "reviews" if not found via schema
+                    if review_count is None:
+                        reviews_link = parent_container.find('a', href=re.compile(r"(album-reviews|reviews\\.asp\\?id=)"), string=re.compile(r"reviews", re.I))
+                        if reviews_link:
+                            review_text = reviews_link.get_text(strip=True)
+                            review_match = re.search(r'(\\d+)\\s+reviews', review_text, re.I)
+                            if review_match:
+                                try:
+                                    review_count = int(review_match.group(1))
+                                    logger.debug(f"Review count found from 'a' tag: {review_count}")
+                                except ValueError:
+                                    logger.warning(f"Could not parse review count from 'a' tag: {review_text}")
+                            elif "Show all reviews" in review_text and not review_count: # If it just says "Show all reviews" and we haven't found a count yet
+                                logger.debug(f"Found 'Show all reviews' link, but no specific count. Review count might be on reviews page.")
                     
                     # Fallback for rating_count if not found via itemprop="votes" but rating_value was found
                     if rating_value is not None and rating_count is None:
-                        # Check for pattern like "1,460 ratings" in the parent_div text
-                        text_content_for_counts = parent_div.get_text(" ", strip=True)
+                        # Check for pattern like "1,460 ratings" in the parent_container text
+                        text_content_for_counts = parent_container.get_text(" ", strip=True)
                         rc_match = re.search(r'(\\d{1,3}(?:,\\d{3})*)\\s+ratings', text_content_for_counts, re.I)
                         if rc_match:
                             try:
@@ -1438,18 +1482,27 @@ class ProgArchivesScraper:
         
         logger.info(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Raw text lines from lineup_content: {raw_text_lines}") # Changed to info
 
+        current_group_is_guest = False
+
         for line in raw_text_lines:
             line = line.strip()
             line_lower = line.lower() # For case-insensitive checks
+
+            # Check for guest headers
+            if line_lower.startswith('with:') or \
+               line_lower.startswith('guest musicians:') or \
+               line_lower.startswith('additional musicians:') or \
+               line_lower.startswith('featuring:') or \
+               line_lower.startswith('and:') or \
+               line_lower == 'guests':
+                logger.info(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Found guest header: '{line}'")
+                current_group_is_guest = True
+                continue
 
             # Skip headers, sub-headers, or common non-musician lines
             if not line or \
                line_lower == 'musicians' or \
                line_lower == 'line-up' or \
-               line_lower.startswith('with:') or \
-               line_lower.startswith('guest musicians:') or \
-               line_lower.startswith('additional musicians:') or \
-               line_lower.startswith('featuring:') or \
                line_lower == '-': # Skip standalone hyphens sometimes used as separators
                 logger.info(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Skipping header/separator line: '{line}'")
                 continue
@@ -1491,10 +1544,11 @@ class ProgArchivesScraper:
                 musician_name = musician_name[1:].strip()
             
             if musician_name:
-                logger.info(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Adding: Musician='{musician_name}', Roles='{instruments_roles}'") # Changed to info
+                logger.info(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Adding: Musician='{musician_name}', Roles='{instruments_roles}', Guest={current_group_is_guest}") # Changed to info
                 lineup_list.append({
                     'musician': musician_name,
-                    'instruments': instruments_roles
+                    'instruments': instruments_roles,
+                    'is_guest': current_group_is_guest
                 })
             else:
                 logger.info(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Could not parse musician from line: '{line}'") # Changed to info
@@ -1503,6 +1557,51 @@ class ProgArchivesScraper:
              logger.warning(f"SCRAPER_LINEUP_DEBUG: _extract_lineup - Parsed 0 members, but lineup_content had text. Content: {lineup_content.get_text(strip=True)[:200]}")
 
         return lineup_list
+
+    def _extract_releases_info(self, soup: BeautifulSoup) -> Dict[str, Any]:
+        """Extracts release information (label, date, credits)."""
+        info = {'label': None, 'release_date': None, 'credits': None}
+        header = soup.find('strong', string=re.compile(r"Releases information", re.I))
+        if header:
+            content_p = header.find_next_sibling('p')
+            if content_p:
+                # Use stripped_strings to get lines while preserving structure
+                lines = list(content_p.stripped_strings)
+                info['credits'] = "\n".join(lines)
+                
+                for line in lines:
+                    # Check for date in parentheses
+                    date_match = re.search(r'\(([^)]+\d{4})\)', line)
+                    if date_match:
+                        possible_date = date_match.group(1)
+                        # Validate it looks like a date
+                        if any(m in possible_date for m in ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']):
+                            info['release_date'] = possible_date
+                            
+                            # Label is often before the date
+                            # "Digital album Label (Date)"
+                            pre_date = line[:date_match.start()].strip()
+                            # Remove common prefixes
+                            pre_date = re.sub(r'^(Digital album|CD|Vinyl|LP)\s+', '', pre_date, flags=re.I)
+                            if not info['label']:
+                                info['label'] = pre_date
+                    
+                    # Fallback Label extraction: "Label - Catalog (Year...)"
+                    # Example: "2xLP Music For Nations - MFN 264 (2001, UK)"
+                    if not info['label']:
+                        year_match = re.search(r'\((\d{4})', line)
+                        if year_match:
+                            # Check if there is a dash before the parens
+                            parts = line[:year_match.start()].split('-')
+                            if len(parts) >= 2:
+                                # The part before the last dash is likely the label (plus prefix)
+                                # "2xLP Music For Nations "
+                                potential_label = parts[-2].strip()
+                                # Clean up prefixes
+                                potential_label = re.sub(r'^(2x)?(CD|LP|Vinyl|Cassette|Digital album)\s+', '', potential_label, flags=re.I).strip()
+                                if potential_label:
+                                    info['label'] = potential_label
+        return info
 
     def _clean_text(self, text: Optional[Union[Tag, str]]) -> str:
         """Clean text content by removing extra whitespace and HTML."""

@@ -1,0 +1,2138 @@
+[
+  {
+    "source_tag": "8-bit",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "a capella",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "acapella",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "adventure",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "african",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "afro",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "afro indie",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "afrolatin",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "american",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "american privitsm",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "angular pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "animistic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "anternative",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "anti",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "anxiety pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "apocalyptic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "arabic pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "arena",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "artcore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "audiobook",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "baggy",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "banjo",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "beats",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "berlin school",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "big band",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "bitpop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "bitprog",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "blackend hardcore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "boogie",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "breaks",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "brostep",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "bubblegum bass",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cabaret",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "canterbury scene",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "carnatic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cathedral bells",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cavernous death metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "celtic punk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "chill",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "chillout",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "chillstep",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "christian progressive rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cinematic soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cinmatic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "classical music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "comedy",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cosmic doom metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cosmic rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cybergrunge",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dadaist",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dance music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dance rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dark country",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dark synth",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dark synthwave",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "darksynth",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "death metal/heavy metal/osdm",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "deathgaze",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "deathjazz",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "deep funk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "depressive rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "desert jangle",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dirt",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "disco funk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "djenty",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "documentary",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dolewave",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "doom folk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "doom metal/rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "doom pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "doom rock/metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dreamcore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "drone pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "drum",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dubstep",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "east african music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "eastern european",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "eclectic rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "edm",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "egg punk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "electonic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "electroclash",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "electronic music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "electronicore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "electropunk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "emocrust",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "emoviolence/skramz",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "epic vampyric black metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "ethereal doom metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "ethio",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "eurodance",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "fates warning related",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "fi house",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "fi shoegaze",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "flamenco",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "folklore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "french electro",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "funk n' roll",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "future",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "future pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "futuristic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "fuzz funk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "gaelic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "garage psych",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "ghotic metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "glam punk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "glitch bitpop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "glitch hop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "glitch metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "global groove",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "gospel",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "goth rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "grunegaze",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "guitar virtuoso",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hard prog",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hardcore funk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hardcore hip hop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hardcore rap",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "heavy pop rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "heavy twang",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hellenic black metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hill country blues",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hip hop soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "igorrr",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "improvisation",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "improvised rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "indian",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "indie hip hop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "indie soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "industrial hardcore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "industrial punk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "irish folk music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "italian prog",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "jangle punk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "jangle rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "kawaii",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "keyboard",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "korean folk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "kosmsiche",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "kuduro",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "latin big band",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "latin pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "latin rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "lounge",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "lover rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "mahraganat",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "malian soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "medieval folk metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "micro",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "microtonal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "midi",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "mincecore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "minimal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "minimal folk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "minimal synth",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "minimal wave",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "mitteralter metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "mongolian",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "movie soundtrack",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "mpb",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "musical",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "musical parody",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "musical theatre",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "native america",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "nature",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "neoclassica",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "neue deutsche härte",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "new rave",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "new wave and prog rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "nintendocore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "noir",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "noise electronics",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "noisegaze",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "nordic folk rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "nordic jazz",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "occult metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "old school death metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "operatic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "operatic metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "orchestra",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "oriental rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "outsider house",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "parody metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "persian pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "philly soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "piano music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "piano oriented",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "plunderphonics",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "poems",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pop art",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pop metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pop prog",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pop rap",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "post prog",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "powerviolence/black metal/death metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "prairie gothic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pschedelic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pscyhedelic rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "psych rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "psyechedelic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pub",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "quartet",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "quasi metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "rautalanka",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "red",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "reductionism",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "reggaetón",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "religious",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "retro pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "retro prog",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "rnb",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "rock n' roll",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "romanian folk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "sadcore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "samurai metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "saxophone",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "scottish folk music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "scottish music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "scum rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "sea",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "shaabi",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "shanty",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "shred",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "skatepunk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "sludge rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "sludgecore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "smooth soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "son cubano",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "soul pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "soundscape",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "southern soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "spacegrind",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "speed/thrash metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "steampunk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "steelpan",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "stoner metal/rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "stoner rock/metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "swamp",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "sympohnic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tape music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tech house",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "techno house",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "thall",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tharsh metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "theatrical",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "theatrical pop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "theatrical rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "thrashcore",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "trad folk",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "trance house",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "trance metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tropicanibalismo",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "turkish psychedelic",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "twang",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "uk hip hop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "uk street soul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "vampyric black metal",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "vgm",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "vibraphone",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "visepop",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "welsh folk music",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "welsh rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "western noir",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "wind",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "witch",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "world",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "world fusion",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "world music (brazil)",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "yacht",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "yatch rock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "zamrock",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "zappa",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "zheul",
+    "source_count": 1,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "acid jazz",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "adult",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "anatolian rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "and",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "appalachian",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "breakbeat",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "celtic rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "chanson",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "chaotic",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "chicago",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "collage",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "comedy rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "country blues",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "country folk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "cyberpunk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dark electro",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dissonant metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "dsbm",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "easycore",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "ecstatic black metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "electro house",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "emo punk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "emo rap",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "emocore",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "epic black metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "epic metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "experimental folk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "experimental noise",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "film",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "folk music",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "french pop",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "funk metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "geek rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "glam metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "gothic pop",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "heavy blues",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "hindustani",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "holler",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "indie punk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "jazz pop",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "jazzgrind",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "kawaii metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "kosmische",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "lo",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "melancolic",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "mex",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "minimal techno",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "minimalist",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "music",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "nautical metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "neoclassicism",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "noise punk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "nugaze",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "osdm",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pagan folk",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pagan metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "party metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pirate metal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "pyschedelic rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "reggae rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "retro rock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "rhythm & blues",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "rockabilly",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "score",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "slushwave",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "smooth",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "soul jazz",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "spoken",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "stadium",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "stargaze",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "stomp",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "street",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "sunshine pop",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "swing",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "synthrock",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tex",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "traditional pop",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tribute",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "tropical",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "vocal",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "war",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "warr",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  },
+  {
+    "source_tag": "word",
+    "source_count": 2,
+    "note": "no deterministic mapping found",
+    "confidence": "low"
+  }
+]

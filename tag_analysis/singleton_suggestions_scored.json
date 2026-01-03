@@ -1,0 +1,183 @@
+{
+  "stats": {
+    "total_singletons": 314,
+    "suggested": 35
+  },
+  "suggestions": {
+    "artcore": {
+      "suggestion": "art core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4667
+    },
+    "blackend hardcore": {
+      "suggestion": "blackened hardcore",
+      "reason": "atomic-decompose",
+      "score": 0.7357
+    },
+    "celtic punk": {
+      "suggestion": "punk",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.5167
+    },
+    "death metal/heavy metal/osdm": {
+      "suggestion": "death metal heavy metal osdm",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.631
+    },
+    "disco-pop": {
+      "suggestion": "disco pop",
+      "reason": "atomic-decompose",
+      "score": 0.9444
+    },
+    "disco-punk": {
+      "suggestion": "disco punk",
+      "reason": "atomic-decompose",
+      "score": 0.95
+    },
+    "doom metal/rock": {
+      "suggestion": "doom metal rock",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.7167
+    },
+    "doom rock/metal": {
+      "suggestion": "doom rock metal",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.7167
+    },
+    "doom-gaze": {
+      "suggestion": "doom shoegaze",
+      "reason": "atomic-decompose",
+      "score": 0.6136
+    },
+    "dreamcore": {
+      "suggestion": "dream core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4737
+    },
+    "electro-ambient": {
+      "suggestion": "electro ambient",
+      "reason": "atomic-decompose",
+      "score": 0.9667
+    },
+    "emocrust": {
+      "suggestion": "emo crust",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4706
+    },
+    "emoviolence/skramz": {
+      "suggestion": "emoviolence skramz",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4722
+    },
+    "ghotic metal": {
+      "suggestion": "gothic metal",
+      "reason": "atomic-decompose",
+      "score": 0.7083
+    },
+    "hip hop soul": {
+      "suggestion": "hip-hop soul",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.825
+    },
+    "italian prog": {
+      "suggestion": "prog",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.5
+    },
+    "jazz-core": {
+      "suggestion": "jazz hardcore",
+      "reason": "atomic-decompose",
+      "score": 0.6136
+    },
+    "latin-jazz": {
+      "suggestion": "latin jazz",
+      "reason": "atomic-decompose",
+      "score": 0.95
+    },
+    "mincecore": {
+      "suggestion": "mince core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4737
+    },
+    "new wave and prog rock": {
+      "suggestion": "new wave progressive rock",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.683
+    },
+    "nintendocore": {
+      "suggestion": "nintendo core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.48
+    },
+    "nordic jazz": {
+      "suggestion": "jazz",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.5167
+    },
+    "piano-oriented": {
+      "suggestion": "piano oriented",
+      "reason": "atomic-decompose",
+      "score": 0.9643
+    },
+    "powerviolence/black metal/death metal": {
+      "suggestion": "powerviolence black metal death metal",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.6396
+    },
+    "prog -rock": {
+      "suggestion": "progressive rock",
+      "reason": "atomic-decompose",
+      "score": 0.5962
+    },
+    "pscyhedelic rock": {
+      "suggestion": "psychedelic rock",
+      "reason": "atomic-decompose",
+      "score": 0.7188
+    },
+    "sadcore": {
+      "suggestion": "sad core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4667
+    },
+    "sludgecore": {
+      "suggestion": "sludge core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4762
+    },
+    "southern soul": {
+      "suggestion": "soul",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4853
+    },
+    "spacegrind": {
+      "suggestion": "space grind",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4762
+    },
+    "speed/thrash metal": {
+      "suggestion": "speed thrash metal",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.7222
+    },
+    "tharsh metal": {
+      "suggestion": "thrash metal",
+      "reason": "atomic-decompose",
+      "score": 0.7083
+    },
+    "thrashcore": {
+      "suggestion": "thrash core",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.4762
+    },
+    "western noir": {
+      "suggestion": "noir",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.5
+    },
+    "yatch rock": {
+      "suggestion": "yacht rock",
+      "reason": "rules-mapped-after-enhanced",
+      "score": 0.7
+    }
+  }
+}

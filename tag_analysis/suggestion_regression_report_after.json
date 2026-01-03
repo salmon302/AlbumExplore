@@ -1,0 +1,17 @@
+{
+  "total_suggestions": 314,
+  "flagged_forbidden_count": 1,
+  "flagged_typos_count": 1,
+  "flagged_forbidden": [
+    {
+      "original": "scottish music",
+      "target": "music"
+    }
+  ],
+  "flagged_typos": [
+    {
+      "original": "bluegras",
+      "target": "bluegrasss"
+    }
+  ]
+}

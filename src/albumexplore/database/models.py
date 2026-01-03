@@ -4,14 +4,6 @@ from typing import List
 from sqlalchemy import Column, Integer, String, ForeignKey, Table, Float, DateTime, Text, Boolean
 from sqlalchemy.orm import relationship, DeclarativeBase
 
-class Base(DeclarativeBase):
-    pass
-
-"""Database models."""
-from datetime import datetime
-from typing import List
-from sqlalchemy import Column, Integer, String, ForeignKey, Table, Float, DateTime, Text, Boolean
-from sqlalchemy.orm import relationship, DeclarativeBase
 
 class Base(DeclarativeBase):
     pass
@@ -74,6 +66,14 @@ class Album(Base):
     # New fields for ProgArchives integration
     artist_id = Column(String, ForeignKey('artists.id')) # New FK to Artist table
     pa_lineup_text = Column(Text) # For storing raw lineup details from ProgArchives
+    
+    # Cross-source identifiers (MusicBrainz)
+    mbid = Column(String(36), nullable=True, index=True)  # MusicBrainz Release ID
+    
+    # Last.fm specific fields
+    lastfm_playcount = Column(Integer, nullable=True)
+    lastfm_listeners = Column(Integer, nullable=True)
+    lastfm_url = Column(String, nullable=True)
 
     # Relationships
     artist_obj = relationship("Artist", back_populates="albums") # Renamed to avoid confusion with old 'artist' column
@@ -81,6 +81,7 @@ class Album(Base):
     atomic_tags = relationship("AtomicTag", secondary=album_atomic_tags, back_populates="albums")
     tracks = relationship("Track", order_by="Track.track_number_raw", back_populates="album")
     reviews = relationship("Review", back_populates="album")
+    sources = relationship("AlbumSource", back_populates="album")  # Track data provenance
 
     def __repr__(self):
         artist_name = getattr(self, 'pa_artist_name_on_album', 'Unknown Artist')
@@ -190,9 +191,14 @@ class Artist(Base):
 
     id = Column(String, primary_key=True)
     name = Column(String, nullable=False, unique=True)
-    # Add other artist-specific fields here, e.g.:
-    # country = Column(String)
-    # formation_year = Column(Integer)
+    
+    # Cross-source identifiers
+    mbid = Column(String(36), nullable=True, index=True)  # MusicBrainz Artist ID
+    lastfm_url = Column(String, nullable=True)
+    
+    # Additional metadata
+    country = Column(String, nullable=True)
+    formation_year = Column(Integer, nullable=True)
 
     # Relationship to albums (if one artist can have multiple albums)
     albums = relationship("Album", back_populates="artist_obj") # Updated to match renamed relationship
@@ -255,3 +261,47 @@ class Review(Base):
 
     def __repr__(self):
         return f"<Review for {self.album_id} by {self.reviewer_name} - {self.rating}>"
+
+
+class AlbumSource(Base):
+    """
+    Track which data sources contributed to an album's data.
+    
+    Enables multi-source data integration with provenance tracking.
+    """
+    __tablename__ = "album_sources"
+    
+    id = Column(Integer, primary_key=True)
+    album_id = Column(String, ForeignKey('albums.id'), nullable=False, index=True)
+    source_name = Column(String, nullable=False)  # 'progarchives', 'lastfm', 'bandcamp', 'musicbrainz'
+    source_id = Column(String, nullable=True)     # Source-specific ID (e.g., pa_album_id, lastfm_url)
+    confidence = Column(Float, default=1.0)       # Match confidence if auto-matched
+    last_fetched = Column(DateTime, default=datetime.utcnow)
+    raw_data_path = Column(String, nullable=True) # Path to raw JSON/HTML file
+    
+    # Relationship to Album
+    album = relationship("Album", back_populates="sources")
+    
+    def __repr__(self):
+        return f"<AlbumSource {self.album_id} <- {self.source_name}>"
+
+
+class ArtistSource(Base):
+    """
+    Track which data sources contributed to an artist's data.
+    """
+    __tablename__ = "artist_sources"
+    
+    id = Column(Integer, primary_key=True)
+    artist_id = Column(String, ForeignKey('artists.id'), nullable=False, index=True)
+    source_name = Column(String, nullable=False)
+    source_id = Column(String, nullable=True)
+    confidence = Column(Float, default=1.0)
+    last_fetched = Column(DateTime, default=datetime.utcnow)
+    raw_data_path = Column(String, nullable=True)
+    
+    # Relationship to Artist
+    artist = relationship("Artist", backref="sources")
+    
+    def __repr__(self):
+        return f"<ArtistSource {self.artist_id} <- {self.source_name}>"

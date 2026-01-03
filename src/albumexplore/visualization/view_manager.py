@@ -37,6 +37,7 @@ class ViewManager(QObject): # Inherit from QObject
         # Cache for rendered data
         self._render_cache: Dict[ViewType, Dict[str, Any]] = {}
         self._current_render_data: Optional[Dict[str, Any]] = None # Cache for the most recent render data
+        self._data_version = 0  # Track when data changes to invalidate cache
 
         graphics_logger.info("View manager initialized")
 
@@ -46,9 +47,17 @@ class ViewManager(QObject): # Inherit from QObject
         return self.state_manager.current_view.view_type
 
     def switch_view(self, view_type: ViewType) -> Dict[str, Any]:
-        """Switch to a different view type."""
+        """Switch to a different view type with caching."""
         old_type = self.state_manager.current_view.view_type
         graphics_logger.debug(f"Switching view from {old_type.value} to {view_type.value}")
+
+        # Check cache first
+        if view_type in self._render_cache:
+            graphics_logger.info(f"Using cached render data for {view_type.value}")
+            self.state_manager.switch_view(view_type)
+            self._current_render_data = self._render_cache[view_type]
+            self.view_changed.emit()
+            return self._current_render_data
 
         nodes, edges = self.data_interface.get_visible_data()
 
@@ -65,6 +74,9 @@ class ViewManager(QObject): # Inherit from QObject
         if self._current_render_data is None: # Should not happen if _render_view guarantees a dict
              self._current_render_data = {}
         self._current_render_data.update(transition_data)
+        
+        # Cache the rendered data
+        self._render_cache[view_type] = self._current_render_data.copy()
         
         self.view_changed.emit() # Emit the signal *after* the new view is rendered and state is updated
 
@@ -96,8 +108,10 @@ class ViewManager(QObject): # Inherit from QObject
         return self._render_view(nodes, edges)
     
     def update_data(self) -> Dict[str, Any]:
-        """Update data and re-render."""
+        """Update data and re-render, invalidating cache."""
         graphics_logger.debug("Updating data")
+        self._data_version += 1
+        self._render_cache.clear()  # Invalidate all cached renders
         nodes, edges = self.data_interface.get_visible_data()
         return self._render_view(nodes, edges)
     
