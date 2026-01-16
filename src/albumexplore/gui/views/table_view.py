@@ -53,9 +53,9 @@ class TableView(BaseView):
 
         # Create table (add a favorites column at index 0)
         self.table = QTableWidget(self)
-        self.table.setColumnCount(8)
+        self.table.setColumnCount(10)
         self.table.setHorizontalHeaderLabels([
-            'Fav', 'Artist', 'Album', 'Year', 'Genre', 'Country', 'Vocal Style', 'Tags'
+            'Fav', 'Artist', 'Album', 'Year', 'Genre', 'Country', 'Vocal Style', 'Tags', 'Plays', 'Listeners'
         ])
         
         # Configure selection
@@ -185,6 +185,20 @@ class TableView(BaseView):
         tags = row.get('tags', [])
         self.table.setItem(row_idx, 7,
                          QTableWidgetItem(', '.join(tags)))
+
+        # Plays (Last.fm)
+        playcount = row.get('playcount')
+        play_item = QTableWidgetItem(f"{playcount:,}" if playcount is not None else "")
+        play_item.setData(Qt.ItemDataRole.DisplayRole, playcount if playcount is not None else 0)
+        play_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        self.table.setItem(row_idx, 8, play_item)
+
+        # Listeners (Last.fm)
+        listeners = row.get('listeners')
+        list_item = QTableWidgetItem(f"{listeners:,}" if listeners is not None else "")
+        list_item.setData(Qt.ItemDataRole.DisplayRole, listeners if listeners is not None else 0)
+        list_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        self.table.setItem(row_idx, 9, list_item)
     
     def _handle_selection(self, selected_ids=None):
         """Handle table selection changes."""
@@ -214,7 +228,7 @@ class TableView(BaseView):
         direction = "desc" if current_direction == Qt.SortOrder.AscendingOrder else "asc"
         
         # Map column index to name (accounts for favorite column at index 0)
-        columns = ['favorite', 'artist', 'album', 'year', 'genre', 'country', 'vocal_style', 'tags']
+        columns = ['favorite', 'artist', 'album', 'year', 'genre', 'country', 'vocal_style', 'tags', 'playcount', 'listeners']
         if 0 <= column_index < len(columns):
             self.sort_changed.emit(columns[column_index], direction)
             

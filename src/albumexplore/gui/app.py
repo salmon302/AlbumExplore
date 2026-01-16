@@ -141,6 +141,63 @@ class AlbumExplorer(QMainWindow):
         dialog = DataLoaderDialog(self, csv_directory)
         dialog.data_loaded.connect(self._on_data_loaded)
         dialog.exec()
+
+    def _show_lastfm_loader(self):
+        """Show the Last.fm loader dialog."""
+        # Import here to avoid circular imports at module import time
+        from .lastfm_loader_dialog import LastFmLoaderDialog
+
+        dialog = LastFmLoaderDialog(self)
+        # When the dialog finishes and transforms data, refresh views
+        dialog.data_changed.connect(self._on_lastfm_data_changed)
+        dialog.exec()
+
+    def _on_lastfm_data_changed(self):
+        """Handle DB changes from Last.fm loader: expire session and clear caches, then show table."""
+        try:
+            # Expire ORM session to pick up external DB changes
+            if hasattr(self, 'session') and self.session:
+                try:
+                    self.session.expire_all()
+                except Exception:
+                    pass
+            # Recreate session to ensure a fresh transactional state
+            try:
+                new_session = get_session()
+                self.session = new_session
+                if hasattr(self, 'data_interface') and self.data_interface:
+                    self.data_interface.session = new_session
+                if hasattr(self, 'view_manager') and self.view_manager:
+                    self.view_manager.data_interface = self.data_interface
+            except Exception:
+                # If creating a new session fails, continue with expire_all approach
+                pass
+        except Exception:
+            pass
+
+        # Clear data interface and view manager caches so the view rebuilds from DB
+        try:
+            if hasattr(self, 'data_interface') and self.data_interface:
+                try:
+                    self.data_interface._clear_caches()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+        try:
+            if hasattr(self, 'view_manager') and self.view_manager:
+                try:
+                    self.view_manager._render_cache.clear()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        # Switch to table view to show updated data
+        try:
+            self.view_manager.switch_view(ViewType.TABLE)
+        except Exception:
+            pass
     
     def _on_data_loaded(self, dataframe):
         """Handle data loaded from the dialog."""
@@ -229,6 +286,11 @@ class AlbumExplorer(QMainWindow):
         load_data_action.setShortcut("Ctrl+O")
         load_data_action.triggered.connect(self._show_data_loader)
         file_menu.addAction(load_data_action)
+
+        # Last.fm data loader
+        load_lastfm_action = QAction("Load Last.fm Data...", self)
+        load_lastfm_action.triggered.connect(self._show_lastfm_loader)
+        file_menu.addAction(load_lastfm_action)
         
         file_menu.addSeparator()
         

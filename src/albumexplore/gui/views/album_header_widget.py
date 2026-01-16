@@ -1,8 +1,10 @@
 """Album header widget for displaying selected album details."""
+import os
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QFrame
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont
+from PyQt6.QtGui import QFont, QPixmap
 from albumexplore.database.models import Album
+
 
 
 class AlbumHeaderWidget(QWidget):
@@ -74,6 +76,9 @@ class AlbumHeaderWidget(QWidget):
             self.title_label.setText("No album selected")
             self.metadata_label.setText("")
             self.tags_label.setText("")
+            self.cover_label.setText("♫")
+            self.cover_label.setPixmap(QPixmap()) # Clear image
+            self.cover_label.setStyleSheet("background-color: #444; border: 1px solid #666;")
             return
         
         # Set title (artist - album)
@@ -81,6 +86,32 @@ class AlbumHeaderWidget(QWidget):
         title = f"{artist_name} - {album.title}"
         self.title_label.setText(title)
         
+        # Set cover image
+        self.cover_label.setText("") # Clear text placeholder
+        if album.cover_image_url:
+            # Handle relative paths for local images
+            image_path = album.cover_image_url
+            if not os.path.isabs(image_path) and not image_path.startswith('http'):
+                image_path = os.path.abspath(image_path)
+            
+            if os.path.exists(image_path):
+                pixmap = QPixmap(image_path)
+                if not pixmap.isNull():
+                    scaled_pixmap = pixmap.scaled(
+                        self.cover_label.size(), 
+                        Qt.AspectRatioMode.KeepAspectRatio, 
+                        Qt.TransformationMode.SmoothTransformation
+                    )
+                    self.cover_label.setPixmap(scaled_pixmap)
+                    self.cover_label.setStyleSheet("border: none;") # Remove border for cleaner look
+                else:
+                    self.cover_label.setText("Error")
+            else:
+                self.cover_label.setText("Missing")
+        else:
+            self.cover_label.setText("♫")
+            self.cover_label.setStyleSheet("background-color: #444; border: 1px solid #666;")
+
         # Set metadata
         metadata_parts = []
         if album.release_year:
@@ -89,6 +120,10 @@ class AlbumHeaderWidget(QWidget):
             metadata_parts.append(album.genre)
         if album.country:
             metadata_parts.append(album.country)
+        
+        # Add Last.fm stats if available
+        if album.lastfm_playcount:
+            metadata_parts.append(f"{album.lastfm_playcount:,} plays")
         
         metadata_text = " | ".join(metadata_parts) if metadata_parts else "No metadata"
         self.metadata_label.setText(metadata_text)

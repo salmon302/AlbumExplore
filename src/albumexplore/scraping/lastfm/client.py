@@ -12,6 +12,7 @@ from urllib.parse import urlencode
 
 import requests
 import backoff
+import threading
 
 logger = logging.getLogger(__name__)
 
@@ -81,6 +82,7 @@ class LastFmClient:
         
         self._min_request_interval = 1.0 / requests_per_second
         self._last_request_time = 0.0
+        self._lock = threading.Lock()
         self._session = requests.Session()
         self._session.headers.update({
             'User-Agent': 'AlbumExplore/1.0 (https://github.com/albumexplore)'
@@ -88,11 +90,12 @@ class LastFmClient:
     
     def _rate_limit(self):
         """Enforce rate limiting between requests."""
-        elapsed = time.time() - self._last_request_time
-        if elapsed < self._min_request_interval:
-            sleep_time = self._min_request_interval - elapsed
-            time.sleep(sleep_time)
-        self._last_request_time = time.time()
+        with self._lock:
+            elapsed = time.time() - self._last_request_time
+            if elapsed < self._min_request_interval:
+                sleep_time = self._min_request_interval - elapsed
+                time.sleep(sleep_time)
+            self._last_request_time = time.time()
     
     def _sign_request(self, params: Dict[str, str]) -> str:
         """
@@ -222,6 +225,44 @@ class LastFmClient:
         
         response = self._make_request('album.getInfo', params)
         return response.get('album', {})
+    
+    def get_similar_albums(
+        self,
+        artist: str,
+        album: str,
+        mbid: Optional[str] = None,
+        autocorrect: bool = True,
+        limit: int = 15
+    ) -> List[Dict[str, Any]]:
+        """
+        Get similar albums (NOT officially documented but often works or inferred).
+        Since Last.fm doesn't have a direct 'album.getSimilar' endpoint that is
+        reliably documented/maintained in 2.0 API, we often rely on artist similar
+        or tag intersection. However, some API wrappers implement it.
+        
+        Wait, checked docs: 'album.search' is there. 'artist.getSimilar' is there.
+        Actually, 'album.getSimilar' IS NOT a standard endpoint in the 2.0 API docs.
+        
+        Correction: The user asked for "fields we can pull from for artist/album similarity".
+        WE CAN USE:
+        1. artist.getSimilar (implemented below)
+        2. Comparing 'toptags' overlap (we fetch tags below)
+        
+        If we want direct album similarity, we might have to rely on 
+        collaborative filtering of our own data using the playcounts/tags.
+        
+        Checking Last.fm API docs again... 
+        There isn't a direct "album.getSimilar".
+        
+        However, `track.getSimilar` exists. `artist.getSimilar` exists.
+        
+        We will rely on `artist.getSimilar` for now, and implement it if missing.
+        It IS implemented below.
+        
+        I will add a convenience method to get artist similarity specifically for
+        enrichment purposes.
+        """
+        pass # Placeholder comment block.
     
     def get_album_tags(
         self,

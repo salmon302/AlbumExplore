@@ -72,6 +72,8 @@ class TableRenderer(RendererBase):
                 'vocal_styles': node.data.get('vocal_styles', []),
                 'raw_tags': node.data.get('raw_tags', ''),  # Add raw_tags field
                 'tags': node.data.get('tags', []),
+                'playcount': node.data.get('playcount'),
+                'listeners': node.data.get('listeners'),
                 'selected': node.id in getattr(viewport, 'selected_ids', set())
             }
             rows.append(row)

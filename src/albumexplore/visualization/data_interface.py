@@ -180,7 +180,11 @@ class DataInterface:
             'tags': list(tags),
             'atomic_tags': list(atomic_tags) if self._config.use_atomic_tags else [],
             'vocal_style': vocal_style_display,
-            'vocal_styles': vocal_styles
+            'vocal_styles': vocal_styles,
+            'playcount': album.lastfm_playcount,
+            'listeners': album.lastfm_listeners,
+            'cover_image_url': album.cover_image_url,
+            'lastfm_url': album.lastfm_url
         }
 
         node = VisualNode(

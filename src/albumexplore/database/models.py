@@ -206,6 +206,23 @@ class Artist(Base):
     def __repr__(self):
         return f"<Artist {self.name}>"
 
+class ArtistSimilarity(Base):
+    """Stores similarity between artists (from Last.fm or other sources)."""
+    __tablename__ = "artist_similarity"
+    
+    id = Column(Integer, primary_key=True)
+    source_artist_id = Column(String, ForeignKey('artists.id'), nullable=False, index=True)
+    target_artist_name = Column(String, nullable=False) # Name only, as target might not be in DB yet
+    target_artist_mbid = Column(String, nullable=True) # MBID if available
+    match_score = Column(Float, nullable=False) # 0.0 to 1.0
+    source_type = Column(String, default='lastfm') # 'lastfm', 'progarchives', etc.
+    
+    # Relationships
+    source_artist = relationship("Artist", backref="similar_artists")
+    
+    def __repr__(self):
+        return f"<ArtistSimilarity {self.source_artist_id} -> {self.target_artist_name} ({self.match_score})>"
+
 class TagRelation(Base):
     __tablename__ = "tag_relationships"
 

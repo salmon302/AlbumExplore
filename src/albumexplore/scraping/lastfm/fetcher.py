@@ -9,8 +9,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any, List, Iterator, Tuple
 from dataclasses import dataclass, asdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from .client import LastFmClient, LastFmAPIError
+from .media_manager import MediaManager
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +60,7 @@ class LastFmFetcher:
         shared_secret: Optional[str] = None,
         raw_data_dir: str = "./raw_data/lastfm",
         requests_per_second: float = 5.0,
+        download_images: bool = True,
     ):
         """
         Initialize the fetcher.
@@ -67,12 +70,14 @@ class LastFmFetcher:
             shared_secret: Last.fm shared secret
             raw_data_dir: Directory for raw JSON storage
             requests_per_second: Rate limit
+            download_images: Whether to download and cache album art
         """
         self.client = LastFmClient(
             api_key=api_key,
             shared_secret=shared_secret,
             requests_per_second=requests_per_second,
         )
+        self.media_manager = MediaManager() if download_images else None
         self.raw_data_dir = Path(raw_data_dir)
         self.raw_data_dir.mkdir(parents=True, exist_ok=True)
         
@@ -115,9 +120,40 @@ class LastFmFetcher:
     def _get_artist_key(self, artist: str) -> str:
         """Generate a unique key for an artist."""
         return artist.lower().strip()
+
+    def _get_best_image_url(self, data: Dict[str, Any]) -> Optional[str]:
+        """Extract best quality image URL from response data."""
+        images = data.get('image', [])
+        if not images:
+            return None
+        
+        # Prefer largest size
+        for size in ['mega', 'extralarge', 'large', 'medium', 'small']:
+            for img in images:
+                if img.get('size') == size and img.get('#text'):
+                    return img['#text']
+        return None
     
+    def _prune_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Prune unnecessary data from the API response to save space.
+        """
+        # Remove redundant images if we have a local copy
+        if '_local_image_path' in data and 'image' in data:
+            # Keep only the largest image URL as backup (usually the last one)
+            images = data['image']
+            if isinstance(images, list) and images:
+                 # Filter to keep just the last one (usually 'mega' or 'extralarge')
+                data['image'] = [images[-1]]
+        
+        # Prune wiki content if it's too long? (Optional)
+        # For now we keep it as it's useful context.
+        
+        return data
+
     def _save_raw_json(self, data: Dict[str, Any], filename: str) -> Path:
         """Save raw JSON response to session directory."""
+        data = self._prune_data(data)
         filepath = self.session_dir / filename
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
@@ -179,6 +215,15 @@ class LastFmFetcher:
             
             # Extract MBID if present
             mbid = album_info.get('mbid') or None
+
+            # Download and cache album art
+            if self.media_manager:
+                image_url = self._get_best_image_url(album_info)
+                if image_url:
+                    local_path = self.media_manager.download_and_process_image(image_url)
+                    if local_path:
+                        album_info['_local_image_path'] = local_path
+                        logger.debug(f"Cached album art to {local_path}")
             
             # Save raw JSON
             safe_artist = "".join(c if c.isalnum() else "_" for c in artist)[:50]
@@ -277,12 +322,22 @@ class LastFmFetcher:
                 try:
                     similar = self.client.get_similar_artists(artist)
                     artist_info['_similar_artists'] = similar
+                    logger.debug(f"Fetched {len(similar)} similar artists for {artist}")
                 except LastFmAPIError as e:
                     logger.debug(f"Could not fetch similar artists for {artist}: {e}")
             
             # Extract MBID
             mbid = artist_info.get('mbid') or None
             
+            # Download and cache artist image
+            if self.media_manager:
+                image_url = self._get_best_image_url(artist_info)
+                if image_url:
+                    local_path = self.media_manager.download_and_process_image(image_url)
+                    if local_path:
+                        artist_info['_local_image_path'] = local_path
+                        logger.debug(f"Cached artist image to {local_path}")
+
             # Save raw JSON
             safe_artist = "".join(c if c.isalnum() else "_" for c in artist)[:50]
             filename = f"artist_{safe_artist}.json"
@@ -331,6 +386,7 @@ class LastFmFetcher:
         skip_if_exists: bool = True,
         include_tags: bool = True,
         progress_callback: Optional[callable] = None,
+        max_workers: int = 5,
     ) -> Iterator[FetchResult]:
         """
         Fetch data for multiple albums.
@@ -340,12 +396,13 @@ class LastFmFetcher:
             skip_if_exists: Skip already fetched albums
             include_tags: Fetch tags for each album
             progress_callback: Called with (current, total, result) after each fetch
+            max_workers: Number of concurrent fetch threads
             
         Yields:
             FetchResult for each album
         """
         total = len(albums)
-        logger.info(f"Starting batch fetch of {total} albums")
+        logger.info(f"Starting batch fetch of {total} albums with {max_workers} workers")
         
         # Track session
         session_info = {
@@ -356,25 +413,47 @@ class LastFmFetcher:
             "skipped": 0,
         }
         
+        # Prepare work items
+        work_items = []
         for i, (artist, album) in enumerate(albums):
-            result = self.fetch_album(
-                artist, album,
-                skip_if_exists=skip_if_exists,
-                include_tags=include_tags,
-            )
+            work_items.append((i, artist, album))
             
-            if result.success:
-                if result.data and result.data.get("cached"):
-                    session_info["skipped"] += 1
+        # Use ThreadPoolExecutor for concurrent fetching
+        completed_count = 0
+        
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Create a future for each album
+            future_to_index = {
+                executor.submit(
+                    self.fetch_album, 
+                    artist, 
+                    album, 
+                    skip_if_exists=skip_if_exists, 
+                    include_tags=include_tags
+                ): i 
+                for i, artist, album in work_items
+            }
+            
+            # Process results as they complete
+            # Note: We yield results out of order as they complete, but we
+            # can use the index to report progress or re-order if strictly needed.
+            # Usually strict order doesn't matter for batch processing.
+            for future in as_completed(future_to_index):
+                completed_count += 1
+                result = future.result()
+                
+                if result.success:
+                    if result.data and result.data.get("cached"):
+                        session_info["skipped"] += 1
+                    else:
+                        session_info["successful"] += 1
                 else:
-                    session_info["successful"] += 1
-            else:
-                session_info["failed"] += 1
-            
-            if progress_callback:
-                progress_callback(i + 1, total, result)
-            
-            yield result
+                    session_info["failed"] += 1
+                
+                if progress_callback:
+                    progress_callback(completed_count, total, result)
+                
+                yield result
         
         # Record session
         session_info["completed"] = datetime.now().isoformat()

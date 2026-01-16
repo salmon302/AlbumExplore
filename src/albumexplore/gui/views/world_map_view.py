@@ -9,6 +9,9 @@ from folium.plugins import MarkerCluster, HeatMap
 import tempfile
 import os
 from pathlib import Path
+import unicodedata
+import requests
+import time
 
 from .base_view import BaseView
 from albumexplore.visualization.state import ViewType
@@ -22,6 +25,51 @@ class LocationCache:
     def __init__(self):
         self._cache: Dict[str, Tuple[float, float]] = {}
         self._load_default_locations()
+        # Allow optional online geocoding fallback controlled via env var
+        self._enable_online = str(os.getenv('ALBUMEXPLORE_GEOCODE_ONLINE', 'false')).lower() in ('1', 'true', 'yes')
+        # Load optional extra locations file (useful for bulk-adding from logs)
+        try:
+            self._load_extra_locations()
+        except Exception:
+            # Best-effort: don't fail view initialization if extra file missing or malformed
+            pass
+        # Build a normalized lookup map to handle unicode composition/spacing/case variants
+        self._norm_map: Dict[str, Tuple[float, float]] = {
+            self._normalize_key(k): v for k, v in self._cache.items()
+        }
+
+    def _load_extra_locations(self):
+        """Load additional cached locations from a JSON file.
+
+        File location resolution order:
+        - Path from env `ALBUMEXPLORE_EXTRA_LOCATIONS`
+        - `data/extra_locations.json` in current working directory
+
+        JSON format: {"Location Name": [lat, lon], ...}
+        """
+        extra_path = os.getenv('ALBUMEXPLORE_EXTRA_LOCATIONS')
+        if extra_path:
+            p = Path(extra_path)
+        else:
+            p = Path.cwd() / 'data' / 'extra_locations.json'
+
+        if not p.exists():
+            return
+
+        try:
+            import json
+            with p.open('r', encoding='utf-8') as fh:
+                data = json.load(fh)
+            for name, coords in data.items():
+                try:
+                    lat, lon = float(coords[0]), float(coords[1])
+                    # store both raw and normalized keys via add_location
+                    self.add_location(name, lat, lon)
+                except Exception:
+                    continue
+            graphics_logger.info(f"Loaded {len(data)} extra locations from {p}")
+        except Exception:
+            graphics_logger.debug(f"Failed to load extra locations from {p}")
     
     def _load_default_locations(self):
         """Load known country/region coordinates."""
@@ -2602,6 +2650,40 @@ class LocationCache:
         """Get lat/long coordinates for a location string."""
         if not location:
             return None
+        # Normalize and try normalized lookup (handles Unicode composition, spacing, case)
+        try:
+            key = self._normalize_key(str(location))
+        except Exception:
+            key = str(location).strip()
+
+        if key in self._norm_map:
+            return self._norm_map[key]
+
+        # Try country extraction from "Country / Region" format using normalized country
+        parts = str(location).split("/")
+        if parts:
+            country = parts[0].strip()
+            country_key = self._normalize_key(country)
+            if country_key in self._norm_map:
+                return self._norm_map[country_key]
+
+        # Fallback: try removing combining marks (decompose then strip) and lookup
+        decomposed = unicodedata.normalize('NFD', str(location)).strip()
+        stripped = ''.join(ch for ch in decomposed if not unicodedata.combining(ch))
+        stripped_key = self._normalize_key(stripped)
+        if stripped_key in self._norm_map:
+            return self._norm_map[stripped_key]
+
+        graphics_logger.debug(f"Location '{location}' not found in cache")
+        # Try optional online geocoding fallback
+        if self._enable_online:
+            try:
+                coords = self._geocode_online(location)
+                if coords:
+                    return coords
+            except Exception:
+                graphics_logger.debug(f"Online geocoding failed for: {location}")
+        return None
         
         # Try direct lookup
         if location in self._cache:
@@ -2620,6 +2702,56 @@ class LocationCache:
     def add_location(self, location: str, lat: float, lon: float):
         """Add a location to the cache."""
         self._cache[location] = (lat, lon)
+        try:
+            self._norm_map[self._normalize_key(location)] = (lat, lon)
+        except Exception:
+            # Best-effort: ignore normalization errors
+            pass
+
+    def _geocode_online(self, location: str) -> Optional[Tuple[float, float]]:
+        """Query Nominatim (OpenStreetMap) for a location and cache the result.
+
+        Respects simple rate limiting and caches successful responses.
+        """
+        if not location:
+            return None
+
+        params = {
+            'q': location,
+            'format': 'json',
+            'limit': 1,
+        }
+        headers = {'User-Agent': 'AlbumExplore/1.0 (contact: none)'}
+
+        try:
+            resp = requests.get('https://nominatim.openstreetmap.org/search', params=params, headers=headers, timeout=6)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data:
+                    lat = float(data[0]['lat'])
+                    lon = float(data[0]['lon'])
+                    # Cache the found location (use original string key)
+                    self.add_location(location, lat, lon)
+                    # Be polite to the service
+                    time.sleep(1.0)
+                    graphics_logger.debug(f"Online geocoding succeeded for '{location}': {(lat, lon)}")
+                    return (lat, lon)
+            else:
+                graphics_logger.debug(f"Nominatim returned status {resp.status_code} for '{location}'")
+        except Exception as e:
+            graphics_logger.debug(f"Exception during online geocoding for '{location}': {e}")
+
+        return None
+
+    def _normalize_key(self, s: str) -> str:
+        """Normalize a location string for stable lookups.
+
+        Steps: NFKC composition, trim whitespace, casefold for case-insensitive match.
+        """
+        if s is None:
+            return ''
+        norm = unicodedata.normalize('NFKC', s).strip()
+        return norm.casefold()
 
 
 class WorldMapView(BaseView):

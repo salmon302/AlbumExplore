@@ -386,7 +386,21 @@ class TagFilterPanel(QWidget):
         # Apply converted state
         self.set_filter_state(state)
         self.filtersChanged.emit()
-        QMessageBox.information(self, "Applied", "Advanced query converted and applied to filters.")
+
+    def update_available_tags(self, tags: list):
+        """Update available tags for autocomplete across the panel and group widgets.
+
+        This provides a compatibility method used by views that expect the panel
+        to expose `update_available_tags`.
+        """
+        self.available_tags = tags or []
+        # Update each group widget's completer/input
+        for widget in self.group_widgets.values():
+            try:
+                widget.update_available_tags(self.available_tags)
+            except Exception:
+                # Do not fail if a widget cannot be updated
+                pass
     
     def _toggle_group_operator(self):
         """Toggle between AND and OR operators for combining groups."""

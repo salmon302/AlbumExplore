@@ -19,7 +19,8 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from albumexplore.database.models import (
-    Base, Album, Artist, Tag, TagCategory, album_tags
+    Base, Album, Artist, Tag, TagCategory, album_tags,
+    ArtistSimilarity
 )
 from albumexplore.tags.normalizer.enhanced_normalizer import EnhancedTagNormalizer
 
@@ -236,7 +237,11 @@ class LastFmTransformer:
         return mbid if mbid else None
     
     def _extract_image_url(self, data: Dict[str, Any]) -> Optional[str]:
-        """Extract best quality image URL."""
+        """Extract best available image path (local preferred, then remote)."""
+        # Prefer locally cached image
+        if data.get('_local_image_path'):
+            return data['_local_image_path']
+
         images = data.get('image', [])
         if not images:
             return None
@@ -273,7 +278,12 @@ class LastFmTransformer:
             logger.error(f"Could not read {file_path}: {e}")
             self.stats["errors"] += 1
             return False
-        
+            
+        if not isinstance(data, dict):
+            logger.warning(f"Invalid JSON format in {file_path}: expected dict, got {type(data).__name__}")
+            self.stats["errors"] += 1
+            return False
+
         # Extract basic info
         artist_name = data.get('artist', '')
         if isinstance(artist_name, dict):
@@ -305,7 +315,12 @@ class LastFmTransformer:
                 album.cover_image_url = self._extract_image_url(data)
             
             # Process tags
-            raw_tags = data.get('tags', {}).get('tag', [])
+            tags_container = data.get('tags', {})
+            if isinstance(tags_container, dict):
+                raw_tags = tags_container.get('tag', [])
+            else:
+                raw_tags = []
+                
             if isinstance(raw_tags, dict):
                 raw_tags = [raw_tags]
             
@@ -354,7 +369,12 @@ class LastFmTransformer:
             session.add(new_album)
             
             # Process tags
-            raw_tags = data.get('tags', {}).get('tag', [])
+            tags_container = data.get('tags', {})
+            if isinstance(tags_container, dict):
+                raw_tags = tags_container.get('tag', [])
+            else:
+                raw_tags = []
+
             if isinstance(raw_tags, dict):
                 raw_tags = [raw_tags]
             
@@ -373,6 +393,66 @@ class LastFmTransformer:
             logger.debug(f"No match found for: {artist_name} - {album_name}")
             self.stats["albums_not_matched"] += 1
             return False
+
+    def transform_artist_similarity(
+        self,
+        session: Session,
+        artist_name: str,
+        similar_artists: List[Dict[str, Any]]
+    ) -> bool:
+        """
+        Process artist similarity data.
+        
+        Args:
+            session: DB session
+            artist_name: Name of source artist
+            similar_artists: List of similar artist data
+            
+        Returns:
+            True if processed
+        """
+        if not similar_artists:
+            return False
+            
+        # Find source artist
+        artist = session.query(Artist).filter(
+            Artist.name.ilike(artist_name.strip())
+        ).first()
+        
+        if not artist:
+            # We only attach similarity if we have the source artist
+            return False
+            
+        # Clear old similarities ?? 
+        # Maybe we want to keep them if they are from different sources. 
+        # For now, let's remove old Last.fm similarities for this artist to avoid dupes/stale data.
+        session.query(ArtistSimilarity).filter(
+            ArtistSimilarity.source_artist_id == artist.id,
+            ArtistSimilarity.source_type == 'lastfm'
+        ).delete()
+        
+        count = 0
+        for sim in similar_artists:
+            target_name = sim.get('name')
+            if not target_name:
+                continue
+                
+            match_score = float(sim.get('match', 0.0))
+            if match_score < 0.1: # Skip very low relevance
+                continue
+                
+            similarity = ArtistSimilarity(
+                source_artist_id=artist.id,
+                target_artist_name=target_name,
+                target_artist_mbid=sim.get('mbid'),
+                match_score=match_score,
+                source_type='lastfm'
+            )
+            session.add(similarity)
+            count += 1
+            
+        logger.debug(f"Added {count} similarity records for {artist.name}")
+        return True
     
     def transform_all(
         self,
@@ -413,9 +493,24 @@ class LastFmTransformer:
             for search_dir in search_dirs:
                 logger.info(f"Processing directory: {search_dir}")
                 
+                # Transform albums
                 for json_file in search_dir.glob("album_*.json"):
                     self.transform_album_file(session, json_file, tag_category)
-            
+                
+                # Transform artist data/similarity (if available)
+                for json_file in search_dir.glob("artist_*.json"):
+                    try:
+                        with open(json_file, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                        
+                        artist_name = data.get('name')
+                        similar = data.get('_similar_artists', [])
+                        if artist_name and similar:
+                            self.transform_artist_similarity(session, artist_name, similar)
+                            
+                    except Exception as e:
+                        logger.warning(f"Failed to process artist file {json_file}: {e}")
+
             # Commit or rollback
             if dry_run:
                 logger.info("Dry run: rolling back changes")

@@ -550,7 +550,8 @@ class TagExplorerView(BaseView):
         album_panel_layout.addWidget(self.album_count_label)
 
         self.album_table = QTableWidget() # Definition of self.album_table
-        self.album_table.setColumnCount(7)
+        # Add Plays and Listeners columns (kept near vocal/style and before tags)
+        self.album_table.setColumnCount(9)
         self.album_table.setHorizontalHeaderLabels([
             "Artist",
             "Album",
@@ -558,6 +559,8 @@ class TagExplorerView(BaseView):
             "Genre",
             "Country",
             "Vocal Style",
+            "Plays",
+            "Listeners",
             "Tags"
         ])
         self.album_table.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
@@ -569,7 +572,9 @@ class TagExplorerView(BaseView):
         album_header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
         album_header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
         album_header.setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents)
-        album_header.setSectionResizeMode(6, QHeaderView.ResizeMode.Stretch)
+        album_header.setSectionResizeMode(6, QHeaderView.ResizeMode.ResizeToContents)
+        album_header.setSectionResizeMode(7, QHeaderView.ResizeMode.ResizeToContents)
+        album_header.setSectionResizeMode(8, QHeaderView.ResizeMode.Stretch)
         album_header.setStretchLastSection(True)  # Tags column stretches
         album_header.setSectionsClickable(True)
         album_header.setHighlightSections(True)
@@ -582,6 +587,8 @@ class TagExplorerView(BaseView):
         self.album_table.setColumnWidth(3, 220)  # Genre column
         self.album_table.setColumnWidth(4, 140)  # Country column
         self.album_table.setColumnWidth(5, 150)  # Vocal style column
+        self.album_table.setColumnWidth(6, 120)  # Plays column
+        self.album_table.setColumnWidth(7, 120)  # Listeners column
         self.album_table.setSortingEnabled(True)
         self.album_table.setAlternatingRowColors(True)
         self.album_table.setShowGrid(True)
@@ -1295,6 +1302,21 @@ class TagExplorerView(BaseView):
                     tags_str = str(tags_list)
                     tags_tooltip = tags_str
                 
+                # Plays / listeners (may be absent)
+                play_raw = album_node.get('playcount') or album_node.get('plays')
+                listeners_raw = album_node.get('listeners')
+                plays_display = self._format_number(play_raw) if play_raw is not None else ""
+                listeners_display = self._format_number(listeners_raw) if listeners_raw is not None else ""
+                # Use user role to store numeric sort value where possible
+                try:
+                    play_sort_val = int(play_raw) if play_raw is not None else None
+                except Exception:
+                    play_sort_val = None
+                try:
+                    listeners_sort_val = int(listeners_raw) if listeners_raw is not None else None
+                except Exception:
+                    listeners_sort_val = None
+
                 # Store items for batch insertion
                 tags_tooltip_text = f"All Tags:\n{tags_tooltip}" if tags_tooltip else "All Tags: (none)"
 
@@ -1306,11 +1328,13 @@ class TagExplorerView(BaseView):
                     (genre_display, genre_display),
                     (country_display, country_display),
                     (vocal_style_display, vocal_style_display),
+                    (plays_display, play_sort_val),
+                    (listeners_display, listeners_sort_val),
                     (tags_str, tags_tooltip_text)
                 ))
             
             # Batch insert all items
-            for row_pos, artist_data, album_data, year_data, genre_data, country_data, vocal_data, tags_data in batch_items:
+            for row_pos, artist_data, album_data, year_data, genre_data, country_data, vocal_data, plays_data, listeners_data, tags_data in batch_items:
                 # Artist
                 artist_item = QTableWidgetItem(artist_data[0])
                 artist_item.setToolTip(artist_data[1])
@@ -1342,11 +1366,24 @@ class TagExplorerView(BaseView):
                 vocal_item = QTableWidgetItem(vocal_data[0])
                 vocal_item.setToolTip(vocal_data[1])
                 self.album_table.setItem(row_pos, 5, vocal_item)
+                # Plays
+                plays_item = QTableWidgetItem(plays_data[0])
+                if plays_data[1] is not None:
+                    plays_item.setData(Qt.ItemDataRole.UserRole, int(plays_data[1]))
+                plays_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+                self.album_table.setItem(row_pos, 6, plays_item)
+
+                # Listeners
+                listeners_item = QTableWidgetItem(listeners_data[0])
+                if listeners_data[1] is not None:
+                    listeners_item.setData(Qt.ItemDataRole.UserRole, int(listeners_data[1]))
+                listeners_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+                self.album_table.setItem(row_pos, 7, listeners_item)
 
                 # Tags
                 tags_item = QTableWidgetItem(tags_data[0])
                 tags_item.setToolTip(tags_data[1])
-                self.album_table.setItem(row_pos, 6, tags_item)
+                self.album_table.setItem(row_pos, 8, tags_item)
             
             # Update progress less frequently
             if show_progress and batch_end % 4000 == 0:
@@ -1400,7 +1437,30 @@ class TagExplorerView(BaseView):
             self.album_table.setItem(i, 3, QTableWidgetItem(genre_display))
             self.album_table.setItem(i, 4, QTableWidgetItem(country_display))
             self.album_table.setItem(i, 5, QTableWidgetItem(vocal_display))
-            self.album_table.setItem(i, 6, QTableWidgetItem(tags_str))
+            # Plays and listeners for simplified large-dataset view
+            play_raw = album_node.get('playcount') or album_node.get('plays')
+            listeners_raw = album_node.get('listeners')
+            plays_text = self._format_number(play_raw) if play_raw is not None else ''
+            listeners_text = self._format_number(listeners_raw) if listeners_raw is not None else ''
+            plays_item = QTableWidgetItem(plays_text)
+            if play_raw is not None:
+                try:
+                    plays_item.setData(Qt.ItemDataRole.UserRole, int(play_raw))
+                except Exception:
+                    pass
+            plays_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            self.album_table.setItem(i, 6, plays_item)
+
+            listeners_item = QTableWidgetItem(listeners_text)
+            if listeners_raw is not None:
+                try:
+                    listeners_item.setData(Qt.ItemDataRole.UserRole, int(listeners_raw))
+                except Exception:
+                    pass
+            listeners_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            self.album_table.setItem(i, 7, listeners_item)
+
+            self.album_table.setItem(i, 8, QTableWidgetItem(tags_str))
         
         # Update label to show limitation
         self.album_count_label.setText(f"Albums: {actual_count} (showing first {max_display})")
@@ -1743,7 +1803,7 @@ class TagExplorerView(BaseView):
         
         # Preview table
         preview_table = QTableWidget()
-        preview_table.setColumnCount(7)
+        preview_table.setColumnCount(9)
         preview_table.setHorizontalHeaderLabels([
             "Artist",
             "Album",
@@ -1751,6 +1811,8 @@ class TagExplorerView(BaseView):
             "Genre",
             "Country",
             "Vocal Style",
+            "Plays",
+            "Listeners",
             "Tags"
         ])
         preview_table.setRowCount(len(nodes))
@@ -1769,14 +1831,36 @@ class TagExplorerView(BaseView):
             if not vocal and node.get('vocal_styles'):
                 vocal = ", ".join(str(v) for v in node['vocal_styles'] if v)
             tags = ', '.join(map(str, node.get('tags', [])))
-            
+            play_raw = node.get('playcount') or node.get('plays')
+            listeners_raw = node.get('listeners')
+            plays_text = self._format_number(play_raw) if play_raw is not None else ''
+            listeners_text = self._format_number(listeners_raw) if listeners_raw is not None else ''
+
             preview_table.setItem(i, 0, QTableWidgetItem(artist))
             preview_table.setItem(i, 1, QTableWidgetItem(album))
             preview_table.setItem(i, 2, QTableWidgetItem(year))
             preview_table.setItem(i, 3, QTableWidgetItem(genre))
             preview_table.setItem(i, 4, QTableWidgetItem(country))
             preview_table.setItem(i, 5, QTableWidgetItem(vocal))
-            preview_table.setItem(i, 6, QTableWidgetItem(tags))
+            plays_item = QTableWidgetItem(plays_text)
+            if play_raw is not None:
+                try:
+                    plays_item.setData(Qt.ItemDataRole.UserRole, int(play_raw))
+                except Exception:
+                    pass
+            plays_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            preview_table.setItem(i, 6, plays_item)
+
+            listeners_item = QTableWidgetItem(listeners_text)
+            if listeners_raw is not None:
+                try:
+                    listeners_item.setData(Qt.ItemDataRole.UserRole, int(listeners_raw))
+                except Exception:
+                    pass
+            listeners_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            preview_table.setItem(i, 7, listeners_item)
+
+            preview_table.setItem(i, 8, QTableWidgetItem(tags))
         
         preview_table.resizeColumnsToContents()
         layout.addWidget(preview_table)
