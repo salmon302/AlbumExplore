@@ -34,7 +34,7 @@ if __name__ == "__main__":
         init_database()
         
         # Load CSV data with enhanced debugging
-        csv_dir = project_root / "csv"
+        csv_dir = project_root / "data" / "csv"
         logger.info(f"Loading CSV data from {csv_dir}")
         load_csv_data_with_debug(csv_dir)
         

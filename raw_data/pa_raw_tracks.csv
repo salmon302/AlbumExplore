@@ -1,3 +1,0 @@
-pa_album_id,raw_track_number,raw_track_title,raw_track_duration,is_subtrack,parent_track_number,is_bonus_track
-2001,1,Test Track 1,5:00,False,,False
-2001,2,Test Track 2,3:30,False,,False

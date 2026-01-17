@@ -14,7 +14,7 @@ from albumexplore.database.csv_loader import (
     normalize_tag,
 )
 
-CSV_DIR = Path("csv")
+CSV_DIR = Path("data") / "csv"
 HEADER_PREFIX = "Artist,Album,Release Date"
 
 

@@ -200,7 +200,7 @@ class DataLoaderDialog(QDialog):
         self.setMinimumSize(800, 600)
         self.setModal(True)
         
-        self.csv_directory = csv_directory or Path("csv")
+        self.csv_directory = csv_directory or (Path("data") / "csv")
         self.worker = None
         self.loaded_data = None
         

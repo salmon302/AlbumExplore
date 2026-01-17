@@ -13,7 +13,7 @@ from albumexplore.database.models import Album, Tag
 def load_and_test_vocal_style():
     """Load CSV data and test if vocal style is working."""
     
-    csv_dir = Path("csv")
+    csv_dir = Path("data/csv")
     if not csv_dir.exists():
         print("❌ CSV directory not found")
         return

@@ -1,2 +1,0 @@
-pa_album_id,raw_album_title,raw_artist_name,raw_release_year,raw_recording_type,raw_subgenre_string,pa_average_rating,pa_rating_count,pa_review_count,pa_cover_image_url,pa_artist_page_link,pa_all_reviews_page_link,source_html_file
-2001,Test Album,Test Artist,1975,Studio Album,Symphonic Prog,4.5,100,10,http://example.com/cover.jpg,artist1001.html,,album2001.html

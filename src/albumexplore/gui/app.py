@@ -136,7 +136,7 @@ class AlbumExplorer(QMainWindow):
         from .data_loader_dialog import DataLoaderDialog
         
         project_root = Path(__file__).resolve().parent.parent.parent.parent
-        csv_directory = project_root / "csv"
+        csv_directory = project_root / "data" / "csv"
         
         dialog = DataLoaderDialog(self, csv_directory)
         dialog.data_loaded.connect(self._on_data_loaded)

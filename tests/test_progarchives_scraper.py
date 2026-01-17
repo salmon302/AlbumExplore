@@ -4,7 +4,7 @@ import json
 import logging
 from pathlib import Path
 # from datetime import datetime # Not used for now, can be re-added if saving test outputs with timestamp
-from albumexplore.scraping.progarchives_scraper import ProgArchivesScraper
+from albumexplore.scraping.progarchives.parser import ProgArchivesScraper
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

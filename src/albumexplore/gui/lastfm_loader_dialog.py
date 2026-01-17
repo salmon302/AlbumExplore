@@ -7,6 +7,7 @@ from typing import Optional
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, 
     QProgressBar, QTextEdit, QCheckBox, QGroupBox, QSpinBox, 
+    QListWidget, QFileDialog,
     QComboBox
 )
 from PyQt6.QtCore import QThread, pyqtSignal, Qt
@@ -24,6 +25,7 @@ class LastFmWorker(QThread):
     
     progress_updated = pyqtSignal(int, str)  # progress (0-100), message
     log_message = pyqtSignal(str, str)       # level, message
+    failed_item = pyqtSignal(str)            # single failed fetch line
     finished_success = pyqtSignal(bool)      # success status
 
     def __init__(self, limit: int = 0, force: bool = False, transform: bool = True):
@@ -32,6 +34,7 @@ class LastFmWorker(QThread):
         self.force = force
         self.transform = transform
         self.should_cancel = False
+        self.failures = []
 
     def run(self):
         session = None
@@ -92,6 +95,14 @@ class LastFmWorker(QThread):
                 
                 level = "INFO" if result.success else "WARNING"
                 self.log_message.emit(level, msg)
+                # If this result failed, record it and emit an update
+                if not result.success:
+                    failure_line = f"{result.artist} - {result.album}: {result.error or 'Unknown error'}"
+                    try:
+                        self.failures.append(failure_line)
+                        self.failed_item.emit(failure_line)
+                    except Exception:
+                        pass
                 
                 percent = int((current / total) * 100) if total > 0 else 0
                 # Scale progress to 0-80% for fetch, 80-100% for transform
@@ -207,6 +218,27 @@ class LastFmLoaderDialog(QDialog):
         self.log_viewer.setFont(QFont("Consolas", 9))
         log_layout.addWidget(self.log_viewer)
         layout.addWidget(log_group)
+
+        # Failures bin
+        failures_group = QGroupBox("Failed Fetches")
+        failures_layout = QVBoxLayout(failures_group)
+        self.failures_list = QListWidget()
+        self.failures_list.setSelectionMode(self.failures_list.SelectionMode.ExtendedSelection)
+        failures_layout.addWidget(self.failures_list)
+
+        failures_btn_layout = QHBoxLayout()
+        self.save_failures_btn = QPushButton("Save Failures...")
+        self.save_failures_btn.setEnabled(False)
+        self.save_failures_btn.clicked.connect(self._save_failures)
+        failures_btn_layout.addWidget(self.save_failures_btn)
+
+        self.clear_failures_btn = QPushButton("Clear")
+        self.clear_failures_btn.clicked.connect(self._clear_failures)
+        failures_btn_layout.addWidget(self.clear_failures_btn)
+
+        failures_btn_layout.addStretch()
+        failures_layout.addLayout(failures_btn_layout)
+        layout.addWidget(failures_group)
         
         # Buttons
         btn_layout = QHBoxLayout()
@@ -237,6 +269,7 @@ class LastFmLoaderDialog(QDialog):
         self.worker = LastFmWorker(limit=limit, force=force, transform=transform)
         self.worker.progress_updated.connect(self._on_progress)
         self.worker.log_message.connect(self._on_log)
+        self.worker.failed_item.connect(self._on_failed_item)
         self.worker.finished_success.connect(self._on_finished)
         
         self.start_btn.setEnabled(False)
@@ -267,6 +300,29 @@ class LastFmLoaderDialog(QDialog):
         # Scroll to bottom
         sb = self.log_viewer.verticalScrollBar()
         sb.setValue(sb.maximum())
+
+    def _on_failed_item(self, line: str):
+        try:
+            self.failures_list.addItem(line)
+            self.save_failures_btn.setEnabled(True)
+        except Exception:
+            pass
+
+    def _save_failures(self):
+        path, _ = QFileDialog.getSaveFileName(self, "Save Failures", "failed_lastfm_fetches.txt", "Text Files (*.txt);;All Files (*)")
+        if not path:
+            return
+        try:
+            with open(path, 'w', encoding='utf-8') as fh:
+                for i in range(self.failures_list.count()):
+                    fh.write(self.failures_list.item(i).text() + "\n")
+            self.log_viewer.append(f"Saved {self.failures_list.count()} failures to {path}")
+        except Exception as e:
+            self.log_viewer.append(f"ERROR saving failures: {e}")
+
+    def _clear_failures(self):
+        self.failures_list.clear()
+        self.save_failures_btn.setEnabled(False)
 
     def _on_finished(self, success):
         self.progress_bar.setValue(100)

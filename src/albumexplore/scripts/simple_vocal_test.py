@@ -15,7 +15,7 @@ def main():
     
     # Load CSV data
     print("1. Loading CSV files...")
-    csv_dir = Path("csv")
+    csv_dir = Path("data/csv")
     load_csv_data(csv_dir)
     print("   CSV loading complete\n")
     

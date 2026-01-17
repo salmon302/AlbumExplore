@@ -19,9 +19,9 @@ def get_project_root() -> Path:
 def get_data_dir() -> Path:
     """Get the absolute path to the data directory."""
     root = get_project_root()
-    data_dir = root / "csv"
+    data_dir = root / "data" / "csv"
     if not data_dir.exists():
-        data_dir.mkdir(parents=True)
+        data_dir.mkdir(parents=True, exist_ok=True)
     return data_dir
 
 def get_log_dir() -> Path:

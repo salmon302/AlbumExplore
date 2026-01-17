@@ -18,7 +18,7 @@ def main():
     session = get_session()
     
     # Find a CSV file to process
-    csv_dir = Path("csv")
+    csv_dir = Path("data") / "csv"
     csv_files = list(csv_dir.glob("*.csv"))
     if not csv_files:
         print("No CSV files found!")

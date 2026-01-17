@@ -1,0 +1,549 @@
+"""
+ProgArchives.com Optimized Scraper
+Based on actual HTML structure analysis - extracts maximum data from list pages.
+
+Key Discovery: The top-albums page supports smaxresults=1000 parameter!
+This means we can get up to 1000 albums per request without pagination.
+
+Data available directly from list pages (no need to crawl individual albums for basic info):
+- Album ID, Title, Artist ID, Artist Name
+- Cover Image URL, Genre/Subgenre, Year, Album Type
+- Average Rating (precise), Number of Ratings, QWR Score
+"""
+
+import requests
+from bs4 import BeautifulSoup
+import re
+import json
+import csv
+import sqlite3
+from dataclasses import dataclass, asdict, field
+from typing import Optional, List, Dict, Generator
+import time
+import logging
+from pathlib import Path
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+# Complete genre mapping from the actual HTML
+GENRES = {
+    12: "Canterbury Scene",
+    3: "Crossover Prog",
+    42: "Eclectic Prog",
+    44: "Experimental/Post Metal",
+    41: "Heavy Prog",
+    35: "Indo-Prog/Raga Rock",
+    30: "Jazz Rock/Fusion",
+    17: "Krautrock",
+    18: "Neo-Prog",
+    32: "Post Rock/Math Rock",
+    6: "Prog Folk",
+    33: "Progressive Electronic",
+    19: "Progressive Metal",
+    15: "Psychedelic/Space Rock",
+    36: "RIO/Avant-Prog",
+    28: "Rock Progressivo Italiano",
+    4: "Symphonic Prog",
+    43: "Tech/Extreme Prog Metal",
+    11: "Zeuhl",
+    29: "Various Genres/Artists",
+    38: "Prog Related",
+    37: "Proto-Prog",
+}
+
+# Album types
+ALBUM_TYPES = {
+    1: "Studio",
+    2: "DVD/Video",
+    3: "Boxset/Compilation",
+    4: "Live",
+    5: "Singles/EPs/Fan Club/Promo",
+}
+
+
+@dataclass
+class Album:
+    """Album data extracted from list pages"""
+    album_id: int
+    title: str
+    artist: str
+    artist_id: int
+    year: Optional[int] = None
+    genre: Optional[str] = None
+    album_type: Optional[str] = None
+    avg_rating: Optional[float] = None
+    num_ratings: Optional[int] = None
+    qwr_score: Optional[float] = None  # Quality Weighted Rating
+    cover_url: Optional[str] = None
+    rank: Optional[int] = None
+    # Additional fields from album page (if crawled)
+    description: Optional[str] = None
+    tracks: Optional[List[dict]] = None
+    label: Optional[str] = None
+    country: Optional[str] = None
+
+
+class ProgArchivesOptimizedScraper:
+    """
+    Optimized scraper that extracts maximum data from list pages.
+    
+    The list pages contain most album data, so we can scrape thousands of albums
+    quickly without needing to visit individual album pages.
+    """
+    
+    BASE_URL = "https://www.progarchives.com"
+    
+    HEADERS = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Referer': 'https://www.progarchives.com/',
+    }
+    
+    def __init__(self, delay: float = 1.5, db_path: str = "progarchives_optimized.db"):
+        self.session = requests.Session()
+        self.session.headers.update(self.HEADERS)
+        self.delay = delay
+        self.db_path = db_path
+        self._init_database()
+    
+    def _init_database(self):
+        """Initialize SQLite database"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS albums (
+                album_id INTEGER PRIMARY KEY,
+                title TEXT NOT NULL,
+                artist TEXT NOT NULL,
+                artist_id INTEGER,
+                year INTEGER,
+                genre TEXT,
+                album_type TEXT,
+                avg_rating REAL,
+                num_ratings INTEGER,
+                qwr_score REAL,
+                cover_url TEXT,
+                rank INTEGER,
+                description TEXT,
+                tracks TEXT,
+                label TEXT,
+                country TEXT,
+                scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
+        cursor.execute('''
+            CREATE INDEX IF NOT EXISTS idx_artist_id ON albums(artist_id)
+        ''')
+        cursor.execute('''
+            CREATE INDEX IF NOT EXISTS idx_year ON albums(year)
+        ''')
+        cursor.execute('''
+            CREATE INDEX IF NOT EXISTS idx_genre ON albums(genre)
+        ''')
+        
+        conn.commit()
+        conn.close()
+        logger.info(f"Database initialized: {self.db_path}")
+    
+    def _get(self, url: str) -> Optional[BeautifulSoup]:
+        """Fetch URL with rate limiting"""
+        time.sleep(self.delay)
+        try:
+            response = self.session.get(url, timeout=30)
+            response.raise_for_status()
+            return BeautifulSoup(response.text, 'html.parser')
+        except requests.RequestException as e:
+            logger.error(f"Request failed for {url}: {e}")
+            return None
+    
+    def build_top_albums_url(self, 
+                              album_types: List[int] = [1],
+                              genres: List[int] = None,
+                              years: List[int] = None,
+                              countries: List[int] = None,
+                              max_results: int = 1000) -> str:
+        """
+        Build URL for top albums page with filters.
+        
+        Key insight: smaxresults can be up to 1000!
+        
+        Args:
+            album_types: List of album type IDs (1=Studio, 2=DVD, 3=Boxset, 4=Live, 5=Singles)
+            genres: List of genre IDs (see GENRES dict)
+            years: List of years to filter
+            countries: List of country IDs
+            max_results: Max results (up to 1000)
+        """
+        params = []
+        
+        # Album types
+        for at in album_types:
+            params.append(f"salbumtypes={at}")
+        
+        # Genres/subgenres
+        if genres:
+            for g in genres:
+                params.append(f"ssubgenres={g}")
+        
+        # Years
+        if years:
+            for y in years:
+                params.append(f"syears={y}")
+        
+        # Countries
+        if countries:
+            for c in countries:
+                params.append(f"scountries={c}")
+        
+        # Max results - THE KEY PARAMETER!
+        params.append(f"smaxresults={max_results}")
+        
+        return f"{self.BASE_URL}/top-prog-albums.asp?{'&'.join(params)}"
+    
+    def parse_album_row(self, row, position: int = None) -> Optional[Album]:
+        """
+        Parse a single album row from the table.
+        
+        Expected structure:
+        <tr>
+          <td><strong>{position}</strong></td>
+          <td><img src="{cover_url}" /></td>
+          <td><a href="album.asp?id={album_id}">{title}</a><br><a href="artist.asp?id={artist_id}">{artist}</a></td>
+          <td><strong>{genre}</strong><br />Studio, {year}</td>
+          <td>... ratings ...</td>
+        </tr>
+        """
+        try:
+            cells = row.find_all('td')
+            if len(cells) < 4:
+                return None
+            
+            album = Album(album_id=0, title="", artist="", artist_id=0)
+            
+            # Position/rank (cell 0)
+            if position is None:
+                pos_elem = cells[0].find('strong')
+                if pos_elem:
+                    album.rank = int(pos_elem.get_text(strip=True))
+            else:
+                album.rank = position
+            
+            # Cover image (cell 1)
+            img = cells[1].find('img')
+            if img:
+                album.cover_url = img.get('src', '')
+            
+            # Album and Artist links (cell 2)
+            links = cells[2].find_all('a')
+            for link in links:
+                href = link.get('href', '')
+                
+                if 'album.asp' in href:
+                    album.title = link.get_text(strip=True)
+                    match = re.search(r'id=(\d+)', href)
+                    if match:
+                        album.album_id = int(match.group(1))
+                
+                elif 'artist.asp' in href:
+                    album.artist = link.get_text(strip=True)
+                    match = re.search(r'id=(\d+)', href)
+                    if match:
+                        album.artist_id = int(match.group(1))
+            
+            # Genre and Year (cell 3)
+            cell3_text = cells[3].get_text(separator='|', strip=True)
+            
+            # Extract genre (in <strong> tag)
+            genre_elem = cells[3].find('strong')
+            if genre_elem:
+                album.genre = genre_elem.get_text(strip=True)
+            
+            # Extract album type and year
+            type_year_match = re.search(r'(Studio|Live|DVD|Video|Boxset|Compilation|Singles|EPs)[,\s]+(\d{4})', cell3_text)
+            if type_year_match:
+                album.album_type = type_year_match.group(1)
+                album.year = int(type_year_match.group(2))
+            else:
+                # Just try to find a year
+                year_match = re.search(r'\b(19\d{2}|20\d{2})\b', cell3_text)
+                if year_match:
+                    album.year = int(year_match.group(1))
+            
+            # Ratings (cell 4 or last cell)
+            ratings_cell = cells[-1]
+            
+            # Get precise rating from JavaScript call
+            # generateReadOnlyStarbox('readOnlyRating_1_1827', 4.68127962085308);
+            scripts = row.find_all('script')
+            for script in scripts:
+                script_text = script.string or ''
+                rating_match = re.search(r'generateReadOnlyStarbox\([^,]+,\s*([\d.]+)\)', script_text)
+                if rating_match:
+                    album.avg_rating = float(rating_match.group(1))
+                    break
+            
+            # Fallback: get rating from span
+            if album.avg_rating is None:
+                avg_span = ratings_cell.find('span', id=re.compile(r'avgRatings_'))
+                if avg_span:
+                    try:
+                        album.avg_rating = float(avg_span.get_text(strip=True))
+                    except ValueError:
+                        pass
+            
+            # Number of ratings
+            nb_span = ratings_cell.find('span', id=re.compile(r'nbRatings_'))
+            if nb_span:
+                try:
+                    album.num_ratings = int(nb_span.get_text(strip=True).replace(',', ''))
+                except ValueError:
+                    pass
+            
+            # QWR score
+            qwr_match = re.search(r'QWR\s*=\s*([\d.]+)', ratings_cell.get_text())
+            if qwr_match:
+                album.qwr_score = float(qwr_match.group(1))
+            
+            # Validate we have minimum required data
+            if album.album_id and album.title:
+                return album
+            
+            return None
+            
+        except Exception as e:
+            logger.warning(f"Error parsing row: {e}")
+            return None
+    
+    def scrape_top_albums_page(self, url: str) -> List[Album]:
+        """Scrape all albums from a single top albums page"""
+        logger.info(f"Fetching: {url}")
+        soup = self._get(url)
+        
+        if not soup:
+            return []
+        
+        albums = []
+        
+        # Find the main data table
+        # The table contains rows with album data
+        tables = soup.find_all('table')
+        
+        for table in tables:
+            rows = table.find_all('tr')
+            position = 0
+            
+            for row in rows:
+                # Skip header rows
+                if row.find('th') or 'cls_TableHeader' in str(row):
+                    continue
+                
+                # Check if this looks like an album row
+                cells = row.find_all('td')
+                if len(cells) >= 4:
+                    album_link = row.find('a', href=re.compile(r'album\.asp'))
+                    if album_link:
+                        position += 1
+                        album = self.parse_album_row(row, position)
+                        if album:
+                            albums.append(album)
+        
+        logger.info(f"Found {len(albums)} albums")
+        return albums
+    
+    def scrape_all_studio_albums(self) -> List[Album]:
+        """
+        Scrape ALL studio albums (up to 1000 per genre).
+        
+        Strategy: Query each genre separately to get more than 1000 total albums.
+        """
+        all_albums = {}  # Use dict to dedupe by album_id
+        
+        for genre_id, genre_name in GENRES.items():
+            logger.info(f"Scraping genre: {genre_name} (ID: {genre_id})")
+            
+            url = self.build_top_albums_url(
+                album_types=[1],  # Studio albums
+                genres=[genre_id],
+                max_results=1000
+            )
+            
+            albums = self.scrape_top_albums_page(url)
+            
+            for album in albums:
+                if album.album_id not in all_albums:
+                    all_albums[album.album_id] = album
+            
+            logger.info(f"Total unique albums so far: {len(all_albums)}")
+        
+        return list(all_albums.values())
+    
+    def scrape_by_year(self, year: int, album_types: List[int] = [1]) -> List[Album]:
+        """Scrape all albums from a specific year"""
+        url = self.build_top_albums_url(
+            album_types=album_types,
+            years=[year],
+            max_results=1000
+        )
+        return self.scrape_top_albums_page(url)
+    
+    def scrape_year_range(self, start_year: int, end_year: int) -> Dict[int, List[Album]]:
+        """Scrape albums across a range of years"""
+        results = {}
+        
+        for year in range(start_year, end_year + 1):
+            logger.info(f"Scraping year {year}...")
+            albums = self.scrape_by_year(year)
+            results[year] = albums
+            logger.info(f"Year {year}: {len(albums)} albums")
+        
+        return results
+    
+    def save_albums(self, albums: List[Album]):
+        """Save albums to database"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        for album in albums:
+            tracks_json = json.dumps(album.tracks) if album.tracks else None
+            
+            cursor.execute('''
+                INSERT OR REPLACE INTO albums 
+                (album_id, title, artist, artist_id, year, genre, album_type,
+                 avg_rating, num_ratings, qwr_score, cover_url, rank,
+                 description, tracks, label, country)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                album.album_id, album.title, album.artist, album.artist_id,
+                album.year, album.genre, album.album_type,
+                album.avg_rating, album.num_ratings, album.qwr_score,
+                album.cover_url, album.rank,
+                album.description, tracks_json, album.label, album.country
+            ))
+        
+        conn.commit()
+        conn.close()
+        logger.info(f"Saved {len(albums)} albums to database")
+    
+    def export_to_csv(self, albums: List[Album], filename: str = "progarchives_albums.csv"):
+        """Export albums to CSV"""
+        with open(filename, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            
+            # Header
+            writer.writerow([
+                'album_id', 'title', 'artist', 'artist_id', 'year', 'genre',
+                'album_type', 'avg_rating', 'num_ratings', 'qwr_score',
+                'cover_url', 'rank'
+            ])
+            
+            # Data
+            for album in albums:
+                writer.writerow([
+                    album.album_id, album.title, album.artist, album.artist_id,
+                    album.year, album.genre, album.album_type,
+                    album.avg_rating, album.num_ratings, album.qwr_score,
+                    album.cover_url, album.rank
+                ])
+        
+        logger.info(f"Exported {len(albums)} albums to {filename}")
+    
+    def export_to_json(self, albums: List[Album], filename: str = "progarchives_albums.json"):
+        """Export albums to JSON"""
+        data = [asdict(album) for album in albums]
+        
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        
+        logger.info(f"Exported {len(albums)} albums to {filename}")
+    
+    def get_artists_from_albums(self, albums: List[Album]) -> Dict[int, str]:
+        """Extract unique artists from album list"""
+        artists = {}
+        for album in albums:
+            if album.artist_id and album.artist_id not in artists:
+                artists[album.artist_id] = album.artist
+        return artists
+    
+    def scrape_artists_alphabetically(self) -> List[Dict]:
+        """
+        Alternative approach: scrape artists by letter (A-Z, #).
+        URL pattern: bands-alpha.asp?letter={letter}
+        """
+        artists = []
+        letters = list('abcdefghijklmnopqrstuvwxyz') + ['0']  # 0 for numbers/symbols
+        
+        for letter in letters:
+            url = f"{self.BASE_URL}/bands-alpha.asp?letter={letter}"
+            logger.info(f"Scraping artists starting with '{letter}'")
+            
+            soup = self._get(url)
+            if not soup:
+                continue
+            
+            # Find artist links
+            for link in soup.find_all('a', href=re.compile(r'artist\.asp\?id=\d+')):
+                href = link.get('href', '')
+                match = re.search(r'id=(\d+)', href)
+                if match:
+                    artists.append({
+                        'artist_id': int(match.group(1)),
+                        'name': link.get_text(strip=True),
+                        'url': f"{self.BASE_URL}/{href}"
+                    })
+        
+        return artists
+
+
+def main():
+    """Example usage demonstrating the optimized scraping approach"""
+    scraper = ProgArchivesOptimizedScraper(delay=2.0)
+    
+    print("\n" + "="*60)
+    print("ProgArchives Optimized Scraper")
+    print("="*60)
+    
+    # Example 1: Scrape top 1000 studio albums (all genres combined)
+    print("\n[1] Scraping top 1000 studio albums...")
+    url = scraper.build_top_albums_url(album_types=[1], max_results=1000)
+    print(f"URL: {url}")
+    
+    albums = scraper.scrape_top_albums_page(url)
+    print(f"Found {len(albums)} albums")
+    
+    if albums:
+        print("\nTop 10 Albums:")
+        for album in albums[:10]:
+            print(f"  {album.rank}. {album.artist} - {album.title} ({album.year})")
+            print(f"      Genre: {album.genre} | Rating: {album.avg_rating:.2f} ({album.num_ratings} ratings)")
+    
+    # Save results
+    if albums:
+        scraper.save_albums(albums)
+        scraper.export_to_csv(albums)
+        scraper.export_to_json(albums)
+        print(f"\nData saved to:")
+        print(f"  - {scraper.db_path} (SQLite)")
+        print(f"  - progarchives_albums.csv")
+        print(f"  - progarchives_albums.json")
+    
+    # Example 2: Scrape specific year
+    # print("\n[2] Scraping 2023 albums...")
+    # albums_2023 = scraper.scrape_by_year(2023)
+    # print(f"Found {len(albums_2023)} albums from 2023")
+    
+    # Example 3: Scrape ALL albums by genre (to exceed 1000 limit)
+    # print("\n[3] Scraping all albums by genre...")
+    # all_albums = scraper.scrape_all_studio_albums()
+    # print(f"Total unique albums: {len(all_albums)}")
+
+
+if __name__ == "__main__":
+    main()
