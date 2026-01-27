@@ -29,44 +29,48 @@ This document outlines the strategy for processing locally downloaded HTML files
 
 ### Components
 
-1.  **ProgArchivesScraper (Local File Parser)**
-    *   Core HTML parsing functionality for local files.
+1.  **ProgArchivesCollector**
+    *   Manages the collection of files (downloading or identifying local files).
     *   Locates and reads files from a defined local data root.
-    *   Error handling for file I/O and parsing.
 
-2.  **ProgArchivesParser (Data Extractor)**
+2.  **ProgArchivesParser** (formerly ProgArchivesScraper)
+    *   Core HTML parsing functionality.
     *   Extracts structured data from parsed HTML content.
-    *   Data validation.
-    *   Genre mapping.
+    *   Data validation and genre mapping.
 
-3.  **ProgArchivesImporter**
+3.  **ProgArchivesTransformer**
     *   Database integration.
     *   Deduplication logic.
     *   Tag system integration.
-    *   Data cleaning.
+    *   Data cleaning and Source-agnostic transformation.
 
 ### Data Flow
 
 1.  File Identification Phase:
-    ```
-    Identify Target HTML Files (e.g., albumXXXX.html, artistYYYY.html) in Local Storage
-    ```
+    
+    Identify Target HTML Files (e.g., albumXXXX.html, artistYYYY.html) in Local Storage via Collector
+    
 
 2.  Parsing Phase:
-    ```
-    Local HTML File -> Read Content -> Parse HTML -> Raw Data -> Validated Data -> Structured Records
-    ```
+    
+    Local HTML File -> ProgArchivesParser -> Structured Records (JSON/Dict)
+    
 
-3.  Import Phase:
-    ```
-    Structured Records -> Deduplication -> Tag Integration -> Database
-    ```
+3.  Extraction Phase (Batch):
+    
+    Structured Records -> CSV Extraction (extract_csvs.py)
+    
+
+4.  Import Phase:
+    
+    CSV Data -> ProgArchivesTransformer -> Database (AlbumSource/ArtistSource tables)
+    
 
 ## Implementation Guidelines
 
 ### File Structure
-- Assumes a local directory structure mirroring the ProgArchives website (e.g., `ProgArchives Data/Website/ProgArchives/www.progarchives.com/`).
-- The `ProgArchivesScraper` will use a base path (`LOCAL_DATA_ROOT`) to locate these files.
+- Assumes a local directory structure mirroring the ProgArchives website (e.g., ProgArchives Data/Website/ProgArchives/www.progarchives.com/).
+- The ProgArchivesParser will use a base path (LOCAL_DATA_ROOT) to locate these files.
 
 ### Error Handling
 - Log all file reading and parsing errors.
@@ -78,25 +82,19 @@ This document outlines the strategy for processing locally downloaded HTML files
 ### Command Line Interface (Updated for Local Files)
 The CLI will be adapted to point to local files or directories instead of URLs.
 
-```bash
+`ash
 # Example: Process a single local album HTML file
-python -m albumexplore.cli.scraper_cli process-album <path_to_album_html_file>
-
-# Example: Process a single local artist HTML file
-python -m albumexplore.cli.scraper_cli process-artist <path_to_artist_html_file>
-
-# Example: Bulk import from a directory of HTML files
-python -m albumexplore.cli.scraper_cli import-local-dump --source-dir <path_to_progarchives_data_root>
-```
+python -m albumexplore.scripts.process_single_file <path_to_album_html_file>
+`
 
 ### Scripts (Updated for Local Files)
 Scripts will be updated to iterate over local file structures.
 
 #### Example: Processing all downloaded album files
-```bash
-# This script would internally use ProgArchivesScraper to find and parse files
-python -m albumexplore.scripts.process_local_progarchives_dump --data-root "ProgArchives Data/Website/ProgArchives/www.progarchives.com/"
-```
+`ash
+# This script internally uses ProgArchivesParser to extract data to CSVs
+python -m albumexplore.scraping.extract_csvs
+`
 
 ## Development Guidelines
 
@@ -111,4 +109,4 @@ python -m albumexplore.scripts.process_local_progarchives_dump --data-root "Prog
 - Test parsing logic against these local samples.
 - Verify correct extraction of all required data points.
 - Test handling of malformed or missing HTML elements gracefully.
-- Test resolution of relative links within the local file structure (if applicable, e.g., an artist page linking to album files by relative paths that need to be resolved to actual file names).
+- Test resolution of relative links within the local file structure.

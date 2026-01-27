@@ -24,6 +24,8 @@ from albumexplore.database import init_db, get_session # Added imports
 from albumexplore.database.csv_loader import load_dataframe_data # Added import
 # Removed auto-loading import: from albumexplore.database.csv_loader import load_csv_data
 from albumexplore.visualization.data_interface import DataInterface # Added import
+from albumexplore.database.utils import generate_stable_id
+import pandas as pd
 
 class AlbumExplorer(QMainWindow):
     """Main application window."""
@@ -67,10 +69,10 @@ class AlbumExplorer(QMainWindow):
             # Set the central widget
             self.setCentralWidget(self.stacked_widget)
 
-            # Show a welcome message instead of loading data
+            # Show welcome view initially
             self._show_welcome_view()
 
-            graphics_logger.info("Album Explorer initialized - ready for data loading")
+            graphics_logger.info("Album Explorer initialized - ready")
             
         except Exception as e:
             graphics_logger.error(f"Failed to initialize Album Explorer: {e}", exc_info=True) 
@@ -200,32 +202,224 @@ class AlbumExplorer(QMainWindow):
             pass
     
     def _on_data_loaded(self, dataframe):
-        """Handle data loaded from the dialog."""
-        graphics_logger.info(f"Data loaded: {len(dataframe)} rows. Saving to database with optimized processing...")
-        
+        """Handle data loaded from the dialog.
+
+        When `dataframe` is None it indicates a DB-driven import (no in-memory
+        DataFrame was passed). In that case refresh the DB session and views
+        without attempting to call `len()` or access DataFrame attributes.
+        """
+        # Special-case: dict payload with explicit album IDs to display
+        if isinstance(dataframe, dict) and 'album_ids' in dataframe:
+            album_ids = dataframe.get('album_ids') or []
+            graphics_logger.info(f"Data load provided {len(album_ids)} album IDs to preview from DB.")
+            try:
+                # Query DB for those albums and build a render_data similar to DataFrame preview
+                session = get_session()
+                from albumexplore.database.models import Album
+                rows = []
+                if album_ids:
+                    q = session.query(Album).filter(Album.id.in_(album_ids)).all()
+                    for alb in q:
+                        rows.append({
+                            'id': str(alb.id),
+                            'artist': alb.artist_obj.name if alb.artist_obj else '',
+                            'album': alb.title or '',
+                            'year': alb.release_year,
+                            'genre': alb.genre or '',
+                            'country': alb.country or (getattr(alb.artist_obj, 'country', '') if hasattr(alb, 'artist_obj') else ''),
+                            'raw_tags': alb.genre or '',
+                            'tags': [t.name for t in alb.tags] if alb.tags else [],
+                            'vocal_style': alb.vocal_style or ''
+                        })
+                render_data = {'type': 'table', 'rows': rows, 'selected_ids': set([r['id'] for r in rows])}
+                # Cache and switch to table view
+                try:
+                    self.view_manager._render_cache[ViewType.TABLE] = render_data
+                    self.view_manager._current_render_data = render_data
+                except Exception:
+                    pass
+                try:
+                    self.view_manager.switch_view(ViewType.TABLE)
+                except Exception:
+                    pass
+            except Exception:
+                graphics_logger.exception("Failed to build preview from album IDs")
+            return
+
+        if dataframe is None:
+            graphics_logger.info("Data load signalled a DB-driven import; refreshing views from database.")
+            # Expire/recreate session to pick up DB changes
+            try:
+                if hasattr(self, 'session') and self.session:
+                    try:
+                        self.session.expire_all()
+                    except Exception:
+                        pass
+                new_session = get_session()
+                self.session = new_session
+                if hasattr(self, 'data_interface') and self.data_interface:
+                    self.data_interface.session = new_session
+                if hasattr(self, 'view_manager') and self.view_manager:
+                    self.view_manager.data_interface = self.data_interface
+            except Exception:
+                graphics_logger.exception("Failed to recreate DB session after import")
+
+            # Clear caches
+            try:
+                if hasattr(self, 'data_interface') and self.data_interface:
+                    try:
+                        self.data_interface._clear_caches()
+                    except Exception:
+                        pass
+                if hasattr(self, 'view_manager') and self.view_manager:
+                    try:
+                        self.view_manager._render_cache.clear()
+                    except Exception:
+                        pass
+            except Exception:
+                graphics_logger.exception("Failed to clear caches after import")
+
+            # Enable view menu actions
+            try:
+                self.table_action.setEnabled(True)
+                self.tag_explorer_action.setEnabled(True)
+                self.similarity_action.setEnabled(True)
+                if MAP_VIEW_AVAILABLE and hasattr(self, 'map_action'):
+                    self.map_action.setEnabled(True)
+            except Exception:
+                pass
+
+            # Update window title and switch to table view
+            try:
+                self.setWindowTitle("Album Explorer - data refreshed from database")
+                self.view_manager.switch_view(ViewType.TABLE)
+            except Exception:
+                graphics_logger.exception("Failed to switch to table view after DB import")
+
+            return
+
+        # --- Existing path for in-memory DataFrame imports ---
+        graphics_logger.info(f"Data loaded: {len(dataframe)} rows. Preparing preview and saving to database...")
+
         # Debug: Check what columns are in the DataFrame
         graphics_logger.info(f"DataFrame columns: {list(dataframe.columns)}")
-        
-        # Debug: Check first few rows for genre/tag data
-        if len(dataframe) > 0:
-            for i in range(min(3, len(dataframe))):
-                row = dataframe.iloc[i]
-                graphics_logger.info(f"Row {i}: Artist='{row.get('Artist', 'N/A')}', Album='{row.get('Album', 'N/A')}'")
-                graphics_logger.info(f"Row {i}: Genre='{row.get('Genre / Subgenres', 'N/A')}', Country='{row.get('Country / State', 'N/A')}'")
-        
+
+        # Render an in-memory preview of the provided DataFrame so the user sees
+        # only the selected CSV rows immediately (do not rely solely on DB state).
+        try:
+            rows = []
+            for _, row in dataframe.iterrows():
+                artist = row.get('Artist') or row.get('artist') or ''
+                album_title = row.get('Album') or row.get('album') or ''
+                year = None
+                # Parse year with improved robustness for different date formats
+                try:
+                    y = row.get('Release Date') or row.get('release date') or row.get('Year') or row.get('year') or row.get('Date')
+                    year = None
+                    if y is not None:
+                        s = str(y).strip()
+                        if s:
+                            # 1. Try simple number (2017 or 2017.0)
+                            try:
+                                year = int(float(s))
+                            except ValueError:
+                                # 2. Try simple extraction of 4 digits (e.g. "2017-05-01" or "01 Jan 2017" or "Oct 2017")
+                                import re
+                                # Look for 19xx or 20xx
+                                match = re.search(r'(?:19|20)\d{2}', s)
+                                if match:
+                                    year = int(match.group(0))
+                    
+                    # Fallback: Extract year from source filename if available
+                    if year is None:
+                        source_file = row.get('_source_file')
+                        if source_file:
+                            match = re.search(r'(?:19|20)\d{2}', str(source_file))
+                            if match:
+                                year = int(match.group(0))
+                                graphics_logger.debug(f"Year '{year}' extracted from filename: '{source_file}'")
+                            else:
+                                 # Only log simple string parse failure if filename also failed
+                                 if y is not None:
+                                     graphics_logger.debug(f"Failed to parse year from string '{y}' and no year in filename '{source_file}'")
+                        elif y is not None:
+                             graphics_logger.debug(f"Failed to parse year from string: '{y}' (no source file)")
+
+                    else:
+                        # Only log first few missing years to avoid spam
+                        pass 
+
+                except Exception as e:
+                    graphics_logger.warning(f"Error parsing year value: {e}")
+                    year = None
+
+                # Parse tags from genre/raw_tags safely (handle NaN/float)
+                raw_tags_val = row.get('Genre / Subgenres') if 'Genre / Subgenres' in row else row.get('genre')
+                if raw_tags_val is None or (hasattr(pd, 'isna') and pd.isna(raw_tags_val)):
+                    raw_tags_str = ''
+                else:
+                    raw_tags_str = str(raw_tags_val)
+
+                # Normalize separators and split
+                tags_list = [t.strip() for t in raw_tags_str.replace(';', ',').split(',') if t.strip()]
+
+                # Country and vocal style - guard against NaN
+                country_val = row.get('Country / State') or row.get('country')
+                country = '' if (country_val is None or (hasattr(pd, 'isna') and pd.isna(country_val))) else str(country_val)
+
+                vocal_val = row.get('Vocal Style') or row.get('vocal_style')
+                vocal_style = '' if (vocal_val is None or (hasattr(pd, 'isna') and pd.isna(vocal_val))) else str(vocal_val)
+
+                node = {
+                    'id': generate_stable_id(str(artist), str(album_title), str(year) if year else ''),
+                    'artist': artist,
+                    'album': album_title,
+                    'year': year,
+                    'genre': raw_tags_str,
+                    'country': country,
+                    'raw_tags': raw_tags_str,
+                    'tags': tags_list,
+                    'vocal_style': vocal_style
+                }
+                rows.append(node)
+
+            render_data = {'type': 'table', 'rows': rows, 'selected_ids': set()}
+
+            # Populate the ViewManager cache with our preview and switch to TABLE
+            try:
+                self.view_manager._render_cache[ViewType.TABLE] = render_data
+                self.view_manager._current_render_data = render_data
+            except Exception:
+                pass
+            try:
+                # Use switch_view so signals and state updates happen consistently.
+                self.view_manager.switch_view(ViewType.TABLE)
+            except Exception:
+                # Fallback: ensure table view shows the preview directly
+                try:
+                    table_view = self._get_or_create_view(ViewType.TABLE)
+                    if table_view:
+                        table_view.update_data(render_data)
+                        self.stacked_widget.setCurrentWidget(table_view)
+                except Exception:
+                    pass
+
+        except Exception:
+            graphics_logger.exception("Failed to render in-memory DataFrame preview")
+
         # Load the dataframe into the database using optimized method
         try:
             session = get_session()
-            
+
             # Use optimized loader for better performance
             from albumexplore.database.optimized_csv_loader import load_dataframe_data_optimized
             load_dataframe_data_optimized(dataframe, session)
             graphics_logger.info("Successfully saved data to database using optimized processing.")
-            
+
             # Debug: Check what was actually saved to the database
             from albumexplore.database.csv_loader import debug_database_tags
             debug_database_tags()
-            
+
         except Exception as e:
             graphics_logger.error(f"Failed to save data to database: {e}", exc_info=True)
             # Fall back to original method if optimized fails
@@ -244,12 +438,22 @@ class AlbumExplorer(QMainWindow):
         self.similarity_action.setEnabled(True)
         if MAP_VIEW_AVAILABLE and hasattr(self, 'map_action'):
             self.map_action.setEnabled(True)
-        
+
         # Update the window title
         self.setWindowTitle(f"Album Explorer - {len(dataframe)} albums loaded")
-        
-        # Switch to table view to show the data
-        self.view_manager.switch_view(ViewType.TABLE)
+
+        # Update ViewManager state to TABLE but avoid forcing a full DB render
+        try:
+            # Set state to table and populate render cache with our preview if available
+            self.view_manager.state_manager.switch_view(ViewType.TABLE)
+            if 'render_data' in locals():
+                try:
+                    self.view_manager._render_cache[ViewType.TABLE] = render_data
+                    self.view_manager._current_render_data = render_data
+                except Exception:
+                    pass
+        except Exception:
+            pass
         
         # Remove welcome widget if it exists (guard against deleted C/C++ object)
         if hasattr(self, 'welcome_widget'):
@@ -275,6 +479,13 @@ class AlbumExplorer(QMainWindow):
                 if hasattr(self, 'welcome_widget'):
                     del self.welcome_widget
 
+    def _run_tag_dev_loop(self):
+        """Run the tag normalization development loop."""
+        from .dev_tools import TagDevLoop
+        project_root = Path(__file__).resolve().parent.parent.parent.parent
+        loop = TagDevLoop(project_root)
+        loop.run_loop(self)
+
     def _setup_menu_bar(self):
         """Sets up the main menu bar with data loading and view switching actions."""
         menu_bar = self.menuBar()
@@ -298,6 +509,12 @@ class AlbumExplorer(QMainWindow):
         exit_action.setShortcut("Ctrl+Q")
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
+        
+        # Dev menu
+        dev_menu = menu_bar.addMenu("&Dev")
+        dev_loop_action = QAction("Run Tag Normalization Loop", self)
+        dev_loop_action.triggered.connect(self._run_tag_dev_loop)
+        dev_menu.addAction(dev_loop_action)
         
         # View menu for switching views
         view_menu = menu_bar.addMenu("&View")
@@ -408,7 +625,9 @@ class AlbumExplorer(QMainWindow):
         graphics_logger.info(f"Switching to similarity view for album: {album_id}")
         
         # Set the album in the similarity view
-        self.similarity_view.set_album(album_id)
+        similarity_view = self._get_or_create_view(ViewType.SIMILARITY)
+        if similarity_view:
+            similarity_view.set_album(album_id)
         
         # Switch to similarity view
         self.view_manager.switch_view(ViewType.SIMILARITY)

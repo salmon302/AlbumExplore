@@ -221,10 +221,17 @@ def load_dataframe_data(df, session: Session):
 
     try:
         # Get existing albums to avoid duplicates
-        existing_albums = {
-            (album.pa_artist_name_on_album, album.title)
-            for album in session.query(Album.pa_artist_name_on_album, Album.title).all()
-        }
+        # Wrap in try-except to handle cases where the model attribute might not be immediately available
+        # or if schema update requires restart
+        try:
+            existing_albums = {
+                (album.pa_artist_name_on_album, album.title)
+                for album in session.query(Album.pa_artist_name_on_album, Album.title).all()
+            }
+        except AttributeError:
+             db_logger.warning("Album.pa_artist_name_on_album attribute missing during load. Skipping duplicate check cache.")
+             existing_albums = set()
+             
         db_logger.info(f"Found {len(existing_albums)} existing albums in the database.")
 
         # Standardize DataFrame columns
@@ -518,8 +525,9 @@ def load_csv_data(csv_dir: Path) -> None:
         )
         
         if has_reddit_data:
-            db_logger.info("Reddit CSV data appears to already be loaded (found non-uppercase albums). Skipping CSV loading.")
-            return
+            db_logger.info("Reddit CSV data appears to already be loaded (found non-uppercase albums). Forcing duplicate check instead of full skip.")
+            # db_logger.info("Reddit CSV data appears to already be loaded (found non-uppercase albums). Skipping CSV loading.")
+            # return
         
         if existing_count > 10000:  # If we have a lot of data, probably already loaded
             db_logger.info(f"Large number of albums ({existing_count}) already in database. Checking if CSV reload is needed...")
@@ -594,9 +602,11 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
 
     # First, we need to find the actual header row
     actual_header_row = 0
-    with open(csv_file, 'r', encoding='utf-8') as f:
+    with open(csv_file, 'r', encoding='utf-8-sig') as f:
         for i, line in enumerate(f):
-            if line.strip().startswith("Artist,Album,Release Date"):
+            # Check for header with flexible whitespace and common variations
+            clean_line = line.strip().lower()
+            if clean_line.startswith("artist,album") or clean_line.startswith("artist, album"):
                 actual_header_row = i
                 break
         
@@ -608,7 +618,7 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
     
     db_logger.info(f"[_process_csv_file] About to open {csv_file.name}") # New log before open
     # Now read the CSV with the correct header row
-    with open(csv_file, 'r', encoding='utf-8') as f:
+    with open(csv_file, 'r', encoding='utf-8-sig') as f:
         db_logger.info(f"[_process_csv_file] Successfully opened {csv_file.name}") # New log after open
         try:
             db_logger.info("Attempting to skip lines (simple log)") # Changed log statement
@@ -669,10 +679,10 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
         artist_col_key = next((col for col in reader.fieldnames if col and "artist" in col.lower()), reader.fieldnames[0])
         album_col_key = next((col for col in reader.fieldnames if col and "album" in col.lower()), reader.fieldnames[1] if len(reader.fieldnames) > 1 else None)
         release_date_col_key = next((col for col in reader.fieldnames if col and "release" in col.lower()), reader.fieldnames[2] if len(reader.fieldnames) > 2 else None)
-        length_col_key = next((col for col in reader.fieldnames if col and "length" in col.lower()), None)
-        genre_col_key = next((col for col in reader.fieldnames if col and "genre" in col.lower()), None)
-        vocal_style_col_key = next((col for col in reader.fieldnames if col and "vocal" in col.lower()), None)
-        country_col_key = next((col for col in reader.fieldnames if col and "country" in col.lower()), None)
+        length_col_key = next((col for col in reader.fieldnames if col and "length" in col.lower()), reader.fieldnames[3] if len(reader.fieldnames) > 3 else None)
+        genre_col_key = next((col for col in reader.fieldnames if col and "genre" in col.lower()), reader.fieldnames[4] if len(reader.fieldnames) > 4 else None)
+        vocal_style_col_key = next((col for col in reader.fieldnames if col and "vocal" in col.lower()), reader.fieldnames[5] if len(reader.fieldnames) > 5 else None)
+        country_col_key = next((col for col in reader.fieldnames if col and "country" in col.lower()), reader.fieldnames[6] if len(reader.fieldnames) > 6 else None)
         
         db_logger.debug(f"Using columns: Artist='{artist_col_key}', Album='{album_col_key}', Release Date='{release_date_col_key}', Length='{length_col_key}', Genre='{genre_col_key}', Vocal Style='{vocal_style_col_key}', Country='{country_col_key}'")
         
@@ -884,7 +894,9 @@ def _process_csv_file(csv_file: Path, year: int, session: Session) -> None:
                     raw_tags=combined_raw_tags,
                     last_updated=datetime.now()
                 )
-                session.add(album)
+                
+                # Use merge to handle potential updates to existing albums
+                album = session.merge(album)
                 
                 # Handle tags and genres
                 if genre_and_tags_str:

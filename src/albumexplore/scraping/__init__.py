@@ -1,4 +1,4 @@
 """Isolated scraping package."""
-from .progarchives.parser import ProgArchivesScraper
+from .progarchives.parser import ProgArchivesParser
 
-__all__ = ['ProgArchivesScraper']
+__all__ = ['ProgArchivesParser']

@@ -14,8 +14,8 @@ from .models import VisualNode, VisualEdge
 @dataclass
 class DataConfig:
     """Configuration for data interface."""
-    max_nodes: int = 1000
-    max_edges: int = 2000
+    max_nodes: int = 25000  # Increased from 1000 to accommodate full library
+    max_edges: int = 50000
     min_edge_weight: float = 0.1
     include_tags: bool = True
     filter_by_year: Optional[int] = None
@@ -61,11 +61,13 @@ class DataInterface:
         if not self.session:
             return [], []
         
-        # Choose data source based on atomic tag configuration
+        # Choose data source based on atomic tag configuration. Limit results
+        # based on the configured `max_nodes` to avoid long blocking DB fetches.
+        max_nodes = getattr(self._config, 'max_nodes', None)
         if self._config.use_atomic_tags:
-            albums = get_albums_with_atomic_tags(self.session)
+            albums = get_albums_with_atomic_tags(self.session, limit=max_nodes)
         else:
-            albums = get_albums_with_tags(self.session)
+            albums = get_albums_with_tags(self.session, limit=max_nodes)
         
         nodes = []
         edges = []
@@ -159,7 +161,14 @@ class DataInterface:
         # Create node
         # Ensure year is an integer
         year = album.release_year
-        if not isinstance(year, int) and album.release_date:
+        # Handle case where year might be a string or float in DB
+        if year is not None and not isinstance(year, int):
+            try:
+                year = int(float(year))
+            except (ValueError, TypeError):
+                year = None
+
+        if year is None and album.release_date:
             try:
                 year = album.release_date.year
             except AttributeError:
@@ -168,16 +177,33 @@ class DataInterface:
         vocal_style_display = album.vocal_style or ''
         vocal_styles = [style.strip() for style in vocal_style_display.split(',') if style.strip()]
 
+        # Determine country (prefer album, fallback to artist)
+        country_display = album.country
+        if not country_display and album.artist_obj:
+            country_display = album.artist_obj.country
+            
+        # Determine artist name (fallback to artist_obj)
+        artist_name = album.pa_artist_name_on_album
+        if not artist_name and album.artist_obj:
+            artist_name = album.artist_obj.name
+
+        # Tags fallback
+        tags_list = list(tags)
+        if not tags_list and (album.raw_tags or album.genre):
+            source_str = album.raw_tags or album.genre
+            # Split by comma and clean up
+            tags_list = [t.strip() for t in source_str.replace(';', ',').split(',') if t.strip()]
+
         # Prepare data for node
         node_data = {
-            'artist': album.pa_artist_name_on_album,
+            'artist': artist_name,
             'title': album.title,
             'year': year,
             'genre': album.genre,
-            'country': album.country,
+            'country': country_display,
             'raw_tags': album.raw_tags or album.genre, # Use raw_tags and fallback to genre
             'type': 'row',  # Indicate this is a table row
-            'tags': list(tags),
+            'tags': tags_list,
             'atomic_tags': list(atomic_tags) if self._config.use_atomic_tags else [],
             'vocal_style': vocal_style_display,
             'vocal_styles': vocal_styles,

@@ -414,7 +414,9 @@ class TagNormalizer:
         tag = tag.strip()
         
         # ---- A: Strip/normalize suffix qualifiers (conservative) ----
-        qualifier_re = re.compile(r"(?i)^\s*(?P<base>.+?)(?:[-\s]?(?:ish|like|esque|related|oriented)|\?)\s*$")
+        # Modified to require a separator (hyphen or space) before the suffix
+        # This prevents stripping 'ish' from words like 'swedish', 'british', 'polish'
+        qualifier_re = re.compile(r"(?i)^\s*(?P<base>.+?)(?:[-\s](?:ish|like|esque|related|oriented)|\?)\s*$")
         m = qualifier_re.match(tag)
         if m:
             base = m.group("base").strip()
@@ -512,7 +514,10 @@ class TagNormalizer:
         # If tag is of form "<region> <genre...>" and region in whitelist, drop region
         region_re = re.compile(r"(?i)^(?P<region>\w+)\s+(?P<genre>.+)$")
         m2 = region_re.match(tag)
-        region_whitelist = {"korean", "italian", "scottish", "welsh", "brazil", "southern", "oriental", "american", "british"}
+        # Removed "southern" to protect "Southern Rock/Metal"
+        # Removed "oriental" to protect "Oriental Metal"
+        # Removed "american" to protect "American Primitivism"
+        region_whitelist = {"korean", "italian", "scottish", "welsh", "brazil", "british"}
         if m2:
             region = m2.group("region").lower()
             genre = m2.group("genre").strip()
@@ -526,7 +531,8 @@ class TagNormalizer:
         # Collapse "<modifier> <genre>" -> "<genre>" only when the derived genre is known/canonical.
         # This is intentionally conservative: only modifiers in the small whitelist are considered
         # and the collapse is applied only if the genre_candidate exists in known atomic/canonical tags.
-        modifier_re = re.compile(r'(?i)^(?P<modifier>(?:hard|deep|cavernous|hellenic|hill|micro|early|late|proto))\s+(?P<genre>.+)$')
+        # Removed 'hard' to prevent 'hard rock' -> 'rock'
+        modifier_re = re.compile(r'(?i)^(?P<modifier>(?:deep|cavernous|hellenic|hill|micro|early|late|proto))\s+(?P<genre>.+)$')
         m3 = modifier_re.match(tag)
         if m3:
             genre_candidate = m3.group('genre').strip()

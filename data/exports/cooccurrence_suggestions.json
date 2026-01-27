@@ -1,0 +1,1291 @@
+{
+  "stats": {
+    "suggested": 214
+  },
+  "suggestions": {
+    "midwestern emo": {
+      "suggestion": "midwest emo",
+      "reason": "fuzzy-cooccurrence:0.88",
+      "score": 0.88,
+      "type": "cooccurrence"
+    },
+    "gothic funeral doom metal": {
+      "suggestion": "doom metal",
+      "reason": "contains-sibling:doom metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "vocal post rock": {
+      "suggestion": "post rock",
+      "reason": "contains-sibling:post rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "armenian folk music": {
+      "suggestion": "armenia",
+      "reason": "contains-sibling:armenia",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive rock prog rock prog melodic progrock djent": {
+      "suggestion": "melodic",
+      "reason": "contains-sibling:djent",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "lol doomergaze": {
+      "suggestion": "doomergaze",
+      "reason": "contains-sibling:doomergaze",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "epic folk metal": {
+      "suggestion": "folk metal",
+      "reason": "contains-sibling:folk metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "bhangra metal": {
+      "suggestion": "bhangra",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "speed rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "psychedelic rock neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock space rock stoner thessaloniki": {
+      "suggestion": "psychedelic rock",
+      "reason": "contains-sibling:thessaloniki",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "not djent": {
+      "suggestion": "djent",
+      "reason": "contains-sibling:djent",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "best albums 2019": {
+      "suggestion": "2019",
+      "reason": "contains-sibling:2019",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "rock n roll": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "emo violence": {
+      "suggestion": "emoviolence",
+      "reason": "fuzzy-cooccurrence:0.32",
+      "score": 0.9565217391304348,
+      "type": "cooccurrence"
+    },
+    "release": {
+      "suggestion": "releases",
+      "reason": "fuzzy-cooccurrence:0.12",
+      "score": 0.9333333333333333,
+      "type": "cooccurrence"
+    },
+    "experimental deathcore": {
+      "suggestion": "deathcore",
+      "reason": "contains-sibling:deathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "black hardcore": {
+      "suggestion": "blackened hardcore",
+      "reason": "fuzzy-cooccurrence:0.56",
+      "score": 0.875,
+      "type": "cooccurrence"
+    },
+    "rock francophone": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "animal album art": {
+      "suggestion": "album art",
+      "reason": "contains-sibling:album art",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "dissonant death metalavant garde metal": {
+      "suggestion": "avant garde metal",
+      "reason": "contains-sibling:dissonant death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "atmospheric black meta": {
+      "suggestion": "atmospheric black metal",
+      "reason": "contains-sibling:atmospheric black",
+      "score": 0.9777777777777777,
+      "type": "cooccurrence"
+    },
+    "blackened power metal": {
+      "suggestion": "power metal",
+      "reason": "contains-sibling:power metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "drone doom metal": {
+      "suggestion": "doom metal",
+      "reason": "contains-sibling:doom metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "roadburn festival": {
+      "suggestion": "roadburn",
+      "reason": "contains-sibling:roadburn",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "old school grind": {
+      "suggestion": "grind",
+      "reason": "contains-sibling:grind",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blackned death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "folk power metal": {
+      "suggestion": "power metal",
+      "reason": "contains-sibling:power metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "polish black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "high speed metal": {
+      "suggestion": "speed metal",
+      "reason": "contains-sibling:speed metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "noise sludge metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:sludge metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progress rock": {
+      "suggestion": "progressive rock",
+      "reason": "fuzzy-cooccurrence:0.82",
+      "score": 0.896551724137931,
+      "type": "cooccurrence"
+    },
+    "thezekinators 2024 album of the year selection": {
+      "suggestion": "2024",
+      "reason": "contains-sibling:2024",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "dark progressive metal": {
+      "suggestion": "progressive metal",
+      "reason": "contains-sibling:progressive metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "serbian": {
+      "suggestion": "serbia",
+      "reason": "contains-sibling:serbia",
+      "score": 0.9230769230769231,
+      "type": "cooccurrence"
+    },
+    "post metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:metalcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "color": {
+      "suggestion": "colors",
+      "reason": "fuzzy-cooccurrence:0.27",
+      "score": 0.9090909090909091,
+      "type": "cooccurrence"
+    },
+    "instrumental neo classical progressive death metal": {
+      "suggestion": "instrumental",
+      "reason": "contains-sibling:instrumental",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "experimental guitar": {
+      "suggestion": "experimental",
+      "reason": "contains-sibling:experimental",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "hard rock francophone": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:hard rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "heavy death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "brazillian metal": {
+      "suggestion": "brazil",
+      "reason": "contains-sibling:brazil",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "2019 releases": {
+      "suggestion": "2019",
+      "reason": "contains-sibling:2019",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blackened skramz": {
+      "suggestion": "skramz",
+      "reason": "contains-sibling:skramz",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "seattle metal": {
+      "suggestion": "seattle",
+      "reason": "contains-sibling:seattle",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "live album": {
+      "suggestion": "live",
+      "reason": "contains-sibling:live",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "egyptian": {
+      "suggestion": "egypt",
+      "reason": "contains-sibling:egypt",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "darkfolk": {
+      "suggestion": "dark folk",
+      "reason": "fuzzy-cooccurrence:0.26",
+      "score": 0.9411764705882353,
+      "type": "cooccurrence"
+    },
+    "athmospheric black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "nujazz": {
+      "suggestion": "jazz",
+      "reason": "contains-sibling:jazz",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "best of2024": {
+      "suggestion": "2024",
+      "reason": "contains-sibling:2024",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "flop era": {
+      "suggestion": "flop",
+      "reason": "contains-sibling:flop",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "2018 metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:2018",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive groove metal": {
+      "suggestion": "groove metal",
+      "reason": "contains-sibling:groove metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "psychedelic drone rock": {
+      "suggestion": "drone",
+      "reason": "contains-sibling:drone",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "cascadian black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "colours": {
+      "suggestion": "colors",
+      "reason": "contains-sibling:colour",
+      "score": 0.9230769230769231,
+      "type": "cooccurrence"
+    },
+    "70s rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "thrash death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "best album 2022": {
+      "suggestion": "best albums 2022",
+      "reason": "fuzzy-cooccurrence:0.22",
+      "score": 0.967741935483871,
+      "type": "cooccurrence"
+    },
+    "experimental grindcore": {
+      "suggestion": "grindcore",
+      "reason": "contains-sibling:grindcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "babymetal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "heavy power metal": {
+      "suggestion": "power metal",
+      "reason": "contains-sibling:power metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "english black metal": {
+      "suggestion": "english",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "boston indie": {
+      "suggestion": "boston",
+      "reason": "contains-sibling:boston",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "doombrass": {
+      "suggestion": "doom",
+      "reason": "contains-sibling:doom",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "estonian": {
+      "suggestion": "estonia",
+      "reason": "contains-sibling:estonia",
+      "score": 0.9333333333333333,
+      "type": "cooccurrence"
+    },
+    "psychedelic progressive metal": {
+      "suggestion": "psychedelic",
+      "reason": "contains-sibling:psychedelic",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "atmospheric blackened death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "melodic thrash": {
+      "suggestion": "melodic",
+      "reason": "contains-sibling:melodic",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "post powerviolence": {
+      "suggestion": "powerviolence",
+      "reason": "contains-sibling:powerviolence",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "avant-jazz": {
+      "suggestion": "jazz",
+      "reason": "contains-sibling:jazz",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "ukrainian metal": {
+      "suggestion": "ukrainian",
+      "reason": "contains-sibling:ukrainian",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "mostly instrumental progressive rock": {
+      "suggestion": "progressive rock",
+      "reason": "contains-sibling:prog",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "powermetal": {
+      "suggestion": "power metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.9523809523809523,
+      "type": "cooccurrence"
+    },
+    "old school grindcore": {
+      "suggestion": "grindcore",
+      "reason": "contains-sibling:grindcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "adventure rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "sassy mathcore": {
+      "suggestion": "mathcore",
+      "reason": "contains-sibling:mathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "releases": {
+      "suggestion": "release",
+      "reason": "contains-sibling:release",
+      "score": 0.9333333333333333,
+      "type": "cooccurrence"
+    },
+    "ocult rock": {
+      "suggestion": "occult rock",
+      "reason": "fuzzy-cooccurrence:0.29",
+      "score": 0.9523809523809523,
+      "type": "cooccurrence"
+    },
+    "2020 favourite albums": {
+      "suggestion": "2020",
+      "reason": "contains-sibling:2020",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "ballymena town centre september 2025": {
+      "suggestion": "2025",
+      "reason": "contains-sibling:2025",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "female fronted rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "dissonant blackened death metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:blackened death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "avant death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "aoty2023list": {
+      "suggestion": "2023",
+      "reason": "contains-sibling:2023",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "skate punk": {
+      "suggestion": "punk",
+      "reason": "contains-sibling:punk",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "sludge djent": {
+      "suggestion": "djent",
+      "reason": "contains-sibling:djent",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "punk black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "canadian black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "balearic folk": {
+      "suggestion": "folk",
+      "reason": "contains-sibling:balearic",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "catholic black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "modern death metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "usa black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "swedish death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "colour": {
+      "suggestion": "colours",
+      "reason": "fuzzy-cooccurrence:0.25",
+      "score": 0.9230769230769231,
+      "type": "cooccurrence"
+    },
+    "chilean": {
+      "suggestion": "chile",
+      "reason": "contains-sibling:chile",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "indonesian black metal": {
+      "suggestion": "indonesia",
+      "reason": "contains-sibling:indonesia",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "japanese psych rock": {
+      "suggestion": "japan",
+      "reason": "contains-sibling:japan",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "2022 best albums": {
+      "suggestion": "2022",
+      "reason": "contains-sibling:2022",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "neoclassicall new age": {
+      "suggestion": "new age",
+      "reason": "contains-sibling:new age",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progerssive rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "post grindcore": {
+      "suggestion": "grindcore",
+      "reason": "contains-sibling:grindcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "inide rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "melodic post hardcore": {
+      "suggestion": "post hardcore",
+      "reason": "contains-sibling:post hardcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "drone ambient": {
+      "suggestion": "ambient",
+      "reason": "contains-sibling:ambient",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "folk doom metal": {
+      "suggestion": "doom metal",
+      "reason": "contains-sibling:doom metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "female singer songwriter": {
+      "suggestion": "singer songwriter",
+      "reason": "contains-sibling:singer songwriter",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "microtonal black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "extreme piano metal": {
+      "suggestion": "extreme piano",
+      "reason": "contains-sibling:extreme piano",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "death grind": {
+      "suggestion": "deathgrind",
+      "reason": "fuzzy-cooccurrence:0.50",
+      "score": 0.9523809523809523,
+      "type": "cooccurrence"
+    },
+    "blackened brutal death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "2024 album of the year runner up": {
+      "suggestion": "2024",
+      "reason": "contains-sibling:2024",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "icelandic": {
+      "suggestion": "iceland",
+      "reason": "contains-sibling:iceland",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "hypnogogic pop": {
+      "suggestion": "hypnagogic pop",
+      "reason": "fuzzy-cooccurrence:0.93",
+      "score": 0.9285714285714286,
+      "type": "cooccurrence"
+    },
+    "pro rock": {
+      "suggestion": "prog rock",
+      "reason": "fuzzy-cooccurrence:0.94",
+      "score": 0.9411764705882353,
+      "type": "cooccurrence"
+    },
+    "unblack metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.9166666666666666,
+      "type": "cooccurrence"
+    },
+    "modern shoegaze": {
+      "suggestion": "shoegaze",
+      "reason": "contains-sibling:shoegaze",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "technical metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:metalcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "modern folk metal": {
+      "suggestion": "folk metal",
+      "reason": "contains-sibling:folk metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "bestalbums2021": {
+      "suggestion": "2021",
+      "reason": "contains-sibling:2021",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "australian metal": {
+      "suggestion": "australia",
+      "reason": "contains-sibling:australia",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "heavy thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "contains-sibling:thrash metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "groove deathcore": {
+      "suggestion": "deathcore",
+      "reason": "contains-sibling:deathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "aoty 2018": {
+      "suggestion": "2018",
+      "reason": "contains-sibling:2018",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blackened post metal": {
+      "suggestion": "post metal",
+      "reason": "contains-sibling:post metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "post deathcore": {
+      "suggestion": "deathcore",
+      "reason": "contains-sibling:deathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "deathcore galore": {
+      "suggestion": "deathcore",
+      "reason": "contains-sibling:deathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive doom metal": {
+      "suggestion": "doom metal",
+      "reason": "contains-sibling:doom metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "modern fusion": {
+      "suggestion": "fusion",
+      "reason": "contains-sibling:fusion",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive mathcore": {
+      "suggestion": "mathcore",
+      "reason": "contains-sibling:mathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "black wave": {
+      "suggestion": "blackwave",
+      "reason": "fuzzy-cooccurrence:0.67",
+      "score": 0.9473684210526315,
+      "type": "cooccurrence"
+    },
+    "california folk": {
+      "suggestion": "folk",
+      "reason": "contains-sibling:folk",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "australian thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "contains-sibling:australia",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "2010s metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:2010s",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive melodic punk a ha black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "new berklee core prog metal": {
+      "suggestion": "new berklee core progressive metal",
+      "reason": "fuzzy-cooccurrence:0.48",
+      "score": 0.8852459016393442,
+      "type": "cooccurrence"
+    },
+    "2020 albums": {
+      "suggestion": "2020",
+      "reason": "contains-sibling:2020",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "german new wave": {
+      "suggestion": "new wave",
+      "reason": "contains-sibling:new wave",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "technical death metal avant garde death metal": {
+      "suggestion": "avant garde death metal",
+      "reason": "contains-sibling:avant garde death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "romanian folk music": {
+      "suggestion": "folk",
+      "reason": "contains-sibling:romania",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "death sludge": {
+      "suggestion": "sludge",
+      "reason": "contains-sibling:sludge",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progrock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "metal progressive metal": {
+      "suggestion": "progressive metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "melodic goregrind": {
+      "suggestion": "goregrind",
+      "reason": "contains-sibling:goregrind",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "woodland black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "usway brutal death metal": {
+      "suggestion": "brutal death metal",
+      "reason": "contains-sibling:brutal death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "classical black metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:black metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "the best symphonic metal tracks ever recorded": {
+      "suggestion": "symphonic metal",
+      "reason": "contains-sibling:symphonic metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "norwegian death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "trash metal": {
+      "suggestion": "thrash metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.9565217391304348,
+      "type": "cooccurrence"
+    },
+    "mostly instrumental prog rock": {
+      "suggestion": "prog rock",
+      "reason": "contains-sibling:prog rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "atmospheric technical deathcore": {
+      "suggestion": "deathcore",
+      "reason": "contains-sibling:deathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "operatic black metal": {
+      "suggestion": "black metal",
+      "reason": "contains-sibling:opera",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "best albums 2017": {
+      "suggestion": "2017",
+      "reason": "contains-sibling:2017",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "best of 2001": {
+      "suggestion": "2001",
+      "reason": "contains-sibling:2001",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "modern hardcore": {
+      "suggestion": "hardcore",
+      "reason": "contains-sibling:hardcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blackened technical death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive brutal death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "electro metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "chamber metal": {
+      "suggestion": "chamber",
+      "reason": "contains-sibling:chamber",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "old school progressive metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:metalcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "kraut rock": {
+      "suggestion": "rock",
+      "reason": "contains-sibling:rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "slamming guttural brutal test metal": {
+      "suggestion": "brutal test metal",
+      "reason": "contains-sibling:brutal test metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blackened nu deathcore": {
+      "suggestion": "deathcore",
+      "reason": "contains-sibling:deathcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "sci fi metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "peogressive rock": {
+      "suggestion": "progressive rock",
+      "reason": "fuzzy-cooccurrence:0.64",
+      "score": 0.9375,
+      "type": "cooccurrence"
+    },
+    "progressive technical death metal": {
+      "suggestion": "technical death metal",
+      "reason": "contains-sibling:technical death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "eclectic metal": {
+      "suggestion": "ecletic metal",
+      "reason": "fuzzy-cooccurrence:0.50",
+      "score": 0.9629629629629629,
+      "type": "cooccurrence"
+    },
+    "breakup album": {
+      "suggestion": "break up album",
+      "reason": "fuzzy-cooccurrence:0.18",
+      "score": 0.9629629629629629,
+      "type": "cooccurrence"
+    },
+    "noise metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:metalcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "orchestral metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "brazilian folk": {
+      "suggestion": "brazil",
+      "reason": "contains-sibling:brazil",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "chaotic metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:metalcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "saxodoom": {
+      "suggestion": "doom",
+      "reason": "contains-sibling:doom",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "colors": {
+      "suggestion": "colours",
+      "reason": "contains-sibling:color",
+      "score": 0.9230769230769231,
+      "type": "cooccurrence"
+    },
+    "grass album art": {
+      "suggestion": "album art",
+      "reason": "contains-sibling:grass",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive space rock": {
+      "suggestion": "space rock",
+      "reason": "contains-sibling:space rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "album 2019": {
+      "suggestion": "2019",
+      "reason": "contains-sibling:2019",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "female vocal": {
+      "suggestion": "female vocalists",
+      "reason": "fuzzy-cooccurrence:0.50",
+      "score": 0.8571428571428571,
+      "type": "cooccurrence"
+    },
+    "israeli": {
+      "suggestion": "israel",
+      "reason": "contains-sibling:israel",
+      "score": 0.9230769230769231,
+      "type": "cooccurrence"
+    },
+    "break up album": {
+      "suggestion": "breakup album",
+      "reason": "fuzzy-cooccurrence:0.26",
+      "score": 0.9629629629629629,
+      "type": "cooccurrence"
+    },
+    "dissonance death metal": {
+      "suggestion": "dissonant death metal",
+      "reason": "fuzzy-cooccurrence:0.65",
+      "score": 0.9302325581395349,
+      "type": "cooccurrence"
+    },
+    "mostly instrumental prog metal": {
+      "suggestion": "prog metal",
+      "reason": "contains-sibling:prog metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "ecletic metal": {
+      "suggestion": "eclectic metal",
+      "reason": "fuzzy-cooccurrence:0.52",
+      "score": 0.9629629629629629,
+      "type": "cooccurrence"
+    },
+    "deva prog": {
+      "suggestion": "prog",
+      "reason": "contains-sibling:prog",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "industrial sludge metal": {
+      "suggestion": "sludge metal",
+      "reason": "contains-sibling:sludge metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "thezekinators 2024 album of the year runner up": {
+      "suggestion": "2024",
+      "reason": "contains-sibling:2024 album of the year runner up",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "melodic death doom metal": {
+      "suggestion": "doom metal",
+      "reason": "contains-sibling:doom metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "melodic thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "contains-sibling:thrash metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "cosmic death metal": {
+      "suggestion": "death metal",
+      "reason": "contains-sibling:death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "indie folk rock": {
+      "suggestion": "folk rock",
+      "reason": "contains-sibling:folk rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "psychedelic noise": {
+      "suggestion": "psychedelic",
+      "reason": "contains-sibling:psychedelic",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "instrumental progressive death metal": {
+      "suggestion": "instrumental",
+      "reason": "contains-sibling:instrumental",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock psychedelic rock space rock stoner thessaloniki": {
+      "suggestion": "psychedelic rock",
+      "reason": "contains-sibling:thessaloniki",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "ambient sludge": {
+      "suggestion": "sludge",
+      "reason": "contains-sibling:sludge",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "melodic death power metal": {
+      "suggestion": "power metal",
+      "reason": "contains-sibling:power metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "in love": {
+      "suggestion": "love",
+      "reason": "contains-sibling:love",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "deathened metalcore": {
+      "suggestion": "metalcore",
+      "reason": "contains-sibling:metalcore",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "instrumental ambient": {
+      "suggestion": "ambient",
+      "reason": "contains-sibling:instrumental",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "serbian pop alchemy": {
+      "suggestion": "serbia",
+      "reason": "contains-sibling:serbia",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blood metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "chilean metal": {
+      "suggestion": "chile",
+      "reason": "contains-sibling:chile",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "ambient music": {
+      "suggestion": "ambient",
+      "reason": "contains-sibling:ambient",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "blackwave": {
+      "suggestion": "black wave",
+      "reason": "fuzzy-cooccurrence:0.60",
+      "score": 0.9473684210526315,
+      "type": "cooccurrence"
+    },
+    "blackened chiptune": {
+      "suggestion": "chiptune",
+      "reason": "contains-sibling:chiptune",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "best 2025": {
+      "suggestion": "2025",
+      "reason": "contains-sibling:2025",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "symphonic melodic death metal": {
+      "suggestion": "metal",
+      "reason": "contains-sibling:metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "celtic punk": {
+      "suggestion": "celtic",
+      "reason": "contains-sibling:celtic",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "scifi doom": {
+      "suggestion": "doom",
+      "reason": "contains-sibling:doom",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "progressive death thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "contains-sibling:thrash metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "finnish melodic death metal": {
+      "suggestion": "melodic death metal",
+      "reason": "contains-sibling:melodic death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "sludge doom metal": {
+      "suggestion": "doom metal",
+      "reason": "contains-sibling:doom metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "italian progressive rock": {
+      "suggestion": "progressive rock",
+      "reason": "contains-sibling:progressive rock",
+      "score": 0.95,
+      "type": "cooccurrence"
+    },
+    "neoclassicall melodic death metal": {
+      "suggestion": "melodic death metal",
+      "reason": "contains-sibling:melodic death metal",
+      "score": 0.95,
+      "type": "cooccurrence"
+    }
+  }
+}

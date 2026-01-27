@@ -4,10 +4,19 @@ from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func, and_, or_
 from .models import Album, Tag, AtomicTag, TagDecomposition, album_tags, album_atomic_tags
 
-def get_albums_with_tags(session: Session) -> List[Album]:
-    """Get all albums with their tags eagerly loaded to prevent N+1 queries."""
-    # Use joinedload to eager load tags in a single query for better performance
-    return session.query(Album).options(joinedload(Album.tags)).all()
+def get_albums_with_tags(session: Session, limit: Optional[int] = None) -> List[Album]:
+    """Get albums with their tags and artist eagerly loaded to prevent N+1 queries.
+
+    If `limit` is provided, return at most `limit` albums (useful for initial
+    rendering to avoid loading the entire DB into memory/UI thread).
+    """
+    query = session.query(Album).options(
+        joinedload(Album.tags),
+        joinedload(Album.artist_obj)
+    )
+    if limit:
+        query = query.limit(limit)
+    return query.all()
 
 def get_album_tags(session: Session, album_id: int) -> List[Tag]:
     """Get tags for a specific album."""
@@ -100,12 +109,19 @@ def get_most_common_tags(session: Session, limit: int = 20) -> List[Tuple[Tag, i
 # ATOMIC TAG QUERIES
 # =============================================================================
 
-def get_albums_with_atomic_tags(session: Session) -> List[Album]:
-    """Get all albums with their atomic tags loaded."""
-    return session.query(Album).options(
+def get_albums_with_atomic_tags(session: Session, limit: Optional[int] = None) -> List[Album]:
+    """Get albums with atomic tags, normal tags and artist eagerly loaded.
+
+    If `limit` is provided, return at most `limit` albums.
+    """
+    query = session.query(Album).options(
         joinedload(Album.atomic_tags),
-        joinedload(Album.tags)
-    ).all()
+        joinedload(Album.tags),
+        joinedload(Album.artist_obj)
+    )
+    if limit:
+        query = query.limit(limit)
+    return query.all()
 
 
 def get_atomic_tag_breakdown(session: Session, tag_name: str) -> Optional[Dict]:

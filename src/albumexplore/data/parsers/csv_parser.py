@@ -126,14 +126,30 @@ class CSVParser:
             for encoding in encodings:
                 try:
                     # First, try to detect if there are proper headers
-                    header_row = self._detect_header_row(file_path, delimiter, encoding)
+                    header_row_line_idx = self._detect_header_row(file_path, delimiter, encoding)
                     
-                    # Read the CSV starting from the header row
-                    df = pd.read_csv(file_path, delimiter=delimiter, encoding=encoding, 
-                                   skiprows=header_row, header=0)
+                    # Read lines manually to skip physical lines, avoiding pandas skiprows logic mismatch
+                    with open(file_path, 'r', encoding=encoding) as f:
+                        lines = f.readlines()
+                    
+                    if header_row_line_idx >= len(lines):
+                        logger.warning(f"Header index {header_row_line_idx} out of bounds for {file_path.name}")
+                        continue
+                        
+                    # Extract header and data lines
+                    # We treat lines[header_row_line_idx] as the header
+                    # And subsequent lines as data
+                    
+                    from io import StringIO
+                    # Join lines starting from header row
+                    csv_content = "".join(lines[header_row_line_idx:])
+                    
+                    df = pd.read_csv(StringIO(csv_content), delimiter=delimiter)
                     
                     # If we still don't have proper column names, assign standard ones
-                    if df.columns[0] != 'Artist' or len(df.columns) < 5:
+                    # Check first column against 'Artist' or similar
+                    first_col = str(df.columns[0]).strip().lower() if not df.empty and len(df.columns) > 0 else ""
+                    if 'artist' not in first_col or len(df.columns) < 5:
                         logger.debug(f"Assigning standard column names for {file_path.name}")
                         df = self._assign_standard_columns(df)
                     
@@ -154,6 +170,49 @@ class CSVParser:
             # Convert genres to tags list
             if 'Genre / Subgenres' in df.columns:
                 df['tags'] = df['Genre / Subgenres'].apply(self._parse_tags)
+
+            # Process vocal styles into tags
+            if 'Vocal Style' in df.columns:
+                # Helper to clean vocal tags
+                def parse_vocal(val):
+                    if pd.isna(val): return []
+                    val = str(val).strip().lower()
+                    if not val or val in ['-', 'n/a', '?']: return []
+                    # Basic extraction
+                    # Split on common separators
+                    import re
+                    parts = re.split(r'[,/]', val)
+                    tags = []
+                    for p in parts:
+                        p = p.strip()
+                        if not p: continue
+                        # normalize specific terms
+                        if p in ['mixed', 'both']: p = 'mixed vocals'
+                        elif p == 'instrumental': p = 'instrumental'
+                        elif 'clean' in p and 'vocals' not in p: p += ' vocals'
+                        elif 'harsh' in p and 'vocals' not in p: p += ' vocals'
+                        elif 'growl' in p: p = 'harsh vocals'
+                        elif 'scream' in p: p = 'harsh vocals'
+                        
+                        # ensure 'vocals' suffix if missing and not instrumental
+                        if 'vocals' not in p and p != 'instrumental':
+                            p += ' vocals'
+                        tags.append(p)
+                    return tags
+
+                # Apply and merge with existing tags
+                if 'tags' not in df.columns:
+                    df['tags'] = [[] for _ in range(len(df))]
+                
+                vocal_tags = df['Vocal Style'].apply(parse_vocal)
+                
+                # Merge into tags column
+                for i, v_tags in enumerate(vocal_tags):
+                    current = df.iat[i, df.columns.get_loc('tags')]
+                    # Use set to avoid dups
+                    new_set = set(current)
+                    new_set.update(v_tags)
+                    df.iat[i, df.columns.get_loc('tags')] = list(new_set)
                 
             # Standardize date column name
             if 'Release Date' in df.columns:

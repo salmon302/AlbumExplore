@@ -1,7 +1,7 @@
 """Database models."""
 from datetime import datetime
 from typing import List
-from sqlalchemy import Column, Integer, String, ForeignKey, Table, Float, DateTime, Text, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, Float, DateTime, Text, Boolean, JSON
 from sqlalchemy.orm import relationship, DeclarativeBase
 
 
@@ -43,29 +43,25 @@ class Album(Base):
     title = Column(String, nullable=False)
     type = Column(String, nullable=True)  # Added type field for Studio/Live/EP etc.
     cover_image_url = Column(String, nullable=True) # Added cover_image_url field
-    pa_album_id = Column(String, nullable=True, index=True) # Added ProgArchives specific album ID
-    pa_artist_name_on_album = Column(String, nullable=True) # Added ProgArchives specific artist name from album page
-    pa_rating_value = Column(Float, nullable=True)  # ProgArchives rating value
-    pa_rating_count = Column(Integer, nullable=True)  # ProgArchives rating count
-    pa_review_count = Column(Integer, nullable=True)  # ProgArchives review count
-    source_html_file = Column(String, nullable=True) # Source HTML file for the album data
+    
     release_date = Column(DateTime)
     release_year = Column(Integer)
     length = Column(String)
     vocal_style = Column(String)
     country = Column(String)
     genre = Column(String)
+    raw_tags = Column(String, nullable=True)
+
+    # Visualization / Spatial Data
     latitude = Column(Float)
     longitude = Column(Float)
     x = Column(Float)
     y = Column(Float)
     last_updated = Column(DateTime)
-    raw_tags = Column(String)
-    platforms = Column(String)
     
     # New fields for ProgArchives integration
     artist_id = Column(String, ForeignKey('artists.id')) # New FK to Artist table
-    pa_lineup_text = Column(Text) # For storing raw lineup details from ProgArchives
+    pa_artist_name_on_album = Column(String, nullable=True) # Artist name as it appears on source (e.g. ProgArchives)
     
     # Cross-source identifiers (MusicBrainz)
     mbid = Column(String(36), nullable=True, index=True)  # MusicBrainz Release ID
@@ -295,6 +291,7 @@ class AlbumSource(Base):
     confidence = Column(Float, default=1.0)       # Match confidence if auto-matched
     last_fetched = Column(DateTime, default=datetime.utcnow)
     raw_data_path = Column(String, nullable=True) # Path to raw JSON/HTML file
+    meta_data = Column(JSON, nullable=True)       # Store source-specific metadata (ratings, stats, extra fields)
     
     # Relationship to Album
     album = relationship("Album", back_populates="sources")
@@ -315,6 +312,7 @@ class ArtistSource(Base):
     source_id = Column(String, nullable=True)
     confidence = Column(Float, default=1.0)
     last_fetched = Column(DateTime, default=datetime.utcnow)
+    meta_data = Column(JSON, nullable=True)       # Store source-specific metadata
     raw_data_path = Column(String, nullable=True)
     
     # Relationship to Artist

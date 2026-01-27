@@ -1,0 +1,1176 @@
+{
+  "stats": {
+    "total_singletons": 686,
+    "suggested": 292
+  },
+  "suggestions": {
+    "woodland black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "vocal post rock": {
+      "suggestion": "post rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: post rock"
+    },
+    "usway brutal death metal": {
+      "suggestion": "brutal death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: brutal death metal"
+    },
+    "usa black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "unblack metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "ukrainian metal": {
+      "suggestion": "ukrainian",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: ukrainian"
+    },
+    "uk garage": {
+      "suggestion": "garage",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "trash metal": {
+      "suggestion": "thrash metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: thrash metal"
+    },
+    "traditional metal": {
+      "suggestion": "traditional metal",
+      "reason": "atomic-decompose"
+    },
+    "thrashcore": {
+      "suggestion": "thrash core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "thrash death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "thezekinators 2024 album of the year selection": {
+      "suggestion": "2024",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2024"
+    },
+    "thezekinators 2024 album of the year runner up": {
+      "suggestion": "2024",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2024"
+    },
+    "the best symphonic metal tracks ever recorded": {
+      "suggestion": "symphonic metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: symphonic metal"
+    },
+    "technical thrash": {
+      "suggestion": "technical thrash",
+      "reason": "atomic-decompose"
+    },
+    "technical progressive metal": {
+      "suggestion": "technical progressive metal",
+      "reason": "atomic-decompose"
+    },
+    "technical progressive deathcore": {
+      "suggestion": "technical progressive deathcore",
+      "reason": "atomic-decompose"
+    },
+    "technical progressive death metal": {
+      "suggestion": "technical progressive death metal",
+      "reason": "atomic-decompose"
+    },
+    "technical metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "technical death metal avant garde death metal": {
+      "suggestion": "avant garde death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: avant garde death metal"
+    },
+    "synth metal": {
+      "suggestion": "synth metal",
+      "reason": "atomic-decompose"
+    },
+    "symphonic melodic death metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "symphonic gothic metal": {
+      "suggestion": "symphonic gothic metal",
+      "reason": "atomic-decompose"
+    },
+    "symphonic experimental metal": {
+      "suggestion": "symphonic experimental metal",
+      "reason": "atomic-decompose"
+    },
+    "swedish death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "speed rock": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "sludge stoner": {
+      "suggestion": "sludge stoner",
+      "reason": "atomic-decompose"
+    },
+    "sludge doom metal": {
+      "suggestion": "doom metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom metal"
+    },
+    "sludge djent": {
+      "suggestion": "djent",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: djent"
+    },
+    "slamming guttural brutal test metal": {
+      "suggestion": "brutal test metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: brutal test metal"
+    },
+    "skate punk": {
+      "suggestion": "skatepunk",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: punk"
+    },
+    "serbian pop alchemy": {
+      "suggestion": "serbia",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: serbia"
+    },
+    "serbian": {
+      "suggestion": "serbia",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: serbia"
+    },
+    "seattle metal": {
+      "suggestion": "seattle",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: seattle"
+    },
+    "scifi doom": {
+      "suggestion": "doom",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom"
+    },
+    "sci fi metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "saxodoom": {
+      "suggestion": "doom",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom"
+    },
+    "sassy mathcore": {
+      "suggestion": "mathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: mathcore"
+    },
+    "romanian folk music": {
+      "suggestion": "folk",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: folk"
+    },
+    "rock n roll": {
+      "suggestion": "rock n' roll",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "rock musical": {
+      "suggestion": "rock musical",
+      "reason": "atomic-decompose"
+    },
+    "rock modern": {
+      "suggestion": "rock modern",
+      "reason": "atomic-decompose"
+    },
+    "rock metal": {
+      "suggestion": "rock metal",
+      "reason": "atomic-decompose"
+    },
+    "rock francophone": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "roadburn festival": {
+      "suggestion": "roadburn",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: roadburn"
+    },
+    "releases": {
+      "suggestion": "release",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: release"
+    },
+    "release": {
+      "suggestion": "releases",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: releases"
+    },
+    "regressive metalcore": {
+      "suggestion": "progressive metalcore",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "punk black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "psytrance": {
+      "suggestion": "psy trance",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "psychodelic": {
+      "suggestion": "psychedelic",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "psychedelic rock neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock space rock stoner thessaloniki": {
+      "suggestion": "psychedelic rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: psychedelic rock"
+    },
+    "psychedelic progressive metal": {
+      "suggestion": "psychedelic",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: psychedelic"
+    },
+    "psychedelic noise": {
+      "suggestion": "psychedelic",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: psychedelic"
+    },
+    "psychedelic drone rock": {
+      "suggestion": "drone",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: drone"
+    },
+    "progrock": {
+      "suggestion": "prog-rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "progressive technical death metal": {
+      "suggestion": "technical death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: technical death metal"
+    },
+    "progressive stoner": {
+      "suggestion": "progressive stoner",
+      "reason": "atomic-decompose"
+    },
+    "progressive space rock": {
+      "suggestion": "space rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: space rock"
+    },
+    "progressive rock prog rock prog melodic progrock djent": {
+      "suggestion": "melodic",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: melodic"
+    },
+    "progressive post metal rock": {
+      "suggestion": "progressive post metal rock",
+      "reason": "atomic-decompose"
+    },
+    "progressive noise rock": {
+      "suggestion": "progressive noise rock",
+      "reason": "atomic-decompose"
+    },
+    "progressive melodic punk a ha black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "progressive mathcore": {
+      "suggestion": "progressive deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: mathcore"
+    },
+    "progressive heavy metal": {
+      "suggestion": "progressive heavy metal",
+      "reason": "atomic-decompose"
+    },
+    "progressive groove metal": {
+      "suggestion": "groove metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: groove metal"
+    },
+    "progressive doom metal": {
+      "suggestion": "doom metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom metal"
+    },
+    "progressive death thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: thrash metal"
+    },
+    "progressive brutal death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "progressive black doom metal": {
+      "suggestion": "progressive black metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "progressive alternative metal": {
+      "suggestion": "progressive alternative metal",
+      "reason": "atomic-decompose"
+    },
+    "progress rock": {
+      "suggestion": "progressive rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: progressive rock"
+    },
+    "progerssive rock": {
+      "suggestion": "progressive rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "pro rock": {
+      "suggestion": "prog rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: prog rock"
+    },
+    "powermetal": {
+      "suggestion": "power metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: power metal"
+    },
+    "post screamo": {
+      "suggestion": "post screamo",
+      "reason": "atomic-decompose"
+    },
+    "post progressive rock": {
+      "suggestion": "post progressive rock",
+      "reason": "atomic-decompose"
+    },
+    "post powerviolence": {
+      "suggestion": "powerviolence",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: powerviolence"
+    },
+    "post metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "post grindcore": {
+      "suggestion": "grindcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: grindcore"
+    },
+    "post deathcore": {
+      "suggestion": "deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathcore"
+    },
+    "polish black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "peogressive rock": {
+      "suggestion": "progressive rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: progressive rock"
+    },
+    "orchestral metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "operatic black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "on vinyl": {
+      "suggestion": "on vinyl",
+      "reason": "atomic-decompose"
+    },
+    "olivia": {
+      "suggestion": "bolivia",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "old school progressive metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "old school grindcore": {
+      "suggestion": "grindcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: grindcore"
+    },
+    "old school grind": {
+      "suggestion": "grind",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: grind"
+    },
+    "ocult rock": {
+      "suggestion": "occult rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: occult rock"
+    },
+    "nujazz": {
+      "suggestion": "nu jazz",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: jazz"
+    },
+    "not djent": {
+      "suggestion": "djent",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: djent"
+    },
+    "norwegian death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "northern silence": {
+      "suggestion": "silence",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "northern nspordy recs": {
+      "suggestion": "nspordy recs",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "noise sludge metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "noise metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "noise metal": {
+      "suggestion": "noise metal",
+      "reason": "atomic-decompose"
+    },
+    "new wave of british heavy metal": {
+      "suggestion": "new wave of heavy metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "new metal": {
+      "suggestion": "new metal",
+      "reason": "atomic-decompose"
+    },
+    "new berklee core prog metal": {
+      "suggestion": "new berklee core progressive metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: new berklee core progressive metal"
+    },
+    "neoclassicall new age": {
+      "suggestion": "neoclassical new age",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: new age"
+    },
+    "neoclassicall melodic death metal": {
+      "suggestion": "neoclassical melodic death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: melodic death metal"
+    },
+    "neo-classical": {
+      "suggestion": "neo classical",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock psychedelic rock space rock stoner thessaloniki": {
+      "suggestion": "psychedelic rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: psychedelic rock"
+    },
+    "neo classical metal": {
+      "suggestion": "neo classical metal",
+      "reason": "atomic-decompose"
+    },
+    "mostly instrumental progressive rock": {
+      "suggestion": "progressive rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: progressive rock"
+    },
+    "mostly instrumental prog rock": {
+      "suggestion": "prog rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: prog rock"
+    },
+    "mostly instrumental prog metal": {
+      "suggestion": "prog metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: prog metal"
+    },
+    "modern shoegaze": {
+      "suggestion": "shoegaze",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: shoegaze"
+    },
+    "modern melodic death metal": {
+      "suggestion": "modern melodic death metal",
+      "reason": "atomic-decompose"
+    },
+    "modern hardcore": {
+      "suggestion": "hardcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: hardcore"
+    },
+    "modern fusion": {
+      "suggestion": "fusion",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: fusion"
+    },
+    "modern folk metal": {
+      "suggestion": "folk metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: folk metal"
+    },
+    "modern emo": {
+      "suggestion": "modern emo",
+      "reason": "atomic-decompose"
+    },
+    "modern death metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "modern alternative rock": {
+      "suggestion": "modern alternative rock",
+      "reason": "atomic-decompose"
+    },
+    "midwestern emo": {
+      "suggestion": "midwest emo",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: midwest emo"
+    },
+    "microtonal black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "metal progressive metal": {
+      "suggestion": "progressive metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: progressive metal"
+    },
+    "melodic thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: thrash metal"
+    },
+    "melodic thrash": {
+      "suggestion": "melodic",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: melodic"
+    },
+    "melodic post hardcore": {
+      "suggestion": "post hardcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: post hardcore"
+    },
+    "melodic goregrind": {
+      "suggestion": "goregrind",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: goregrind"
+    },
+    "melodic death power metal": {
+      "suggestion": "power metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: power metal"
+    },
+    "melodic death doom metal": {
+      "suggestion": "doom metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom metal"
+    },
+    "melancholic black metal": {
+      "suggestion": "melancholic black metal",
+      "reason": "atomic-decompose"
+    },
+    "lol doomergaze": {
+      "suggestion": "doomergaze",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doomergaze"
+    },
+    "live album": {
+      "suggestion": "live",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: live"
+    },
+    "kraut rock": {
+      "suggestion": "krautrock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "jazz piano": {
+      "suggestion": "jazz piano",
+      "reason": "atomic-decompose"
+    },
+    "japanese psych rock": {
+      "suggestion": "psych rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: japan"
+    },
+    "italian progressive rock": {
+      "suggestion": "progressive rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: progressive rock"
+    },
+    "israeli": {
+      "suggestion": "israel",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: israel"
+    },
+    "instrumental progressive death metal": {
+      "suggestion": "instrumental progressive metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: instrumental"
+    },
+    "instrumental neo classical progressive death metal": {
+      "suggestion": "instrumental",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: instrumental"
+    },
+    "instrumental ambient": {
+      "suggestion": "ambient",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: ambient"
+    },
+    "inide rock": {
+      "suggestion": "indie rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "industrial sludge metal": {
+      "suggestion": "sludge metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: sludge metal"
+    },
+    "industrial dance": {
+      "suggestion": "industrial dance",
+      "reason": "atomic-decompose"
+    },
+    "indonesian black metal": {
+      "suggestion": "indonesia",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: indonesia"
+    },
+    "indigenous north american music": {
+      "suggestion": "indigenous north music",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "indie folk rock": {
+      "suggestion": "folk rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: folk rock"
+    },
+    "indie emo": {
+      "suggestion": "indie emo",
+      "reason": "atomic-decompose"
+    },
+    "in love": {
+      "suggestion": "love",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: love"
+    },
+    "icelandic": {
+      "suggestion": "iceland",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: iceland"
+    },
+    "hypnogogic pop": {
+      "suggestion": "hypnagogic pop",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: hypnagogic pop"
+    },
+    "high speed metal": {
+      "suggestion": "speed metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: speed metal"
+    },
+    "heavy thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: thrash metal"
+    },
+    "heavy progressive": {
+      "suggestion": "heavy progressive",
+      "reason": "atomic-decompose"
+    },
+    "heavy power metal": {
+      "suggestion": "power metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: power metal"
+    },
+    "heavy jazz": {
+      "suggestion": "heavy jazz",
+      "reason": "atomic-decompose"
+    },
+    "heavy death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "hard rock francophone": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "groove deathcore": {
+      "suggestion": "deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathcore"
+    },
+    "grass album art": {
+      "suggestion": "album art",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: album art"
+    },
+    "gothic funeral doom metal": {
+      "suggestion": "doom metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom metal"
+    },
+    "gothic doom": {
+      "suggestion": "gothic doom",
+      "reason": "atomic-decompose"
+    },
+    "german new wave": {
+      "suggestion": "new wave",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: new wave"
+    },
+    "german metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "garbage": {
+      "suggestion": "garage",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "folk power metal": {
+      "suggestion": "power metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: power metal"
+    },
+    "folk noir": {
+      "suggestion": "folk noir",
+      "reason": "atomic-decompose"
+    },
+    "folk indie": {
+      "suggestion": "folk indie",
+      "reason": "atomic-decompose"
+    },
+    "folk doom metal": {
+      "suggestion": "doom metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom metal"
+    },
+    "folk doom": {
+      "suggestion": "folk doom",
+      "reason": "atomic-decompose"
+    },
+    "folk death metal": {
+      "suggestion": "folk death metal",
+      "reason": "atomic-decompose"
+    },
+    "flop era": {
+      "suggestion": "flop",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: flop"
+    },
+    "finnish melodic death metal": {
+      "suggestion": "melodic death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: melodic death metal"
+    },
+    "female vocal": {
+      "suggestion": "female vocalists",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: female vocalists"
+    },
+    "female singer songwriter": {
+      "suggestion": "singer songwriter",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: singer songwriter"
+    },
+    "female fronted rock": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "extreme piano metal": {
+      "suggestion": "extreme piano",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: extreme piano"
+    },
+    "experimental guitar": {
+      "suggestion": "experimental",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: experimental"
+    },
+    "experimental grindcore": {
+      "suggestion": "grindcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: grindcore"
+    },
+    "experimental deathcore": {
+      "suggestion": "deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathcore"
+    },
+    "estonian": {
+      "suggestion": "estonia",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: estonia"
+    },
+    "epic folk metal": {
+      "suggestion": "folk metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: folk metal"
+    },
+    "english black metal": {
+      "suggestion": "english",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: english"
+    },
+    "emo violence": {
+      "suggestion": "emoviolence",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: emoviolence"
+    },
+    "electronic jazz": {
+      "suggestion": "electronic jazz",
+      "reason": "atomic-decompose"
+    },
+    "electro swing": {
+      "suggestion": "electro swing",
+      "reason": "atomic-decompose"
+    },
+    "electro rock": {
+      "suggestion": "electro rock",
+      "reason": "atomic-decompose"
+    },
+    "electro metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "elctronic": {
+      "suggestion": "electronic",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "egyptian": {
+      "suggestion": "egypt",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: egypt"
+    },
+    "ecletic metal": {
+      "suggestion": "eclectic metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: eclectic metal"
+    },
+    "eclectic metal": {
+      "suggestion": "eclectic metal",
+      "reason": "atomic-decompose; ALSO co-occurrence: ecletic metal"
+    },
+    "drone doom metal": {
+      "suggestion": "doom metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom metal"
+    },
+    "drone ambient": {
+      "suggestion": "ambient",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: ambient"
+    },
+    "doombrass": {
+      "suggestion": "doom",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: doom"
+    },
+    "dissonant death metalavant garde metal": {
+      "suggestion": "avant garde metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: avant garde metal"
+    },
+    "dissonant blackened death metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "dissonance death metal": {
+      "suggestion": "dissonant death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: dissonant death metal"
+    },
+    "deva prog": {
+      "suggestion": "prog",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: prog"
+    },
+    "deppresive black metal": {
+      "suggestion": "depressive black metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "deathened metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "deathcore galore": {
+      "suggestion": "deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathcore"
+    },
+    "death sludge": {
+      "suggestion": "sludge",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: sludge"
+    },
+    "death grind": {
+      "suggestion": "deathgrind",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathgrind"
+    },
+    "darkfolk": {
+      "suggestion": "dark folk",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: dark folk"
+    },
+    "dark progressive metal": {
+      "suggestion": "progressive metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: progressive metal"
+    },
+    "cosmic death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "comedy metal": {
+      "suggestion": "comedy metal",
+      "reason": "atomic-decompose"
+    },
+    "colours": {
+      "suggestion": "colors",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: colors"
+    },
+    "colour": {
+      "suggestion": "colors",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: colours"
+    },
+    "colors": {
+      "suggestion": "colours",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: colours"
+    },
+    "color": {
+      "suggestion": "colors",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: colors"
+    },
+    "classical black metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "chilean metal": {
+      "suggestion": "chile",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: chile"
+    },
+    "chilean": {
+      "suggestion": "chile",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: chile"
+    },
+    "chaotic metalcore": {
+      "suggestion": "metalcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metalcore"
+    },
+    "chamber post metal": {
+      "suggestion": "chamber post metal",
+      "reason": "atomic-decompose"
+    },
+    "chamber metal": {
+      "suggestion": "chamber",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: chamber"
+    },
+    "celtic punk": {
+      "suggestion": "punk",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: celtic"
+    },
+    "catholic black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "cascadian black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "canadian black metal": {
+      "suggestion": "black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "california folk": {
+      "suggestion": "folk",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: folk"
+    },
+    "british progressive jazz": {
+      "suggestion": "progressive jazz",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "british indie": {
+      "suggestion": "indie",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "british folk": {
+      "suggestion": "folk",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "breakup album": {
+      "suggestion": "break up album",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: break up album"
+    },
+    "breakbeat hardcore": {
+      "suggestion": "breakbeat hardcore",
+      "reason": "atomic-decompose"
+    },
+    "break up album": {
+      "suggestion": "breakup album",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: breakup album"
+    },
+    "brazillian metal": {
+      "suggestion": "brazil",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: brazil"
+    },
+    "brazilian folk": {
+      "suggestion": "brazil",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: brazil"
+    },
+    "boston indie": {
+      "suggestion": "boston",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: boston"
+    },
+    "blood metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "blackwave": {
+      "suggestion": "black wave",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black wave"
+    },
+    "blackned death metal": {
+      "suggestion": "blackened death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "blackened technical death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "blackened skramz": {
+      "suggestion": "skramz",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: skramz"
+    },
+    "blackened power metal": {
+      "suggestion": "power metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: power metal"
+    },
+    "blackened post metal": {
+      "suggestion": "post metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: post metal"
+    },
+    "blackened nu deathcore": {
+      "suggestion": "blackened deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathcore"
+    },
+    "blackened chiptune": {
+      "suggestion": "chiptune",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: chiptune"
+    },
+    "blackened brutal death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "black wave": {
+      "suggestion": "blackwave",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: blackwave"
+    },
+    "black hardcore": {
+      "suggestion": "blackened hardcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: blackened hardcore"
+    },
+    "black doom metal": {
+      "suggestion": "black doom metal",
+      "reason": "atomic-decompose"
+    },
+    "black doom": {
+      "suggestion": "black doom",
+      "reason": "atomic-decompose"
+    },
+    "bhangra metal": {
+      "suggestion": "bhangra",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: bhangra"
+    },
+    "bestalbums2021": {
+      "suggestion": "best albums 2021",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2021"
+    },
+    "best of2024": {
+      "suggestion": "best of 2024",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2024"
+    },
+    "best of 2001": {
+      "suggestion": "best of 2021",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2001"
+    },
+    "best albums of 2023": {
+      "suggestion": "best albums 2023",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "best albums of 2022": {
+      "suggestion": "best albums 2022",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "best albums 2019": {
+      "suggestion": "best albums 2021",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2019"
+    },
+    "best albums 2017": {
+      "suggestion": "best albums 2021",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2017"
+    },
+    "best album 2022": {
+      "suggestion": "best albums 2022",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: best albums 2022"
+    },
+    "best 2025": {
+      "suggestion": "2025",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2025"
+    },
+    "ballymena town centre september 2025": {
+      "suggestion": "2025",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2025"
+    },
+    "balearic folk": {
+      "suggestion": "folk",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: folk"
+    },
+    "babymetal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "avant-jazz": {
+      "suggestion": "avant jazz",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: jazz"
+    },
+    "avant death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "australian thrash metal": {
+      "suggestion": "thrash metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: thrash metal"
+    },
+    "australian metal": {
+      "suggestion": "australia",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: australia"
+    },
+    "atmospheric technical deathcore": {
+      "suggestion": "deathcore",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: deathcore"
+    },
+    "atmospheric blackened death metal": {
+      "suggestion": "death metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: death metal"
+    },
+    "atmospheric black meta": {
+      "suggestion": "atmospheric black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: atmospheric black metal"
+    },
+    "athmospheric black metal": {
+      "suggestion": "atmospheric black metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: black metal"
+    },
+    "artcore": {
+      "suggestion": "art core",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "art puk": {
+      "suggestion": "art punk",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "art metal": {
+      "suggestion": "party metal",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "armenian folk music": {
+      "suggestion": "armenia",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: armenia"
+    },
+    "armenian": {
+      "suggestion": "armenia",
+      "reason": "rules-mapped-after-enhanced"
+    },
+    "aoty2023list": {
+      "suggestion": "2023",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2023"
+    },
+    "aoty 2020": {
+      "suggestion": "aoty 2020",
+      "reason": "atomic-decompose"
+    },
+    "aoty 2018": {
+      "suggestion": "2018",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2018"
+    },
+    "animal album art": {
+      "suggestion": "album art",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: album art"
+    },
+    "ambient sludge": {
+      "suggestion": "sludge",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: sludge"
+    },
+    "ambient music": {
+      "suggestion": "ambient",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: ambient"
+    },
+    "alternative indie rock": {
+      "suggestion": "alternative indie rock",
+      "reason": "atomic-decompose"
+    },
+    "alternative indie": {
+      "suggestion": "alternative indie",
+      "reason": "atomic-decompose"
+    },
+    "alternative folk": {
+      "suggestion": "alternative folk",
+      "reason": "atomic-decompose"
+    },
+    "alternative country": {
+      "suggestion": "alternative country",
+      "reason": "atomic-decompose"
+    },
+    "album 2019": {
+      "suggestion": "2019",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2019"
+    },
+    "adventure rock": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "acoustic metal": {
+      "suggestion": "acoustic metal",
+      "reason": "atomic-decompose"
+    },
+    "acid techno": {
+      "suggestion": "acid techno",
+      "reason": "atomic-decompose"
+    },
+    "70s rock": {
+      "suggestion": "rock",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: rock"
+    },
+    "2024 album of the year runner up": {
+      "suggestion": "2024",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2024"
+    },
+    "2022 best albums": {
+      "suggestion": "2022",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2022"
+    },
+    "2020 favourite albums": {
+      "suggestion": "2020",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2020"
+    },
+    "2020 albums": {
+      "suggestion": "2020 albums",
+      "reason": "atomic-decompose; ALSO co-occurrence: 2020"
+    },
+    "2019 releases": {
+      "suggestion": "release",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: 2019"
+    },
+    "2018 metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    },
+    "2018 albums": {
+      "suggestion": "2018 albums",
+      "reason": "atomic-decompose"
+    },
+    "2010s metal": {
+      "suggestion": "metal",
+      "reason": "rules-mapped-after-enhanced; ALSO co-occurrence: metal"
+    }
+  }
+}

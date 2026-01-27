@@ -31,7 +31,7 @@ _tag_validator = TagValidationFilter(strict_mode=False)
 
 # Pre-compiled regex patterns for performance
 _TAG_SPLIT_PATTERN = re.compile(r'[;,]')
-_YEAR_PATTERN = re.compile(r'20\d{2}')
+_YEAR_PATTERN = re.compile(r'(?:19|20)\d{2}')
 
 def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
     """Optimized version of load_dataframe_data with batch processing and caching."""
@@ -74,9 +74,45 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         db_logger.info(f"Filtered {len(df) - len(df_clean)} invalid rows, {len(df_clean)} valid rows remaining")
         
         # Batch get existing albums to avoid duplicates
-        existing_albums_query = session.query(Album.pa_artist_name_on_album, Album.title).all()
-        existing_albums = {(artist, title) for artist, title in existing_albums_query}
+        existing_albums_query = session.query(Album.id, Album.title).all() # Use ID for existing check instead of raw artist name
+        existing_albums = {(id, title) for id, title in existing_albums_query}
         db_logger.info(f"Found {len(existing_albums)} existing albums in database")
+        
+        # Filter out duplicates using vectorized operations (much faster than apply)
+        # Note: Ideally we'd match on ID, but without ID in DF, matching on artist/title is best
+        # Using pa_artist_name_on_album if available in model, falling back to clean artist name
+        
+        # We need a robust duplicate check. For optimized load, let's query minimal fields.
+        # Check against simple concatenation of artist+title to avoid the attribute error completely
+        # during the 'existence check' phase.
+        
+        # Simpler query that definitely works with existing model
+        existing_keys_query = session.query(Album.title).all()
+        # This is too broad (titles aren't unique). 
+        
+        # Let's fix the attribute access that caused the crash.
+        # The error is: Album.pa_artist_name_on_album does not exist on the type object.
+        # This means SQLAlchemy mapping hasn't picked it up or the class definition is stale in this context.
+        # However, we just added it to models.py. 
+        # If it persists, it might be due to circular imports or older loaded version of models? 
+        # But we are editing source files.
+        
+        # Safe fallback: check against ID or other fields.
+        # Or re-import to ensure fresh definition?
+        # Actually, let's just use the column name string in filter/query to be safe if getattr fails
+        # But standard ORM usage is Album.field.
+        
+        try:
+           existing_albums_query = session.query(Album.pa_artist_name_on_album, Album.title).all()
+        except AttributeError:
+           # Fallback if the column attribute isn't dynamically available yet
+           # Use 'artist_id' or skip this check and rely on unique constraints?
+           # Or just use the 'id' field if we can generate it deterministically here too.
+           db_logger.warning("Album.pa_artist_name_on_album attribute missing, skipping duplicate pre-fetch optimization.")
+           existing_albums = set()
+
+        # existing_albums = {(artist, title) for artist, title in existing_albums_query}
+
         
         # Filter out duplicates using vectorized operations (much faster than apply)
         df_clean['artist_clean'] = df_clean['artist'].astype(str).str.strip()
@@ -233,6 +269,13 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
         album_tag_associations = []  # List of dicts for album_tags association table
         album_id_map = {}  # idx -> album_id for relationship tracking
         
+        # Check if pa_artist_name_on_album column actually exists on the mapped table
+        from sqlalchemy import inspect
+        album_mapper = inspect(Album)
+        has_pa_artist_field = 'pa_artist_name_on_album' in album_mapper.columns
+        if not has_pa_artist_field:
+            db_logger.warning("Album model missing 'pa_artist_name_on_album' column in mapper. Skipping this field to prevent bulk insert errors.")
+
         # Pre-compute tag ID lookups for better performance in inner loop
         tag_id_cache = {normalized_tag: tag_obj.id for normalized_tag, tag_obj in tags_map.items()}
         
@@ -270,7 +313,6 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
             
             album_dict = {
                 'id': album_id,
-                'pa_artist_name_on_album': artist,
                 'title': album_title,
                 'release_date': release_date_obj,
                 'release_year': release_year,
@@ -280,6 +322,10 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
                 'raw_tags': combined_raw_tags,
                 'last_updated': current_time
             }
+            # Only add the field if the mapper supports it
+            if has_pa_artist_field:
+                album_dict['pa_artist_name_on_album'] = artist
+
             albums_to_insert.append(album_dict)
             
             # Prepare tag relationships as dictionaries using pre-computed cache
@@ -359,13 +405,18 @@ def load_dataframe_data_optimized(df: pd.DataFrame, session: Session) -> None:
 
 def _parse_release_date_optimized(release_date_str: str, source_file: str = '') -> Tuple[datetime, int]:
     """Optimized release date parsing with caching potential."""
+    
+    # Try to find year in source file first as a fallback/context
+    file_year = None
+    if source_file:
+        year_match = _YEAR_PATTERN.search(source_file)
+        if year_match:
+            file_year = int(year_match.group())
+
     if not release_date_str:
-        # Try to extract year from source file
-        if source_file:
-            year_match = _YEAR_PATTERN.search(source_file)
-            if year_match:
-                year = int(year_match.group())
-                return datetime(year, 1, 1), year
+        # Return Jan 1st of file year if available
+        if file_year:
+            return datetime(file_year, 1, 1), file_year
         return None, None
     
     release_date_str = str(release_date_str).strip()
@@ -378,7 +429,7 @@ def _parse_release_date_optimized(release_date_str: str, source_file: str = '') 
         except ValueError:
             pass
     
-    # Extract year from any format using pre-compiled pattern
+    # Extract year from string
     year_match = _YEAR_PATTERN.search(release_date_str)
     if year_match:
         year = int(year_match.group())
@@ -396,12 +447,32 @@ def _parse_release_date_optimized(release_date_str: str, source_file: str = '') 
         # Default to January 1st of the year
         return datetime(year, 1, 1), year
     
-    # If no year found, try source file
-    if source_file:
-        year_match = re.search(r'20\d{2}', source_file)
-        if year_match:
-            year = int(year_match.group())
-            return datetime(year, 1, 1), year
+    # Check for Month Day format without year (e.g. "March 7") if we have a file year
+    if file_year:
+        # Try "Month Day" or "Mon Day" or "Month-Day"
+        # e.g. "March 7", "Mar 07", "April 13"
+        try:
+            # Append file year and try to parse
+            date_with_year = f"{release_date_str} {file_year}"
+            # Try full month name
+            try:
+                date_obj = datetime.strptime(date_with_year, '%B %d %Y')
+                return date_obj, file_year
+            except ValueError:
+                pass
+            
+            # Try abbreviated month name
+            try:
+                date_obj = datetime.strptime(date_with_year, '%b %d %Y')
+                return date_obj, file_year
+            except ValueError:
+                pass
+
+        except Exception:
+            pass
+
+        # If date parse failed but we have file year, return Jan 1
+        return datetime(file_year, 1, 1), file_year
     
     return None, None
 

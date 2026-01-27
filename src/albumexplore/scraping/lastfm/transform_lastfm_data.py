@@ -6,42 +6,20 @@ or creates new entries.
 """
 import json
 import logging
-import hashlib
-from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
-from uuid import uuid4
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
-
-import sys
-sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from albumexplore.database.models import (
     Base, Album, Artist, Tag, TagCategory, album_tags,
     ArtistSimilarity
 )
 from albumexplore.tags.normalizer.enhanced_normalizer import EnhancedTagNormalizer
+from albumexplore.utils import generate_id
 
 logger = logging.getLogger(__name__)
-
-
-def generate_id(prefix: str = "") -> str:
-    """Generate a unique ID for database entities."""
-    return f"{prefix}{str(uuid4())}"
-
-
-def calculate_file_hash(file_path: Path) -> str:
-    """Calculate MD5 hash of a file."""
-    hash_md5 = hashlib.md5()
-    try:
-        with open(file_path, "rb") as f:
-            for chunk in iter(lambda: f.read(4096), b""):
-                hash_md5.update(chunk)
-        return hash_md5.hexdigest()
-    except FileNotFoundError:
-        return ""
 
 
 class LastFmTransformer:

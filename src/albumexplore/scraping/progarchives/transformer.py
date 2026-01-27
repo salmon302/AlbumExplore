@@ -8,25 +8,20 @@ a structured format ready for database loading.
 import logging
 import json
 import re
-import hashlib
 import pandas as pd
 import numpy as np
 from pathlib import Path
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
-from uuid import uuid4
-import sys
 from datetime import datetime
 from typing import Dict, List, Tuple, Any, Optional
 
-# Add parent directory to path to find albumexplore modules
-sys.path.append(str(Path(__file__).parent.parent.parent))
-
 from albumexplore.database.models import (
     Base, Album, Artist, Track, Review, Tag, TagCategory,
-    album_tags
+    album_tags, AlbumSource, ArtistSource
 )
 from albumexplore.tags.normalizer.enhanced_normalizer import EnhancedTagNormalizer
+from albumexplore.utils import clean_text, generate_id, calculate_file_hash, load_state, save_state
 
 # Configure logging
 logging.basicConfig(
@@ -34,62 +29,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-# Helper functions for data cleaning
-def calculate_file_hash(file_path: Path) -> str:
-    """Calculate MD5 hash of a file."""
-    hash_md5 = hashlib.md5()
-    try:
-        with open(file_path, "rb") as f:
-            for chunk in iter(lambda: f.read(4096), b""):
-                hash_md5.update(chunk)
-        return hash_md5.hexdigest()
-    except FileNotFoundError:
-        return ""
-
-def load_state(state_file: Path) -> Dict[str, str]:
-    """Load processing state from JSON file."""
-    if state_file.exists():
-        try:
-            with open(state_file, 'r') as f:
-                return json.load(f)
-        except json.JSONDecodeError:
-            logger.warning(f"Could not decode state file {state_file}. Starting fresh.")
-            return {}
-    return {}
-
-def save_state(state_file: Path, state: Dict[str, str]):
-    """Save processing state to JSON file."""
-    with open(state_file, 'w') as f:
-        json.dump(state, f, indent=4)
-
-def clean_text(text: str) -> str:
-    """
-    Clean text from HTML tags and normalize whitespace.
-    
-    Args:
-        text: Raw text string that might contain HTML or extra whitespace
-        
-    Returns:
-        Cleaned text
-    """
-    if pd.isna(text) or text is None:
-        return None
-    
-    # Remove HTML tags
-    clean = re.sub(r'<[^>]+>', '', str(text))
-    
-    # Normalize whitespace
-    clean = re.sub(r'\s+', ' ', clean).strip()
-    
-    # Convert special HTML entities
-    clean = clean.replace('&amp;', '&')
-    clean = clean.replace('&lt;', '<')
-    clean = clean.replace('&gt;', '>')
-    clean = clean.replace('&quot;', '"')
-    clean = clean.replace('&apos;', "'")
-    
-    return clean
 
 def convert_duration_to_seconds(duration_str: str) -> Optional[int]:
     """
@@ -129,17 +68,7 @@ def convert_duration_to_seconds(duration_str: str) -> Optional[int]:
         logger.warning(f"Failed to convert duration: {duration_str}")
         return None
 
-def generate_id(prefix: str = "") -> str:
-    """
-    Generate a unique ID for database entities.
-    
-    Args:
-        prefix: Optional prefix for the ID
-        
-    Returns:
-        Unique string ID
-    """
-    return f"{prefix}{str(uuid4())}"
+# Removed generate_id definition, using import from utils
 
 # Main transformation functions
 def link_artists(session, raw_artists_df) -> Dict[str, Artist]:
@@ -156,10 +85,15 @@ def link_artists(session, raw_artists_df) -> Dict[str, Artist]:
     logger.info("Processing artists...")
     artist_map = {}
     
-    # Pre-load existing artists to minimize DB queries
-    existing_artists = {a.name.lower(): a for a in session.query(Artist).all()}
-    logger.info(f"Loaded {len(existing_artists)} existing artists.")
-
+    # Pre-load existing ArtistSources for ProgArchives to minimize DB queries
+    existing_pa_sources = {
+        s.source_id: s.artist 
+        for s in session.query(ArtistSource).filter_by(source_name='progarchives').all()
+    }
+    
+    # Also load generic artists by name for fallback matching
+    existing_artists_by_name = {a.name.lower(): a for a in session.query(Artist).all()}
+    
     new_artists_count = 0
 
     for _, row in raw_artists_df.iterrows():
@@ -168,26 +102,62 @@ def link_artists(session, raw_artists_df) -> Dict[str, Artist]:
             
         canonical_name = clean_text(row['raw_artist_name_canonical'])
         canonical_name_lower = canonical_name.lower()
+        pa_artist_id = str(row.get('pa_artist_id')) if pd.notna(row.get('pa_artist_id')) else None
         
         # Skip if we already processed this artist in this batch
         if canonical_name_lower in artist_map:
             continue
             
-        # Check if artist already exists in database
-        if canonical_name_lower in existing_artists:
-            artist = existing_artists[canonical_name_lower]
+        artist = None
+
+        # 1. Try to find by Source ID
+        if pa_artist_id and pa_artist_id in existing_pa_sources:
+            artist = existing_pa_sources[pa_artist_id]
+            
+        # 2. Try to find by Name (if source link missing)
+        elif canonical_name_lower in existing_artists_by_name:
+            artist = existing_artists_by_name[canonical_name_lower]
+            # Create source link if we have an ID
+            if pa_artist_id:
+                new_source = ArtistSource(
+                    artist_id=artist.id,
+                    source_name='progarchives',
+                    source_id=pa_artist_id,
+                    confidence=1.0,
+                    meta_data={
+                        "country": clean_text(row.get('raw_artist_country')),
+                        "style_main": row.get('raw_artist_style_main')
+                    }
+                )
+                session.add(new_source)
+                existing_pa_sources[pa_artist_id] = artist
+                
+        # 3. Create New Artist
         else:
-            # Create new artist
             artist_id = generate_id("art_")
             artist = Artist(
                 id=artist_id,
                 name=canonical_name,
-                # Add other fields as needed, like country
+                country=clean_text(row.get('raw_artist_country'))
             )
             session.add(artist)
-            existing_artists[canonical_name_lower] = artist # Add to local cache
+            
+            if pa_artist_id:
+                new_source = ArtistSource(
+                    artist=artist,
+                    source_name='progarchives',
+                    source_id=pa_artist_id,
+                    confidence=1.0,
+                    meta_data={
+                        "country": clean_text(row.get('raw_artist_country')),
+                        "style_main": row.get('raw_artist_style_main')
+                    }
+                )
+                session.add(new_source)
+                existing_pa_sources[pa_artist_id] = artist
+            
+            existing_artists_by_name[canonical_name_lower] = artist
             new_artists_count += 1
-            # logger.debug(f"Created artist: {canonical_name}")
         
         artist_map[canonical_name_lower] = artist
     
@@ -339,8 +309,7 @@ def process_subgenres(session, raw_subgenre_df) -> Dict[str, Tag]:
             continue
 
         existing_tag = session.query(Tag).filter(
-            Tag.name == subgenre_name,
-            Tag.category_id == tag_category.id # Ensure it's in the same category if names can repeat across categories
+            Tag.name == subgenre_name
         ).first()
 
         if existing_tag:
@@ -349,6 +318,11 @@ def process_subgenres(session, raw_subgenre_df) -> Dict[str, Tag]:
             if existing_tag.description != subgenre_definition and subgenre_definition:
                  logger.info(f"Updating description for existing tag '{subgenre_name}'.")
                  existing_tag.description = subgenre_definition
+            
+            # If tag doesn't have a category, assign it to ours
+            if existing_tag.category_id is None:
+                existing_tag.category_id = tag_category.id
+                logger.info(f"Assigned existing tag '{subgenre_name}' to category '{category_name}'.")
         else:
             tag_id = generate_id("tag_")
             tag = Tag(
@@ -494,13 +468,14 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
         
         album_id_map = {} # Maps pa_album_id to internal Album object ID
 
-        # Pre-load existing albums to check for updates (Idempotency)
-        existing_albums = {}
+        # Pre-load existing album sources for idempotency
+        existing_album_sources = {}
         if not dry_run:
-            existing_albums_query = session.query(Album).filter(Album.pa_album_id != None).all()
-            for alb in existing_albums_query:
-                existing_albums[str(alb.pa_album_id)] = alb
-            logger.info(f"Loaded {len(existing_albums)} existing albums for idempotency check.")
+            # Load sources specifically for progarchives to match pa_album_id
+            sources = session.query(AlbumSource).filter_by(source_name='progarchives').all()
+            for src in sources:
+                existing_album_sources[str(src.source_id)] = src
+            logger.info(f"Loaded {len(existing_album_sources)} existing PA album sources.")
 
         for index, album_row in raw_albums_df.iterrows():
             # Ensure pa_album_id is not NaN
@@ -512,11 +487,6 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             pa_album_id = str(pa_album_id_raw) # Ensure it's a string for consistent lookup
 
             # --- 1. Link to Artist ---
-            # The artist_link_local can be used if your artist_map is keyed by local links.
-            # Or, use a canonical artist name if that's how artist_map is structured.
-            # This part needs to align with how `link_artists` and `raw_artists_df` are structured.
-            
-            # Assuming 'raw_artist_name' from album data needs to be mapped to an Artist object
             raw_artist_name_on_album = clean_text(album_row.get('raw_artist_name'))
             album_artist_obj = None
             
@@ -544,83 +514,95 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             release_year = None
             if release_year_str and release_year_str != 'nan' and release_year_str != '0':
                 try:
-                    release_year = int(float(release_year_str)) # float conversion handles cases like '1995.0'
+                    release_year = int(float(release_year_str))
                 except ValueError:
                     logger.warning(f"Could not convert release year '{release_year_str}' to int for album '{album_title}'.")
 
-
             album_type_raw = album_row.get('raw_recording_type')
-            album_type_processed = process_recording_type(album_type_raw) # Already exists
+            album_type_processed = process_recording_type(album_type_raw)
 
-            # Basic album data
-            album_data = {
-                'title': album_title,
-                'release_year': release_year,
-                'type': album_type_processed,
-                'cover_image_url': clean_text(album_row.get('pa_cover_image_url')),
-                'pa_album_id': pa_album_id, # Store the original ProgArchives ID
-                'pa_artist_name_on_album': raw_artist_name_on_album, # Store for reference
-                'pa_rating_value': pd.to_numeric(album_row.get('pa_average_rating'), errors='coerce'),
-                'pa_rating_count': pd.to_numeric(album_row.get('pa_rating_count'), errors='coerce'),
-                'pa_review_count': pd.to_numeric(album_row.get('pa_review_count'), errors='coerce'),
+            # Metadata for Source (ProgArchives specifics)
+            pa_meta = {
+                'pa_artist_name_on_album': raw_artist_name_on_album,
+                'rating_value': float(album_row.get('pa_average_rating')) if pd.notna(album_row.get('pa_average_rating')) else None,
+                'rating_count': int(album_row.get('pa_rating_count')) if pd.notna(album_row.get('pa_rating_count')) else None,
+                'review_count': int(album_row.get('pa_review_count')) if pd.notna(album_row.get('pa_review_count')) else None,
+                'lineup_text': album_lineups_processed.get(pa_album_id),
                 'source_html_file': album_row.get('source_html_file')
             }
+
+            album = None
             
-            if album_artist_obj:
-                album_data['artist_id'] = album_artist_obj.id
-            
-            # Check if album exists
-            if pa_album_id in existing_albums:
-                album = existing_albums[pa_album_id]
-                # Update fields
-                for key, value in album_data.items():
-                    if hasattr(album, key):
-                        setattr(album, key, value)
+            # Check if source exists
+            if pa_album_id in existing_album_sources:
+                source = existing_album_sources[pa_album_id]
+                album = source.album
+                
+                # Update Core Album fields
+                album.title = album_title
+                album.release_year = release_year
+                album.type = album_type_processed
+                album.cover_image_url = clean_text(album_row.get('pa_cover_image_url'))
+                album.pa_artist_name_on_album = raw_artist_name_on_album
+                if album_artist_obj:
+                    album.artist_obj = album_artist_obj
+                
+                # Update Source
+                source.meta_data = pa_meta
+                source.last_fetched = datetime.utcnow()
+                
                 logger.debug(f"Updated existing album: {album_title} ({pa_album_id})")
             else:
-                # Create new
+                # Create New Album
                 album_id = generate_id("alb_")
-                album_data['id'] = album_id
-                album = Album(**album_data)
+                album = Album(
+                    id=album_id,
+                    title=album_title,
+                    release_year=release_year,
+                    type=album_type_processed,
+                    cover_image_url=clean_text(album_row.get('pa_cover_image_url')),
+                    artist_obj=album_artist_obj,
+                    pa_artist_name_on_album=raw_artist_name_on_album
+                )
                 session.add(album)
+                
+                # Create Source
+                source = AlbumSource(
+                    album=album,
+                    source_name='progarchives',
+                    source_id=pa_album_id,
+                    meta_data=pa_meta,
+                    last_fetched=datetime.utcnow()
+                )
+                session.add(source)
+                existing_album_sources[pa_album_id] = source
                 logger.debug(f"Created new album: {album_title} ({pa_album_id})")
 
             album_id_map[pa_album_id] = album.id # Map PA ID to new internal Album ID
 
             # --- 3. Link Subgenres (Tags) ---
-            # Use enhanced normalizer to split and normalize tags
             raw_subgenre_string = clean_text(album_row.get('raw_subgenre_string'))
             
             if raw_subgenre_string:
-                # Split multi-tags (e.g. "Death Metal/Heavy Metal")
                 subgenres = normalizer.split_multi_tags(raw_subgenre_string)
-                
                 for subgenre in subgenres:
-                    # Normalize each tag
                     normalized_subgenre = normalizer.normalize_enhanced(subgenre)
-                    
                     if normalized_subgenre.lower() in subgenre_tag_map:
                         tag_to_link = subgenre_tag_map[normalized_subgenre.lower()]
-                        if tag_to_link not in album.tags: # Avoid duplicate associations
+                        if tag_to_link not in album.tags:
                             album.tags.append(tag_to_link)
                     else:
-                        # Optional: Create new tag if not found in definitions?
-                        # For now, just log warning as per original logic
                         logger.warning(f"Subgenre '{normalized_subgenre}' (raw: '{subgenre}') for album '{album_title}' not found in subgenre_tag_map.")
 
 
             # --- 4. Add Lineup ---
-            # The `process_lineups` function returns a dict keyed by `pa_album_id`.
-            # The value could be a pre-formatted string or structured data.
-            # Let's assume it's a string to be stored in `Album.lineup_description`.
-            if pa_album_id in album_lineups_processed:
-                album.lineup_text_raw = album_lineups_processed[pa_album_id]
-            else:
-                album.lineup_text_raw = None # Or empty string, depending on preference
+            # Now handled via AlbumSource meta_data, so no direct assignment to album needed for provenance.
+            # If we want a generic "lineup" display field on Album, we could add one, but 'pa_lineup_text' was specific.
+            # Assuming we rely on source data for details.
         
         logger.info(f"Processed {len(album_id_map)} albums. Committing album objects to get IDs.")
         if not dry_run:
-            session.commit() # Commit albums to get their IDs for tracks and reviews
+            session.commit()
 
         # --- 5. Process Tracks ---
         # For idempotency, we'll delete existing tracks for processed albums and re-insert.
@@ -771,7 +753,9 @@ def transform_progarchives_data(raw_data_dir: str, db_uri: str, dry_run: bool = 
             logger.info("Dry run: Rollback successful.")
 
         logger.info("Data transformation completed successfully.")
-        return True
+        # Return list of processed internal album IDs to allow callers to focus view
+        processed_album_internal_ids = list(album_id_map.values())
+        return True, processed_album_internal_ids
 
     except Exception as e:
         logger.error(f"An error occurred during data transformation: {e}", exc_info=True)
@@ -816,5 +800,7 @@ def main():
         logger.error("Transformation failed")
         return 1
 
-if __name__ == "__main__":
-    sys.exit(main())
+    if __name__ == "__main__":
+        result = main()
+        # main returns exit code 0/1; ensure transformer returns same when used as script
+        sys.exit(result)

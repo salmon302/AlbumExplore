@@ -12,6 +12,9 @@ if str(root_dir / 'src') not in sys.path:
 
 from albumexplore.scraping.progarchives.collectors import ProgArchivesCollector
 from albumexplore.scraping.lastfm.fetcher import LastFmFetcher
+from albumexplore.scraping.progarchives.extract_csvs import run_extraction
+from albumexplore.scraping.progarchives.transformer import transform_progarchives_data
+from albumexplore.scraping.lastfm.transform_lastfm_data import transform_lastfm_data
 from albumexplore.database import session_scope
 from albumexplore.database import models as db_models
 
@@ -102,10 +105,16 @@ def run_hybrid_collection(
                 first_char = artist.name[0].lower() if artist.name else ''
                 allowed = set(letters.lower())
                 if first_char not in allowed:
-                    if not (first_char.isnumeric() == False and '0' in allowed): # Handle '0' for numbers if needed, simplistic check
-                         if not (not first_char.isalpha() and '0' in allowed): # better check
+                    if not (first_char.isnumeric() == False and '0' in allowed): 
+                         if not (not first_char.isalpha() and '0' in allowed): 
                             continue
             
+            # Ensure we have the local HTML page for this artist
+            try:
+                pa_collector.fetch_artist_page(artist)
+            except Exception as e:
+                logger.warning(f"Failed to fetch artist page for {artist.name}: {e}")
+
             artists.append(artist)
             if i % 100 == 0:
                 logger.info(f"Loaded {i} artists so far...")
@@ -219,7 +228,35 @@ def run_hybrid_collection(
             logger.error(f"Unexpected error processing {artist.name}: {e}")
             fail_count += 1
             
-    logger.info(f"Hybrid Pipeline Complete. Success: {success_count}, Failed: {fail_count}")
+    logger.info(f"Hybrid Pipeline Collection Complete. Success: {success_count}, Failed: {fail_count}")
+
+    # 4. Extraction (Phase 3)
+    logger.info("--- Phase 3: Extraction (HTML -> CSV) ---")
+    try:
+        run_extraction(input_dir=str(pa_output_dir), output_dir=str(pa_output_dir))
+    except Exception as e:
+        logger.error(f"Extraction failed: {e}")
+
+    # 5. Transformation (Phase 4)
+    logger.info("--- Phase 4: Database Import ---")
+    try:
+        db_uri = os.getenv("DATABASE_URL", "sqlite:///albumexplore.db")
+        # Ensure raw_data_dir is string for compatibility
+        transform_progarchives_data(
+            raw_data_dir=str(pa_output_dir),
+            db_uri=db_uri,
+            force=force_reindex
+        )
+
+        logger.info("--- Phase 5: Last.fm Enrichment (Database Import) ---")
+        transform_lastfm_data(
+            raw_data_dir=str(lastfm_output_dir),
+            db_uri=db_uri,
+            dry_run=False
+        )
+
+    except Exception as e:
+        logger.error(f"Transformation failed: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description="Hybrid PA + Last.fm Scraper")

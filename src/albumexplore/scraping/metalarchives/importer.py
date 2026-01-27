@@ -1,4 +1,3 @@
-import uuid
 import logging
 from typing import Dict, Any, List, Optional, Set
 from sqlalchemy.orm import Session
@@ -7,6 +6,7 @@ from tqdm import tqdm
 
 from albumexplore.database import models
 from albumexplore.scraping.metalarchives.loader import MetalArchivesLoader
+from albumexplore.utils import generate_id
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +64,7 @@ class MetalArchivesImporter:
             
         # 4. Create Artist
         new_artist = models.Artist(
-            id=str(uuid.uuid4()),
+            id=generate_id("art_"),
             name=final_name,
             country=country,
             # formation_year could be parsed from Status if available or other files, but distinct here
@@ -147,24 +147,17 @@ class MetalArchivesImporter:
             
             # Create Album
             new_album = models.Album(
-                id=str(uuid.uuid4()),
+                id=generate_id("alb_"),
                 title=title,
                 artist_obj=artist_obj,
                 release_year=year,
                 type=atype,
-                # Store extra MA metadata
-                pa_rating_count=album_data.get('review_count'), # Reuse PA field or migrate to generic?
-                                                                # Schema has 'pa_rating_count', let's use it for now 
-                                                                # or assume we need generic rating fields later.
                 genre=album_data.get('artist_genre'), # Store raw genre string
                 last_updated=func.now()
             )
             
             # We map specific MetalArchives review stats to available fields
-            # Currently 'pa_rating_count' implies ProgArchives. 
-            # Ideally we add 'ma_rating_count', or just use a generic one if we refactor.
-            # For now, I will NOT overload PA fields to avoid confusion.
-            # I will leave them null or add them if schema permits.
+            # Review counts are stored in AlbumSource metadata.
             
             self.session.add(new_album)
             
@@ -178,7 +171,10 @@ class MetalArchivesImporter:
                 album=new_album,
                 source_name=self.SOURCE_NAME,
                 source_id=pseudo_id,
-                confidence=1.0
+                confidence=1.0,
+                meta_data={
+                    "review_count": album_data.get('review_count')
+                }
             )
             self.session.add(src)
             

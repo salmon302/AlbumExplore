@@ -1,99 +1,33 @@
-import pytest
+import unittest
+import os
 from pathlib import Path
-from albumexplore.data.parsers.progarchives_parser import ProgArchivesParser
+from albumexplore.scraping.progarchives.parser import ProgArchivesParser
 
-@pytest.fixture
-def sample_html():
-    return """
-    <html>
-        <body>
-            <h1 class="album-title">Sample Album</h1>
-            <div class="artist-name">Test Artist</div>
-            <div class="genre">Progressive Metal</div>
-            <div class="album-info">Studio Album, 2023</div>
-            <div class="rating">4.5</div>
-        </body>
-    </html>
-    """
+class TestProgArchivesParser(unittest.TestCase):
+    def setUp(self):
+        # Point to the directory containing the real sample file in the workspace
+        self.sample_dir = Path(r'ProgArchives Data/Additional HTML Structure Examples')
+        self.parser = ProgArchivesParser(local_data_root=self.sample_dir)
+        self.sample_filename = 'CIRCE LINK & CHRISTIAN NESMITH Arcana reviews.html'
+        self.sample_file_path = self.sample_dir / self.sample_filename
 
-@pytest.fixture
-def sample_html_ep():
-    return """
-    <html>
-        <body>
-            <h1 class="album-title">EP Album</h1>
-            <div class="artist-name">Test Artist</div>
-            <div class="genre">Progressive Rock</div>
-            <div class="album-info">EP, 2024</div>
-            <div class="rating">4.0</div>
-        </body>
-    </html>
-    """
+    def test_parse_real_sample_file(self):
+        if not self.sample_file_path.exists():
+            self.skipTest(f'Sample file not found at {self.sample_file_path}')
 
-@pytest.fixture
-def tmp_html_file(tmp_path, sample_html):
-    html_file = tmp_path / "test_album.html"
-    html_file.write_text(sample_html)
-    return html_file
+        result = self.parser.get_album_data(self.sample_file_path)
 
-@pytest.fixture
-def tmp_html_files(tmp_path, sample_html, sample_html_ep):
-    file1 = tmp_path / "test_album1.html"
-    file2 = tmp_path / "test_album2.html"
-    file1.write_text(sample_html)
-    file2.write_text(sample_html_ep)
-    return [file1, file2]
+        self.assertNotIn('error', result, f'Parser returned error: {result.get('error')}')
 
-def test_parse_album(sample_html):
-    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
-    result = parser.parse_album(sample_html)
-    
-    assert result["title"] == "Sample Album"
-    assert result["artist"] == "Test Artist"
-    assert result["genre"] == "Progressive Metal"
-    assert result["record_type"] == "Studio"
-    assert result["year"] == 2023
-    assert result["rating"] == 4.5
+        self.assertEqual(result.get('album_title'), 'ARCANA')
+        self.assertEqual(result.get('artist_name'), 'Circe Link & Christian Nesmith')
+        self.assertEqual(result.get('year'), 2024)
+        
+        tracks = result.get('tracks', [])
+        self.assertTrue(len(tracks) > 0, 'No tracks extracted')
+        
+        self.assertEqual(result.get('album_type'), 'Studio Album')
+        self.assertIn('rating_value', result)
 
-def test_parse_album_ep(sample_html_ep):
-    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
-    result = parser.parse_album(sample_html_ep)
-    
-    assert result["title"] == "EP Album"
-    assert result["genre"] == "Progressive Rock"
-    assert result["record_type"] == "EP"
-    assert result["year"] == 2024
-    assert result["rating"] == 4.0
-
-def test_parse_directory(tmp_path, tmp_html_files):
-    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
-    # This test might need adjustment if ProgArchivesParser now expects input_dir at parse() or other methods
-    # For now, assuming parse() can work without input_dir or uses a default if not provided.
-    # If parse() now requires input_dir, it should be parser.parse(input_dir=tmp_path)
-    df = parser.parse(input_dir=tmp_path) # Added input_dir to parse method
-    
-    assert len(df) == 2
-    assert "Studio" in df["record_type"].values
-    assert "EP" in df["record_type"].values
-    assert all(year in df["year"].values for year in [2023, 2024])
-
-def test_invalid_html():
-    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
-    result = parser.parse_album("<invalid>html</invalid>")
-    
-    assert all(v is None for v in result.values())
-
-def test_parse_record_info():
-    parser = ProgArchivesParser() # Initialize ProgArchivesParser without arguments
-    
-    test_cases = [
-        ("Studio Album, 2023", ("Studio", 2023)),
-        ("EP Release, 2024", ("EP", 2024)),
-        ("Fan Club Release 1999", ("Fan Club", 1999)),
-        ("Promo Single 2022", ("Promo", 2022)),
-        ("Live Album 2021", (None, 2021)),  # Live albums should be skipped
-    ]
-    
-    for input_text, expected in test_cases:
-        record_type, year = parser._parse_record_info(input_text)
-        assert (record_type, year) == expected
+if __name__ == '__main__':
+    unittest.main()

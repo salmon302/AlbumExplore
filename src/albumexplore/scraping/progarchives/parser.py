@@ -2,6 +2,7 @@
 import logging
 import re
 import json
+import hashlib
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Union, Any, Tuple
@@ -9,7 +10,7 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 
 logger = logging.getLogger(__name__)
 
-class ProgArchivesScraper:
+class ProgArchivesParser:
     """Parser for local ProgArchives.com HTML files."""
     
     # Constants for file paths
@@ -28,9 +29,9 @@ class ProgArchivesScraper:
         self.cache_dir = Path(cache_dir) if cache_dir else Path("cache/progarchives")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-        # Regex for matching album links (e.g., albumXXXX.html or albumXXXX.html?id=YYYY)
+        # Regex for matching album links (e.g., albumXXXX.html or albumXXXX.html?id=YYYY or album.asp?id=YYYY)
         # Allows for alphanumeric characters, dots, hyphens, and underscores in the album identifier part.
-        self.album_link_pattern = re.compile(r"album[a-zA-Z0-9._-]+\.html(?:\?id=\d+)?$")
+        self.album_link_pattern = re.compile(r"album(?:[a-zA-Z0-9._-]+\.html|\.asp)(?:\?id=\d+)?$")
         self.year_pattern = re.compile(r"(?:\b|\()((?:19|20)\d{2})(?:\b|\))") # (YYYY) or YYYY
         self.rating_pattern = re.compile(r"\b(\d\.\d{2})\b") # X.YY
         
@@ -87,7 +88,8 @@ class ProgArchivesScraper:
 
     def _get_cached_result(self, file_path: str) -> Optional[Dict]:
         """Get cached result for file path."""
-        cache_file = self.cache_dir / f"{hash(file_path)}.json"
+        file_hash = hashlib.md5(str(file_path).encode('utf-8')).hexdigest()
+        cache_file = self.cache_dir / f"{file_hash}.json"
         if cache_file.exists():
             try:
                 with open(cache_file, 'r', encoding='utf-8') as f:
@@ -98,7 +100,8 @@ class ProgArchivesScraper:
 
     def _save_to_cache(self, file_path: str, data: Dict):
         """Save result to cache."""
-        cache_file = self.cache_dir / f"{hash(file_path)}.json"
+        file_hash = hashlib.md5(str(file_path).encode('utf-8')).hexdigest()
+        cache_file = self.cache_dir / f"{file_hash}.json"
         try:
             with open(cache_file, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2)
@@ -144,38 +147,50 @@ class ProgArchivesScraper:
         Resolve a relative reference (like a link to an artist or album) to a local file path
         within the self.local_data_root directory.
         """
-        logger.debug(f"_resolve_relative_path: self.local_data_root is currently '{self.local_data_root}'") # Log the current local_data_root
+        logger.debug(f"_resolve_relative_path: self.local_data_root is currently '{self.local_data_root}'")
         # Normalize backslashes to forward slashes for regex and path consistency
-        relative_reference = relative_reference.replace("\\\\", "/")
+        relative_reference = relative_reference.replace("\\", "/")
 
-        # Extract the core filename (e.g., "albumXXXX.html") from the reference
-        # It might have query parameters like ?id=...
-        filename_match = re.match(r"([^?#]+)(\?[^#]*)?(#.*)?", relative_reference)
+        # Extract filename and query parameters
+        match = re.match(r"([^?#]+)(?:\?([^#]*))?(?:#.*)?", relative_reference)
         
-        if not filename_match:
+        if not match:
             logger.warning(f"Could not extract filename from relative reference: '{relative_reference}' on page '{base_path.name}'. Returning base path.")
             return base_path # Fallback for unparsable references
 
-        core_filename = filename_match.group(1)
+        core_filename = match.group(1)
+        query_params = match.group(2) or ""
 
-        # Check if it's an album, artist, or reviews file pattern we expect locally.
+        # Extract ID if present (e.g. id=1234)
+        id_match = re.search(r"(?:^|&)id=(\d+)", query_params)
+        entity_id = id_match.group(1) if id_match else None
+
+        target_filename = core_filename
+
+        # Translate .asp files to local .html format if ID is present
+        if core_filename.lower() == "album.asp" and entity_id:
+            target_filename = f"album_{entity_id}.html"
+        elif core_filename.lower() == "artist.asp" and entity_id:
+            target_filename = f"artist_{entity_id}.html"
+        elif core_filename.lower() == "album-reviews.asp" and entity_id:
+            target_filename = f"album-reviews_{entity_id}.html"
+
+        # Check if it matches known local file patterns (supporting underscores now)
         # These files are expected to be directly under self.local_data_root.
-        if (re.fullmatch(r"album[a-zA-Z0-9.-]+\.html", core_filename) or 
-            re.fullmatch(r"artist[a-zA-Z0-9.-]+\.html", core_filename) or 
-            re.fullmatch(r"album-reviews[a-zA-Z0-9.-]+\.html", core_filename)):
+        if (re.fullmatch(r"album[a-zA-Z0-9._-]+\.html", target_filename) or 
+            re.fullmatch(r"artist[a-zA-Z0-9._-]+\.html", target_filename) or 
+            re.fullmatch(r"album-reviews[a-zA-Z0-9._-]+\.html", target_filename) or
+            re.fullmatch(r"review[a-zA-Z0-9._-]+\.html", target_filename)):
             
             # Construct the path directly under self.local_data_root
-            resolved_path = self.local_data_root / core_filename
+            resolved_path = self.local_data_root / target_filename
             logger.info(f"Resolved relative reference '{relative_reference}' to '{resolved_path}' from base '{base_path.name}'")
             return resolved_path
         
         logger.warning(
-            f"Relative reference '{relative_reference}' (core: '{core_filename}') on page '{base_path.name}' "
-            f"does not match known local file patterns (e.g. albumXXXX.html). Returning original base path."
+            f"Relative reference '{relative_reference}' (target: '{target_filename}') on page '{base_path.name}' "
+            f"does not match known local file patterns. Returning original base path."
         )
-        # If it doesn't match our specific file patterns, it might be a link to another part of the site
-        # we don't have locally, or an external link. Returning base_path effectively means we don't follow it
-        # as a local file for further parsing in the current context of resolving album/artist links.
         return base_path 
 
     def get_band_details(self, artist_id_or_path: Union[str, Path], use_cache: bool = True) -> Dict:
@@ -964,7 +979,7 @@ class ProgArchivesScraper:
         # Structure: <h2 style="margin-top:1px;display:inline;"><a href="artist1ce3.html?id=630">Kansas</a></h2>
         artist_h2 = soup.find('h2', style=lambda x: 'margin-top:1px;display:inline;' in x if x else False)
         if artist_h2:
-            artist_link_tag = artist_h2.find('a', href=re.compile(r"artist[a-zA-Z0-9]+\.html\?id=\d+"))
+            artist_link_tag = artist_h2.find('a', href=re.compile(r"artist(?:[a-zA-Z0-9._-]+\.html|\.asp)(?:\?id=\d+)?"))
             if artist_link_tag:
                 artist_name = artist_link_tag.get_text(strip=True)
                 artist_page_link = artist_link_tag.get('href') # Capture the href

@@ -1,363 +1,262 @@
 """Table visualization view."""
-from typing import Dict, Any
-from PyQt6.QtWidgets import (QTableWidget, QTableWidgetItem, QHeaderView,
-                          QAbstractItemView, QVBoxLayout, QMenu,
-                          QLineEdit, QHBoxLayout, QPushButton, QLabel, QCheckBox)
-from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QAction, QKeySequence, QShortcut
+from typing import Dict, Any, List
+from PyQt6.QtWidgets import (QTableView, QHeaderView, QAbstractItemView, 
+                           QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, 
+                           QLabel, QCheckBox, QMenu)
+from PyQt6.QtCore import Qt, pyqtSignal, QItemSelectionModel
+from PyQt6.QtGui import QAction, QKeySequence, QShortcut, QCursor
+
 from .base_view import BaseView
 from albumexplore.visualization.state import ViewType
 from albumexplore.gui.gui_logging import graphics_logger
 from albumexplore.gui.favorites import get_favorites_manager
+from .table_model import AlbumTableModel, AlbumProxyModel
 
 class TableView(BaseView):
     """Table visualization view."""
     
     sort_changed = pyqtSignal(str, str)  # column, direction
-    show_similar_requested = pyqtSignal(str)  # album_id - signal to request similarity view
+    show_similar_requested = pyqtSignal(str)  # album_id
     
     def __init__(self, parent=None):
         super().__init__(parent)
         self.view_type = ViewType.TABLE
-        self._all_rows = []  # Cache all rows for filtering
-        self._filtered_row_indices = []  # Indices of visible rows after filtering
-        self._batch_size = 100  # Number of rows to render at once
+        self._fav_mgr = get_favorites_manager()
+        
+        # Setup models
+        self.source_model = AlbumTableModel(self._fav_mgr)
+        self.proxy_model = AlbumProxyModel(self)
+        self.proxy_model.setSourceModel(self.source_model)
+        
         self._setup_ui()
-        graphics_logger.debug("Table view initialized")
-    
+        
+        # Signals
+        self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
+        graphics_logger.debug("Table view initialized with QTableView")
+        
     def _setup_ui(self):
         """Set up UI elements."""
-        # Create search bar
         layout = self.layout() or QVBoxLayout(self)
-
-        search_layout = QHBoxLayout()
+        layout.setSpacing(10)
+        
+        # --- Toolbar ---
+        toolbar_layout = QHBoxLayout()
+        toolbar_layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Search
         search_label = QLabel("Search:")
         self.search_input = QLineEdit(self)
-        self.search_input.setPlaceholderText("Search artist, album, tags, genre, country, vocal style...")
-        self.clear_search_btn = QPushButton("Clear")
-        self.clear_search_btn.setToolTip("Clear search and show all rows")
-        search_layout.addWidget(search_label)
-        search_layout.addWidget(self.search_input)
-        search_layout.addWidget(self.clear_search_btn)
-        # "Only favorites" checkbox
-        self.fav_only_checkbox = QCheckBox("Only favorites")
-        self.fav_only_checkbox.setToolTip("Show only favorite albums in the table")
-        # Connect checkbox to filter (stateChanged emits int, _apply_filter will handle optional arg)
-        self.fav_only_checkbox.stateChanged.connect(self._apply_filter)
-        search_layout.addWidget(self.fav_only_checkbox)
-
-        layout.addLayout(search_layout)
-
-        # Keyboard shortcut to focus search
-        QShortcut(QKeySequence("Ctrl+F"), self).activated.connect(self._focus_search)
-
-        # Create table (add a favorites column at index 0)
-        self.table = QTableWidget(self)
-        self.table.setColumnCount(10)
-        self.table.setHorizontalHeaderLabels([
-            'Fav', 'Artist', 'Album', 'Year', 'Genre', 'Country', 'Vocal Style', 'Tags', 'Plays', 'Listeners'
-        ])
+        self.search_input.setPlaceholderText("Refine by artist, album, tags, etc...")
+        self.search_input.setClearButtonEnabled(True)
+        self.search_input.textChanged.connect(self._on_search_changed)
         
-        # Configure selection
+        toolbar_layout.addWidget(search_label)
+        toolbar_layout.addWidget(self.search_input, 1) # Stretch
+        
+        # Filters
+        self.fav_only_checkbox = QCheckBox("❤️ Favorites only")
+        self.fav_only_checkbox.setToolTip("Show only favorite albums")
+        self.fav_only_checkbox.stateChanged.connect(self._on_fav_filter_changed)
+        toolbar_layout.addWidget(self.fav_only_checkbox)
+        
+        layout.addLayout(toolbar_layout)
+
+        # Keyboard shortcut for search
+        QShortcut(QKeySequence("Ctrl+F"), self).activated.connect(self.search_input.setFocus)
+        
+        # --- Table View ---
+        self.table = QTableView(self)
+        self.table.setModel(self.proxy_model)
+        
+        # Appearance
+        self.table.setAlternatingRowColors(True)
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.table.setSortingEnabled(True)
+        self.table.setShowGrid(False)
+        self.table.setWordWrap(False)
         
-        # Configure headers
+        # Columns
         header = self.table.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
-        header.setSectionsClickable(True)
-        header.sectionClicked.connect(self._handle_sort)
+        header.setStretchLastSection(True)
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         
-        # Configure layout
-        layout = self.layout() or QVBoxLayout(self)
+        # Vertical header (row numbers) - hide them for cleaner look
+        self.table.verticalHeader().setVisible(False)
+        self.table.verticalHeader().setDefaultSectionSize(32) # row height
+        
         layout.addWidget(self.table)
-        layout.setContentsMargins(0, 0, 0, 0)
         
-        # Enable context menu
+        # --- Status Bar ---
+        self.status_label = QLabel("Ready")
+        self.status_label.setStyleSheet("color: gray;")
+        layout.addWidget(self.status_label)
+        layout.setContentsMargins(10, 10, 10, 10)
+        
+        # Interaction
+        self.table.clicked.connect(self._on_table_clicked)
+        self.table.doubleClicked.connect(self._on_table_double_clicked)
+        
+        # Context Menu
         self.table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.table.customContextMenuRequested.connect(self._show_context_menu)
         
-        # Connect signals
-        self.table.itemSelectionChanged.connect(self._handle_selection)
-        # Connect search signals
-        self.search_input.textChanged.connect(self._apply_filter)
-        self.clear_search_btn.clicked.connect(lambda: self.search_input.setText(''))
-        
-        # Favorites manager
-        self._fav_mgr = get_favorites_manager()
-        self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
-    
+        # Selection
+        self.table.selectionModel().selectionChanged.connect(self._on_table_selection_changed)
+
     def update_data(self, render_data: Dict[str, Any], edges=None):
-        """Update table data with batch rendering for performance."""
+        """Update table data."""
         super().update_data(render_data)
         
         if 'rows' not in render_data:
             return
+            
+        rows = render_data['rows']
+        self.source_model.set_data(rows)
         
-        # Store all rows for filtering
-        self._all_rows = render_data['rows']
-        self._filtered_row_indices = list(range(len(self._all_rows)))
+        # Update selection if ids provided
+        self._restore_selection(render_data.get('selected_ids', []))
         
-        # Initially render only first batch
-        self._render_visible_rows()
+        self._update_status()
+        self._resize_columns_to_content()
         
-        # Update selection
-        self.table.clearSelection()
-        if 'selected_ids' in render_data:
-            selected_ids = set(render_data['selected_ids'])
-            for row in range(self.table.rowCount()):
-                item = self.table.item(row, 1)  # artist column holds the id
-                if item and item.data(Qt.ItemDataRole.UserRole) in selected_ids:
-                    self.table.selectRow(row)
-        
-        graphics_logger.debug(f"Updated table view with {len(self._all_rows)} total rows, showing first {min(self._batch_size, len(self._all_rows))}")
-        
-        # Re-apply filter after populating rows so the search stays in effect
-        try:
-            current_search = self.search_input.text() if hasattr(self, 'search_input') else ''
-            if current_search:
-                self._apply_filter(current_search)
-        except Exception:
-            # Don't let filtering errors break the UI
-            graphics_logger.exception("Error applying search filter after data update")
-    
-    def _render_visible_rows(self):
-        """Render only visible rows for better performance."""
-        visible_count = min(len(self._filtered_row_indices), self._batch_size)
-        self.table.setRowCount(visible_count)
-        
-        for display_row in range(visible_count):
-            data_row_idx = self._filtered_row_indices[display_row]
-            row = self._all_rows[data_row_idx]
-            self._populate_row(display_row, row)
-    
-    def _populate_row(self, row_idx: int, row: Dict[str, Any]):
-        """Populate a single table row."""
-        album_id = row.get('id')
-
-        # Favorite button in column 0
-        try:
-            fav_btn = QPushButton(self)
-            fav_btn.setFlat(True)
-            fav_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-            is_fav = self._fav_mgr.is_favorite(album_id) if album_id else False
-            fav_btn.setText('★' if is_fav else '☆')
-            fav_btn.setToolTip('Toggle favorite')
-            # Closure to capture album_id and button reference
-            def _make_handler(aid, btn):
-                return lambda checked=False: self._toggle_favorite(aid, btn)
-            fav_btn.clicked.connect(_make_handler(album_id, fav_btn))
-            self.table.setCellWidget(row_idx, 0, fav_btn)
-        except Exception:
-            graphics_logger.exception('Failed to create favorite button')
-
-        # Artist
-        artist_data = row.get('artist', '')
-        artist_name = str(artist_data) if artist_data is not None else ''
-        item = QTableWidgetItem(artist_name)
-        item.setData(Qt.ItemDataRole.UserRole, album_id)
-        self.table.setItem(row_idx, 1, item)
-
-        # Album
-        self.table.setItem(row_idx, 2,
-                         QTableWidgetItem(row.get('album', '')))
-
+    def _resize_columns_to_content(self):
+        # Resize some columns to content, but keep some constrained
+        # Fav
+        self.table.setColumnWidth(AlbumTableModel.COL_FAV, 30)
         # Year
-        year_val = row.get('year', '')
-        year_item = QTableWidgetItem()
-        year_item.setData(Qt.ItemDataRole.DisplayRole, year_val)
-        self.table.setItem(row_idx, 3, year_item)
+        self.table.setColumnWidth(AlbumTableModel.COL_YEAR, 50)
+        # Stats
+        self.table.setColumnWidth(AlbumTableModel.COL_PLAYS, 70)
+        self.table.setColumnWidth(AlbumTableModel.COL_LISTENERS, 70)
+        
+        # Artist/Album get default width or initial resize
+        if self.source_model.rowCount() > 0:
+            self.table.resizeColumnToContents(AlbumTableModel.COL_ARTIST)
+            self.table.resizeColumnToContents(AlbumTableModel.COL_ALBUM)
+            
+            # Cap width so they don't take over everything
+            if self.table.columnWidth(AlbumTableModel.COL_ARTIST) > 300:
+                self.table.setColumnWidth(AlbumTableModel.COL_ARTIST, 300)
+            if self.table.columnWidth(AlbumTableModel.COL_ALBUM) > 300:
+                self.table.setColumnWidth(AlbumTableModel.COL_ALBUM, 300)
 
-        # Genre
-        self.table.setItem(row_idx, 4,
-                         QTableWidgetItem(row.get('genre', '')))
+    def _on_search_changed(self, text):
+        self.proxy_model.set_filter_text(text)
+        self._update_status()
+        
+    def _on_fav_filter_changed(self, state):
+        self.proxy_model.set_fav_only(state == Qt.CheckState.Checked.value)
+        self._update_status()
+        
+    def _update_status(self):
+        total = self.source_model.rowCount()
+        visible = self.proxy_model.rowCount()
+        msg = f"Showing {visible:,} albums"
+        if visible != total:
+            msg += f" (filtered from {total:,})"
+        self.status_label.setText(msg)
 
-        # Country
-        self.table.setItem(row_idx, 5,
-                         QTableWidgetItem(row.get('country', '')))
-
-        # Vocal style
-        vocal_style_value = row.get('vocal_style', '')
-        self.table.setItem(row_idx, 6,
-                         QTableWidgetItem(vocal_style_value))
-
-        # Tags
-        tags = row.get('tags', [])
-        self.table.setItem(row_idx, 7,
-                         QTableWidgetItem(', '.join(tags)))
-
-        # Plays (Last.fm)
-        playcount = row.get('playcount')
-        play_item = QTableWidgetItem(f"{playcount:,}" if playcount is not None else "")
-        play_item.setData(Qt.ItemDataRole.DisplayRole, playcount if playcount is not None else 0)
-        play_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        self.table.setItem(row_idx, 8, play_item)
-
-        # Listeners (Last.fm)
-        listeners = row.get('listeners')
-        list_item = QTableWidgetItem(f"{listeners:,}" if listeners is not None else "")
-        list_item.setData(Qt.ItemDataRole.DisplayRole, listeners if listeners is not None else 0)
-        list_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        self.table.setItem(row_idx, 9, list_item)
+    def _on_table_clicked(self, index):
+        if not index.isValid():
+            return
+            
+        # Check if favorite column
+        # Map proxy index to source index? No, data() handles logic but structure is same for cols
+        if index.column() == AlbumTableModel.COL_FAV:
+            # Toggle favorite
+            source_idx = self.proxy_model.mapToSource(index)
+            item_data = self.source_model.data(source_idx, Qt.ItemDataRole.UserRole)
+            if item_data:
+                aid = item_data.get('id')
+                # Toggle via manager
+                self._fav_mgr.toggle(aid)
+                # The view will refresh via _on_favorites_changed
     
-    def _handle_selection(self, selected_ids=None):
-        """Handle table selection changes."""
-        # Use instance variable for recursion protection (defined in BaseView)
+    def _on_table_double_clicked(self, index):
+        if not index.isValid():
+            return
+        # Double click to show similar albums?
+        source_idx = self.proxy_model.mapToSource(index)
+        item_data = self.source_model.data(source_idx, Qt.ItemDataRole.UserRole)
+        if item_data:
+             self._request_show_similar(item_data.get('id'))
+
+    def _on_favorites_changed(self):
+        # Invalidate favorite column or whole model
+        # Just notify data changed for all rows, col 0
+        top_left = self.source_model.index(0, AlbumTableModel.COL_FAV)
+        bottom_right = self.source_model.index(self.source_model.rowCount()-1, AlbumTableModel.COL_FAV)
+        self.source_model.dataChanged.emit(top_left, bottom_right, [Qt.ItemDataRole.DisplayRole, Qt.ItemDataRole.EditRole])
+        
+    def _on_table_selection_changed(self, selected, deselected):
         if self._is_processing_selection:
             return
-            
-        try:
-            self._is_processing_selection = True
-            
-            # Ignore the passed-in selected_ids parameter and calculate from table selection
-            calculated_ids = set()
-            for item in self.table.selectedItems():
-                # Artist column (1) contains the album id
-                if item.column() == 1:
-                    node_id = item.data(Qt.ItemDataRole.UserRole)
-                    if node_id:
-                        calculated_ids.add(node_id)
-            
-            self.selection_changed.emit(calculated_ids)
-        finally:
-            self._is_processing_selection = False
-            
-    def _handle_sort(self, column_index: int):
-        """Handle column header clicks for sorting."""
-        current_direction = self.table.horizontalHeader().sortIndicatorOrder()
-        direction = "desc" if current_direction == Qt.SortOrder.AscendingOrder else "asc"
+
+        # Calculate IDs from current selection
+        calculated_ids = set()
+        selection_model = self.table.selectionModel()
         
-        # Map column index to name (accounts for favorite column at index 0)
-        columns = ['favorite', 'artist', 'album', 'year', 'genre', 'country', 'vocal_style', 'tags', 'playcount', 'listeners']
-        if 0 <= column_index < len(columns):
-            self.sort_changed.emit(columns[column_index], direction)
+        # Map selected rows to source IDs
+        # selection_model.selectedRows() returns indexes in proxy model
+        for proxy_idx in selection_model.selectedRows():
+            source_idx = self.proxy_model.mapToSource(proxy_idx)
+            # Get ID from source model (UserRole + 1)
+            aid = self.source_model.data(source_idx, Qt.ItemDataRole.UserRole + 1)
+            if aid:
+                calculated_ids.add(aid)
+        
+        # Let BaseView handle updates and emission
+        super()._handle_selection(calculated_ids)
+
+    def _restore_selection(self, selected_ids_list):
+        if not selected_ids_list:
+            return
             
-            # Update sort indicator
-            self.table.horizontalHeader().setSortIndicator(
-                column_index,
-                Qt.SortOrder.DescendingOrder if direction == "desc"
-                else Qt.SortOrder.AscendingOrder
-            )
-    
+        ids_set = set(selected_ids_list)
+        
+        # Block signals to avoid feedback loop
+        self.table.blockSignals(True)
+        self.table.selectionModel().clearSelection()
+        
+        # This implementation iterates visible rows.
+        selection_mode = QItemSelectionModel.SelectionFlag.Valid | QItemSelectionModel.SelectionFlag.Select | QItemSelectionModel.SelectionFlag.Rows
+        
+        for row in range(self.proxy_model.rowCount()):
+            idx = self.proxy_model.index(row, 0)
+            source_idx = self.proxy_model.mapToSource(idx)
+            aid = self.source_model.data(source_idx, Qt.ItemDataRole.UserRole + 1)
+            
+            if aid in ids_set:
+                self.table.selectionModel().select(idx, selection_mode)
+                
+        self.table.blockSignals(False)
+
     def _show_context_menu(self, position):
-        """Show context menu for table row."""
-        item = self.table.itemAt(position)
-        if not item:
+        index = self.table.indexAt(position)
+        if not index.isValid():
             return
-        
-        row = item.row()
-        album_item = self.table.item(row, 1)  # artist column contains album id
-        if not album_item:
+            
+        source_idx = self.proxy_model.mapToSource(index)
+        item_data = self.source_model.data(source_idx, Qt.ItemDataRole.UserRole)
+        if not item_data:
             return
-        
-        album_id = album_item.data(Qt.ItemDataRole.UserRole)
-        if not album_id:
-            return
+            
+        album_id = item_data.get('id')
         
         menu = QMenu(self)
         
-        show_similar_action = QAction("Show Similar Albums", self)
-        show_similar_action.triggered.connect(lambda: self._request_show_similar(album_id))
-        menu.addAction(show_similar_action)
+        similar_action = QAction("Show Similar Albums", self)
+        similar_action.triggered.connect(lambda: self._request_show_similar(album_id))
+        menu.addAction(similar_action)
         
-        try:
-            fav_action = QAction("Toggle Favorite", self)
-            fav_action.triggered.connect(lambda: self._toggle_favorite(album_id))
-            menu.addAction(fav_action)
-        except Exception:
-            pass
+        is_fav = self._fav_mgr.is_favorite(album_id)
+        fav_action = QAction(f"{'Unfavorite' if is_fav else 'Favorite'} Album", self)
+        fav_action.triggered.connect(lambda: self._fav_mgr.toggle(album_id))
+        menu.addAction(fav_action)
 
-        menu.exec(self.table.viewport().mapToGlobal(position))
-    
+        menu.exec(QCursor.pos())
+
     def _request_show_similar(self, album_id: str):
-        """Request to show similar albums for the given album."""
         graphics_logger.info(f"Requesting to show similar albums for: {album_id}")
         self.show_similar_requested.emit(album_id)
-
-    def _toggle_favorite(self, album_id: str, btn: QPushButton = None):
-        try:
-            now_fav = self._fav_mgr.toggle(album_id)
-            if btn is not None:
-                btn.setText('★' if now_fav else '☆')
-        except Exception:
-            graphics_logger.exception('Error toggling favorite')
-
-    def _on_favorites_changed(self):
-        # Update favorite buttons for all rows
-        try:
-            for r in range(self.table.rowCount()):
-                artist_item = self.table.item(r, 1)
-                if not artist_item:
-                    continue
-                aid = artist_item.data(Qt.ItemDataRole.UserRole)
-                w = self.table.cellWidget(r, 0)
-                if isinstance(w, QPushButton):
-                    w.setText('★' if self._fav_mgr.is_favorite(aid) else '☆')
-            # Re-apply filter in case "Only favorites" is active so visibility updates
-            try:
-                self._apply_filter()
-            except Exception:
-                pass
-        except Exception:
-            graphics_logger.exception('Error refreshing favorite buttons')
-
-    def _apply_filter(self, text=None):
-        """Filter table rows by searching across multiple columns.
-
-        The search is case-insensitive and treats whitespace-separated tokens as
-        ANDed terms (all tokens must be present somewhere in the row text).
-        """
-        try:
-            # Support being called from checkbox stateChanged which passes an int
-            current_text = text if isinstance(text, str) else (self.search_input.text() if hasattr(self, 'search_input') else '')
-            tokens = [t.strip().lower() for t in current_text.split() if t.strip()]
-
-            only_favs = getattr(self, 'fav_only_checkbox', None) and self.fav_only_checkbox.isChecked()
-            favs = self._fav_mgr.all() if only_favs else None
-
-            # If no filters, show all rows
-            if not tokens and not only_favs:
-                self._filtered_row_indices = list(range(len(self._all_rows)))
-                self._render_visible_rows()
-                return
-
-            # Filter rows based on search criteria
-            self._filtered_row_indices = []
-            for idx, row in enumerate(self._all_rows):
-                # Check favorites filter
-                if favs is not None:
-                    aid = row.get('id')
-                    if aid not in favs:
-                        continue
-                
-                # Check search tokens if present
-                if tokens:
-                    # Build searchable text from all columns
-                    searchable_parts = [
-                        str(row.get('artist', '')),
-                        str(row.get('album', '')),
-                        str(row.get('year', '')),
-                        str(row.get('genre', '')),
-                        str(row.get('country', '')),
-                        str(row.get('vocal_style', '')),
-                        ', '.join(row.get('tags', []))
-                    ]
-                    combined_text = ' '.join(searchable_parts).lower()
-                    
-                    # All tokens must be present
-                    if not all(tok in combined_text for tok in tokens):
-                        continue
-                
-                # Row passes all filters
-                self._filtered_row_indices.append(idx)
-            
-            # Re-render with filtered rows
-            self._render_visible_rows()
-            
-        except Exception:
-            graphics_logger.exception("Error during table search filtering")
-
-    def _focus_search(self):
-        if hasattr(self, 'search_input'):
-            self.search_input.setFocus()
-            self.search_input.selectAll()

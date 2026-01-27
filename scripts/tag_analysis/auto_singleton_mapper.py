@@ -8,6 +8,7 @@ Uses `EnhancedTagNormalizer` where available and falls back to `TagNormalizer` h
 import json
 from pathlib import Path
 import pandas as pd
+from difflib import get_close_matches
 from albumexplore.tags.normalizer.enhanced_normalizer import EnhancedTagNormalizer
 from albumexplore.tags.config.tag_rules_config import TagRulesConfig
 import re
@@ -26,7 +27,26 @@ def strip_geographic(tag: str) -> str:
     return ' '.join(filtered).strip()
 
 
-def suggest_for_tag(tag: str, normalizer: EnhancedTagNormalizer, rules: TagRulesConfig):
+def check_atomic_candidates(tag: str, valid_tags_set: set):
+    """
+    Check if a tag can be split into two valid canonical tags.
+    Returns: string "atomic:PartA|PartB" or None
+    """
+    words = tag.split()
+    if len(words) < 2: return None
+    
+    # Try splitting into two parts at every space index
+    for i in range(1, len(words)):
+        left = " ".join(words[:i]).strip()
+        right = " ".join(words[i:]).strip()
+        
+        # We only suggest if both parts are frequent/canonical tags
+        if left in valid_tags_set and right in valid_tags_set:
+            return f"atomic:{left}|{right}"
+            
+    return None
+
+def suggest_for_tag(tag: str, normalizer: EnhancedTagNormalizer, rules: TagRulesConfig, canonical_candidates: list = None, canonical_set: set = None):
     """Return a suggested normalized form and reason for a single tag."""
     original = tag
     normalized_enh = normalizer.normalize_enhanced(tag)
@@ -42,6 +62,12 @@ def suggest_for_tag(tag: str, normalizer: EnhancedTagNormalizer, rules: TagRules
     if len(atomic_components) > 1:
         candidate = ' '.join(atomic_components)
         return candidate, 'atomic-decompose'
+    
+    # NEW STEP: Check for NEW atomic decomposition candidates
+    if canonical_set:
+        atomic_sugg = check_atomic_candidates(normalized_enh, canonical_set)
+        if atomic_sugg:
+            return atomic_sugg, 'atomic-candidate'
 
     # 3) Try removing geographic qualifiers and re-normalize
     stripped = strip_geographic(normalized_enh)
@@ -60,7 +86,15 @@ def suggest_for_tag(tag: str, normalizer: EnhancedTagNormalizer, rules: TagRules
         if mapped_part and mapped_part != p:
             return mapped_part, f'component-map:{p}'
 
-    # 5) Fallback to enhanced normalized form if different
+    # 5) Fuzzy Matching against canonical candidates
+    if canonical_candidates:
+        # Only fuzzy match if the tag is reasonably long (avoid short noise)
+        if len(normalized_enh) > 4:
+            matches = get_close_matches(normalized_enh, canonical_candidates, n=1, cutoff=0.9)
+            if matches:
+                return matches[0], 'fuzzy-match'
+
+    # 6) Fallback to enhanced normalized form if different
     if normalized_enh != original.lower().strip():
         return normalized_enh, 'enhanced-fallback'
 
@@ -78,7 +112,20 @@ def re_split(tag: str):
 
 def analyze_singletons(csv_path: Path, out_json: Path):
     df = pd.read_csv(csv_path)
-    singletons = df[df['Count'] == 1]['Tag'].astype(str).tolist()
+    df['Tag'] = df['Tag'].fillna('').astype(str)
+    
+    singletons = df[df['Count'] == 1]['Tag'].tolist()
+    # Candidates for fuzzy matching: Tags with Count >= 5
+    canonical_candidates = df[df['Count'] >= 5]['Tag'].tolist()
+    
+    # Pre-filter candidates to normalized lower case for better matching?
+    # Actually get_close_matches is case sensitive, but we usually work in lower.
+    # The normalizer works in lower. Let's ensure candidates are lower too?
+    # But usually tags in DB might be mixed case.
+    # Let's clean candidates:
+    canonical_candidates = [c.lower().strip() for c in canonical_candidates if isinstance(c, str)]
+    canonical_candidates = sorted(list(set(canonical_candidates)))
+    canonical_set = set(canonical_candidates)
 
     normalizer = EnhancedTagNormalizer()
     rules = TagRulesConfig()
@@ -87,7 +134,7 @@ def analyze_singletons(csv_path: Path, out_json: Path):
     stats = {'total_singletons': len(singletons), 'suggested': 0}
 
     for tag in singletons:
-        suggestion, reason = suggest_for_tag(tag, normalizer, rules)
+        suggestion, reason = suggest_for_tag(tag, normalizer, rules, canonical_candidates, canonical_set)
         if suggestion:
             suggestions[tag] = {'suggestion': suggestion, 'reason': reason}
             stats['suggested'] += 1

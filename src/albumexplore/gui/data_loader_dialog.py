@@ -1,528 +1,516 @@
 """
-Data Loader Dialog for selective CSV file processing.
+Data Loader Dialog for modular data access.
 """
 import logging
+import sys
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QListWidget, QListWidgetItem,
     QPushButton, QLabel, QProgressBar, QTextEdit, QCheckBox, QGroupBox,
-    QSplitter, QTabWidget, QWidget, QComboBox, QSpinBox
+    QSplitter, QTabWidget, QWidget, QComboBox, QSpinBox, QFileDialog, QLineEdit
 )
 from PyQt6.QtCore import QThread, pyqtSignal, Qt, QTimer
 from PyQt6.QtGui import QFont
 import pandas as pd
 
 from albumexplore.data.parsers.csv_parser import CSVParser
-from albumexplore.data.validators.data_validator import DataValidator
+from albumexplore.database import session_scope
+from albumexplore.scraping.metalarchives.importer import MetalArchivesImporter
+from albumexplore.scraping.progarchives.transformer import transform_progarchives_data
+from albumexplore.scraping.progarchives.extract_csvs import run_extraction
 
 logger = logging.getLogger(__name__)
 
-
-class DataLoadWorker(QThread):
-    """Background worker for loading CSV data."""
-    
+class WorkerSignals(QThread):
+    """Common signals for data loading workers."""
     progress_updated = pyqtSignal(int, str)  # progress, status message
-    file_processed = pyqtSignal(str, int, bool)  # filename, row_count, success
-    loading_complete = pyqtSignal(object)  # DataFrame
-    error_occurred = pyqtSignal(str)  # error message
     log_message = pyqtSignal(str, str)  # level, message
+    op_finished = pyqtSignal(bool, str) # success, message (renamed from finished to avoid conflict)
+    data_loaded = pyqtSignal(object) # Optional payload
+
+    def __init__(self):
+        super().__init__()
+        self.should_cancel = False
+
+    def cancel(self):
+        self.should_cancel = True
+
+class CSVLoadWorker(WorkerSignals):
+    """Background worker for loading generic CSV data."""
     
+    file_processed = pyqtSignal(str, int, bool) # filename, row_count, success
+
     def __init__(self, csv_files: List[Path], debug_level: str = "INFO"):
         super().__init__()
         self.csv_files = csv_files
         self.debug_level = debug_level
-        self.should_cancel = False
         
     def _standardize_columns(self, df, filename):
         """Standardize column names across different CSV formats."""
-        # Create a mapping of common column name variations
         column_mapping = {
-            # Artist variations
-            'artist': 'Artist',
-            'band': 'Artist',
-            'band name': 'Artist',
-            'artist name': 'Artist',
-            
-            # Album variations  
-            'album': 'Album',
-            'album name': 'Album',
-            'album title': 'Album',
-            'title': 'Album',
-            
-            # Release date variations
-            'release date': 'Release Date',
-            'release_date': 'Release Date',
-            'date': 'Release Date',
-            'year': 'Release Date',
-            
-            # Genre variations
-            'genre / subgenres': 'Genre / Subgenres',
-            'genre/subgenres': 'Genre / Subgenres',
-            'genre': 'Genre / Subgenres',
-            'genres': 'Genre / Subgenres',
-            'subgenres': 'Genre / Subgenres',
-            
-            # Other common variations
-            'country / state': 'Country / State',
-            'country/state': 'Country / State',
-            'country': 'Country / State',
-            'vocal style': 'Vocal Style',
-            'vocals': 'Vocal Style'
+            'artist': 'Artist', 'band': 'Artist', 'band name': 'Artist', 'artist name': 'Artist',
+            'album': 'Album', 'album name': 'Album', 'album title': 'Album', 'title': 'Album',
+            'release date': 'Release Date', 'release_date': 'Release Date', 'date': 'Release Date', 'year': 'Release Date',
+            'genre / subgenres': 'Genre / Subgenres', 'genre': 'Genre / Subgenres', 'genres': 'Genre / Subgenres',
+            'country': 'Country / State'
         }
         
-        # Apply column mapping
         df_columns = df.columns.str.lower().str.strip()
         new_columns = {}
-        
         for i, col in enumerate(df_columns):
             if col in column_mapping:
                 new_columns[df.columns[i]] = column_mapping[col]
         
         if new_columns:
             df = df.rename(columns=new_columns)
-            self.log_message.emit("DEBUG", f"Standardized columns in {filename}: {new_columns}")
-        
         return df
 
     def run(self):
-        """Process selected CSV files."""
         try:
-            # Set up logging for this worker
-            self._setup_worker_logging()
-            
             all_dfs = []
-            total_files = len(self.csv_files)
+            total = len(self.csv_files)
             
             for i, csv_file in enumerate(self.csv_files):
                 if self.should_cancel:
-                    self.log_message.emit("INFO", "Processing cancelled by user")
+                    self.log_message.emit("INFO", "Cancelled.")
                     return
-                    
-                self.progress_updated.emit(
-                    int((i / total_files) * 100), 
-                    f"Processing {csv_file.name}..."
-                )
                 
+                self.progress_updated.emit(int((i / total) * 100), f"Processing {csv_file.name}...")
                 try:
-                    # Process single file
                     parser = CSVParser(csv_file)
                     df = parser.parse_single_csv(csv_file)
-                    
                     if not df.empty:
-                        # Standardize column names
                         df = self._standardize_columns(df, csv_file.name)
                         df['_source_file'] = csv_file.name
-                        
-                        # Log column information for debugging
-                        columns_info = list(df.columns)
-                        self.log_message.emit("DEBUG", f"Final columns in {csv_file.name}: {columns_info}")
-                        
                         all_dfs.append(df)
                         self.file_processed.emit(csv_file.name, len(df), True)
-                        self.log_message.emit("INFO", f"Successfully processed {csv_file.name}: {len(df)} rows")
+                        self.log_message.emit("INFO", f"Loaded {csv_file.name}: {len(df)} rows")
                     else:
                         self.file_processed.emit(csv_file.name, 0, False)
-                        self.log_message.emit("WARNING", f"No data found in {csv_file.name}")
-                        
+                        self.log_message.emit("WARNING", f"No data in {csv_file.name}")
                 except Exception as e:
                     self.file_processed.emit(csv_file.name, 0, False)
-                    self.log_message.emit("ERROR", f"Error processing {csv_file.name}: {str(e)}")
-                    # Log more details for debugging
-                    import traceback
-                    self.log_message.emit("DEBUG", f"Full error trace for {csv_file.name}: {traceback.format_exc()}")
-                    
-            # Combine all dataframes
+                    self.log_message.emit("ERROR", f"Error loading {csv_file.name}: {e}")
+
             if all_dfs:
-                self.progress_updated.emit(90, "Combining data...")
-                combined_df = pd.concat(all_dfs, ignore_index=True)
+                self.progress_updated.emit(90, "Combining...")
+                combined = pd.concat(all_dfs, ignore_index=True)
+                if 'Artist' in combined.columns and 'Album' in combined.columns:
+                    combined = combined.drop_duplicates(subset=['Artist', 'Album'], keep='first')
                 
-                self.progress_updated.emit(95, "Removing duplicates...")
-                # Check if required columns exist before dropping duplicates
-                if 'Artist' in combined_df.columns and 'Album' in combined_df.columns:
-                    combined_df = combined_df.drop_duplicates(subset=['Artist', 'Album'], keep='first')
-                    self.log_message.emit("INFO", "Removed duplicates based on Artist and Album")
-                else:
-                    # Log available columns for debugging
-                    available_cols = list(combined_df.columns)
-                    self.log_message.emit("WARNING", f"Cannot remove duplicates - missing Artist/Album columns. Available: {available_cols}")
-                    # Still proceed without duplicate removal
-                
-                self.progress_updated.emit(100, "Complete!")
-                self.loading_complete.emit(combined_df)
-                self.log_message.emit("INFO", f"Data loading complete: {len(combined_df)} total rows from {len(all_dfs)} files")
+                self.progress_updated.emit(100, "Done")
+                self.data_loaded.emit(combined)
+                self.op_finished.emit(True, f"Loaded {len(combined)} rows.")
             else:
-                self.error_occurred.emit("No valid data found in any selected files")
+                self.op_finished.emit(False, "No valid data found.")
+        except Exception as e:
+            self.op_finished.emit(False, f"Fatal error: {e}")
+
+class ProgArchivesWorker(WorkerSignals):
+    """Worker for ProgArchives Transformation Pipeline."""
+    def __init__(self, raw_data_dir: str):
+        super().__init__()
+        self.raw_data_dir = raw_data_dir
+        
+    def run(self):
+        self.progress_updated.emit(0, "Starting transformation...")
+        self.log_message.emit("INFO", f"Transforming data from {self.raw_data_dir}")
+        try:
+            # Check inputs
+            path = Path(self.raw_data_dir)
+            if not path.exists():
+                self.op_finished.emit(False, f"Directory not found: {self.raw_data_dir}")
+                return
+
+            # Automatic Parsing Step
+            csv_path = path / "pa_raw_albums.csv"
+            has_csv = csv_path.exists()
+            # Simple validity check: Is it larger than just a header? (e.g. > 100 bytes)
+            is_valid_csv = has_csv and csv_path.stat().st_size > 100
+
+            if not has_csv or not is_valid_csv:
+                msg = "No CSVs found." if not has_csv else "CSV file seems empty or invalid."
+                self.log_message.emit("INFO", f"{msg} Attempting to parse local HTML files...")
+                try:
+                    # Provide a generic feedback loop logic?
+                    self.log_message.emit("INFO", "Running extractor...")
+                    run_extraction(str(path), str(path))
+                    self.log_message.emit("INFO", "Parsing complete. CSVs generated.")
+                except Exception as e:
+                    import traceback
+                    logger.error(traceback.format_exc())
+                    self.log_message.emit("ERROR", f"Parsing failed: {e}")
+                    self.op_finished.emit(False, f"Parsing failed: {e}")
+                    return
+
+            self.log_message.emit("INFO", "Running ETL pipeline... check console for details if needed.")
+            
+            result = transform_progarchives_data(
+                raw_data_dir=self.raw_data_dir,
+                db_uri="sqlite:///albumexplore.db",
+                dry_run=False,
+                force=True # Force for manual trigger
+            )
+
+            # transformer may return either a boolean or (bool, list_of_ids)
+            success = False
+            processed_ids = None
+            if isinstance(result, tuple):
+                success, processed_ids = result
+            else:
+                success = bool(result)
+
+            if success:
+                self.progress_updated.emit(100, "Complete")
+                # If we have processed ids, emit them so the main UI can focus
+                if processed_ids:
+                    self.data_loaded.emit({'album_ids': processed_ids})
+                self.op_finished.emit(True, "ProgArchives data imported successfully.")
+            else:
+                self.op_finished.emit(False, "Transformation failed. Check logs.")
+        except Exception as e:
+            import traceback
+            logger.error(traceback.format_exc())
+            self.log_message.emit("ERROR", str(e))
+            self.op_finished.emit(False, f"Error: {e}")
+
+class MetalArchivesWorker(WorkerSignals):
+    """Worker for MetalArchives Import."""
+    def __init__(self, data_dir: str):
+        super().__init__()
+        self.data_dir = data_dir
+        
+    def run(self):
+        self.progress_updated.emit(0, "Initializing importer...")
+        self.log_message.emit("INFO", f"Importing MetalArchives from {self.data_dir}")
+        
+        try:
+             # Check inputs
+            path = Path(self.data_dir)
+            if not path.exists():
+                self.op_finished.emit(False, f"Directory not found: {self.data_dir}")
+                return
+
+            with session_scope() as session:
+                importer = MetalArchivesImporter(session, data_dir=self.data_dir)
+                
+                self.log_message.emit("INFO", "Starting batch import... This may take a while.")
+                
+                importer.import_batch(limit=None, dry_run=False)
+                
+                stats = importer.stats
+                msg = f"Imported: {stats['albums_created']} albums, {stats['artists_created']} artists."
+                self.log_message.emit("INFO", msg)
+                self.op_finished.emit(True, msg)
                 
         except Exception as e:
-            self.error_occurred.emit(f"Fatal error during data loading: {str(e)}")
-            
-    def cancel(self):
-        """Cancel the loading process."""
-        self.should_cancel = True
-        
-    def _setup_worker_logging(self):
-        """Set up logging for the worker thread."""
-        # Configure logging level based on user selection
-        level = getattr(logging, self.debug_level.upper(), logging.INFO)
-        
-        # Create a custom handler that emits signals
-        class SignalHandler(logging.Handler):
-            def __init__(self, signal_emitter):
-                super().__init__()
-                self.signal_emitter = signal_emitter
-                
-            def emit(self, record):
-                self.signal_emitter.emit(record.levelname, self.format(record))
-        
-        # Set up the logger
-        worker_logger = logging.getLogger('albumexplore.data.parsers')
-        worker_logger.setLevel(level)
-        
-        # Remove existing handlers to avoid duplication
-        for handler in worker_logger.handlers[:]:
-            worker_logger.removeHandler(handler)
-            
-        # Add our signal handler
-        signal_handler = SignalHandler(self.log_message)
-        signal_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-        worker_logger.addHandler(signal_handler)
-
+            import traceback
+            logger.error(traceback.format_exc())
+            self.log_message.emit("ERROR", str(e))
+            self.op_finished.emit(False, f"Error: {e}")
 
 class DataLoaderDialog(QDialog):
-    """Dialog for selecting and loading CSV files."""
+    """Unified Dialog for loading/importing data."""
     
-    data_loaded = pyqtSignal(object)  # Emits the loaded DataFrame
+    data_loaded = pyqtSignal(object)  # Emits data if loading CSVs directly to view
     
     def __init__(self, parent=None, csv_directory: Optional[Path] = None):
         super().__init__(parent)
-        self.setWindowTitle("Load Album Data")
-        self.setMinimumSize(800, 600)
-        self.setModal(True)
-        
-        self.csv_directory = csv_directory or (Path("data") / "csv")
+        self.setWindowTitle("Data Manager")
+        self.resize(800, 600)
         self.worker = None
         self.loaded_data = None
         
-        self._setup_ui()
-        self._discover_csv_files()
+        self.setup_ui()
         
-    def _setup_ui(self):
-        """Set up the user interface."""
+    def setup_ui(self):
+        self.setStyleSheet("""
+            QTabWidget::pane { border: 1px solid #C2C7CB; }
+            QTabBar::tab { background: #E0E0E0; border: 1px solid #C4C4C3; padding: 5px; min-width: 100px; color: black; }
+            QTabBar::tab:selected { background: #FFFFFF; border-bottom-color: #FFFFFF; }
+        """)
+
         layout = QVBoxLayout(self)
         
-        # Create splitter for main content
-        splitter = QSplitter(Qt.Orientation.Horizontal)
-        layout.addWidget(splitter)
+        self.tabs = QTabWidget()
         
-        # Left panel: File selection
-        left_panel = self._create_file_selection_panel()
-        splitter.addWidget(left_panel)
+        # Tab 1: CSV Loader
+        self.csv_tab = QWidget()
+        self.setup_csv_tab(self.csv_tab)
+        self.tabs.addTab(self.csv_tab, "Load CSVs")
         
-        # Right panel: Progress and logs
-        right_panel = self._create_progress_panel()
-        splitter.addWidget(right_panel)
+        # Tab 2: ProgArchives
+        self.pa_tab = QWidget()
+        self.setup_pa_tab(self.pa_tab)
+        self.tabs.addTab(self.pa_tab, "ProgArchives")
         
-        # Set splitter proportions
-        splitter.setSizes([400, 400])
+        # Tab 3: MetalArchives
+        self.ma_tab = QWidget()
+        self.setup_ma_tab(self.ma_tab)
+        self.tabs.addTab(self.ma_tab, "MetalArchives")
         
-        # Bottom buttons
-        button_layout = QHBoxLayout()
+        layout.addWidget(self.tabs)
         
-        self.load_button = QPushButton("Load Selected Files")
-        self.load_button.clicked.connect(self._start_loading)
-        self.load_button.setEnabled(False)
-        
-        self.cancel_button = QPushButton("Cancel Loading")
-        self.cancel_button.clicked.connect(self._cancel_loading)
-        self.cancel_button.setEnabled(False)
-        
-        self.close_button = QPushButton("Close")
-        self.close_button.clicked.connect(self.reject)
-        
-        self.use_data_button = QPushButton("Use Loaded Data")
-        self.use_data_button.clicked.connect(self._use_loaded_data)
-        self.use_data_button.setEnabled(False)
-        
-        self.performance_button = QPushButton("Performance Monitor")
-        self.performance_button.clicked.connect(self._show_performance_monitor)
-        self.performance_button.setEnabled(True)
-        
-        button_layout.addWidget(self.load_button)
-        button_layout.addWidget(self.cancel_button)
-        button_layout.addWidget(self.performance_button)
-        button_layout.addStretch()
-        button_layout.addWidget(self.use_data_button)
-        button_layout.addWidget(self.close_button)
-        
-        layout.addLayout(button_layout)
-        
-    def _create_file_selection_panel(self):
-        """Create the file selection panel."""
-        panel = QWidget()
-        layout = QVBoxLayout(panel)
-        
-        # Title
-        title = QLabel("Select CSV Files to Load")
-        title.setFont(QFont("Arial", 12, QFont.Weight.Bold))
-        layout.addWidget(title)
-        
-        # File list with checkboxes
-        self.file_list = QListWidget()
-        self.file_list.itemChanged.connect(self._update_load_button_state)
-        layout.addWidget(self.file_list)
-        
-        # Selection controls
-        selection_layout = QHBoxLayout()
-        
-        select_all_btn = QPushButton("Select All")
-        select_all_btn.clicked.connect(self._select_all_files)
-        
-        select_none_btn = QPushButton("Select None")
-        select_none_btn.clicked.connect(self._select_no_files)
-        
-        refresh_btn = QPushButton("Refresh")
-        refresh_btn.clicked.connect(self._discover_csv_files)
-        
-        selection_layout.addWidget(select_all_btn)
-        selection_layout.addWidget(select_none_btn)
-        selection_layout.addWidget(refresh_btn)
-        
-        layout.addLayout(selection_layout)
-        
-        # Debug level selection
-        debug_group = QGroupBox("Debug Level")
-        debug_layout = QVBoxLayout(debug_group)
-        
-        self.debug_combo = QComboBox()
-        self.debug_combo.addItems(["ERROR", "WARNING", "INFO", "DEBUG"])
-        self.debug_combo.setCurrentText("INFO")
-        debug_layout.addWidget(self.debug_combo)
-        
-        layout.addWidget(debug_group)
-        
-        return panel
-        
-    def _create_progress_panel(self):
-        """Create the progress and logging panel."""
-        panel = QWidget()
-        layout = QVBoxLayout(panel)
-        
-        # Progress section
-        progress_group = QGroupBox("Loading Progress")
-        progress_layout = QVBoxLayout(progress_group)
-        
-        self.progress_bar = QProgressBar()
-        self.progress_label = QLabel("Ready to load data")
-        
-        progress_layout.addWidget(self.progress_label)
-        progress_layout.addWidget(self.progress_bar)
-        
-        layout.addWidget(progress_group)
-        
-        # File status section
-        status_group = QGroupBox("File Processing Status")
-        status_layout = QVBoxLayout(status_group)
-        
-        self.status_list = QListWidget()
-        status_layout.addWidget(self.status_list)
-        
-        layout.addWidget(status_group)
-        
-        # Log viewer
-        log_group = QGroupBox("Processing Logs")
+        # Shared Log Viewer
+        log_group = QGroupBox("Logs & Progress")
         log_layout = QVBoxLayout(log_group)
-        
+        self.progress_bar = QProgressBar()
+        self.status_label = QLabel("Ready")
         self.log_viewer = QTextEdit()
         self.log_viewer.setReadOnly(True)
-        self.log_viewer.setMaximumHeight(200)
-        self.log_viewer.setFont(QFont("Consolas", 9))
+        self.log_viewer.setMaximumHeight(150)
         
+        log_layout.addWidget(self.status_label)
+        log_layout.addWidget(self.progress_bar)
         log_layout.addWidget(self.log_viewer)
-        
-        # Log controls
-        log_controls = QHBoxLayout()
-        
-        clear_logs_btn = QPushButton("Clear Logs")
-        clear_logs_btn.clicked.connect(self.log_viewer.clear)
-        
-        export_logs_btn = QPushButton("Export Logs")
-        export_logs_btn.clicked.connect(self._export_logs)
-        
-        log_controls.addWidget(clear_logs_btn)
-        log_controls.addWidget(export_logs_btn)
-        log_controls.addStretch()
-        
-        log_layout.addLayout(log_controls)
         layout.addWidget(log_group)
         
-        return panel
+        # Log Controls
+        log_controls = QHBoxLayout()
+        export_btn = QPushButton("Export Logs")
+        export_btn.clicked.connect(self.export_logs)
+        log_controls.addWidget(export_btn)
+        log_controls.addStretch()
+        log_layout.addLayout(log_controls)
+
+        # Shared Bottom Buttons
+        btn_layout = QHBoxLayout()
+        self.close_btn = QPushButton("Close")
+        self.close_btn.clicked.connect(self.reject)
+        self.cancel_btn = QPushButton("Cancel")
+        self.cancel_btn.clicked.connect(self.cancel_worker)
+        self.cancel_btn.setEnabled(False)
         
-    def _discover_csv_files(self):
-        """Discover CSV files in the specified directory."""
+        btn_layout.addStretch()
+        btn_layout.addWidget(self.cancel_btn)
+        btn_layout.addWidget(self.close_btn)
+        layout.addLayout(btn_layout)
+
+    def setup_csv_tab(self, tab):
+        layout = QVBoxLayout(tab)
+        
+        # File list
+        self.file_list = QListWidget()
+        self.refresh_csv_list()
+        layout.addWidget(QLabel("Select files to load into current view:"))
+        layout.addWidget(self.file_list)
+        
+        btns = QHBoxLayout()
+        refresh = QPushButton("Refresh List")
+        refresh.clicked.connect(self.refresh_csv_list)
+        # Select All / Unselect All button next to Load Selected
+        self.select_all_btn = QPushButton("Select All")
+        self.select_all_btn.clicked.connect(self.toggle_select_all)
+
+        load = QPushButton("Load Selected")
+        load.clicked.connect(self.start_csv_load)
+        
+        btns.addWidget(refresh)
+        btns.addStretch()
+        btns.addWidget(self.select_all_btn)
+        btns.addWidget(load)
+        layout.addLayout(btns)
+
+    def toggle_select_all(self):
+        """Toggle selection state for all items in the file list.
+
+        If any item is unchecked, select all. Otherwise unselect all.
+        """
+        count = self.file_list.count()
+        if count == 0:
+            return
+
+        # If any item is not checked, we will check them all; otherwise uncheck all.
+        any_unchecked = any(self.file_list.item(i).checkState() != Qt.CheckState.Checked for i in range(count))
+        new_state = Qt.CheckState.Checked if any_unchecked else Qt.CheckState.Unchecked
+        for i in range(count):
+            item = self.file_list.item(i)
+            item.setCheckState(new_state)
+
+        # Update the button label to reflect next action
+        self.select_all_btn.setText("Unselect All" if new_state == Qt.CheckState.Checked else "Select All")
+        
+    def refresh_csv_list(self):
         self.file_list.clear()
-        
-        if not self.csv_directory.exists():
-            self.file_list.addItem(f"Directory not found: {self.csv_directory}")
-            return
-            
-        csv_files = list(self.csv_directory.glob("*.csv")) + list(self.csv_directory.glob("*.tsv"))
-        
-        if not csv_files:
-            self.file_list.addItem("No CSV/TSV files found in directory")
-            return
-            
-        for csv_file in sorted(csv_files):
-            item = QListWidgetItem(f"{csv_file.name} ({csv_file.stat().st_size // 1024} KB)")
-            item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
-            item.setCheckState(Qt.CheckState.Unchecked)
-            item.setData(Qt.ItemDataRole.UserRole, csv_file)
-            self.file_list.addItem(item)
-            
-    def _select_all_files(self):
-        """Select all CSV files."""
-        for i in range(self.file_list.count()):
-            item = self.file_list.item(i)
-            if item.data(Qt.ItemDataRole.UserRole):  # Only if it has file data
-                item.setCheckState(Qt.CheckState.Checked)
+        csv_dir = Path("data/csv")
+        if csv_dir.exists():
+            for f in csv_dir.glob("*.csv"):
+                item = QListWidgetItem(f.name)
+                item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
+                item.setCheckState(Qt.CheckState.Unchecked)
+                item.setData(Qt.ItemDataRole.UserRole, f)
+                self.file_list.addItem(item)
                 
-    def _select_no_files(self):
-        """Deselect all CSV files."""
-        for i in range(self.file_list.count()):
-            item = self.file_list.item(i)
-            item.setCheckState(Qt.CheckState.Unchecked)
-            
-    def _update_load_button_state(self):
-        """Update the load button state based on file selection."""
-        selected_count = sum(1 for i in range(self.file_list.count()) 
-                           if self.file_list.item(i).checkState() == Qt.CheckState.Checked)
-        self.load_button.setEnabled(selected_count > 0)
+    def setup_pa_tab(self, tab):
+        layout = QVBoxLayout(tab)
+        layout.addWidget(QLabel("Import ProgArchives data from scraped raw files."))
         
-    def _start_loading(self):
-        """Start loading the selected CSV files."""
-        selected_files = []
+        form = QHBoxLayout()
+        form.addWidget(QLabel("Raw Data Dir:"))
+        # Point to the root raw_data/progarchives where new scraper outputs
+        self.pa_dir_input = QLineEdit("raw_data/progarchives") 
+        form.addWidget(self.pa_dir_input)
+        layout.addLayout(form)
         
-        for i in range(self.file_list.count()):
-            item = self.file_list.item(i)
-            if item.checkState() == Qt.CheckState.Checked:
-                file_path = item.data(Qt.ItemDataRole.UserRole)
-                if file_path:
-                    selected_files.append(file_path)
-                    
-        if not selected_files:
+        run_btn = QPushButton("Run Import Pipeline")
+        run_btn.clicked.connect(self.start_pa_import)
+        layout.addWidget(run_btn)
+        layout.addStretch()
+        
+    def setup_ma_tab(self, tab):
+        layout = QVBoxLayout(tab)
+        layout.addWidget(QLabel("Import MetalArchives data from CSV dump."))
+        
+        form = QHBoxLayout()
+        form.addWidget(QLabel("Data Directory:"))
+        self.ma_dir_input = QLineEdit("data/MetalArchives")
+        form.addWidget(self.ma_dir_input)
+        layout.addLayout(form)
+        
+        run_btn = QPushButton("Run Import")
+        run_btn.clicked.connect(self.start_ma_import)
+        layout.addWidget(run_btn)
+        layout.addStretch()
+
+    # --- Worker Management ---
+    def start_worker(self, worker):
+        if self.worker is not None:
             return
             
-        # Set up UI for loading
-        self.load_button.setEnabled(False)
-        self.cancel_button.setEnabled(True)
-        self.close_button.setEnabled(False)
+        self.worker = worker
+        # Keep a reference to the concrete worker type for post-run actions
+        self._current_worker = worker
+        self.worker.progress_updated.connect(lambda p, m: (self.progress_bar.setValue(p), self.status_label.setText(m)))
+        self.worker.log_message.connect(self.append_log)
+        self.worker.op_finished.connect(self.worker_finished) # Use op_finished
+        # Connect worker data_loaded to appropriate handler so the dialog
+        # forwards payloads to the main window. CSVLoadWorker provides a
+        # DataFrame and has a specialized handler; other workers emit
+        # payloads (e.g. {'album_ids': [...]}) and should be forwarded.
+        if isinstance(worker, CSVLoadWorker):
+            self.worker.data_loaded.connect(self.on_csv_data_loaded)
+        else:
+            self.worker.data_loaded.connect(self.on_worker_data_loaded)
+            
+        self.cancel_btn.setEnabled(True)
+        self.close_btn.setEnabled(False)
         self.progress_bar.setValue(0)
-        self.status_list.clear()
-        
-        # Create and start worker
-        debug_level = self.debug_combo.currentText()
-        self.worker = DataLoadWorker(selected_files, debug_level)
-        
-        # Connect signals
-        self.worker.progress_updated.connect(self._update_progress)
-        self.worker.file_processed.connect(self._update_file_status)
-        self.worker.loading_complete.connect(self._loading_complete)
-        self.worker.error_occurred.connect(self._loading_error)
-        self.worker.log_message.connect(self._add_log_message)
-        
         self.worker.start()
         
-    def _cancel_loading(self):
-        """Cancel the loading process."""
+    def worker_finished(self, success, msg):
+        self.append_log("INFO" if success else "ERROR", msg)
+        self.status_label.setText("Finished")
+        self.cancel_btn.setEnabled(False)
+        self.close_btn.setEnabled(True)
+        # For CSVLoadWorker, the worker emits `data_loaded` with DataFrame.
+        # For ETL/import workers (ProgArchives/MetalArchives) they emit an explicit
+        # `data_loaded` payload when there's something to preview. Avoid emitting
+        # a generic None here which would force a full DB refresh.
+        self.worker = None
+        self._current_worker = None
+        
+    def cancel_worker(self):
         if self.worker:
             self.worker.cancel()
-            self.worker.wait()  # Wait for thread to finish
-            
-        self._reset_ui_after_loading()
-        
-    def _update_progress(self, value: int, message: str):
-        """Update the progress bar and message."""
-        self.progress_bar.setValue(value)
-        self.progress_label.setText(message)
-        
-    def _update_file_status(self, filename: str, row_count: int, success: bool):
-        """Update the file processing status."""
-        status_icon = "✓" if success else "✗"
-        status_text = f"{status_icon} {filename}: {row_count} rows" if success else f"{status_icon} {filename}: Failed"
-        self.status_list.addItem(status_text)
-        
-    def _loading_complete(self, dataframe):
-        """Handle successful data loading."""
-        self.loaded_data = dataframe
-        self._reset_ui_after_loading()
-        self.use_data_button.setEnabled(True)
-        self.progress_label.setText(f"Loading complete! {len(dataframe)} total rows loaded.")
-        
-    def _loading_error(self, error_message: str):
-        """Handle loading errors."""
-        self._reset_ui_after_loading()
-        self.progress_label.setText(f"Error: {error_message}")
-        self._add_log_message("ERROR", error_message)
-        
-    def _add_log_message(self, level: str, message: str):
-        """Add a message to the log viewer."""
-        # Color code by level
-        color_map = {
-            "DEBUG": "#888888",
-            "INFO": "#000000", 
-            "WARNING": "#FF8C00",
-            "ERROR": "#FF0000"
-        }
-        
-        color = color_map.get(level, "#000000")
-        formatted_message = f'<span style="color: {color};">[{level}] {message}</span>'
-        
-        self.log_viewer.append(formatted_message)
-        
-        # Auto-scroll to bottom
-        scrollbar = self.log_viewer.verticalScrollBar()
-        scrollbar.setValue(scrollbar.maximum())
-        
-    def _reset_ui_after_loading(self):
-        """Reset UI state after loading completes or is cancelled."""
-        self.load_button.setEnabled(True)
-        self.cancel_button.setEnabled(False)
-        self.close_button.setEnabled(True)
-        self._update_load_button_state()  # Re-check file selection
-        
-    def _use_loaded_data(self):
-        """Emit the loaded data and close the dialog."""
-        if self.loaded_data is not None:
-            self.data_loaded.emit(self.loaded_data)
-            self.accept()
-            
-    def _export_logs(self):
+            self.status_label.setText("Cancelling...")
+
+    def append_log(self, level, msg):
+        color = "black"
+        if level == "ERROR": color = "red"
+        elif level == "WARNING": color = "orange"
+        self.log_viewer.append(f'<span style="color:{color}">[{level}] {msg}</span>')
+
+    def export_logs(self):
         """Export the current logs to a file."""
-        from PyQt6.QtWidgets import QFileDialog
-        
         filename, _ = QFileDialog.getSaveFileName(
             self, 
             "Export Logs", 
-            f"albumexplore_logs_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.txt",
+            f"data_manager_logs.txt",
             "Text Files (*.txt);;All Files (*)"
         )
-        
         if filename:
             try:
                 with open(filename, 'w', encoding='utf-8') as f:
                     f.write(self.log_viewer.toPlainText())
-                self._add_log_message("INFO", f"Logs exported to {filename}")
+                self.append_log("INFO", f"Logs exported to {filename}")
             except Exception as e:
-                self._add_log_message("ERROR", f"Failed to export logs: {str(e)}")
-    
-    def _show_performance_monitor(self):
-        """Show the performance monitoring dialog."""
-        try:
-            from albumexplore.performance.performance_monitor import PerformanceViewer
+                self.append_log("ERROR", f"Failed to export logs: {str(e)}")
+
+    # --- Actions ---
+    def start_csv_load(self):
+        files = []
+        for i in range(self.file_list.count()):
+            item = self.file_list.item(i)
+            if item.checkState() == Qt.CheckState.Checked:
+                files.append(item.data(Qt.ItemDataRole.UserRole))
+        
+        if not files:
+            self.append_log("WARNING", "No files selected.")
+            return
             
-            dialog = PerformanceViewer(self)
-            dialog.exec()
-        except ImportError:
-            self._add_log_message("WARNING", "Performance monitoring module not available")
+        self.start_worker(CSVLoadWorker(files))
+        
+    def on_csv_data_loaded(self, df):
+        self.loaded_data = df
+        self.data_loaded.emit(df) # Notify main window
+        self.append_log("INFO", "Data emitted to view.")
+
+    def on_worker_data_loaded(self, payload):
+        """Generic handler for non-CSV workers that emit payloads to preview.
+
+        This forwards the worker payload via the dialog's `data_loaded` signal
+        so the main window can act on it (e.g. preview album IDs).
+        """
+        try:
+            self.loaded_data = payload
+            self.data_loaded.emit(payload)
+            self.append_log("INFO", "Data emitted to view from worker.")
         except Exception as e:
-            self._add_log_message("ERROR", f"Failed to open performance monitor: {str(e)}") 
+            self.append_log("ERROR", f"Failed to forward worker payload: {e}")
+
+    def start_pa_import(self):
+        d = self.pa_dir_input.text()
+        self.start_worker(ProgArchivesWorker(d))
+
+    def start_ma_import(self):
+        d = self.ma_dir_input.text()
+        self.start_worker(MetalArchivesWorker(d))
+
+    def reject(self):
+        """Override close via Cancel/Close to ensure background workers are stopped."""
+        if self.worker is not None:
+            self.append_log("WARNING", "Worker running — cancelling and waiting to finish before close.")
+            try:
+                self.worker.cancel()
+            except Exception:
+                pass
+            try:
+                # Ask the thread to quit if it has an event loop
+                self.worker.quit()
+            except Exception:
+                pass
+            # Wait briefly for thread to finish; do not block indefinitely
+            try:
+                self.worker.wait(5000)
+            except Exception:
+                pass
+        super().reject()
+
+    def closeEvent(self, event):
+        """Handle window close (e.g. app exit) to avoid destroying active QThreads."""
+        if self.worker is not None:
+            self.append_log("WARNING", "Worker running — cancelling and waiting to finish before close.")
+            try:
+                self.worker.cancel()
+            except Exception:
+                pass
+            try:
+                self.worker.quit()
+            except Exception:
+                pass
+            try:
+                self.worker.wait(5000)
+            except Exception:
+                pass
+        super().closeEvent(event)

@@ -3858,8 +3858,8 @@
       "york",
       "city"
     ],
-    "paços de ferreira": [
-      "paços",
+    "pa\u00c3\u00a7os de ferreira": [
+      "pa\u00c3\u00a7os",
       "de",
       "ferreira"
     ],
@@ -3913,9 +3913,9 @@
       "chula",
       "vista"
     ],
-    "ciudad juárez": [
+    "ciudad ju\u00c3\u00a1rez": [
       "ciudad",
-      "juárez"
+      "ju\u00c3\u00a1rez"
     ],
     "ciudad real": [
       "ciudad",
@@ -3953,9 +3953,9 @@
       "emoviolence",
       "skramz"
     ],
-    "entre ríos": [
+    "entre r\u00c3\u00ados": [
       "entre",
-      "ríos"
+      "r\u00c3\u00ados"
     ],
     "fall river": [
       "fall",
@@ -3976,6 +3976,226 @@
     "fort walton": [
       "fort",
       "walton"
+    ],
+    "traditional metal": [
+      "traditional",
+      "metal"
+    ],
+    "technical thrash": [
+      "technical",
+      "thrash"
+    ],
+    "technical progressive metal": [
+      "technical",
+      "progressive metal"
+    ],
+    "technical progressive deathcore": [
+      "technical",
+      "progressive deathcore"
+    ],
+    "technical progressive death metal": [
+      "technical",
+      "progressive death metal"
+    ],
+    "synth metal": [
+      "synth",
+      "metal"
+    ],
+    "symphonic gothic metal": [
+      "symphonic",
+      "gothic metal"
+    ],
+    "symphonic experimental metal": [
+      "symphonic",
+      "experimental metal"
+    ],
+    "sludge stoner": [
+      "sludge",
+      "stoner"
+    ],
+    "rock musical": [
+      "rock",
+      "musical"
+    ],
+    "rock modern": [
+      "rock",
+      "modern"
+    ],
+    "rock metal": [
+      "rock",
+      "metal"
+    ],
+    "progressive stoner": [
+      "progressive",
+      "stoner"
+    ],
+    "progressive post metal rock": [
+      "progressive",
+      "post metal rock"
+    ],
+    "progressive noise rock": [
+      "progressive",
+      "noise rock"
+    ],
+    "progressive heavy metal": [
+      "progressive",
+      "heavy metal"
+    ],
+    "progressive alternative metal": [
+      "progressive",
+      "alternative metal"
+    ],
+    "post screamo": [
+      "post",
+      "screamo"
+    ],
+    "post progressive rock": [
+      "post",
+      "progressive rock"
+    ],
+    "on vinyl": [
+      "on",
+      "vinyl"
+    ],
+    "noise metal": [
+      "noise",
+      "metal"
+    ],
+    "new metal": [
+      "new",
+      "metal"
+    ],
+    "neo classical metal": [
+      "neo classical",
+      "metal"
+    ],
+    "modern melodic death metal": [
+      "modern",
+      "melodic death metal"
+    ],
+    "modern emo": [
+      "modern",
+      "emo"
+    ],
+    "modern alternative rock": [
+      "modern",
+      "alternative rock"
+    ],
+    "melancholic black metal": [
+      "melancholic",
+      "black metal"
+    ],
+    "jazz piano": [
+      "jazz",
+      "piano"
+    ],
+    "industrial dance": [
+      "industrial",
+      "dance"
+    ],
+    "indie emo": [
+      "indie",
+      "emo"
+    ],
+    "heavy progressive": [
+      "heavy",
+      "progressive"
+    ],
+    "heavy jazz": [
+      "heavy",
+      "jazz"
+    ],
+    "gothic doom": [
+      "gothic",
+      "doom"
+    ],
+    "folk noir": [
+      "folk",
+      "noir"
+    ],
+    "folk indie": [
+      "folk",
+      "indie"
+    ],
+    "folk doom": [
+      "folk",
+      "doom"
+    ],
+    "folk death metal": [
+      "folk",
+      "death metal"
+    ],
+    "electronic jazz": [
+      "electronic",
+      "jazz"
+    ],
+    "electro swing": [
+      "electro",
+      "swing"
+    ],
+    "electro rock": [
+      "electro",
+      "rock"
+    ],
+    "comedy metal": [
+      "comedy",
+      "metal"
+    ],
+    "chamber post metal": [
+      "chamber",
+      "post metal"
+    ],
+    "breakbeat hardcore": [
+      "breakbeat",
+      "hardcore"
+    ],
+    "black doom metal": [
+      "black",
+      "doom metal"
+    ],
+    "black doom": [
+      "black",
+      "doom"
+    ],
+    "aoty 2020": [
+      "aoty",
+      "2020"
+    ],
+    "alternative indie rock": [
+      "alternative",
+      "indie rock"
+    ],
+    "alternative indie": [
+      "alternative",
+      "indie"
+    ],
+    "alternative folk": [
+      "alternative",
+      "folk"
+    ],
+    "alternative country": [
+      "alternative",
+      "country"
+    ],
+    "acoustic metal": [
+      "acoustic",
+      "metal"
+    ],
+    "acid techno": [
+      "acid",
+      "techno"
+    ],
+    "2020 albums": [
+      "2020",
+      "albums"
+    ],
+    "2018 albums": [
+      "2018",
+      "albums"
+    ],
+    "eclectic metal": [
+      "eclectic",
+      "metal"
     ]
   },
   "substitutions": {
@@ -3995,7 +4215,7 @@
     "tronica": "electronica",
     "primitivism": "primitive",
     "electronics": "electronic",
-    "metal‎": "metal",
+    "metal\u00e2\u20ac\u017d": "metal",
     "electronica": "electronic",
     "folk": "folk music",
     "jazz": "jazz music",
@@ -4341,7 +4561,7 @@
     "nautical",
     "nautical metal",
     "neoclassica",
-    "neue deutsche härte",
+    "neue deutsche h\u00c3\u00a4rte",
     "new rave",
     "new wave and prog rock",
     "nintendocore",
@@ -4391,7 +4611,7 @@
     "pop prog",
     "pop rap",
     "post prog",
-    "post-metal‎",
+    "post-metal\u00e2\u20ac\u017d",
     "powerviolence/black metal/death metal",
     "prairie gothic",
     "primus-related",
@@ -4417,7 +4637,7 @@
     "rave",
     "red",
     "reductionism",
-    "reggaetón",
+    "reggaet\u00c3\u00b3n",
     "related",
     "religious",
     "retro pop",
@@ -5000,12 +5220,24 @@
     ]
   },
   "single_instance_mappings": {
+    "uk garage": "garage",
+    "neo-classical": "neo classical",
+    "thrashcore": "thrash core",
+    "skate punk": "skatepunk",
+    "japanese psych rock": "psych rock",
+    "italian progressive rock": "progressive rock",
+    "german new wave": "new wave",
+    "german metal": "metal",
+    "british progressive jazz": "progressive jazz",
+    "british indie": "indie",
+    "british folk": "folk",
+    "avant-jazz": "avant jazz",
+    "artcore": "art core",
     "acapella": "a capella",
     "afro-funk": "afro funk",
     "afro-rock": "afro rock",
     "american privitsm": "american primitivism",
     "anternative": "alternative",
-    "artcore": "art core",
     "blackend hardcore": "blackened hardcore",
     "bluegras": "bluegrass",
     "bolero-beat": "bolero beat",
@@ -5058,7 +5290,7 @@
     "nordic jazz": "jazz",
     "oriental rock": "rock",
     "piano-oriented": "piano oriented",
-    "post-metal‎": "post metal‎",
+    "post-metal\u00e2\u20ac\u017d": "post metal\u00e2\u20ac\u017d",
     "powerviolence/black metal/death metal": "powerviolence black metal death metal",
     "primus-related": "primus related",
     "prog -rock": "progressive rock",
@@ -5078,7 +5310,6 @@
     "speed/thrash metal": "speed thrash metal",
     "sympohnic": "symphonic",
     "tharsh metal": "thrash metal",
-    "thrashcore": "thrash core",
     "welsh rock": "rock",
     "western noir": "noir",
     "arabic pop": "arabic pop",
@@ -5164,7 +5395,268 @@
     "seventh wonder-ish": "seventh wonder-ish",
     "soft machine-related": "soft machine-related",
     "yatch rock": "yacht rock",
-    "electronic music": "electronic"
+    "electronic music": "electronic",
+    "northern nspordy recs": "nspordy recs",
+    "new wave of british heavy metal": "new wave of heavy metal",
+    "neoclassicall new age": "neoclassical new age",
+    "neoclassicall melodic death metal": "neoclassical melodic death metal",
+    "indigenous north american music": "indigenous north music",
+    "eclectic metal": "eclectic metal",
+    "breakup album": "break up album",
+    "break up album": "breakup album",
+    "ecletic metal": "eclectic metal",
+    "vocal post rock": "post rock",
+    "lol doomergaze": "doomergaze",
+    "epic folk metal": "folk metal",
+    "bhangra metal": "bhangra",
+    "roadburn festival": "roadburn",
+    "gothic funeral doom metal": "doom metal",
+    "progressive rock prog rock prog melodic progrock djent": "melodic",
+    "speed rock": "rock",
+    "psychedelic rock neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock space rock stoner thessaloniki": "psychedelic rock",
+    "not djent": "djent",
+    "experimental deathcore": "deathcore",
+    "rock francophone": "rock",
+    "animal album art": "album art",
+    "dissonant death metalavant garde metal": "avant garde metal",
+    "blackened power metal": "power metal",
+    "drone doom metal": "doom metal",
+    "old school grind": "grind",
+    "folk power metal": "power metal",
+    "polish black metal": "black metal",
+    "high speed metal": "speed metal",
+    "noise sludge metalcore": "metalcore",
+    "thezekinators 2024 album of the year selection": "2024",
+    "dark progressive metal": "progressive metal",
+    "post metalcore": "metalcore",
+    "instrumental neo classical progressive death metal": "instrumental",
+    "experimental guitar": "experimental",
+    "hard rock francophone": "rock",
+    "heavy death metal": "death metal",
+    "blackened skramz": "skramz",
+    "live album": "live",
+    "egyptian": "egypt",
+    "flop era": "flop",
+    "2018 metal": "metal",
+    "progressive groove metal": "groove metal",
+    "psychedelic drone rock": "drone",
+    "cascadian black metal": "black metal",
+    "70s rock": "rock",
+    "thrash death metal": "death metal",
+    "experimental grindcore": "grindcore",
+    "babymetal": "metal",
+    "heavy power metal": "power metal",
+    "boston indie": "boston",
+    "doombrass": "doom",
+    "psychedelic progressive metal": "psychedelic",
+    "atmospheric blackened death metal": "death metal",
+    "melodic thrash": "melodic",
+    "post powerviolence": "powerviolence",
+    "ukrainian metal": "ukrainian",
+    "mostly instrumental progressive rock": "progressive rock",
+    "old school grindcore": "grindcore",
+    "adventure rock": "rock",
+    "sassy mathcore": "mathcore",
+    "2020 favourite albums": "2020",
+    "ballymena town centre september 2025": "2025",
+    "female fronted rock": "rock",
+    "dissonant blackened death metal": "metal",
+    "avant death metal": "death metal",
+    "aoty2023list": "2023",
+    "sludge djent": "djent",
+    "punk black metal": "black metal",
+    "canadian black metal": "black metal",
+    "balearic folk": "folk",
+    "catholic black metal": "black metal",
+    "modern death metal": "metal",
+    "usa black metal": "black metal",
+    "swedish death metal": "death metal",
+    "chilean": "chile",
+    "2022 best albums": "2022",
+    "post grindcore": "grindcore",
+    "melodic post hardcore": "post hardcore",
+    "drone ambient": "ambient",
+    "folk doom metal": "doom metal",
+    "female singer songwriter": "singer songwriter",
+    "microtonal black metal": "black metal",
+    "extreme piano metal": "extreme piano",
+    "blackened brutal death metal": "death metal",
+    "2024 album of the year runner up": "2024",
+    "icelandic": "iceland",
+    "modern shoegaze": "shoegaze",
+    "technical metalcore": "metalcore",
+    "modern folk metal": "folk metal",
+    "heavy thrash metal": "thrash metal",
+    "groove deathcore": "deathcore",
+    "aoty 2018": "2018",
+    "blackened post metal": "post metal",
+    "post deathcore": "deathcore",
+    "deathcore galore": "deathcore",
+    "progressive doom metal": "doom metal",
+    "modern fusion": "fusion",
+    "california folk": "folk",
+    "australian thrash metal": "thrash metal",
+    "2010s metal": "metal",
+    "progressive melodic punk a ha black metal": "black metal",
+    "technical death metal avant garde death metal": "avant garde death metal",
+    "romanian folk music": "folk",
+    "death sludge": "sludge",
+    "metal progressive metal": "progressive metal",
+    "melodic goregrind": "goregrind",
+    "woodland black metal": "black metal",
+    "usway brutal death metal": "brutal death metal",
+    "classical black metal": "metal",
+    "the best symphonic metal tracks ever recorded": "symphonic metal",
+    "norwegian death metal": "death metal",
+    "mostly instrumental prog rock": "prog rock",
+    "atmospheric technical deathcore": "deathcore",
+    "operatic black metal": "black metal",
+    "modern hardcore": "hardcore",
+    "blackened technical death metal": "death metal",
+    "progressive brutal death metal": "death metal",
+    "electro metal": "metal",
+    "chamber metal": "chamber",
+    "old school progressive metalcore": "metalcore",
+    "slamming guttural brutal test metal": "brutal test metal",
+    "sci fi metal": "metal",
+    "progressive technical death metal": "technical death metal",
+    "noise metalcore": "metalcore",
+    "orchestral metal": "metal",
+    "chaotic metalcore": "metalcore",
+    "saxodoom": "doom",
+    "grass album art": "album art",
+    "progressive space rock": "space rock",
+    "album 2019": "2019",
+    "mostly instrumental prog metal": "prog metal",
+    "deva prog": "prog",
+    "industrial sludge metal": "sludge metal",
+    "thezekinators 2024 album of the year runner up": "2024",
+    "melodic death doom metal": "doom metal",
+    "melodic thrash metal": "thrash metal",
+    "cosmic death metal": "death metal",
+    "indie folk rock": "folk rock",
+    "psychedelic noise": "psychedelic",
+    "neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock psychedelic rock space rock stoner thessaloniki": "psychedelic rock",
+    "ambient sludge": "sludge",
+    "melodic death power metal": "power metal",
+    "in love": "love",
+    "deathened metalcore": "metalcore",
+    "instrumental ambient": "ambient",
+    "blood metal": "metal",
+    "ambient music": "ambient",
+    "blackened chiptune": "chiptune",
+    "best 2025": "2025",
+    "symphonic melodic death metal": "metal",
+    "scifi doom": "doom",
+    "progressive death thrash metal": "thrash metal",
+    "finnish melodic death metal": "melodic death metal",
+    "sludge doom metal": "doom metal",
+    "black wave": "blackwave",
+    "releases": "release",
+    "colours": "colors",
+    "color": "colors",
+    "progress rock": "progressive rock",
+    "new berklee core prog metal": "new berklee core progressive metal",
+    "midwestern emo": "midwest emo",
+    "black hardcore": "blackened hardcore",
+    "female vocal": "female vocalists",
+    "unblack metal": "black metal",
+    "trash metal": "thrash metal",
+    "serbian": "serbia",
+    "rock n roll": "rock n' roll",
+    "regressive metalcore": "progressive metalcore",
+    "psytrance": "psy trance",
+    "psychodelic": "psychedelic",
+    "progrock": "prog-rock",
+    "progressive mathcore": "progressive deathcore",
+    "progressive black doom metal": "progressive black metal",
+    "progerssive rock": "progressive rock",
+    "pro rock": "prog rock",
+    "powermetal": "power metal",
+    "peogressive rock": "progressive rock",
+    "ocult rock": "occult rock",
+    "nujazz": "nu jazz",
+    "kraut rock": "krautrock",
+    "israeli": "israel",
+    "instrumental progressive death metal": "instrumental progressive metal",
+    "inide rock": "indie rock",
+    "hypnogogic pop": "hypnagogic pop",
+    "estonian": "estonia",
+    "emo violence": "emoviolence",
+    "elctronic": "electronic",
+    "dissonance death metal": "dissonant death metal",
+    "deppresive black metal": "depressive black metal",
+    "death grind": "deathgrind",
+    "darkfolk": "dark folk",
+    "blackned death metal": "blackened death metal",
+    "blackened nu deathcore": "blackened deathcore",
+    "bestalbums2021": "best albums 2021",
+    "best of2024": "best of 2024",
+    "best albums of 2023": "best albums 2023",
+    "best albums of 2022": "best albums 2022",
+    "best album 2022": "best albums 2022",
+    "atmospheric black meta": "atmospheric black metal",
+    "athmospheric black metal": "atmospheric black metal",
+    "art puk": "art punk",
+    "armenian": "armenia",
+    "blackwave": "black wave",
+    "colour": "colors",
+    "southern california": "southern california",
+    "2019 releases": "release",
+    "traditional metal": "traditional metal",
+    "technical thrash": "technical thrash",
+    "technical progressive metal": "technical progressive metal",
+    "technical progressive deathcore": "technical progressive deathcore",
+    "technical progressive death metal": "technical progressive death metal",
+    "synth metal": "synth metal",
+    "symphonic gothic metal": "symphonic gothic metal",
+    "symphonic experimental metal": "symphonic experimental metal",
+    "sludge stoner": "sludge stoner",
+    "rock musical": "rock musical",
+    "rock modern": "rock modern",
+    "rock metal": "rock metal",
+    "progressive stoner": "progressive stoner",
+    "progressive post metal rock": "progressive post metal rock",
+    "progressive noise rock": "progressive noise rock",
+    "progressive heavy metal": "progressive heavy metal",
+    "progressive alternative metal": "progressive alternative metal",
+    "post screamo": "post screamo",
+    "post progressive rock": "post progressive rock",
+    "on vinyl": "on vinyl",
+    "noise metal": "noise metal",
+    "new metal": "new metal",
+    "neo classical metal": "neo classical metal",
+    "modern melodic death metal": "modern melodic death metal",
+    "modern emo": "modern emo",
+    "modern alternative rock": "modern alternative rock",
+    "melancholic black metal": "melancholic black metal",
+    "jazz piano": "jazz piano",
+    "industrial dance": "industrial dance",
+    "indie emo": "indie emo",
+    "heavy progressive": "heavy progressive",
+    "heavy jazz": "heavy jazz",
+    "gothic doom": "gothic doom",
+    "folk noir": "folk noir",
+    "folk indie": "folk indie",
+    "folk doom": "folk doom",
+    "folk death metal": "folk death metal",
+    "electronic jazz": "electronic jazz",
+    "electro swing": "electro swing",
+    "electro rock": "electro rock",
+    "comedy metal": "comedy metal",
+    "chamber post metal": "chamber post metal",
+    "breakbeat hardcore": "breakbeat hardcore",
+    "black doom metal": "black doom metal",
+    "black doom": "black doom",
+    "aoty 2020": "aoty 2020",
+    "alternative indie rock": "alternative indie rock",
+    "alternative indie": "alternative indie",
+    "alternative folk": "alternative folk",
+    "alternative country": "alternative country",
+    "acoustic metal": "acoustic metal",
+    "acid techno": "acid techno",
+    "2020 albums": "2020 albums",
+    "2018 albums": "2018 albums"
   },
   "automated_merges": [
     {
@@ -5504,8 +5996,8 @@
       "rule": "hyphen->space"
     },
     {
-      "source": "post-metal‎",
-      "target": "post metal‎",
+      "source": "post-metal\u00e2\u20ac\u017d",
+      "target": "post metal\u00e2\u20ac\u017d",
       "applied_by": "normalizer_round2",
       "confidence": "high",
       "reason": "hyphen",

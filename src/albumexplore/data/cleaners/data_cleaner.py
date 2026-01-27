@@ -131,17 +131,41 @@ class DataCleaner:
 
 	def _clean_tags(self, df: pd.DataFrame) -> pd.DataFrame:
 		"""Clean tags in the DataFrame."""
-		# Always initialize tags column with untagged for all rows
+		# Always generate genre tags first
 		if 'Genre / Subgenres' not in df.columns or df['Genre / Subgenres'].isna().all() or df['Genre / Subgenres'].str.strip().eq('').all():
-			df['tags'] = [['untagged'] for _ in range(len(df))]
-			return df
+			genre_tags = [['untagged'] for _ in range(len(df))]
+		else:
+			try:
+				genre_tags_series = df['Genre / Subgenres'].apply(self._process_tags)
+				genre_tags = genre_tags_series.tolist()
+			except Exception as e:
+				logging.error(f"Error processing tags: {str(e)}")
+				genre_tags = [['untagged'] for _ in range(len(df))]
 		
-		try:
-			df['tags'] = df['Genre / Subgenres'].apply(self._process_tags)
-		except Exception as e:
-			logging.error(f"Error processing tags: {str(e)}")
-			df['tags'] = [['untagged'] for _ in range(len(df))]
-		
+		# If tags column already exists (e.g. from previous steps adding vocal tags), merge with genre tags
+		if 'tags' in df.columns:
+			merged_tags = []
+			for i, current_tags in enumerate(df['tags']):
+				new_tags = genre_tags[i]
+				
+				# If either is just ['untagged'] and valid tags exist, prefer the valid ones
+				if current_tags == ['untagged'] and new_tags != ['untagged']:
+					merged = new_tags
+				elif new_tags == ['untagged'] and current_tags != ['untagged']:
+					merged = current_tags
+				else:
+					# Merge lists and deduplicate
+					if isinstance(current_tags, list):
+						merged = list(set(current_tags + new_tags))
+					else:
+						merged = new_tags
+				
+				merged_tags.append(merged)
+			df['tags'] = merged_tags
+		else:
+			# Just use the genre tags
+			df['tags'] = genre_tags
+			
 		return df
 
 	

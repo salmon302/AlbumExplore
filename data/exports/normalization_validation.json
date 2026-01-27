@@ -1,0 +1,1325 @@
+{
+  "original_unique_tags": 4374,
+  "original_singletons": 686,
+  "normalized_unique_tags": 4118,
+  "normalized_singletons": 447,
+  "total_originals_mapped": 272,
+  "sample_mappings": {
+    "post rock": [
+      {
+        "original": "post-rock",
+        "count": 147
+      },
+      {
+        "original": "vocal post rock",
+        "count": 1
+      }
+    ],
+    "post hardcore": [
+      {
+        "original": "post-hardcore",
+        "count": 129
+      },
+      {
+        "original": "melodic post hardcore",
+        "count": 1
+      }
+    ],
+    "post metal": [
+      {
+        "original": "post-metal",
+        "count": 124
+      },
+      {
+        "original": "blackened post metal",
+        "count": 1
+      }
+    ],
+    "art rock": [
+      {
+        "original": "art-rock",
+        "count": 70
+      }
+    ],
+    "post punk": [
+      {
+        "original": "post-punk",
+        "count": 65
+      }
+    ],
+    "art pop": [
+      {
+        "original": "art-pop",
+        "count": 35
+      }
+    ],
+    "singer songwriter": [
+      {
+        "original": "singer-songwriter",
+        "count": 24
+      },
+      {
+        "original": "female singer songwriter",
+        "count": 1
+      }
+    ],
+    "neo psychedelia": [
+      {
+        "original": "neo-psychedelia",
+        "count": 20
+      }
+    ],
+    "prog rock": [
+      {
+        "original": "prog-rock",
+        "count": 15
+      },
+      {
+        "original": "pro rock",
+        "count": 1
+      },
+      {
+        "original": "mostly instrumental prog rock",
+        "count": 1
+      }
+    ],
+    "alt country": [
+      {
+        "original": "alt-country",
+        "count": 12
+      }
+    ],
+    "prog metal": [
+      {
+        "original": "prog-metal",
+        "count": 11
+      },
+      {
+        "original": "mostly instrumental prog metal",
+        "count": 1
+      }
+    ],
+    "post industrial": [
+      {
+        "original": "post-industrial",
+        "count": 10
+      }
+    ],
+    "art punk": [
+      {
+        "original": "art-punk",
+        "count": 9
+      },
+      {
+        "original": "art puk",
+        "count": 1
+      }
+    ],
+    "sludge core": [
+      {
+        "original": "sludgecore",
+        "count": 6
+      }
+    ],
+    "lo fi": [
+      {
+        "original": "lo-fi",
+        "count": 6
+      }
+    ],
+    "avant folk": [
+      {
+        "original": "avant-folk",
+        "count": 6
+      }
+    ],
+    "alt rock": [
+      {
+        "original": "alt-rock",
+        "count": 6
+      }
+    ],
+    "alt pop": [
+      {
+        "original": "alt-pop",
+        "count": 5
+      }
+    ],
+    "neo prog": [
+      {
+        "original": "neo-prog",
+        "count": 4
+      }
+    ],
+    "8-bit": [
+      {
+        "original": "8 bit",
+        "count": 4
+      }
+    ],
+    "no wave": [
+      {
+        "original": "no-wave",
+        "count": 3
+      }
+    ],
+    "post grunge": [
+      {
+        "original": "post-grunge",
+        "count": 2
+      }
+    ],
+    "post bop": [
+      {
+        "original": "post-bop",
+        "count": 2
+      }
+    ],
+    "neo soul": [
+      {
+        "original": "neo-soul",
+        "count": 2
+      }
+    ],
+    "black metal": [
+      {
+        "original": "italian black metal",
+        "count": 2
+      },
+      {
+        "original": "british black metal",
+        "count": 2
+      },
+      {
+        "original": "woodland black metal",
+        "count": 1
+      },
+      {
+        "original": "usa black metal",
+        "count": 1
+      },
+      {
+        "original": "unblack metal",
+        "count": 1
+      }
+    ],
+    "avant-garde": [
+      {
+        "original": "avantgarde",
+        "count": 2
+      }
+    ],
+    "brutal death metal": [
+      {
+        "original": "usway brutal death metal",
+        "count": 1
+      }
+    ],
+    "ukrainian": [
+      {
+        "original": "ukrainian metal",
+        "count": 1
+      }
+    ],
+    "garage": [
+      {
+        "original": "uk garage",
+        "count": 1
+      },
+      {
+        "original": "garbage",
+        "count": 1
+      }
+    ],
+    "thrash metal": [
+      {
+        "original": "trash metal",
+        "count": 1
+      },
+      {
+        "original": "progressive death thrash metal",
+        "count": 1
+      },
+      {
+        "original": "melodic thrash metal",
+        "count": 1
+      },
+      {
+        "original": "heavy thrash metal",
+        "count": 1
+      },
+      {
+        "original": "australian thrash metal",
+        "count": 1
+      }
+    ],
+    "thrash core": [
+      {
+        "original": "thrashcore",
+        "count": 1
+      }
+    ],
+    "death metal": [
+      {
+        "original": "thrash death metal",
+        "count": 1
+      },
+      {
+        "original": "swedish death metal",
+        "count": 1
+      },
+      {
+        "original": "progressive brutal death metal",
+        "count": 1
+      },
+      {
+        "original": "norwegian death metal",
+        "count": 1
+      },
+      {
+        "original": "heavy death metal",
+        "count": 1
+      }
+    ],
+    "2024": [
+      {
+        "original": "thezekinators 2024 album of the year selection",
+        "count": 1
+      },
+      {
+        "original": "thezekinators 2024 album of the year runner up",
+        "count": 1
+      },
+      {
+        "original": "2024 album of the year runner up",
+        "count": 1
+      }
+    ],
+    "symphonic metal": [
+      {
+        "original": "the best symphonic metal tracks ever recorded",
+        "count": 1
+      }
+    ],
+    "metalcore": [
+      {
+        "original": "technical metalcore",
+        "count": 1
+      },
+      {
+        "original": "post metalcore",
+        "count": 1
+      },
+      {
+        "original": "old school progressive metalcore",
+        "count": 1
+      },
+      {
+        "original": "noise sludge metalcore",
+        "count": 1
+      },
+      {
+        "original": "noise metalcore",
+        "count": 1
+      }
+    ],
+    "avant garde death metal": [
+      {
+        "original": "technical death metal avant garde death metal",
+        "count": 1
+      }
+    ],
+    "metal": [
+      {
+        "original": "symphonic melodic death metal",
+        "count": 1
+      },
+      {
+        "original": "sci fi metal",
+        "count": 1
+      },
+      {
+        "original": "orchestral metal",
+        "count": 1
+      },
+      {
+        "original": "modern death metal",
+        "count": 1
+      },
+      {
+        "original": "german metal",
+        "count": 1
+      }
+    ],
+    "rock": [
+      {
+        "original": "speed rock",
+        "count": 1
+      },
+      {
+        "original": "rock related",
+        "count": 1
+      },
+      {
+        "original": "rock francophone",
+        "count": 1
+      },
+      {
+        "original": "hard rock francophone",
+        "count": 1
+      },
+      {
+        "original": "female fronted rock",
+        "count": 1
+      }
+    ],
+    "doom metal": [
+      {
+        "original": "sludge doom metal",
+        "count": 1
+      },
+      {
+        "original": "progressive doom metal",
+        "count": 1
+      },
+      {
+        "original": "melodic death doom metal",
+        "count": 1
+      },
+      {
+        "original": "gothic funeral doom metal",
+        "count": 1
+      },
+      {
+        "original": "folk doom metal",
+        "count": 1
+      }
+    ],
+    "djent": [
+      {
+        "original": "sludge djent",
+        "count": 1
+      },
+      {
+        "original": "not djent",
+        "count": 1
+      }
+    ],
+    "brutal test metal": [
+      {
+        "original": "slamming guttural brutal test metal",
+        "count": 1
+      }
+    ],
+    "skatepunk": [
+      {
+        "original": "skate punk",
+        "count": 1
+      }
+    ],
+    "serbia": [
+      {
+        "original": "serbian pop alchemy",
+        "count": 1
+      },
+      {
+        "original": "serbian",
+        "count": 1
+      }
+    ],
+    "seattle": [
+      {
+        "original": "seattle metal",
+        "count": 1
+      }
+    ],
+    "doom": [
+      {
+        "original": "scifi doom",
+        "count": 1
+      },
+      {
+        "original": "saxodoom",
+        "count": 1
+      },
+      {
+        "original": "doombrass",
+        "count": 1
+      }
+    ],
+    "mathcore": [
+      {
+        "original": "sassy mathcore",
+        "count": 1
+      }
+    ],
+    "folk": [
+      {
+        "original": "romanian folk music",
+        "count": 1
+      },
+      {
+        "original": "california folk",
+        "count": 1
+      },
+      {
+        "original": "british folk",
+        "count": 1
+      },
+      {
+        "original": "balearic folk",
+        "count": 1
+      }
+    ],
+    "rock n' roll": [
+      {
+        "original": "rock n roll",
+        "count": 1
+      }
+    ],
+    "roadburn": [
+      {
+        "original": "roadburn festival",
+        "count": 1
+      }
+    ],
+    "release": [
+      {
+        "original": "releases",
+        "count": 1
+      },
+      {
+        "original": "2019 releases",
+        "count": 1
+      }
+    ],
+    "releases": [
+      {
+        "original": "release",
+        "count": 1
+      }
+    ],
+    "progressive metalcore": [
+      {
+        "original": "regressive metalcore",
+        "count": 1
+      }
+    ],
+    "psy trance": [
+      {
+        "original": "psytrance",
+        "count": 1
+      }
+    ],
+    "psychedelic": [
+      {
+        "original": "psychodelic",
+        "count": 1
+      },
+      {
+        "original": "psychedelic progressive metal",
+        "count": 1
+      },
+      {
+        "original": "psychedelic noise",
+        "count": 1
+      }
+    ],
+    "psychedelic rock": [
+      {
+        "original": "psychedelic rock neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock space rock stoner thessaloniki",
+        "count": 1
+      },
+      {
+        "original": "neo prog progressive rock rock heavy psych heavy psych rock neo progressive rock prog rock psych rock psychedelic rock space rock stoner thessaloniki",
+        "count": 1
+      }
+    ],
+    "drone": [
+      {
+        "original": "psychedelic drone rock",
+        "count": 1
+      }
+    ],
+    "prog-rock": [
+      {
+        "original": "progrock",
+        "count": 1
+      }
+    ],
+    "technical death metal": [
+      {
+        "original": "progressive technical death metal",
+        "count": 1
+      }
+    ],
+    "space rock": [
+      {
+        "original": "progressive space rock",
+        "count": 1
+      }
+    ],
+    "melodic": [
+      {
+        "original": "progressive rock prog rock prog melodic progrock djent",
+        "count": 1
+      },
+      {
+        "original": "melodic thrash",
+        "count": 1
+      }
+    ],
+    "progressive deathcore": [
+      {
+        "original": "progressive mathcore",
+        "count": 1
+      }
+    ],
+    "groove metal": [
+      {
+        "original": "progressive groove metal",
+        "count": 1
+      }
+    ],
+    "progressive black metal": [
+      {
+        "original": "progressive black doom metal",
+        "count": 1
+      }
+    ],
+    "progressive rock": [
+      {
+        "original": "progress rock",
+        "count": 1
+      },
+      {
+        "original": "progerssive rock",
+        "count": 1
+      },
+      {
+        "original": "peogressive rock",
+        "count": 1
+      },
+      {
+        "original": "mostly instrumental progressive rock",
+        "count": 1
+      },
+      {
+        "original": "italian progressive rock",
+        "count": 1
+      }
+    ],
+    "power metal": [
+      {
+        "original": "powermetal",
+        "count": 1
+      },
+      {
+        "original": "melodic death power metal",
+        "count": 1
+      },
+      {
+        "original": "heavy power metal",
+        "count": 1
+      },
+      {
+        "original": "folk power metal",
+        "count": 1
+      },
+      {
+        "original": "blackened power metal",
+        "count": 1
+      }
+    ],
+    "powerviolence": [
+      {
+        "original": "post powerviolence",
+        "count": 1
+      }
+    ],
+    "grindcore": [
+      {
+        "original": "post grindcore",
+        "count": 1
+      },
+      {
+        "original": "old school grindcore",
+        "count": 1
+      },
+      {
+        "original": "experimental grindcore",
+        "count": 1
+      }
+    ],
+    "deathcore": [
+      {
+        "original": "post deathcore",
+        "count": 1
+      },
+      {
+        "original": "groove deathcore",
+        "count": 1
+      },
+      {
+        "original": "experimental deathcore",
+        "count": 1
+      },
+      {
+        "original": "deathcore galore",
+        "count": 1
+      },
+      {
+        "original": "atmospheric technical deathcore",
+        "count": 1
+      }
+    ],
+    "bolivia": [
+      {
+        "original": "olivia",
+        "count": 1
+      }
+    ],
+    "grind": [
+      {
+        "original": "old school grind",
+        "count": 1
+      }
+    ],
+    "occult rock": [
+      {
+        "original": "ocult rock",
+        "count": 1
+      }
+    ],
+    "nu jazz": [
+      {
+        "original": "nujazz",
+        "count": 1
+      }
+    ],
+    "silence": [
+      {
+        "original": "northern silence",
+        "count": 1
+      }
+    ],
+    "nspordy recs": [
+      {
+        "original": "northern nspordy recs",
+        "count": 1
+      }
+    ],
+    "new wave of heavy metal": [
+      {
+        "original": "new wave of british heavy metal",
+        "count": 1
+      }
+    ],
+    "new berklee core progressive metal": [
+      {
+        "original": "new berklee core prog metal",
+        "count": 1
+      }
+    ],
+    "neoclassical new age": [
+      {
+        "original": "neoclassicall new age",
+        "count": 1
+      }
+    ],
+    "neoclassical melodic death metal": [
+      {
+        "original": "neoclassicall melodic death metal",
+        "count": 1
+      }
+    ],
+    "neo classical": [
+      {
+        "original": "neo-classical",
+        "count": 1
+      }
+    ],
+    "shoegaze": [
+      {
+        "original": "modern shoegaze",
+        "count": 1
+      }
+    ],
+    "hardcore": [
+      {
+        "original": "modern hardcore",
+        "count": 1
+      }
+    ],
+    "fusion": [
+      {
+        "original": "modern fusion",
+        "count": 1
+      }
+    ],
+    "folk metal": [
+      {
+        "original": "modern folk metal",
+        "count": 1
+      },
+      {
+        "original": "epic folk metal",
+        "count": 1
+      }
+    ],
+    "midwest emo": [
+      {
+        "original": "midwestern emo",
+        "count": 1
+      }
+    ],
+    "progressive metal": [
+      {
+        "original": "metal progressive metal",
+        "count": 1
+      },
+      {
+        "original": "dark progressive metal",
+        "count": 1
+      }
+    ],
+    "goregrind": [
+      {
+        "original": "melodic goregrind",
+        "count": 1
+      }
+    ],
+    "doomergaze": [
+      {
+        "original": "lol doomergaze",
+        "count": 1
+      }
+    ],
+    "live": [
+      {
+        "original": "live album",
+        "count": 1
+      }
+    ],
+    "krautrock": [
+      {
+        "original": "kraut rock",
+        "count": 1
+      }
+    ],
+    "psych rock": [
+      {
+        "original": "japanese psych rock",
+        "count": 1
+      }
+    ],
+    "j-rock": [
+      {
+        "original": "j rock",
+        "count": 1
+      }
+    ],
+    "j-pop": [
+      {
+        "original": "j pop",
+        "count": 1
+      }
+    ],
+    "israel": [
+      {
+        "original": "israeli",
+        "count": 1
+      }
+    ],
+    "instrumental progressive metal": [
+      {
+        "original": "instrumental progressive death metal",
+        "count": 1
+      }
+    ],
+    "instrumental": [
+      {
+        "original": "instrumental neo classical progressive death metal",
+        "count": 1
+      }
+    ],
+    "ambient": [
+      {
+        "original": "instrumental ambient",
+        "count": 1
+      },
+      {
+        "original": "drone ambient",
+        "count": 1
+      },
+      {
+        "original": "ambient music",
+        "count": 1
+      }
+    ],
+    "indie rock": [
+      {
+        "original": "inide rock",
+        "count": 1
+      }
+    ],
+    "sludge metal": [
+      {
+        "original": "industrial sludge metal",
+        "count": 1
+      }
+    ],
+    "indonesia": [
+      {
+        "original": "indonesian black metal",
+        "count": 1
+      }
+    ],
+    "indigenous north music": [
+      {
+        "original": "indigenous north american music",
+        "count": 1
+      }
+    ],
+    "indie": [
+      {
+        "original": "indie related",
+        "count": 1
+      },
+      {
+        "original": "british indie",
+        "count": 1
+      }
+    ],
+    "folk rock": [
+      {
+        "original": "indie folk rock",
+        "count": 1
+      }
+    ],
+    "love": [
+      {
+        "original": "in love",
+        "count": 1
+      }
+    ],
+    "iceland": [
+      {
+        "original": "icelandic",
+        "count": 1
+      }
+    ],
+    "hypnagogic pop": [
+      {
+        "original": "hypnogogic pop",
+        "count": 1
+      }
+    ],
+    "speed metal": [
+      {
+        "original": "high speed metal",
+        "count": 1
+      }
+    ],
+    "album art": [
+      {
+        "original": "grass album art",
+        "count": 1
+      },
+      {
+        "original": "animal album art",
+        "count": 1
+      }
+    ],
+    "new wave": [
+      {
+        "original": "german new wave",
+        "count": 1
+      }
+    ],
+    "flop": [
+      {
+        "original": "flop era",
+        "count": 1
+      }
+    ],
+    "melodic death metal": [
+      {
+        "original": "finnish melodic death metal",
+        "count": 1
+      }
+    ],
+    "female vocalists": [
+      {
+        "original": "female vocal",
+        "count": 1
+      }
+    ],
+    "extreme piano": [
+      {
+        "original": "extreme piano metal",
+        "count": 1
+      }
+    ],
+    "experimental": [
+      {
+        "original": "experimental guitar",
+        "count": 1
+      }
+    ],
+    "estonia": [
+      {
+        "original": "estonian",
+        "count": 1
+      }
+    ],
+    "english": [
+      {
+        "original": "english black metal",
+        "count": 1
+      }
+    ],
+    "emoviolence": [
+      {
+        "original": "emo violence",
+        "count": 1
+      }
+    ],
+    "electronic": [
+      {
+        "original": "electronic related",
+        "count": 1
+      },
+      {
+        "original": "elctronic",
+        "count": 1
+      }
+    ],
+    "egypt": [
+      {
+        "original": "egyptian",
+        "count": 1
+      }
+    ],
+    "eclectic metal": [
+      {
+        "original": "ecletic metal",
+        "count": 1
+      }
+    ],
+    "do not": [
+      {
+        "original": "do not like",
+        "count": 1
+      }
+    ],
+    "avant garde metal": [
+      {
+        "original": "dissonant death metalavant garde metal",
+        "count": 1
+      }
+    ],
+    "dissonant death metal": [
+      {
+        "original": "dissonance death metal",
+        "count": 1
+      }
+    ],
+    "prog": [
+      {
+        "original": "deva prog",
+        "count": 1
+      }
+    ],
+    "depressive black metal": [
+      {
+        "original": "deppresive black metal",
+        "count": 1
+      }
+    ],
+    "sludge": [
+      {
+        "original": "death sludge",
+        "count": 1
+      },
+      {
+        "original": "ambient sludge",
+        "count": 1
+      }
+    ],
+    "deathgrind": [
+      {
+        "original": "death grind",
+        "count": 1
+      }
+    ],
+    "dark folk": [
+      {
+        "original": "darkfolk",
+        "count": 1
+      }
+    ],
+    "d beat": [
+      {
+        "original": "d-beat",
+        "count": 1
+      }
+    ],
+    "colors": [
+      {
+        "original": "colours",
+        "count": 1
+      },
+      {
+        "original": "colour",
+        "count": 1
+      },
+      {
+        "original": "color",
+        "count": 1
+      }
+    ],
+    "colours": [
+      {
+        "original": "colors",
+        "count": 1
+      }
+    ],
+    "chile": [
+      {
+        "original": "chilean metal",
+        "count": 1
+      },
+      {
+        "original": "chilean",
+        "count": 1
+      }
+    ],
+    "chamber": [
+      {
+        "original": "chamber metal",
+        "count": 1
+      }
+    ],
+    "punk": [
+      {
+        "original": "celtic punk",
+        "count": 1
+      }
+    ],
+    "progressive jazz": [
+      {
+        "original": "british progressive jazz",
+        "count": 1
+      }
+    ],
+    "break up album": [
+      {
+        "original": "breakup album",
+        "count": 1
+      }
+    ],
+    "breakup album": [
+      {
+        "original": "break up album",
+        "count": 1
+      }
+    ],
+    "brazil": [
+      {
+        "original": "brazillian metal",
+        "count": 1
+      },
+      {
+        "original": "brazilian folk",
+        "count": 1
+      }
+    ],
+    "boston": [
+      {
+        "original": "boston indie",
+        "count": 1
+      }
+    ],
+    "black wave": [
+      {
+        "original": "blackwave",
+        "count": 1
+      }
+    ],
+    "blackened death metal": [
+      {
+        "original": "blackned death metal",
+        "count": 1
+      }
+    ],
+    "skramz": [
+      {
+        "original": "blackened skramz",
+        "count": 1
+      }
+    ],
+    "blackened deathcore": [
+      {
+        "original": "blackened nu deathcore",
+        "count": 1
+      }
+    ],
+    "chiptune": [
+      {
+        "original": "blackened chiptune",
+        "count": 1
+      }
+    ],
+    "blackwave": [
+      {
+        "original": "black wave",
+        "count": 1
+      }
+    ],
+    "blackened hardcore": [
+      {
+        "original": "black hardcore",
+        "count": 1
+      }
+    ],
+    "bhangra": [
+      {
+        "original": "bhangra metal",
+        "count": 1
+      }
+    ],
+    "best albums 2021": [
+      {
+        "original": "bestalbums2021",
+        "count": 1
+      },
+      {
+        "original": "best albums 2019",
+        "count": 1
+      },
+      {
+        "original": "best albums 2017",
+        "count": 1
+      }
+    ],
+    "best of 2024": [
+      {
+        "original": "best of2024",
+        "count": 1
+      }
+    ],
+    "best of 2021": [
+      {
+        "original": "best of 2001",
+        "count": 1
+      }
+    ],
+    "best albums 2023": [
+      {
+        "original": "best albums of 2023",
+        "count": 1
+      }
+    ],
+    "best albums 2022": [
+      {
+        "original": "best albums of 2022",
+        "count": 1
+      },
+      {
+        "original": "best album 2022",
+        "count": 1
+      }
+    ],
+    "2025": [
+      {
+        "original": "best 2025",
+        "count": 1
+      },
+      {
+        "original": "ballymena town centre september 2025",
+        "count": 1
+      }
+    ],
+    "avant jazz": [
+      {
+        "original": "avant-jazz",
+        "count": 1
+      }
+    ],
+    "australia": [
+      {
+        "original": "australian metal",
+        "count": 1
+      }
+    ],
+    "atmospheric black metal": [
+      {
+        "original": "atmospheric black meta",
+        "count": 1
+      },
+      {
+        "original": "athmospheric black metal",
+        "count": 1
+      }
+    ],
+    "art core": [
+      {
+        "original": "artcore",
+        "count": 1
+      }
+    ],
+    "party metal": [
+      {
+        "original": "art metal",
+        "count": 1
+      }
+    ],
+    "armenia": [
+      {
+        "original": "armenian folk music",
+        "count": 1
+      },
+      {
+        "original": "armenian",
+        "count": 1
+      }
+    ],
+    "2023": [
+      {
+        "original": "aoty2023list",
+        "count": 1
+      }
+    ],
+    "2018": [
+      {
+        "original": "aoty 2018",
+        "count": 1
+      }
+    ],
+    "2019": [
+      {
+        "original": "album 2019",
+        "count": 1
+      }
+    ],
+    "2022": [
+      {
+        "original": "2022 best albums",
+        "count": 1
+      }
+    ],
+    "2020": [
+      {
+        "original": "2020 favourite albums",
+        "count": 1
+      }
+    ],
+    "2 5": [
+      {
+        "original": "2/5",
+        "count": 1
+      }
+    ]
+  }
+}

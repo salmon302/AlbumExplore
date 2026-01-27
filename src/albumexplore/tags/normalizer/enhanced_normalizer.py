@@ -164,12 +164,14 @@ class EnhancedTagNormalizer(TagNormalizer):
         if tag_lower in self._enhanced_misspellings:
             return self._enhanced_misspellings[tag_lower]
         
-        # Check for misspellings within the tag
+        # Check for misspellings within the tag using word boundaries
         for misspelling, correction in self._enhanced_misspellings.items():
-            if misspelling in tag_lower:
-                tag = tag_lower.replace(misspelling, correction)
+            # Escape the misspelling just in case it contains regex chars
+            pattern = r'\b' + re.escape(misspelling) + r'\b'
+            if re.search(pattern, tag_lower):
+                tag_lower = re.sub(pattern, correction, tag_lower)
         
-        return tag
+        return tag_lower
     
     def _normalize_whitespace(self, tag: str) -> str:
         """Normalize whitespace and remove extra spaces."""

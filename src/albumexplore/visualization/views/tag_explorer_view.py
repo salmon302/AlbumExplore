@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (QTableWidget, QTableWidgetItem, QHeaderView,
                            QComboBox, QRadioButton, QButtonGroup, QToolButton, 
                            QStackedWidget, QLineEdit, QCheckBox, QDialog, QMessageBox,
                            QListWidgetItem, QTabWidget, QFrame) # Added QDialog, QMessageBox, QListWidgetItem, QTabWidget, QFrame
-from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QSortFilterProxyModel, QRegularExpression, QTime, QEvent # Added QTime and QEvent
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QSortFilterProxyModel, QRegularExpression, QTime, QEvent, QSize # Added QTime, QEvent, QSize
 from PyQt6.QtCore import QThread, QObject
 from PyQt6.QtGui import QStandardItemModel, QStandardItem, QColor, QPainter, QFontMetrics, QPalette, QAction # Added QAction
 from typing import Dict, Any, Set, List, Optional
@@ -184,10 +184,14 @@ class TagExplorerView(BaseView):
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setAutoFillBackground(True)
         
-        # Create main layout
-        main_layout = QHBoxLayout(self)
+        # Create main layout - Vertical for top toolbar
+        main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
+        
+        # Initialize Toolbar
+        self._setup_toolbar()
+        main_layout.addWidget(self.toolbar)
         
         # Create splitter for resizable panels
         self.splitter = QSplitter(Qt.Orientation.Horizontal)
@@ -202,168 +206,9 @@ class TagExplorerView(BaseView):
         tag_panel_layout = QVBoxLayout(self.tag_panel)
         tag_panel_layout.setContentsMargins(5, 5, 5, 5)
         
-        # Add filter header controls with better organization
-        self.filter_header = QWidget()
-        self.filter_header.setObjectName("filterHeader")
-        self.filter_header.setMaximumHeight(80)  # Limit header height to preserve space for tables
-        filter_header_layout = QVBoxLayout(self.filter_header)  # Use vertical layout for better organization
-        filter_header_layout.setContentsMargins(5, 5, 5, 5)
-        filter_header_layout.setSpacing(3)
-        
-        # Top row - Info and search
-        top_row = QWidget()
-        top_layout = QHBoxLayout(top_row)
-        top_layout.setContentsMargins(0, 0, 0, 0)
-        
-        self.tag_count_label = QLabel("Tags: 0")
-        self.tag_count_label.setObjectName("tagCountLabel")
-        top_layout.addWidget(self.tag_count_label)
-        
-        # Favorites display and filter
-        try:
-            self._fav_mgr = get_favorites_manager()
-            self.fav_count_label = QLabel("Favorites: 0")
-            self.fav_count_label.setObjectName("favCountLabel")
-            top_layout.addWidget(self.fav_count_label)
-
-            self.fav_only_checkbox = QCheckBox("Only favorites")
-            self.fav_only_checkbox.setToolTip("Show only favorite albums in tag explorer")
-            self.fav_only_checkbox.stateChanged.connect(self._on_fav_only_toggled)
-            top_layout.addWidget(self.fav_only_checkbox)
-
-            # Subscribe to favorites changes
-            self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
-        except Exception:
-            # If favorites manager import fails, continue without favorites UI
-            pass
-        
-        # Add progress indicator for large datasets
-        from PyQt6.QtWidgets import QProgressBar
-        self.progress_bar = QProgressBar()
-        self.progress_bar.setVisible(False)
-        self.progress_bar.setMaximumHeight(20)
-        self.progress_bar.setTextVisible(True)
-        self.progress_bar.setFormat("Processing: %p%")
-        self.progress_bar.setToolTip("Data processing progress")
-        top_layout.addWidget(self.progress_bar)
-        
-        # Search input for tags
-        self.tag_search_input = QLineEdit()
-        self.tag_search_input.setPlaceholderText("Search tags...")
-        self.tag_search_input.setToolTip("Search tags (Ctrl+F to focus)")
-        self.tag_search_input.returnPressed.connect(self._handle_tag_search)
-        self.tag_search_input.textChanged.connect(self._handle_tag_search)  # Live search
-        self.tag_search_input.setMaximumWidth(150)  # Limit width to save space
-        top_layout.addWidget(self.tag_search_input)
-        
-        # Clear search button
-        self.tag_search_clear_button = QPushButton("✖")
-        self.tag_search_clear_button.clicked.connect(self._clear_tag_search)
-        self.tag_search_clear_button.setMaximumWidth(30)  # Very compact
-        self.tag_search_clear_button.setToolTip("Clear search (Esc)")
-        top_layout.addWidget(self.tag_search_clear_button)
-        
-        top_layout.addStretch()
-        
-        # Bottom row - Controls and actions
-        bottom_row = QWidget()
-        bottom_layout = QHBoxLayout(bottom_row)
-        bottom_layout.setContentsMargins(0, 0, 0, 0)
-        
-        # Add view mode selector
-        self.view_mode_combo = QComboBox()
-        self.view_mode_combo.addItems(["Table", "Cloud"])
-        self.view_mode_combo.setToolTip("Switch view mode (Ctrl+T)")
-        self.view_mode_combo.currentIndexChanged.connect(self._change_tag_view_mode)
-        self.view_mode_combo.setMaximumWidth(80)  # Compact combo
-        bottom_layout.addWidget(self.view_mode_combo)
-        
-        # Add normalization toggle
-        self.normalize_checkbox = QCheckBox("Normalize")
-        self.normalize_checkbox.setChecked(True)  # Default to normalization enabled
-        self.normalize_checkbox.stateChanged.connect(self._toggle_normalization)
-        bottom_layout.addWidget(self.normalize_checkbox)
-        
-        bottom_layout.addStretch()
-        
-        # Action buttons with icons
-        self.export_button = QPushButton("📊 Tags")
-        self.export_button.setObjectName("exportTagsButton")
-        self.export_button.setToolTip("Export tag data to console for analysis")
-        self.export_button.clicked.connect(self._export_tag_data)
-        bottom_layout.addWidget(self.export_button)
-        
-        self.export_albums_button = QPushButton("💾 Albums")
-        self.export_albums_button.setObjectName("exportAlbumsButton")
-        self.export_albums_button.setToolTip("Export filtered albums to CSV")
-        self.export_albums_button.clicked.connect(self._export_filtered_albums)
-        bottom_layout.addWidget(self.export_albums_button)
-        
-        # Visual separator
-        separator1 = QLabel("|")
-        separator1.setStyleSheet("color: #3f4449; padding: 0 5px;")
-        bottom_layout.addWidget(separator1)
-        
-        self.manage_singles_button = QPushButton("• Singles")
-        self.manage_singles_button.setObjectName("manageSinglesButton")
-        self.manage_singles_button.setToolTip("Manage single-instance tags")
-        self.manage_singles_button.clicked.connect(self._show_single_instance_dialog)
-        bottom_layout.addWidget(self.manage_singles_button)
-        
-        # Visual separator
-        separator2 = QLabel("|")
-        separator2.setStyleSheet("color: #3f4449; padding: 0 5px;")
-        bottom_layout.addWidget(separator2)
-        
-        self.clear_filters_button = QPushButton("✕ Clear")
-        self.clear_filters_button.setObjectName("clearFiltersButton")
-        self.clear_filters_button.setToolTip("Clear all tag filters (Ctrl+Shift+C)")
-        self.clear_filters_button.clicked.connect(self.clear_tag_filters)
-        bottom_layout.addWidget(self.clear_filters_button)
-        
-        # Add bulk action buttons
-        self.include_selected_button = QPushButton("➕")
-        self.include_selected_button.setObjectName("includeButton")
-        self.include_selected_button.setToolTip("Include selected tags (Ctrl+I)")
-        self.include_selected_button.clicked.connect(self._include_selected_tags)
-        bottom_layout.addWidget(self.include_selected_button)
-        
-        self.exclude_selected_button = QPushButton("➖")
-        self.exclude_selected_button.setObjectName("excludeButton")
-        self.exclude_selected_button.setToolTip("Exclude selected tags (Ctrl+E)")
-        self.exclude_selected_button.clicked.connect(self._exclude_selected_tags)
-        bottom_layout.addWidget(self.exclude_selected_button)
-        
-        self.invert_filters_button = QPushButton("⇄")
-        self.invert_filters_button.setObjectName("invertButton")
-        self.invert_filters_button.setToolTip("Invert all filters (swap Include/Exclude)")
-        self.invert_filters_button.clicked.connect(self._invert_filters)
-        bottom_layout.addWidget(self.invert_filters_button)
-        
-        # Visual separator
-        separator3 = QLabel("|")
-        separator3.setStyleSheet("color: #3f4449; padding: 0 5px;")
-        bottom_layout.addWidget(separator3)
-        
-        # Add layout reset button
-        self.reset_layout_button = QPushButton("↻ Reset")
-        self.reset_layout_button.setObjectName("resetLayoutButton")
-        self.reset_layout_button.setToolTip("Reset layout to default proportions (Ctrl+R)")
-        self.reset_layout_button.clicked.connect(self.reset_layout)
-        bottom_layout.addWidget(self.reset_layout_button)
-        
-        # Add help button
-        self.help_button = QPushButton("❓")
-        self.help_button.setObjectName("helpButton")
-        self.help_button.setToolTip("Show keyboard shortcuts and help (F1)")
-        self.help_button.clicked.connect(self.show_layout_help)
-        bottom_layout.addWidget(self.help_button)
-        
-        # Add both rows to the header
-        filter_header_layout.addWidget(top_row)
-        filter_header_layout.addWidget(bottom_row)
-        
-        tag_panel_layout.addWidget(self.filter_header)
+        # Removed legacy Tag Actions Bar (functionality moved to filter panel and main toolbar)
+        # self._setup_tag_actions_bar()
+        # tag_panel_layout.addWidget(self.tag_actions_bar)
 
         # --- Begin moved UI: tag views, album panel, splitters, and related widgets ---
         # Create filter panel container and filter panel widget
@@ -383,6 +228,10 @@ class TagExplorerView(BaseView):
                 graphics_logger.info("TagExplorerView: TagFilterPanel added to layout")
                 # Connect filter panel signals to apply filters
                 self.filter_panel.filtersChanged.connect(self.apply_tag_filters)
+                # Connect new action signals
+                self.filter_panel.includeSelectedRequest.connect(self._include_selected_tags)
+                self.filter_panel.excludeSelectedRequest.connect(self._exclude_selected_tags)
+                
                 graphics_logger.info("TagExplorerView: Connected filter panel signals - setup complete!")
             except Exception as e:
                 # If TagFilterPanel construction fails, keep the container empty
@@ -401,15 +250,15 @@ class TagExplorerView(BaseView):
             self.filter_panel = None
 
         # Set initial size constraints - make it more compact
-        self.filter_panel_container.setMinimumHeight(120)
+        self.filter_panel_container.setMinimumHeight(180)
         self.filter_panel_container.setMaximumHeight(400)
-        # Set a distinctive background for debugging visibility
+        # Use a subtle background and border to delineate the filter area
         self.filter_panel_container.setStyleSheet("""
             QWidget#filterPanelContainer {
-                background-color: #1a1d21;
-                border: 2px solid #3a7db8;
+                background-color: #1e1e1e;
+                border: 1px solid #333;
                 border-radius: 4px;
-                padding: 2px;
+                padding: 0px;
             }
         """)
         # Performance and worker attributes (ensure they exist before any deferred scheduling)
@@ -501,10 +350,10 @@ class TagExplorerView(BaseView):
         # Add the tag_views_stack to the vertical splitter
         self.tag_panel_splitter.addWidget(self.tag_views_stack)
         
-        # Set initial sizes for the splitter (30% filter panel, 70% tag views)
-        self.tag_panel_splitter.setSizes([200, 500])
-        self.tag_panel_splitter.setStretchFactor(0, 1)  # Filter panel
-        self.tag_panel_splitter.setStretchFactor(1, 3)  # Tag views
+        # Set initial sizes for the splitter (Filter panel needs more height for advanced controls)
+        self.tag_panel_splitter.setSizes([280, 500])
+        self.tag_panel_splitter.setStretchFactor(0, 0)  # Filter panel (fixed-ish height preference)
+        self.tag_panel_splitter.setStretchFactor(1, 1)  # Tag views (takes remaining space)
         
         # Add the vertical splitter to tag panel layout
         tag_panel_layout.addWidget(self.tag_panel_splitter, 1)  # Give stretch factor of 1 to expand
@@ -537,17 +386,31 @@ class TagExplorerView(BaseView):
             # If AtomicTagWidget is unavailable, ensure attribute exists to avoid AttributeError
             self.atomic_widget = None
 
-        # Create the album panel, its layout, and its widgets (album_count_label, album_table)
+        # Create the album panel, its layout, and its widgets
         self.album_panel = QWidget()
         self.album_panel.setObjectName("albumPanel")
         self.album_panel.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.album_panel.setMinimumWidth(300)  # Ensure minimum usable width
+        self.album_panel.setMinimumWidth(300)
         album_panel_layout = QVBoxLayout(self.album_panel)
         album_panel_layout.setContentsMargins(5, 5, 5, 5)
-
+        
+        # Album Header Bar
+        album_header_bar = QWidget()
+        ah_layout = QHBoxLayout(album_header_bar)
+        ah_layout.setContentsMargins(0, 0, 0, 0)
+        
         self.album_count_label = QLabel("Albums: 0")
-        self.album_count_label.setMaximumHeight(25)  # Keep album header compact
-        album_panel_layout.addWidget(self.album_count_label)
+        self.album_count_label.setStyleSheet("font-weight: bold; font-size: 13px;")
+        ah_layout.addWidget(self.album_count_label)
+        
+        ah_layout.addStretch()
+        
+        self.export_albums_button = QPushButton("Export Albums")
+        self.export_albums_button.setToolTip("Export filtered albums to CSV")
+        self.export_albums_button.clicked.connect(self._export_filtered_albums)
+        ah_layout.addWidget(self.export_albums_button)
+        
+        album_panel_layout.addWidget(album_header_bar)
 
         self.album_table = QTableWidget() # Definition of self.album_table
         # Add Plays and Listeners columns (kept near vocal/style and before tags)
@@ -614,7 +477,7 @@ class TagExplorerView(BaseView):
         self.splitter.splitterMoved.connect(self._save_splitter_state)
 
         # Add splitter to main layout
-        main_layout.addWidget(self.splitter)
+        main_layout.addWidget(self.splitter, 1)
 
         # Add status bar at the bottom
         self.status_bar = QLabel("Ready")
@@ -671,6 +534,166 @@ class TagExplorerView(BaseView):
         self._setup_keyboard_shortcuts()
 
         self.setUpdatesEnabled(True)  # Re-enable updates
+
+    def _setup_toolbar(self):
+        """Initialize the top toolbar with controls."""
+        self.toolbar = QWidget()
+        self.toolbar.setObjectName("explorerToolbar")
+        
+        layout = QHBoxLayout(self.toolbar)
+        layout.setContentsMargins(10, 8, 10, 8)
+        layout.setSpacing(12)
+        
+        # --- Left: Stats Section ---
+        stats_layout = QHBoxLayout()
+        stats_layout.setSpacing(15)
+        
+        self.tag_count_label = QLabel("Tags: 0")
+        self.tag_count_label.setStyleSheet("font-weight: bold;")
+        stats_layout.addWidget(self.tag_count_label)
+        
+        # Favorites
+        try:
+            self._fav_mgr = get_favorites_manager()
+            self.fav_count_label = QLabel("Favorites: 0")
+            stats_layout.addWidget(self.fav_count_label)
+            
+            self.fav_only_checkbox = QCheckBox("Favorites Only")
+            self.fav_only_checkbox.setToolTip("Show only favorite albums")
+            self.fav_only_checkbox.stateChanged.connect(self._on_fav_only_toggled)
+            stats_layout.addWidget(self.fav_only_checkbox)
+            
+            self._fav_mgr.favorites_changed.connect(self._on_favorites_changed)
+        except Exception:
+            pass
+            
+        layout.addLayout(stats_layout)
+        
+        # Progress Bar (Contextual)
+        from PyQt6.QtWidgets import QProgressBar
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setVisible(False)
+        self.progress_bar.setFixedWidth(120)
+        self.progress_bar.setFormat("%p%")
+        layout.addWidget(self.progress_bar)
+
+        # Vertical Separator
+        line1 = QFrame()
+        line1.setFrameShape(QFrame.Shape.VLine)
+        line1.setFrameShadow(QFrame.Shadow.Sunken)
+        layout.addWidget(line1)
+        
+        # --- Center: Search ---
+        self.tag_search_input = QLineEdit()
+        self.tag_search_input.setPlaceholderText("Search tags...")
+        self.tag_search_input.setFixedWidth(220)
+        self.tag_search_input.returnPressed.connect(self._handle_tag_search)
+        self.tag_search_input.textChanged.connect(self._handle_tag_search)
+        
+        self.tag_search_clear_button = QToolButton()
+        self.tag_search_clear_button.setText("×")
+        self.tag_search_clear_button.setToolTip("Clear search (Esc)")
+        self.tag_search_clear_button.clicked.connect(self._clear_tag_search)
+        
+        search_layout = QHBoxLayout()
+        search_layout.setSpacing(2)
+        search_layout.addWidget(self.tag_search_input)
+        search_layout.addWidget(self.tag_search_clear_button)
+        layout.addLayout(search_layout)
+        
+        layout.addStretch()
+
+        # --- Right: Controls ---
+        
+        # View Mode
+        self.view_mode_combo = QComboBox()
+        self.view_mode_combo.addItems(["Table Mode", "Cloud Mode"])
+        self.view_mode_combo.currentIndexChanged.connect(self._change_tag_view_mode)
+        layout.addWidget(self.view_mode_combo)
+        
+        # Normalize Toggle
+        self.normalize_checkbox = QCheckBox("Normalize")
+        self.normalize_checkbox.setChecked(True)
+        self.normalize_checkbox.setToolTip("Consolidate similar tags")
+        self.normalize_checkbox.stateChanged.connect(self._toggle_normalization)
+        layout.addWidget(self.normalize_checkbox)
+        
+        # Reset Layout
+        self.reset_layout_button = QToolButton()
+        self.reset_layout_button.setText("⟲") # Reset symbol
+        self.reset_layout_button.setToolTip("Reset Layout")
+        self.reset_layout_button.clicked.connect(self.reset_layout)
+        layout.addWidget(self.reset_layout_button)
+
+        # Management
+        self.manage_singles_button = QToolButton()
+        self.manage_singles_button.setText("•")
+        self.manage_singles_button.setToolTip("Manage Single-Instance Tags")
+        self.manage_singles_button.clicked.connect(self._show_single_instance_dialog)
+        layout.addWidget(self.manage_singles_button)
+        
+        self.export_button = QToolButton()
+        self.export_button.setText("📊")
+        self.export_button.setToolTip("Export Tags Data")
+        self.export_button.clicked.connect(self._export_tag_data)
+        layout.addWidget(self.export_button)
+
+        # Help
+        self.help_button = QToolButton()
+        self.help_button.setText("?")
+        self.help_button.setToolTip("Keyboard Shortcuts")
+        self.help_button.clicked.connect(self.show_layout_help)
+        layout.addWidget(self.help_button)
+
+    def _setup_tag_actions_bar(self):
+        """Startups the action bar for the tag panel."""
+        self.tag_actions_bar = QWidget()
+        self.tag_actions_bar.setObjectName("tagActionsBar")
+        layout = QHBoxLayout(self.tag_actions_bar)
+        layout.setContentsMargins(2, 2, 2, 8)
+        layout.setSpacing(4)
+        
+        # Filter Operations
+        self.include_selected_button = QPushButton("Include")
+        self.include_selected_button.setIconSize(QSize(12, 12))
+        self.include_selected_button.setToolTip("Include selected tags filter (Ctrl+I)")
+        self.include_selected_button.clicked.connect(self._include_selected_tags)
+        self.include_selected_button.setStyleSheet("background-color: #2e4a30;")
+        layout.addWidget(self.include_selected_button)
+        
+        self.exclude_selected_button = QPushButton("Exclude")
+        self.exclude_selected_button.setToolTip("Exclude selected tags filter (Ctrl+E)")
+        self.exclude_selected_button.clicked.connect(self._exclude_selected_tags)
+        self.exclude_selected_button.setStyleSheet("background-color: #4a2e2e;")
+        layout.addWidget(self.exclude_selected_button)
+        
+        self.invert_filters_button = QToolButton()
+        self.invert_filters_button.setText("⇄")
+        self.invert_filters_button.setToolTip("Invert filters")
+        self.invert_filters_button.clicked.connect(self._invert_filters)
+        layout.addWidget(self.invert_filters_button)
+        
+        self.clear_filters_button = QToolButton()
+        self.clear_filters_button.setText("✕")
+        self.clear_filters_button.setToolTip("Clear all filters")
+        self.clear_filters_button.clicked.connect(self.clear_tag_filters)
+        layout.addWidget(self.clear_filters_button)
+        
+        layout.addStretch()
+        
+        # Management
+        self.manage_singles_button = QToolButton()
+        self.manage_singles_button.setText("•")
+        self.manage_singles_button.setToolTip("Manage Single-Instance Tags")
+        self.manage_singles_button.clicked.connect(self._show_single_instance_dialog)
+        layout.addWidget(self.manage_singles_button)
+        
+        self.export_button = QToolButton()
+        self.export_button.setText("📊")
+        self.export_button.setToolTip("Export Tags Data")
+        self.export_button.clicked.connect(self._export_tag_data)
+        layout.addWidget(self.export_button)
+
     
     def _on_fav_only_toggled(self, state: int):
         """Handler for the 'Only favorites' checkbox toggle.
@@ -848,8 +871,59 @@ class TagExplorerView(BaseView):
             self.filter_panel.update_available_tags(available_tags)
             graphics_logger.debug(f"Updated filter panel with {len(available_tags)} available tags")
 
+        # Cache processed tags on nodes to speed up filtering
+        self._cache_processed_tags_on_nodes()
+
         # After finalization, re-apply filters and update views
         self.apply_tag_filters()
+
+    def _cache_processed_tags_on_nodes(self):
+        """
+        Pre-calculate and cache the set of processed tags for each album node.
+        This drastically speeds up filtering by avoiding repeated string splitting and normalization.
+        """
+        tag_splitter = re.compile(r'[;,]')
+        is_normalization_active = self.tag_normalizer.is_active()
+        atomic_mode = self.tag_normalizer.get_atomic_mode()
+        
+        # Build local cache for fast lookup locally within this method
+        # normalized_mapping is already comprehensive after finalize
+        
+        for node in self.album_nodes_original:
+            raw_tags_str = node.get('raw_tags') or node.get('genre', '')
+            if not raw_tags_str:
+                node['_cached_tag_set'] = set()
+                continue
+            
+            # Split tags
+            node_raw_tags = [tag.strip() for tag in tag_splitter.split(raw_tags_str) if tag.strip()]
+            
+            if not is_normalization_active:
+                # No normalization: processed matches raw (but split and stripped)
+                node['_cached_tag_set'] = set(node_raw_tags)
+                continue
+            
+            # Normalization active
+            processed = set()
+            for tag in node_raw_tags:
+                # Use self.normalized_mapping which is populated in _finalize_tag_processing_from_raw
+                res = self.normalized_mapping.get(tag)
+                
+                # If for some reason it's missing (shouldn't be if raw_counts came from here), calculate it
+                if res is None:
+                    if atomic_mode:
+                        res = self.tag_normalizer.normalize_to_atomic(tag)
+                    else:
+                        res = self.tag_normalizer.normalize_enhanced(tag)
+                    # We don't update global mapping here to avoid side effects during cache build
+                
+                if isinstance(res, list):
+                    processed.update(res)
+                elif res:
+                    processed.add(res)
+            
+            node['_cached_tag_set'] = processed
+
 
     def _process_atomic_tags(self):
         """Process tags using atomic tag decomposition."""
@@ -899,213 +973,147 @@ class TagExplorerView(BaseView):
     def apply_tag_filters(self):
         """
         Filters albums based on the current tag filters and updates the view.
-        Combines legacy tag table filters with advanced filter panel groups.
-        Optimized for performance with large datasets.
+        Uses cached tag sets and inverted index for optimized performance.
         """
-        # Temporarily disable updates during bulk processing
+        # Temporarily disable updates during processing
         self.setUpdatesEnabled(False)
         graphics_logger.debug(f"Applying tag filters. Normalization active: {self.tag_normalizer.is_active()}")
-        graphics_logger.debug(f"Current tag_filters: {self.tag_filters}")
 
         # Get filter state from filter panel if it exists and is visible
         filter_panel_state = None
         if (hasattr(self, 'filter_panel') and self.filter_panel is not None and 
             hasattr(self, 'filter_panel_container') and self.filter_panel_container.isVisible()):
             filter_panel_state = self.filter_panel.get_filter_state()
-            graphics_logger.debug(f"Using filter panel with {len(filter_panel_state.groups)} groups")
         
-        # Pre-compute filter sets for better performance (from legacy tag table)
+        # Identify filters
         include_filters = {tag for tag, state in self.tag_filters.items() if state == self.FILTER_INCLUDE}
         exclude_filters = {tag for tag, state in self.tag_filters.items() if state == self.FILTER_EXCLUDE}
         
-        # Combine exclusions from both sources
-        all_exclusions = exclude_filters.copy()
+        # Combine exclusions
         if filter_panel_state:
-            all_exclusions.update(filter_panel_state.exclude_tags)
+            exclude_filters.update(filter_panel_state.exclude_tags)
+            
+        has_includes = bool(include_filters)
+        has_excludes = bool(exclude_filters)
+        has_panel_groups = filter_panel_state and not filter_panel_state.is_empty()
         
-        # Early exit if no filters are active
-        has_legacy_filters = bool(include_filters or exclude_filters)
-        has_panel_filters = filter_panel_state and not filter_panel_state.is_empty()
-        has_filters = has_legacy_filters or has_panel_filters
-
+        # Reset results
         self.filtered_albums.clear()
         self.matching_counts.clear()
 
-        is_normalization_active = self.tag_normalizer.is_active()
+        # Optimization: Use Inverted Index to restrict candidates if we have INCLUDE filters
+        candidate_source = None
         
-        # Pre-compile regex for better performance if needed
-        tag_splitter = re.compile(r'[;,]')
+        if has_includes:
+            # Sort include filters by frequency (smallest first) to minimize initial candidate set
+            sorted_includes = sorted(include_filters, key=lambda t: self.tag_counts.get(t, 0))
+            
+            # Start with the rarest tag's albums
+            rarest_tag = sorted_includes[0]
+            # Use a list copy to avoid modifying the index list
+            candidate_source = list(self.tag_to_album_nodes.get(rarest_tag, []))
+            
+            # If multiple includes, we verify the rest later (faster than intersection of lists)
+            # We treat the remaining includes as required checks
+            remaining_includes = set(sorted_includes[1:])
+        else:
+            # No include filters: start with all albums
+            # If we utilize cached tags, iterating 50k items is reasonably fast in Python (~100ms)
+            candidate_source = self.album_nodes_original
+
+        # Filtering Loop
+        # We perform one pass to filter and count tags simultaneously
         
-        # Batch process albums for better performance
-        total_albums = len(self.album_nodes_original)
-        batch_size = 1000
-        processed_albums = 0
+        final_filtered = []
+        final_counts = Counter()
         
-        for batch_start in range(0, total_albums, batch_size):
-            batch_end = min(batch_start + batch_size, total_albums)
-            batch_filtered_albums = []
-            batch_matching_counts = Counter()
-            
-            for i in range(batch_start, batch_end):
-                node = self.album_nodes_original[i]
-                
-                # Get raw tags from the node data - optimized
-                raw_tags_str = node.get('raw_tags') or node.get('genre', '')
-                if not raw_tags_str:
-                    # No tags means no match if ANY positive filters exist (legacy or panel groups)
-                    has_positive_filters = bool(include_filters) or (filter_panel_state and filter_panel_state.groups)
-                    if not has_positive_filters:
-                        batch_filtered_albums.append(node)
-                    continue
-                
-                # Split tags efficiently
-                node_raw_tags = [tag.strip() for tag in tag_splitter.split(raw_tags_str) if tag.strip()]
-                if not node_raw_tags:
-                    # No tags means no match if ANY positive filters exist (legacy or panel groups)
-                    has_positive_filters = bool(include_filters) or (filter_panel_state and filter_panel_state.groups)
-                    if not has_positive_filters:
-                        batch_filtered_albums.append(node)
-                    continue
-                
-                # Determine the set of processed tags for the current node, based on normalization state
-                if is_normalization_active:
-                    # Use cached normalization mapping where possible.
-                    # In atomic mode, a raw tag may map to multiple components; include all.
-                    current_node_processed_tags = []
-                    for tag in node_raw_tags:
-                        normalized = self.normalized_mapping.get(tag)
-                        if normalized is None:
-                            # Not cached yet - compute using normalizer
-                            if self.tag_normalizer.get_atomic_mode():
-                                comps = self.tag_normalizer.normalize_to_atomic(tag)
-                                if comps:
-                                    normalized = comps
-                                    self.normalized_mapping[tag] = comps
-                                else:
-                                    fallback = self.tag_normalizer.normalize_enhanced(tag)
-                                    if fallback:
-                                        normalized = fallback
-                                        self.normalized_mapping[tag] = fallback
-                            else:
-                                fallback = self.tag_normalizer.normalize_enhanced(tag)
-                                if fallback:
-                                    normalized = fallback
-                                    self.normalized_mapping[tag] = fallback
-
-                        if isinstance(normalized, list):
-                            current_node_processed_tags.extend(normalized)
-                        elif normalized:
-                            current_node_processed_tags.append(normalized)
-                else:
-                    # In non-normalized mode, use cached mapping or create it
-                    current_node_processed_tags = []
-                    for tag in node_raw_tags:
-                        processed_tag = self._get_normalized_tag_for_processing(tag)
-                        current_node_processed_tags.append(processed_tag)
-
-                # Early exit if no filters are active
-                if not has_filters:
-                    batch_filtered_albums.append(node)
-                    for tag in current_node_processed_tags:
-                        batch_matching_counts[tag] += 1
-                    continue
-
-                # Convert to set for faster membership testing
-                node_tags_set = set(current_node_processed_tags)
-
-                # Check exclusions first (from both sources)
-                if all_exclusions and all_exclusions.intersection(node_tags_set):
-                    continue
-
-                # Check legacy include filters (from tag table)
-                legacy_match = True
-                if include_filters:
-                    legacy_match = bool(include_filters.intersection(node_tags_set))
-                
-                # Check filter panel groups (if active)
-                panel_match = True
-                if filter_panel_state and not filter_panel_state.is_empty():
-                    # Pass the tag set to the filter state matches method
-                    panel_match = filter_panel_state.matches(node_tags_set)
-                
-                # Album must match BOTH legacy filters AND panel filters (if active)
-                if not legacy_match or not panel_match:
-                    continue
-
-                # If we reach here, the node matches all active filters
-                batch_filtered_albums.append(node)
-                for tag in current_node_processed_tags:
-                    batch_matching_counts[tag] += 1
-            
-            # Merge batch results
-            self.filtered_albums.extend(batch_filtered_albums)
-            self.matching_counts.update(batch_matching_counts)
-            
-            processed_albums = batch_end
-            
-            # Log progress for large datasets
-            if total_albums > 5000 and processed_albums % 5000 == 0:
-                graphics_logger.debug(f"TagExplorerView: Filtered {processed_albums}/{total_albums} albums...")
-
-        # If favorites-only mode is enabled, filter the final album list to favorites
-        try:
-            if getattr(self, '_show_only_favorites', False) and hasattr(self, '_fav_mgr'):
-                favs = self._fav_mgr.all()
-                if favs:
-                    # Filter albums to only favorites
-                    self.filtered_albums = [n for n in self.filtered_albums if n.get('id') in favs]
-
-                # Recompute matching_counts from the filtered albums to keep tag counts accurate
-                self.matching_counts.clear()
-                is_normalization_active = self.tag_normalizer.is_active()
-                for node in self.filtered_albums:
-                    raw_tags_str = node.get('raw_tags') or node.get('genre', '')
-                    if not raw_tags_str:
-                        continue
-                    node_raw_tags = [tag.strip() for tag in tag_splitter.split(raw_tags_str) if tag.strip()]
-                    if not node_raw_tags:
-                        continue
-                    current_node_processed_tags = []
-                    if is_normalization_active:
-                        for tag in node_raw_tags:
-                            normalized = self.normalized_mapping.get(tag)
-                            if normalized is None:
-                                if self.tag_normalizer.get_atomic_mode():
-                                    comps = self.tag_normalizer.normalize_to_atomic(tag)
-                                    if comps:
-                                        normalized = comps
-                                        self.normalized_mapping[tag] = comps
-                                    else:
-                                        fallback = self.tag_normalizer.normalize_enhanced(tag)
-                                        if fallback:
-                                            normalized = fallback
-                                            self.normalized_mapping[tag] = fallback
-                                else:
-                                    fallback = self.tag_normalizer.normalize_enhanced(tag)
-                                    if fallback:
-                                        normalized = fallback
-                                        self.normalized_mapping[tag] = fallback
-
-                            if isinstance(normalized, list):
-                                current_node_processed_tags.extend(normalized)
-                            elif normalized:
-                                current_node_processed_tags.append(normalized)
+        # Pre-resolve checks to avoid lookups in loop
+        check_includes = bool(has_includes and len(include_filters) > 1) if has_includes else False
+        # If we started with 'rarest_tag', we implicitly checked sorted_includes[0]
+        # So we only check remaining_includes.
+        
+        if has_includes:
+            required_tags = include_filters
+            # If we used the inverted index strategy:
+            # required_tags is effectively `remaining_includes` from above logic
+            # But let's keep it simple: if candidate_source is from tag_to_album_nodes[rarest],
+            # then rarest is guaranteed. We check others.
+            if len(include_filters) > 1:
+                # We need to check the other tags
+                 # Note: sorting above was just to pick source. 
+                 # We can just check `include_filters` subset relations.
+                 pass
+        
+        for node in candidate_source:
+            # Get cached tag set - efficient O(1) access
+            # Fallback to empty set if cache missing (shouldn't happen if initialized correctly)
+            node_tags = node.get('_cached_tag_set')
+            if node_tags is None:
+                # Fallback: compute on the fly (slow path)
+                # This ensures robustness if cache invalidation failed
+                raw_s = node.get('raw_tags') or node.get('genre', '')
+                if raw_s:
+                    # Quick split/clean
+                    raw_ts = {t.strip() for t in re.split(r'[;,]', raw_s) if t.strip()}
+                    if self.tag_normalizer.is_active():
+                         # simplified on-fly normalization
+                         node_tags = set()
+                         for rt in raw_ts:
+                             nt = self.normalized_mapping.get(rt)
+                             if nt:
+                                 if isinstance(nt, list): node_tags.update(nt)
+                                 else: node_tags.add(nt)
                     else:
-                        for tag in node_raw_tags:
-                            processed_tag = self._get_normalized_tag_for_processing(tag)
-                            current_node_processed_tags.append(processed_tag)
+                        node_tags = raw_ts
+                else:
+                    node_tags = set()
+                # Update cache
+                node['_cached_tag_set'] = node_tags
 
-                    for t in current_node_processed_tags:
-                        self.matching_counts[t] += 1
-        except Exception:
-            # Do not let favorites filtering break the main filter operation
-            graphics_logger.exception("Error applying favorites-only post-filtering in TagExplorer")
+            # 1. Check Exclusions (Fast fail)
+            if has_excludes:
+                # faster than set intersection for small exclusion list
+                if not node_tags.isdisjoint(exclude_filters):
+                    continue
 
-        # Update views efficiently
+            # 2. Check Includes (if not already guaranteed by source)
+            if has_includes:
+                # We grabbed candidates from one tag, must ensure ALL include tags are present
+                if not include_filters.issubset(node_tags):
+                    continue
+            
+            # 3. Check Filter Panel Groups
+            if has_panel_groups:
+                if not filter_panel_state.matches(node_tags):
+                    continue
+
+            # Passed all filters
+            final_filtered.append(node)
+            final_counts.update(node_tags)
+
+        # Apply Favorites Only filter if active
+        if getattr(self, '_show_only_favorites', False) and hasattr(self, '_fav_mgr'):
+            favs = self._fav_mgr.all()
+            if favs:
+                # Filter down
+                final_filtered = [n for n in final_filtered if n.get('id') in favs]
+                # Recompute counts for the reduced set
+                final_counts.clear()
+                for n in final_filtered:
+                    ts = n.get('_cached_tag_set', set())
+                    final_counts.update(ts)
+
+        self.filtered_albums = final_filtered
+        self.matching_counts = final_counts
+        
+        # Log results
+        total = len(self.album_nodes_original)
+        filtered = len(self.filtered_albums)
+        graphics_logger.debug(f"Applied filters: {filtered}/{total} albums match.")
+
+        # Update views
         self._update_tag_views()
         self._update_album_table_display()
-        
-        # Update status bar with filter summary
         self._update_status_bar()
 
         self.setUpdatesEnabled(True)
@@ -3022,7 +3030,7 @@ class TagExplorerView(BaseView):
             self,
             self.tag_panel,
             self.album_panel,
-            self.filter_header,
+            self.toolbar,
             self.tags_table,
             self.album_table,
             self.status_bar,
@@ -3038,10 +3046,13 @@ class TagExplorerView(BaseView):
                 color: {text_primary_hex};
                 font-size: 10pt;
             }}
-            QWidget#filterHeader {{
+            QWidget#explorerToolbar {{
                 background-color: {surface_hex};
                 border-bottom: 1px solid {border_hex};
-                padding: 6px 10px;
+            }}
+            QWidget#tagActionsBar {{
+                background-color: {surface_hex};
+                border-bottom: 1px solid {border_hex};
             }}
             QWidget#tagPanel, QWidget#albumPanel {{
                 background-color: {surface_hex};
@@ -3072,7 +3083,7 @@ class TagExplorerView(BaseView):
                 border-color: {accent_hex};
                 background-color: {raised_hex};
             }}
-            QPushButton {{
+            QPushButton, QToolButton {{
                 background-color: {control_base_hex};
                 border: 1px solid {border_hex};
                 border-radius: 4px;
@@ -3080,28 +3091,22 @@ class TagExplorerView(BaseView):
                 color: {text_primary_hex};
                 font-weight: 500;
             }}
-            QPushButton:hover {{
+            QPushButton:hover, QToolButton:hover {{
                 background-color: {control_hover_hex};
                 border-color: {accent_hex};
             }}
-            QPushButton:pressed {{
+            QPushButton:pressed, QToolButton:pressed {{
                 background-color: {control_pressed_hex};
                 border-color: {accent_pressed_hex};
             }}
-            QPushButton:disabled {{
+            QPushButton:disabled, QToolButton:disabled {{
                 color: {text_muted_hex};
                 border-color: {border_hex};
-            }}
-            QWidget#filterHeader QPushButton {{
-                min-height: 28px;
-            }}
-            QWidget#filterHeader QPushButton:pressed {{
-                color: {background_hex};
             }}
             QPushButton#includeButton {{
                 color: {success_hex};
                 border-color: #2f6f4a;
-                font-size: 16pt;
+                font-size: 11pt; /* Adjusted size */
                 font-weight: bold;
             }}
             QPushButton#includeButton:hover {{
@@ -3111,30 +3116,30 @@ class TagExplorerView(BaseView):
             QPushButton#excludeButton {{
                 color: {danger_hex};
                 border-color: #703646;
-                font-size: 16pt;
+                font-size: 11pt; /* Adjusted size */
                 font-weight: bold;
             }}
             QPushButton#excludeButton:hover {{
                 background-color: #3b1e24;
                 border-color: {danger_hex};
             }}
-            QPushButton#clearFiltersButton {{
+            QToolButton#clearFiltersButton {{
                 color: {accent_hex};
                 border-color: {accent_hex};
             }}
-            QPushButton#clearFiltersButton:hover {{
+            QToolButton#clearFiltersButton:hover {{
                 background-color: {control_hover_hex};
             }}
-            QPushButton#invertButton, QPushButton#resetLayoutButton, QPushButton#helpButton {{
+            QToolButton#invertButton, QToolButton#resetLayoutButton, QToolButton#helpButton {{
                 color: {accent_hex};
             }}
-            QPushButton#invertButton:hover, QPushButton#resetLayoutButton:hover, QPushButton#helpButton:hover {{
+            QToolButton#invertButton:hover, QToolButton#resetLayoutButton:hover, QToolButton#helpButton:hover {{
                 color: {accent_hover_hex};
             }}
-            QPushButton#exportTagsButton, QPushButton#exportAlbumsButton, QPushButton#manageSinglesButton {{
+            QToolButton#exportButton, QPushButton#exportAlbumsButton, QToolButton#manageSinglesButton {{
                 border-color: {border_hex};
             }}
-            QPushButton#exportTagsButton:hover, QPushButton#exportAlbumsButton:hover, QPushButton#manageSinglesButton:hover {{
+            QToolButton#exportButton:hover, QPushButton#exportAlbumsButton:hover, QToolButton#manageSinglesButton:hover {{
                 border-color: {accent_hex};
             }}
             QComboBox {{

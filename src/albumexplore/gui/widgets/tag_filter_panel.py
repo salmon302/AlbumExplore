@@ -41,6 +41,10 @@ class TagFilterPanel(QWidget):
     tagAddedToGroup = pyqtSignal(str, str)  # tag, group_id
     tagRemovedFromGroup = pyqtSignal(str, str)  # tag, group_id
     
+    # New signals for parent interaction
+    includeSelectedRequest = pyqtSignal()
+    excludeSelectedRequest = pyqtSignal()
+
     def __init__(self, filter_state: TagFilterState = None, available_tags: list = None, parent=None):
         """
         Initialize the filter panel.
@@ -60,6 +64,12 @@ class TagFilterPanel(QWidget):
         self._populate_exclusions()
         self._update_summary()
     
+    def _update_placeholder_visibility(self):
+        """Show/hide placeholder based on whether groups exist."""
+        has_groups = len(self.group_widgets) > 0
+        if hasattr(self, 'empty_placeholder'):
+            self.empty_placeholder.setVisible(not has_groups)
+
     def _setup_ui(self):
         """Setup the UI components."""
         main_layout = QVBoxLayout(self)
@@ -76,6 +86,25 @@ class TagFilterPanel(QWidget):
         header_layout = QHBoxLayout()
         header_layout.setSpacing(4)
         
+        # New: Action Buttons (Include/Exclude Selection)
+        self.btn_include = QPushButton("Include")
+        self.btn_include.setToolTip("Add selected tags to filters (Ctrl+I)")
+        self.btn_include.setStyleSheet("background-color: #2e4a30; font-weight: bold; padding: 2px 8px; border-radius: 2px;")
+        self.btn_include.clicked.connect(self.includeSelectedRequest.emit)
+        header_layout.addWidget(self.btn_include)
+
+        self.btn_exclude = QPushButton("Exclude")
+        self.btn_exclude.setToolTip("Exclude selected tags from filters (Ctrl+E)")
+        self.btn_exclude.setStyleSheet("background-color: #4a2e2e; font-weight: bold; padding: 2px 8px; border-radius: 2px;")
+        self.btn_exclude.clicked.connect(self.excludeSelectedRequest.emit)
+        header_layout.addWidget(self.btn_exclude)
+        
+        # Separator
+        line = QFrame()
+        line.setFrameShape(QFrame.Shape.VLine)
+        line.setFrameShadow(QFrame.Shadow.Sunken)
+        header_layout.addWidget(line)
+
         # Active checkbox
         self.active_checkbox = QCheckBox("Tag Filters")
         self.active_checkbox.setChecked(self.filter_state.active)
@@ -148,21 +177,29 @@ class TagFilterPanel(QWidget):
         """)
         header_layout.addWidget(self.saved_queries_button)
         
-        # Advanced query button
-        self.advanced_query_button = QPushButton("Advanced")
-        self.advanced_query_button.setToolTip("Open advanced boolean query editor")
-        self.advanced_query_button.clicked.connect(self._on_open_advanced_query)
-        # Make it visually prominent so users can find the advanced editor quickly
+        # Advanced query toggle (renamed from 'Advanced' dialog button)
+        self.advanced_query_button = QPushButton("Query Mode")
+        self.advanced_query_button.setCheckable(True)
+        self.advanced_query_button.setToolTip("Toggle advanced boolean query editor")
+        self.advanced_query_button.toggled.connect(self._toggle_advanced_mode)
+        # Style as a toggle button
         self.advanced_query_button.setStyleSheet("""
             QPushButton {
-                padding: 4px 10px;
-                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffb74d, stop:1 #ffa000);
-                color: #1b1b1b;
-                font-weight: bold;
-                border: 1px solid #8a5a00;
-                border-radius: 4px;
+                padding: 2px 8px;
+                background: #333;
+                color: #ccc;
+                border: 1px solid #555;
+                font-size: 9px;
+                border-radius: 2px;
             }
-            QPushButton:hover { background: #ffc54d; }
+            QPushButton:checked {
+                background: #d68a00;
+                color: #111;
+                border: 1px solid #ffa000;
+                font-weight: bold;
+            }
+            QPushButton:hover { background: #444; }
+            QPushButton:checked:hover { background: #e69a10; }
         """)
         header_layout.addWidget(self.advanced_query_button)
         
@@ -187,46 +224,52 @@ class TagFilterPanel(QWidget):
         
         main_layout.addLayout(header_layout)
         
+        # --- Advanced Query Section (Hidden by default) ---
+        self.advanced_container = QWidget()
+        self.advanced_container.setVisible(False)
+        advanced_layout = QVBoxLayout(self.advanced_container)
+        advanced_layout.setContentsMargins(4, 4, 4, 4)
+        advanced_layout.setSpacing(2)
+        
         # Add operator palette for drag-and-drop
         self.operator_palette = OperatorPalette(self)
         self.operator_palette.setMaximumHeight(30)
-        main_layout.addWidget(self.operator_palette)
+        advanced_layout.addWidget(self.operator_palette)
         
         # Inline advanced query input (tokenized)
-        # We intentionally log construction errors so failures are visible during
-        # development instead of silently hiding the widget.
         if HAS_TOKENIZED_INPUT:
             try:
                 self.tokenized_query = TokenizedQueryInput(self)
-                # Make the inline input visually distinct so it's easy to find in dark themes
                 try:
                     self.tokenized_query.setStyleSheet('''
                         QWidget { border: 1px solid #3a7db8; border-radius: 4px; padding: 4px; background: #131417; }
                     ''')
                 except Exception:
                     pass
-                main_layout.addWidget(self.tokenized_query)
+                advanced_layout.addWidget(self.tokenized_query)
                 self.tokenized_query.applyQuery.connect(self._on_apply_tokenized_query)
             except Exception as e:
                 import logging
                 logger = logging.getLogger(__name__)
                 logger.exception("Failed to create TokenizedQueryInput: %s", e)
-                # Provide a visible placeholder so users know the feature exists even
-                # if the inline widget couldn't be constructed.
-                error_msg = QLabel(f"⚠ Advanced query input unavailable: {str(e)}\n"
-                                 "Use the 'Advanced' button above for full query editor.")
+                error_msg = QLabel(f"⚠ Advanced query input unavailable: {str(e)}")
                 error_msg.setStyleSheet('color: #b66; font-style: italic; font-size: 9px;')
-                error_msg.setWordWrap(True)
-                main_layout.addWidget(error_msg)
+                advanced_layout.addWidget(error_msg)
                 self.tokenized_query = None
         else:
-            # TokenizedQueryInput not available
             self.tokenized_query = None
-            placeholder = QLabel("Advanced query input: not yet implemented\n"
-                               "Use the 'Advanced' button above for full query editor.")
+            placeholder = QLabel("Advanced query input: not yet implemented")
             placeholder.setStyleSheet('color: #888; font-style: italic; font-size: 9px;')
-            placeholder.setWordWrap(True)
-            main_layout.addWidget(placeholder)
+            advanced_layout.addWidget(placeholder)
+            
+        # Add "Full Editor Dialog" link
+        full_editor_btn = QPushButton("Open Full Screen Editor")
+        full_editor_btn.setStyleSheet("text-align: left; padding: 2px; color: #8ab; border: none; font-size: 9px;")
+        full_editor_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        full_editor_btn.clicked.connect(self._on_open_advanced_query)
+        advanced_layout.addWidget(full_editor_btn)
+
+        main_layout.addWidget(self.advanced_container)
         
         # Scrollable area for groups
         scroll_area = QScrollArea()
@@ -240,6 +283,12 @@ class TagFilterPanel(QWidget):
         self.groups_layout.setContentsMargins(0, 0, 0, 0)
         self.groups_layout.setSpacing(2)  # Very tight spacing
         # No stretch at bottom - let groups fill naturally
+        
+        # Placeholder for empty state
+        self.empty_placeholder = QLabel("No active filter groups\nClick '+ Group' or add tags to filter")
+        self.empty_placeholder.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.empty_placeholder.setStyleSheet("color: #666; font-style: italic; margin: 20px;")
+        self.groups_layout.addWidget(self.empty_placeholder)
         
         scroll_area.setWidget(self.groups_container)
         main_layout.addWidget(scroll_area, stretch=1)
@@ -315,6 +364,9 @@ class TagFilterPanel(QWidget):
         
         # Setup keyboard shortcuts
         self._setup_keyboard_shortcuts()
+        
+        # Initial placeholder state
+        self._update_placeholder_visibility()
     
     def _setup_keyboard_shortcuts(self):
         """Setup keyboard shortcuts for the filter panel."""
@@ -325,6 +377,11 @@ class TagFilterPanel(QWidget):
         # Ctrl+Shift+C to clear all (already handled by TagExplorerView, but provide here too)
         clear_shortcut = QShortcut(QKeySequence("Ctrl+Shift+C"), self)
         clear_shortcut.activated.connect(self._on_clear_all)
+
+    def _toggle_advanced_mode(self, checked: bool):
+        """Toggle the visibility of the advanced query section."""
+        if hasattr(self, 'advanced_container'):
+            self.advanced_container.setVisible(checked)
     
     def _open_saved_queries(self):
         """Open the saved queries dialog."""
@@ -537,6 +594,7 @@ class TagFilterPanel(QWidget):
         self.groups_layout.addWidget(widget)
         
         self.group_widgets[group.group_id] = widget
+        self._update_placeholder_visibility()
     
     def _remove_group_widget(self, group_id: str):
         """Remove a group widget from the panel."""
@@ -569,6 +627,7 @@ class TagFilterPanel(QWidget):
         self.groups_layout.removeWidget(widget)
         widget.deleteLater()
         del self.group_widgets[group_id]
+        self._update_placeholder_visibility()
     
     def _add_exclusion_chip(self, tag: str):
         """Add an exclusion tag chip."""

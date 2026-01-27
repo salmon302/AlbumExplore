@@ -50,6 +50,15 @@ def load_canonical_names_from_manifest():
     logger.info(f"Loaded {len(mapping)} canonical artist names from manifest.")
     return mapping
 
+def is_all_caps(name):
+    # Allow some non-letters, but mostly check if it has letters and no lowercase
+    if not name: return False
+    # Check if it has any letter
+    if not any(c.isalpha() for c in name): return False
+    # Check if it has any lowercase
+    if any(c.islower() for c in name): return False
+    return True
+
 def fix_casing(dry_run=True):
     """
     Scan DB for artists with ALL CAPS names and try to fix them using the manifest.
@@ -60,14 +69,7 @@ def fix_casing(dry_run=True):
         return
 
     with session_scope() as session:
-        # Find all distinct artist names currently on albums
-        # Only target those that look like ALL CAPS (simple heuristic: isupper and len > 2)
-        # We fetch ALL names and filter in python to be safe and cross-check everything
-        
         albums = session.query(models.Album).all()
-        
-        # Group by artist name to update efficiently?
-        # Better: iterate distinct names, keep set of updates
         
         updates = {} # current_caps_name -> new_proper_name
         
@@ -75,38 +77,36 @@ def fix_casing(dry_run=True):
         
         logger.info(f"Checking {len(distinct_names)} distinct artist names in DB...")
         
-        fixed_count = 0
-        unknown_count = 0
+        all_caps_count = 0
+        fixable_count = 0
         
         for name in tqdm(distinct_names, desc="Analyzing Artists"):
-            # Check if it looks bad (ALL CAPS)
-            # OR simple case-insensitive check against our canonical list
-            
-            lower_name = name.lower()
-            
-            if lower_name in mapping:
-                canonical = mapping[lower_name]
+            if is_all_caps(name):
+                all_caps_count += 1
+                lower_name = name.lower()
                 
-                # If current name differs from canonical (and canonical isn't just ALL CAPS itself)
-                if name != canonical:
-                    # Special check: If lookup name is same but just casing, we fix it.
-                    # If lookup name is totally different (e.g. variation), we might fix it too?
-                    # The user mentioned "correction to the case".
-                    
-                    updates[name] = canonical
-                    fixed_count += 1
-            else:
-                # User mentioned "ProgArchives employs all caps"
-                # If we don't have it in Last.fm, maybe attempt Title Case for purely ALL CAPS names?
-                if name.isupper() and len(name) > 3:
-                    # Simple heuristic: TITLE CASE
-                    title_cased = name.title()
-                    # Log this as a heuristic fix
-                    # updates[name] = title_cased 
-                    # Actually, let's be conservative. If not in Last.fm, leave it or log it.
-                    unknown_count += 1
+                if lower_name in mapping:
+                    canonical = mapping[lower_name]
+                    # Only apply if canonical is NOT all caps
+                    # e.g. "PINK FLOYD" -> "Pink Floyd" (Update)
+                    # "OHHMS" -> "OHHMS" (No change)
+                    if not is_all_caps(canonical):
+                        updates[name] = canonical
+                        fixable_count += 1
+                    else:
+                        logger.info(f"Last.fm also has ALL CAPS for: {name}")
+                else:
+                    # Fallback: Title Case heuristic for unknowns
+                    # e.g. "UNKNOWN BAND" -> "Unknown Band"
+                    if len(name) > 3:
+                        title_cased = name.title()
+                        updates[name] = title_cased
+                    else:
+                        logger.warning(f"Skipping short ALL CAPS name: {name}")
 
-        logger.info(f"Found {len(updates)} artists to rename.")
+        
+        logger.info(f"Found {all_caps_count} ALL CAPS names.")
+        logger.info(f"Proposed fixes for {len(updates)} names.")
         
         if not updates:
             return
@@ -114,24 +114,19 @@ def fix_casing(dry_run=True):
         # Apply updates
         if dry_run:
             logger.info("DRY RUN: Samples of changes:")
-            for i, (old, new) in enumerate(updates.items()):
-                if i < 10:
-                    logger.info(f"  '{old}' -> '{new}'")
+            count = 0
+            # Sort for stable output
+            for old in sorted(updates.keys()):
+                if count < 20: 
+                    logger.info(f"  '{old}' -> '{updates[old]}'")
+                    count += 1
             logger.info("To apply, run with dry_run=False")
         else:
             logger.info("Applying updates to database...")
-            # We must update all albums with these names
-            
-            # This could be slow if we iterate one by one.
-            # Batch update via SQL is better.
-            
-            # For SqlAlchemy, we can iterate:
             for old, new in tqdm(updates.items(), desc="Updating DB"):
                 session.query(models.Album).filter(
                     models.Album.pa_artist_name_on_album == old
                 ).update({models.Album.pa_artist_name_on_album: new}, synchronize_session=False)
-            
-            # Also update any created Artists? (None exist yet per previous check)
             
             logger.info("Updates committed.")
 
